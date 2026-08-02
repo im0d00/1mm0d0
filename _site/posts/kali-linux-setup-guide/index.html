@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started with Kali Linux: Complete Beginner Setup Guide | Aimad Ul Islam</title>
+    <meta name="description" content="Cybersecurity Professional &amp; Technical Writer">
+    <meta name="theme-color" content="#080C1A">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/blog.css">
+    
+    <script>
+      // Apply theme early to prevent flash
+      (function() {
+        var localTheme = localStorage.getItem('aimad-theme');
+        if (localTheme === 'light' || (!localTheme && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="scan-line"></div>
+    <div id="reading-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="blog-nav">
+        <a href="/" class="nav-logo">AIMAD<span class="br">/</span>ISLAM<span class="nav-dot"></span></a>
+        
+        <ul class="nav-links">
+            <li><a href="/" >Portfolio</a></li>
+            <li><a href="/blog" class="active">Blog</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <div class="nav-status">
+                <span class="status-dot"></span>
+                <span class="status-text">SYSTEM_ONLINE</span>
+            </div>
+            <button class="dark-mode-btn" id="theme-toggle" aria-label="Toggle theme">
+                <i class="fa-regular fa-moon"></i>
+            </button>
+            <button class="hamburger" aria-label="Menu" aria-expanded="false" id="mobile-menu-btn">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobile-nav">
+        <a href="/">Portfolio</a>
+        <a href="/blog">Blog</a>
+    </div>
+
+    <main class="container">
+    <article class="article-hero">
+        <div class="breadcrumb">
+            <a href="/"><i class="fa-solid fa-house"></i></a>
+            <span>/</span>
+            <a href="/blog">Blog</a>
+            <span>/</span>
+            <span style="color:var(--white);">Getting Started with Kali Linux: Complete Beginner Setup Guide</span>
+        </div>
+
+        <div class="article-layout">
+            
+            <!-- Main Content -->
+            <div class="article-main">
+                <header class="article-header">
+                    <div class="article-cats">
+                        
+                        <a href="/blog?category=Cybersecurity" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Cybersecurity</a>
+                        
+                        <a href="/blog?category=Linux" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Linux</a>
+                        
+                        <a href="/blog?category=Tutorials" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Tutorials</a>
+                        
+                    </div>
+                    
+                    <h1 class="article-title">Getting Started with Kali Linux: Complete Beginner Setup Guide</h1>
+                    
+                    
+                    <p class="article-subtitle">Set up your ethical hacking lab from scratch — VirtualBox, Kali Linux, Metasploitable 2, and DVWA in one complete beginner guide.</p>
+                    
+                    
+                    <div class="article-meta">
+                        <div class="article-meta-item">
+                            <i class="fa-regular fa-calendar"></i>
+                            <span>Published: <strong>15 Jul 2026</strong></span>
+                        </div>
+                        
+                        <div class="article-meta-item">
+                            <i class="fa-regular fa-clock"></i>
+                            <span>Read time: <strong>12 min</strong></span>
+                        </div>
+                        
+                        <div class="article-meta-item">
+                            <i class="fa-solid fa-terminal"></i>
+                            <span>Author: <strong>Aimad Ul Islam</strong></span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="article-tags">
+                        
+                        <span class="tag tag-tut">#kali-linux</span>
+                        
+                        <span class="tag tag-tut">#virtualbox</span>
+                        
+                        <span class="tag tag-tut">#ethical-hacking</span>
+                        
+                        <span class="tag tag-tut">#lab-setup</span>
+                        
+                        <span class="tag tag-tut">#beginners</span>
+                        
+                    </div>
+                    
+                </header>
+
+                <div class="article-body">
+                    <h2 id="introduction" tabindex="-1">Introduction <a class="direct-link" href="#introduction" aria-hidden="true">#</a></h2>
+<p>Before you can hack anything, you need a legal, safe environment to practise in. Kali Linux is the industry-standard penetration testing distribution — it comes pre-loaded with 600+ security tools and is used by professional penetration testers worldwide.</p>
+<div class="callout callout-warn">
+  <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Legal Reminder</div>
+    <div class="callout-body">Every technique in this guide must only be practised on systems you own or have explicit written permission to test. Using these tools against systems without authorisation is a criminal offence in Pakistan, the UK, the USA, and virtually every country.</div>
+  </div>
+</div>
+<h2 id="what-you-need" tabindex="-1">What You Need <a class="direct-link" href="#what-you-need" aria-hidden="true">#</a></h2>
+<p>Before we start, here's what you need on your computer:</p>
+<ul>
+<li><strong>At least 8GB RAM</strong> (16GB recommended for running multiple VMs)</li>
+<li><strong>50GB+ free disk space</strong></li>
+<li><strong>64-bit processor</strong> with virtualisation enabled in BIOS (VT-x or AMD-V)</li>
+<li><strong>Internet connection</strong> for downloads</li>
+</ul>
+<div class="callout callout-info">
+  <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Enable Virtualisation in BIOS</div>
+    <div class="callout-body">If VirtualBox gives you errors about 64-bit VMs, restart your PC and enter BIOS (usually F2, F12, or Delete on startup). Find "Virtualisation Technology" or "VT-x" and enable it.</div>
+  </div>
+</div>
+<h2 id="step-1-install-virtualbox" tabindex="-1">Step 1: Install VirtualBox <a class="direct-link" href="#step-1-install-virtualbox" aria-hidden="true">#</a></h2>
+<p>VirtualBox is free software that lets you run multiple operating systems inside your current OS. Download it from the official site — never from random websites.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Download & Install VirtualBox</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># 1. Go to: https://www.virtualbox.org/wiki/Downloads
+# 2. Download for your OS (Windows/macOS/Linux)
+# 3. Run the installer as Administrator
+# 4. Accept all defaults → click Next → Install
+# 5. Restart your computer
+<h1 id="verify-installation-on-linux" tabindex="-1">Verify installation on Linux: <a class="direct-link" href="#verify-installation-on-linux" aria-hidden="true">#</a></h1>
+<p>virtualbox --version</p>
+<h1 id="expected-7-x-x-or-similar" tabindex="-1">Expected: 7.x.x or similar</code></pre> <a class="direct-link" href="#expected-7-x-x-or-similar" aria-hidden="true">#</a></h1>
+</div>
+<h2 id="step-2-install-kali-linux" tabindex="-1">Step 2: Install Kali Linux <a class="direct-link" href="#step-2-install-kali-linux" aria-hidden="true">#</a></h2>
+<p>Instead of installing from an ISO (which takes 45 minutes), download the pre-built VirtualBox image from the official Kali website. This is faster and already configured.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Import Kali Linux VM</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># 1. Go to: https://www.kali.org/get-kali/#kali-virtual-machines
+# 2. Click "VirtualBox" → download .ova file (~4GB)
+# 3. Open VirtualBox → File → Import Appliance
+# 4. Select the .ova file → click Import
+# 5. Wait 5–10 minutes
+<h1 id="first-login" tabindex="-1">First login: <a class="direct-link" href="#first-login" aria-hidden="true">#</a></h1>
+<h1 id="username-kali" tabindex="-1">Username: kali <a class="direct-link" href="#username-kali" aria-hidden="true">#</a></h1>
+<h1 id="password-kali" tabindex="-1">Password: kali <a class="direct-link" href="#password-kali" aria-hidden="true">#</a></h1>
+<h1 id="update-everything-run-in-kali-terminal" tabindex="-1">Update everything (run in Kali terminal): <a class="direct-link" href="#update-everything-run-in-kali-terminal" aria-hidden="true">#</a></h1>
+<p>sudo apt update &amp;&amp; sudo apt upgrade -y</code></pre></p>
+</div>
+<div class="callout callout-success">
+  <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Change the Default Password</div>
+    <div class="callout-body">Immediately change the default password: <code>passwd</code> → enter a strong password. The default "kali/kali" is publicly known.</div>
+  </div>
+</div>
+<h2 id="step-3-set-up-metasploitable-2" tabindex="-1">Step 3: Set Up Metasploitable 2 <a class="direct-link" href="#step-3-set-up-metasploitable-2" aria-hidden="true">#</a></h2>
+<p>Metasploitable 2 is a deliberately vulnerable Linux server. It's your first legal target — designed specifically for practising attacks. You own it, so you have full permission.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Download & Configure Metasploitable 2</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># 1. Download from SourceForge:
+#    https://sourceforge.net/projects/metasploitable/
+<h1 id="2-extract-the-zip-file" tabindex="-1">2. Extract the ZIP file <a class="direct-link" href="#2-extract-the-zip-file" aria-hidden="true">#</a></h1>
+<h1 id="3-in-virtualbox-new-linux-ubuntu-64-bit" tabindex="-1">3. In VirtualBox: New → Linux → Ubuntu (64-bit) <a class="direct-link" href="#3-in-virtualbox-new-linux-ubuntu-64-bit" aria-hidden="true">#</a></h1>
+<h1 id="name-metasploitable2" tabindex="-1">Name: Metasploitable2 <a class="direct-link" href="#name-metasploitable2" aria-hidden="true">#</a></h1>
+<h1 id="ram-512mb-its-very-lightweight" tabindex="-1">RAM: 512MB (it's very lightweight) <a class="direct-link" href="#ram-512mb-its-very-lightweight" aria-hidden="true">#</a></h1>
+<h1 id="4-at-storage-step-select-the-vmdk-file-from-extracted-folder" tabindex="-1">4. At storage step: select the .vmdk file from extracted folder <a class="direct-link" href="#4-at-storage-step-select-the-vmdk-file-from-extracted-folder" aria-hidden="true">#</a></h1>
+<h1 id="5-network-settings-network-host-only-adapter" tabindex="-1">5. Network: Settings → Network → Host-Only Adapter <a class="direct-link" href="#5-network-settings-network-host-only-adapter" aria-hidden="true">#</a></h1>
+<h1 id="critical-keeps-attacks-isolated-from-internet" tabindex="-1">(CRITICAL: keeps attacks isolated from internet) <a class="direct-link" href="#critical-keeps-attacks-isolated-from-internet" aria-hidden="true">#</a></h1>
+<h1 id="default-credentials" tabindex="-1">Default credentials: <a class="direct-link" href="#default-credentials" aria-hidden="true">#</a></h1>
+<h1 id="username-msfadmin" tabindex="-1">Username: msfadmin <a class="direct-link" href="#username-msfadmin" aria-hidden="true">#</a></h1>
+<h1 id="password-msfadmin" tabindex="-1">Password: msfadmin <a class="direct-link" href="#password-msfadmin" aria-hidden="true">#</a></h1>
+<h1 id="find-its-ip-address-run-inside-metasploitable" tabindex="-1">Find its IP address (run inside Metasploitable): <a class="direct-link" href="#find-its-ip-address-run-inside-metasploitable" aria-hidden="true">#</a></h1>
+<p>ifconfig</p>
+<h1 id="look-for-inet-addr-192-168-56-xxx" tabindex="-1">Look for inet addr: 192.168.56.xxx</code></pre> <a class="direct-link" href="#look-for-inet-addr-192-168-56-xxx" aria-hidden="true">#</a></h1>
+</div>
+<h2 id="step-4-install-dvwa" tabindex="-1">Step 4: Install DVWA <a class="direct-link" href="#step-4-install-dvwa" aria-hidden="true">#</a></h2>
+<p>DVWA (Damn Vulnerable Web Application) gives you a vulnerable website to practise web hacking — SQL injection, XSS, file upload attacks, and more.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Install DVWA with Docker on Kali</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># In your Kali Linux terminal:
+sudo apt install docker.io -y
+sudo systemctl start docker
+sudo systemctl enable docker
+<h1 id="pull-and-run-dvwa" tabindex="-1">Pull and run DVWA: <a class="direct-link" href="#pull-and-run-dvwa" aria-hidden="true">#</a></h1>
+<p>sudo docker pull vulnerables/web-dvwa<br>
+sudo docker run -d -p 80:80 vulnerables/web-dvwa</p>
+<h1 id="open-firefox-in-kali" tabindex="-1">Open Firefox in Kali: <a class="direct-link" href="#open-firefox-in-kali" aria-hidden="true">#</a></h1>
+<h1 id="go-to-http-localhost-setup-php" tabindex="-1">Go to: <a href="http://localhost/setup.php">http://localhost/setup.php</a> <a class="direct-link" href="#go-to-http-localhost-setup-php" aria-hidden="true">#</a></h1>
+<h1 id="click-create-reset-database" tabindex="-1">Click &quot;Create / Reset Database&quot; <a class="direct-link" href="#click-create-reset-database" aria-hidden="true">#</a></h1>
+<h1 id="login-admin-password" tabindex="-1">Login: admin / password <a class="direct-link" href="#login-admin-password" aria-hidden="true">#</a></h1>
+<h1 id="set-security-level-to-low-for-beginners" tabindex="-1">Set Security Level to &quot;Low&quot; for beginners</code></pre> <a class="direct-link" href="#set-security-level-to-low-for-beginners" aria-hidden="true">#</a></h1>
+</div>
+<h2 id="step-5-configure-network" tabindex="-1">Step 5: Configure Network <a class="direct-link" href="#step-5-configure-network" aria-hidden="true">#</a></h2>
+<p>Host-Only networking is essential. It means your VMs can talk to each other but cannot reach the internet — your attack traffic stays completely contained.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Set up Host-Only network</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># In VirtualBox:
+# File → Host Network Manager → Create
+# Note the range: usually 192.168.56.0/24
+<h1 id="set-both-kali-and-metasploitable-to" tabindex="-1">Set BOTH Kali AND Metasploitable to: <a class="direct-link" href="#set-both-kali-and-metasploitable-to" aria-hidden="true">#</a></h1>
+<h1 id="settings-network-adapter-1-host-only-adapter" tabindex="-1">Settings → Network → Adapter 1 → Host-Only Adapter <a class="direct-link" href="#settings-network-adapter-1-host-only-adapter" aria-hidden="true">#</a></h1>
+<h1 id="after-starting-both-vms" tabindex="-1">After starting both VMs: <a class="direct-link" href="#after-starting-both-vms" aria-hidden="true">#</a></h1>
+<h1 id="in-kali" tabindex="-1">In Kali: <a class="direct-link" href="#in-kali" aria-hidden="true">#</a></h1>
+<p>ip a</p>
+<h1 id="note-your-ip-192-168-56-101-example" tabindex="-1">Note your IP: 192.168.56.101 (example) <a class="direct-link" href="#note-your-ip-192-168-56-101-example" aria-hidden="true">#</a></h1>
+<h1 id="test-connection-from-kali-to-metasploitable" tabindex="-1">Test connection from Kali to Metasploitable: <a class="direct-link" href="#test-connection-from-kali-to-metasploitable" aria-hidden="true">#</a></h1>
+<p>ping 192.168.56.102 -c 4</p>
+<h1 id="expected-4-packets-received-lab-is-working" tabindex="-1">Expected: 4 packets received = lab is working!</code></pre> <a class="direct-link" href="#expected-4-packets-received-lab-is-working" aria-hidden="true">#</a></h1>
+</div>
+<h2 id="step-6-run-your-first-scan" tabindex="-1">Step 6: Run Your First Scan <a class="direct-link" href="#step-6-run-your-first-scan" aria-hidden="true">#</a></h2>
+<p>With your lab working, let's run your first real Nmap scan. This is the starting point of every penetration test.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Your first Nmap scan</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Basic scan of Metasploitable:
+nmap -sV 192.168.56.102
+<h1 id="expected-output" tabindex="-1">Expected output: <a class="direct-link" href="#expected-output" aria-hidden="true">#</a></h1>
+<h1 id="port-state-service-version" tabindex="-1">PORT     STATE SERVICE     VERSION <a class="direct-link" href="#port-state-service-version" aria-hidden="true">#</a></h1>
+<h1 id="21-tcp-open-ftp-vsftpd-2-3-4-famous-backdoor" tabindex="-1">21/tcp   open  ftp         vsftpd 2.3.4   ← famous backdoor! <a class="direct-link" href="#21-tcp-open-ftp-vsftpd-2-3-4-famous-backdoor" aria-hidden="true">#</a></h1>
+<h1 id="22-tcp-open-ssh-openssh-4-7p1" tabindex="-1">22/tcp   open  ssh         OpenSSH 4.7p1 <a class="direct-link" href="#22-tcp-open-ssh-openssh-4-7p1" aria-hidden="true">#</a></h1>
+<h1 id="23-tcp-open-telnet-linux-telnetd" tabindex="-1">23/tcp   open  telnet      Linux telnetd <a class="direct-link" href="#23-tcp-open-telnet-linux-telnetd" aria-hidden="true">#</a></h1>
+<h1 id="80-tcp-open-http-apache-httpd-2-2-8" tabindex="-1">80/tcp   open  http        Apache httpd 2.2.8 <a class="direct-link" href="#80-tcp-open-http-apache-httpd-2-2-8" aria-hidden="true">#</a></h1>
+<h1 id="3306-tcp-open-mysql-mysql-5-0-51a" tabindex="-1">3306/tcp open  mysql       MySQL 5.0.51a <a class="direct-link" href="#3306-tcp-open-mysql-mysql-5-0-51a" aria-hidden="true">#</a></h1>
+<h1 id="many-more-vulnerable-services" tabindex="-1">... many more vulnerable services <a class="direct-link" href="#many-more-vulnerable-services" aria-hidden="true">#</a></h1>
+<h1 id="full-scan-all-65535-ports" tabindex="-1">Full scan (all 65535 ports): <a class="direct-link" href="#full-scan-all-65535-ports" aria-hidden="true">#</a></h1>
+<p>nmap -sV -sC -O -A -p- 192.168.56.102 --min-rate 5000 -oA my_first_scan</code></pre></p>
+</div>
+<blockquote>
+<p>Congratulations. You just ran your first penetration testing recon scan on a legal target. This is how every professional engagement begins.</p>
+</blockquote>
+<h2 id="next-steps" tabindex="-1">Next Steps <a class="direct-link" href="#next-steps" aria-hidden="true">#</a></h2>
+<p>Now that your lab is running, here's what to do next:</p>
+<ul>
+<li><strong>Read my Nmap Deep Dive</strong> — understand every flag and output format</li>
+<li><strong>Create a TryHackMe account</strong> — guided learning paths from beginner to advanced</li>
+<li><strong>Try the vsftpd backdoor exploit</strong> — your first Metasploit module (look up CVE-2011-2523)</li>
+<li><strong>Practice DVWA</strong> — start with SQL injection on Security Level: Low</li>
+<li><strong>Document everything</strong> — take notes, save screenshots, build your methodology</li>
+</ul>
+<div class="callout callout-info">
+  <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Your Lab is Ready</div>
+    <div class="callout-body">You now have a complete, legal ethical hacking lab. VirtualBox + Kali + Metasploitable + DVWA is the exact setup used in professional cybersecurity training courses costing thousands of dollars — and you built it for free.</div>
+  </div>
+</div>
+
+                </div>
+
+                <div class="social-share">
+                    <span class="share-label">Share article</span>
+                    <a href="https://twitter.com/intent/tweet?text=Getting%20Started%20with%20Kali%20Linux%3A%20Complete%20Beginner%20Setup%20Guide&url=https://aimadulislam.dpdns.org/posts/kali-linux-setup-guide/" target="_blank" rel="noopener" class="share-btn twitter" aria-label="Share on Twitter"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://aimadulislam.dpdns.org/posts/kali-linux-setup-guide/&title=Getting%20Started%20with%20Kali%20Linux%3A%20Complete%20Beginner%20Setup%20Guide" target="_blank" rel="noopener" class="share-btn linkedin" aria-label="Share on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <button class="share-btn copy-url" aria-label="Copy Link" id="copy-url-btn" data-url="https://aimadulislam.dpdns.org/posts/kali-linux-setup-guide/"><i class="fa-solid fa-link"></i></button>
+                </div>
+
+                <!-- Navigation between posts -->
+                
+                
+                <nav class="article-nav">
+                    
+                    <a href="/posts/metasploitable-complete-guide/" class="article-nav-link prev">
+                        <span class="article-nav-dir"><i class="fa-solid fa-angle-left"></i> Previous Post</span>
+                        <div class="article-nav-title">Metasploitable 2: The Ultimate Beginner&#39;s Guide to Exploitation</div>
+                    </a>
+                    
+                    
+                    
+                    <a href="/posts/nmap-complete-guide/" class="article-nav-link next">
+                        <span class="article-nav-dir">Next Post <i class="fa-solid fa-angle-right"></i></span>
+                        <div class="article-nav-title">Nmap Deep Dive: From Port Scanning to Full Network Enumeration</div>
+                    </a>
+                    
+                </nav>
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-widget card">
+                    <h3 class="widget-title"><i class="fa-solid fa-fire"></i> Recent Articles</h3>
+                    <div class="sidebar-posts">
+                        
+                        
+                            
+                            <a href="/posts/metasploitable-complete-guide/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    🎯
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">Metasploitable 2: The Ultimate Beginner&#39;s Guide to Exploitation</h4>
+                                    <span class="sidebar-post-meta">25 Jul 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                        
+                            
+                            <a href="/posts/nmap-complete-guide/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    🗺️
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">Nmap Deep Dive: From Port Scanning to Full Network Enumeration</h4>
+                                    <span class="sidebar-post-meta">10 Jul 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                            <a href="/posts/dfir-introduction/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    🔬
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">Digital Forensics &amp; Incident Response: A Hands-On Introduction</h4>
+                                    <span class="sidebar-post-meta">05 Jul 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                            <a href="/posts/linux-essentials-guide/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    🐧
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">Linux Essentials: Every Command You Actually Need</h4>
+                                    <span class="sidebar-post-meta">28 Jun 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                        
+                            
+                        
+                    </div>
+                </div>
+
+                <div class="sidebar-widget card">
+                    <h3 class="widget-title"><i class="fa-solid fa-envelope"></i> Terminal Feed</h3>
+                    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+                        <input type="email" class="newsletter-input" placeholder="root@localhost:~# _" required>
+                        <button type="submit" class="newsletter-btn">EXECUTE /SUBSCRIBE</button>
+                        <p class="newsletter-note">Get new tutorials and writeups directly in your inbox. No spam.</p>
+                    </form>
+                </div>
+            </aside>
+        </div>
+    </article>
+</main>
+
+<script>
+    // Copy URL button
+    document.getElementById('copy-url-btn')?.addEventListener('click', function() {
+        navigator.clipboard.writeText(this.dataset.url).then(() => {
+            const originalHtml = this.innerHTML;
+            this.innerHTML = '<i class="fa-solid fa-check"></i>';
+            this.classList.add('copied');
+            setTimeout(() => {
+                this.innerHTML = originalHtml;
+                this.classList.remove('copied');
+            }, 2000);
+        });
+    });
+
+    // Code block copy buttons
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const pre = this.parentElement.querySelector('pre');
+            if (!pre) return;
+            
+            navigator.clipboard.writeText(pre.innerText).then(() => {
+                const originalHtml = this.innerHTML;
+                this.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
+                this.classList.add('copied');
+                setTimeout(() => {
+                    this.innerHTML = originalHtml;
+                    this.classList.remove('copied');
+                }, 2000);
+            });
+        });
+    });
+
+    // Reading progress bar
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        const progress = document.getElementById('reading-progress');
+        if (progress) progress.style.width = scrolled + '%';
+    });
+</script>
+
+
+    <!-- Footer -->
+    <footer class="blog-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">AIMAD<span>/</span>ISLAM</div>
+                    <p class="footer-tagline">Offensive Security & Technical Writing. Securing the perimeter, one post at a time.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <a href="/">Portfolio</a>
+                    <a href="/blog">Blog</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <a href="https://linkedin.com/in/aimad-ul-islam" target="_blank" rel="noopener noreferrer">LinkedIn <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.6rem; margin-left:0.2rem;"></i></a>
+                    <a href="https://github.com/aimad-ul-islam" target="_blank" rel="noopener noreferrer">GitHub <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.6rem; margin-left:0.2rem;"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copy">© 2026 Aimad Ul Islam. All rights reserved.</div>
+                <div class="footer-socs">
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scroll-top" aria-label="Scroll to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <script>
+      // Basic Navigation & UI Interactions
+      document.addEventListener('DOMContentLoaded', () => {
+          // Mobile Menu
+          const menuBtn = document.getElementById('mobile-menu-btn');
+          const mobileNav = document.getElementById('mobile-nav');
+          if(menuBtn && mobileNav) {
+              menuBtn.addEventListener('click', () => {
+                  mobileNav.classList.toggle('open');
+              });
+          }
+
+          // Dark Mode Toggle
+          const themeToggle = document.getElementById('theme-toggle');
+          const html = document.documentElement;
+          
+          if(themeToggle) {
+              // Set initial icon
+              if(html.getAttribute('data-theme') === 'light') {
+                  themeToggle.innerHTML = '<i class="fa-regular fa-sun"></i>';
+              }
+              
+              themeToggle.addEventListener('click', () => {
+                  if (html.getAttribute('data-theme') === 'dark') {
+                      html.setAttribute('data-theme', 'light');
+                      localStorage.setItem('aimad-theme', 'light');
+                      themeToggle.innerHTML = '<i class="fa-regular fa-sun"></i>';
+                  } else {
+                      html.setAttribute('data-theme', 'dark');
+                      localStorage.setItem('aimad-theme', 'dark');
+                      themeToggle.innerHTML = '<i class="fa-regular fa-moon"></i>';
+                  }
+              });
+          }
+
+          // Nav Scroll Effect
+          const nav = document.querySelector('.blog-nav');
+          window.addEventListener('scroll', () => {
+              if (window.scrollY > 50) {
+                  nav.classList.add('scrolled');
+              } else {
+                  nav.classList.remove('scrolled');
+              }
+          });
+
+          // Scroll to Top
+          const scrollTopBtn = document.getElementById('scroll-top');
+          if(scrollTopBtn) {
+              window.addEventListener('scroll', () => {
+                  if (window.scrollY > 500) {
+                      scrollTopBtn.classList.add('visible');
+                  } else {
+                      scrollTopBtn.classList.remove('visible');
+                  }
+              });
+              scrollTopBtn.addEventListener('click', () => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+              });
+          }
+      });
+    </script>
+</body>
+</html>

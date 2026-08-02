@@ -1,0 +1,58 @@
+{
+  "items": [
+    {
+      "year": "2019",
+      "date": "Jan 2019",
+      "title": "Co-Founded Lizzdo Studio / Lizzdo.com",
+      "description": "Started digital technology & operations platform, building foundational skills in Linux servers, website management, and client security.",
+      "icon": "fa-solid fa-rocket",
+      "image": "",
+      "category": "Career"
+    },
+    {
+      "year": "2021",
+      "date": "Sep 2021",
+      "title": "Enrolled in BSc Computer Science",
+      "description": "Began formal Computer Science undergraduate studies at University of Peshawar, focusing on networking and system administration.",
+      "icon": "fa-solid fa-graduation-cap",
+      "image": "",
+      "category": "Education"
+    },
+    {
+      "year": "2025",
+      "date": "Jan 2025",
+      "title": "Enrolled in Cisco Networking Academy",
+      "description": "Started specialized Cisco pathways covering Networking Essentials, Introduction to Cybersecurity, and Linux Essentials.",
+      "icon": "fa-solid fa-network-wired",
+      "image": "",
+      "category": "Certification"
+    },
+    {
+      "year": "2025",
+      "date": "Jun 2025",
+      "title": "Graduated BSc CS & Mastercard Job Sim",
+      "description": "Completed university degree and Mastercard Cybersecurity Job Simulation through Forage.",
+      "icon": "fa-solid fa-certificate",
+      "image": "",
+      "category": "Education"
+    },
+    {
+      "year": "2026",
+      "date": "Mar 2026",
+      "title": "Cisco Learn-A-Thon 2026 Achievement Award",
+      "description": "Earned national award recognition for high proficiency in Ethical Hacking & Networking pathways.",
+      "icon": "fa-solid fa-award",
+      "image": "",
+      "category": "Award"
+    },
+    {
+      "year": "2026",
+      "date": "Apr 2026",
+      "title": "DFIR Certification & Portfolio Launch",
+      "description": "Completed Digital Forensics & Incident Response training by BlueCapeSecurity and launched full cybersecurity portfolio.",
+      "icon": "fa-solid fa-microscope",
+      "image": "",
+      "category": "Milestone"
+    }
+  ]
+}

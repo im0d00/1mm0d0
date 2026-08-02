@@ -1,0 +1,40 @@
+{
+  "items": [
+    {
+      "name": "Blue Team Labs — Incident Response Challenge",
+      "platform": "Blue Team Labs",
+      "description": "Analyzed suspicious PowerShell execution logs and PCAP files to trace an initial access vector, C2 communication, and data exfiltration.",
+      "tools": ["Wireshark", "PowerShell Logs", "Timeline Explorer"],
+      "screenshots": [],
+      "writeup_url": "/blog/dfir-introduction/",
+      "tags": ["DFIR", "Incident Response", "PowerShell", "PCAP"]
+    },
+    {
+      "name": "TryHackMe — Wireshark 101 & Packet Analysis",
+      "platform": "TryHackMe",
+      "description": "Completed hands-on packet capture analysis challenges focusing on HTTP headers, DNS exfiltration, and TCP stream reconstruction.",
+      "tools": ["Wireshark", "TShark"],
+      "screenshots": [],
+      "writeup_url": "/blog/nmap-complete-guide/",
+      "tags": ["Wireshark", "TryHackMe", "Network Security"]
+    },
+    {
+      "name": "Hack The Box — Starting Point Track",
+      "platform": "Hack The Box",
+      "description": "Pwned machines across Tier 0 to Tier 2 covering FTP anonymous logins, SMB enumeration, Telnet exploits, and privilege escalation.",
+      "tools": ["Nmap", "Metasploit", "Gobuster", "Netcat"],
+      "screenshots": [],
+      "writeup_url": "",
+      "tags": ["HTB", "Pentesting", "Privilege Escalation"]
+    },
+    {
+      "name": "PortSwigger Web Security Academy — SQL Injection",
+      "platform": "PortSwigger",
+      "description": "Solved SQLi labs involving UNION attacks, error-based exploitation, and blind SQL injection with time delays.",
+      "tools": ["Burp Suite", "SQLMap"],
+      "screenshots": [],
+      "writeup_url": "",
+      "tags": ["PortSwigger", "SQLi", "Web Security"]
+    }
+  ]
+}

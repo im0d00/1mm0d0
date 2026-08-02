@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "institution": "University of Peshawar",
+      "course": "Computer Science",
+      "degree": "Bachelor of Science (BSc CS)",
+      "platform": "University Campus",
+      "start_date": "2021",
+      "end_date": "2025",
+      "current_status": "Completed",
+      "description": "Comprehensive degree covering Computer Networks, Operating Systems, Data Structures & Algorithms, Database Systems, Software Engineering, and Information Security.",
+      "skills_learned": "Computer Networks, Operating Systems, C++, Python, Data Structures, Security Fundamentals",
+      "certificate_link": "",
+      "institution_logo": "fa-solid fa-graduation-cap",
+      "institution_badge": "BSc Degree",
+      "location": "Peshawar, KPK, Pakistan"
+    },
+    {
+      "institution": "Cisco Networking Academy",
+      "course": "Networking Essentials & Ethical Hacking",
+      "degree": "Cisco Certified Pathway",
+      "platform": "Cisco NetAcad",
+      "start_date": "2025",
+      "end_date": "2026",
+      "current_status": "Completed",
+      "description": "Covered TCP/IP, OSI Model, routing, switching, Linux administration, ethical hacking methodologies, threat landscapes, and defensive security practices.",
+      "skills_learned": "TCP/IP, Routing, Switching, Subnetting, Linux System Admin, Ethical Hacking",
+      "certificate_link": "https://netacad.com",
+      "institution_logo": "fa-solid fa-network-wired",
+      "institution_badge": "Learn-A-Thon Award",
+      "location": "Online / Cisco NetAcad"
+    },
+    {
+      "institution": "BlueCapeSecurity",
+      "course": "Digital Forensics & Incident Response (DFIR)",
+      "degree": "Professional DFIR Certification",
+      "platform": "BlueCape Training",
+      "start_date": "2026",
+      "end_date": "2026",
+      "current_status": "Completed",
+      "description": "Hands-on training in digital forensics, incident response lifecycle, evidence acquisition, memory forensics, log analysis, and malware triage.",
+      "skills_learned": "Disk Forensics, Volatility, Autopsy, FTK Imager, Log Triage, Incident Response",
+      "certificate_link": "",
+      "institution_logo": "fa-solid fa-microscope",
+      "institution_badge": "DFIR Specialist",
+      "location": "Online"
+    }
+  ]
+}

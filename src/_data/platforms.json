@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "name": "Cisco Networking Academy",
+      "logo": "fa-solid fa-network-wired",
+      "progress": 100,
+      "courses_completed": 4,
+      "badges": 5,
+      "certificates": 4,
+      "hours_learned": 180
+    },
+    {
+      "name": "TryHackMe",
+      "logo": "fa-solid fa-terminal",
+      "progress": 85,
+      "courses_completed": 12,
+      "badges": 15,
+      "certificates": 3,
+      "hours_learned": 220
+    },
+    {
+      "name": "Hack The Box",
+      "logo": "fa-solid fa-cube",
+      "progress": 70,
+      "courses_completed": 8,
+      "badges": 10,
+      "certificates": 2,
+      "hours_learned": 160
+    },
+    {
+      "name": "BlueCapeSecurity",
+      "logo": "fa-solid fa-microscope",
+      "progress": 100,
+      "courses_completed": 2,
+      "badges": 3,
+      "certificates": 1,
+      "hours_learned": 120
+    },
+    {
+      "name": "Mastercard / Forage",
+      "logo": "fa-solid fa-shield-cat",
+      "progress": 100,
+      "courses_completed": 1,
+      "badges": 2,
+      "certificates": 1,
+      "hours_learned": 30
+    }
+  ]
+}

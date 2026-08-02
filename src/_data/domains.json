@@ -1,0 +1,46 @@
+{
+  "items": [
+    {
+      "name": "SOC & Security Operations",
+      "icon": "fa-solid fa-chart-line",
+      "description": "Continuous security monitoring, event log analysis, threat triage, SIEM dashboard creation, and operational alert response.",
+      "skill_percentage": 88,
+      "experience_level": "Advanced"
+    },
+    {
+      "name": "Digital Forensics & Incident Response (DFIR)",
+      "icon": "fa-solid fa-microscope",
+      "description": "Evidence collection, chain of custody preservation, memory forensics, artifact extraction, disk timeline reconstruction, and incident reporting.",
+      "skill_percentage": 90,
+      "experience_level": "Advanced"
+    },
+    {
+      "name": "Network Security & Infrastructure",
+      "icon": "fa-solid fa-network-wired",
+      "description": "Designing secure network topologies, configuring firewalls, setting up IDS/IPS rules, VPN tunnels, VLAN isolation, and Packet inspection.",
+      "skill_percentage": 92,
+      "experience_level": "Expert"
+    },
+    {
+      "name": "Ethical Hacking & Penetration Testing",
+      "icon": "fa-solid fa-user-ninja",
+      "description": "Systematic vulnerability assessment, service enumeration, web application security testing, exploitation, and remediation guidance.",
+      "skill_percentage": 85,
+      "experience_level": "Advanced"
+    },
+    {
+      "name": "Threat Intelligence & OSINT",
+      "icon": "fa-solid fa-eye",
+      "description": "Open-source intelligence gathering, domain and IP reputation analysis, IOC tracking, and threat actor profiling.",
+      "skill_percentage": 82,
+      "experience_level": "Intermediate"
+    },
+    {
+      "name": "Cloud Security & Automation",
+      "icon": "fa-solid fa-cloud",
+      "description": "Automating security checks, monitoring cloud workloads, securing API endpoints, and implementing basic IAM policies.",
+      "skill_percentage": 80,
+      "experience_level": "Intermediate"
+    }
+  ]
+}

@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Aimad Ul Islam — Cybersecurity & Network Security</title>
+<meta name="description" content="Aimad Ul Islam — Cybersecurity student, SOC enthusiast, and network security learner from Pakistan. BSc Computer Science, Cisco certified."/>
+<meta property="og:title" content="Aimad Ul Islam — Cybersecurity Portfolio"/>
+<meta property="og:description" content="Cybersecurity student, SOC enthusiast, and network security researcher from Pakistan."/>
+<meta property="og:type" content="website"/>
+<meta name="theme-color" content="#00D4FF"/>
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23050810'/%3E%3Ccircle cx='32' cy='32' r='30' fill='none' stroke='%2300D4FF' stroke-width='2.5'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-family='Arial Black,Arial' font-weight='900' font-size='26' fill='%2300D4FF'%3EA%3C/text%3E%3C/svg%3E"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="css/main.css"/>
+<script>
+(function(){
+  var img=new Image();
+  img.crossOrigin='anonymous';
+  img.onload=function(){
+    var c=document.createElement('canvas');
+    c.width=c.height=64;
+    var ctx=c.getContext('2d');
+    ctx.beginPath();ctx.arc(32,32,30,0,Math.PI*2);ctx.closePath();ctx.clip();
+    ctx.drawImage(img,0,0,64,64);
+    // cyan border ring
+    ctx.beginPath();ctx.arc(32,32,30,0,Math.PI*2);
+    ctx.strokeStyle='rgba(0,212,255,0.85)';ctx.lineWidth=3;ctx.stroke();
+    var link=document.querySelector("link[rel~='icon']")||document.createElement('link');
+    link.rel='icon';link.type='image/png';link.href=c.toDataURL('image/png');
+    document.head.appendChild(link);
+  };
+  img.onerror=function(){
+    // fallback: SVG circular monogram
+    var svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><circle cx="32" cy="32" r="30" fill="#050810"/><circle cx="32" cy="32" r="30" fill="none" stroke="#00D4FF" stroke-width="2.5"/><text x="32" y="38" text-anchor="middle" font-family="Arial" font-weight="bold" font-size="22" fill="#00D4FF">A</text></svg>';
+    var b64=btoa(svg);
+    var link=document.querySelector("link[rel~='icon']")||document.createElement('link');
+    link.rel='icon';link.type='image/svg+xml';
+    link.href='data:image/svg+xml;base64,'+b64;
+    document.head.appendChild(link);
+  };
+  img.src='https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg';
+})();
+</script>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="scan-line"></div>
+
+<div id="loader">
+    <div class="loader-ring"><div class="loader-icon"><i class="fa-solid fa-shield-halved"></i></div></div>
+    <div style="text-align:center;">
+        <div class="loader-text">Initializing Security Profile</div>
+        <div style="height:0.5rem;"></div>
+        <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+        <div style="height:0.5rem;"></div>
+        <div class="loader-status" id="lstat">Loading modules...</div>
+    </div>
+</div>
+
+<nav id="navbar">
+    <a href="#" class="nav-logo"><span class="br">[</span>Aimad<span class="nav-dot"></span>Security<span class="br">]</span></a>
+    <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#certifications">Certs</a></li>
+        <li><a href="#specializations">Specs</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#platforms">Platforms</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#timeline">Timeline</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="blog.html"><i class="fa-solid fa-pen-nib" style="font-size:0.6rem"></i> Blog</a></li>
+    </ul>
+    <div class="nav-right">
+        <div class="nav-status"><div class="status-dot"></div><span class="status-text">Available for Opportunities</span></div>
+        <a href="#resume" class="nav-resume"><i class="fa-solid fa-download fa-xs"></i> Resume</a>
+    </div>
+    <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+</nav>
+
+<div class="mobile-nav" id="mobNav">
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#specializations">Specializations</a>
+    <a href="#skills">Skills</a>
+    <a href="#tools">Tools</a>
+    <a href="#platforms">Platforms</a>
+    <a href="#projects">Projects</a>
+    <a href="#experience">Experience</a>
+    <a href="#achievements">Achievements</a>
+    <a href="#timeline">Timeline</a>
+    <a href="#contact">Contact</a>
+    <a href="blog.html"><i class="fa-solid fa-pen-nib" style="font-size:0.75rem"></i> Blog</a>
+</div>
+
+<section id="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-inner">
+        <div class="hero-profile reveal">
+            <div class="profile-outer">
+                <div class="orbit orbit1"></div><div class="orbit orbit2"></div>
+                <div class="profile-inner">
+                    <img src="https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg" alt="Aimad Ul Islam"
+                    onerror="this.src='https://ui-avatars.com/api/?name=Aimad+Ul+Islam&background=0A1628&color=00E5FF&size=290&bold=true'" />
+                </div>
+                <div class="profile-hud">
+                    <div class="hud-row"><span class="hud-dot"></span><span>Status: Active</span></div>
+                    <div class="hud-row"><span style="color:var(--violet2)">◆</span><span>BSc CS — UoP</span></div>
+                    <div class="hud-row"><span style="color:var(--amber)">◆</span><span>Cisco & DFIR Certified</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-text reveal rv1">
+            <div class="hero-eyebrow">Cybersecurity Professional & SOC Enthusiast</div>
+            <h1 class="hero-name">Aimad Ul Islam<br /><span class="name-accent">Khan</span></h1>
+            <div class="hero-role-wrap"><div class="hero-role" id="heroRole">Cybersecurity Professional_</div></div>
+            <p class="hero-desc">
+                BSc Computer Science graduate from the University of Peshawar with a deep passion for network security,
+                ethical hacking, digital forensics, and security operations. Cisco-certified in Networking, Cybersecurity,
+                Linux Essentials, and Ethical Hacking. Trained in Digital Forensics & Incident Response (DFIR) by BlueCapeSecurity.
+                Building real-world expertise through hands-on labs, simulations, and continuous learning.
+            </p>
+            <div class="hero-btns">
+                <a href="#resume" class="btn primary"><i class="fa-solid fa-download fa-xs"></i> Download Resume</a>
+                <a href="#contact" class="btn outline"><i class="fa-solid fa-envelope fa-xs"></i> Contact Me</a>
+                <a href="#projects" class="btn outline"><i class="fa-solid fa-terminal fa-xs"></i> View Projects</a>
+            </div>
+            <div class="hero-metrics">
+                <div class="metric"><div class="metric-num">7+</div><div class="metric-lbl">Years Tech</div></div>
+                <div class="metric"><div class="metric-num">6</div><div class="metric-lbl">Certifications</div></div>
+                <div class="metric"><div class="metric-num">100+</div><div class="metric-lbl">Projects</div></div>
+                <div class="metric"><div class="metric-num">∞</div><div class="metric-lbl">Learning</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="about" style="background:linear-gradient(180deg,transparent,rgba(11,19,40,0.35),transparent);">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">01 About</div><h2 class="sec-title">Who I Am</h2><div class="sec-rule"></div></div>
+        <div class="about-grid">
+            <div class="about-text reveal">
+                <p>I'm <strong>Aimad Ul Islam</strong>, a Computer Science graduate from the <strong>University of Peshawar</strong>, Pakistan, with a growing specialisation in cybersecurity, network security, and security operations. My journey began with a fascination for how systems communicate — and how they can be compromised, defended, and hardened.</p>
+                <p>I hold <strong>Cisco Networking Academy certifications</strong> in Networking Essentials, Introduction to Cybersecurity, <strong>Linux Essentials</strong>, and <strong>Ethical Hacker</strong>. I've earned the <strong>Cisco Learn-A-Thon 2026 Achievement Award</strong>, completed a <strong>Mastercard Cybersecurity Job Simulation</strong>, and trained in <strong>Digital Forensics & Incident Response (DFIR)</strong> with <strong>BlueCapeSecurity</strong>. I practice packet analysis with Wireshark and maintain an active cybersecurity home lab.</p>
+                <p>Alongside security studies, I co-founded <strong><a href="https://aimad.lizzdo.com" target="_blank">Lizzdo.com</a></strong> — a digital technology platform — building 7+ years of expertise in AI tools, automation, remote operations, and international client management.</p>
+                <p>My goal is a career in <strong>threat detection, security research, and digital forensics</strong>, within SOC environments, penetration testing firms, or security research organisations.</p>
+                <div class="tags">
+                    <span class="ctag tc">Network Security</span><span class="ctag tc">SOC Operations</span>
+                    <span class="ctag tv">Ethical Hacking</span><span class="ctag tv">Digital Forensics</span>
+                    <span class="ctag tg">Incident Response</span><span class="ctag tg">Threat Intelligence</span>
+                    <span class="ctag tc">Penetration Testing</span><span class="ctag tv">Malware Analysis</span>
+                    <span class="ctag tg">OSINT</span><span class="ctag tc">Cloud Security</span>
+                </div>
+            </div>
+            <div class="stats-grid reveal rv1">
+                <div class="stat-c card"><div class="stat-n">7+</div><div class="stat-l">Yrs in Tech</div></div>
+                <div class="stat-c card"><div class="stat-n">6</div><div class="stat-l">Certifications</div></div>
+                <div class="stat-c card"><div class="stat-n">100+</div><div class="stat-l">Client Projects</div></div>
+                <div class="stat-c card"><div class="stat-n">∞</div><div class="stat-l">Curiosity</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="education">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">02 Education</div><h2 class="sec-title">Academic Background</h2><div class="sec-rule"></div></div>
+        <div class="edu-card card reveal"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+            <div class="edu-ic ic-uni"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div><div class="edu-h">Bachelor of Science in Computer Science</div><div class="edu-org">University of Peshawar — Peshawar, Pakistan</div>
+                <div class="edu-meta"><span><i class="fa-regular fa-calendar fa-xs"></i>Completed</span><span><i class="fa-solid fa-location-dot fa-xs"></i>Peshawar, KPK</span></div>
+                <div class="edu-detail"><strong style="color:var(--white)">Relevant Coursework:</strong> Computer Networks · Operating Systems · Data Structures · Algorithms · Database Systems · Software Engineering · Information Security<br /><strong style="color:var(--white)">Research Interests:</strong> Network Security · Digital Forensics · Cyber Threat Intelligence</div></div>
+        </div>
+        <div class="edu-card card reveal rv1"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+            <div class="edu-ic ic-cisco"><i class="fa-solid fa-network-wired"></i></div>
+            <div><div class="edu-h">Cisco Networking Academy</div><div class="edu-org" style="color:#4A9EFF">Cisco Systems — Online Learning Platform</div>
+                <div class="edu-meta"><span><i class="fa-regular fa-calendar fa-xs"></i>2025 – 2026</span><span><i class="fa-solid fa-award fa-xs"></i>Learn-A-Thon Achievement Award</span></div>
+                <div class="edu-detail">Completed: Networking Essentials · Introduction to Cybersecurity · <strong>Linux Essentials</strong> · <strong>Ethical Hacker</strong>. Covered TCP/IP, OSI, routing, switching, Linux system administration, ethical hacking methodologies, threat landscapes, and defensive security practices.</div></div>
+        </div>
+        <div class="edu-card card reveal rv2"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+            <div class="edu-ic ic-bluecap"><i class="fa-solid fa-microscope"></i></div>
+            <div><div class="edu-h">Digital Forensics & Incident Response (DFIR)</div><div class="edu-org" style="color:#00B4FF;">BlueCapeSecurity — Professional Training</div>
+                <div class="edu-meta"><span><i class="fa-regular fa-calendar fa-xs"></i>2026</span><span><i class="fa-solid fa-certificate fa-xs"></i>DFIR Certified</span></div>
+                <div class="edu-detail">Comprehensive training in digital forensics, incident response lifecycle, evidence acquisition, chain of custody, memory forensics, log analysis, and malware triage. Hands-on labs with industry-standard forensic tools.</div></div>
+        </div>
+    </div>
+</section>
+
+<section id="certifications" style="background:linear-gradient(180deg,transparent,rgba(11,19,40,0.4),transparent);">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">03 Certifications</div><h2 class="sec-title">Credentials & Certifications</h2><div class="sec-rule"></div></div>
+        <div class="cert-grid">
+
+            <div class="cert-card card reveal"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+                <div class="cert-top"><div class="cert-logo cl-cisco"><i class="fa-solid fa-network-wired"></i></div><div><div class="cert-name">Networking Essentials</div><div class="cert-iss">Cisco Networking Academy</div></div></div>
+                <div class="cert-desc">TCP/IP, OSI models, routing & switching, IP addressing, subnetting, DNS, DHCP. Via ITU-DTC Pakistan.</div>
+                <div class="cert-foot"><span class="cert-date">Nov 2025</span><span class="badge b-earned">Earned</span></div>
+            </div>
+
+            <div class="cert-card card reveal rv1"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+                <div class="cert-top"><div class="cert-logo cl-cisco"><i class="fa-solid fa-shield-halved"></i></div><div><div class="cert-name">Introduction to Cybersecurity</div><div class="cert-iss">Cisco Networking Academy</div></div></div>
+                <div class="cert-desc">Threat landscapes, attack vectors, phishing, malware, authentication, encryption, and security best practices. Via Virtual University Lahore.</div>
+                <div class="cert-foot"><span class="cert-date">Mar 2026</span><span class="badge b-earned">Earned</span></div>
+            </div>
+
+            <div class="cert-card card reveal rv2"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+                <div class="cert-top"><div class="cert-logo cl-cisco"><i class="fa-solid fa-terminal"></i></div><div><div class="cert-name">Linux Essentials</div><div class="cert-iss">Cisco Networking Academy</div></div></div>
+                <div class="cert-desc">Linux system architecture, command-line fundamentals, file systems, process management, permissions, scripting, and system administration essentials.</div>
+                <div class="cert-foot"><span class="cert-date">2026</span><span class="badge b-earned">Earned</span></div>
+            </div>
+
+            <div class="cert-card card reveal"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+                <div class="cert-top"><div class="cert-logo cl-cisco"><i class="fa-solid fa-user-secret"></i></div><div><div class="cert-name">Ethical Hacker</div><div class="cert-iss">Cisco Networking Academy</div></div></div>
+                <div class="cert-desc">Ethical hacking methodologies, reconnaissance, vulnerability assessment, exploitation techniques, penetration testing frameworks, and defensive countermeasures.</div>
+                <div class="cert-foot"><span class="cert-date">2026</span><span class="badge b-earned">Earned</span></div>
+            </div>
+
+            <div class="cert-card card reveal rv1"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+                <div class="cert-top"><div class="cert-logo cl-bluecap"><i class="fa-solid fa-microscope"></i></div><div><div class="cert-name">DFIR — Digital Forensics & Incident Response</div><div class="cert-iss">BlueCapeSecurity</div></div></div>
+                <div class="cert-desc">Professional training covering the full incident response lifecycle, forensic evidence acquisition, memory analysis, log correlation, chain of custody, and malware triage.</div>
+                <div class="cert-foot"><span class="cert-date">2026</span><span class="badge b-earned">Earned</span></div>
+            </div>
+
+            <div class="cert-card card reveal rv2"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+                <div class="cert-top"><div class="cert-logo cl-ec"><i class="fa-solid fa-building-columns"></i></div><div><div class="cert-name">Cybersecurity Job Simulation</div><div class="cert-iss">Mastercard / Forage</div></div></div>
+                <div class="cert-desc">Phishing simulation design, IOC analysis, and corporate security incident reporting.</div>
+                <div class="cert-foot"><span class="cert-date">Jun 2026</span><span class="badge b-earned">Earned</span></div>
+            </div>
+
+            <div class="cert-card card reveal"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+                <div class="cert-top"><div class="cert-logo cl-comptia"><i class="fa-solid fa-lock"></i></div><div><div class="cert-name">CompTIA Security+</div><div class="cert-iss">CompTIA</div></div></div>
+                <div class="cert-desc">Globally recognised security certification covering threats, attacks, architecture, implementation, and operations.</div>
+                <div class="cert-foot"><span class="cert-date">In Progress</span><span class="badge b-prog">Pursuing</span></div>
+            </div>
+
+            <div class="cert-card card reveal rv1"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+                <div class="cert-top"><div class="cert-logo cl-ec"><i class="fa-solid fa-user-ninja"></i></div><div><div class="cert-name">Certified Ethical Hacker (CEH)</div><div class="cert-iss">EC-Council</div></div></div>
+                <div class="cert-desc">Penetration testing, vulnerability assessment, and ethical hacking methodology. Planned at Corvit Peshawar.</div>
+                <div class="cert-foot"><span class="cert-date">Planned</span><span class="badge b-plan">Planned</span></div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<section id="skills">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">04 Skills</div><h2 class="sec-title">Technical Skills</h2><div class="sec-rule"></div></div>
+        <div class="skills-grid">
+            <div class="card reveal" style="padding:1.4rem;"><div class="card-glow"></div><div class="corner tl"></div>
+                <div class="sk-head"><div class="sk-ic si1"><i class="fa-solid fa-network-wired"></i></div><h3>Network Security</h3></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">TCP/IP & OSI Models</span><span class="sk-pct">92%</span></div><div class="sk-bar"><div class="sk-fill sf1" data-w="92"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Routing & Switching</span><span class="sk-pct">85%</span></div><div class="sk-bar"><div class="sk-fill sf1" data-w="85"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Subnetting & VLSM</span><span class="sk-pct">88%</span></div><div class="sk-bar"><div class="sk-fill sf1" data-w="88"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">DNS / DHCP / VLANs</span><span class="sk-pct">84%</span></div><div class="sk-bar"><div class="sk-fill sf1" data-w="84"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Firewall & IDS/IPS</span><span class="sk-pct">68%</span></div><div class="sk-bar"><div class="sk-fill sf1" data-w="68"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">VPN & IPsec</span><span class="sk-pct">60%</span></div><div class="sk-bar"><div class="sk-fill sf1" data-w="60"></div></div></div>
+            </div>
+            <div class="card reveal rv1" style="padding:1.4rem;"><div class="card-glow"></div><div class="corner tl"></div>
+                <div class="sk-head"><div class="sk-ic si2"><i class="fa-solid fa-shield-halved"></i></div><h3>Cybersecurity & Offensive</h3></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Threat Detection & IOC</span><span class="sk-pct">78%</span></div><div class="sk-bar"><div class="sk-fill sf2" data-w="78"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Phishing Analysis</span><span class="sk-pct">82%</span></div><div class="sk-bar"><div class="sk-fill sf2" data-w="82"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Ethical Hacking</span><span class="sk-pct">72%</span></div><div class="sk-bar"><div class="sk-fill sf2" data-w="72"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Vulnerability Assessment</span><span class="sk-pct">65%</span></div><div class="sk-bar"><div class="sk-fill sf2" data-w="65"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Incident Response</span><span class="sk-pct">70%</span></div><div class="sk-bar"><div class="sk-fill sf2" data-w="70"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Digital Forensics</span><span class="sk-pct">68%</span></div><div class="sk-bar"><div class="sk-fill sf2" data-w="68"></div></div></div>
+            </div>
+            <div class="card reveal rv2" style="padding:1.4rem;"><div class="card-glow"></div><div class="corner tl"></div>
+                <div class="sk-head"><div class="sk-ic si3"><i class="fa-solid fa-code"></i></div><h3>Programming & Scripting</h3></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Python</span><span class="sk-pct">70%</span></div><div class="sk-bar"><div class="sk-fill sf3" data-w="70"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Bash Shell Scripting</span><span class="sk-pct">65%</span></div><div class="sk-bar"><div class="sk-fill sf3" data-w="65"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">PowerShell</span><span class="sk-pct">50%</span></div><div class="sk-bar"><div class="sk-fill sf3" data-w="50"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">JavaScript</span><span class="sk-pct">72%</span></div><div class="sk-bar"><div class="sk-fill sf3" data-w="72"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">HTML / CSS</span><span class="sk-pct">82%</span></div><div class="sk-bar"><div class="sk-fill sf3" data-w="82"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Git & GitHub</span><span class="sk-pct">75%</span></div><div class="sk-bar"><div class="sk-fill sf3" data-w="75"></div></div></div>
+            </div>
+            <div class="card reveal" style="padding:1.4rem;"><div class="card-glow"></div><div class="corner tl"></div>
+                <div class="sk-head"><div class="sk-ic si4"><i class="fa-brands fa-linux"></i></div><h3>Operating Systems</h3></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Linux (Ubuntu, Kali, CentOS)</span><span class="sk-pct">78%</span></div><div class="sk-bar"><div class="sk-fill sf4" data-w="78"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Windows (10, 11, Server)</span><span class="sk-pct">85%</span></div><div class="sk-bar"><div class="sk-fill sf4" data-w="85"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">System Administration</span><span class="sk-pct">62%</span></div><div class="sk-bar"><div class="sk-fill sf4" data-w="62"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">File Systems & Permissions</span><span class="sk-pct">76%</span></div><div class="sk-bar"><div class="sk-fill sf4" data-w="76"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Process Management</span><span class="sk-pct">72%</span></div><div class="sk-bar"><div class="sk-fill sf4" data-w="72"></div></div></div>
+            </div>
+            <div class="card reveal rv1" style="padding:1.4rem;"><div class="card-glow"></div><div class="corner tl"></div>
+                <div class="sk-head"><div class="sk-ic si5"><i class="fa-solid fa-screwdriver-wrench"></i></div><h3>Security Tools</h3></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Wireshark</span><span class="sk-pct">78%</span></div><div class="sk-bar"><div class="sk-fill sf1" data-w="78"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Cisco Packet Tracer</span><span class="sk-pct">85%</span></div><div class="sk-bar"><div class="sk-fill sf1" data-w="85"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Nmap</span><span class="sk-pct">60%</span></div><div class="sk-bar"><div class="sk-fill sf1" data-w="60"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Burp Suite</span><span class="sk-pct">45%</span></div><div class="sk-bar"><div class="sk-fill sf1" data-w="45"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Metasploit Framework</span><span class="sk-pct">40%</span></div><div class="sk-bar"><div class="sk-fill sf1" data-w="40"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Nessus / OpenVAS</span><span class="sk-pct">45%</span></div><div class="sk-bar"><div class="sk-fill sf1" data-w="45"></div></div></div>
+            </div>
+            <div class="card reveal rv2" style="padding:1.4rem;"><div class="card-glow"></div><div class="corner tl"></div>
+                <div class="sk-head"><div class="sk-ic si6"><i class="fa-solid fa-cloud"></i></div><h3>Cloud & Infrastructure</h3></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Virtualization (VirtualBox, VMware)</span><span class="sk-pct">70%</span></div><div class="sk-bar"><div class="sk-fill sf2" data-w="70"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Docker</span><span class="sk-pct">45%</span></div><div class="sk-bar"><div class="sk-fill sf2" data-w="45"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">AWS / Azure Fundamentals</span><span class="sk-pct">42%</span></div><div class="sk-bar"><div class="sk-fill sf2" data-w="42"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">IAM & Zero Trust Concepts</span><span class="sk-pct">45%</span></div><div class="sk-bar"><div class="sk-fill sf2" data-w="45"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">AI & Automation Tools</span><span class="sk-pct">88%</span></div><div class="sk-bar"><div class="sk-fill sf2" data-w="88"></div></div></div>
+                <div class="sk-item"><div class="sk-meta"><span class="sk-name">Forensic Research</span><span class="sk-pct">60%</span></div><div class="sk-bar"><div class="sk-fill sf2" data-w="60"></div></div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="tools" style="background:linear-gradient(180deg,transparent,rgba(11,19,40,0.3),transparent);">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">05 Tools & Platforms</div><h2 class="sec-title">Security Tools & Platforms</h2><div class="sec-rule"></div></div>
+        <div class="tools-grid reveal">
+            <div class="tool-item"><i class="fa-solid fa-network-wired"></i><span>Wireshark</span><span class="tlvl">Advanced</span></div>
+            <div class="tool-item"><i class="fa-solid fa-diagram-project"></i><span>Cisco Packet Tracer</span><span class="tlvl">Advanced</span></div>
+            <div class="tool-item"><i class="fa-solid fa-crosshairs"></i><span>Nmap</span><span class="tlvl">Intermediate</span></div>
+            <div class="tool-item"><i class="fa-solid fa-bug"></i><span>Burp Suite</span><span class="tlvl">Beginner</span></div>
+            <div class="tool-item"><i class="fa-solid fa-shield"></i><span>Metasploit</span><span class="tlvl">Beginner</span></div>
+            <div class="tool-item"><i class="fa-solid fa-search"></i><span>Nessus / OpenVAS</span><span class="tlvl">Beginner</span></div>
+            <div class="tool-item"><i class="fa-solid fa-memory"></i><span>Volatility</span><span class="tlvl">Intermediate</span></div>
+            <div class="tool-item"><i class="fa-solid fa-folder-tree"></i><span>Autopsy</span><span class="tlvl">Intermediate</span></div>
+            <div class="tool-item"><i class="fa-solid fa-database"></i><span>FTK Imager</span><span class="tlvl">Intermediate</span></div>
+            <div class="tool-item"><i class="fa-solid fa-terminal"></i><span>Linux CLI</span><span class="tlvl">Advanced</span></div>
+            <div class="tool-item"><i class="fa-solid fa-code"></i><span>Python</span><span class="tlvl">Intermediate</span></div>
+            <div class="tool-item"><i class="fa-brands fa-github"></i><span>Git / GitHub</span><span class="tlvl">Intermediate</span></div>
+            <div class="tool-item"><i class="fa-solid fa-cloud"></i><span>VirtualBox / VMware</span><span class="tlvl">Advanced</span></div>
+            <div class="tool-item"><i class="fa-solid fa-docker"></i><span>Docker</span><span class="tlvl">Beginner</span></div>
+            <div class="tool-item"><i class="fa-solid fa-shield-halved"></i><span>SIEM Concepts</span><span class="tlvl">Beginner</span></div>
+            <div class="tool-item"><i class="fa-solid fa-robot"></i><span>AI Automation Tools</span><span class="tlvl">Advanced</span></div>
+        </div>
+    </div>
+</section>
+
+<section id="projects">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">06 Projects</div><h2 class="sec-title">Projects & Labs</h2><div class="sec-rule"></div></div>
+        <div class="proj-grid">
+            <div class="proj-card card reveal"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+                <div class="proj-hd"><div class="proj-num">// PROJECT 01</div><div class="proj-type">HOME LAB</div></div>
+                <div class="proj-title">Cybersecurity Home Lab</div>
+                <p class="proj-desc">Personal lab for practicing Linux system administration, network configuration, packet analysis, and security tool exploration using Wireshark, VirtualBox, and network simulation.</p>
+                <div class="proj-stack"><span class="stag">Linux</span><span class="stag">Wireshark</span><span class="stag">VirtualBox</span><span class="stag">Networking</span></div>
+                <div class="proj-links"><a href="https://github.com/Aimadulislam" class="plink" target="_blank"><i class="fa-brands fa-github fa-xs"></i> GitHub</a><a href="#" class="plink"><i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i> Details</a></div>
+            </div>
+            <div class="proj-card card reveal rv1"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+                <div class="proj-hd"><div class="proj-num">// PROJECT 02</div><div class="proj-type">SIMULATION</div></div>
+                <div class="proj-title">Phishing Simulation Analysis</div>
+                <p class="proj-desc">Designed and analysed a corporate phishing simulation for Mastercard via Forage — identifying IOCs, assessing attack vectors, and producing a structured remediation report.</p>
+                <div class="proj-stack"><span class="stag">Phishing Analysis</span><span class="stag">IOC Correlation</span><span class="stag">Security Reporting</span></div>
+                <div class="proj-links"><a href="#" class="plink"><i class="fa-solid fa-file-lines fa-xs"></i> Report</a></div>
+            </div>
+            <div class="proj-card card reveal rv2"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+                <div class="proj-hd"><div class="proj-num">// PROJECT 03</div><div class="proj-type">NETWORKING LAB</div></div>
+                <div class="proj-title">Network Topology Labs</div>
+                <p class="proj-desc">Multi-device network topologies in Cisco Packet Tracer — subnetting, VLANs, routing protocols, and systematic troubleshooting across multi-segment networks.</p>
+                <div class="proj-stack"><span class="stag">Cisco Packet Tracer</span><span class="stag">Subnetting</span><span class="stag">VLANs</span><span class="stag">Routing</span></div>
+                <div class="proj-links"><a href="https://github.com/Aimadulislam" class="plink" target="_blank"><i class="fa-brands fa-github fa-xs"></i> GitHub</a></div>
+            </div>
+            <div class="proj-card card reveal rv3"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+                <div class="proj-hd"><div class="proj-num">// PROJECT 04</div><div class="proj-type">DFIR LAB</div></div>
+                <div class="proj-title">Digital Forensics & Incident Response Lab</div>
+                <p class="proj-desc">Hands-on DFIR practice with forensic imaging, memory analysis, log correlation, and incident response playbook execution using industry-standard tools.</p>
+                <div class="proj-stack"><span class="stag">DFIR</span><span class="stag">Autopsy</span><span class="stag">Volatility</span><span class="stag">FTK Imager</span></div>
+                <div class="proj-links"><a href="#" class="plink"><i class="fa-solid fa-file-lines fa-xs"></i> Report</a></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!-- SPECIALIZATIONS -->
+<section id="specializations" style="background:linear-gradient(180deg,transparent,rgba(11,19,40,0.35),transparent);">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">06b Specializations</div><h2 class="sec-title">Cybersecurity Domains</h2><div class="sec-rule"></div></div>
+        <div class="spec-grid">
+            <div class="spec-card card reveal"><div class="card-glow"></div><div class="spec-ic s1"><i class="fa-solid fa-user-secret"></i></div><div class="spec-name">Ethical Hacking</div><div class="spec-lv lv-l">Learning</div></div>
+            <div class="spec-card card reveal rv1"><div class="card-glow"></div><div class="spec-ic s2"><i class="fa-solid fa-bullseye"></i></div><div class="spec-name">Penetration Testing</div><div class="spec-lv lv-s">Studying</div></div>
+            <div class="spec-card card reveal rv2"><div class="card-glow"></div><div class="spec-ic s3"><i class="fa-solid fa-magnifying-glass-chart"></i></div><div class="spec-name">Vulnerability Assessment</div><div class="spec-lv lv-l">Learning</div></div>
+            <div class="spec-card card reveal rv3"><div class="card-glow"></div><div class="spec-ic s4"><i class="fa-solid fa-network-wired"></i></div><div class="spec-name">Network Security</div><div class="spec-lv lv-l">Learning</div></div>
+            <div class="spec-card card reveal"><div class="card-glow"></div><div class="spec-ic s1"><i class="fa-solid fa-desktop"></i></div><div class="spec-name">SOC Operations</div><div class="spec-lv lv-l">Learning</div></div>
+            <div class="spec-card card reveal rv1"><div class="card-glow"></div><div class="spec-ic s2"><i class="fa-solid fa-fingerprint"></i></div><div class="spec-name">Digital Forensics</div><div class="spec-lv lv-s">Certified</div></div>
+            <div class="spec-card card reveal rv2"><div class="card-glow"></div><div class="spec-ic s3"><i class="fa-solid fa-fire-extinguisher"></i></div><div class="spec-name">Incident Response</div><div class="spec-lv lv-s">Certified</div></div>
+            <div class="spec-card card reveal rv3"><div class="card-glow"></div><div class="spec-ic s4"><i class="fa-solid fa-crosshairs"></i></div><div class="spec-name">Threat Hunting</div><div class="spec-lv lv-s">Studying</div></div>
+            <div class="spec-card card reveal"><div class="card-glow"></div><div class="spec-ic s1"><i class="fa-solid fa-bug"></i></div><div class="spec-name">Malware Analysis</div><div class="spec-lv lv-e">Exploring</div></div>
+            <div class="spec-card card reveal rv1"><div class="card-glow"></div><div class="spec-ic s2"><i class="fa-solid fa-globe"></i></div><div class="spec-name">Web App Security</div><div class="spec-lv lv-s">Studying</div></div>
+            <div class="spec-card card reveal rv2"><div class="card-glow"></div><div class="spec-ic s3"><i class="fa-solid fa-cloud"></i></div><div class="spec-name">Cloud Security</div><div class="spec-lv lv-e">Exploring</div></div>
+            <div class="spec-card card reveal rv3"><div class="card-glow"></div><div class="spec-ic s4"><i class="fa-solid fa-binoculars"></i></div><div class="spec-name">OSINT</div><div class="spec-lv lv-e">Exploring</div></div>
+            <div class="spec-card card reveal"><div class="card-glow"></div><div class="spec-ic s1"><i class="fa-solid fa-robot"></i></div><div class="spec-name">Security Automation</div><div class="spec-lv lv-e">Exploring</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- PLATFORMS -->
+<section id="platforms">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">07b Platforms</div><h2 class="sec-title">Learning Platforms & Badges</h2><div class="sec-rule"></div></div>
+        <div class="plat-grid">
+            <div class="plat-card card reveal"><div class="card-glow"></div><div class="plat-ic pi-htb"><i class="fa-solid fa-cube"></i></div><div class="plat-name">Hack The Box</div><div class="plat-st st-plan">— Join & Add Profile —</div><div class="plat-sub">Offensive Security Platform</div><div class="plat-prog"><div class="pp" style="width:0%"></div></div></div>
+            <div class="plat-card card reveal rv1"><div class="card-glow"></div><div class="plat-ic pi-thm"><i class="fa-solid fa-flag"></i></div><div class="plat-name">TryHackMe</div><div class="plat-st st-plan">— Join & Add Profile —</div><div class="plat-sub">Guided Security Learning</div><div class="plat-prog"><div class="pp" style="width:0%"></div></div></div>
+            <div class="plat-card card reveal rv2"><div class="card-glow"></div><div class="plat-ic pi-ps"><i class="fa-solid fa-spider"></i></div><div class="plat-name">PortSwigger Web Academy</div><div class="plat-st st-plan">— Enrol & Add Profile —</div><div class="plat-sub">Web App Security</div><div class="plat-prog"><div class="pp" style="width:0%"></div></div></div>
+            <div class="plat-card card reveal rv3"><div class="card-glow"></div><div class="plat-ic pi-cisco"><i class="fa-solid fa-network-wired"></i></div><div class="plat-name">Cisco Networking Academy</div><div class="plat-st st-active">● Active</div><div class="plat-sub">4 Certs · Learn-A-Thon Award</div><div class="plat-prog"><div class="pp" style="width:92%"></div></div></div>
+            <div class="plat-card card reveal"><div class="card-glow"></div><div class="plat-ic pi-bluecap"><i class="fa-solid fa-microscope"></i></div><div class="plat-name">BlueCapeSecurity</div><div class="plat-st st-active">● DFIR Certified</div><div class="plat-sub">DFIR Foundations & Techniques</div><div class="plat-prog"><div class="pp" style="width:100%"></div></div></div>
+            <div class="plat-card card reveal rv1"><div class="card-glow"></div><div class="plat-ic pi-otw"><i class="fa-solid fa-terminal"></i></div><div class="plat-name">OverTheWire</div><div class="plat-st st-plan">— Start Challenges —</div><div class="plat-sub">Linux & Wargames</div><div class="plat-prog"><div class="pp" style="width:0%"></div></div></div>
+            <div class="plat-card card reveal rv2"><div class="card-glow"></div><div class="plat-ic pi-pico"><i class="fa-solid fa-puzzle-piece"></i></div><div class="plat-name">PicoCTF</div><div class="plat-st st-plan">— Join & Compete —</div><div class="plat-sub">CTF Competitions</div><div class="plat-prog"><div class="pp" style="width:0%"></div></div></div>
+            <div class="plat-card card reveal rv3"><div class="card-glow"></div><div class="plat-ic pi-cd"><i class="fa-solid fa-magnifying-glass-chart"></i></div><div class="plat-name">CyberDefenders</div><div class="plat-st st-plan">— Join & Add Profile —</div><div class="plat-sub">Blue Team Labs</div><div class="plat-prog"><div class="pp" style="width:0%"></div></div></div>
+        </div>
+    </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="background:linear-gradient(180deg,transparent,rgba(11,19,40,0.35),transparent);">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">07c Experience</div><h2 class="sec-title">Professional Experience</h2><div class="sec-rule"></div></div>
+        <div class="exp-tl">
+            <div class="exp-item reveal">
+                <div class="exp-dot"></div>
+                <div class="exp-inner card"><div class="card-glow"></div><div class="corner tl"></div>
+                    <div class="exp-hd"><div><div class="exp-role">Co-Founder & Technology Lead</div><div class="exp-co">Lizzdo.com</div></div><span class="exp-dur">2023 – Present</span></div>
+                    <ul class="exp-list">
+                        <li>Co-founded a digital technology platform delivering AI-powered solutions, automation, 3D/2D design, and digital products for international clients across the USA, Europe, and the Middle East.</li>
+                        <li>Managed 100+ client projects with structured documentation, escalation processes, and quality assurance — skills directly transferable to SOC operations and incident reporting.</li>
+                        <li>Integrated AI tools, automation pipelines, and prompt engineering systems — building practical AI/ML experience relevant to security automation.</li>
+                        <li>Researched and evaluated emerging technologies systematically — continuous learning mindset essential in cybersecurity.</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="exp-item reveal rv1">
+                <div class="exp-dot"></div>
+                <div class="exp-inner card"><div class="card-glow"></div><div class="corner tl"></div>
+                    <div class="exp-hd"><div><div class="exp-role">Freelance Technology Specialist</div><div class="exp-co">Remote — Fiverr, Upwork, Freelancer</div></div><span class="exp-dur">2021 – Present</span></div>
+                    <ul class="exp-list">
+                        <li>Delivered 100+ technical projects for international clients — web platforms, digital products, 3D production, automation systems, and brand technology solutions.</li>
+                        <li>Maintained meticulous project documentation and communicated technical findings clearly — building precision and reporting habits essential to security work.</li>
+                        <li>Independently diagnosed and resolved complex technical issues under deadline pressure — mirroring the triage and investigation cycle of security operations.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">07d Achievements</div><h2 class="sec-title">Achievements & Recognition</h2><div class="sec-rule"></div></div>
+        <div class="ach-grid">
+            <div class="ach-card card reveal"><div class="card-glow"></div><div class="ach-ic ai-gold"><i class="fa-solid fa-award"></i></div><div class="ach-title">Cisco Learn-A-Thon 2026</div><p class="ach-desc">Learner Achievement Award — exceptional and sustained learning engagement within the Cisco Networking Academy (Mar 2026).</p></div>
+            <div class="ach-card card reveal rv1"><div class="card-glow"></div><div class="ach-ic ai-cyan"><i class="fa-solid fa-shield-halved"></i></div><div class="ach-title">Mastercard SOC Simulation</div><p class="ach-desc">Completed Mastercard Cybersecurity Job Simulation via Forage — phishing design and IOC analysis (Jun 2026).</p></div>
+            <div class="ach-card card reveal rv2"><div class="card-glow"></div><div class="ach-ic ai-green"><i class="fa-solid fa-microscope"></i></div><div class="ach-title">BlueCapeSecurity DFIR Certified</div><p class="ach-desc">Completed DFIR Foundations & Techniques — professional digital forensics and incident response training (2026).</p></div>
+            <div class="ach-card card reveal rv3"><div class="card-glow"></div><div class="ach-ic ai-violet"><i class="fa-solid fa-graduation-cap"></i></div><div class="ach-title">BSc Computer Science</div><p class="ach-desc">Successfully completed BSc Computer Science at the University of Peshawar — foundation for cybersecurity specialisation.</p></div>
+        </div>
+    </div>
+</section>
+
+<!-- DASHBOARD -->
+<section id="dashboard" style="background:linear-gradient(180deg,transparent,rgba(11,19,40,0.35),transparent);">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">07e Dashboard</div><h2 class="sec-title">Security Dashboard</h2><div class="sec-rule"></div></div>
+        <div class="dash-grid">
+            <div class="card dash-card reveal"><div class="card-glow"></div><div class="corner tl"></div>
+                <div class="dash-lbl">Learning Progress</div>
+                <div class="db-bar-item"><div class="db-bar-meta"><span>Networking</span><span>92%</span></div><div class="db-bar-track"><div class="db-bar-fill" style="width:92%;background:linear-gradient(90deg,var(--cyan),var(--cyan2))"></div></div></div>
+                <div class="db-bar-item"><div class="db-bar-meta"><span>Linux Essentials</span><span>78%</span></div><div class="db-bar-track"><div class="db-bar-fill" style="width:78%;background:linear-gradient(90deg,var(--green),rgba(0,255,136,.5))"></div></div></div>
+                <div class="db-bar-item"><div class="db-bar-meta"><span>Ethical Hacking</span><span>72%</span></div><div class="db-bar-track"><div class="db-bar-fill" style="width:72%;background:linear-gradient(90deg,var(--violet),var(--violet2))"></div></div></div>
+                <div class="db-bar-item"><div class="db-bar-meta"><span>DFIR</span><span>68%</span></div><div class="db-bar-track"><div class="db-bar-fill" style="width:68%;background:linear-gradient(90deg,#00B4FF,rgba(0,180,255,.5))"></div></div></div>
+                <div class="db-bar-item"><div class="db-bar-meta"><span>Python Scripting</span><span>70%</span></div><div class="db-bar-track"><div class="db-bar-fill" style="width:70%;background:linear-gradient(90deg,var(--amber),rgba(255,183,0,.5))"></div></div></div>
+                <div class="db-bar-item"><div class="db-bar-meta"><span>Penetration Testing</span><span>55%</span></div><div class="db-bar-track"><div class="db-bar-fill" style="width:55%;background:linear-gradient(90deg,var(--red),rgba(255,56,96,.5))"></div></div></div>
+            </div>
+            <div class="card dash-card reveal rv1"><div class="card-glow"></div><div class="corner tl"></div>
+                <div class="dash-lbl">Certification Tracker</div>
+                <div class="db-bar-item"><div class="db-bar-meta"><span>Cisco Networking Essentials</span><span style="color:var(--cyan)">✓</span></div><div class="db-bar-track"><div class="db-bar-fill" style="width:100%;background:var(--cyan)"></div></div></div>
+                <div class="db-bar-item"><div class="db-bar-meta"><span>Cisco Intro to Cybersecurity</span><span style="color:var(--cyan)">✓</span></div><div class="db-bar-track"><div class="db-bar-fill" style="width:100%;background:var(--cyan)"></div></div></div>
+                <div class="db-bar-item"><div class="db-bar-meta"><span>Cisco Linux Essentials</span><span style="color:var(--cyan)">✓</span></div><div class="db-bar-track"><div class="db-bar-fill" style="width:100%;background:var(--cyan)"></div></div></div>
+                <div class="db-bar-item"><div class="db-bar-meta"><span>Cisco Ethical Hacker</span><span style="color:var(--cyan)">✓</span></div><div class="db-bar-track"><div class="db-bar-fill" style="width:100%;background:var(--cyan)"></div></div></div>
+                <div class="db-bar-item"><div class="db-bar-meta"><span>BlueCapeSecurity DFIR</span><span style="color:var(--cyan)">✓</span></div><div class="db-bar-track"><div class="db-bar-fill" style="width:100%;background:var(--cyan)"></div></div></div>
+                <div class="db-bar-item"><div class="db-bar-meta"><span>Mastercard Cyber Simulation</span><span style="color:var(--cyan)">✓</span></div><div class="db-bar-track"><div class="db-bar-fill" style="width:100%;background:var(--cyan)"></div></div></div>
+                <div class="db-bar-item"><div class="db-bar-meta"><span>CompTIA Security+</span><span style="color:var(--violet2)">In Progress</span></div><div class="db-bar-track"><div class="db-bar-fill" style="width:20%;background:var(--violet)"></div></div></div>
+            </div>
+            <div class="card dash-card reveal rv2"><div class="card-glow"></div><div class="corner tl"></div>
+                <div class="dash-lbl">Recent Activity Feed</div>
+                <ul class="af">
+                    <li class="af-item"><div class="af-dot" style="background:var(--cyan);box-shadow:0 0 5px var(--cyan)"></div><div><div class="af-text">Mastercard Cybersecurity Job Simulation — phishing analysis & IOC report completed</div><div class="af-time">Jun 2026</div></div></li>
+                    <li class="af-item"><div class="af-dot" style="background:#00B4FF"></div><div><div class="af-text">BlueCapeSecurity DFIR Foundations & Techniques — certified</div><div class="af-time">2026</div></div></li>
+                    <li class="af-item"><div class="af-dot" style="background:var(--violet2)"></div><div><div class="af-text">Cisco Ethical Hacker course completed — 70hrs, 34 labs, Kali Linux</div><div class="af-time">2026</div></div></li>
+                    <li class="af-item"><div class="af-dot" style="background:var(--green)"></div><div><div class="af-text">Cisco Linux Essentials certified — LPI PDC 010-160 aligned</div><div class="af-time">2026</div></div></li>
+                    <li class="af-item"><div class="af-dot" style="background:var(--cyan)"></div><div><div class="af-text">Cisco Learn-A-Thon 2026 Learner Achievement Award received</div><div class="af-time">Mar 2026</div></div></li>
+                    <li class="af-item"><div class="af-dot" style="background:var(--muted)"></div><div><div class="af-text">Completed Introduction to Cybersecurity — Cisco Networking Academy</div><div class="af-time">Mar 2026</div></div></li>
+                    <li class="af-item"><div class="af-dot" style="background:var(--muted)"></div><div><div class="af-text">Networking Essentials certified — Cisco / ITU-DTC Pakistan</div><div class="af-time">Nov 2025</div></div></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="timeline">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">08 Timeline</div><h2 class="sec-title">Cybersecurity Journey</h2><div class="sec-rule"></div></div>
+        <div class="tl-wrap">
+            <div class="tl-item reveal"><div class="tl-dot"></div><div class="tl-date">2021</div><div class="tl-title">Started Freelance Technology Career</div><div class="tl-body">Began delivering technology solutions for international clients — web development, automation, AI tools, and digital product management.</div></div>
+            <div class="tl-item reveal"><div class="tl-dot"></div><div class="tl-date">2023</div><div class="tl-title">Co-Founded Lizzdo.com</div><div class="tl-body">Launched Lizzdo.com serving global clients. Built remote team management, AI integration, and product delivery expertise.</div></div>
+            <div class="tl-item reveal"><div class="tl-dot"></div><div class="tl-date">Nov 2025</div><div class="tl-title">Cisco Networking Essentials Certified</div><div class="tl-body">Completed Cisco Networking Essentials via ITU-DTC Pakistan — formal pivot into cybersecurity and networking specialisation.</div></div>
+            <div class="tl-item reveal"><div class="tl-dot"></div><div class="tl-date">Mar 2026</div><div class="tl-title">Cisco Cybersecurity Certified + Learn-A-Thon Award</div><div class="tl-body">Completed Introduction to Cybersecurity via Virtual University Lahore and received the Cisco Networking Academy Learn-A-Thon 2026 Achievement Award.</div></div>
+            <div class="tl-item reveal"><div class="tl-dot"></div><div class="tl-date">2026</div><div class="tl-title">Linux Essentials & Ethical Hacker Certified</div><div class="tl-body">Completed Linux Essentials and Ethical Hacker certifications through Cisco Networking Academy — expanding expertise in system administration and offensive security.</div></div>
+            <div class="tl-item reveal"><div class="tl-dot"></div><div class="tl-date">2026</div><div class="tl-title">DFIR Certified — BlueCapeSecurity</div><div class="tl-body">Completed professional training in Digital Forensics & Incident Response, covering evidence acquisition, memory forensics, and incident handling.</div></div>
+            <div class="tl-item reveal"><div class="tl-dot"></div><div class="tl-date">Jun 2026</div><div class="tl-title">Mastercard Cybersecurity Simulation Completed</div><div class="tl-body">Completed the Mastercard Cybersecurity Job Simulation via Forage — first hands-on SOC-style experience covering phishing analysis and incident reporting.</div></div>
+            <div class="tl-item reveal" style="opacity:0.45;"><div class="tl-dot" style="border-color:var(--violet2)"></div><div class="tl-date" style="color:var(--violet2)">2026 – 2027</div><div class="tl-title">CEH + Security+ — Upcoming</div><div class="tl-body ph">Planned: Certified Ethical Hacker (CEH) at Corvit Peshawar and CompTIA Security+.</div></div>
+            <div class="tl-item reveal" style="opacity:0.3;"><div class="tl-dot" style="border-color:var(--muted)"></div><div class="tl-date" style="color:var(--muted)">Future</div><div class="tl-title ph">SOC Analyst / Security Researcher Role</div><div class="tl-body ph">Target: join a Security Operations Center, penetration testing firm, or cybersecurity research organisation.</div></div>
+        </div>
+    </div>
+</section>
+
+<section id="resume" style="background:linear-gradient(180deg,transparent,rgba(11,19,40,0.35),transparent);">
+    <div class="container" style="text-align:center;">
+        <div class="reveal"><div class="sec-eye" style="justify-content:center;display:flex;">09 Resume</div><h2 class="sec-title">Download My Resume</h2><div class="sec-rule" style="margin:0 auto 2.5rem;"></div></div>
+        <div class="res-wrap reveal">
+            <div class="card" style="padding:2.4rem;"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+                <div class="res-ic"><i class="fa-solid fa-file-shield"></i></div>
+                <div class="res-title">Aimad Ul Islam — Full Resume</div>
+                <p class="res-desc">Download my latest CV including education, certifications (Cisco, BlueCapeSecurity, Mastercard), technical skills, cybersecurity experience, and professional background. Available in PDF format.</p>
+                <a href="#resume" class="res-dl"><i class="fa-solid fa-download fa-xs"></i> Download Resume (PDF)</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="contact">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">10 Contact</div><h2 class="sec-title">Get In Touch</h2><div class="sec-rule"></div></div>
+        <div class="con-grid">
+            <div class="reveal">
+                <div class="con-title">Open to Opportunities</div>
+                <p class="con-desc">Actively seeking cybersecurity internships, SOC analyst roles, research collaborations, and security-focused opportunities. Whether you're a recruiter, researcher, or team lead — I'd love to connect.</p>
+                <div class="con-item"><div class="ci-ic"><i class="fa-solid fa-envelope"></i></div><div><div class="ci-lbl">Email</div><div class="ci-val"><a href="mailto:info@aimadulislam.dpdns.org">info@aimadulislam.dpdns.org</a></div></div></div>
+                <div class="con-item"><div class="ci-ic"><i class="fa-solid fa-globe"></i></div><div><div class="ci-lbl">Portfolio</div><div class="ci-val"><a href="https://aimad.lizzdo.com" target="_blank">aimad.lizzdo.com</a></div></div></div>
+                <div class="con-item"><div class="ci-ic"><i class="fa-solid fa-location-dot"></i></div><div><div class="ci-lbl">Location</div><div class="ci-val">Peshawar, KPK, Pakistan</div></div></div>
+                <div class="con-item"><div class="ci-ic"><i class="fa-solid fa-clock"></i></div><div><div class="ci-lbl">Availability</div><div class="ci-val">Remote · UK/EU/US overlapping hours available</div></div></div>
+                <div class="soc-row">
+                    <a href="https://www.linkedin.com/in/aimad-ulislam/" class="soc-btn" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://github.com/Aimadulislam" class="soc-btn" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://aimad.lizzdo.com" class="soc-btn" target="_blank" aria-label="Portfolio"><i class="fa-solid fa-globe"></i></a>
+                    <a href="mailto:info@aimadulislam.dpdns.org" class="soc-btn" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+            <form class="con-form reveal rv1" onsubmit="handleForm(event)">
+                <div class="fg"><label>Your Name</label><input type="text" id="cn" placeholder="John Smith" required /></div>
+                <div class="fg"><label>Email Address</label><input type="email" id="ce" placeholder="john@company.com" required /></div>
+                <div class="fg"><label>Organization</label><input type="text" id="co" placeholder="Company / University / Team" /></div>
+                <div class="fg"><label>Inquiry Type</label>
+                    <select id="ct"><option value="">Select type...</option><option>Internship Opportunity</option><option>SOC / Security Role</option><option>Research Collaboration</option><option>Recruitment</option><option>General Inquiry</option></select>
+                </div>
+                <div class="fg"><label>Message</label><textarea id="cm" placeholder="Tell me about the opportunity..." required></textarea></div>
+                <button type="submit" class="form-btn"><i class="fa-solid fa-paper-plane fa-xs"></i> Send Message</button>
+                <div class="form-ok" id="formOk"><i class="fa-solid fa-circle-check"></i> Message copied — please email to info@aimadulislam.dpdns.org</div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<script>
+// LOADER
+const statuses = ['Initializing security modules...', 'Loading profile data...', 'Establishing secure connection...', 'Verifying credentials...', 'Rendering interface...', 'System ready.'];
+let si = 0;
+const lstat = document.getElementById('lstat');
+const sint = setInterval(() => { if (si < statuses.length - 1) { si++; lstat.textContent = statuses[si]; } }, 400);
+window.addEventListener('load', () => {
+    clearInterval(sint);
+    lstat.textContent = 'System ready.';
+    setTimeout(() => document.getElementById('loader').classList.add('hide'), 2500);
+});
+
+// HERO CANVAS
+(() => {
+    const c = document.getElementById('hero-canvas'), ctx = c.getContext('2d');
+    let W, H, nodes = [];
+    const N = 52;
+    function resize() { W = c.width = c.offsetWidth; H = c.height = c.offsetHeight; }
+    window.addEventListener('resize', resize);
+    resize();
+    for (let i = 0; i < N; i++) nodes.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .38, vy: (Math.random() - .5) * .38, r: Math.random() * 1.7 + 1, p: Math.random() * Math.PI * 2, t: Math.random() > .72 ? 'v' : 'c' });
+    function draw() {
+        ctx.clearRect(0, 0, W, H);
+        nodes.forEach(n => { n.x += n.vx; n.y += n.vy; n.p += .017; if (n.x < 0 || n.x > W) n.vx *= -1; if (n.y < 0 || n.y > H) n.vy *= -1; });
+        for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) {
+            const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y, d = Math.sqrt(dx * dx + dy * dy);
+            if (d < 175) {
+                const a = (1 - d / 175) * .22;
+                ctx.strokeStyle = nodes[i].t === 'c' ? `rgba(0,212,255,${a})` : `rgba(167,139,250,${a})`;
+                ctx.lineWidth = .55; ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y); ctx.stroke();
+            }
+        }
+        nodes.forEach(n => {
+            const p = .5 + .5 * Math.sin(n.p);
+            ctx.beginPath(); ctx.arc(n.x, n.y, n.r * (.65 + .35 * p), 0, Math.PI * 2);
+            ctx.fillStyle = n.t === 'c' ? `rgba(0,212,255,${p*.75})` : `rgba(167,139,250,${p*.65})`;
+            ctx.fill();
+        });
+        requestAnimationFrame(draw);
+    }
+    draw();
+})();
+
+// NAV
+window.addEventListener('scroll', () => {
+    const secs = document.querySelectorAll('section[id]');
+    const links = document.querySelectorAll('.nav-links a');
+    let cur = '';
+    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 130) cur = s.id; });
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '/#' + cur || a.getAttribute('href') === '#' + cur));
+});
+document.getElementById('ham').addEventListener('click', () => document.getElementById('mobNav').classList.toggle('open'));
+document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => document.getElementById('mobNav').classList.remove('open')));
+
+// HERO ROLE ROTATION
+const roles = ['Cybersecurity Professional_', 'SOC Enthusiast_', 'Network Security Specialist_', 'Ethical Hacker_', 'DFIR Practitioner_', 'Security Researcher_'];
+let ri = 0;
+const roleEl = document.getElementById('heroRole');
+if (roleEl) {
+    setInterval(() => {
+        roleEl.style.opacity = '0';
+        roleEl.style.transform = 'translateY(-10px)';
+        setTimeout(() => {
+            ri = (ri + 1) % roles.length;
+            roleEl.textContent = roles[ri];
+            roleEl.style.transition = 'opacity .4s,transform .4s';
+            roleEl.style.opacity = '1';
+            roleEl.style.transform = 'none';
+        }, 300);
+    }, 2800);
+}
+
+// SCROLL REVEAL
+const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: .1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+// SKILL BARS
+const sobs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.querySelectorAll('.sk-fill[data-w]').forEach(b => {
+                setTimeout(() => { b.style.width = b.dataset.w + '%'; }, 200);
+            });
+            sobs.unobserve(e.target);
+        }
+    });
+}, { threshold: .25 });
+document.querySelectorAll('.card').forEach(c => { if (c.querySelector('.sk-fill')) sobs.observe(c); });
+
+// CONTACT FORM
+function handleForm(e) {
+    e.preventDefault();
+    const txt = `Name: ${document.getElementById('cn').value}\nEmail: ${document.getElementById('ce').value}\nOrg: ${document.getElementById('co').value}\nType: ${document.getElementById('ct').value}\n\nMessage:\n${document.getElementById('cm').value}`;
+    navigator.clipboard.writeText(txt).catch(() => {});
+    document.getElementById('formOk').style.display = 'block';
+    e.target.reset();
+}
+</script>
+</body>
+</html>

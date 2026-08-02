@@ -1,0 +1,416 @@
+backend:
+  name: git-gateway
+  branch: main
+
+local_backend:
+  url: "http://localhost:3000/api/v1"
+
+media_folder: "src/images"
+public_folder: "/images"
+
+collections:
+  - name: "global_settings"
+    label: "Global Settings"
+    delete: false
+    editor:
+      preview: false
+    files:
+      - name: "settings"
+        label: "Website & SEO Settings"
+        file: "src/_data/settings.json"
+        fields:
+          - { label: "Website Title", name: "website_title", widget: "string" }
+          - { label: "Website Description", name: "website_description", widget: "text" }
+          - { label: "SEO Title", name: "seo_title", widget: "string" }
+          - { label: "SEO Description", name: "seo_description", widget: "text" }
+          - { label: "Keywords", name: "keywords", widget: "string" }
+          - { label: "Author", name: "author", widget: "string" }
+          - { label: "Portfolio Name", name: "portfolio_name", widget: "string" }
+          - { label: "Profile Picture", name: "profile_picture", widget: "image" }
+          - { label: "Favicon", name: "favicon", widget: "image" }
+          - { label: "Logo Text", name: "logo", widget: "string" }
+          - { label: "Hero Background Style", name: "hero_background", widget: "string" }
+          - { label: "Theme Color (Hex)", name: "theme_color", widget: "string" }
+          - { label: "Accent Color (Hex)", name: "accent_color", widget: "string" }
+          - { label: "Footer Text", name: "footer_text", widget: "string" }
+          - { label: "Copyright", name: "copyright", widget: "string" }
+          - { label: "Google Analytics ID", name: "google_analytics_id", widget: "string", required: false }
+          - { label: "Google Search Console Verification", name: "google_search_console_verification", widget: "string", required: false }
+          - { label: "Microsoft Clarity ID", name: "microsoft_clarity_id", widget: "string", required: false }
+          - { label: "Cloudflare Analytics Token", name: "cloudflare_analytics", widget: "string", required: false }
+          - { label: "Open Graph Image", name: "og_image", widget: "image", required: false }
+          - { label: "Robots Settings", name: "robots_settings", widget: "text", required: false }
+          - name: "social_media_links"
+            label: "Social Media Links"
+            widget: "list"
+            fields:
+              - { label: "Platform Name", name: "platform", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+              - { label: "Icon Class", name: "icon", widget: "string" }
+
+      - name: "hero"
+        label: "Hero Section"
+        file: "src/_data/hero.json"
+        fields:
+          - { label: "Name", name: "name", widget: "string" }
+          - { label: "Name Accent / Last Name", name: "name_accent", widget: "string", required: false }
+          - { label: "Professional Title", name: "professional_title", widget: "string" }
+          - { label: "Rotating Job Titles", name: "rotating_job_titles", widget: "list" }
+          - { label: "Biography / Intro Text", name: "biography", widget: "text" }
+          - { label: "Hero Image", name: "hero_image", widget: "image" }
+          - { label: "Background Image", name: "background_image", widget: "image", required: false }
+          - { label: "Resume Button Text", name: "resume_button_text", widget: "string" }
+          - { label: "Resume Button Link", name: "resume_button_link", widget: "string" }
+          - { label: "Contact Button Text", name: "contact_button_text", widget: "string" }
+          - { label: "Contact Button Link", name: "contact_button_link", widget: "string" }
+          - { label: "View Projects Button Text", name: "view_projects_button_text", widget: "string" }
+          - { label: "View Projects Button Link", name: "view_projects_button_link", widget: "string" }
+          - { label: "Blog Button Text", name: "blog_button_text", widget: "string" }
+          - { label: "Blog Button Link", name: "blog_button_link", widget: "string" }
+          - { label: "Animated Subtext", name: "animated_text", widget: "string" }
+          - name: "statistics_override"
+            label: "Hero Metric Cards"
+            widget: "object"
+            fields:
+              - { label: "Years in Tech", name: "years_tech", widget: "string" }
+              - { label: "Certifications Count", name: "certifications", widget: "string" }
+              - { label: "Projects Count", name: "projects", widget: "string" }
+              - { label: "Learning Metric", name: "learning", widget: "string" }
+          - name: "social_icons"
+            label: "Social Icons"
+            widget: "list"
+            fields:
+              - { label: "Platform", name: "platform", widget: "string" }
+              - { label: "FontAwesome Icon Class", name: "icon", widget: "string" }
+              - { label: "Link URL", name: "link", widget: "string" }
+
+      - name: "about"
+        label: "About Me"
+        file: "src/_data/about.json"
+        fields:
+          - { label: "Short Biography", name: "biography", widget: "text" }
+          - { label: "Personal Description", name: "personal_description", widget: "text" }
+          - { label: "Skill Tags", name: "skills", widget: "list" }
+          - { label: "Interests", name: "interests", widget: "list" }
+          - name: "languages"
+            label: "Languages Spoken"
+            widget: "list"
+            fields:
+              - { label: "Language", name: "language", widget: "string" }
+              - { label: "Proficiency", name: "proficiency", widget: "string" }
+          - { label: "Career Objectives", name: "career_objectives", widget: "text" }
+          - { label: "Experience Summary", name: "experience_summary", widget: "text" }
+          - { label: "Download Resume Button Text", name: "download_resume_button_text", widget: "string" }
+          - { label: "Download Resume Link", name: "download_resume_button_link", widget: "string" }
+          - { label: "Profile Image", name: "profile_image", widget: "image" }
+
+      - name: "resume"
+        label: "Resume & Downloads"
+        file: "src/_data/resume.json"
+        fields:
+          - { label: "Resume PDF File", name: "pdf_file", widget: "file" }
+          - { label: "Resume DOCX File", name: "docx_file", widget: "file", required: false }
+          - { label: "Version Tag", name: "version", widget: "string" }
+          - { label: "Resume Description", name: "description", widget: "text" }
+          - { label: "Last Updated Date", name: "date", widget: "date" }
+
+      - name: "contact"
+        label: "Contact & Availability"
+        file: "src/_data/contact.json"
+        fields:
+          - { label: "Email Address", name: "email", widget: "string" }
+          - { label: "Phone Number", name: "phone", widget: "string" }
+          - { label: "Website URL", name: "website", widget: "string" }
+          - { label: "Portfolio URL", name: "portfolio", widget: "string" }
+          - { label: "GitHub Profile", name: "github", widget: "string" }
+          - { label: "LinkedIn Profile", name: "linkedin", widget: "string" }
+          - { label: "YouTube Channel", name: "youtube", widget: "string" }
+          - { label: "Instagram", name: "instagram", widget: "string" }
+          - { label: "X (Twitter)", name: "x", widget: "string" }
+          - { label: "Facebook", name: "facebook", widget: "string" }
+          - { label: "Discord Tag", name: "discord", widget: "string" }
+          - { label: "Location", name: "location", widget: "string" }
+          - { label: "Availability Status", name: "availability", widget: "string" }
+          - { label: "Timezone", name: "timezone", widget: "string" }
+          - { label: "Working Hours", name: "working_hours", widget: "string" }
+          - { label: "Calendly Link", name: "calendly_link", widget: "string", required: false }
+          - { label: "Contact Form Endpoint", name: "contact_form_endpoint", widget: "string", required: false }
+
+      - name: "dashboard"
+        label: "SOC Dashboard Metrics"
+        file: "src/_data/dashboard.json"
+        fields:
+          - { label: "Total Learning Hours", name: "learning_hours", widget: "number", value_type: "int" }
+          - { label: "Unique Visitors Counter", name: "visitors", widget: "number", value_type: "int" }
+          - { label: "Page Views Counter", name: "page_views", widget: "number", value_type: "int" }
+          - name: "recent_activities"
+            label: "Recent Activity Log Entries"
+            widget: "list"
+            fields:
+              - { label: "Activity Title", name: "title", widget: "string" }
+              - { label: "Category", name: "category", widget: "string" }
+              - { label: "Date", name: "date", widget: "string" }
+              - { label: "Icon Class", name: "icon", widget: "string" }
+              - { label: "Details", name: "details", widget: "string" }
+
+  - name: "education_collection"
+    label: "Education"
+    delete: false
+    files:
+      - name: "education"
+        label: "Education List"
+        file: "src/_data/education.json"
+        fields:
+          - name: "items"
+            label: "Education Entries"
+            widget: "list"
+            fields:
+              - { label: "Institution Name", name: "institution", widget: "string" }
+              - { label: "Course / Major", name: "course", widget: "string" }
+              - { label: "Degree / Credential", name: "degree", widget: "string" }
+              - { label: "Platform / Campus", name: "platform", widget: "string" }
+              - { label: "Start Date / Year", name: "start_date", widget: "string" }
+              - { label: "End Date / Year", name: "end_date", widget: "string" }
+              - { label: "Current Status", name: "current_status", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Skills Learned", name: "skills_learned", widget: "string" }
+              - { label: "Certificate Link", name: "certificate_link", widget: "string", required: false }
+              - { label: "Institution Logo / Icon", name: "institution_logo", widget: "string" }
+              - { label: "Badge Tag", name: "institution_badge", widget: "string" }
+              - { label: "Location", name: "location", widget: "string" }
+
+  - name: "certifications_collection"
+    label: "Certifications"
+    delete: false
+    files:
+      - name: "certifications"
+        label: "Certifications List"
+        file: "src/_data/certifications.json"
+        fields:
+          - name: "items"
+            label: "Certifications List"
+            widget: "list"
+            fields:
+              - { label: "Certification Name", name: "name", widget: "string" }
+              - { label: "Provider", name: "provider", widget: "string" }
+              - { label: "Badge Image URL", name: "badge_image", widget: "string", required: false }
+              - { label: "Provider Logo Class / Image", name: "provider_logo", widget: "string" }
+              - { label: "Credential ID", name: "credential_id", widget: "string", required: false }
+              - { label: "Verification URL", name: "verification_url", widget: "string", required: false }
+              - { label: "Issue Date", name: "issue_date", widget: "string" }
+              - { label: "Expiration Date", name: "expiration_date", widget: "string", required: false }
+              - { label: "Status", name: "status", widget: "select", options: ["Completed", "Active", "Expired", "In Progress", "Planned"] }
+
+  - name: "experience_collection"
+    label: "Experience"
+    delete: false
+    files:
+      - name: "experience"
+        label: "Experience List"
+        file: "src/_data/experience.json"
+        fields:
+          - name: "items"
+            label: "Experience Entries"
+            widget: "list"
+            fields:
+              - { label: "Company / Organization", name: "company", widget: "string" }
+              - { label: "Position / Role", name: "position", widget: "string" }
+              - { label: "Employment Type", name: "employment_type", widget: "string" }
+              - { label: "Start Date", name: "start_date", widget: "string" }
+              - { label: "End Date", name: "end_date", widget: "string" }
+              - { label: "Is Current Position?", name: "current", widget: "boolean", default: false }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Technologies Used", name: "technologies", widget: "list" }
+              - { label: "Key Responsibilities", name: "responsibilities", widget: "list" }
+              - { label: "Achievements", name: "achievements", widget: "list" }
+              - { label: "Company Logo / Icon", name: "company_logo", widget: "string" }
+
+  - name: "skills_collection"
+    label: "Technical Skills"
+    delete: false
+    files:
+      - name: "skills"
+        label: "Skill Categories"
+        file: "src/_data/skills.json"
+        fields:
+          - name: "categories"
+            label: "Skill Categories"
+            widget: "list"
+            fields:
+              - { label: "Category Name", name: "category_name", widget: "string" }
+              - { label: "Category Icon Class", name: "icon", widget: "string" }
+              - name: "skills"
+                label: "Skills in Category"
+                widget: "list"
+                fields:
+                  - { label: "Skill Name", name: "name", widget: "string" }
+                  - { label: "Percentage (0-100)", name: "percentage", widget: "number", value_type: "int" }
+                  - { label: "Color Hex / Var", name: "color", widget: "string" }
+                  - { label: "Skill Icon Class", name: "icon", widget: "string" }
+                  - { label: "Description", name: "description", widget: "string" }
+
+  - name: "tools_collection"
+    label: "Security Tools"
+    delete: false
+    files:
+      - name: "tools"
+        label: "Security Tools List"
+        file: "src/_data/tools.json"
+        fields:
+          - name: "items"
+            label: "Tools & Software"
+            widget: "list"
+            fields:
+              - { label: "Tool Name", name: "name", widget: "string" }
+              - { label: "Category", name: "category", widget: "string" }
+              - { label: "Icon Class", name: "icon", widget: "string" }
+              - { label: "Logo URL / Image", name: "logo", widget: "image", required: false }
+              - { label: "Skill Level", name: "skill_level", widget: "select", options: ["Beginner", "Intermediate", "Advanced", "Expert"] }
+
+  - name: "projects_collection"
+    label: "Projects"
+    delete: false
+    files:
+      - name: "projects"
+        label: "Projects List"
+        file: "src/_data/projects.json"
+        fields:
+          - name: "items"
+            label: "Projects"
+            widget: "list"
+            fields:
+              - { label: "Project Title", name: "title", widget: "string" }
+              - { label: "Category", name: "category", widget: "select", options: ["Home Lab", "Research", "Simulation", "CTF", "Web Development", "Networking", "Automation", "Digital Forensics", "Malware Analysis", "Reverse Engineering", "Cloud Security"] }
+              - { label: "Featured Image", name: "featured_image", widget: "image" }
+              - { label: "Gallery Images", name: "gallery", widget: "list", field: { label: "Image", name: "image", widget: "image" }, required: false }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Technologies Used", name: "technologies", widget: "list" }
+              - { label: "Difficulty Level", name: "difficulty", widget: "select", options: ["Beginner", "Intermediate", "Advanced", "Expert"] }
+              - { label: "Status", name: "status", widget: "select", options: ["Completed", "In Progress", "Planned"] }
+              - { label: "GitHub Link", name: "github_link", widget: "string", required: false }
+              - { label: "Live Demo URL", name: "live_demo", widget: "string", required: false }
+              - { label: "Documentation URL / Summary", name: "documentation", widget: "string", required: false }
+              - { label: "Report Title / Ref", name: "report", widget: "string", required: false }
+              - { label: "PDF File / Link", name: "pdf", widget: "file", required: false }
+              - { label: "Screenshots", name: "screenshots", widget: "list", field: { label: "Screenshot", widget: "image" }, required: false }
+              - { label: "Videos", name: "videos", widget: "list", field: { label: "Video URL", widget: "string" }, required: false }
+
+  - name: "labs_collection"
+    label: "Labs & CTFs"
+    delete: false
+    files:
+      - name: "labs"
+        label: "Labs List"
+        file: "src/_data/labs.json"
+        fields:
+          - name: "items"
+            label: "Cybersecurity Labs"
+            widget: "list"
+            fields:
+              - { label: "Lab Name", name: "name", widget: "string" }
+              - { label: "Platform", name: "platform", widget: "select", options: ["Hack The Box", "TryHackMe", "Blue Team Labs", "PortSwigger", "OverTheWire", "PicoCTF", "Custom Home Lab"] }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Tools Used", name: "tools", widget: "list" }
+              - { label: "Screenshots", name: "screenshots", widget: "list", field: { label: "Image", widget: "image" }, required: false }
+              - { label: "Write-up Link", name: "writeup_url", widget: "string", required: false }
+              - { label: "Tags", name: "tags", widget: "list" }
+
+  - name: "domains_collection"
+    label: "Cybersecurity Domains"
+    delete: false
+    files:
+      - name: "domains"
+        label: "Domains List"
+        file: "src/_data/domains.json"
+        fields:
+          - name: "items"
+            label: "Domains"
+            widget: "list"
+            fields:
+              - { label: "Domain Name", name: "name", widget: "string" }
+              - { label: "Icon Class", name: "icon", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Skill Percentage (0-100)", name: "skill_percentage", widget: "number", value_type: "int" }
+              - { label: "Experience Level", name: "experience_level", widget: "select", options: ["Beginner", "Intermediate", "Advanced", "Expert"] }
+
+  - name: "platforms_collection"
+    label: "Learning Platforms"
+    delete: false
+    files:
+      - name: "platforms"
+        label: "Platforms List"
+        file: "src/_data/platforms.json"
+        fields:
+          - name: "items"
+            label: "Learning Platforms"
+            widget: "list"
+            fields:
+              - { label: "Platform Name", name: "name", widget: "string" }
+              - { label: "Logo Class / Image", name: "logo", widget: "string" }
+              - { label: "Progress Percentage (0-100)", name: "progress", widget: "number", value_type: "int" }
+              - { label: "Courses Completed", name: "courses_completed", widget: "number", value_type: "int" }
+              - { label: "Badges Earned", name: "badges", widget: "number", value_type: "int" }
+              - { label: "Certificates Earned", name: "certificates", widget: "number", value_type: "int" }
+              - { label: "Hours Learned", name: "hours_learned", widget: "number", value_type: "int" }
+
+  - name: "achievements_collection"
+    label: "Achievements"
+    delete: false
+    files:
+      - name: "achievements"
+        label: "Achievements List"
+        file: "src/_data/achievements.json"
+        fields:
+          - name: "items"
+            label: "Achievements"
+            widget: "list"
+            fields:
+              - { label: "Achievement Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Date", name: "date", widget: "string" }
+              - { label: "Badge Label", name: "badge", widget: "string" }
+              - { label: "Icon Class", name: "icon", widget: "string" }
+              - { label: "Image", name: "image", widget: "image", required: false }
+              - { label: "Certificate URL", name: "certificate", widget: "string", required: false }
+              - { label: "Category", name: "category", widget: "string" }
+
+  - name: "timeline_collection"
+    label: "Journey Timeline"
+    delete: false
+    files:
+      - name: "timeline"
+        label: "Timeline Entries"
+        file: "src/_data/timeline.json"
+        fields:
+          - name: "items"
+            label: "Timeline Milestones"
+            widget: "list"
+            fields:
+              - { label: "Year", name: "year", widget: "string" }
+              - { label: "Date Label", name: "date", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Icon Class", name: "icon", widget: "string" }
+              - { label: "Image", name: "image", widget: "image", required: false }
+              - { label: "Category", name: "category", widget: "string" }
+
+  - name: "posts"
+    label: "Blog Posts"
+    folder: "src/posts"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
+      - { label: "Publish Date", name: "date", widget: "datetime" }
+      - { label: "Updated Date", name: "updated", widget: "datetime", required: false }
+      - { label: "Author", name: "author", widget: "string", default: "Aimad Ul Islam" }
+      - { label: "Excerpt", name: "excerpt", widget: "text" }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Image Alt Text", name: "imageAlt", widget: "string", required: false }
+      - { label: "Emoji / Icon", name: "emoji", widget: "string", required: false }
+      - { label: "Categories", name: "categories", widget: "list" }
+      - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Reading Time (minutes)", name: "readingTime", widget: "number", value_type: "int", required: false }
+      - { label: "Featured Post?", name: "featured", widget: "boolean", default: false }
+      - { label: "Body", name: "body", widget: "markdown" }

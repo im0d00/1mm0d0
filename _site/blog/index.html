@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+  <!-- SEO -->
+  <title>Blog — Aimad Ul Islam | Cybersecurity, Linux, Networking &amp; More</title>
+  <meta name="description" content="Technical blog by Aimad Ul Islam — cybersecurity, ethical hacking, Linux, networking, programming, DFIR, and more. Practical guides and tutorials."/>
+  <meta name="author" content="Aimad Ul Islam"/>
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="Blog — Aimad Ul Islam | Cybersecurity, Linux, Networking &amp; More"/>
+  <meta property="og:description" content="Technical blog by Aimad Ul Islam — cybersecurity, ethical hacking, Linux, networking, programming, DFIR, and more. Practical guides and tutorials."/>
+  <meta property="og:site_name" content="Aimad Ul Islam"/>
+  <meta property="og:image" content="https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg"/>
+
+  <meta name="theme-color" content="#00D4FF"/>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23050810'/%3E%3Ccircle cx='32' cy='32' r='30' fill='none' stroke='%2300D4FF' stroke-width='2.5'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-family='Arial Black,Arial' font-weight='900' font-size='26' fill='%2300D4FF'%3EA%3C/text%3E%3C/svg%3E"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- Blog CSS -->
+  <link rel="stylesheet" href="/css/blog.css"/>
+</head>
+<body>
+
+<!-- Reading Progress Bar -->
+<div id="reading-progress" role="progressbar" aria-label="Page reading progress"></div>
+
+<!-- Grid Background -->
+<div class="grid-bg" aria-hidden="true"></div>
+<div class="scan-line" aria-hidden="true"></div>
+
+<!-- NAVIGATION -->
+<nav class="blog-nav" id="navbar" role="navigation" aria-label="Main navigation">
+  <a href="/" class="nav-logo" aria-label="Aimad Ul Islam — Home">
+    <span class="br">[</span>Aimad<span class="nav-dot" aria-hidden="true"></span>Security<span class="br">]</span>
+  </a>
+
+  <ul class="nav-links" role="list">
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#certifications">Certs</a></li>
+    <li><a href="/#skills">Skills</a></li>
+    <li><a href="/#projects">Projects</a></li>
+    <li><a href="/blog/" class="active" aria-current="page">Blog</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <div class="nav-status" aria-label="Availability status">
+      <div class="status-dot" aria-hidden="true"></div>
+      <span class="status-text">Available for Internship</span>
+    </div>
+    <button id="dark-mode-btn" class="dark-mode-btn" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <i class="fa-solid fa-moon" aria-hidden="true"></i>
+    </button>
+    <a href="/#contact" class="nav-btn">Hire Me</a>
+  </div>
+
+  <button class="hamburger" id="ham" aria-label="Toggle mobile menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobNav" role="navigation" aria-label="Mobile navigation">
+  <a href="/">Home</a>
+  <a href="/#about">About</a>
+  <a href="/#certifications">Certifications</a>
+  <a href="/#skills">Skills</a>
+  <a href="/#projects">Projects</a>
+  <a href="/blog/" aria-current="page">Blog</a>
+  <a href="/#contact">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="blog-hero" aria-labelledby="blog-hero-title">
+  <canvas id="blog-hero-canvas" aria-hidden="true"></canvas>
+  <div class="blog-hero-inner">
+    <div class="blog-hero-eye" aria-hidden="true">Technical Writing & Research</div>
+    <h1 class="blog-hero-title" id="blog-hero-title">
+      The <span class="accent">Cyber</span>security Blog
+    </h1>
+    <p class="blog-hero-sub">Practical guides on ethical hacking, Linux, networking, DFIR, and more — written by a cybersecurity student who documents everything he learns.</p>
+
+    <!-- Search -->
+    <div class="search-wrap" role="search">
+      <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+      <label for="blog-search" class="visually-hidden">Search blog posts</label>
+      <input type="search" id="blog-search" placeholder="Search posts, topics, tools..." autocomplete="off" spellcheck="false" aria-label="Search blog posts"/>
+    </div>
+    <p class="search-results-count" id="posts-count" aria-live="polite"></p>
+
+    <!-- Stats -->
+    <div class="blog-hero-stats" aria-label="Blog statistics">
+      <div class="text-center">
+        <div class="hero-stat-num">7</div>
+        <div class="hero-stat-lbl">Articles</div>
+      </div>
+      <div class="text-center">
+        <div class="hero-stat-num">6</div>
+        <div class="hero-stat-lbl">Categories</div>
+      </div>
+      <div class="text-center">
+        <div class="hero-stat-num">∞</div>
+        <div class="hero-stat-lbl">Learning</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES BAR -->
+<div id="categories-bar" role="navigation" aria-label="Filter by category">
+  <div class="categories-scroll" role="list">
+    <button class="cat-btn active" data-cat="all" role="listitem" aria-pressed="true">
+      <i class="fa-solid fa-border-all fa-xs" aria-hidden="true"></i> All Posts
+    </button>
+    
+    <button class="cat-btn" data-cat="Cybersecurity" role="listitem" aria-pressed="false">
+      <i class="fa-solid fa-folder-open fa-xs" aria-hidden="true"></i> Cybersecurity
+    </button>
+    
+    <button class="cat-btn" data-cat="Linux" role="listitem" aria-pressed="false">
+      <i class="fa-solid fa-folder-open fa-xs" aria-hidden="true"></i> Linux
+    </button>
+    
+    <button class="cat-btn" data-cat="Networking" role="listitem" aria-pressed="false">
+      <i class="fa-solid fa-folder-open fa-xs" aria-hidden="true"></i> Networking
+    </button>
+    
+    <button class="cat-btn" data-cat="Personal Projects" role="listitem" aria-pressed="false">
+      <i class="fa-solid fa-folder-open fa-xs" aria-hidden="true"></i> Personal Projects
+    </button>
+    
+    <button class="cat-btn" data-cat="Programming" role="listitem" aria-pressed="false">
+      <i class="fa-solid fa-folder-open fa-xs" aria-hidden="true"></i> Programming
+    </button>
+    
+    <button class="cat-btn" data-cat="Tutorials" role="listitem" aria-pressed="false">
+      <i class="fa-solid fa-folder-open fa-xs" aria-hidden="true"></i> Tutorials
+    </button>
+    
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main>
+  <section id="articles-section" aria-labelledby="articles-heading">
+    <div class="container">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/"><i class="fa-solid fa-house fa-xs" aria-hidden="true"></i> Home</a>
+        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        <span aria-current="page">Blog</span>
+      </nav>
+
+      <!-- Featured Post -->
+      <div class="articles-section-title" id="articles-heading" aria-hidden="true">
+        Featured Post
+      </div>
+      <div id="featured-post-wrap" aria-label="Featured post">
+        
+        
+        <a href="/posts/metasploitable-complete-guide/" class="featured-post card" aria-label="Featured: Metasploitable 2: The Ultimate Beginner&#39;s Guide to Exploitation">
+          <div class="card-glow"></div>
+          <div class="featured-img-wrap">
+            
+            <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:5rem;background:linear-gradient(135deg,rgba(0,212,255,0.06),rgba(124,58,237,0.08));">🎯</div>
+            
+            <div class="featured-img-overlay"></div>
+            <span class="featured-badge">Featured</span>
+          </div>
+          <div class="featured-content">
+            <div>
+              <div class="featured-cat">
+                
+                <span class="tag tag-cyber">Cybersecurity</span>
+                
+                <span class="tag tag-cyber">Tutorials</span>
+                
+              </div>
+              <h2 class="featured-title">Metasploitable 2: The Ultimate Beginner&#39;s Guide to Exploitation</h2>
+              <p class="featured-excerpt">Learn how to hack Metasploitable 2 from scratch using Metasploit – exploit vsftpd, UnrealIRCd, and more.</p>
+            </div>
+            <div class="featured-meta">
+              <span class="meta-item"><i class="fa-solid fa-user"></i>Aimad Ul Islam</span>
+              <span class="meta-item"><i class="fa-regular fa-calendar"></i>25 Jul 2026</span>
+              <span class="meta-item"><i class="fa-regular fa-clock"></i>20 min read</span>
+            </div>
+          </div>
+        </a>
+        
+      </div>
+
+      <!-- Blog Layout: Articles + Sidebar -->
+      <div class="blog-layout">
+
+        <!-- Main: Articles Grid -->
+        <div>
+          <div class="articles-section-title" aria-hidden="true">Latest Articles</div>
+          <div id="articles-grid" class="articles-grid" role="list" aria-label="Blog articles">
+            
+            <article class="card article-card reveal" data-categories="cybersecurity,tutorials,linux" data-title="metasploitable 2: the ultimate beginner&#39;s guide to exploitation" onclick="window.location='/posts/metasploitable-complete-guide/'" role="link" tabindex="0">
+              <div class="card-glow"></div>
+              <div class="article-card-img-wrap">
+                
+                <div class="article-card-img-placeholder">🎯</div>
+                
+              </div>
+              <div class="article-card-body">
+                <div class="article-card-tags">
+                  
+                  <span class="tag tag-cyber">Cybersecurity</span>
+                  
+                  <span class="tag tag-cyber">Tutorials</span>
+                  
+                </div>
+                <h3 class="article-card-title">Metasploitable 2: The Ultimate Beginner&#39;s Guide to Exploitation</h3>
+                <p class="article-card-excerpt">Learn how to hack Metasploitable 2 from scratch using Metasploit – exploit vsftpd, UnrealIRCd, and more.</p>
+                <div class="article-card-footer">
+                  <div class="article-meta-mini">
+                    <span><i class="fa-regular fa-calendar"></i> 25 Jul 2026</span>
+                    <span><i class="fa-regular fa-clock"></i> 20 min</span>
+                  </div>
+                  <span class="read-more-link">Read <i class="fa-solid fa-arrow-right fa-xs"></i></span>
+                </div>
+              </div>
+            </article>
+            
+            <article class="card article-card reveal" data-categories="cybersecurity,linux,tutorials" data-title="getting started with kali linux: complete beginner setup guide" onclick="window.location='/posts/kali-linux-setup-guide/'" role="link" tabindex="0">
+              <div class="card-glow"></div>
+              <div class="article-card-img-wrap">
+                
+                <div class="article-card-img-placeholder">🐉</div>
+                
+              </div>
+              <div class="article-card-body">
+                <div class="article-card-tags">
+                  
+                  <span class="tag tag-cyber">Cybersecurity</span>
+                  
+                  <span class="tag tag-cyber">Linux</span>
+                  
+                </div>
+                <h3 class="article-card-title">Getting Started with Kali Linux: Complete Beginner Setup Guide</h3>
+                <p class="article-card-excerpt">Set up your ethical hacking lab from scratch — VirtualBox, Kali Linux, Metasploitable 2, and DVWA.</p>
+                <div class="article-card-footer">
+                  <div class="article-meta-mini">
+                    <span><i class="fa-regular fa-calendar"></i> 15 Jul 2026</span>
+                    <span><i class="fa-regular fa-clock"></i> 12 min</span>
+                  </div>
+                  <span class="read-more-link">Read <i class="fa-solid fa-arrow-right fa-xs"></i></span>
+                </div>
+              </div>
+            </article>
+            
+            <article class="card article-card reveal" data-categories="cybersecurity,networking,tutorials" data-title="nmap deep dive: from port scanning to full network enumeration" onclick="window.location='/posts/nmap-complete-guide/'" role="link" tabindex="0">
+              <div class="card-glow"></div>
+              <div class="article-card-img-wrap">
+                
+                <div class="article-card-img-placeholder">🗺️</div>
+                
+              </div>
+              <div class="article-card-body">
+                <div class="article-card-tags">
+                  
+                  <span class="tag tag-cyber">Cybersecurity</span>
+                  
+                  <span class="tag tag-cyber">Networking</span>
+                  
+                </div>
+                <h3 class="article-card-title">Nmap Deep Dive: From Port Scanning to Full Network Enumeration</h3>
+                <p class="article-card-excerpt">Master Nmap — every flag, scan type, NSE script, output format, and professional methodology explained with real examples.</p>
+                <div class="article-card-footer">
+                  <div class="article-meta-mini">
+                    <span><i class="fa-regular fa-calendar"></i> 10 Jul 2026</span>
+                    <span><i class="fa-regular fa-clock"></i> 15 min</span>
+                  </div>
+                  <span class="read-more-link">Read <i class="fa-solid fa-arrow-right fa-xs"></i></span>
+                </div>
+              </div>
+            </article>
+            
+            <article class="card article-card reveal" data-categories="cybersecurity,tutorials" data-title="digital forensics &amp; incident response: a hands-on introduction" onclick="window.location='/posts/dfir-introduction/'" role="link" tabindex="0">
+              <div class="card-glow"></div>
+              <div class="article-card-img-wrap">
+                
+                <div class="article-card-img-placeholder">🔬</div>
+                
+              </div>
+              <div class="article-card-body">
+                <div class="article-card-tags">
+                  
+                  <span class="tag tag-cyber">Cybersecurity</span>
+                  
+                  <span class="tag tag-cyber">Tutorials</span>
+                  
+                </div>
+                <h3 class="article-card-title">Digital Forensics &amp; Incident Response: A Hands-On Introduction</h3>
+                <p class="article-card-excerpt">Windows forensics, memory analysis, Splunk, and Velociraptor — what I learned from BlueCapeSecurity DFIR certification.</p>
+                <div class="article-card-footer">
+                  <div class="article-meta-mini">
+                    <span><i class="fa-regular fa-calendar"></i> 05 Jul 2026</span>
+                    <span><i class="fa-regular fa-clock"></i> 18 min</span>
+                  </div>
+                  <span class="read-more-link">Read <i class="fa-solid fa-arrow-right fa-xs"></i></span>
+                </div>
+              </div>
+            </article>
+            
+            <article class="card article-card reveal" data-categories="linux,tutorials" data-title="linux essentials: every command you actually need" onclick="window.location='/posts/linux-essentials-guide/'" role="link" tabindex="0">
+              <div class="card-glow"></div>
+              <div class="article-card-img-wrap">
+                
+                <div class="article-card-img-placeholder">🐧</div>
+                
+              </div>
+              <div class="article-card-body">
+                <div class="article-card-tags">
+                  
+                  <span class="tag tag-cyber">Linux</span>
+                  
+                  <span class="tag tag-cyber">Tutorials</span>
+                  
+                </div>
+                <h3 class="article-card-title">Linux Essentials: Every Command You Actually Need</h3>
+                <p class="article-card-excerpt">From file permissions to bash scripting — the complete Linux reference guide for cybersecurity professionals.</p>
+                <div class="article-card-footer">
+                  <div class="article-meta-mini">
+                    <span><i class="fa-regular fa-calendar"></i> 28 Jun 2026</span>
+                    <span><i class="fa-regular fa-clock"></i> 20 min</span>
+                  </div>
+                  <span class="read-more-link">Read <i class="fa-solid fa-arrow-right fa-xs"></i></span>
+                </div>
+              </div>
+            </article>
+            
+            <article class="card article-card reveal" data-categories="programming,cybersecurity" data-title="python for hackers: security automation scripts from scratch" onclick="window.location='/posts/python-for-security/'" role="link" tabindex="0">
+              <div class="card-glow"></div>
+              <div class="article-card-img-wrap">
+                
+                <div class="article-card-img-placeholder">🐍</div>
+                
+              </div>
+              <div class="article-card-body">
+                <div class="article-card-tags">
+                  
+                  <span class="tag tag-cyber">Programming</span>
+                  
+                  <span class="tag tag-cyber">Cybersecurity</span>
+                  
+                </div>
+                <h3 class="article-card-title">Python for Hackers: Security Automation Scripts from Scratch</h3>
+                <p class="article-card-excerpt">Port scanners, password sprayers, subdomain enumerators — building real security tools in Python from scratch.</p>
+                <div class="article-card-footer">
+                  <div class="article-meta-mini">
+                    <span><i class="fa-regular fa-calendar"></i> 20 Jun 2026</span>
+                    <span><i class="fa-regular fa-clock"></i> 14 min</span>
+                  </div>
+                  <span class="read-more-link">Read <i class="fa-solid fa-arrow-right fa-xs"></i></span>
+                </div>
+              </div>
+            </article>
+            
+            <article class="card article-card reveal" data-categories="cybersecurity,tutorials,personal projects" data-title="building a cybersecurity home lab on a budget" onclick="window.location='/posts/home-lab-setup/'" role="link" tabindex="0">
+              <div class="card-glow"></div>
+              <div class="article-card-img-wrap">
+                
+                <div class="article-card-img-placeholder">🏠</div>
+                
+              </div>
+              <div class="article-card-body">
+                <div class="article-card-tags">
+                  
+                  <span class="tag tag-cyber">Cybersecurity</span>
+                  
+                  <span class="tag tag-cyber">Tutorials</span>
+                  
+                </div>
+                <h3 class="article-card-title">Building a Cybersecurity Home Lab on a Budget</h3>
+                <p class="article-card-excerpt">You don&#39;t need expensive hardware or software to build a professional cybersecurity lab. This guide covers everything.</p>
+                <div class="article-card-footer">
+                  <div class="article-meta-mini">
+                    <span><i class="fa-regular fa-calendar"></i> 15 Jun 2026</span>
+                    <span><i class="fa-regular fa-clock"></i> 10 min</span>
+                  </div>
+                  <span class="read-more-link">Read <i class="fa-solid fa-arrow-right fa-xs"></i></span>
+                </div>
+              </div>
+            </article>
+            
+          </div>
+          <div class="no-results" id="no-results" role="alert" aria-live="polite">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            <h3>No posts found</h3>
+            <p>Try a different search term or browse all categories.</p>
+            <button class="btn btn-outline mt-1" onclick="resetSearch()">
+              <i class="fa-solid fa-rotate-left fa-xs" aria-hidden="true"></i> Reset Filters
+            </button>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" aria-label="Sidebar">
+
+          <!-- Recent Posts -->
+          <div class="sidebar-widget card">
+            <div class="card-glow"></div>
+            <div class="widget-title"><i class="fa-regular fa-clock" aria-hidden="true"></i> Recent Posts</div>
+            <div id="recent-posts" role="list" aria-label="Recent posts">
+              
+              <a href="/posts/metasploitable-complete-guide/" class="sidebar-post">
+                <div class="sidebar-post-thumb">
+                  
+                  🎯
+                  
+                </div>
+                <div>
+                  <div class="sidebar-post-title">Metasploitable 2: The Ultimate Beginner&#39;s Guide to Exploitation</div>
+                  <div class="sidebar-post-meta">25 Jul 2026</div>
+                </div>
+              </a>
+              
+              <a href="/posts/kali-linux-setup-guide/" class="sidebar-post">
+                <div class="sidebar-post-thumb">
+                  
+                  🐉
+                  
+                </div>
+                <div>
+                  <div class="sidebar-post-title">Getting Started with Kali Linux: Complete Beginner Setup Guide</div>
+                  <div class="sidebar-post-meta">15 Jul 2026</div>
+                </div>
+              </a>
+              
+              <a href="/posts/nmap-complete-guide/" class="sidebar-post">
+                <div class="sidebar-post-thumb">
+                  
+                  🗺️
+                  
+                </div>
+                <div>
+                  <div class="sidebar-post-title">Nmap Deep Dive: From Port Scanning to Full Network Enumeration</div>
+                  <div class="sidebar-post-meta">10 Jul 2026</div>
+                </div>
+              </a>
+              
+              <a href="/posts/dfir-introduction/" class="sidebar-post">
+                <div class="sidebar-post-thumb">
+                  
+                  🔬
+                  
+                </div>
+                <div>
+                  <div class="sidebar-post-title">Digital Forensics &amp; Incident Response: A Hands-On Introduction</div>
+                  <div class="sidebar-post-meta">05 Jul 2026</div>
+                </div>
+              </a>
+              
+            </div>
+          </div>
+
+          <!-- Categories -->
+          <div class="sidebar-widget card">
+            <div class="card-glow"></div>
+            <div class="widget-title"><i class="fa-solid fa-folder-open" aria-hidden="true"></i> Categories</div>
+            <div id="cat-list" role="list" aria-label="Post categories">
+              
+              <a href="?cat=Cybersecurity" class="cat-list-item cat-sidebar-link" data-cat="Cybersecurity">
+                <span class="cat-list-name"><i class="fa-solid fa-folder" style="font-size:0.6rem"></i>Cybersecurity</span>
+              </a>
+              
+              <a href="?cat=Linux" class="cat-list-item cat-sidebar-link" data-cat="Linux">
+                <span class="cat-list-name"><i class="fa-solid fa-folder" style="font-size:0.6rem"></i>Linux</span>
+              </a>
+              
+              <a href="?cat=Networking" class="cat-list-item cat-sidebar-link" data-cat="Networking">
+                <span class="cat-list-name"><i class="fa-solid fa-folder" style="font-size:0.6rem"></i>Networking</span>
+              </a>
+              
+              <a href="?cat=Personal Projects" class="cat-list-item cat-sidebar-link" data-cat="Personal Projects">
+                <span class="cat-list-name"><i class="fa-solid fa-folder" style="font-size:0.6rem"></i>Personal Projects</span>
+              </a>
+              
+              <a href="?cat=Programming" class="cat-list-item cat-sidebar-link" data-cat="Programming">
+                <span class="cat-list-name"><i class="fa-solid fa-folder" style="font-size:0.6rem"></i>Programming</span>
+              </a>
+              
+              <a href="?cat=Tutorials" class="cat-list-item cat-sidebar-link" data-cat="Tutorials">
+                <span class="cat-list-name"><i class="fa-solid fa-folder" style="font-size:0.6rem"></i>Tutorials</span>
+              </a>
+              
+            </div>
+          </div>
+
+          <!-- Newsletter Widget -->
+          <div class="sidebar-widget card">
+            <div class="card-glow"></div>
+            <div class="widget-title"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Newsletter</div>
+            <p style="color:var(--muted);font-size:0.78rem;line-height:1.6;margin-bottom:1rem;">Get new posts delivered to your inbox. No spam, ever.</p>
+            <form class="newsletter-form newsletter-form-handler" novalidate>
+              <input type="email" class="newsletter-input" placeholder="your@email.com" aria-label="Email address for newsletter" required/>
+              <button type="submit" class="newsletter-btn">Subscribe</button>
+              <p class="newsletter-note">No spam · Unsubscribe anytime</p>
+            </form>
+          </div>
+
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER SECTION -->
+  <section id="newsletter-section" aria-labelledby="newsletter-heading">
+    <div class="container">
+      <div class="newsletter-big-wrap reveal">
+        <div class="newsletter-big-icon" aria-hidden="true"><i class="fa-solid fa-envelope-open-text"></i></div>
+        <h2 class="newsletter-big-title" id="newsletter-heading">Stay in the Loop</h2>
+        <p class="newsletter-big-desc">New cybersecurity guides, tool walkthroughs, and DFIR writeups — delivered straight to your inbox when they go live.</p>
+        <form class="newsletter-big-form newsletter-form-handler" novalidate>
+          <label for="newsletter-email" class="visually-hidden">Email address</label>
+          <input type="email" id="newsletter-email" placeholder="your@email.com" aria-label="Email address" required/>
+          <button type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-paper-plane fa-xs" aria-hidden="true"></i> Subscribe
+          </button>
+        </form>
+        <p style="color:var(--muted);font-size:0.72rem;margin-top:0.85rem;">No spam · Unsubscribe anytime · Free forever</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="blog-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">[Aimad<span>.</span>Blog]</div>
+        <p class="footer-tagline">Cybersecurity student, SOC enthusiast, and Cisco Ethical Hacker from Peshawar, Pakistan. Writing about what I learn — one post at a time.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="/">Portfolio</a>
+        <a href="/blog/">Blog Home</a>
+        <a href="/#certifications">Certifications</a>
+        <a href="/#projects">Projects</a>
+        <a href="/#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="https://linkedin.com/in/aimadulislam" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in fa-xs" aria-hidden="true"></i> LinkedIn</a>
+        <a href="https://github.com/Aimadulislam" target="_blank" rel="noopener"><i class="fa-brands fa-github fa-xs" aria-hidden="true"></i> GitHub</a>
+        <a href="https://aimad.lizzdo.com" target="_blank" rel="noopener"><i class="fa-solid fa-globe fa-xs" aria-hidden="true"></i> Lizzdo.com</a>
+        <a href="mailto:info@aimadulislam.dpdns.org"><i class="fa-solid fa-envelope fa-xs" aria-hidden="true"></i> Email</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Aimad Ul Islam — All rights reserved.</span>
+      <div class="footer-socs">
+        <a href="https://linkedin.com/in/aimadulislam" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+        <a href="https://github.com/Aimadulislam" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+        <a href="mailto:info@aimadulislam.dpdns.org" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Scroll to Top -->
+<button id="scroll-top" aria-label="Scroll to top" title="Scroll to top">
+  <i class="fa-solid fa-chevron-up fa-xs" aria-hidden="true"></i>
+</button>
+
+<script src="/js/blog.js"></script>
+<script>
+  // Simple client-side filtering logic for the Eleventy rendered list
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("blog-search");
+    const catBtns = document.querySelectorAll(".cat-btn");
+    const sidebarCatLinks = document.querySelectorAll(".cat-sidebar-link");
+    const articles = document.querySelectorAll(".article-card");
+    const noResults = document.getElementById("no-results");
+    
+    let currentCat = "all";
+    let currentSearch = "";
+
+    function applyFilters() {
+      let visibleCount = 0;
+      articles.forEach(article => {
+        const title = article.getAttribute("data-title");
+        const cats = article.getAttribute("data-categories");
+        
+        const matchesSearch = currentSearch === "" || title.includes(currentSearch) || cats.includes(currentSearch);
+        const matchesCat = currentCat === "all" || cats.includes(currentCat.toLowerCase());
+
+        if (matchesSearch && matchesCat) {
+          article.style.display = "";
+          visibleCount++;
+        } else {
+          article.style.display = "none";
+        }
+      });
+
+      if (visibleCount === 0) {
+        noResults.style.display = "block";
+      } else {
+        noResults.style.display = "none";
+      }
+    }
+
+    if(searchInput) {
+      searchInput.addEventListener("input", (e) => {
+        currentSearch = e.target.value.toLowerCase().trim();
+        applyFilters();
+      });
+    }
+
+    function setActiveCategory(cat) {
+      currentCat = cat;
+      catBtns.forEach(b => {
+        if(b.getAttribute("data-cat") === cat) {
+          b.classList.add("active");
+        } else {
+          b.classList.remove("active");
+        }
+      });
+      applyFilters();
+    }
+
+    catBtns.forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        setActiveCategory(btn.getAttribute("data-cat"));
+      });
+    });
+
+    sidebarCatLinks.forEach(link => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const targetCat = link.getAttribute("data-cat");
+        setActiveCategory(targetCat);
+        document.getElementById("articles-section").scrollIntoView({behavior: "smooth"});
+      });
+    });
+
+    window.resetSearch = () => {
+      if(searchInput) searchInput.value = "";
+      currentSearch = "";
+      setActiveCategory("all");
+    };
+
+    // Handle URL params
+    const params = new URLSearchParams(window.location.search);
+    const urlCat = params.get('cat');
+    if(urlCat) {
+      setActiveCategory(urlCat);
+    }
+  });
+</script>
+</body>
+</html>

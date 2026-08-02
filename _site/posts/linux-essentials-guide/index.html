@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Essentials: Every Command You Actually Need | Aimad Ul Islam</title>
+    <meta name="description" content="Cybersecurity Professional &amp; Technical Writer">
+    <meta name="theme-color" content="#080C1A">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/blog.css">
+    
+    <script>
+      // Apply theme early to prevent flash
+      (function() {
+        var localTheme = localStorage.getItem('aimad-theme');
+        if (localTheme === 'light' || (!localTheme && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="scan-line"></div>
+    <div id="reading-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="blog-nav">
+        <a href="/" class="nav-logo">AIMAD<span class="br">/</span>ISLAM<span class="nav-dot"></span></a>
+        
+        <ul class="nav-links">
+            <li><a href="/" >Portfolio</a></li>
+            <li><a href="/blog" class="active">Blog</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <div class="nav-status">
+                <span class="status-dot"></span>
+                <span class="status-text">SYSTEM_ONLINE</span>
+            </div>
+            <button class="dark-mode-btn" id="theme-toggle" aria-label="Toggle theme">
+                <i class="fa-regular fa-moon"></i>
+            </button>
+            <button class="hamburger" aria-label="Menu" aria-expanded="false" id="mobile-menu-btn">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobile-nav">
+        <a href="/">Portfolio</a>
+        <a href="/blog">Blog</a>
+    </div>
+
+    <main class="container">
+    <article class="article-hero">
+        <div class="breadcrumb">
+            <a href="/"><i class="fa-solid fa-house"></i></a>
+            <span>/</span>
+            <a href="/blog">Blog</a>
+            <span>/</span>
+            <span style="color:var(--white);">Linux Essentials: Every Command You Actually Need</span>
+        </div>
+
+        <div class="article-layout">
+            
+            <!-- Main Content -->
+            <div class="article-main">
+                <header class="article-header">
+                    <div class="article-cats">
+                        
+                        <a href="/blog?category=Linux" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Linux</a>
+                        
+                        <a href="/blog?category=Tutorials" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Tutorials</a>
+                        
+                    </div>
+                    
+                    <h1 class="article-title">Linux Essentials: Every Command You Actually Need</h1>
+                    
+                    
+                    <p class="article-subtitle">From file permissions to bash scripting — the complete Linux reference guide for cybersecurity professionals, built during my Cisco Linux Essentials (LPI PDC) certification.</p>
+                    
+                    
+                    <div class="article-meta">
+                        <div class="article-meta-item">
+                            <i class="fa-regular fa-calendar"></i>
+                            <span>Published: <strong>28 Jun 2026</strong></span>
+                        </div>
+                        
+                        <div class="article-meta-item">
+                            <i class="fa-regular fa-clock"></i>
+                            <span>Read time: <strong>20 min</strong></span>
+                        </div>
+                        
+                        <div class="article-meta-item">
+                            <i class="fa-solid fa-terminal"></i>
+                            <span>Author: <strong>Aimad Ul Islam</strong></span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="article-tags">
+                        
+                        <span class="tag tag-tut">#linux</span>
+                        
+                        <span class="tag tag-tut">#bash</span>
+                        
+                        <span class="tag tag-tut">#command-line</span>
+                        
+                        <span class="tag tag-tut">#permissions</span>
+                        
+                        <span class="tag tag-tut">#scripting</span>
+                        
+                        <span class="tag tag-tut">#lpi</span>
+                        
+                    </div>
+                    
+                </header>
+
+                <div class="article-body">
+                    <h2 id="introduction" tabindex="-1">Introduction <a class="direct-link" href="#introduction" aria-hidden="true">#</a></h2>
+<p>Linux is the undisputed backbone of modern IT infrastructure. From cloud servers (AWS, Azure, GCP) to container orchestration (Kubernetes, Docker) and enterprise networks, Linux runs over 90% of the world's servers. More importantly for us cybersecurity professionals, <strong>Kali Linux</strong> is the industry standard for penetration testing.</p>
+<p>During my <strong>Cisco Linux Essentials</strong> certification (aligned with the <strong>LPI Linux Professional Institute Certification - Linux Essentials (010-160)</strong>), I built this comprehensive reference guide. It condenses everything you need to know into practical, executable commands.</p>
+<div class="callout callout-info">
+  <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">LPI Essentials Focus</div>
+    <div class="callout-body">This guide covers the core competencies of the LPI Linux Essentials exam, including CLI navigation, managing files and permissions, working with text streams, installing software, and basic shell scripting.</div>
+  </div>
+</div>
+<div class="callout callout-warn">
+  <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Linux & Cybersecurity</div>
+    <div class="callout-body">If you are learning ethical hacking, start here. Almost every tool you will use (Metasploit, Nmap, Burp Suite, Wireshark, etc.) runs natively on Linux. A deep understanding of the CLI is mandatory for any penetration tester or SOC analyst.</div>
+  </div>
+</div>
+<h2 id="file-system-navigation" tabindex="-1">File System Navigation <a class="direct-link" href="#file-system-navigation" aria-hidden="true">#</a></h2>
+<p>The Linux file system is a hierarchical tree starting from the root directory, denoted by a forward slash (<code>/</code>). Here are the commands you will use daily to move around.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Navigating the Filesystem</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Print current working directory
+pwd
+<h1 id="list-files-in-the-current-directory" tabindex="-1">List files in the current directory <a class="direct-link" href="#list-files-in-the-current-directory" aria-hidden="true">#</a></h1>
+<p>ls</p>
+<h1 id="list-all-files-including-hidden-files-with-detailed-info" tabindex="-1">List all files (including hidden .files) with detailed info <a class="direct-link" href="#list-all-files-including-hidden-files-with-detailed-info" aria-hidden="true">#</a></h1>
+<p>ls -la</p>
+<h1 id="change-directory-to-etc" tabindex="-1">Change directory to /etc <a class="direct-link" href="#change-directory-to-etc" aria-hidden="true">#</a></h1>
+<p>cd /etc</p>
+<h1 id="go-back-to-the-previous-directory" tabindex="-1">Go back to the previous directory <a class="direct-link" href="#go-back-to-the-previous-directory" aria-hidden="true">#</a></h1>
+<p>cd -</p>
+<h1 id="go-to-your-users-home-directory" tabindex="-1">Go to your user's home directory (~) <a class="direct-link" href="#go-to-your-users-home-directory" aria-hidden="true">#</a></h1>
+<p>cd ~</p>
+<h1 id="view-directory-structure-as-a-tree-install-if-needed-apt-install-tree" tabindex="-1">View directory structure as a tree (install if needed: apt install tree) <a class="direct-link" href="#view-directory-structure-as-a-tree-install-if-needed-apt-install-tree" aria-hidden="true">#</a></h1>
+<p>tree -L 2 /var/log</code></pre></p>
+</div>
+Key directories you should memorise: `/etc` (configuration files), `/var/log` (system logs), `/home` (user home directories), and `/bin` (essential system binaries).
+<h2 id="file-permissions-and-ownership" tabindex="-1">File Permissions &amp; Ownership <a class="direct-link" href="#file-permissions-and-ownership" aria-hidden="true">#</a></h2>
+<p>Linux is a multi-user operating system, and permissions are critical for security. Every file and directory has three permission sets: <strong>Owner</strong> (u), <strong>Group</strong> (g), and <strong>Others</strong> (o).</p>
+<p>Permissions are broken into <strong>Read</strong> (r), <strong>Write</strong> (w), and <strong>Execute</strong> (x). They can be represented symbolically (<code>-rwxr-xr--</code>) or by octal numbers (<code>755</code>).</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Understanding and Modifying Permissions</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># View current permissions
+ls -l filename.txt
+# Output: -rw-r--r-- 1 aimad aimad 2048 Jun 28 10:00 filename.txt
+<h1 id="change-permissions-using-octal-values" tabindex="-1">Change permissions using octal values <a class="direct-link" href="#change-permissions-using-octal-values" aria-hidden="true">#</a></h1>
+<p>chmod 755 script.sh  # Owner:rwx, Group:r-x, Others:r-x</p>
+<h1 id="change-permissions-using-symbolic-notation" tabindex="-1">Change permissions using symbolic notation <a class="direct-link" href="#change-permissions-using-symbolic-notation" aria-hidden="true">#</a></h1>
+<p>chmod u+x script.sh  # Adds execute for the owner<br>
+chmod go-w script.sh # Removes write for group and others</p>
+<h1 id="change-ownership-of-a-file" tabindex="-1">Change ownership of a file <a class="direct-link" href="#change-ownership-of-a-file" aria-hidden="true">#</a></h1>
+<p>sudo chown newuser:newgroup filename.txt</p>
+<h1 id="change-default-file-creation-permissions-umask" tabindex="-1">Change default file creation permissions (umask) <a class="direct-link" href="#change-default-file-creation-permissions-umask" aria-hidden="true">#</a></h1>
+<p>umask 022  # Sets default permissions to 755 for directories, 644 for files</code></pre></p>
+</div>
+**Important for Security:** Never give `777` (full permissions to everyone) to a file on a production server. This is a major security risk allowing anyone to modify your critical files.
+<h2 id="text-processing-and-filtering" tabindex="-1">Text Processing &amp; Filtering <a class="direct-link" href="#text-processing-and-filtering" aria-hidden="true">#</a></h2>
+<p>In Linux, everything is a file or a stream of text. Mastering text processing tools allows you to filter massive log files, extract IP addresses, and parse command outputs quickly.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Text Pipes & Filters</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># View a file page by page
+less /var/log/syslog
+<h1 id="view-only-the-first-10-or-last-10-lines-of-a-file" tabindex="-1">View only the first 10 or last 10 lines of a file <a class="direct-link" href="#view-only-the-first-10-or-last-10-lines-of-a-file" aria-hidden="true">#</a></h1>
+<p>head -n 5 /etc/passwd<br>
+tail -f /var/log/auth.log  # Follow new lines in real-time (great for monitoring)</p>
+<h1 id="search-for-specific-text-patterns-using-grep" tabindex="-1">Search for specific text patterns using grep <a class="direct-link" href="#search-for-specific-text-patterns-using-grep" aria-hidden="true">#</a></h1>
+<p>grep &quot;Failed password&quot; /var/log/auth.log</p>
+<h1 id="search-recursively-through-all-files-in-a-directory" tabindex="-1">Search recursively through all files in a directory <a class="direct-link" href="#search-recursively-through-all-files-in-a-directory" aria-hidden="true">#</a></h1>
+<p>grep -r &quot;error&quot; /var/log/</p>
+<h1 id="cut-specific-columns-from-a-file-e-g-get-only-usernames-from-etc-passwd" tabindex="-1">Cut specific columns from a file (e.g., get only usernames from /etc/passwd) <a class="direct-link" href="#cut-specific-columns-from-a-file-e-g-get-only-usernames-from-etc-passwd" aria-hidden="true">#</a></h1>
+<p>cut -d: -f1 /etc/passwd</p>
+<h1 id="sort-output-and-count-duplicates" tabindex="-1">Sort output and count duplicates <a class="direct-link" href="#sort-output-and-count-duplicates" aria-hidden="true">#</a></h1>
+<p>cat /var/log/access.log | cut -d' ' -f1 | sort | uniq -c | sort -nr  # Top IP addresses</code></pre></p>
+</div>
+<p><strong>Pro Tip:</strong> The pipe operator <code>|</code> is the secret to Linux power. It takes the output of the command on the left and sends it as input to the command on the right, allowing you to chain complex queries effortlessly.</p>
+<h2 id="package-management" tabindex="-1">Package Management <a class="direct-link" href="#package-management" aria-hidden="true">#</a></h2>
+<p>Linux distributions are split into two major families: <strong>Debian-based</strong> (Ubuntu, Kali, Debian) which use <code>apt</code> and <code>dpkg</code>, and <strong>RPM-based</strong> (RedHat, CentOS, Fedora) which use <code>yum</code> or <code>dnf</code>. This guide focuses on Debian-based systems, which are the most common for cybersecurity.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Software Management with APT</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Update the package list
+sudo apt update
+<h1 id="upgrade-all-installed-packages" tabindex="-1">Upgrade all installed packages <a class="direct-link" href="#upgrade-all-installed-packages" aria-hidden="true">#</a></h1>
+<p>sudo apt upgrade -y</p>
+<h1 id="install-a-new-package-e-g-nmap" tabindex="-1">Install a new package (e.g., nmap) <a class="direct-link" href="#install-a-new-package-e-g-nmap" aria-hidden="true">#</a></h1>
+<p>sudo apt install nmap -y</p>
+<h1 id="remove-a-package" tabindex="-1">Remove a package <a class="direct-link" href="#remove-a-package" aria-hidden="true">#</a></h1>
+<p>sudo apt remove nmap</p>
+<h1 id="search-for-a-package-in-the-repository" tabindex="-1">Search for a package in the repository <a class="direct-link" href="#search-for-a-package-in-the-repository" aria-hidden="true">#</a></h1>
+<p>apt search &quot;web server&quot;</p>
+<h1 id="view-detailed-information-about-a-package" tabindex="-1">View detailed information about a package <a class="direct-link" href="#view-detailed-information-about-a-package" aria-hidden="true">#</a></h1>
+<p>apt show nmap</code></pre></p>
+</div>
+<div class="callout callout-success">
+  <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Pro Tip for Pen Testers</div>
+    <div class="callout-body">Always run <code>sudo apt update && sudo apt upgrade -y</code> on your Kali Linux environment before starting a penetration test to ensure you have the latest exploits and tools available.</div>
+  </div>
+</div>
+<h2 id="processes-and-system-monitoring" tabindex="-1">Processes &amp; System Monitoring <a class="direct-link" href="#processes-and-system-monitoring" aria-hidden="true">#</a></h2>
+<p>When a system is compromised, malicious processes run in the background. You need to know how to find them and stop them.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Monitor and Manage Running Processes</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># List all running processes with detailed info
+ps aux
+<h1 id="view-processes-in-a-hierarchical-tree" tabindex="-1">View processes in a hierarchical tree <a class="direct-link" href="#view-processes-in-a-hierarchical-tree" aria-hidden="true">#</a></h1>
+<p>pstree</p>
+<h1 id="interactive-process-viewer-press-q-to-quit" tabindex="-1">Interactive process viewer (press 'q' to quit) <a class="direct-link" href="#interactive-process-viewer-press-q-to-quit" aria-hidden="true">#</a></h1>
+<p>top</p>
+<h1 id="or-install-htop-for-a-better-visual-experience-sudo-apt-install-htop" tabindex="-1">Or install htop for a better visual experience: sudo apt install htop <a class="direct-link" href="#or-install-htop-for-a-better-visual-experience-sudo-apt-install-htop" aria-hidden="true">#</a></h1>
+<h1 id="find-a-specific-process-by-name-e-g-apache" tabindex="-1">Find a specific process by name (e.g., Apache) <a class="direct-link" href="#find-a-specific-process-by-name-e-g-apache" aria-hidden="true">#</a></h1>
+<p>ps aux | grep apache</p>
+<h1 id="kill-a-process-by-its-pid-process-id" tabindex="-1">Kill a process by its PID (Process ID) <a class="direct-link" href="#kill-a-process-by-its-pid-process-id" aria-hidden="true">#</a></h1>
+<p>sudo kill -9 1234  # -9 forces an immediate kill</p>
+<h1 id="view-system-services-status" tabindex="-1">View system services status <a class="direct-link" href="#view-system-services-status" aria-hidden="true">#</a></h1>
+<p>systemctl status ssh</p>
+<h1 id="start-stop-restart-a-service" tabindex="-1">Start/Stop/Restart a service <a class="direct-link" href="#start-stop-restart-a-service" aria-hidden="true">#</a></h1>
+<p>sudo systemctl start ssh<br>
+sudo systemctl enable ssh  # Enable to start on boot</code></pre></p>
+</div>
+<h2 id="users-and-groups" tabindex="-1">Users &amp; Groups <a class="direct-link" href="#users-and-groups" aria-hidden="true">#</a></h2>
+<p>Managing users, groups, and their privileges is essential for system security and compliance.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">User and Group Administration</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Add a new user
+sudo useradd -m -g users -s /bin/bash newuser
+<h1 id="set-or-change-a-users-password" tabindex="-1">Set or change a user's password <a class="direct-link" href="#set-or-change-a-users-password" aria-hidden="true">#</a></h1>
+<p>sudo passwd newuser</p>
+<h1 id="add-a-user-to-a-new-group-e-g-sudo" tabindex="-1">Add a user to a new group (e.g., sudo) <a class="direct-link" href="#add-a-user-to-a-new-group-e-g-sudo" aria-hidden="true">#</a></h1>
+<p>sudo usermod -aG sudo newuser</p>
+<h1 id="delete-a-user" tabindex="-1">Delete a user <a class="direct-link" href="#delete-a-user" aria-hidden="true">#</a></h1>
+<p>sudo userdel -r newuser</p>
+<h1 id="view-all-users-on-the-system" tabindex="-1">View all users on the system <a class="direct-link" href="#view-all-users-on-the-system" aria-hidden="true">#</a></h1>
+<p>cat /etc/passwd</p>
+<h1 id="switch-to-a-different-user-context" tabindex="-1">Switch to a different user context <a class="direct-link" href="#switch-to-a-different-user-context" aria-hidden="true">#</a></h1>
+<p>su - aimad</p>
+<h1 id="execute-a-single-command-as-root-super-user" tabindex="-1">Execute a single command as root (super user) <a class="direct-link" href="#execute-a-single-command-as-root-super-user" aria-hidden="true">#</a></h1>
+<p>sudo whoami</code></pre></p>
+</div>
+Privilege escalation is a major attack vector. Always ensure standard users have the least amount of privileges required. Use `sudo` sparingly and never give a user root-level access unless absolutely necessary.
+<h2 id="bash-scripting-for-automation" tabindex="-1">Bash Scripting for Automation <a class="direct-link" href="#bash-scripting-for-automation" aria-hidden="true">#</a></h2>
+<p>Automation is a core skill for both system administrators and security professionals. Instead of manually typing 10 commands, you can put them in a script and run them all at once.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Your First Bash Script</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code>#!/bin/bash
+# This is a simple backup script
+<h1 id="variables" tabindex="-1">Variables <a class="direct-link" href="#variables" aria-hidden="true">#</a></h1>
+<p>BACKUP_DIR=&quot;/backups&quot;<br>
+SOURCE_DIR=&quot;/var/www/html&quot;<br>
+DATE=$(date +%Y%m%d)</p>
+<h1 id="create-backup-directory-if-it-doesnt-exist" tabindex="-1">Create backup directory if it doesn't exist <a class="direct-link" href="#create-backup-directory-if-it-doesnt-exist" aria-hidden="true">#</a></h1>
+<p>mkdir -p $BACKUP_DIR</p>
+<h1 id="archive-and-compress-the-source-directory" tabindex="-1">Archive and compress the source directory <a class="direct-link" href="#archive-and-compress-the-source-directory" aria-hidden="true">#</a></h1>
+<p>tar -czf $BACKUP_DIR/backup_$DATE.tar.gz $SOURCE_DIR</p>
+<h1 id="print-success-message" tabindex="-1">Print success message <a class="direct-link" href="#print-success-message" aria-hidden="true">#</a></h1>
+<p>echo &quot;Backup completed successfully for $DATE&quot;</code></pre></p>
+</div>
+<div class="code-block-wrap">
+  <span class="code-block-label">Loops, Conditions, and Cron</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Use an IF statement to check privileges
+if [ $USER == "root" ]; then
+    echo "You are running as root!"
+else
+    echo "Run this script with sudo."
+fi
+<h1 id="for-loop-to-process-a-list-of-ip-addresses" tabindex="-1">FOR loop to process a list of IP addresses <a class="direct-link" href="#for-loop-to-process-a-list-of-ip-addresses" aria-hidden="true">#</a></h1>
+<p>for ip in $(cat ip_list.txt); do<br>
+ping -c 1 $ip<br>
+done</p>
+<h1 id="schedule-the-script-to-run-automatically-using-cron-crontab-e" tabindex="-1">Schedule the script to run automatically using Cron (crontab -e) <a class="direct-link" href="#schedule-the-script-to-run-automatically-using-cron-crontab-e" aria-hidden="true">#</a></h1>
+<h1 id="runs-at-2-am-every-day" tabindex="-1">Runs at 2 AM every day <a class="direct-link" href="#runs-at-2-am-every-day" aria-hidden="true">#</a></h1>
+<p>0 2 * * * /home/aimad/scripts/backup.sh</code></pre></p>
+</div>
+<h2 id="linux-security-hardening" tabindex="-1">Linux Security Hardening <a class="direct-link" href="#linux-security-hardening" aria-hidden="true">#</a></h2>
+<p>Securing your Linux server is non-negotiable. Here are the fundamental steps you can take to protect a system from attack.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Basic System Hardening</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># 1. Enable and configure the firewall (UFW - Uncomplicated Firewall)
+sudo ufw enable
+sudo ufw allow 22/tcp  # Allow SSH explicitly
+sudo ufw allow 80/tcp  # Allow HTTP for web servers
+sudo ufw status
+<h1 id="2-harden-ssh-configuration" tabindex="-1">2. Harden SSH configuration <a class="direct-link" href="#2-harden-ssh-configuration" aria-hidden="true">#</a></h1>
+<p>sudo nano /etc/ssh/sshd_config</p>
+<h1 id="set-permitrootlogin-no" tabindex="-1">Set: PermitRootLogin no <a class="direct-link" href="#set-permitrootlogin-no" aria-hidden="true">#</a></h1>
+<h1 id="set-passwordauthentication-no-use-ssh-keys-instead" tabindex="-1">Set: PasswordAuthentication no (Use SSH keys instead) <a class="direct-link" href="#set-passwordauthentication-no-use-ssh-keys-instead" aria-hidden="true">#</a></h1>
+<p>sudo systemctl restart sshd</p>
+<h1 id="3-generate-a-strong-ssh-key-pair" tabindex="-1">3. Generate a strong SSH key pair <a class="direct-link" href="#3-generate-a-strong-ssh-key-pair" aria-hidden="true">#</a></h1>
+<p>ssh-keygen -t ed25519 -C &quot;aimad@secureserver&quot;</p>
+<h1 id="4-audit-open-ports-to-ensure-no-unnecessary-services-are-running" tabindex="-1">4. Audit open ports to ensure no unnecessary services are running <a class="direct-link" href="#4-audit-open-ports-to-ensure-no-unnecessary-services-are-running" aria-hidden="true">#</a></h1>
+<p>sudo netstat -tulpn</p>
+<h1 id="5-configure-automatic-security-updates" tabindex="-1">5. Configure automatic security updates <a class="direct-link" href="#5-configure-automatic-security-updates" aria-hidden="true">#</a></h1>
+<p>sudo apt install unattended-upgrades<br>
+sudo dpkg-reconfigure --priority=low unattended-upgrades</code></pre></p>
+</div>
+<div class="callout callout-danger">
+  <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Critical SSH Hardening</div>
+    <div class="callout-body">On internet-facing servers, disabling root login (<code>PermitRootLogin no</code>) and using only SSH keys instead of passwords (<code>PasswordAuthentication no</code>) are the two most important settings. Brute-force SSH attacks are inevitable — these settings stop them dead.</div>
+  </div>
+</div>
+<h2 id="next-steps-and-resources" tabindex="-1">Next Steps &amp; Resources <a class="direct-link" href="#next-steps-and-resources" aria-hidden="true">#</a></h2>
+<p>Mastering Linux is a journey, not a destination. Here are my recommended next steps after this guide:</p>
+<ul>
+<li><strong>Take the LPI Linux Essentials Exam (010-160):</strong> Validate your knowledge with the official certification. It is a great foundational stepping stone.</li>
+<li><strong>Explore OverTheWire Bandit:</strong> An excellent wargame that teaches Linux CLI skills through puzzles. Highly recommended for hands-on practice.</li>
+<li><strong>Build your own lab:</strong> Launch a virtual machine (Ubuntu Server or Kali) and practice the commands in this guide. Mess up, break things, and learn to fix them.</li>
+</ul>
+<p>The terminal is your most powerful weapon in cybersecurity. Keep typing, keep learning, and stay curious.</p>
+
+                </div>
+
+                <div class="social-share">
+                    <span class="share-label">Share article</span>
+                    <a href="https://twitter.com/intent/tweet?text=Linux%20Essentials%3A%20Every%20Command%20You%20Actually%20Need&url=https://aimadulislam.dpdns.org/posts/linux-essentials-guide/" target="_blank" rel="noopener" class="share-btn twitter" aria-label="Share on Twitter"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://aimadulislam.dpdns.org/posts/linux-essentials-guide/&title=Linux%20Essentials%3A%20Every%20Command%20You%20Actually%20Need" target="_blank" rel="noopener" class="share-btn linkedin" aria-label="Share on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <button class="share-btn copy-url" aria-label="Copy Link" id="copy-url-btn" data-url="https://aimadulislam.dpdns.org/posts/linux-essentials-guide/"><i class="fa-solid fa-link"></i></button>
+                </div>
+
+                <!-- Navigation between posts -->
+                
+                
+                <nav class="article-nav">
+                    
+                    <a href="/posts/dfir-introduction/" class="article-nav-link prev">
+                        <span class="article-nav-dir"><i class="fa-solid fa-angle-left"></i> Previous Post</span>
+                        <div class="article-nav-title">Digital Forensics &amp; Incident Response: A Hands-On Introduction</div>
+                    </a>
+                    
+                    
+                    
+                    <a href="/posts/python-for-security/" class="article-nav-link next">
+                        <span class="article-nav-dir">Next Post <i class="fa-solid fa-angle-right"></i></span>
+                        <div class="article-nav-title">Python for Hackers: Security Automation Scripts from Scratch</div>
+                    </a>
+                    
+                </nav>
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-widget card">
+                    <h3 class="widget-title"><i class="fa-solid fa-fire"></i> Recent Articles</h3>
+                    <div class="sidebar-posts">
+                        
+                        
+                            
+                            <a href="/posts/metasploitable-complete-guide/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    🎯
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">Metasploitable 2: The Ultimate Beginner&#39;s Guide to Exploitation</h4>
+                                    <span class="sidebar-post-meta">25 Jul 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                            <a href="/posts/kali-linux-setup-guide/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    🐉
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">Getting Started with Kali Linux: Complete Beginner Setup Guide</h4>
+                                    <span class="sidebar-post-meta">15 Jul 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                            <a href="/posts/nmap-complete-guide/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    🗺️
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">Nmap Deep Dive: From Port Scanning to Full Network Enumeration</h4>
+                                    <span class="sidebar-post-meta">10 Jul 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                            <a href="/posts/dfir-introduction/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    🔬
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">Digital Forensics &amp; Incident Response: A Hands-On Introduction</h4>
+                                    <span class="sidebar-post-meta">05 Jul 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                    </div>
+                </div>
+
+                <div class="sidebar-widget card">
+                    <h3 class="widget-title"><i class="fa-solid fa-envelope"></i> Terminal Feed</h3>
+                    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+                        <input type="email" class="newsletter-input" placeholder="root@localhost:~# _" required>
+                        <button type="submit" class="newsletter-btn">EXECUTE /SUBSCRIBE</button>
+                        <p class="newsletter-note">Get new tutorials and writeups directly in your inbox. No spam.</p>
+                    </form>
+                </div>
+            </aside>
+        </div>
+    </article>
+</main>
+
+<script>
+    // Copy URL button
+    document.getElementById('copy-url-btn')?.addEventListener('click', function() {
+        navigator.clipboard.writeText(this.dataset.url).then(() => {
+            const originalHtml = this.innerHTML;
+            this.innerHTML = '<i class="fa-solid fa-check"></i>';
+            this.classList.add('copied');
+            setTimeout(() => {
+                this.innerHTML = originalHtml;
+                this.classList.remove('copied');
+            }, 2000);
+        });
+    });
+
+    // Code block copy buttons
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const pre = this.parentElement.querySelector('pre');
+            if (!pre) return;
+            
+            navigator.clipboard.writeText(pre.innerText).then(() => {
+                const originalHtml = this.innerHTML;
+                this.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
+                this.classList.add('copied');
+                setTimeout(() => {
+                    this.innerHTML = originalHtml;
+                    this.classList.remove('copied');
+                }, 2000);
+            });
+        });
+    });
+
+    // Reading progress bar
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        const progress = document.getElementById('reading-progress');
+        if (progress) progress.style.width = scrolled + '%';
+    });
+</script>
+
+
+    <!-- Footer -->
+    <footer class="blog-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">AIMAD<span>/</span>ISLAM</div>
+                    <p class="footer-tagline">Offensive Security & Technical Writing. Securing the perimeter, one post at a time.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <a href="/">Portfolio</a>
+                    <a href="/blog">Blog</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <a href="https://linkedin.com/in/aimad-ul-islam" target="_blank" rel="noopener noreferrer">LinkedIn <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.6rem; margin-left:0.2rem;"></i></a>
+                    <a href="https://github.com/aimad-ul-islam" target="_blank" rel="noopener noreferrer">GitHub <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.6rem; margin-left:0.2rem;"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copy">© 2026 Aimad Ul Islam. All rights reserved.</div>
+                <div class="footer-socs">
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scroll-top" aria-label="Scroll to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <script>
+      // Basic Navigation & UI Interactions
+      document.addEventListener('DOMContentLoaded', () => {
+          // Mobile Menu
+          const menuBtn = document.getElementById('mobile-menu-btn');
+          const mobileNav = document.getElementById('mobile-nav');
+          if(menuBtn && mobileNav) {
+              menuBtn.addEventListener('click', () => {
+                  mobileNav.classList.toggle('open');
+              });
+          }
+
+          // Dark Mode Toggle
+          const themeToggle = document.getElementById('theme-toggle');
+          const html = document.documentElement;
+          
+          if(themeToggle) {
+              // Set initial icon
+              if(html.getAttribute('data-theme') === 'light') {
+                  themeToggle.innerHTML = '<i class="fa-regular fa-sun"></i>';
+              }
+              
+              themeToggle.addEventListener('click', () => {
+                  if (html.getAttribute('data-theme') === 'dark') {
+                      html.setAttribute('data-theme', 'light');
+                      localStorage.setItem('aimad-theme', 'light');
+                      themeToggle.innerHTML = '<i class="fa-regular fa-sun"></i>';
+                  } else {
+                      html.setAttribute('data-theme', 'dark');
+                      localStorage.setItem('aimad-theme', 'dark');
+                      themeToggle.innerHTML = '<i class="fa-regular fa-moon"></i>';
+                  }
+              });
+          }
+
+          // Nav Scroll Effect
+          const nav = document.querySelector('.blog-nav');
+          window.addEventListener('scroll', () => {
+              if (window.scrollY > 50) {
+                  nav.classList.add('scrolled');
+              } else {
+                  nav.classList.remove('scrolled');
+              }
+          });
+
+          // Scroll to Top
+          const scrollTopBtn = document.getElementById('scroll-top');
+          if(scrollTopBtn) {
+              window.addEventListener('scroll', () => {
+                  if (window.scrollY > 500) {
+                      scrollTopBtn.classList.add('visible');
+                  } else {
+                      scrollTopBtn.classList.remove('visible');
+                  }
+              });
+              scrollTopBtn.addEventListener('click', () => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+              });
+          }
+      });
+    </script>
+</body>
+</html>

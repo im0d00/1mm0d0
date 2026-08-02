@@ -1,0 +1,33 @@
+{
+  "biography": "I'm Aimad Ul Islam, a Computer Science graduate from the University of Peshawar, Pakistan, with a growing specialisation in cybersecurity, network security, and security operations.",
+  "personal_description": "My journey began with a fascination for how systems communicate — and how they can be compromised, defended, and hardened. I hold Cisco Networking Academy certifications in Networking Essentials, Introduction to Cybersecurity, Linux Essentials, and Ethical Hacker. I've earned the Cisco Learn-A-Thon 2026 Achievement Award, completed a Mastercard Cybersecurity Job Simulation, and trained in Digital Forensics & Incident Response (DFIR) with BlueCapeSecurity.",
+  "skills": [
+    "Network Security",
+    "SOC Operations",
+    "Ethical Hacking",
+    "Digital Forensics",
+    "Incident Response",
+    "Threat Intelligence",
+    "Penetration Testing",
+    "Malware Analysis",
+    "OSINT",
+    "Cloud Security"
+  ],
+  "interests": [
+    "Security Operations Center (SOC)",
+    "Packet Analysis & Wireshark",
+    "SIEM Logging & Threat Hunting",
+    "Memory & Disk Forensics",
+    "Network Infrastructure Hardening"
+  ],
+  "languages": [
+    { "language": "English", "proficiency": "Full Professional" },
+    { "language": "Urdu", "proficiency": "Native" },
+    { "language": "Pashto", "proficiency": "Native" }
+  ],
+  "career_objectives": "To leverage my education, Cisco credentials, and hands-on DFIR training in a dedicated SOC Analyst, Security Researcher, or Network Security Engineer role.",
+  "experience_summary": "7+ years of experience managing technology platforms, remote operations, digital systems, and hands-on cybersecurity labs.",
+  "download_resume_button_text": "Download Resume",
+  "download_resume_button_link": "#resume",
+  "profile_image": "https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg"
+}

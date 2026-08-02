@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python for Hackers: Security Automation Scripts from Scratch | Aimad Ul Islam</title>
+    <meta name="description" content="Cybersecurity Professional &amp; Technical Writer">
+    <meta name="theme-color" content="#080C1A">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/blog.css">
+    
+    <script>
+      // Apply theme early to prevent flash
+      (function() {
+        var localTheme = localStorage.getItem('aimad-theme');
+        if (localTheme === 'light' || (!localTheme && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="scan-line"></div>
+    <div id="reading-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="blog-nav">
+        <a href="/" class="nav-logo">AIMAD<span class="br">/</span>ISLAM<span class="nav-dot"></span></a>
+        
+        <ul class="nav-links">
+            <li><a href="/" >Portfolio</a></li>
+            <li><a href="/blog" class="active">Blog</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <div class="nav-status">
+                <span class="status-dot"></span>
+                <span class="status-text">SYSTEM_ONLINE</span>
+            </div>
+            <button class="dark-mode-btn" id="theme-toggle" aria-label="Toggle theme">
+                <i class="fa-regular fa-moon"></i>
+            </button>
+            <button class="hamburger" aria-label="Menu" aria-expanded="false" id="mobile-menu-btn">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobile-nav">
+        <a href="/">Portfolio</a>
+        <a href="/blog">Blog</a>
+    </div>
+
+    <main class="container">
+    <article class="article-hero">
+        <div class="breadcrumb">
+            <a href="/"><i class="fa-solid fa-house"></i></a>
+            <span>/</span>
+            <a href="/blog">Blog</a>
+            <span>/</span>
+            <span style="color:var(--white);">Python for Hackers: Security Automation Scripts from Scratch</span>
+        </div>
+
+        <div class="article-layout">
+            
+            <!-- Main Content -->
+            <div class="article-main">
+                <header class="article-header">
+                    <div class="article-cats">
+                        
+                        <a href="/blog?category=Programming" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Programming</a>
+                        
+                        <a href="/blog?category=Cybersecurity" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Cybersecurity</a>
+                        
+                    </div>
+                    
+                    <h1 class="article-title">Python for Hackers: Security Automation Scripts from Scratch</h1>
+                    
+                    
+                    <p class="article-subtitle">Port scanners, password sprayers, subdomain enumerators — building real security tools in Python from scratch.</p>
+                    
+                    
+                    <div class="article-meta">
+                        <div class="article-meta-item">
+                            <i class="fa-regular fa-calendar"></i>
+                            <span>Published: <strong>20 Jun 2026</strong></span>
+                        </div>
+                        
+                        <div class="article-meta-item">
+                            <i class="fa-regular fa-clock"></i>
+                            <span>Read time: <strong>14 min</strong></span>
+                        </div>
+                        
+                        <div class="article-meta-item">
+                            <i class="fa-solid fa-terminal"></i>
+                            <span>Author: <strong>Aimad Ul Islam</strong></span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="article-tags">
+                        
+                        <span class="tag tag-tut">#python</span>
+                        
+                        <span class="tag tag-tut">#automation</span>
+                        
+                        <span class="tag tag-tut">#security-scripting</span>
+                        
+                        <span class="tag tag-tut">#penetration-testing</span>
+                        
+                        <span class="tag tag-tut">#tools</span>
+                        
+                    </div>
+                    
+                </header>
+
+                <div class="article-body">
+                    <h2 id="introduction" tabindex="-1">Introduction <a class="direct-link" href="#introduction" aria-hidden="true">#</a></h2>
+<p>Python is the go-to language for cybersecurity professionals. Its simplicity, extensive library ecosystem, and cross‑platform capabilities make it perfect for building custom automation tools. Whether you're a penetration tester, a SOC analyst, or a security researcher, writing your own scripts gives you the flexibility to tailor tools to your exact needs.</p>
+<p>In this guide, I'll walk you through four practical Python projects that I've built during my learning journey. You'll learn how to create a port scanner, a subdomain enumerator, a credential sprayer, and a log parser — all from scratch, with no external dependencies (except the standard library).</p>
+<div class="callout callout-info">
+  <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Before You Begin</div>
+    <div class="callout-body">Make sure you have Python 3 installed. All code here uses only the standard library, so you can run these scripts immediately without installing any additional packages.</div>
+  </div>
+</div>
+<div class="callout callout-warn">
+  <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Legal & Ethical Use</div>
+    <div class="callout-body">These tools are for educational purposes only. Only run them against systems you own or have explicit permission to test. Unauthorised scanning or credential testing is illegal.</div>
+  </div>
+</div>
+<h2 id="tool-1-port-scanner" tabindex="-1">Tool 1: Port Scanner <a class="direct-link" href="#tool-1-port-scanner" aria-hidden="true">#</a></h2>
+<p>A port scanner is the first step in any penetration test. It identifies open ports and services on a target, revealing potential attack surfaces. Our scanner will use TCP SYN scans (stealth scans) to check if a port is open, filtering out closed and filtered ports.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">port_scanner.py</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code>#!/usr/bin/env python3
+"""
+Simple TCP port scanner with threading for speed.
+"""
+import socket
+import sys
+import threading
+from queue import Queue
+<p>target = input(&quot;Enter target IP or domain: &quot;)<br>
+start_port = int(input(&quot;Start port: &quot;))<br>
+end_port = int(input(&quot;End port: &quot;))</p>
+<p>def scan_port(port):<br>
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)<br>
+sock.settimeout(1)  # 1 second timeout<br>
+result = sock.connect_ex((target, port))<br>
+sock.close()<br>
+return result == 0</p>
+<p>def worker():<br>
+while not q.empty():<br>
+port = q.get()<br>
+if scan_port(port):<br>
+print(f&quot;[+] Port {port} is open&quot;)<br>
+q.task_done()</p>
+<h1 id="create-a-queue-and-fill-it-with-ports" tabindex="-1">Create a queue and fill it with ports <a class="direct-link" href="#create-a-queue-and-fill-it-with-ports" aria-hidden="true">#</a></h1>
+<p>q = Queue()<br>
+for port in range(start_port, end_port + 1):<br>
+q.put(port)</p>
+<h1 id="launch-threads" tabindex="-1">Launch threads <a class="direct-link" href="#launch-threads" aria-hidden="true">#</a></h1>
+<p>threads = []<br>
+for _ in range(50):  # 50 concurrent threads<br>
+t = threading.Thread(target=worker)<br>
+t.start()<br>
+threads.append(t)</p>
+<h1 id="wait-for-all-threads-to-finish" tabindex="-1">Wait for all threads to finish <a class="direct-link" href="#wait-for-all-threads-to-finish" aria-hidden="true">#</a></h1>
+<p>for t in threads:<br>
+t.join()</p>
+<p>print(&quot;Scan completed.&quot;)</code></pre></p>
+</div>
+<p><strong>How it works:</strong> The script tries to establish a TCP connection to each port. If the connection succeeds (returns <code>0</code>), the port is open. The queue and threading allow us to scan hundreds of ports in seconds.</p>
+<h2 id="tool-2-subdomain-enumerator" tabindex="-1">Tool 2: Subdomain Enumerator <a class="direct-link" href="#tool-2-subdomain-enumerator" aria-hidden="true">#</a></h2>
+<p>Subdomain enumeration helps discover hidden assets, test environments, and other services that might not be publicly listed. We'll use DNS resolution to find subdomains from a wordlist.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">subdomain_enum.py</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code>#!/usr/bin/env python3
+"""
+Subdomain enumerator using DNS resolution.
+"""
+import socket
+import sys
+<p>domain = input(&quot;Enter target domain (e.g., example.com): &quot;)<br>
+wordlist_file = input(&quot;Enter wordlist file path: &quot;)</p>
+<p>try:<br>
+with open(wordlist_file, 'r') as f:<br>
+subdomains = f.read().splitlines()<br>
+except FileNotFoundError:<br>
+print(&quot;File not found.&quot;)<br>
+sys.exit(1)</p>
+<p>for sub in subdomains:<br>
+subdomain = f&quot;{sub}.{domain}&quot;<br>
+try:<br>
+ip = socket.gethostbyname(subdomain)<br>
+print(f&quot;[+] Found: {subdomain} -&gt; {ip}&quot;)<br>
+except socket.gaierror:<br>
+# DNS resolution failed, subdomain does not exist<br>
+pass</code></pre></p>
+</div>
+<p>You can use a common wordlist like <code>subdomains.txt</code> from SecLists. This script is a foundation; you can later add threading, wildcard detection, and other enhancements.</p>
+<h2 id="tool-3-credential-tester-password-spray" tabindex="-1">Tool 3: Credential Tester (Password Spray) <a class="direct-link" href="#tool-3-credential-tester-password-spray" aria-hidden="true">#</a></h2>
+<p>Password spraying is an attack where you try a small set of common passwords against many accounts to avoid account lockouts. This script attempts to log in to a service (like SSH, FTP, or a web login) using a list of usernames and passwords.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">credential_spray.py</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code>#!/usr/bin/env python3
+"""
+Example of a password spray using SSH (paramiko would be needed).
+This is a conceptual snippet for educational purposes.
+"""
+import paramiko  # Not in standard library, install with: pip install paramiko
+<p>host = input(&quot;Target SSH server: &quot;)<br>
+username_list = [&quot;admin&quot;, &quot;root&quot;, &quot;user&quot;]<br>
+password_list = [&quot;password&quot;, &quot;123456&quot;, &quot;admin&quot;]</p>
+<p>for user in username_list:<br>
+for pwd in password_list:<br>
+try:<br>
+ssh = paramiko.SSHClient()<br>
+ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())<br>
+ssh.connect(host, username=user, password=pwd, timeout=2)<br>
+print(f&quot;[+] Credentials found: {user}:{pwd}&quot;)<br>
+ssh.close()<br>
+break<br>
+except paramiko.AuthenticationException:<br>
+continue<br>
+except Exception as e:<br>
+print(f&quot;[-] Error: {e}&quot;)<br>
+break</code></pre></p>
+</div>
+<div class="callout callout-danger">
+  <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Important: Use with Caution</div>
+    <div class="callout-body">This type of attack is a form of brute‑forcing and should only be performed during authorised penetration tests. Many systems have rate‑limiting and intrusion detection systems that will block you if you spray too fast.</div>
+  </div>
+</div>
+<h2 id="tool-4-log-parser-for-security-analysis" tabindex="-1">Tool 4: Log Parser for Security Analysis <a class="direct-link" href="#tool-4-log-parser-for-security-analysis" aria-hidden="true">#</a></h2>
+<p>Log analysis is critical for incident response and threat hunting. This script parses Apache access logs and extracts useful information, such as the top IP addresses, most requested URIs, and suspicious patterns.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">log_parser.py</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code>#!/usr/bin/env python3
+"""
+Parse Apache access logs and extract statistics.
+"""
+import re
+from collections import Counter
+<p>log_file = input(&quot;Enter path to access.log: &quot;)</p>
+<p>ip_pattern = r'^(\d+.\d+.\d+.\d+)'<br>
+url_pattern = r'&quot;(GET|POST) (\S+)'</p>
+<p>ips = []<br>
+urls = []</p>
+<p>try:<br>
+with open(log_file, 'r') as f:<br>
+for line in f:<br>
+ip_match = re.search(ip_pattern, line)<br>
+if ip_match:<br>
+ips.append(ip_match.group(1))<br>
+url_match = re.search(url_pattern, line)<br>
+if url_match:<br>
+urls.append(url_match.group(2))<br>
+except FileNotFoundError:<br>
+print(&quot;File not found.&quot;)<br>
+sys.exit(1)</p>
+<p>print(&quot;=== Top IP addresses ===&quot;)<br>
+for ip, count in Counter(ips).most_common(10):<br>
+print(f&quot;{ip}: {count}&quot;)</p>
+<p>print(&quot;\n=== Most requested URIs ===&quot;)<br>
+for url, count in Counter(urls).most_common(10):<br>
+print(f&quot;{url}: {count}&quot;)</code></pre></p>
+</div>
+<p>You can extend this script to detect SQL injection attempts, brute‑force patterns, or unusual user‑agent strings.</p>
+<h2 id="next-steps-and-enhancements" tabindex="-1">Next Steps &amp; Enhancements <a class="direct-link" href="#next-steps-and-enhancements" aria-hidden="true">#</a></h2>
+<p>These scripts are just the beginning. Here are some ideas to take them further:</p>
+<ul>
+<li><strong>Add multithreading</strong> to the subdomain enumerator and log parser to speed them up.</li>
+<li><strong>Use the <code>argparse</code> module</strong> to accept command‑line arguments instead of interactive input.</li>
+<li><strong>Integrate with APIs</strong> (e.g., VirusTotal, Shodan) to enrich your findings.</li>
+<li><strong>Write a custom SSH client</strong> that uses the <code>socket</code> library directly (avoiding <code>paramiko</code>) for more control.</li>
+<li><strong>Create a combined tool</strong> that performs reconnaissance, scanning, and reporting in one pipeline.</li>
+</ul>
+<p>Python empowers you to automate the boring stuff and focus on what matters: understanding the security posture of your targets. Keep coding, keep learning, and always stay ethical.</p>
+
+                </div>
+
+                <div class="social-share">
+                    <span class="share-label">Share article</span>
+                    <a href="https://twitter.com/intent/tweet?text=Python%20for%20Hackers%3A%20Security%20Automation%20Scripts%20from%20Scratch&url=https://aimadulislam.dpdns.org/posts/python-for-security/" target="_blank" rel="noopener" class="share-btn twitter" aria-label="Share on Twitter"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://aimadulislam.dpdns.org/posts/python-for-security/&title=Python%20for%20Hackers%3A%20Security%20Automation%20Scripts%20from%20Scratch" target="_blank" rel="noopener" class="share-btn linkedin" aria-label="Share on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <button class="share-btn copy-url" aria-label="Copy Link" id="copy-url-btn" data-url="https://aimadulislam.dpdns.org/posts/python-for-security/"><i class="fa-solid fa-link"></i></button>
+                </div>
+
+                <!-- Navigation between posts -->
+                
+                
+                <nav class="article-nav">
+                    
+                    <a href="/posts/linux-essentials-guide/" class="article-nav-link prev">
+                        <span class="article-nav-dir"><i class="fa-solid fa-angle-left"></i> Previous Post</span>
+                        <div class="article-nav-title">Linux Essentials: Every Command You Actually Need</div>
+                    </a>
+                    
+                    
+                    
+                    <a href="/posts/home-lab-setup/" class="article-nav-link next">
+                        <span class="article-nav-dir">Next Post <i class="fa-solid fa-angle-right"></i></span>
+                        <div class="article-nav-title">Building a Cybersecurity Home Lab on a Budget</div>
+                    </a>
+                    
+                </nav>
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-widget card">
+                    <h3 class="widget-title"><i class="fa-solid fa-fire"></i> Recent Articles</h3>
+                    <div class="sidebar-posts">
+                        
+                        
+                            
+                            <a href="/posts/metasploitable-complete-guide/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    🎯
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">Metasploitable 2: The Ultimate Beginner&#39;s Guide to Exploitation</h4>
+                                    <span class="sidebar-post-meta">25 Jul 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                            <a href="/posts/kali-linux-setup-guide/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    🐉
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">Getting Started with Kali Linux: Complete Beginner Setup Guide</h4>
+                                    <span class="sidebar-post-meta">15 Jul 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                            <a href="/posts/nmap-complete-guide/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    🗺️
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">Nmap Deep Dive: From Port Scanning to Full Network Enumeration</h4>
+                                    <span class="sidebar-post-meta">10 Jul 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                            <a href="/posts/dfir-introduction/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    🔬
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">Digital Forensics &amp; Incident Response: A Hands-On Introduction</h4>
+                                    <span class="sidebar-post-meta">05 Jul 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                    </div>
+                </div>
+
+                <div class="sidebar-widget card">
+                    <h3 class="widget-title"><i class="fa-solid fa-envelope"></i> Terminal Feed</h3>
+                    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+                        <input type="email" class="newsletter-input" placeholder="root@localhost:~# _" required>
+                        <button type="submit" class="newsletter-btn">EXECUTE /SUBSCRIBE</button>
+                        <p class="newsletter-note">Get new tutorials and writeups directly in your inbox. No spam.</p>
+                    </form>
+                </div>
+            </aside>
+        </div>
+    </article>
+</main>
+
+<script>
+    // Copy URL button
+    document.getElementById('copy-url-btn')?.addEventListener('click', function() {
+        navigator.clipboard.writeText(this.dataset.url).then(() => {
+            const originalHtml = this.innerHTML;
+            this.innerHTML = '<i class="fa-solid fa-check"></i>';
+            this.classList.add('copied');
+            setTimeout(() => {
+                this.innerHTML = originalHtml;
+                this.classList.remove('copied');
+            }, 2000);
+        });
+    });
+
+    // Code block copy buttons
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const pre = this.parentElement.querySelector('pre');
+            if (!pre) return;
+            
+            navigator.clipboard.writeText(pre.innerText).then(() => {
+                const originalHtml = this.innerHTML;
+                this.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
+                this.classList.add('copied');
+                setTimeout(() => {
+                    this.innerHTML = originalHtml;
+                    this.classList.remove('copied');
+                }, 2000);
+            });
+        });
+    });
+
+    // Reading progress bar
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        const progress = document.getElementById('reading-progress');
+        if (progress) progress.style.width = scrolled + '%';
+    });
+</script>
+
+
+    <!-- Footer -->
+    <footer class="blog-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">AIMAD<span>/</span>ISLAM</div>
+                    <p class="footer-tagline">Offensive Security & Technical Writing. Securing the perimeter, one post at a time.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <a href="/">Portfolio</a>
+                    <a href="/blog">Blog</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <a href="https://linkedin.com/in/aimad-ul-islam" target="_blank" rel="noopener noreferrer">LinkedIn <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.6rem; margin-left:0.2rem;"></i></a>
+                    <a href="https://github.com/aimad-ul-islam" target="_blank" rel="noopener noreferrer">GitHub <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.6rem; margin-left:0.2rem;"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copy">© 2026 Aimad Ul Islam. All rights reserved.</div>
+                <div class="footer-socs">
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scroll-top" aria-label="Scroll to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <script>
+      // Basic Navigation & UI Interactions
+      document.addEventListener('DOMContentLoaded', () => {
+          // Mobile Menu
+          const menuBtn = document.getElementById('mobile-menu-btn');
+          const mobileNav = document.getElementById('mobile-nav');
+          if(menuBtn && mobileNav) {
+              menuBtn.addEventListener('click', () => {
+                  mobileNav.classList.toggle('open');
+              });
+          }
+
+          // Dark Mode Toggle
+          const themeToggle = document.getElementById('theme-toggle');
+          const html = document.documentElement;
+          
+          if(themeToggle) {
+              // Set initial icon
+              if(html.getAttribute('data-theme') === 'light') {
+                  themeToggle.innerHTML = '<i class="fa-regular fa-sun"></i>';
+              }
+              
+              themeToggle.addEventListener('click', () => {
+                  if (html.getAttribute('data-theme') === 'dark') {
+                      html.setAttribute('data-theme', 'light');
+                      localStorage.setItem('aimad-theme', 'light');
+                      themeToggle.innerHTML = '<i class="fa-regular fa-sun"></i>';
+                  } else {
+                      html.setAttribute('data-theme', 'dark');
+                      localStorage.setItem('aimad-theme', 'dark');
+                      themeToggle.innerHTML = '<i class="fa-regular fa-moon"></i>';
+                  }
+              });
+          }
+
+          // Nav Scroll Effect
+          const nav = document.querySelector('.blog-nav');
+          window.addEventListener('scroll', () => {
+              if (window.scrollY > 50) {
+                  nav.classList.add('scrolled');
+              } else {
+                  nav.classList.remove('scrolled');
+              }
+          });
+
+          // Scroll to Top
+          const scrollTopBtn = document.getElementById('scroll-top');
+          if(scrollTopBtn) {
+              window.addEventListener('scroll', () => {
+                  if (window.scrollY > 500) {
+                      scrollTopBtn.classList.add('visible');
+                  } else {
+                      scrollTopBtn.classList.remove('visible');
+                  }
+              });
+              scrollTopBtn.addEventListener('click', () => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+              });
+          }
+      });
+    </script>
+</body>
+</html>

@@ -1,0 +1,434 @@
+---
+title: Blog — Aimad Ul Islam | Cybersecurity, Linux, Networking & More
+description: Technical blog by Aimad Ul Islam — cybersecurity, ethical hacking, Linux, networking, programming, DFIR, and more. Practical guides and tutorials.
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+
+  <!-- SEO -->
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}"/>
+  <meta name="author" content="{{ settings.author }}"/>
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="{{ title }}"/>
+  <meta property="og:description" content="{{ description }}"/>
+  <meta property="og:site_name" content="{{ settings.author }}"/>
+  <meta property="og:image" content="{{ settings.og_image }}"/>
+
+  <meta name="theme-color" content="{{ settings.theme_color }}"/>
+  <link rel="icon" type="image/svg+xml" href="{{ settings.favicon }}"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- Blog CSS -->
+  <link rel="stylesheet" href="/css/blog.css"/>
+</head>
+<body>
+
+<!-- Reading Progress Bar -->
+<div id="reading-progress" role="progressbar" aria-label="Page reading progress"></div>
+
+<!-- Grid Background -->
+<div class="grid-bg" aria-hidden="true"></div>
+<div class="scan-line" aria-hidden="true"></div>
+
+<!-- NAVIGATION -->
+<nav class="blog-nav" id="navbar" role="navigation" aria-label="Main navigation">
+  <a href="/" class="nav-logo" aria-label="{{ settings.author }} — Home">
+    <span class="br">[</span>{{ settings.portfolio_name }}<span class="nav-dot" aria-hidden="true"></span><span class="br">]</span>
+  </a>
+
+  <ul class="nav-links" role="list">
+    <li><a href="/#about">About</a></li>
+    <li><a href="/#certifications">Certs</a></li>
+    <li><a href="/#skills">Skills</a></li>
+    <li><a href="/#projects">Projects</a></li>
+    <li><a href="/blog/" class="active" aria-current="page">Blog</a></li>
+    <li><a href="/#contact">Contact</a></li>
+  </ul>
+
+  <div class="nav-right">
+    <div class="nav-status" aria-label="Availability status">
+      <div class="status-dot" aria-hidden="true"></div>
+      <span class="status-text">{{ contact.availability }}</span>
+    </div>
+    <button id="dark-mode-btn" class="dark-mode-btn" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <i class="fa-solid fa-moon" aria-hidden="true"></i>
+    </button>
+    <a href="/#contact" class="nav-btn">Hire Me</a>
+  </div>
+
+  <button class="hamburger" id="ham" aria-label="Toggle mobile menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Nav -->
+<div class="mobile-nav" id="mobNav" role="navigation" aria-label="Mobile navigation">
+  <a href="/">Home</a>
+  <a href="/#about">About</a>
+  <a href="/#certifications">Certifications</a>
+  <a href="/#skills">Skills</a>
+  <a href="/#projects">Projects</a>
+  <a href="/blog/" aria-current="page">Blog</a>
+  <a href="/#contact">Contact</a>
+</div>
+
+<!-- HERO -->
+<section id="blog-hero" aria-labelledby="blog-hero-title">
+  <canvas id="blog-hero-canvas" aria-hidden="true"></canvas>
+  <div class="blog-hero-inner">
+    <div class="blog-hero-eye" aria-hidden="true">Technical Writing & Research</div>
+    <h1 class="blog-hero-title" id="blog-hero-title">
+      The <span class="accent">Cyber</span>security Blog
+    </h1>
+    <p class="blog-hero-sub">Practical guides on ethical hacking, Linux, networking, DFIR, and more — written by a cybersecurity student who documents everything he learns.</p>
+
+    <!-- Search -->
+    <div class="search-wrap" role="search">
+      <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+      <label for="blog-search" class="visually-hidden">Search blog posts</label>
+      <input type="search" id="blog-search" placeholder="Search posts, topics, tools..." autocomplete="off" spellcheck="false" aria-label="Search blog posts"/>
+    </div>
+    <p class="search-results-count" id="posts-count" aria-live="polite"></p>
+
+    <!-- Stats -->
+    <div class="blog-hero-stats" aria-label="Blog statistics">
+      <div class="text-center">
+        <div class="hero-stat-num">{{ collections.posts.length }}</div>
+        <div class="hero-stat-lbl">Articles</div>
+      </div>
+      <div class="text-center">
+        <div class="hero-stat-num">{{ collections.categories.length }}</div>
+        <div class="hero-stat-lbl">Categories</div>
+      </div>
+      <div class="text-center">
+        <div class="hero-stat-num">∞</div>
+        <div class="hero-stat-lbl">Learning</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORIES BAR -->
+<div id="categories-bar" role="navigation" aria-label="Filter by category">
+  <div class="categories-scroll" role="list">
+    <button class="cat-btn active" data-cat="all" role="listitem" aria-pressed="true">
+      <i class="fa-solid fa-border-all fa-xs" aria-hidden="true"></i> All Posts
+    </button>
+    {% for cat in collections.categories %}
+    <button class="cat-btn" data-cat="{{ cat }}" role="listitem" aria-pressed="false">
+      <i class="fa-solid fa-folder-open fa-xs" aria-hidden="true"></i> {{ cat }}
+    </button>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- MAIN CONTENT -->
+<main>
+  <section id="articles-section" aria-labelledby="articles-heading">
+    <div class="container">
+
+      <!-- Breadcrumb -->
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="/"><i class="fa-solid fa-house fa-xs" aria-hidden="true"></i> Home</a>
+        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+        <span aria-current="page">Blog</span>
+      </nav>
+
+      <!-- Featured Post -->
+      <div class="articles-section-title" id="articles-heading" aria-hidden="true">
+        Featured Post
+      </div>
+      <div id="featured-post-wrap" aria-label="Featured post">
+        {% set featuredPost = collections.posts | head(1) | first %}
+        {% if featuredPost %}
+        <a href="{{ featuredPost.url }}" class="featured-post card" aria-label="Featured: {{ featuredPost.data.title }}">
+          <div class="card-glow"></div>
+          <div class="featured-img-wrap">
+            {% if featuredPost.data.image %}
+            <img src="{{ featuredPost.data.image }}" alt="{{ featuredPost.data.imageAlt }}" loading="lazy"/>
+            {% else %}
+            <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:5rem;background:linear-gradient(135deg,rgba(0,212,255,0.06),rgba(124,58,237,0.08));">{{ featuredPost.data.emoji | default("📄") }}</div>
+            {% endif %}
+            <div class="featured-img-overlay"></div>
+            <span class="featured-badge">Featured</span>
+          </div>
+          <div class="featured-content">
+            <div>
+              <div class="featured-cat">
+                {% for cat in featuredPost.data.categories | head(2) %}
+                <span class="tag tag-cyber">{{ cat }}</span>
+                {% endfor %}
+              </div>
+              <h2 class="featured-title">{{ featuredPost.data.title }}</h2>
+              <p class="featured-excerpt">{{ featuredPost.data.excerpt }}</p>
+            </div>
+            <div class="featured-meta">
+              <span class="meta-item"><i class="fa-solid fa-user"></i>{{ featuredPost.data.author | default("Aimad Ul Islam") }}</span>
+              <span class="meta-item"><i class="fa-regular fa-calendar"></i>{{ featuredPost.date | readableDate }}</span>
+              <span class="meta-item"><i class="fa-regular fa-clock"></i>{{ featuredPost.data.readingTime | default("5") }} min read</span>
+            </div>
+          </div>
+        </a>
+        {% endif %}
+      </div>
+
+      <!-- Blog Layout: Articles + Sidebar -->
+      <div class="blog-layout">
+
+        <!-- Main: Articles Grid -->
+        <div>
+          <div class="articles-section-title" aria-hidden="true">Latest Articles</div>
+          <div id="articles-grid" class="articles-grid" role="list" aria-label="Blog articles">
+            {% for post in collections.posts %}
+            <article class="card article-card reveal" data-categories="{{ post.data.categories | join(',') | lower }}" data-title="{{ post.data.title | lower }}" onclick="window.location='{{ post.url }}'" role="link" tabindex="0">
+              <div class="card-glow"></div>
+              <div class="article-card-img-wrap">
+                {% if post.data.image %}
+                <img class="article-card-img" src="{{ post.data.image }}" alt="{{ post.data.imageAlt }}" loading="lazy"/>
+                {% else %}
+                <div class="article-card-img-placeholder">{{ post.data.emoji | default("📄") }}</div>
+                {% endif %}
+              </div>
+              <div class="article-card-body">
+                <div class="article-card-tags">
+                  {% for cat in post.data.categories | head(2) %}
+                  <span class="tag tag-cyber">{{ cat }}</span>
+                  {% endfor %}
+                </div>
+                <h3 class="article-card-title">{{ post.data.title }}</h3>
+                <p class="article-card-excerpt">{{ post.data.excerpt }}</p>
+                <div class="article-card-footer">
+                  <div class="article-meta-mini">
+                    <span><i class="fa-regular fa-calendar"></i> {{ post.date | readableDate }}</span>
+                    <span><i class="fa-regular fa-clock"></i> {{ post.data.readingTime | default("5") }} min</span>
+                  </div>
+                  <span class="read-more-link">Read <i class="fa-solid fa-arrow-right fa-xs"></i></span>
+                </div>
+              </div>
+            </article>
+            {% endfor %}
+          </div>
+          <div class="no-results" id="no-results" role="alert" aria-live="polite">
+            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+            <h3>No posts found</h3>
+            <p>Try a different search term or browse all categories.</p>
+            <button class="btn btn-outline mt-1" onclick="resetSearch()">
+              <i class="fa-solid fa-rotate-left fa-xs" aria-hidden="true"></i> Reset Filters
+            </button>
+          </div>
+        </div>
+
+        <!-- Sidebar -->
+        <aside class="sidebar" aria-label="Sidebar">
+
+          <!-- Recent Posts -->
+          <div class="sidebar-widget card">
+            <div class="card-glow"></div>
+            <div class="widget-title"><i class="fa-regular fa-clock" aria-hidden="true"></i> Recent Posts</div>
+            <div id="recent-posts" role="list" aria-label="Recent posts">
+              {% for post in collections.posts | head(4) %}
+              <a href="{{ post.url }}" class="sidebar-post">
+                <div class="sidebar-post-thumb">
+                  {% if post.data.image %}
+                  <img src="{{ post.data.image }}" alt="{{ post.data.imageAlt }}" loading="lazy"/>
+                  {% else %}
+                  {{ post.data.emoji | default("📄") }}
+                  {% endif %}
+                </div>
+                <div>
+                  <div class="sidebar-post-title">{{ post.data.title }}</div>
+                  <div class="sidebar-post-meta">{{ post.date | readableDate }}</div>
+                </div>
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+
+          <!-- Categories -->
+          <div class="sidebar-widget card">
+            <div class="card-glow"></div>
+            <div class="widget-title"><i class="fa-solid fa-folder-open" aria-hidden="true"></i> Categories</div>
+            <div id="cat-list" role="list" aria-label="Post categories">
+              {% for cat in collections.categories %}
+              <a href="?cat={{ cat }}" class="cat-list-item cat-sidebar-link" data-cat="{{ cat }}">
+                <span class="cat-list-name"><i class="fa-solid fa-folder" style="font-size:0.6rem"></i>{{ cat }}</span>
+              </a>
+              {% endfor %}
+            </div>
+          </div>
+
+          <!-- Newsletter Widget -->
+          <div class="sidebar-widget card">
+            <div class="card-glow"></div>
+            <div class="widget-title"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Newsletter</div>
+            <p style="color:var(--muted);font-size:0.78rem;line-height:1.6;margin-bottom:1rem;">Get new posts delivered to your inbox. No spam, ever.</p>
+            <form class="newsletter-form newsletter-form-handler" novalidate>
+              <input type="email" class="newsletter-input" placeholder="your@email.com" aria-label="Email address for newsletter" required/>
+              <button type="submit" class="newsletter-btn">Subscribe</button>
+              <p class="newsletter-note">No spam · Unsubscribe anytime</p>
+            </form>
+          </div>
+
+        </aside>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER SECTION -->
+  <section id="newsletter-section" aria-labelledby="newsletter-heading">
+    <div class="container">
+      <div class="newsletter-big-wrap reveal">
+        <div class="newsletter-big-icon" aria-hidden="true"><i class="fa-solid fa-envelope-open-text"></i></div>
+        <h2 class="newsletter-big-title" id="newsletter-heading">Stay in the Loop</h2>
+        <p class="newsletter-big-desc">New cybersecurity guides, tool walkthroughs, and DFIR writeups — delivered straight to your inbox when they go live.</p>
+        <form class="newsletter-big-form newsletter-form-handler" novalidate>
+          <label for="newsletter-email" class="visually-hidden">Email address</label>
+          <input type="email" id="newsletter-email" placeholder="your@email.com" aria-label="Email address" required/>
+          <button type="submit" class="btn btn-primary">
+            <i class="fa-solid fa-paper-plane fa-xs" aria-hidden="true"></i> Subscribe
+          </button>
+        </form>
+        <p style="color:var(--muted);font-size:0.72rem;margin-top:0.85rem;">No spam · Unsubscribe anytime · Free forever</p>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="blog-footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="footer-brand">[Aimad<span>.</span>Blog]</div>
+        <p class="footer-tagline">Cybersecurity student, SOC enthusiast, and Cisco Ethical Hacker from Peshawar, Pakistan. Writing about what I learn — one post at a time.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Navigation</h4>
+        <a href="/">Portfolio</a>
+        <a href="/blog/">Blog Home</a>
+        <a href="/#certifications">Certifications</a>
+        <a href="/#projects">Projects</a>
+        <a href="/#contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <a href="https://linkedin.com/in/aimadulislam" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in fa-xs" aria-hidden="true"></i> LinkedIn</a>
+        <a href="https://github.com/Aimadulislam" target="_blank" rel="noopener"><i class="fa-brands fa-github fa-xs" aria-hidden="true"></i> GitHub</a>
+        <a href="https://aimad.lizzdo.com" target="_blank" rel="noopener"><i class="fa-solid fa-globe fa-xs" aria-hidden="true"></i> Lizzdo.com</a>
+        <a href="mailto:info@aimadulislam.dpdns.org"><i class="fa-solid fa-envelope fa-xs" aria-hidden="true"></i> Email</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span class="footer-copy">© 2026 Aimad Ul Islam — All rights reserved.</span>
+      <div class="footer-socs">
+        <a href="https://linkedin.com/in/aimadulislam" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
+        <a href="https://github.com/Aimadulislam" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
+        <a href="mailto:info@aimadulislam.dpdns.org" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Scroll to Top -->
+<button id="scroll-top" aria-label="Scroll to top" title="Scroll to top">
+  <i class="fa-solid fa-chevron-up fa-xs" aria-hidden="true"></i>
+</button>
+
+<script src="/js/blog.js"></script>
+<script>
+  // Simple client-side filtering logic for the Eleventy rendered list
+  document.addEventListener("DOMContentLoaded", () => {
+    const searchInput = document.getElementById("blog-search");
+    const catBtns = document.querySelectorAll(".cat-btn");
+    const sidebarCatLinks = document.querySelectorAll(".cat-sidebar-link");
+    const articles = document.querySelectorAll(".article-card");
+    const noResults = document.getElementById("no-results");
+    
+    let currentCat = "all";
+    let currentSearch = "";
+
+    function applyFilters() {
+      let visibleCount = 0;
+      articles.forEach(article => {
+        const title = article.getAttribute("data-title");
+        const cats = article.getAttribute("data-categories");
+        
+        const matchesSearch = currentSearch === "" || title.includes(currentSearch) || cats.includes(currentSearch);
+        const matchesCat = currentCat === "all" || cats.includes(currentCat.toLowerCase());
+
+        if (matchesSearch && matchesCat) {
+          article.style.display = "";
+          visibleCount++;
+        } else {
+          article.style.display = "none";
+        }
+      });
+
+      if (visibleCount === 0) {
+        noResults.style.display = "block";
+      } else {
+        noResults.style.display = "none";
+      }
+    }
+
+    if(searchInput) {
+      searchInput.addEventListener("input", (e) => {
+        currentSearch = e.target.value.toLowerCase().trim();
+        applyFilters();
+      });
+    }
+
+    function setActiveCategory(cat) {
+      currentCat = cat;
+      catBtns.forEach(b => {
+        if(b.getAttribute("data-cat") === cat) {
+          b.classList.add("active");
+        } else {
+          b.classList.remove("active");
+        }
+      });
+      applyFilters();
+    }
+
+    catBtns.forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        setActiveCategory(btn.getAttribute("data-cat"));
+      });
+    });
+
+    sidebarCatLinks.forEach(link => {
+      link.addEventListener("click", (e) => {
+        e.preventDefault();
+        const targetCat = link.getAttribute("data-cat");
+        setActiveCategory(targetCat);
+        document.getElementById("articles-section").scrollIntoView({behavior: "smooth"});
+      });
+    });
+
+    window.resetSearch = () => {
+      if(searchInput) searchInput.value = "";
+      currentSearch = "";
+      setActiveCategory("all");
+    };
+
+    // Handle URL params
+    const params = new URLSearchParams(window.location.search);
+    const urlCat = params.get('cat');
+    if(urlCat) {
+      setActiveCategory(urlCat);
+    }
+  });
+</script>
+</body>
+</html>

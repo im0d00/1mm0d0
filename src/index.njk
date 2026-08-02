@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>{{ settings.website_title }}</title>
+<meta name="description" content="{{ settings.website_description }}"/>
+<meta name="keywords" content="{{ settings.keywords }}"/>
+<meta name="author" content="{{ settings.author }}"/>
+
+<!-- Open Graph / SEO -->
+<meta property="og:title" content="{{ settings.seo_title }}"/>
+<meta property="og:description" content="{{ settings.seo_description }}"/>
+<meta property="og:type" content="website"/>
+<meta property="og:image" content="{{ settings.og_image }}"/>
+<meta name="theme-color" content="{{ settings.theme_color }}"/>
+<link rel="icon" type="image/svg+xml" href="{{ settings.favicon }}"/>
+
+<!-- Fonts & FontAwesome -->
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+<link rel="stylesheet" href="css/main.css"/>
+
+{% if settings.google_analytics_id %}
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id={{ settings.google_analytics_id }}"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '{{ settings.google_analytics_id }}');
+</script>
+{% endif %}
+
+{% if settings.google_search_console_verification %}
+<meta name="google-site-verification" content="{{ settings.google_search_console_verification }}" />
+{% endif %}
+
+{% if settings.microsoft_clarity_id %}
+<script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "{{ settings.microsoft_clarity_id }}");
+</script>
+{% endif %}
+
+<!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "{{ settings.author }}",
+  "jobTitle": "{{ hero.professional_title }}",
+  "description": "{{ settings.website_description }}",
+  "url": "{{ settings.sitemap_settings.url }}",
+  "sameAs": [
+    "{{ contact.github }}",
+    "{{ contact.linkedin }}",
+    "{{ contact.x }}",
+    "{{ contact.youtube }}"
+  ]
+}
+</script>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<div class="scan-line"></div>
+
+<!-- LOADER SCREEN -->
+<div id="loader">
+    <div class="loader-ring"><div class="loader-icon"><i class="fa-solid fa-shield-halved"></i></div></div>
+    <div style="text-align:center;">
+        <div class="loader-text">{{ settings.logo }}</div>
+        <div style="height:0.5rem;"></div>
+        <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+        <div style="height:0.5rem;"></div>
+        <div class="loader-status" id="lstat">Initializing Security Operations Center...</div>
+    </div>
+</div>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+    <a href="#" class="nav-logo"><span class="br">[</span>{{ settings.portfolio_name }}<span class="nav-dot"></span><span class="br">]</span></a>
+    <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#certifications">Certs</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#tools">Tools</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#labs">Labs</a></li>
+        <li><a href="#domains">Domains</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#dashboard">Dashboard</a></li>
+        <li><a href="#timeline">Timeline</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="/blog/"><i class="fa-solid fa-pen-nib" style="font-size:0.6rem"></i> Blog</a></li>
+    </ul>
+    <div class="nav-right">
+        <div class="nav-status"><div class="status-dot"></div><span class="status-text">{{ contact.availability }}</span></div>
+        <a href="{{ resume.pdf_file }}" download class="nav-resume"><i class="fa-solid fa-download fa-xs"></i> Resume</a>
+    </div>
+    <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+</nav>
+
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobNav">
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#skills">Skills</a>
+    <a href="#tools">Tools</a>
+    <a href="#projects">Projects</a>
+    <a href="#labs">Labs</a>
+    <a href="#domains">Domains</a>
+    <a href="#experience">Experience</a>
+    <a href="#achievements">Achievements</a>
+    <a href="#dashboard">Dashboard</a>
+    <a href="#timeline">Timeline</a>
+    <a href="#contact">Contact</a>
+    <a href="/blog/"><i class="fa-solid fa-pen-nib" style="font-size:0.75rem"></i> Blog</a>
+</div>
+
+<!-- HERO SECTION -->
+<section id="hero">
+    <canvas id="hero-canvas"></canvas>
+    <div class="hero-inner">
+        <div class="hero-profile reveal">
+            <div class="profile-outer">
+                <div class="orbit orbit1"></div><div class="orbit orbit2"></div>
+                <div class="profile-inner">
+                    <img src="{{ settings.profile_picture or hero.hero_image }}" alt="{{ hero.name }}"
+                    onerror="this.src='https://ui-avatars.com/api/?name={{ hero.name | urlencode }}&background=0A1628&color=00E5FF&size=290&bold=true'" />
+                </div>
+                <div class="profile-hud">
+                    <div class="hud-row"><span class="hud-dot"></span><span>Status: {{ contact.availability }}</span></div>
+                    <div class="hud-row"><span style="color:var(--violet2)">◆</span><span>{{ education.items[0].degree }}</span></div>
+                    <div class="hud-row"><span style="color:var(--amber)">◆</span><span>{{ certifications.items | length }} Certifications</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-text reveal rv1">
+            <div class="hero-eyebrow">{{ hero.professional_title }}</div>
+            <h1 class="hero-name">{{ hero.name }}<br /><span class="name-accent">{{ hero.name_accent }}</span></h1>
+            <div class="hero-role-wrap"><div class="hero-role" id="heroRole">{{ hero.rotating_job_titles[0] }}_</div></div>
+            <p class="hero-desc">{{ hero.biography }}</p>
+            <div class="hero-btns">
+                <a href="{{ resume.pdf_file }}" download class="btn primary"><i class="fa-solid fa-download fa-xs"></i> {{ hero.resume_button_text }}</a>
+                <a href="{{ hero.contact_button_link }}" class="btn outline"><i class="fa-solid fa-envelope fa-xs"></i> {{ hero.contact_button_text }}</a>
+                <a href="{{ hero.view_projects_button_link }}" class="btn outline"><i class="fa-solid fa-terminal fa-xs"></i> {{ hero.view_projects_button_text }}</a>
+                <a href="{{ hero.blog_button_link }}" class="btn outline"><i class="fa-solid fa-pen-nib fa-xs"></i> {{ hero.blog_button_text }}</a>
+            </div>
+            <div class="hero-metrics">
+                <div class="metric"><div class="metric-num">{{ hero.statistics_override.years_tech or "7+" }}</div><div class="metric-lbl">Years Tech</div></div>
+                <div class="metric"><div class="metric-num">{{ certifications.items | length }}</div><div class="metric-lbl">Certifications</div></div>
+                <div class="metric"><div class="metric-num">{{ projects.items | length }}</div><div class="metric-lbl">Projects</div></div>
+                <div class="metric"><div class="metric-num">{{ dashboard.learning_hours }}+</div><div class="metric-lbl">Hours Learned</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ABOUT ME -->
+<section id="about" style="background:linear-gradient(180deg,transparent,rgba(11,19,40,0.35),transparent);">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">01 About</div><h2 class="sec-title">Who I Am</h2><div class="sec-rule"></div></div>
+        <div class="about-grid">
+            <div class="about-text reveal">
+                <p>{{ about.biography }}</p>
+                <p>{{ about.personal_description }}</p>
+                <p><strong>Career Objective:</strong> {{ about.career_objectives }}</p>
+                <p><strong>Experience Summary:</strong> {{ about.experience_summary }}</p>
+                
+                <div class="tags" style="margin-top:1.2rem;">
+                    {% for skillTag in about.skills %}
+                    <span class="ctag tc">{{ skillTag }}</span>
+                    {% endfor %}
+                </div>
+
+                {% if about.languages | length > 0 %}
+                <div style="margin-top:1.5rem; display:flex; gap:1rem; flex-wrap:wrap; font-size:0.88rem; color:var(--silver);">
+                    <strong style="color:var(--white);"><i class="fa-solid fa-language"></i> Languages:</strong>
+                    {% for lang in about.languages %}
+                    <span>{{ lang.language }} ({{ lang.proficiency }})</span>{% if not loop.last %} • {% endif %}
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+            <div class="stats-grid reveal rv1">
+                <div class="stat-c card"><div class="stat-n">{{ hero.statistics_override.years_tech or "7+" }}</div><div class="stat-l">Years Tech</div></div>
+                <div class="stat-c card"><div class="stat-n">{{ certifications.items | length }}</div><div class="stat-l">Certifications</div></div>
+                <div class="stat-c card"><div class="stat-n">{{ projects.items | length }}</div><div class="stat-l">Projects Completed</div></div>
+                <div class="stat-c card"><div class="stat-n">{{ dashboard.learning_hours }}+</div><div class="stat-l">Learning Hours</div></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- EDUCATION -->
+<section id="education">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">02 Education</div><h2 class="sec-title">Academic & Training Background</h2><div class="sec-rule"></div></div>
+        {% for edu in education.items %}
+        <div class="edu-card card reveal {% if loop.index == 2 %}rv1{% elif loop.index == 3 %}rv2{% endif %}"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+            <div class="edu-ic ic-uni"><i class="{{ edu.institution_logo or 'fa-solid fa-graduation-cap' }}"></i></div>
+            <div>
+                <div class="edu-h">{{ edu.course }} — {{ edu.degree }}</div>
+                <div class="edu-org">{{ edu.institution }} — {{ edu.platform }}</div>
+                <div class="edu-meta">
+                    <span><i class="fa-regular fa-calendar fa-xs"></i> {{ edu.start_date }} – {{ edu.end_date }}</span>
+                    <span><i class="fa-solid fa-location-dot fa-xs"></i> {{ edu.location }}</span>
+                    {% if edu.institution_badge %}<span class="badge b-earned"><i class="fa-solid fa-award fa-xs"></i> {{ edu.institution_badge }}</span>{% endif %}
+                </div>
+                <div class="edu-detail">
+                    <p>{{ edu.description }}</p>
+                    {% if edu.skills_learned %}<div style="margin-top:0.4rem; font-size:0.85rem;"><strong style="color:var(--white)">Skills Learned:</strong> {{ edu.skills_learned }}</div>{% endif %}
+                    {% if edu.certificate_link %}<a href="{{ edu.certificate_link }}" target="_blank" style="font-size:0.85rem; margin-top:0.4rem; display:inline-block;"><i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i> View Verification</a>{% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</section>
+
+<!-- CERTIFICATIONS SECTION (Dynamic Counter) -->
+<section id="certifications" style="background:linear-gradient(180deg,transparent,rgba(11,19,40,0.4),transparent);">
+    <div class="container">
+        <div class="reveal">
+            <div class="sec-eye">03 Certifications</div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
+                <h2 class="sec-title">Credentials & Certifications</h2>
+                <div class="cert-counter-badge" style="background:rgba(0,212,255,0.1); border:1px solid var(--border2); padding:0.4rem 1rem; border-radius:20px; color:var(--cyan); font-family:'JetBrains Mono',monospace; font-size:0.9rem;">
+                    <i class="fa-solid fa-award"></i> {{ certifications.items | length }} Certifications Total
+                </div>
+            </div>
+            <div class="sec-rule"></div>
+        </div>
+        <div class="cert-grid">
+            {% for cert in certifications.items %}
+            <div class="cert-card card reveal {% if loop.index % 3 == 2 %}rv1{% elif loop.index % 3 == 0 %}rv2{% endif %}"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+                <div class="cert-top">
+                    <div class="cert-logo cl-cisco"><i class="{{ cert.provider_logo or 'fa-solid fa-award' }}"></i></div>
+                    <div>
+                        <div class="cert-name">{{ cert.name }}</div>
+                        <div class="cert-iss">{{ cert.provider }}</div>
+                    </div>
+                </div>
+                {% if cert.badge_image %}
+                <div style="margin:0.5rem 0;"><img src="{{ cert.badge_image }}" alt="{{ cert.name }} Badge" style="max-height:28px;" /></div>
+                {% endif %}
+                {% if cert.credential_id %}
+                <div style="font-size:0.78rem; font-family:'JetBrains Mono',monospace; color:var(--muted); margin-bottom:0.4rem;">ID: {{ cert.credential_id }}</div>
+                {% endif %}
+                <div class="cert-foot">
+                    <span class="cert-date">Issued: {{ cert.issue_date }}</span>
+                    {% if cert.status == "Active" or cert.status == "Completed" %}
+                    <span class="badge b-earned">{{ cert.status }}</span>
+                    {% elif cert.status == "In Progress" %}
+                    <span class="badge b-prog">{{ cert.status }}</span>
+                    {% else %}
+                    <span class="badge b-plan">{{ cert.status }}</span>
+                    {% endif %}
+                </div>
+                {% if cert.verification_url %}
+                <a href="{{ cert.verification_url }}" target="_blank" style="font-size:0.8rem; margin-top:0.5rem; display:inline-block;"><i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i> Verify Credential</a>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- TECHNICAL SKILLS SECTION -->
+<section id="skills">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">04 Skills</div><h2 class="sec-title">Technical Skills</h2><div class="sec-rule"></div></div>
+        <div class="skills-grid">
+            {% for cat in skills.categories %}
+            <div class="card reveal {% if loop.index % 3 == 2 %}rv1{% elif loop.index % 3 == 0 %}rv2{% endif %}" style="padding:1.4rem;"><div class="card-glow"></div><div class="corner tl"></div>
+                <div class="sk-head">
+                    <div class="sk-ic si1"><i class="{{ cat.icon or 'fa-solid fa-code' }}"></i></div>
+                    <h3>{{ cat.category_name }}</h3>
+                </div>
+                {% for sk in cat.skills %}
+                <div class="sk-item">
+                    <div class="sk-meta"><span class="sk-name">{{ sk.name }}</span><span class="sk-pct">{{ sk.percentage }}%</span></div>
+                    <div class="sk-bar"><div class="sk-fill" data-w="{{ sk.percentage }}" style="width:0%; background:{{ sk.color or 'var(--cyan)' }}"></div></div>
+                    {% if sk.description %}<div style="font-size:0.75rem; color:var(--muted); margin-top:0.2rem;">{{ sk.description }}</div>{% endif %}
+                </div>
+                {% endfor %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- SECURITY TOOLS & PLATFORMS -->
+<section id="tools" style="background:linear-gradient(180deg,transparent,rgba(11,19,40,0.3),transparent);">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">05 Security Tools</div><h2 class="sec-title">Security Tools & Platforms</h2><div class="sec-rule"></div></div>
+        <div class="tools-grid reveal">
+            {% for tool in tools.items %}
+            <div class="tool-item">
+                <i class="{{ tool.icon or 'fa-solid fa-screwdriver-wrench' }}"></i>
+                <span>{{ tool.name }}</span>
+                <span class="tlvl">{{ tool.skill_level }}</span>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- PROJECTS SECTION (Dynamic Counter) -->
+<section id="projects">
+    <div class="container">
+        <div class="reveal">
+            <div class="sec-eye">06 Projects</div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
+                <h2 class="sec-title">Projects & Security Repositories</h2>
+                <div style="background:rgba(0,255,136,0.1); border:1px solid rgba(0,255,136,0.3); padding:0.4rem 1rem; border-radius:20px; color:var(--green); font-family:'JetBrains Mono',monospace; font-size:0.9rem;">
+                    <i class="fa-solid fa-terminal"></i> {{ projects.items | length }} Projects Completed
+                </div>
+            </div>
+            <div class="sec-rule"></div>
+        </div>
+        
+        <div class="proj-grid">
+            {% for proj in projects.items %}
+            <div class="proj-card card reveal {% if loop.index % 3 == 2 %}rv1{% elif loop.index % 3 == 0 %}rv2{% endif %}"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+                {% if proj.featured_image %}
+                <div style="margin:-1.5rem -1.5rem 1rem -1.5rem; max-height:160px; overflow:hidden; border-radius:12px 12px 0 0;">
+                    <img src="{{ proj.featured_image }}" alt="{{ proj.title }}" style="width:100%; height:160px; object-fit:cover;" />
+                </div>
+                {% endif %}
+                <div class="proj-hd">
+                    <div class="proj-num">// PROJECT {{ loop.index | string | padStart(2, '0') }}</div>
+                    <div class="proj-type">{{ proj.category | upper }}</div>
+                </div>
+                <div class="proj-title">{{ proj.title }}</div>
+                <p class="proj-desc">{{ proj.description }}</p>
+                <div class="proj-stack">
+                    {% for tech in proj.technologies %}
+                    <span class="stag">{{ tech }}</span>
+                    {% endfor %}
+                </div>
+                <div class="proj-links">
+                    {% if proj.github_link %}<a href="{{ proj.github_link }}" class="plink" target="_blank"><i class="fa-brands fa-github fa-xs"></i> GitHub</a>{% endif %}
+                    {% if proj.live_demo %}<a href="{{ proj.live_demo }}" class="plink" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i> Live Demo</a>{% endif %}
+                    {% if proj.pdf %}<a href="{{ proj.pdf }}" class="plink" download><i class="fa-solid fa-file-pdf fa-xs"></i> PDF</a>{% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- LABS & CTFS SECTION -->
+<section id="labs" style="background:linear-gradient(180deg,transparent,rgba(11,19,40,0.35),transparent);">
+    <div class="container">
+        <div class="reveal">
+            <div class="sec-eye">07 Labs & CTFs</div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
+                <h2 class="sec-title">Cybersecurity Labs & Write-ups</h2>
+                <div style="background:rgba(124,58,237,0.15); border:1px solid var(--violet); padding:0.4rem 1rem; border-radius:20px; color:var(--violet2); font-family:'JetBrains Mono',monospace; font-size:0.9rem;">
+                    <i class="fa-solid fa-vial"></i> {{ labs.items | length }} Hands-on Labs
+                </div>
+            </div>
+            <div class="sec-rule"></div>
+        </div>
+        <div class="proj-grid">
+            {% for lab in labs.items %}
+            <div class="proj-card card reveal {% if loop.index % 2 == 0 %}rv1{% endif %}"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+                <div class="proj-hd"><div class="proj-num">// LAB {{ loop.index | string | padStart(2, '0') }}</div><div class="proj-type">{{ lab.platform }}</div></div>
+                <div class="proj-title">{{ lab.name }}</div>
+                <p class="proj-desc">{{ lab.description }}</p>
+                <div class="proj-stack">
+                    {% for tool in lab.tools %}
+                    <span class="stag">{{ tool }}</span>
+                    {% endfor %}
+                </div>
+                {% if lab.writeup_url %}
+                <div class="proj-links" style="margin-top:1rem;"><a href="{{ lab.writeup_url }}" class="plink"><i class="fa-solid fa-book-open fa-xs"></i> Read Write-up</a></div>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- CYBERSECURITY DOMAINS -->
+<section id="domains">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">08 Domains</div><h2 class="sec-title">Cybersecurity Specializations</h2><div class="sec-rule"></div></div>
+        <div class="spec-grid">
+            {% for domain in domains.items %}
+            <div class="spec-card card reveal {% if loop.index % 4 == 2 %}rv1{% elif loop.index % 4 == 3 %}rv2{% elif loop.index % 4 == 0 %}rv3{% endif %}">
+                <div class="card-glow"></div>
+                <div class="spec-ic s1"><i class="{{ domain.icon or 'fa-solid fa-shield-halved' }}"></i></div>
+                <div class="spec-name">{{ domain.name }}</div>
+                <p style="font-size:0.82rem; color:var(--silver); margin:0.4rem 0;">{{ domain.description }}</p>
+                <div class="spec-lv lv-s">{{ domain.experience_level }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- LEARNING PLATFORMS -->
+<section id="platforms" style="background:linear-gradient(180deg,transparent,rgba(11,19,40,0.35),transparent);">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">09 Platforms</div><h2 class="sec-title">Learning Platforms & Badges</h2><div class="sec-rule"></div></div>
+        <div class="plat-grid">
+            {% for plat in platforms.items %}
+            <div class="plat-card card reveal {% if loop.index % 4 == 2 %}rv1{% elif loop.index % 4 == 3 %}rv2{% elif loop.index % 4 == 0 %}rv3{% endif %}">
+                <div class="card-glow"></div>
+                <div class="plat-ic pi-cisco"><i class="{{ plat.logo or 'fa-solid fa-graduation-cap' }}"></i></div>
+                <div class="plat-name">{{ plat.name }}</div>
+                <div class="plat-sub">{{ plat.courses_completed }} Courses · {{ plat.certificates }} Certs · {{ plat.hours_learned }} Hours</div>
+                <div class="plat-prog" style="margin-top:0.8rem;"><div class="pp" style="width:{{ plat.progress }}%"></div></div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- PROFESSIONAL EXPERIENCE -->
+<section id="experience">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">10 Experience</div><h2 class="sec-title">Professional Experience</h2><div class="sec-rule"></div></div>
+        <div class="exp-tl">
+            {% for exp in experience.items %}
+            <div class="exp-item reveal {% if loop.index % 2 == 0 %}rv1{% endif %}">
+                <div class="exp-dot"></div>
+                <div class="exp-inner card"><div class="card-glow"></div><div class="corner tl"></div>
+                    <div class="exp-hd">
+                        <div>
+                            <div class="exp-role">{{ exp.position }}</div>
+                            <div class="exp-co">{{ exp.company }} — {{ exp.employment_type }}</div>
+                        </div>
+                        <span class="exp-dur">{{ exp.start_date }} – {% if exp.current %}Present{% else %}{{ exp.end_date }}{% endif %}</span>
+                    </div>
+                    <p style="margin:0.5rem 0; color:var(--silver); font-size:0.92rem;">{{ exp.description }}</p>
+                    <ul class="exp-list">
+                        {% for resp in exp.responsibilities %}
+                        <li>{{ resp }}</li>
+                        {% endfor %}
+                    </ul>
+                    <div style="margin-top:0.8rem; display:flex; gap:0.4rem; flex-wrap:wrap;">
+                        {% for tech in exp.technologies %}
+                        <span class="stag">{{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- ACHIEVEMENTS -->
+<section id="achievements" style="background:linear-gradient(180deg,transparent,rgba(11,19,40,0.35),transparent);">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">11 Achievements</div><h2 class="sec-title">Achievements & Recognition</h2><div class="sec-rule"></div></div>
+        <div class="ach-grid">
+            {% for ach in achievements.items %}
+            <div class="ach-card card reveal {% if loop.index % 4 == 2 %}rv1{% elif loop.index % 4 == 3 %}rv2{% elif loop.index % 4 == 0 %}rv3{% endif %}">
+                <div class="card-glow"></div>
+                <div class="ach-ic ai-gold"><i class="{{ ach.icon or 'fa-solid fa-trophy' }}"></i></div>
+                <div class="ach-title">{{ ach.title }}</div>
+                <p class="ach-desc">{{ ach.description }} ({{ ach.date }})</p>
+                {% if ach.badge %}<span class="badge b-earned" style="margin-top:0.5rem; display:inline-block;">{{ ach.badge }}</span>{% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- LIVE SOC DASHBOARD -->
+<section id="dashboard">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">12 Dashboard</div><h2 class="sec-title">Security & Operations Dashboard</h2><div class="sec-rule"></div></div>
+        <div class="dash-grid">
+            <div class="card dash-card reveal"><div class="card-glow"></div><div class="corner tl"></div>
+                <div class="dash-lbl"><i class="fa-solid fa-chart-pie"></i> Real-time System Metrics</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1rem;">
+                    <div style="background:rgba(0,212,255,0.05); border:1px solid var(--border); padding:1rem; border-radius:8px; text-align:center;">
+                        <div style="font-size:1.8rem; font-weight:700; color:var(--cyan);">{{ projects.items | length }}</div>
+                        <div style="font-size:0.75rem; color:var(--muted); text-transform:uppercase;">Projects Completed</div>
+                    </div>
+                    <div style="background:rgba(0,255,136,0.05); border:1px solid rgba(0,255,136,0.2); padding:1rem; border-radius:8px; text-align:center;">
+                        <div style="font-size:1.8rem; font-weight:700; color:var(--green);">{{ certifications.items | length }}</div>
+                        <div style="font-size:0.75rem; color:var(--muted); text-transform:uppercase;">Certifications</div>
+                    </div>
+                    <div style="background:rgba(124,58,237,0.05); border:1px solid rgba(124,58,237,0.2); padding:1rem; border-radius:8px; text-align:center;">
+                        <div style="font-size:1.8rem; font-weight:700; color:var(--violet2);">{{ dashboard.learning_hours }}h</div>
+                        <div style="font-size:0.75rem; color:var(--muted); text-transform:uppercase;">Learning Hours</div>
+                    </div>
+                    <div style="background:rgba(255,183,0,0.05); border:1px solid rgba(255,183,0,0.2); padding:1rem; border-radius:8px; text-align:center;">
+                        <div style="font-size:1.8rem; font-weight:700; color:var(--amber);">{{ collections.posts | length }}</div>
+                        <div style="font-size:0.75rem; color:var(--muted); text-transform:uppercase;">Blog Articles</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card dash-card reveal rv1"><div class="card-glow"></div><div class="corner tl"></div>
+                <div class="dash-lbl"><i class="fa-solid fa-users"></i> Analytics & Traffic</div>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-top:1rem;">
+                    <div style="background:rgba(0,212,255,0.05); border:1px solid var(--border); padding:1rem; border-radius:8px; text-align:center;">
+                        <div style="font-size:1.8rem; font-weight:700; color:var(--white);">{{ dashboard.visitors }}</div>
+                        <div style="font-size:0.75rem; color:var(--muted); text-transform:uppercase;">Unique Visitors</div>
+                    </div>
+                    <div style="background:rgba(0,212,255,0.05); border:1px solid var(--border); padding:1rem; border-radius:8px; text-align:center;">
+                        <div style="font-size:1.8rem; font-weight:700; color:var(--white);">{{ dashboard.page_views }}</div>
+                        <div style="font-size:0.75rem; color:var(--muted); text-transform:uppercase;">Page Views</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card dash-card reveal rv2"><div class="card-glow"></div><div class="corner tl"></div>
+                <div class="dash-lbl"><i class="fa-solid fa-list-check"></i> Recent Activity Log</div>
+                <ul class="af">
+                    {% for act in dashboard.recent_activities %}
+                    <li class="af-item">
+                        <div class="af-dot" style="background:var(--cyan)"></div>
+                        <div>
+                            <div class="af-text">{{ act.title }}</div>
+                            <div class="af-time">{{ act.date }} • {{ act.details }}</div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CYBERSECURITY TIMELINE -->
+<section id="timeline" style="background:linear-gradient(180deg,transparent,rgba(11,19,40,0.35),transparent);">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">13 Timeline</div><h2 class="sec-title">Cybersecurity Journey Timeline</h2><div class="sec-rule"></div></div>
+        <div class="tl-wrap">
+            {% for item in timeline.items %}
+            <div class="tl-item reveal">
+                <div class="tl-dot"></div>
+                <div class="tl-date">{{ item.date or item.year }}</div>
+                <div class="tl-title">{{ item.title }}</div>
+                <div class="tl-body">{{ item.description }}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- RESUME DOWNLOAD SECTION -->
+<section id="resume">
+    <div class="container" style="text-align:center;">
+        <div class="reveal"><div class="sec-eye" style="justify-content:center;display:flex;">14 Resume</div><h2 class="sec-title">Download Resume</h2><div class="sec-rule" style="margin:0 auto 2.5rem;"></div></div>
+        <div class="res-wrap reveal">
+            <div class="card" style="padding:2.4rem;"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+                <div class="res-ic"><i class="fa-solid fa-file-shield"></i></div>
+                <div class="res-title">{{ settings.author }} — Security CV</div>
+                <p class="res-desc">{{ resume.description }}</p>
+                <div style="font-size:0.85rem; color:var(--muted); margin-bottom:1.2rem;">Version: {{ resume.version }} • Last Updated: {{ resume.date }}</div>
+                <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+                    <a href="{{ resume.pdf_file }}" download class="res-dl"><i class="fa-solid fa-file-pdf fa-xs"></i> Download PDF</a>
+                    {% if resume.docx_file %}
+                    <a href="{{ resume.docx_file }}" download class="res-dl" style="background:var(--panel); border:1px solid var(--border2);"><i class="fa-solid fa-file-word fa-xs"></i> Download DOCX</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact" style="background:linear-gradient(180deg,transparent,rgba(11,19,40,0.35),transparent);">
+    <div class="container">
+        <div class="reveal"><div class="sec-eye">15 Contact</div><h2 class="sec-title">Get In Touch</h2><div class="sec-rule"></div></div>
+        <div class="con-grid">
+            <div class="reveal">
+                <div class="con-title">Open for Opportunities</div>
+                <p class="con-desc">Actively seeking SOC analyst roles, penetration testing internships, cybersecurity research collaborations, and security engineering positions.</p>
+                <div class="con-item"><div class="ci-ic"><i class="fa-solid fa-envelope"></i></div><div><div class="ci-lbl">Email</div><div class="ci-val"><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></div></div></div>
+                <div class="con-item"><div class="ci-ic"><i class="fa-solid fa-phone"></i></div><div><div class="ci-lbl">Phone</div><div class="ci-val">{{ contact.phone }}</div></div></div>
+                <div class="con-item"><div class="ci-ic"><i class="fa-solid fa-globe"></i></div><div><div class="ci-lbl">Website / Portfolio</div><div class="ci-val"><a href="{{ contact.website }}" target="_blank">{{ contact.website }}</a></div></div></div>
+                <div class="con-item"><div class="ci-ic"><i class="fa-solid fa-location-dot"></i></div><div><div class="ci-lbl">Location</div><div class="ci-val">{{ contact.location }}</div></div></div>
+                <div class="con-item"><div class="ci-ic"><i class="fa-solid fa-clock"></i></div><div><div class="ci-lbl">Timezone & Hours</div><div class="ci-val">{{ contact.timezone }} ({{ contact.working_hours }})</div></div></div>
+                
+                <div class="soc-row" style="margin-top:1.5rem;">
+                    {% if contact.linkedin %}<a href="{{ contact.linkedin }}" class="soc-btn" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>{% endif %}
+                    {% if contact.github %}<a href="{{ contact.github }}" class="soc-btn" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>{% endif %}
+                    {% if contact.x %}<a href="{{ contact.x }}" class="soc-btn" target="_blank" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>{% endif %}
+                    {% if contact.youtube %}<a href="{{ contact.youtube }}" class="soc-btn" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>{% endif %}
+                    <a href="mailto:{{ contact.email }}" class="soc-btn" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                </div>
+            </div>
+
+            <form class="con-form reveal rv1" action="{{ contact.contact_form_endpoint or '#' }}" method="POST" onsubmit="handleForm(event)">
+                <div class="fg"><label>Your Name</label><input type="text" name="name" id="cn" placeholder="Jane Doe" required /></div>
+                <div class="fg"><label>Email Address</label><input type="email" name="email" id="ce" placeholder="jane@organization.com" required /></div>
+                <div class="fg"><label>Organization</label><input type="text" name="organization" id="co" placeholder="Company / University" /></div>
+                <div class="fg"><label>Inquiry Type</label>
+                    <select name="type" id="ct">
+                        <option value="">Select inquiry...</option>
+                        <option>SOC / Security Position</option>
+                        <option>Internship / Opportunity</option>
+                        <option>Research Collaboration</option>
+                        <option>General Message</option>
+                    </select>
+                </div>
+                <div class="fg"><label>Message</label><textarea name="message" id="cm" placeholder="How can we collaborate?" required></textarea></div>
+                <button type="submit" class="form-btn"><i class="fa-solid fa-paper-plane fa-xs"></i> Send Message</button>
+                <div class="form-ok" id="formOk"><i class="fa-solid fa-circle-check"></i> Thank you! Message submitted successfully.</div>
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- FOOTER -->
+<footer style="padding:2.5rem 0; border-top:1px solid var(--border); text-align:center; font-size:0.88rem; color:var(--muted);">
+    <div class="container">
+        <div style="font-family:'Space Grotesk',sans-serif; font-size:1.2rem; font-weight:700; color:var(--cyan); margin-bottom:0.5rem;">
+            {{ settings.logo }}
+        </div>
+        <div>{{ settings.footer_text }}</div>
+        <div style="margin-top:0.5rem;">{{ settings.copyright }}</div>
+    </div>
+</footer>
+
+<script>
+// LOADER
+const statuses = ['Initializing security modules...', 'Loading profile data...', 'Establishing secure connection...', 'Verifying credentials...', 'Rendering interface...', 'System ready.'];
+let si = 0;
+const lstat = document.getElementById('lstat');
+const sint = setInterval(() => { if (si < statuses.length - 1) { si++; lstat.textContent = statuses[si]; } }, 350);
+window.addEventListener('load', () => {
+    clearInterval(sint);
+    lstat.textContent = 'System ready.';
+    setTimeout(() => document.getElementById('loader').classList.add('hide'), 1200);
+});
+
+// HERO CANVAS
+(() => {
+    const c = document.getElementById('hero-canvas'), ctx = c.getContext('2d');
+    let W, H, nodes = [];
+    const N = 52;
+    function resize() { W = c.width = c.offsetWidth; H = c.height = c.offsetHeight; }
+    window.addEventListener('resize', resize);
+    resize();
+    for (let i = 0; i < N; i++) nodes.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .38, vy: (Math.random() - .5) * .38, r: Math.random() * 1.7 + 1, p: Math.random() * Math.PI * 2, t: Math.random() > .72 ? 'v' : 'c' });
+    function draw() {
+        ctx.clearRect(0, 0, W, H);
+        nodes.forEach(n => { n.x += n.vx; n.y += n.vy; n.p += .017; if (n.x < 0 || n.x > W) n.vx *= -1; if (n.y < 0 || n.y > H) n.vy *= -1; });
+        for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) {
+            const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y, d = Math.sqrt(dx * dx + dy * dy);
+            if (d < 175) {
+                const a = (1 - d / 175) * .22;
+                ctx.strokeStyle = nodes[i].t === 'c' ? `rgba(0,212,255,${a})` : `rgba(167,139,250,${a})`;
+                ctx.lineWidth = .55; ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y); ctx.stroke();
+            }
+        }
+        nodes.forEach(n => {
+            const p = .5 + .5 * Math.sin(n.p);
+            ctx.beginPath(); ctx.arc(n.x, n.y, n.r * (.65 + .35 * p), 0, Math.PI * 2);
+            ctx.fillStyle = n.t === 'c' ? `rgba(0,212,255,${p*.75})` : `rgba(167,139,250,${p*.65})`;
+            ctx.fill();
+        });
+        requestAnimationFrame(draw);
+    }
+    draw();
+})();
+
+// NAV HIGHLIGHTING & MOBILE NAV
+window.addEventListener('scroll', () => {
+    const secs = document.querySelectorAll('section[id]');
+    const links = document.querySelectorAll('.nav-links a');
+    let cur = '';
+    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 130) cur = s.id; });
+    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '/#' + cur || a.getAttribute('href') === '#' + cur));
+});
+document.getElementById('ham').addEventListener('click', () => document.getElementById('mobNav').classList.toggle('open'));
+document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => document.getElementById('mobNav').classList.remove('open')));
+
+// HERO ROLE TYPEWRITER
+const roles = {{ hero.rotating_job_titles | dump | safe }};
+let ri = 0;
+const roleEl = document.getElementById('heroRole');
+if (roleEl && roles.length > 0) {
+    setInterval(() => {
+        roleEl.style.opacity = '0';
+        roleEl.style.transform = 'translateY(-10px)';
+        setTimeout(() => {
+            ri = (ri + 1) % roles.length;
+            roleEl.textContent = roles[ri] + '_';
+            roleEl.style.transition = 'opacity .4s,transform .4s';
+            roleEl.style.opacity = '1';
+            roleEl.style.transform = 'none';
+        }, 300);
+    }, 2800);
+}
+
+// SCROLL REVEAL & SKILL BARS
+const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: .1 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+const sobs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+        if (e.isIntersecting) {
+            e.target.querySelectorAll('.sk-fill[data-w]').forEach(b => {
+                setTimeout(() => { b.style.width = b.dataset.w + '%'; }, 200);
+            });
+            sobs.unobserve(e.target);
+        }
+    });
+}, { threshold: .2 });
+document.querySelectorAll('.card').forEach(c => { if (c.querySelector('.sk-fill')) sobs.observe(c); });
+
+// CONTACT FORM HANDLER
+function handleForm(e) {
+    const endpoint = "{{ contact.contact_form_endpoint }}";
+    if (!endpoint || endpoint === '#' || endpoint === '') {
+        e.preventDefault();
+        const txt = `Name: ${document.getElementById('cn').value}\nEmail: ${document.getElementById('ce').value}\nOrg: ${document.getElementById('co').value}\nType: ${document.getElementById('ct').value}\n\nMessage:\n${document.getElementById('cm').value}`;
+        navigator.clipboard.writeText(txt).catch(() => {});
+        document.getElementById('formOk').style.display = 'block';
+        e.target.reset();
+    }
+}
+</script>
+</body>
+</html>

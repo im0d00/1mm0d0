@@ -1,0 +1,44 @@
+{
+  "items": [
+    {
+      "title": "Cisco Learn-A-Thon 2026 Achievement Award",
+      "description": "Recognized by Cisco Networking Academy for exceptional performance and completion speed across advanced networking & security pathways.",
+      "date": "2026-03-01",
+      "badge": "Gold Award",
+      "icon": "fa-solid fa-trophy",
+      "image": "",
+      "certificate": "",
+      "category": "Award"
+    },
+    {
+      "title": "DFIR Training Specialist Completion",
+      "description": "Graduated from BlueCapeSecurity's Digital Forensics & Incident Response intensive practical program.",
+      "date": "2026-04-01",
+      "badge": "Specialist",
+      "icon": "fa-solid fa-microscope",
+      "image": "",
+      "certificate": "",
+      "category": "Certification"
+    },
+    {
+      "title": "BSc Computer Science Graduation",
+      "description": "Successfully completed Bachelor of Science degree at University of Peshawar with focus on computer networks and information security.",
+      "date": "2025-06-15",
+      "badge": "Academic Degree",
+      "icon": "fa-solid fa-graduation-cap",
+      "image": "",
+      "certificate": "",
+      "category": "Academic"
+    },
+    {
+      "title": "Co-Founded Lizzdo.com Platform",
+      "description": "Established digital technology operations platform serving 100+ clients across international markets for 7+ years.",
+      "date": "2019-01-01",
+      "badge": "Entrepreneurship",
+      "icon": "fa-solid fa-rocket",
+      "image": "",
+      "certificate": "",
+      "category": "Career"
+    }
+  ]
+}

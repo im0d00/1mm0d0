@@ -1,0 +1,166 @@
+---
+layout: layouts/base.njk
+---
+<main class="container">
+    <article class="article-hero">
+        <div class="breadcrumb">
+            <a href="/"><i class="fa-solid fa-house"></i></a>
+            <span>/</span>
+            <a href="/blog">Blog</a>
+            <span>/</span>
+            <span style="color:var(--white);">{{ title }}</span>
+        </div>
+
+        <div class="article-layout">
+            
+            <!-- Main Content -->
+            <div class="article-main">
+                <header class="article-header">
+                    <div class="article-cats">
+                        {% for cat in categories %}
+                        <a href="/blog?category={{ cat | urlencode }}" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> {{ cat }}</a>
+                        {% endfor %}
+                    </div>
+                    
+                    <h1 class="article-title">{{ title }}</h1>
+                    
+                    {% if subtitle %}
+                    <p class="article-subtitle">{{ subtitle }}</p>
+                    {% endif %}
+                    
+                    <div class="article-meta">
+                        <div class="article-meta-item">
+                            <i class="fa-regular fa-calendar"></i>
+                            <span>Published: <strong>{{ date | readableDate }}</strong></span>
+                        </div>
+                        {% if readingTime %}
+                        <div class="article-meta-item">
+                            <i class="fa-regular fa-clock"></i>
+                            <span>Read time: <strong>{{ readingTime }} min</strong></span>
+                        </div>
+                        {% endif %}
+                        <div class="article-meta-item">
+                            <i class="fa-solid fa-terminal"></i>
+                            <span>Author: <strong>{{ author }}</strong></span>
+                        </div>
+                    </div>
+
+                    {% if tags %}
+                    <div class="article-tags">
+                        {% for tag in tags %}
+                        <span class="tag tag-tut">#{{ tag }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </header>
+
+                <div class="article-body">
+                    {{ content | safe }}
+                </div>
+
+                <div class="social-share">
+                    <span class="share-label">Share article</span>
+                    <a href="https://twitter.com/intent/tweet?text={{ title | urlencode }}&url=https://aimadulislam.dpdns.org{{ page.url }}" target="_blank" rel="noopener" class="share-btn twitter" aria-label="Share on Twitter"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://aimadulislam.dpdns.org{{ page.url }}&title={{ title | urlencode }}" target="_blank" rel="noopener" class="share-btn linkedin" aria-label="Share on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <button class="share-btn copy-url" aria-label="Copy Link" id="copy-url-btn" data-url="https://aimadulislam.dpdns.org{{ page.url }}"><i class="fa-solid fa-link"></i></button>
+                </div>
+
+                <!-- Navigation between posts -->
+                {% set previousPost = collections.posts | getPreviousCollectionItem(page) %}
+                {% set nextPost = collections.posts | getNextCollectionItem(page) %}
+                <nav class="article-nav">
+                    {% if previousPost %}
+                    <a href="{{ previousPost.url }}" class="article-nav-link prev">
+                        <span class="article-nav-dir"><i class="fa-solid fa-angle-left"></i> Previous Post</span>
+                        <div class="article-nav-title">{{ previousPost.data.title }}</div>
+                    </a>
+                    {% else %}
+                    <div></div>
+                    {% endif %}
+                    
+                    {% if nextPost %}
+                    <a href="{{ nextPost.url }}" class="article-nav-link next">
+                        <span class="article-nav-dir">Next Post <i class="fa-solid fa-angle-right"></i></span>
+                        <div class="article-nav-title">{{ nextPost.data.title }}</div>
+                    </a>
+                    {% endif %}
+                </nav>
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-widget card">
+                    <h3 class="widget-title"><i class="fa-solid fa-fire"></i> Recent Articles</h3>
+                    <div class="sidebar-posts">
+                        {% set count = 0 %}
+                        {% for post in collections.posts %}
+                            {% if count < 4 and post.url != page.url %}
+                            <a href="{{ post.url }}" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    {{ post.data.emoji or '📄' }}
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">{{ post.data.title }}</h4>
+                                    <span class="sidebar-post-meta">{{ post.date | readableDate }}</span>
+                                </div>
+                            </a>
+                            {% set count = count + 1 %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <div class="sidebar-widget card">
+                    <h3 class="widget-title"><i class="fa-solid fa-envelope"></i> Terminal Feed</h3>
+                    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+                        <input type="email" class="newsletter-input" placeholder="root@localhost:~# _" required>
+                        <button type="submit" class="newsletter-btn">EXECUTE /SUBSCRIBE</button>
+                        <p class="newsletter-note">Get new tutorials and writeups directly in your inbox. No spam.</p>
+                    </form>
+                </div>
+            </aside>
+        </div>
+    </article>
+</main>
+
+<script>
+    // Copy URL button
+    document.getElementById('copy-url-btn')?.addEventListener('click', function() {
+        navigator.clipboard.writeText(this.dataset.url).then(() => {
+            const originalHtml = this.innerHTML;
+            this.innerHTML = '<i class="fa-solid fa-check"></i>';
+            this.classList.add('copied');
+            setTimeout(() => {
+                this.innerHTML = originalHtml;
+                this.classList.remove('copied');
+            }, 2000);
+        });
+    });
+
+    // Code block copy buttons
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const pre = this.parentElement.querySelector('pre');
+            if (!pre) return;
+            
+            navigator.clipboard.writeText(pre.innerText).then(() => {
+                const originalHtml = this.innerHTML;
+                this.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
+                this.classList.add('copied');
+                setTimeout(() => {
+                    this.innerHTML = originalHtml;
+                    this.classList.remove('copied');
+                }, 2000);
+            });
+        });
+    });
+
+    // Reading progress bar
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        const progress = document.getElementById('reading-progress');
+        if (progress) progress.style.width = scrolled + '%';
+    });
+</script>

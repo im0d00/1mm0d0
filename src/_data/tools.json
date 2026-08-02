@@ -1,0 +1,22 @@
+{
+  "items": [
+    { "name": "Wireshark", "category": "Packet Analysis", "icon": "fa-solid fa-fish", "logo": "", "skill_level": "Expert" },
+    { "name": "Nmap", "category": "Network Scanner", "icon": "fa-solid fa-radar", "logo": "", "skill_level": "Expert" },
+    { "name": "Cisco Packet Tracer", "category": "Network Simulation", "icon": "fa-solid fa-network-wired", "logo": "", "skill_level": "Expert" },
+    { "name": "Burp Suite", "category": "Web Security", "icon": "fa-solid fa-bug", "logo": "", "skill_level": "Advanced" },
+    { "name": "Metasploit", "category": "Penetration Testing", "icon": "fa-solid fa-skull", "logo": "", "skill_level": "Advanced" },
+    { "name": "Autopsy", "category": "Digital Forensics", "icon": "fa-solid fa-microscope", "logo": "", "skill_level": "Advanced" },
+    { "name": "Volatility", "category": "Memory Forensics", "icon": "fa-solid fa-memory", "logo": "", "skill_level": "Advanced" },
+    { "name": "FTK Imager", "category": "Disk Evidence", "icon": "fa-solid fa-hard-drive", "logo": "", "skill_level": "Advanced" },
+    { "name": "Python Security", "category": "Scripting", "icon": "fa-brands fa-python", "logo": "", "skill_level": "Advanced" },
+    { "name": "Linux CLI (Kali / Ubuntu)", "category": "OS Administration", "icon": "fa-brands fa-linux", "logo": "", "skill_level": "Expert" },
+    { "name": "Snort / Suricata", "category": "IDS / IPS", "icon": "fa-solid fa-shield-cat", "logo": "", "skill_level": "Intermediate" },
+    { "name": "Splunk / SIEM", "category": "Log Analysis", "icon": "fa-solid fa-chart-column", "logo": "", "skill_level": "Intermediate" },
+    { "name": "VirtualBox / VMware", "category": "Virtualization & Labs", "icon": "fa-solid fa-cubes", "logo": "", "skill_level": "Expert" },
+    { "name": "Docker", "category": "Containerization", "icon": "fa-brands fa-docker", "logo": "", "skill_level": "Intermediate" },
+    { "name": "John the Ripper / Hashcat", "category": "Password Auditing", "icon": "fa-solid fa-key", "logo": "", "skill_level": "Intermediate" },
+    { "name": "Hydra", "category": "Authentication Auditing", "icon": "fa-solid fa-unlock-keyhole", "logo": "", "skill_level": "Intermediate" },
+    { "name": "SQLMap", "category": "Database Security", "icon": "fa-solid fa-database", "logo": "", "skill_level": "Intermediate" },
+    { "name": "Gobuster / FFUF", "category": "Directory Enumeration", "icon": "fa-solid fa-folder-tree", "logo": "", "skill_level": "Advanced" }
+  ]
+}

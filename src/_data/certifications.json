@@ -1,0 +1,81 @@
+{
+  "items": [
+    {
+      "name": "Cisco Learn-A-Thon 2026 Achievement Award",
+      "provider": "Cisco Networking Academy",
+      "badge_image": "https://img.shields.io/badge/Cisco-Learn--A--Thon-00B4FF?style=for-the-badge&logo=cisco",
+      "provider_logo": "fa-solid fa-award",
+      "credential_id": "CSCO-LAT-2026-991A",
+      "verification_url": "https://netacad.com",
+      "issue_date": "2026-03-01",
+      "expiration_date": "Never",
+      "status": "Active"
+    },
+    {
+      "name": "Linux Essentials Certification",
+      "provider": "Cisco Networking Academy / LPI",
+      "badge_image": "https://img.shields.io/badge/Linux-Essentials-00FF88?style=for-the-badge&logo=linux",
+      "provider_logo": "fa-brands fa-linux",
+      "credential_id": "CSCO-LNX-8821B",
+      "verification_url": "https://netacad.com",
+      "issue_date": "2026-01-15",
+      "expiration_date": "Never",
+      "status": "Active"
+    },
+    {
+      "name": "Ethical Hacker Certification",
+      "provider": "Cisco Networking Academy",
+      "badge_image": "https://img.shields.io/badge/Cisco-Ethical_Hacker-7C3AED?style=for-the-badge&logo=cisco",
+      "provider_logo": "fa-solid fa-user-ninja",
+      "credential_id": "CSCO-EH-3301C",
+      "verification_url": "https://netacad.com",
+      "issue_date": "2026-02-10",
+      "expiration_date": "Never",
+      "status": "Active"
+    },
+    {
+      "name": "Digital Forensics & Incident Response (DFIR)",
+      "provider": "BlueCapeSecurity",
+      "badge_image": "https://img.shields.io/badge/BlueCape-DFIR-00D4FF?style=for-the-badge",
+      "provider_logo": "fa-solid fa-microscope",
+      "credential_id": "BCS-DFIR-2026-04",
+      "verification_url": "https://bluecapesecurity.com",
+      "issue_date": "2026-04-01",
+      "expiration_date": "Never",
+      "status": "Active"
+    },
+    {
+      "name": "Mastercard Cybersecurity Job Simulation",
+      "provider": "Mastercard / Forage",
+      "badge_image": "https://img.shields.io/badge/Mastercard-Cybersecurity-FFB700?style=for-the-badge&logo=mastercard",
+      "provider_logo": "fa-solid fa-shield-cat",
+      "credential_id": "FORAGE-MC-7729",
+      "verification_url": "https://theforage.com",
+      "issue_date": "2025-11-20",
+      "expiration_date": "Never",
+      "status": "Completed"
+    },
+    {
+      "name": "Networking Essentials Certification",
+      "provider": "Cisco Networking Academy",
+      "badge_image": "https://img.shields.io/badge/Cisco-Networking_Essentials-00D4FF?style=for-the-badge&logo=cisco",
+      "provider_logo": "fa-solid fa-network-wired",
+      "credential_id": "CSCO-NET-1029D",
+      "verification_url": "https://netacad.com",
+      "issue_date": "2025-08-14",
+      "expiration_date": "Never",
+      "status": "Active"
+    },
+    {
+      "name": "CompTIA Security+ (SY0-701)",
+      "provider": "CompTIA",
+      "badge_image": "https://img.shields.io/badge/CompTIA-Security%2B-FF3860?style=for-the-badge&logo=comptia",
+      "provider_logo": "fa-solid fa-shield-halved",
+      "credential_id": "COMP-SEC-701-PLAN",
+      "verification_url": "",
+      "issue_date": "2026-09-01",
+      "expiration_date": "",
+      "status": "In Progress"
+    }
+  ]
+}

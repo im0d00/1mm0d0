@@ -1,0 +1,35 @@
+{
+  "learning_hours": 710,
+  "visitors": 1420,
+  "page_views": 4890,
+  "recent_activities": [
+    {
+      "title": "Completed Digital Forensics DFIR Training",
+      "category": "Certification",
+      "date": "2026-04-01",
+      "icon": "fa-solid fa-microscope",
+      "details": "BlueCapeSecurity Certified in Incident Response"
+    },
+    {
+      "title": "Earned Cisco Learn-A-Thon 2026 Award",
+      "category": "Achievement",
+      "date": "2026-03-01",
+      "icon": "fa-solid fa-trophy",
+      "details": "Top performer recognition across NetAcad pathways"
+    },
+    {
+      "title": "Published Article: Nmap Complete Guide",
+      "category": "Blog Post",
+      "date": "2026-02-15",
+      "icon": "fa-solid fa-pen-nib",
+      "details": "Detailed guide on Nmap scripts and host discovery"
+    },
+    {
+      "title": "Deployed Splunk & Snort Home Lab",
+      "category": "Project",
+      "date": "2026-01-20",
+      "icon": "fa-solid fa-terminal",
+      "details": "Simulated live SOC log ingestion and rule alerts"
+    }
+  ]
+}

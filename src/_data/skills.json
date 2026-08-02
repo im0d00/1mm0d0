@@ -1,0 +1,49 @@
+{
+  "categories": [
+    {
+      "category_name": "Networking",
+      "icon": "fa-solid fa-network-wired",
+      "skills": [
+        { "name": "TCP/IP & OSI Model", "percentage": 92, "color": "#00D4FF", "icon": "fa-solid fa-layer-group", "description": "Protocol stack analysis, packet structures, header inspection" },
+        { "name": "Routing & Switching", "percentage": 88, "color": "#00D4FF", "icon": "fa-solid fa-route", "description": "VLANs, OSPF, BGP, Static routing, Cisco Packet Tracer" },
+        { "name": "Subnetting & IP Addressing", "percentage": 95, "color": "#00D4FF", "icon": "fa-solid fa-calculator", "description": "CIDR notation, VLSM, IPv4 & IPv6 address allocation" },
+        { "name": "DNS, DHCP & VPNs", "percentage": 90, "color": "#00D4FF", "icon": "fa-solid fa-server", "description": "Infrastructure services, IPsec & OpenVPN configurations" }
+      ]
+    },
+    {
+      "category_name": "Cybersecurity & Defenses",
+      "icon": "fa-solid fa-shield-halved",
+      "skills": [
+        { "name": "SOC & Log Analysis", "percentage": 85, "color": "#00FF88", "icon": "fa-solid fa-chart-line", "description": "SIEM, event correlation, syslog triage, incident logging" },
+        { "name": "Digital Forensics (DFIR)", "percentage": 88, "color": "#00FF88", "icon": "fa-solid fa-microscope", "description": "Disk image examination, memory forensics, chain of custody" },
+        { "name": "Packet Analysis (Wireshark)", "percentage": 90, "color": "#00FF88", "icon": "fa-solid fa-fish", "description": "Deep packet inspection, pcap carving, protocol anomaly detection" },
+        { "name": "Firewalls & IDS/IPS", "percentage": 82, "color": "#00FF88", "icon": "fa-solid fa-fire-flame-curved", "description": "Rule creation, Snort syntax, traffic filtering policies" }
+      ]
+    },
+    {
+      "category_name": "Offensive Security",
+      "icon": "fa-solid fa-user-ninja",
+      "skills": [
+        { "name": "Ethical Hacking Methodologies", "percentage": 84, "color": "#A78BFA", "icon": "fa-solid fa-skull-crossbones", "description": "Reconnaissance, scanning, exploitation, post-exploitation" },
+        { "name": "Nmap & Vulnerability Scanning", "percentage": 92, "color": "#A78BFA", "icon": "fa-solid fa-radar", "description": "Port scanning, NSE scripts, service enumeration" },
+        { "name": "Web Application Security", "percentage": 80, "color": "#A78BFA", "icon": "fa-solid fa-bug", "description": "OWASP Top 10, SQLi, XSS, CSRF, Burp Suite proxying" }
+      ]
+    },
+    {
+      "category_name": "Operating Systems & Linux",
+      "icon": "fa-brands fa-linux",
+      "skills": [
+        { "name": "Linux Systems Administration", "percentage": 90, "color": "#FFB700", "icon": "fa-brands fa-ubuntu", "description": "Bash scripting, file permissions, systemd, SSH, Kali Linux" },
+        { "name": "Windows Administration & AD", "percentage": 80, "color": "#FFB700", "icon": "fa-brands fa-windows", "description": "PowerShell, Event Viewer, Active Directory concepts" }
+      ]
+    },
+    {
+      "category_name": "Programming & Scripting",
+      "icon": "fa-solid fa-code",
+      "skills": [
+        { "name": "Python for Automation & Security", "percentage": 85, "color": "#00D4FF", "icon": "fa-brands fa-python", "description": "Socket programming, log parsers, Scapy, automation scripts" },
+        { "name": "Bash & Shell Scripting", "percentage": 88, "color": "#00D4FF", "icon": "fa-solid fa-terminal", "description": "CLI automation, log processing, cron tasks" }
+      ]
+    }
+  ]
+}

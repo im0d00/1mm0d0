@@ -1,0 +1,42 @@
+{
+  "items": [
+    {
+      "company": "Lizzdo.com",
+      "position": "Co-Founder & Operations Specialist",
+      "employment_type": "Full-time / Co-Founder",
+      "start_date": "2019-01-01",
+      "end_date": "Present",
+      "current": true,
+      "description": "Co-founded and managed a digital services platform delivering IT automation, cloud infrastructure, website management, and client security consulting.",
+      "technologies": ["Linux", "Cloud Automation", "DNS & Domain Security", "Web Administration", "Python"],
+      "responsibilities": [
+        "Oversee security posture and cloud hosting configurations for client sites",
+        "Implement basic DDoS mitigation, SSL management, and web application security",
+        "Manage international client communications and technology deployments"
+      ],
+      "achievements": [
+        "Scaled platform to serve 100+ international projects and clients over 7+ years"
+      ],
+      "company_logo": "fa-solid fa-rocket"
+    },
+    {
+      "company": "Security Lab & Research",
+      "position": "Cybersecurity & SOC Lab Researcher",
+      "employment_type": "Self-Directed / Hands-on Lab",
+      "start_date": "2024-06-01",
+      "end_date": "Present",
+      "current": true,
+      "description": "Configuring virtualized Security Operations Center (SOC) environments to analyze packet captures, malware behaviors, and SIEM event logs.",
+      "technologies": ["Wireshark", "Nmap", "Burp Suite", "Volatility", "Autopsy", "Splunk", "Snort"],
+      "responsibilities": [
+        "Capture and inspect network traffic to identify malicious patterns and unauthorized access attempts",
+        "Perform digital forensic investigations on compromised disk images and RAM captures",
+        "Document step-by-step CTF and lab write-ups on technical blog"
+      ],
+      "achievements": [
+        "Completed 50+ lab challenges across TryHackMe, HTB, and Blue Team Labs"
+      ],
+      "company_logo": "fa-solid fa-terminal"
+    }
+  ]
+}

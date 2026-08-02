@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building a Cybersecurity Home Lab on a Budget | Aimad Ul Islam</title>
+    <meta name="description" content="Cybersecurity Professional &amp; Technical Writer">
+    <meta name="theme-color" content="#080C1A">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/blog.css">
+    
+    <script>
+      // Apply theme early to prevent flash
+      (function() {
+        var localTheme = localStorage.getItem('aimad-theme');
+        if (localTheme === 'light' || (!localTheme && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="scan-line"></div>
+    <div id="reading-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="blog-nav">
+        <a href="/" class="nav-logo">AIMAD<span class="br">/</span>ISLAM<span class="nav-dot"></span></a>
+        
+        <ul class="nav-links">
+            <li><a href="/" >Portfolio</a></li>
+            <li><a href="/blog" class="active">Blog</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <div class="nav-status">
+                <span class="status-dot"></span>
+                <span class="status-text">SYSTEM_ONLINE</span>
+            </div>
+            <button class="dark-mode-btn" id="theme-toggle" aria-label="Toggle theme">
+                <i class="fa-regular fa-moon"></i>
+            </button>
+            <button class="hamburger" aria-label="Menu" aria-expanded="false" id="mobile-menu-btn">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobile-nav">
+        <a href="/">Portfolio</a>
+        <a href="/blog">Blog</a>
+    </div>
+
+    <main class="container">
+    <article class="article-hero">
+        <div class="breadcrumb">
+            <a href="/"><i class="fa-solid fa-house"></i></a>
+            <span>/</span>
+            <a href="/blog">Blog</a>
+            <span>/</span>
+            <span style="color:var(--white);">Building a Cybersecurity Home Lab on a Budget</span>
+        </div>
+
+        <div class="article-layout">
+            
+            <!-- Main Content -->
+            <div class="article-main">
+                <header class="article-header">
+                    <div class="article-cats">
+                        
+                        <a href="/blog?category=Cybersecurity" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Cybersecurity</a>
+                        
+                        <a href="/blog?category=Tutorials" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Tutorials</a>
+                        
+                        <a href="/blog?category=Personal%20Projects" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Personal Projects</a>
+                        
+                    </div>
+                    
+                    <h1 class="article-title">Building a Cybersecurity Home Lab on a Budget</h1>
+                    
+                    
+                    <p class="article-subtitle">Everything you need for a fully functional hacking and forensics lab — free or under $20.</p>
+                    
+                    
+                    <div class="article-meta">
+                        <div class="article-meta-item">
+                            <i class="fa-regular fa-calendar"></i>
+                            <span>Published: <strong>15 Jun 2026</strong></span>
+                        </div>
+                        
+                        <div class="article-meta-item">
+                            <i class="fa-regular fa-clock"></i>
+                            <span>Read time: <strong>10 min</strong></span>
+                        </div>
+                        
+                        <div class="article-meta-item">
+                            <i class="fa-solid fa-terminal"></i>
+                            <span>Author: <strong>Aimad Ul Islam</strong></span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="article-tags">
+                        
+                        <span class="tag tag-tut">#home-lab</span>
+                        
+                        <span class="tag tag-tut">#virtualbox</span>
+                        
+                        <span class="tag tag-tut">#lab-setup</span>
+                        
+                        <span class="tag tag-tut">#beginners</span>
+                        
+                        <span class="tag tag-tut">#free-tools</span>
+                        
+                    </div>
+                    
+                </header>
+
+                <div class="article-body">
+                    <h2 id="introduction" tabindex="-1">Introduction <a class="direct-link" href="#introduction" aria-hidden="true">#</a></h2>
+<p>One of the most common questions I get from people starting in cybersecurity is: <em>“Do I need expensive hardware to practise?”</em> The answer is a resounding <strong>no</strong>. With free software like VirtualBox and a handful of purpose‑built virtual machines, you can build a fully functional cybersecurity lab that rivals professional training environments — and it costs you absolutely nothing.</p>
+<p>In this guide, I’ll walk you through exactly what I use in my own lab. You’ll learn how to set up an attack machine (Kali Linux), a vulnerable target (Metasploitable), a web app for practice (DVWA), and even add DFIR tools for forensics and incident response. By the end, you’ll have a safe, isolated playground where you can experiment, break things, and learn without any risk.</p>
+<div class="callout callout-info">
+  <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Why a Lab?</div>
+    <div class="callout-body">A home lab is the safest place to learn offensive and defensive techniques. It’s fully under your control, and you never have to worry about accidentally scanning or attacking systems you don’t own.</div>
+  </div>
+</div>
+<h2 id="what-you-need" tabindex="-1">What You Need <a class="direct-link" href="#what-you-need" aria-hidden="true">#</a></h2>
+<p>Here’s the minimal hardware and software required. You probably already have everything on this list:</p>
+<ul>
+<li><strong>Computer</strong> with at least 8 GB of RAM (16 GB recommended) and a 64‑bit processor with virtualization support (VT‑x / AMD‑V).</li>
+<li><strong>50 GB</strong> of free disk space (more if you plan to store many VMs).</li>
+<li><strong>VirtualBox</strong> – free hypervisor available for Windows, macOS, and Linux.</li>
+<li><strong>Internet connection</strong> to download the VMs and tools.</li>
+<li><strong>Patience</strong> – the most important ingredient.</li>
+</ul>
+<h2 id="step-1-install-virtualbox" tabindex="-1">Step 1: Install VirtualBox <a class="direct-link" href="#step-1-install-virtualbox" aria-hidden="true">#</a></h2>
+<p>VirtualBox is the foundation of your lab. It’s open‑source and runs on all major operating systems.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Download & Install VirtualBox</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Go to: https://www.virtualbox.org/wiki/Downloads
+# Download the appropriate installer for your host OS
+# Run the installer and accept all defaults
+<h1 id="verify-installation-in-terminal-if-on-linux" tabindex="-1">Verify installation (in terminal, if on Linux): <a class="direct-link" href="#verify-installation-in-terminal-if-on-linux" aria-hidden="true">#</a></h1>
+<p>virtualbox --version</p>
+<h1 id="example-output-7-0-20r162988" tabindex="-1">Example output: 7.0.20r162988 <a class="direct-link" href="#example-output-7-0-20r162988" aria-hidden="true">#</a></h1>
+<h1 id="on-windows-you-can-check-via-where-virtualbox-or-open-virtualbox-from-the-start-menu" tabindex="-1">On Windows, you can check via 'where virtualbox' or open VirtualBox from the Start menu.</code></pre> <a class="direct-link" href="#on-windows-you-can-check-via-where-virtualbox-or-open-virtualbox-from-the-start-menu" aria-hidden="true">#</a></h1>
+</div>
+<h2 id="step-2-choose-your-attack-os-kali-linux" tabindex="-1">Step 2: Choose Your Attack OS (Kali Linux) <a class="direct-link" href="#step-2-choose-your-attack-os-kali-linux" aria-hidden="true">#</a></h2>
+<p>Kali Linux is the industry‑standard penetration testing distribution. Instead of a full ISO install, download the pre‑built VirtualBox appliance from the official Kali website – it’s ready to import.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Import Kali Linux VM</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># 1. Download the .ova file from: https://www.kali.org/get-kali/#kali-virtual-machines
+#    Choose "VirtualBox" (around 4 GB)
+<h1 id="2-in-virtualbox-go-to-file-import-appliance" tabindex="-1">2. In VirtualBox, go to File → Import Appliance <a class="direct-link" href="#2-in-virtualbox-go-to-file-import-appliance" aria-hidden="true">#</a></h1>
+<h1 id="select-the-ova-file-and-click-import" tabindex="-1">Select the .ova file and click Import <a class="direct-link" href="#select-the-ova-file-and-click-import" aria-hidden="true">#</a></h1>
+<h1 id="3-after-import-start-the-vm" tabindex="-1">3. After import, start the VM. <a class="direct-link" href="#3-after-import-start-the-vm" aria-hidden="true">#</a></h1>
+<h1 id="default-credentials-kali-kali" tabindex="-1">Default credentials: kali / kali <a class="direct-link" href="#default-credentials-kali-kali" aria-hidden="true">#</a></h1>
+<h1 id="4-immediately-change-the-default-password" tabindex="-1">4. Immediately change the default password: <a class="direct-link" href="#4-immediately-change-the-default-password" aria-hidden="true">#</a></h1>
+<p>passwd</p>
+<h1 id="5-update-the-system" tabindex="-1">5. Update the system: <a class="direct-link" href="#5-update-the-system" aria-hidden="true">#</a></h1>
+<p>sudo apt update &amp;&amp; sudo apt upgrade -y</code></pre></p>
+</div>
+<div class="callout callout-success">
+  <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Kali is Ready</div>
+    <div class="callout-body">You now have a full‑fledged offensive security platform with hundreds of tools pre‑installed – from Nmap and Metasploit to Burp Suite and Wireshark.</div>
+  </div>
+</div>
+<h2 id="step-3-add-vulnerable-targets" tabindex="-1">Step 3: Add Vulnerable Targets <a class="direct-link" href="#step-3-add-vulnerable-targets" aria-hidden="true">#</a></h2>
+<p>To practise attacks, you need a target that is deliberately vulnerable. Two of the best free options are <strong>Metasploitable 2</strong> and <strong>DVWA</strong>.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Set Up Metasploitable 2</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># 1. Download Metasploitable 2 from SourceForge:
+#    https://sourceforge.net/projects/metasploitable/
+<h1 id="2-extract-the-zip-file-inside-you-ll-find-a-vmdk-disk-file" tabindex="-1">2. Extract the ZIP file – inside you'll find a .vmdk disk file. <a class="direct-link" href="#2-extract-the-zip-file-inside-you-ll-find-a-vmdk-disk-file" aria-hidden="true">#</a></h1>
+<h1 id="3-in-virtualbox-create-a-new-vm-choose-linux-ubuntu-64-bit" tabindex="-1">3. In VirtualBox: create a new VM, choose &quot;Linux&quot; → &quot;Ubuntu (64-bit)&quot;. <a class="direct-link" href="#3-in-virtualbox-create-a-new-vm-choose-linux-ubuntu-64-bit" aria-hidden="true">#</a></h1>
+<h1 id="name-it-metasploitable2" tabindex="-1">Name it &quot;Metasploitable2&quot;. <a class="direct-link" href="#name-it-metasploitable2" aria-hidden="true">#</a></h1>
+<h1 id="ram-512-mb-is-enough" tabindex="-1">RAM: 512 MB is enough. <a class="direct-link" href="#ram-512-mb-is-enough" aria-hidden="true">#</a></h1>
+<h1 id="4-at-the-storage-step-select-the-vmdk-file-as-the-hard-disk" tabindex="-1">4. At the storage step, select the .vmdk file as the hard disk. <a class="direct-link" href="#4-at-the-storage-step-select-the-vmdk-file-as-the-hard-disk" aria-hidden="true">#</a></h1>
+<h1 id="5-network-set-adapter-to-host-only-see-next-section" tabindex="-1">5. Network: Set adapter to &quot;Host‑Only&quot; (see next section). <a class="direct-link" href="#5-network-set-adapter-to-host-only-see-next-section" aria-hidden="true">#</a></h1>
+<h1 id="6-boot-the-vm-default-credentials-msfadmin-msfadmin" tabindex="-1">6. Boot the VM. Default credentials: msfadmin / msfadmin. <a class="direct-link" href="#6-boot-the-vm-default-credentials-msfadmin-msfadmin" aria-hidden="true">#</a></h1>
+<h1 id="find-its-ip-address-with" tabindex="-1">Find its IP address with: <a class="direct-link" href="#find-its-ip-address-with" aria-hidden="true">#</a></h1>
+<p>ifconfig</code></pre></p>
+</div>
+<div class="code-block-wrap">
+  <span class="code-block-label">Install DVWA (Damn Vulnerable Web App)</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># On Kali, using Docker is the easiest way:
+sudo apt install docker.io -y
+sudo systemctl start docker
+sudo docker pull vulnerables/web-dvwa
+sudo docker run -d -p 80:80 vulnerables/web-dvwa
+<h1 id="then-open-firefox-in-kali-and-go-to" tabindex="-1">Then open Firefox in Kali and go to: <a class="direct-link" href="#then-open-firefox-in-kali-and-go-to" aria-hidden="true">#</a></h1>
+<h1 id="http-localhost-setup-php" tabindex="-1"><a href="http://localhost/setup.php">http://localhost/setup.php</a> <a class="direct-link" href="#http-localhost-setup-php" aria-hidden="true">#</a></h1>
+<h1 id="click-create-reset-database" tabindex="-1">Click &quot;Create / Reset Database&quot; <a class="direct-link" href="#click-create-reset-database" aria-hidden="true">#</a></h1>
+<h1 id="login-with-admin-password" tabindex="-1">Login with admin / password</code></pre> <a class="direct-link" href="#login-with-admin-password" aria-hidden="true">#</a></h1>
+</div>
+<h2 id="step-4-configure-the-network" tabindex="-1">Step 4: Configure the Network <a class="direct-link" href="#step-4-configure-the-network" aria-hidden="true">#</a></h2>
+<p>To keep your lab isolated from your main network (and the Internet), use <strong>Host‑Only networking</strong> in VirtualBox. This creates a private subnet between your host and the VMs, with no external access.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Set Up Host‑Only Adapter</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># 1. In VirtualBox, go to File → Host Network Manager.
+#    Create a new host‑only network (it usually gets IP range 192.168.56.0/24).
+<h1 id="2-for-each-vm-kali-metasploitable-etc-go-to" tabindex="-1">2. For each VM (Kali, Metasploitable, etc.), go to: <a class="direct-link" href="#2-for-each-vm-kali-metasploitable-etc-go-to" aria-hidden="true">#</a></h1>
+<h1 id="settings-network-adapter-1-attached-to-host-only-adapter" tabindex="-1">Settings → Network → Adapter 1 → Attached to: Host‑Only Adapter. <a class="direct-link" href="#settings-network-adapter-1-attached-to-host-only-adapter" aria-hidden="true">#</a></h1>
+<h1 id="3-start-all-vms-in-kali-check-its-ip" tabindex="-1">3. Start all VMs. In Kali, check its IP: <a class="direct-link" href="#3-start-all-vms-in-kali-check-its-ip" aria-hidden="true">#</a></h1>
+<p>ip a</p>
+<h1 id="4-test-connectivity-to-metasploitable-replace-with-its-ip" tabindex="-1">4. Test connectivity to Metasploitable (replace with its IP): <a class="direct-link" href="#4-test-connectivity-to-metasploitable-replace-with-its-ip" aria-hidden="true">#</a></h1>
+<p>ping 192.168.56.102 -c 4</code></pre></p>
+</div>
+<div class="callout callout-warn">
+  <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Never Use NAT for Practice</div>
+    <div class="callout-body">If you leave the network on NAT, your VMs will be able to reach the Internet – and your attack traffic could accidentally leak out. Always use Host‑Only to keep your experiments contained.</div>
+  </div>
+</div>
+<h2 id="step-5-install-dfir-and-analysis-tools" tabindex="-1">Step 5: Install DFIR &amp; Analysis Tools <a class="direct-link" href="#step-5-install-dfir-and-analysis-tools" aria-hidden="true">#</a></h2>
+<p>A good lab isn’t just for hacking – it’s also for learning defensive techniques. Install these free tools on your Kali VM to practise digital forensics and incident response.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Install DFIR Tools on Kali</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Volatility for memory forensics
+sudo apt install volatility -y
+<h1 id="autopsy-the-sleuth-kit-for-disk-forensics" tabindex="-1">Autopsy / The Sleuth Kit for disk forensics <a class="direct-link" href="#autopsy-the-sleuth-kit-for-disk-forensics" aria-hidden="true">#</a></h1>
+<p>sudo apt install autopsy sleuthkit -y</p>
+<h1 id="ftk-imager-download-from-accessdata-free-for-personal-use" tabindex="-1">FTK Imager (download from AccessData – free for personal use) <a class="direct-link" href="#ftk-imager-download-from-accessdata-free-for-personal-use" aria-hidden="true">#</a></h1>
+<h1 id="or-use-the-built-in-dd-for-raw-disk-images" tabindex="-1">Or use the built‑in 'dd' for raw disk images. <a class="direct-link" href="#or-use-the-built-in-dd-for-raw-disk-images" aria-hidden="true">#</a></h1>
+<h1 id="for-log-analysis-install-splunk-free" tabindex="-1">For log analysis, install Splunk Free: <a class="direct-link" href="#for-log-analysis-install-splunk-free" aria-hidden="true">#</a></h1>
+<h1 id="download-from-splunk-com-and-install-with-dpkg" tabindex="-1">Download from splunk.com and install with dpkg. <a class="direct-link" href="#download-from-splunk-com-and-install-with-dpkg" aria-hidden="true">#</a></h1>
+<h1 id="also-consider-installing-velociraptor-open-source-edr" tabindex="-1">Also consider installing Velociraptor (open‑source EDR): <a class="direct-link" href="#also-consider-installing-velociraptor-open-source-edr" aria-hidden="true">#</a></h1>
+<h1 id="follow-the-official-guide-at-velociraptor-velocidex-com" tabindex="-1">Follow the official guide at velociraptor.velocidex.com</code></pre> <a class="direct-link" href="#follow-the-official-guide-at-velociraptor-velocidex-com" aria-hidden="true">#</a></h1>
+</div>
+These tools will allow you to analyse memory dumps, recover deleted files, and parse logs – exactly what a SOC analyst does daily.
+<h2 id="step-6-start-practising" tabindex="-1">Step 6: Start Practising <a class="direct-link" href="#step-6-start-practising" aria-hidden="true">#</a></h2>
+<p>With your lab up and running, here are a few exercises to get you started:</p>
+<ul>
+<li><strong>Basic recon:</strong> Scan Metasploitable with Nmap: <code>nmap -sV 192.168.56.102</code></li>
+<li><strong>Exploit a service:</strong> Use Metasploit against the vsftpd backdoor (CVE‑2011‑2523).</li>
+<li><strong>Web app testing:</strong> Access DVWA and try SQL injection or XSS on the “Low” security level.</li>
+<li><strong>Forensics:</strong> Simulate a malware infection on a Windows VM, capture a memory dump, and analyse it with Volatility.</li>
+</ul>
+<div class="callout callout-success">
+  <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Your Lab is Ready</div>
+    <div class="callout-body">You now have a complete, free, and legal environment to practise everything from penetration testing to incident response. The best part? You can break, repair, and reconfigure it as many times as you want.</div>
+  </div>
+</div>
+<h2 id="next-steps-and-enhancements" tabindex="-1">Next Steps &amp; Enhancements <a class="direct-link" href="#next-steps-and-enhancements" aria-hidden="true">#</a></h2>
+<p>Once you’ve mastered the basics, consider these upgrades to expand your lab:</p>
+<ul>
+<li><strong>Add a Windows 10 VM</strong> – it’s useful for testing Windows‑specific exploits and practising AD attacks.</li>
+<li><strong>Set up a SIEM</strong> – install Wazuh or ELK to aggregate logs from your VMs.</li>
+<li><strong>Include a pfSense firewall</strong> – learn network segmentation and firewall rules.</li>
+<li><strong>Automate with Ansible</strong> – script the deployment of your lab machines.</li>
+<li><strong>Explore Cloud Labs</strong> – use AWS or Azure free tiers to practise cloud security.</li>
+</ul>
+<p>Building a home lab is a continuous process. Start small, add tools as you need them, and always remember: the goal is to learn, not to own the fanciest setup. Happy hacking!</p>
+
+                </div>
+
+                <div class="social-share">
+                    <span class="share-label">Share article</span>
+                    <a href="https://twitter.com/intent/tweet?text=Building%20a%20Cybersecurity%20Home%20Lab%20on%20a%20Budget&url=https://aimadulislam.dpdns.org/posts/home-lab-setup/" target="_blank" rel="noopener" class="share-btn twitter" aria-label="Share on Twitter"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://aimadulislam.dpdns.org/posts/home-lab-setup/&title=Building%20a%20Cybersecurity%20Home%20Lab%20on%20a%20Budget" target="_blank" rel="noopener" class="share-btn linkedin" aria-label="Share on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <button class="share-btn copy-url" aria-label="Copy Link" id="copy-url-btn" data-url="https://aimadulislam.dpdns.org/posts/home-lab-setup/"><i class="fa-solid fa-link"></i></button>
+                </div>
+
+                <!-- Navigation between posts -->
+                
+                
+                <nav class="article-nav">
+                    
+                    <a href="/posts/python-for-security/" class="article-nav-link prev">
+                        <span class="article-nav-dir"><i class="fa-solid fa-angle-left"></i> Previous Post</span>
+                        <div class="article-nav-title">Python for Hackers: Security Automation Scripts from Scratch</div>
+                    </a>
+                    
+                    
+                    
+                </nav>
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-widget card">
+                    <h3 class="widget-title"><i class="fa-solid fa-fire"></i> Recent Articles</h3>
+                    <div class="sidebar-posts">
+                        
+                        
+                            
+                            <a href="/posts/metasploitable-complete-guide/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    🎯
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">Metasploitable 2: The Ultimate Beginner&#39;s Guide to Exploitation</h4>
+                                    <span class="sidebar-post-meta">25 Jul 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                            <a href="/posts/kali-linux-setup-guide/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    🐉
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">Getting Started with Kali Linux: Complete Beginner Setup Guide</h4>
+                                    <span class="sidebar-post-meta">15 Jul 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                            <a href="/posts/nmap-complete-guide/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    🗺️
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">Nmap Deep Dive: From Port Scanning to Full Network Enumeration</h4>
+                                    <span class="sidebar-post-meta">10 Jul 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                            <a href="/posts/dfir-introduction/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    🔬
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">Digital Forensics &amp; Incident Response: A Hands-On Introduction</h4>
+                                    <span class="sidebar-post-meta">05 Jul 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                    </div>
+                </div>
+
+                <div class="sidebar-widget card">
+                    <h3 class="widget-title"><i class="fa-solid fa-envelope"></i> Terminal Feed</h3>
+                    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+                        <input type="email" class="newsletter-input" placeholder="root@localhost:~# _" required>
+                        <button type="submit" class="newsletter-btn">EXECUTE /SUBSCRIBE</button>
+                        <p class="newsletter-note">Get new tutorials and writeups directly in your inbox. No spam.</p>
+                    </form>
+                </div>
+            </aside>
+        </div>
+    </article>
+</main>
+
+<script>
+    // Copy URL button
+    document.getElementById('copy-url-btn')?.addEventListener('click', function() {
+        navigator.clipboard.writeText(this.dataset.url).then(() => {
+            const originalHtml = this.innerHTML;
+            this.innerHTML = '<i class="fa-solid fa-check"></i>';
+            this.classList.add('copied');
+            setTimeout(() => {
+                this.innerHTML = originalHtml;
+                this.classList.remove('copied');
+            }, 2000);
+        });
+    });
+
+    // Code block copy buttons
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const pre = this.parentElement.querySelector('pre');
+            if (!pre) return;
+            
+            navigator.clipboard.writeText(pre.innerText).then(() => {
+                const originalHtml = this.innerHTML;
+                this.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
+                this.classList.add('copied');
+                setTimeout(() => {
+                    this.innerHTML = originalHtml;
+                    this.classList.remove('copied');
+                }, 2000);
+            });
+        });
+    });
+
+    // Reading progress bar
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        const progress = document.getElementById('reading-progress');
+        if (progress) progress.style.width = scrolled + '%';
+    });
+</script>
+
+
+    <!-- Footer -->
+    <footer class="blog-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">AIMAD<span>/</span>ISLAM</div>
+                    <p class="footer-tagline">Offensive Security & Technical Writing. Securing the perimeter, one post at a time.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <a href="/">Portfolio</a>
+                    <a href="/blog">Blog</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <a href="https://linkedin.com/in/aimad-ul-islam" target="_blank" rel="noopener noreferrer">LinkedIn <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.6rem; margin-left:0.2rem;"></i></a>
+                    <a href="https://github.com/aimad-ul-islam" target="_blank" rel="noopener noreferrer">GitHub <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.6rem; margin-left:0.2rem;"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copy">© 2026 Aimad Ul Islam. All rights reserved.</div>
+                <div class="footer-socs">
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scroll-top" aria-label="Scroll to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <script>
+      // Basic Navigation & UI Interactions
+      document.addEventListener('DOMContentLoaded', () => {
+          // Mobile Menu
+          const menuBtn = document.getElementById('mobile-menu-btn');
+          const mobileNav = document.getElementById('mobile-nav');
+          if(menuBtn && mobileNav) {
+              menuBtn.addEventListener('click', () => {
+                  mobileNav.classList.toggle('open');
+              });
+          }
+
+          // Dark Mode Toggle
+          const themeToggle = document.getElementById('theme-toggle');
+          const html = document.documentElement;
+          
+          if(themeToggle) {
+              // Set initial icon
+              if(html.getAttribute('data-theme') === 'light') {
+                  themeToggle.innerHTML = '<i class="fa-regular fa-sun"></i>';
+              }
+              
+              themeToggle.addEventListener('click', () => {
+                  if (html.getAttribute('data-theme') === 'dark') {
+                      html.setAttribute('data-theme', 'light');
+                      localStorage.setItem('aimad-theme', 'light');
+                      themeToggle.innerHTML = '<i class="fa-regular fa-sun"></i>';
+                  } else {
+                      html.setAttribute('data-theme', 'dark');
+                      localStorage.setItem('aimad-theme', 'dark');
+                      themeToggle.innerHTML = '<i class="fa-regular fa-moon"></i>';
+                  }
+              });
+          }
+
+          // Nav Scroll Effect
+          const nav = document.querySelector('.blog-nav');
+          window.addEventListener('scroll', () => {
+              if (window.scrollY > 50) {
+                  nav.classList.add('scrolled');
+              } else {
+                  nav.classList.remove('scrolled');
+              }
+          });
+
+          // Scroll to Top
+          const scrollTopBtn = document.getElementById('scroll-top');
+          if(scrollTopBtn) {
+              window.addEventListener('scroll', () => {
+                  if (window.scrollY > 500) {
+                      scrollTopBtn.classList.add('visible');
+                  } else {
+                      scrollTopBtn.classList.remove('visible');
+                  }
+              });
+              scrollTopBtn.addEventListener('click', () => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+              });
+          }
+      });
+    </script>
+</body>
+</html>

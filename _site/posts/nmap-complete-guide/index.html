@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nmap Deep Dive: From Port Scanning to Full Network Enumeration | Aimad Ul Islam</title>
+    <meta name="description" content="Cybersecurity Professional &amp; Technical Writer">
+    <meta name="theme-color" content="#080C1A">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/blog.css">
+    
+    <script>
+      // Apply theme early to prevent flash
+      (function() {
+        var localTheme = localStorage.getItem('aimad-theme');
+        if (localTheme === 'light' || (!localTheme && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      })();
+    </script>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="scan-line"></div>
+    <div id="reading-progress"></div>
+
+    <!-- Navigation -->
+    <nav class="blog-nav">
+        <a href="/" class="nav-logo">AIMAD<span class="br">/</span>ISLAM<span class="nav-dot"></span></a>
+        
+        <ul class="nav-links">
+            <li><a href="/" >Portfolio</a></li>
+            <li><a href="/blog" class="active">Blog</a></li>
+        </ul>
+
+        <div class="nav-right">
+            <div class="nav-status">
+                <span class="status-dot"></span>
+                <span class="status-text">SYSTEM_ONLINE</span>
+            </div>
+            <button class="dark-mode-btn" id="theme-toggle" aria-label="Toggle theme">
+                <i class="fa-regular fa-moon"></i>
+            </button>
+            <button class="hamburger" aria-label="Menu" aria-expanded="false" id="mobile-menu-btn">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Nav -->
+    <div class="mobile-nav" id="mobile-nav">
+        <a href="/">Portfolio</a>
+        <a href="/blog">Blog</a>
+    </div>
+
+    <main class="container">
+    <article class="article-hero">
+        <div class="breadcrumb">
+            <a href="/"><i class="fa-solid fa-house"></i></a>
+            <span>/</span>
+            <a href="/blog">Blog</a>
+            <span>/</span>
+            <span style="color:var(--white);">Nmap Deep Dive: From Port Scanning to Full Network Enumeration</span>
+        </div>
+
+        <div class="article-layout">
+            
+            <!-- Main Content -->
+            <div class="article-main">
+                <header class="article-header">
+                    <div class="article-cats">
+                        
+                        <a href="/blog?category=Cybersecurity" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Cybersecurity</a>
+                        
+                        <a href="/blog?category=Networking" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Networking</a>
+                        
+                        <a href="/blog?category=Tutorials" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Tutorials</a>
+                        
+                    </div>
+                    
+                    <h1 class="article-title">Nmap Deep Dive: From Port Scanning to Full Network Enumeration</h1>
+                    
+                    
+                    <p class="article-subtitle">Master the most important tool in penetration testing — every flag, scan type, NSE script, output format, and professional methodology explained with real lab examples.</p>
+                    
+                    
+                    <div class="article-meta">
+                        <div class="article-meta-item">
+                            <i class="fa-regular fa-calendar"></i>
+                            <span>Published: <strong>10 Jul 2026</strong></span>
+                        </div>
+                        
+                        <div class="article-meta-item">
+                            <i class="fa-regular fa-clock"></i>
+                            <span>Read time: <strong>15 min</strong></span>
+                        </div>
+                        
+                        <div class="article-meta-item">
+                            <i class="fa-solid fa-terminal"></i>
+                            <span>Author: <strong>Aimad Ul Islam</strong></span>
+                        </div>
+                    </div>
+
+                    
+                    <div class="article-tags">
+                        
+                        <span class="tag tag-tut">#nmap</span>
+                        
+                        <span class="tag tag-tut">#port-scanning</span>
+                        
+                        <span class="tag tag-tut">#enumeration</span>
+                        
+                        <span class="tag tag-tut">#penetration-testing</span>
+                        
+                        <span class="tag tag-tut">#networking</span>
+                        
+                        <span class="tag tag-tut">#nse-scripts</span>
+                        
+                        <span class="tag tag-tut">#ethical-hacking</span>
+                        
+                    </div>
+                    
+                </header>
+
+                <div class="article-body">
+                    <h2 id="what-is-nmap" tabindex="-1">What is Nmap? <a class="direct-link" href="#what-is-nmap" aria-hidden="true">#</a></h2>
+<p>Nmap (Network Mapper) is the most widely used network scanning tool in the world. It was created by Gordon Lyon (Fyodor) in 1997 and has been actively developed ever since. Every penetration tester, network administrator, and security researcher uses it — and for good reason.</p>
+<p>Nmap does several things that are essential to security work:</p>
+<ul>
+<li>Discovers <strong>which hosts are alive</strong> on a network</li>
+<li>Finds <strong>which ports are open</strong> on those hosts</li>
+<li>Detects <strong>what services and versions</strong> are running</li>
+<li>Identifies the <strong>operating system</strong> of the target</li>
+<li>Runs <strong>automated scripts</strong> to detect vulnerabilities and misconfigurations</li>
+</ul>
+<div class="callout callout-warn">
+  <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Authorisation Required</div>
+    <div class="callout-body">Only scan systems you own or have <strong>explicit written permission</strong> to test. Scanning someone else's network without permission is illegal in most countries. All examples in this guide use Metasploitable 2 — a deliberately vulnerable VM you own.</div>
+  </div>
+</div>
+<h2 id="installing-nmap" tabindex="-1">Installing Nmap <a class="direct-link" href="#installing-nmap" aria-hidden="true">#</a></h2>
+<p>Nmap comes pre-installed on Kali Linux. If you're on another system, here's how to install it:</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Installation</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Kali Linux / Debian / Ubuntu:
+sudo apt install nmap -y
+<h1 id="centos-rhel-fedora" tabindex="-1">CentOS / RHEL / Fedora: <a class="direct-link" href="#centos-rhel-fedora" aria-hidden="true">#</a></h1>
+<p>sudo yum install nmap -y</p>
+<h1 id="macos-with-homebrew" tabindex="-1">macOS (with Homebrew): <a class="direct-link" href="#macos-with-homebrew" aria-hidden="true">#</a></h1>
+<p>brew install nmap</p>
+<h1 id="windows" tabindex="-1">Windows: <a class="direct-link" href="#windows" aria-hidden="true">#</a></h1>
+<h1 id="download-installer-from-https-nmap-org-download-html" tabindex="-1">Download installer from: <a href="https://nmap.org/download.html">https://nmap.org/download.html</a> <a class="direct-link" href="#download-installer-from-https-nmap-org-download-html" aria-hidden="true">#</a></h1>
+<h1 id="verify-installation" tabindex="-1">Verify installation: <a class="direct-link" href="#verify-installation" aria-hidden="true">#</a></h1>
+<p>nmap --version</p>
+<h1 id="expected-nmap-7-x-x-https-nmap-org" tabindex="-1">Expected: Nmap 7.x.x ( <a href="https://nmap.org">https://nmap.org</a> )</code></pre> <a class="direct-link" href="#expected-nmap-7-x-x-https-nmap-org" aria-hidden="true">#</a></h1>
+</div>
+<h2 id="basic-scan-types" tabindex="-1">Basic Scan Types <a class="direct-link" href="#basic-scan-types" aria-hidden="true">#</a></h2>
+<p>Nmap has multiple scan techniques. Each sends different types of packets and is suited to different situations. Understanding why each works — not just how to run it — is what separates a professional from someone who just copies commands.</p>
+<h3 id="syn-scan-the-default-and-most-common" tabindex="-1">SYN Scan — The Default &amp; Most Common <a class="direct-link" href="#syn-scan-the-default-and-most-common" aria-hidden="true">#</a></h3>
+<p>The SYN scan (also called a &quot;stealth scan&quot; or &quot;half-open scan&quot;) is Nmap's default when run as root. It sends a SYN packet — the first step of a TCP handshake — and waits for the response. It never completes the full handshake, which means it's faster and less likely to be logged than a full TCP connection.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">SYN Scan</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># SYN scan (requires root/sudo):
+sudo nmap -sS 192.168.56.102
+<h1 id="what-each-response-means" tabindex="-1">What each response means: <a class="direct-link" href="#what-each-response-means" aria-hidden="true">#</a></h1>
+<h1 id="syn-ack-received-port-is-open" tabindex="-1">SYN-ACK received → port is OPEN <a class="direct-link" href="#syn-ack-received-port-is-open" aria-hidden="true">#</a></h1>
+<h1 id="rst-received-port-is-closed" tabindex="-1">RST received     → port is CLOSED <a class="direct-link" href="#rst-received-port-is-closed" aria-hidden="true">#</a></h1>
+<h1 id="no-response-port-is-filtered-firewall-dropping-packets" tabindex="-1">No response      → port is FILTERED (firewall dropping packets) <a class="direct-link" href="#no-response-port-is-filtered-firewall-dropping-packets" aria-hidden="true">#</a></h1>
+<h1 id="icmp-unreachable-port-is-filtered" tabindex="-1">ICMP unreachable → port is FILTERED <a class="direct-link" href="#icmp-unreachable-port-is-filtered" aria-hidden="true">#</a></h1>
+<h1 id="example-output" tabindex="-1">Example output: <a class="direct-link" href="#example-output" aria-hidden="true">#</a></h1>
+<h1 id="port-state-service" tabindex="-1">PORT    STATE SERVICE <a class="direct-link" href="#port-state-service" aria-hidden="true">#</a></h1>
+<h1 id="22-tcp-open-ssh" tabindex="-1">22/tcp  open  ssh <a class="direct-link" href="#22-tcp-open-ssh" aria-hidden="true">#</a></h1>
+<h1 id="80-tcp-open-http" tabindex="-1">80/tcp  open  http <a class="direct-link" href="#80-tcp-open-http" aria-hidden="true">#</a></h1>
+<h1 id="443-tcp-closed-https" tabindex="-1">443/tcp closed https</code></pre> <a class="direct-link" href="#443-tcp-closed-https" aria-hidden="true">#</a></h1>
+</div>
+<h3 id="udp-scan" tabindex="-1">UDP Scan <a class="direct-link" href="#udp-scan" aria-hidden="true">#</a></h3>
+<p>UDP scanning is slower and less reliable than TCP scanning because UDP is connectionless — there's no handshake. But many critical services run on UDP: DNS (53), DHCP (67/68), SNMP (161), and NTP (123). Never skip UDP in a real engagement.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">UDP Scan</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># UDP scan (slow — be patient):
+sudo nmap -sU 192.168.56.102
+<h1 id="scan-only-most-common-udp-ports-faster" tabindex="-1">Scan only most common UDP ports (faster): <a class="direct-link" href="#scan-only-most-common-udp-ports-faster" aria-hidden="true">#</a></h1>
+<p>sudo nmap -sU --top-ports 100 192.168.56.102</p>
+<h1 id="combine-udp-tcp-syn-scan" tabindex="-1">Combine UDP + TCP SYN scan: <a class="direct-link" href="#combine-udp-tcp-syn-scan" aria-hidden="true">#</a></h1>
+<p>sudo nmap -sS -sU -p T:80,443,22,U:53,161,67 192.168.56.102</p>
+<h1 id="common-udp-ports-to-always-check" tabindex="-1">Common UDP ports to always check: <a class="direct-link" href="#common-udp-ports-to-always-check" aria-hidden="true">#</a></h1>
+<h1 id="53-dns" tabindex="-1">53   = DNS <a class="direct-link" href="#53-dns" aria-hidden="true">#</a></h1>
+<h1 id="67-dhcp" tabindex="-1">67   = DHCP <a class="direct-link" href="#67-dhcp" aria-hidden="true">#</a></h1>
+<h1 id="69-tftp" tabindex="-1">69   = TFTP <a class="direct-link" href="#69-tftp" aria-hidden="true">#</a></h1>
+<h1 id="123-ntp" tabindex="-1">123  = NTP <a class="direct-link" href="#123-ntp" aria-hidden="true">#</a></h1>
+<h1 id="161-snmp-often-misconfigured-dumps-full-system-info" tabindex="-1">161  = SNMP (often misconfigured, dumps full system info) <a class="direct-link" href="#161-snmp-often-misconfigured-dumps-full-system-info" aria-hidden="true">#</a></h1>
+<h1 id="500-ike-ipsec-vpn" tabindex="-1">500  = IKE/IPsec VPN</code></pre> <a class="direct-link" href="#500-ike-ipsec-vpn" aria-hidden="true">#</a></h1>
+</div>
+<div class="callout callout-info">
+  <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">SNMP on Port 161</div>
+    <div class="callout-body">If UDP port 161 is open, always follow up with: <code>snmpwalk -c public -v1 TARGET_IP</code> — SNMP with the default "public" community string can dump the entire system MIB including running processes, network interfaces, installed software, and user accounts.</div>
+  </div>
+</div>
+<h3 id="tcp-connect-scan" tabindex="-1">TCP Connect Scan <a class="direct-link" href="#tcp-connect-scan" aria-hidden="true">#</a></h3>
+<p>When you don't have root/sudo privileges, Nmap falls back to a TCP Connect scan. It completes the full three-way handshake, making it more detectable but usable without elevated privileges.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">TCP Connect Scan (no root needed)</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># TCP Connect scan (no sudo required):
+nmap -sT 192.168.56.102
+<h1 id="when-to-use-st" tabindex="-1">When to use -sT: <a class="direct-link" href="#when-to-use-st" aria-hidden="true">#</a></h1>
+<h1 id="you-dont-have-root-sudo" tabindex="-1">- You don't have root/sudo <a class="direct-link" href="#you-dont-have-root-sudo" aria-hidden="true">#</a></h1>
+<h1 id="scanning-through-proxies-syn-scan-doesnt-work-through-proxies" tabindex="-1">- Scanning through proxies (SYN scan doesn't work through proxies) <a class="direct-link" href="#scanning-through-proxies-syn-scan-doesnt-work-through-proxies" aria-hidden="true">#</a></h1>
+<h1 id="when-you-need-reliable-open-closed-results" tabindex="-1">- When you need reliable open/closed results</code></pre> <a class="direct-link" href="#when-you-need-reliable-open-closed-results" aria-hidden="true">#</a></h1>
+</div>
+<h2 id="host-discovery-finding-live-hosts" tabindex="-1">Host Discovery — Finding Live Hosts <a class="direct-link" href="#host-discovery-finding-live-hosts" aria-hidden="true">#</a></h2>
+<p>Before scanning ports, you need to know which hosts are alive. Nmap's host discovery phase sends probes to figure out who is online without scanning every port.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Host Discovery</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Ping sweep — find alive hosts in a subnet:
+nmap -sn 192.168.56.0/24
+# Output: Hosts that responded, their MACs and vendor names
+<h1 id="faster-with-fping" tabindex="-1">Faster with fping: <a class="direct-link" href="#faster-with-fping" aria-hidden="true">#</a></h1>
+<p>fping -a -g 192.168.56.0/24 2&gt;/dev/null</p>
+<h1 id="disable-ping-scan-even-if-host-blocks-icmp" tabindex="-1">Disable ping (scan even if host blocks ICMP): <a class="direct-link" href="#disable-ping-scan-even-if-host-blocks-icmp" aria-hidden="true">#</a></h1>
+<p>nmap -Pn 192.168.56.102</p>
+<h1 id="use-when-firewall-blocks-ping-but-ports-may-still-be-open" tabindex="-1">Use when: firewall blocks ping but ports may still be open <a class="direct-link" href="#use-when-firewall-blocks-ping-but-ports-may-still-be-open" aria-hidden="true">#</a></h1>
+<h1 id="arp-scan-most-reliable-on-local-network" tabindex="-1">ARP scan (most reliable on local network): <a class="direct-link" href="#arp-scan-most-reliable-on-local-network" aria-hidden="true">#</a></h1>
+<p>sudo nmap -PR 192.168.56.0/24</p>
+<h1 id="tcp-syn-ping-on-specific-ports" tabindex="-1">TCP SYN ping on specific ports: <a class="direct-link" href="#tcp-syn-ping-on-specific-ports" aria-hidden="true">#</a></h1>
+<p>nmap -PS80,443,22 192.168.56.0/24</p>
+<h1 id="multiple-hosts-scan-a-list-from-a-file" tabindex="-1">Multiple hosts — scan a list from a file: <a class="direct-link" href="#multiple-hosts-scan-a-list-from-a-file" aria-hidden="true">#</a></h1>
+<p>nmap -sn -iL targets.txt</p>
+<h1 id="exclude-specific-hosts" tabindex="-1">Exclude specific hosts: <a class="direct-link" href="#exclude-specific-hosts" aria-hidden="true">#</a></h1>
+<p>nmap -sn 192.168.56.0/24 --exclude 192.168.56.1</code></pre></p>
+</div>
+<h2 id="port-selection" tabindex="-1">Port Selection <a class="direct-link" href="#port-selection" aria-hidden="true">#</a></h2>
+<p>By default Nmap scans the top 1000 most common ports. That misses a lot. Here's how to control exactly which ports get scanned.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Port Selection Options</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Default: top 1000 ports
+nmap 192.168.56.102
+<h1 id="specific-ports" tabindex="-1">Specific ports: <a class="direct-link" href="#specific-ports" aria-hidden="true">#</a></h1>
+<p>nmap -p 22,80,443,3306,8080 192.168.56.102</p>
+<h1 id="port-range" tabindex="-1">Port range: <a class="direct-link" href="#port-range" aria-hidden="true">#</a></h1>
+<p>nmap -p 1-1024 192.168.56.102</p>
+<h1 id="all-65535-ports-thorough-takes-longer" tabindex="-1">ALL 65535 ports (thorough — takes longer): <a class="direct-link" href="#all-65535-ports-thorough-takes-longer" aria-hidden="true">#</a></h1>
+<p>nmap -p- 192.168.56.102</p>
+<h1 id="all-ports-with-speed-boost" tabindex="-1">All ports with speed boost: <a class="direct-link" href="#all-ports-with-speed-boost" aria-hidden="true">#</a></h1>
+<p>nmap -p- --min-rate 5000 192.168.56.102</p>
+<h1 id="top-n-most-common-ports" tabindex="-1">Top N most common ports: <a class="direct-link" href="#top-n-most-common-ports" aria-hidden="true">#</a></h1>
+<p>nmap --top-ports 100 192.168.56.102<br>
+nmap --top-ports 500 192.168.56.102</p>
+<h1 id="fast-scan-top-100-ports-only" tabindex="-1">Fast scan (top 100 ports only): <a class="direct-link" href="#fast-scan-top-100-ports-only" aria-hidden="true">#</a></h1>
+<p>nmap -F 192.168.56.102</p>
+<h1 id="specific-protocol-prefix" tabindex="-1">Specific protocol prefix: <a class="direct-link" href="#specific-protocol-prefix" aria-hidden="true">#</a></h1>
+<p>nmap -p T:80,443,U:53,161 192.168.56.102</p>
+<h1 id="t-tcp-u-udp" tabindex="-1">T: = TCP,  U: = UDP</code></pre> <a class="direct-link" href="#t-tcp-u-udp" aria-hidden="true">#</a></h1>
+</div>
+<div class="callout callout-info">
+  <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Professional Workflow: Two-Phase Scanning</div>
+    <div class="callout-body">In real engagements, run a fast all-port scan first to find open ports, then run a deep scan on only those ports. This is faster and more thorough than one slow full scan.</div>
+  </div>
+</div>
+<h2 id="service-and-version-detection" tabindex="-1">Service &amp; Version Detection <a class="direct-link" href="#service-and-version-detection" aria-hidden="true">#</a></h2>
+<p>Finding open ports is just the beginning. <code>-sV</code> tells you what software is running on each port and — critically — what version. This is how you find exploitable vulnerabilities: an outdated Apache, an ancient OpenSSH, a vulnerable vsftpd.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Service & Version Detection</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Service version detection:
+nmap -sV 192.168.56.102
+<h1 id="sample-output" tabindex="-1">Sample output: <a class="direct-link" href="#sample-output" aria-hidden="true">#</a></h1>
+<h1 id="port-state-service-version" tabindex="-1">PORT     STATE SERVICE  VERSION <a class="direct-link" href="#port-state-service-version" aria-hidden="true">#</a></h1>
+<h1 id="21-tcp-open-ftp-vsftpd-2-3-4-vulnerable-cve-2011-2523" tabindex="-1">21/tcp   open  ftp      vsftpd 2.3.4        ← VULNERABLE (CVE-2011-2523) <a class="direct-link" href="#21-tcp-open-ftp-vsftpd-2-3-4-vulnerable-cve-2011-2523" aria-hidden="true">#</a></h1>
+<h1 id="22-tcp-open-ssh-openssh-4-7p1-very-old" tabindex="-1">22/tcp   open  ssh      OpenSSH 4.7p1       ← Very old <a class="direct-link" href="#22-tcp-open-ssh-openssh-4-7p1-very-old" aria-hidden="true">#</a></h1>
+<h1 id="80-tcp-open-http-apache-httpd-2-2-8-very-old" tabindex="-1">80/tcp   open  http     Apache httpd 2.2.8  ← Very old <a class="direct-link" href="#80-tcp-open-http-apache-httpd-2-2-8-very-old" aria-hidden="true">#</a></h1>
+<h1 id="3306-tcp-open-mysql-mysql-5-0-51a-very-old" tabindex="-1">3306/tcp open  mysql    MySQL 5.0.51a       ← Very old <a class="direct-link" href="#3306-tcp-open-mysql-mysql-5-0-51a-very-old" aria-hidden="true">#</a></h1>
+<h1 id="5432-tcp-open-postgres-postgresql-8-3-0-very-old" tabindex="-1">5432/tcp open  postgres PostgreSQL 8.3.0    ← Very old <a class="direct-link" href="#5432-tcp-open-postgres-postgresql-8-3-0-very-old" aria-hidden="true">#</a></h1>
+<h1 id="intensity-levels-0-9-default-is-7" tabindex="-1">Intensity levels (0-9, default is 7): <a class="direct-link" href="#intensity-levels-0-9-default-is-7" aria-hidden="true">#</a></h1>
+<p>nmap -sV --version-intensity 9 192.168.56.102  # Most thorough<br>
+nmap -sV --version-intensity 0 192.168.56.102  # Lightest (version banner only)</p>
+<h1 id="version-light-faster-less-accurate" tabindex="-1">Version light (faster, less accurate): <a class="direct-link" href="#version-light-faster-less-accurate" aria-hidden="true">#</a></h1>
+<p>nmap -sV --version-light 192.168.56.102</p>
+<h1 id="version-all-try-every-probe" tabindex="-1">Version all (try every probe): <a class="direct-link" href="#version-all-try-every-probe" aria-hidden="true">#</a></h1>
+<p>nmap -sV --version-all 192.168.56.102</code></pre></p>
+</div>
+<h2 id="os-detection" tabindex="-1">OS Detection <a class="direct-link" href="#os-detection" aria-hidden="true">#</a></h2>
+<p>Nmap can fingerprint the operating system by analysing how it responds to specially crafted packets. OS detection is useful for understanding the target environment and narrowing down which exploits may apply.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">OS Detection</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># OS detection (requires root):
+sudo nmap -O 192.168.56.102
+<h1 id="sample-output-1" tabindex="-1">Sample output: <a class="direct-link" href="#sample-output-1" aria-hidden="true">#</a></h1>
+<h1 id="running-linux-2-6-x" tabindex="-1">Running: Linux 2.6.X <a class="direct-link" href="#running-linux-2-6-x" aria-hidden="true">#</a></h1>
+<h1 id="os-cpe-cpe-o-linux-linux-kernel-2-6" tabindex="-1">OS CPE: cpe:/o:linux:linux_kernel:2.6 <a class="direct-link" href="#os-cpe-cpe-o-linux-linux-kernel-2-6" aria-hidden="true">#</a></h1>
+<h1 id="os-details-linux-2-6-9-2-6-33" tabindex="-1">OS details: Linux 2.6.9 - 2.6.33 <a class="direct-link" href="#os-details-linux-2-6-9-2-6-33" aria-hidden="true">#</a></h1>
+<h1 id="aggressive-os-detection-tries-harder" tabindex="-1">Aggressive OS detection (tries harder): <a class="direct-link" href="#aggressive-os-detection-tries-harder" aria-hidden="true">#</a></h1>
+<p>sudo nmap -O --osscan-guess 192.168.56.102</p>
+<h1 id="limit-os-detection-to-promising-targets" tabindex="-1">Limit OS detection to promising targets: <a class="direct-link" href="#limit-os-detection-to-promising-targets" aria-hidden="true">#</a></h1>
+<p>sudo nmap -O --osscan-limit 192.168.56.102</p>
+<h1 id="combined-service-os-detection" tabindex="-1">Combined service + OS detection: <a class="direct-link" href="#combined-service-os-detection" aria-hidden="true">#</a></h1>
+<p>sudo nmap -sV -O 192.168.56.102</code></pre></p>
+</div>
+<h2 id="nse-scripts-nmaps-secret-weapon" tabindex="-1">NSE Scripts — Nmap's Secret Weapon <a class="direct-link" href="#nse-scripts-nmaps-secret-weapon" aria-hidden="true">#</a></h2>
+<p>The Nmap Scripting Engine (NSE) is what elevates Nmap from a port scanner to a full reconnaissance and vulnerability assessment platform. NSE scripts are written in Lua and can automate virtually any network interaction — from grabbing banners to detecting specific CVEs.<br>
+Scripts are stored in <code>/usr/share/nmap/scripts/</code> on Kali Linux. There are over 600 built-in scripts.</p>
+<h3 id="default-scripts-sc" tabindex="-1">Default Scripts (-sC) <a class="direct-link" href="#default-scripts-sc" aria-hidden="true">#</a></h3>
+<p>The <code>-sC</code> flag runs the default script set — scripts that are safe, fast, and provide high-value information. Always use it.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Default Scripts</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Run default scripts:
+nmap -sC 192.168.56.102
+<h1 id="default-scripts-automatically-check-things-like" tabindex="-1">Default scripts automatically check things like: <a class="direct-link" href="#default-scripts-automatically-check-things-like" aria-hidden="true">#</a></h1>
+<h1 id="ssh-host-keys-and-algorithms" tabindex="-1">- SSH host keys and algorithms <a class="direct-link" href="#ssh-host-keys-and-algorithms" aria-hidden="true">#</a></h1>
+<h1 id="http-server-headers-and-title" tabindex="-1">- HTTP server headers and title <a class="direct-link" href="#http-server-headers-and-title" aria-hidden="true">#</a></h1>
+<h1 id="ftp-anonymous-login-allowed" tabindex="-1">- FTP anonymous login allowed? <a class="direct-link" href="#ftp-anonymous-login-allowed" aria-hidden="true">#</a></h1>
+<h1 id="ssl-certificate-details" tabindex="-1">- SSL certificate details <a class="direct-link" href="#ssl-certificate-details" aria-hidden="true">#</a></h1>
+<h1 id="smb-shares-and-os-information" tabindex="-1">- SMB shares and OS information <a class="direct-link" href="#smb-shares-and-os-information" aria-hidden="true">#</a></h1>
+<h1 id="dns-zone-transfer-attempts" tabindex="-1">- DNS zone transfer attempts <a class="direct-link" href="#dns-zone-transfer-attempts" aria-hidden="true">#</a></h1>
+<h1 id="default-credentials-on-common-services" tabindex="-1">- Default credentials on common services <a class="direct-link" href="#default-credentials-on-common-services" aria-hidden="true">#</a></h1>
+<h1 id="combined-with-version-detection-use-this-always" tabindex="-1">Combined with version detection (use this always): <a class="direct-link" href="#combined-with-version-detection-use-this-always" aria-hidden="true">#</a></h1>
+<p>nmap -sV -sC 192.168.56.102</p>
+<h1 id="sample-sc-output-for-ftp-port-21" tabindex="-1">Sample -sC output for FTP port 21: <a class="direct-link" href="#sample-sc-output-for-ftp-port-21" aria-hidden="true">#</a></h1>
+<h1 id="port-state-service-1" tabindex="-1">PORT   STATE SERVICE <a class="direct-link" href="#port-state-service-1" aria-hidden="true">#</a></h1>
+<h1 id="21-tcp-open-ftp" tabindex="-1">21/tcp open  ftp <a class="direct-link" href="#21-tcp-open-ftp" aria-hidden="true">#</a></h1>
+<h1 id="ftp-anon-anonymous-ftp-login-allowed-ftp-code-230" tabindex="-1">| ftp-anon: Anonymous FTP login allowed (FTP code 230) <a class="direct-link" href="#ftp-anon-anonymous-ftp-login-allowed-ftp-code-230" aria-hidden="true">#</a></h1>
+<h1 id="drwxr-xr-x-2-0-65534-4096-mar-17-2010-pub" tabindex="-1">|_drwxr-xr-x  2 0  65534  4096 Mar 17  2010 pub <a class="direct-link" href="#drwxr-xr-x-2-0-65534-4096-mar-17-2010-pub" aria-hidden="true">#</a></h1>
+<h1 id="ftp-syst" tabindex="-1">| ftp-syst: <a class="direct-link" href="#ftp-syst" aria-hidden="true">#</a></h1>
+<h1 id="stat" tabindex="-1">|   STAT: <a class="direct-link" href="#stat" aria-hidden="true">#</a></h1>
+<h1 id="ftp-server-status" tabindex="-1">| FTP server status: <a class="direct-link" href="#ftp-server-status" aria-hidden="true">#</a></h1>
+<h1 id="connected-to-192-168-56-101" tabindex="-1">|      Connected to 192.168.56.101</code></pre> <a class="direct-link" href="#connected-to-192-168-56-101" aria-hidden="true">#</a></h1>
+</div>
+<h3 id="vulnerability-detection-scripts" tabindex="-1">Vulnerability Detection Scripts <a class="direct-link" href="#vulnerability-detection-scripts" aria-hidden="true">#</a></h3>
+<p>The <code>vuln</code> category runs scripts that check for specific known vulnerabilities. This is powerful but can be noisy — use it carefully on production systems and only with permission.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Vulnerability Scripts</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Run ALL vulnerability scripts:
+sudo nmap --script vuln 192.168.56.102
+<h1 id="check-specifically-for-eternalblue-ms17-010" tabindex="-1">Check specifically for EternalBlue (MS17-010): <a class="direct-link" href="#check-specifically-for-eternalblue-ms17-010" aria-hidden="true">#</a></h1>
+<p>nmap --script smb-vuln-ms17-010 -p 445 192.168.56.102</p>
+<h1 id="output-if-vulnerable" tabindex="-1">Output if vulnerable: <a class="direct-link" href="#output-if-vulnerable" aria-hidden="true">#</a></h1>
+<h1 id="smb-vuln-ms17-010" tabindex="-1">| smb-vuln-ms17-010: <a class="direct-link" href="#smb-vuln-ms17-010" aria-hidden="true">#</a></h1>
+<h1 id="vulnerable" tabindex="-1">|   VULNERABLE: <a class="direct-link" href="#vulnerable" aria-hidden="true">#</a></h1>
+<h1 id="remote-code-execution-vulnerability-in-microsoft-smbv1" tabindex="-1">|   Remote Code Execution vulnerability in Microsoft SMBv1 <a class="direct-link" href="#remote-code-execution-vulnerability-in-microsoft-smbv1" aria-hidden="true">#</a></h1>
+<h1 id="state-vulnerable" tabindex="-1">|     State: VULNERABLE <a class="direct-link" href="#state-vulnerable" aria-hidden="true">#</a></h1>
+<h1 id="ids-cve-cve-2017-0143" tabindex="-1">|     IDs:  CVE:CVE-2017-0143 <a class="direct-link" href="#ids-cve-cve-2017-0143" aria-hidden="true">#</a></h1>
+<h1 id="check-for-heartbleed-openssl" tabindex="-1">Check for Heartbleed (OpenSSL): <a class="direct-link" href="#check-for-heartbleed-openssl" aria-hidden="true">#</a></h1>
+<p>nmap --script ssl-heartbleed -p 443 192.168.56.102</p>
+<h1 id="check-for-shellshock" tabindex="-1">Check for ShellShock: <a class="direct-link" href="#check-for-shellshock" aria-hidden="true">#</a></h1>
+<p>nmap --script http-shellshock --script-args uri=/cgi-bin/test.cgi -p 80 192.168.56.102</p>
+<h1 id="check-for-vsftpd-backdoor-cve-2011-2523" tabindex="-1">Check for vsftpd backdoor (CVE-2011-2523): <a class="direct-link" href="#check-for-vsftpd-backdoor-cve-2011-2523" aria-hidden="true">#</a></h1>
+<p>nmap --script ftp-vsftpd-backdoor -p 21 192.168.56.102</p>
+<h1 id="sql-injection-detection-on-web" tabindex="-1">SQL injection detection on web: <a class="direct-link" href="#sql-injection-detection-on-web" aria-hidden="true">#</a></h1>
+<p>nmap --script http-sql-injection -p 80 192.168.56.102</p>
+<h1 id="smb-vulnerabilities-comprehensive" tabindex="-1">SMB vulnerabilities (comprehensive): <a class="direct-link" href="#smb-vulnerabilities-comprehensive" aria-hidden="true">#</a></h1>
+<p>nmap --script smb-vuln* -p 139,445 192.168.56.102</code></pre></p>
+</div>
+<h3 id="authentication-and-brute-force-scripts" tabindex="-1">Authentication &amp; Brute Force Scripts <a class="direct-link" href="#authentication-and-brute-force-scripts" aria-hidden="true">#</a></h3>
+<p>NSE includes brute force scripts for common services. These try username/password combinations automatically.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Auth & Brute Scripts</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># FTP brute force:
+nmap --script ftp-brute -p 21 192.168.56.102
+<h1 id="ssh-brute-force" tabindex="-1">SSH brute force: <a class="direct-link" href="#ssh-brute-force" aria-hidden="true">#</a></h1>
+<p>nmap --script ssh-brute -p 22 192.168.56.102</p>
+<h1 id="http-basic-auth-brute-force" tabindex="-1">HTTP basic auth brute force: <a class="direct-link" href="#http-basic-auth-brute-force" aria-hidden="true">#</a></h1>
+<p>nmap --script http-brute -p 80 192.168.56.102</p>
+<h1 id="mysql-brute-force" tabindex="-1">MySQL brute force: <a class="direct-link" href="#mysql-brute-force" aria-hidden="true">#</a></h1>
+<p>nmap --script mysql-brute -p 3306 192.168.56.102</p>
+<h1 id="custom-credentials" tabindex="-1">Custom credentials: <a class="direct-link" href="#custom-credentials" aria-hidden="true">#</a></h1>
+<p>nmap --script ssh-brute --script-args userdb=users.txt,passdb=passwords.txt -p 22 192.168.56.102</p>
+<h1 id="check-for-default-credentials-on-many-services-at-once" tabindex="-1">Check for default credentials on many services at once: <a class="direct-link" href="#check-for-default-credentials-on-many-services-at-once" aria-hidden="true">#</a></h1>
+<p>nmap --script *-default-accounts 192.168.56.102</p>
+<h1 id="smb-enumeration-users-shares-os" tabindex="-1">SMB enumeration (users, shares, OS): <a class="direct-link" href="#smb-enumeration-users-shares-os" aria-hidden="true">#</a></h1>
+<p>nmap --script smb-enum-users,smb-enum-shares,smb-os-discovery -p 139,445 192.168.56.102</p>
+<h1 id="http-enumeration-directories-methods-headers" tabindex="-1">HTTP enumeration (directories, methods, headers): <a class="direct-link" href="#http-enumeration-directories-methods-headers" aria-hidden="true">#</a></h1>
+<p>nmap --script http-headers,http-methods,http-enum -p 80 192.168.56.102</code></pre></p>
+</div>
+<div class="callout callout-info">
+  <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Find Scripts by Category or Name</div>
+    <div class="callout-body">List all available scripts: <code>ls /usr/share/nmap/scripts/</code> — Search for scripts: <code>nmap --script-help "ftp*"</code> — Find scripts by category: <code>grep -r "categories" /usr/share/nmap/scripts/ | grep "vuln"</code></div>
+  </div>
+</div>
+<h2 id="output-formats" tabindex="-1">Output Formats <a class="direct-link" href="#output-formats" aria-hidden="true">#</a></h2>
+<p>Always save your Nmap output. You'll want to refer back to it, import it into Metasploit, or include it in your report. Nmap supports multiple output formats.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Output Formats</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Normal output (human readable):
+nmap -sV 192.168.56.102 -oN scan_normal.txt
+<h1 id="xml-output-machine-readable-importable" tabindex="-1">XML output (machine readable, importable): <a class="direct-link" href="#xml-output-machine-readable-importable" aria-hidden="true">#</a></h1>
+<p>nmap -sV 192.168.56.102 -oX scan_results.xml</p>
+<h1 id="grepable-output-easy-to-parse-with-grep-awk" tabindex="-1">Grepable output (easy to parse with grep/awk): <a class="direct-link" href="#grepable-output-easy-to-parse-with-grep-awk" aria-hidden="true">#</a></h1>
+<p>nmap -sV 192.168.56.102 -oG scan_grepable.txt</p>
+<h1 id="all-formats-at-once-recommended-saves-all-three" tabindex="-1">ALL formats at once (recommended — saves all three): <a class="direct-link" href="#all-formats-at-once-recommended-saves-all-three" aria-hidden="true">#</a></h1>
+<p>nmap -sV -sC -O -p- 192.168.56.102 -oA full_scan</p>
+<h1 id="creates-full-scan-nmap-full-scan-xml-full-scan-gnmap" tabindex="-1">Creates: full_scan.nmap  full_scan.xml  full_scan.gnmap <a class="direct-link" href="#creates-full-scan-nmap-full-scan-xml-full-scan-gnmap" aria-hidden="true">#</a></h1>
+<h1 id="import-xml-into-metasploit" tabindex="-1">Import XML into Metasploit: <a class="direct-link" href="#import-xml-into-metasploit" aria-hidden="true">#</a></h1>
+<h1 id="inside-msfconsole" tabindex="-1">Inside msfconsole: <a class="direct-link" href="#inside-msfconsole" aria-hidden="true">#</a></h1>
+<h1 id="db-import-full-scan-xml" tabindex="-1">db_import full_scan.xml <a class="direct-link" href="#db-import-full-scan-xml" aria-hidden="true">#</a></h1>
+<h1 id="hosts-see-imported-hosts" tabindex="-1">hosts       ← see imported hosts <a class="direct-link" href="#hosts-see-imported-hosts" aria-hidden="true">#</a></h1>
+<h1 id="services-see-imported-services" tabindex="-1">services    ← see imported services <a class="direct-link" href="#services-see-imported-services" aria-hidden="true">#</a></h1>
+<h1 id="parse-grepable-output" tabindex="-1">Parse grepable output: <a class="direct-link" href="#parse-grepable-output" aria-hidden="true">#</a></h1>
+<p>grep &quot;open&quot; scan_grepable.txt<br>
+grep &quot;22/open&quot; scan_grepable.txt</p>
+<h1 id="extract-just-open-ports-with-grep" tabindex="-1">Extract just open ports with grep: <a class="direct-link" href="#extract-just-open-ports-with-grep" aria-hidden="true">#</a></h1>
+<p>grep -oP '\d+(?=/tcp\s+open)' scan_grepable.txt | tr '\n' ','</code></pre></p>
+</div>
+<h2 id="timing-and-performance" tabindex="-1">Timing &amp; Performance <a class="direct-link" href="#timing-and-performance" aria-hidden="true">#</a></h2>
+<p>Nmap's timing templates control how fast or slow it scans. Faster scans are noisier and more likely to be detected or blocked. Slower scans are stealthier but take longer. Choose based on your situation.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Timing Templates</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Timing templates: -T0 (slowest/stealthiest) to -T5 (fastest/loudest)
+<h1 id="t0-paranoid-ids-evasion-very-slow" tabindex="-1">T0 — Paranoid (IDS evasion, very slow): <a class="direct-link" href="#t0-paranoid-ids-evasion-very-slow" aria-hidden="true">#</a></h1>
+<p>nmap -T0 192.168.56.102</p>
+<h1 id="sends-one-probe-every-5-minutes" tabindex="-1">Sends one probe every 5 minutes <a class="direct-link" href="#sends-one-probe-every-5-minutes" aria-hidden="true">#</a></h1>
+<h1 id="t1-sneaky-ids-evasion-slow" tabindex="-1">T1 — Sneaky (IDS evasion, slow): <a class="direct-link" href="#t1-sneaky-ids-evasion-slow" aria-hidden="true">#</a></h1>
+<p>nmap -T1 192.168.56.102</p>
+<h1 id="t2-polite-low-bandwidth-impact" tabindex="-1">T2 — Polite (low bandwidth impact): <a class="direct-link" href="#t2-polite-low-bandwidth-impact" aria-hidden="true">#</a></h1>
+<p>nmap -T2 192.168.56.102</p>
+<h1 id="t3-normal-default" tabindex="-1">T3 — Normal (default): <a class="direct-link" href="#t3-normal-default" aria-hidden="true">#</a></h1>
+<p>nmap -T3 192.168.56.102</p>
+<h1 id="t4-aggressive-recommended-for-lab-ctf" tabindex="-1">T4 — Aggressive (recommended for lab/CTF): <a class="direct-link" href="#t4-aggressive-recommended-for-lab-ctf" aria-hidden="true">#</a></h1>
+<p>nmap -T4 192.168.56.102</p>
+<h1 id="t5-insane-fastest-may-miss-ports-on-slow-networks" tabindex="-1">T5 — Insane (fastest, may miss ports on slow networks): <a class="direct-link" href="#t5-insane-fastest-may-miss-ports-on-slow-networks" aria-hidden="true">#</a></h1>
+<p>nmap -T5 192.168.56.102</p>
+<h1 id="manual-rate-control" tabindex="-1">Manual rate control: <a class="direct-link" href="#manual-rate-control" aria-hidden="true">#</a></h1>
+<p>nmap --min-rate 5000 192.168.56.102    # At least 5000 packets/sec<br>
+nmap --max-rate 100 192.168.56.102     # At most 100 packets/sec</p>
+<h1 id="parallelism" tabindex="-1">Parallelism: <a class="direct-link" href="#parallelism" aria-hidden="true">#</a></h1>
+<p>nmap --min-parallelism 100 192.168.56.102<br>
+nmap --max-parallelism 10 192.168.56.102</p>
+<h1 id="timeout-control" tabindex="-1">Timeout control: <a class="direct-link" href="#timeout-control" aria-hidden="true">#</a></h1>
+<p>nmap --host-timeout 30s 192.168.56.102  # Give up on host after 30 seconds</code></pre></p>
+</div>
+<h2 id="firewall-evasion-techniques" tabindex="-1">Firewall Evasion Techniques <a class="direct-link" href="#firewall-evasion-techniques" aria-hidden="true">#</a></h2>
+<p>In real engagements, firewalls, IDS, and WAFs may be blocking or detecting your scans. Nmap has several built-in techniques to reduce detection and bypass basic filtering.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Firewall Evasion</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Fragment packets (split into smaller pieces, bypass simple firewalls):
+sudo nmap -f 192.168.56.102
+<h1 id="use-decoys-makes-scan-appear-to-come-from-multiple-ips" tabindex="-1">Use decoys (makes scan appear to come from multiple IPs): <a class="direct-link" href="#use-decoys-makes-scan-appear-to-come-from-multiple-ips" aria-hidden="true">#</a></h1>
+<p>sudo nmap -D RND:10 192.168.56.102</p>
+<h1 id="d-rnd-10-use-10-random-decoy-ips" tabindex="-1">-D RND:10 = use 10 random decoy IPs <a class="direct-link" href="#d-rnd-10-use-10-random-decoy-ips" aria-hidden="true">#</a></h1>
+<h1 id="specific-decoys" tabindex="-1">Specific decoys: <a class="direct-link" href="#specific-decoys" aria-hidden="true">#</a></h1>
+<p>sudo nmap -D 10.10.10.1,10.10.10.2,ME 192.168.56.102</p>
+<h1 id="me-your-real-ip-mixed-in-with-decoys" tabindex="-1">ME = your real IP mixed in with decoys <a class="direct-link" href="#me-your-real-ip-mixed-in-with-decoys" aria-hidden="true">#</a></h1>
+<h1 id="spoof-source-port-bypass-port-based-firewall-rules" tabindex="-1">Spoof source port (bypass port-based firewall rules): <a class="direct-link" href="#spoof-source-port-bypass-port-based-firewall-rules" aria-hidden="true">#</a></h1>
+<p>sudo nmap --source-port 53 192.168.56.102</p>
+<h1 id="many-firewalls-allow-dns-port-53-traffic-through" tabindex="-1">Many firewalls allow DNS (port 53) traffic through <a class="direct-link" href="#many-firewalls-allow-dns-port-53-traffic-through" aria-hidden="true">#</a></h1>
+<h1 id="slow-scan-to-avoid-rate-based-ids-detection" tabindex="-1">Slow scan to avoid rate-based IDS detection: <a class="direct-link" href="#slow-scan-to-avoid-rate-based-ids-detection" aria-hidden="true">#</a></h1>
+<p>nmap -T1 --scan-delay 2s 192.168.56.102</p>
+<h1 id="idle-scan-completely-hide-your-ip-using-a-zombie-host" tabindex="-1">Idle scan (completely hide your IP using a zombie host): <a class="direct-link" href="#idle-scan-completely-hide-your-ip-using-a-zombie-host" aria-hidden="true">#</a></h1>
+<p>sudo nmap -sI ZOMBIE_IP 192.168.56.102</p>
+<h1 id="requires-finding-a-suitable-zombie-host-first" tabindex="-1">Requires finding a suitable zombie host first <a class="direct-link" href="#requires-finding-a-suitable-zombie-host-first" aria-hidden="true">#</a></h1>
+<h1 id="mtu-manipulation" tabindex="-1">MTU manipulation: <a class="direct-link" href="#mtu-manipulation" aria-hidden="true">#</a></h1>
+<p>sudo nmap --mtu 16 192.168.56.102</p>
+<h1 id="randomise-host-order-less-predictable-scanning-pattern" tabindex="-1">Randomise host order (less predictable scanning pattern): <a class="direct-link" href="#randomise-host-order-less-predictable-scanning-pattern" aria-hidden="true">#</a></h1>
+<p>nmap --randomize-hosts 192.168.56.0/24</p>
+<h1 id="append-random-data-to-packets" tabindex="-1">Append random data to packets: <a class="direct-link" href="#append-random-data-to-packets" aria-hidden="true">#</a></h1>
+<p>sudo nmap --data-length 25 192.168.56.102</code></pre></p>
+</div>
+<div class="callout callout-warn">
+  <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Evasion in Real Engagements</div>
+    <div class="callout-body">Evasion techniques are only ethical and legal during authorised penetration tests. Using them without permission is not just illegal — it's the kind of activity that gets professionals fired and prosecuted. In your home lab, use freely.</div>
+  </div>
+</div>
+<h2 id="professional-scanning-workflow" tabindex="-1">Professional Scanning Workflow <a class="direct-link" href="#professional-scanning-workflow" aria-hidden="true">#</a></h2>
+<p>This is the exact workflow I use on every target — lab or CTF. It's a two-phase approach: fast first, thorough second.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Phase 1 — Fast Discovery (run first)</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Phase 1: Fast all-port scan — find WHAT is open
+sudo nmap -sS -p- --min-rate 5000 -T4 192.168.56.102 -oN phase1_fast.txt
+<h1 id="extract-open-ports-from-output" tabindex="-1">Extract open ports from output: <a class="direct-link" href="#extract-open-ports-from-output" aria-hidden="true">#</a></h1>
+<p>open_ports=$(grep &quot;^[0-9]&quot; phase1_fast.txt | cut -d'/' -f1 | tr '\n' ',' | sed 's/,$//')<br>
+echo &quot;Open ports: $open_ports&quot;</p>
+<h1 id="example-21-22-23-25-80-139-445-3306-5432-8180" tabindex="-1">Example: 21,22,23,25,80,139,445,3306,5432,8180</code></pre> <a class="direct-link" href="#example-21-22-23-25-80-139-445-3306-5432-8180" aria-hidden="true">#</a></h1>
+</div>
+<div class="code-block-wrap">
+  <span class="code-block-label">Phase 2 — Deep Scan on Open Ports Only</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Phase 2: Deep scan on discovered ports only
+sudo nmap -sV -sC -O -A -p $open_ports 192.168.56.102 -oA phase2_deep
+<h1 id="breakdown-of-flags" tabindex="-1">Breakdown of flags: <a class="direct-link" href="#breakdown-of-flags" aria-hidden="true">#</a></h1>
+<h1 id="sv-service-version-detection" tabindex="-1">-sV  = service version detection <a class="direct-link" href="#sv-service-version-detection" aria-hidden="true">#</a></h1>
+<h1 id="sc-default-nse-scripts" tabindex="-1">-sC  = default NSE scripts <a class="direct-link" href="#sc-default-nse-scripts" aria-hidden="true">#</a></h1>
+<h1 id="o-os-detection" tabindex="-1">-O   = OS detection <a class="direct-link" href="#o-os-detection" aria-hidden="true">#</a></h1>
+<h1 id="a-aggressive-version-scripts-os-traceroute" tabindex="-1">-A   = aggressive (version + scripts + OS + traceroute) <a class="direct-link" href="#a-aggressive-version-scripts-os-traceroute" aria-hidden="true">#</a></h1>
+<h1 id="oa-save-all-output-formats" tabindex="-1">-oA  = save all output formats <a class="direct-link" href="#oa-save-all-output-formats" aria-hidden="true">#</a></h1>
+<h1 id="this-gives-you" tabindex="-1">This gives you: <a class="direct-link" href="#this-gives-you" aria-hidden="true">#</a></h1>
+<h1 id="exact-software-versions-for-cve-lookup" tabindex="-1">- Exact software versions (for CVE lookup) <a class="direct-link" href="#exact-software-versions-for-cve-lookup" aria-hidden="true">#</a></h1>
+<h1 id="os-identification" tabindex="-1">- OS identification <a class="direct-link" href="#os-identification" aria-hidden="true">#</a></h1>
+<h1 id="default-script-results-anonymous-ftp-smb-shares-etc" tabindex="-1">- Default script results (anonymous FTP, SMB shares, etc.) <a class="direct-link" href="#default-script-results-anonymous-ftp-smb-shares-etc" aria-hidden="true">#</a></h1>
+<h1 id="banner-grabbing-for-every-service" tabindex="-1">- Banner grabbing for every service</code></pre> <a class="direct-link" href="#banner-grabbing-for-every-service" aria-hidden="true">#</a></h1>
+</div>
+<div class="code-block-wrap">
+  <span class="code-block-label">Phase 3 — Targeted Vulnerability Checks</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Phase 3: Run targeted vuln scripts based on Phase 2 findings
+<h1 id="if-smb-139-445-is-open" tabindex="-1">If SMB (139/445) is open: <a class="direct-link" href="#if-smb-139-445-is-open" aria-hidden="true">#</a></h1>
+<p>sudo nmap --script smb-vuln-ms17-010,smb-vuln-ms08-067,smb-enum-shares,smb-enum-users -p 139,445 192.168.56.102 -oN smb_scan.txt</p>
+<h1 id="if-http-80-443-8080-is-open" tabindex="-1">If HTTP (80/443/8080) is open: <a class="direct-link" href="#if-http-80-443-8080-is-open" aria-hidden="true">#</a></h1>
+<p>sudo nmap --script http-title,http-headers,http-methods,http-enum,http-sql-injection -p 80,443,8080 192.168.56.102 -oN web_scan.txt</p>
+<h1 id="if-ftp-21-is-open" tabindex="-1">If FTP (21) is open: <a class="direct-link" href="#if-ftp-21-is-open" aria-hidden="true">#</a></h1>
+<p>sudo nmap --script ftp-anon,ftp-bounce,ftp-vsftpd-backdoor -p 21 192.168.56.102 -oN ftp_scan.txt</p>
+<h1 id="if-ssh-22-is-open" tabindex="-1">If SSH (22) is open: <a class="direct-link" href="#if-ssh-22-is-open" aria-hidden="true">#</a></h1>
+<p>sudo nmap --script ssh-auth-methods,ssh2-enum-algos -p 22 192.168.56.102 -oN ssh_scan.txt</p>
+<h1 id="if-mysql-3306-is-open" tabindex="-1">If MySQL (3306) is open: <a class="direct-link" href="#if-mysql-3306-is-open" aria-hidden="true">#</a></h1>
+<p>sudo nmap --script mysql-info,mysql-empty-password,mysql-enum -p 3306 192.168.56.102 -oN mysql_scan.txt</code></pre></p>
+</div>
+<h2 id="reading-nmap-output-like-a-pro" tabindex="-1">Reading Nmap Output Like a Pro <a class="direct-link" href="#reading-nmap-output-like-a-pro" aria-hidden="true">#</a></h2>
+<p>Here's a complete Nmap output from Metasploitable 2 with annotations explaining what each finding means and what to do next.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Annotated Metasploitable 2 Output</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code>Starting Nmap 7.94 at 2026-07-10 14:22 PKT
+Nmap scan report for 192.168.56.102
+Host is up (0.00045s latency).    ← Very fast = local network, host is alive
+<p>PORT     STATE SERVICE     VERSION<br>
+21/tcp   open  ftp         vsftpd 2.3.4<br>
+| ftp-anon: Anonymous FTP login allowed    ← CRITICAL: open to anyone<br>
+| ftp-vsftpd-backdoor:                     ← CRITICAL: CVE-2011-2523<br>
+|   VULNERABLE: vsftpd 2.3.4 backdoor</p>
+<p>22/tcp   open  ssh         OpenSSH 4.7p1<br>
+| ssh-hostkey:<br>
+|   RSA 8bytes...                          ← Old key, check for weak algos</p>
+<p>23/tcp   open  telnet      Linux telnetd  ← HIGH: unencrypted protocol<br>
+← All traffic visible in Wireshark</p>
+<p>25/tcp   open  smtp        Postfix smtpd  ← Check for open relay</p>
+<p>80/tcp   open  http        Apache httpd 2.2.8<br>
+| http-title: Metasploitable2 - Linux     ← Very old Apache (2.2.8 = 2008!)<br>
+| http-methods: GET HEAD POST OPTIONS<br>
+| http-enum:                              ← Directories found:<br>
+|   /dvwa/: DVWA v1.0.7<br>
+|   /phpmyadmin/: phpMyAdmin<br>
+|   /tikiwiki/: TikiWiki CMS</p>
+<p>139/tcp  open  netbios-ssn Samba smbd 3.X<br>
+445/tcp  open  netbios-ssn Samba smbd 3.X ← Check: smb-vuln-ms17-010</p>
+<p>3306/tcp open  mysql       MySQL 5.0.51a  ← Very old MySQL<br>
+| mysql-empty-password:                   ← CRITICAL: root has no password!<br>
+|   root account has empty password</p>
+<p>5432/tcp open  postgresql  PostgreSQL DB<br>
+8180/tcp open  http        Apache Tomcat  ← Default credentials common</p>
+<p>OS: Linux 2.6.9 - 2.6.33              ← Old kernel, check kernel exploits</p>
+<p>← ACTION PLAN from this scan:<br>
+← 1. vsftpd backdoor → msfconsole → exploit/unix/ftp/vsftpd_234_backdoor<br>
+← 2. MySQL empty root → mysql -u root -h 192.168.56.102<br>
+← 3. Anonymous FTP → ftp 192.168.56.102 → user:anonymous<br>
+← 4. Telnet → telnet 192.168.56.102 → try msfadmin:msfadmin<br>
+← 5. phpMyAdmin → browser → try default creds → root / (empty)</code></pre></p>
+</div>
+<h2 id="quick-reference-cheatsheet" tabindex="-1">Quick Reference Cheatsheet <a class="direct-link" href="#quick-reference-cheatsheet" aria-hidden="true">#</a></h2>
+<p>Save this — it covers 90% of what you'll use Nmap for in real engagements.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Nmap Cheatsheet — Save This</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># ═══ HOST DISCOVERY ═══
+nmap -sn 192.168.56.0/24                    # Ping sweep
+nmap -sn -iL targets.txt                    # From file
+sudo nmap -PR 192.168.56.0/24              # ARP scan (most reliable LAN)
+nmap -Pn 192.168.56.102                     # Skip ping, scan anyway
+<h1 id="port-scanning" tabindex="-1">═══ PORT SCANNING ═══ <a class="direct-link" href="#port-scanning" aria-hidden="true">#</a></h1>
+<p>nmap 192.168.56.102                         # Top 1000 ports<br>
+nmap -p- 192.168.56.102                     # All 65535 ports<br>
+nmap -p 22,80,443,3306 192.168.56.102      # Specific ports<br>
+nmap -F 192.168.56.102                      # Fast (top 100)<br>
+sudo nmap -sS 192.168.56.102               # SYN scan (stealth)<br>
+sudo nmap -sU 192.168.56.102               # UDP scan<br>
+nmap -sT 192.168.56.102                     # TCP connect (no root)</p>
+<h1 id="detection" tabindex="-1">═══ DETECTION ═══ <a class="direct-link" href="#detection" aria-hidden="true">#</a></h1>
+<p>nmap -sV 192.168.56.102                     # Service versions<br>
+sudo nmap -O 192.168.56.102                # OS detection<br>
+nmap -sV -sC 192.168.56.102               # Versions + default scripts<br>
+sudo nmap -A 192.168.56.102               # Aggressive (all detection)</p>
+<h1 id="professional-workflow" tabindex="-1">═══ PROFESSIONAL WORKFLOW ═══ <a class="direct-link" href="#professional-workflow" aria-hidden="true">#</a></h1>
+<p>sudo nmap -sS -p- --min-rate 5000 TARGET -oN fast.txt          # Phase 1<br>
+sudo nmap -sV -sC -O -A -p PORTS TARGET -oA deep               # Phase 2</p>
+<h1 id="nse-scripts" tabindex="-1">═══ NSE SCRIPTS ═══ <a class="direct-link" href="#nse-scripts" aria-hidden="true">#</a></h1>
+<p>nmap --script vuln TARGET                   # All vuln scripts<br>
+nmap --script smb-vuln-ms17-010 -p 445 TARGET  # EternalBlue check<br>
+nmap --script ftp-anon -p 21 TARGET        # Anonymous FTP<br>
+nmap --script http-enum -p 80 TARGET       # Web directories<br>
+nmap --script ssh-brute -p 22 TARGET       # SSH brute force</p>
+<h1 id="output" tabindex="-1">═══ OUTPUT ═══ <a class="direct-link" href="#output" aria-hidden="true">#</a></h1>
+<p>nmap TARGET -oN output.txt                  # Normal text<br>
+nmap TARGET -oX output.xml                  # XML (Metasploit import)<br>
+nmap TARGET -oG output.gnmap               # Grepable<br>
+nmap TARGET -oA all_formats                 # All three at once</p>
+<h1 id="timing" tabindex="-1">═══ TIMING ═══ <a class="direct-link" href="#timing" aria-hidden="true">#</a></h1>
+<p>nmap -T4 TARGET                             # Fast (lab/CTF)<br>
+nmap -T1 TARGET                             # Slow (IDS evasion)<br>
+nmap --min-rate 5000 TARGET                 # Force rate</p>
+<h1 id="evasion" tabindex="-1">═══ EVASION ═══ <a class="direct-link" href="#evasion" aria-hidden="true">#</a></h1>
+<p>sudo nmap -f TARGET                        # Fragment packets<br>
+sudo nmap -D RND:10 TARGET                 # Random decoys<br>
+sudo nmap --source-port 53 TARGET          # Spoof source port</code></pre></p>
+</div>
+<blockquote>
+<p>Nmap is not magic. Every number in the output represents a real packet sent and a real response received. Once you understand TCP/IP, reading Nmap output feels like reading a conversation between your machine and the target.</p>
+</blockquote>
+<div class="callout callout-success">
+  <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">What to Do After Scanning</div>
+    <div class="callout-body">Take every version number from your Nmap output and search it on: <strong>SearchSploit</strong> (<code>searchsploit vsftpd 2.3.4</code>), <strong>NVD</strong> (nvd.nist.gov), and <strong>ExploitDB</strong> (exploit-db.com). This turns a list of open ports into a prioritised attack plan.</div>
+  </div>
+</div>
+
+                </div>
+
+                <div class="social-share">
+                    <span class="share-label">Share article</span>
+                    <a href="https://twitter.com/intent/tweet?text=Nmap%20Deep%20Dive%3A%20From%20Port%20Scanning%20to%20Full%20Network%20Enumeration&url=https://aimadulislam.dpdns.org/posts/nmap-complete-guide/" target="_blank" rel="noopener" class="share-btn twitter" aria-label="Share on Twitter"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://aimadulislam.dpdns.org/posts/nmap-complete-guide/&title=Nmap%20Deep%20Dive%3A%20From%20Port%20Scanning%20to%20Full%20Network%20Enumeration" target="_blank" rel="noopener" class="share-btn linkedin" aria-label="Share on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <button class="share-btn copy-url" aria-label="Copy Link" id="copy-url-btn" data-url="https://aimadulislam.dpdns.org/posts/nmap-complete-guide/"><i class="fa-solid fa-link"></i></button>
+                </div>
+
+                <!-- Navigation between posts -->
+                
+                
+                <nav class="article-nav">
+                    
+                    <a href="/posts/kali-linux-setup-guide/" class="article-nav-link prev">
+                        <span class="article-nav-dir"><i class="fa-solid fa-angle-left"></i> Previous Post</span>
+                        <div class="article-nav-title">Getting Started with Kali Linux: Complete Beginner Setup Guide</div>
+                    </a>
+                    
+                    
+                    
+                    <a href="/posts/dfir-introduction/" class="article-nav-link next">
+                        <span class="article-nav-dir">Next Post <i class="fa-solid fa-angle-right"></i></span>
+                        <div class="article-nav-title">Digital Forensics &amp; Incident Response: A Hands-On Introduction</div>
+                    </a>
+                    
+                </nav>
+            </div>
+
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-widget card">
+                    <h3 class="widget-title"><i class="fa-solid fa-fire"></i> Recent Articles</h3>
+                    <div class="sidebar-posts">
+                        
+                        
+                            
+                            <a href="/posts/metasploitable-complete-guide/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    🎯
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">Metasploitable 2: The Ultimate Beginner&#39;s Guide to Exploitation</h4>
+                                    <span class="sidebar-post-meta">25 Jul 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                            <a href="/posts/kali-linux-setup-guide/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    🐉
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">Getting Started with Kali Linux: Complete Beginner Setup Guide</h4>
+                                    <span class="sidebar-post-meta">15 Jul 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                        
+                            
+                            <a href="/posts/dfir-introduction/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    🔬
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">Digital Forensics &amp; Incident Response: A Hands-On Introduction</h4>
+                                    <span class="sidebar-post-meta">05 Jul 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                            <a href="/posts/linux-essentials-guide/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    🐧
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">Linux Essentials: Every Command You Actually Need</h4>
+                                    <span class="sidebar-post-meta">28 Jun 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                        
+                            
+                        
+                    </div>
+                </div>
+
+                <div class="sidebar-widget card">
+                    <h3 class="widget-title"><i class="fa-solid fa-envelope"></i> Terminal Feed</h3>
+                    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
+                        <input type="email" class="newsletter-input" placeholder="root@localhost:~# _" required>
+                        <button type="submit" class="newsletter-btn">EXECUTE /SUBSCRIBE</button>
+                        <p class="newsletter-note">Get new tutorials and writeups directly in your inbox. No spam.</p>
+                    </form>
+                </div>
+            </aside>
+        </div>
+    </article>
+</main>
+
+<script>
+    // Copy URL button
+    document.getElementById('copy-url-btn')?.addEventListener('click', function() {
+        navigator.clipboard.writeText(this.dataset.url).then(() => {
+            const originalHtml = this.innerHTML;
+            this.innerHTML = '<i class="fa-solid fa-check"></i>';
+            this.classList.add('copied');
+            setTimeout(() => {
+                this.innerHTML = originalHtml;
+                this.classList.remove('copied');
+            }, 2000);
+        });
+    });
+
+    // Code block copy buttons
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const pre = this.parentElement.querySelector('pre');
+            if (!pre) return;
+            
+            navigator.clipboard.writeText(pre.innerText).then(() => {
+                const originalHtml = this.innerHTML;
+                this.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
+                this.classList.add('copied');
+                setTimeout(() => {
+                    this.innerHTML = originalHtml;
+                    this.classList.remove('copied');
+                }, 2000);
+            });
+        });
+    });
+
+    // Reading progress bar
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        const progress = document.getElementById('reading-progress');
+        if (progress) progress.style.width = scrolled + '%';
+    });
+</script>
+
+
+    <!-- Footer -->
+    <footer class="blog-footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="footer-brand">AIMAD<span>/</span>ISLAM</div>
+                    <p class="footer-tagline">Offensive Security & Technical Writing. Securing the perimeter, one post at a time.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Navigation</h4>
+                    <a href="/">Portfolio</a>
+                    <a href="/blog">Blog</a>
+                </div>
+                <div class="footer-col">
+                    <h4>Connect</h4>
+                    <a href="https://linkedin.com/in/aimad-ul-islam" target="_blank" rel="noopener noreferrer">LinkedIn <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.6rem; margin-left:0.2rem;"></i></a>
+                    <a href="https://github.com/aimad-ul-islam" target="_blank" rel="noopener noreferrer">GitHub <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.6rem; margin-left:0.2rem;"></i></a>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-copy">© 2026 Aimad Ul Islam. All rights reserved.</div>
+                <div class="footer-socs">
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <button id="scroll-top" aria-label="Scroll to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <script>
+      // Basic Navigation & UI Interactions
+      document.addEventListener('DOMContentLoaded', () => {
+          // Mobile Menu
+          const menuBtn = document.getElementById('mobile-menu-btn');
+          const mobileNav = document.getElementById('mobile-nav');
+          if(menuBtn && mobileNav) {
+              menuBtn.addEventListener('click', () => {
+                  mobileNav.classList.toggle('open');
+              });
+          }
+
+          // Dark Mode Toggle
+          const themeToggle = document.getElementById('theme-toggle');
+          const html = document.documentElement;
+          
+          if(themeToggle) {
+              // Set initial icon
+              if(html.getAttribute('data-theme') === 'light') {
+                  themeToggle.innerHTML = '<i class="fa-regular fa-sun"></i>';
+              }
+              
+              themeToggle.addEventListener('click', () => {
+                  if (html.getAttribute('data-theme') === 'dark') {
+                      html.setAttribute('data-theme', 'light');
+                      localStorage.setItem('aimad-theme', 'light');
+                      themeToggle.innerHTML = '<i class="fa-regular fa-sun"></i>';
+                  } else {
+                      html.setAttribute('data-theme', 'dark');
+                      localStorage.setItem('aimad-theme', 'dark');
+                      themeToggle.innerHTML = '<i class="fa-regular fa-moon"></i>';
+                  }
+              });
+          }
+
+          // Nav Scroll Effect
+          const nav = document.querySelector('.blog-nav');
+          window.addEventListener('scroll', () => {
+              if (window.scrollY > 50) {
+                  nav.classList.add('scrolled');
+              } else {
+                  nav.classList.remove('scrolled');
+              }
+          });
+
+          // Scroll to Top
+          const scrollTopBtn = document.getElementById('scroll-top');
+          if(scrollTopBtn) {
+              window.addEventListener('scroll', () => {
+                  if (window.scrollY > 500) {
+                      scrollTopBtn.classList.add('visible');
+                  } else {
+                      scrollTopBtn.classList.remove('visible');
+                  }
+              });
+              scrollTopBtn.addEventListener('click', () => {
+                  window.scrollTo({ top: 0, behavior: 'smooth' });
+              });
+          }
+      });
+    </script>
+</body>
+</html>
