@@ -1,0 +1,72 @@
+{
+  "categories": [
+    {
+      "name": "SOC & Incident Response",
+      "slug": "soc",
+      "description": "SIEM querying, incident triage playbooks, log analysis, and threat hunting routines.",
+      "items": [
+        {
+          "title": "Splunk SPL Threat Hunting Cheat Sheet",
+          "category": "SOC & Incident Response",
+          "difficulty": "Intermediate",
+          "tags": ["Splunk", "SIEM", "Threat Hunting", "SPL"],
+          "summary": "Essential SPL commands for detecting brute force, beaconing traffic, and privilege escalation in Sysmon logs.",
+          "content": "### Key SPL Queries\n\n#### 1. Failed Login Spikes (Event ID 4625)\n```spl\nindex=win_logs EventCode=4625 | stats count by Account_Name, src_ip | sort - count\n```\n\n#### 2. Suspicious PowerShell Execution\n```spl\nindex=sysmon EventCode=1 Image=\"*powershell.exe\" (CommandLine=\"*-enc*\" OR CommandLine=\"*-EncodedCommand*\")\n| table _time, Computer, User, CommandLine\n```\n\n#### 3. DNS Tunneling Detection\n```spl\nindex=dns_logs | eval query_len=len(query) | search query_len > 50 | stats count by src_ip, query | sort - query_len\n```"
+        },
+        {
+          "title": "Sysmon Configuration & Event ID Reference",
+          "category": "SOC & Incident Response",
+          "difficulty": "Beginner",
+          "tags": ["Sysmon", "Windows", "Blue Team"],
+          "summary": "Core Windows Event IDs for SOC analysts examining process creation, network connection, and file modification.",
+          "content": "### Critical Sysmon Event IDs\n- **Event ID 1**: Process Creation (Image, CommandLine, ParentCommandLine)\n- **Event ID 3**: Network Connection (Source/Dest IP, Port, Process)\n- **Event ID 7**: Image Loaded (DLL injections)\n- **Event ID 11**: FileCreated (Malware dropping executables)\n- **Event ID 22**: DNSEvent (Domain query tracing)"
+        }
+      ]
+    },
+    {
+      "name": "Digital Forensics & Malware Analysis",
+      "slug": "forensics",
+      "description": "Memory dump extraction, disk image examination, Volatility 3 commands, and Cuckoo triage.",
+      "items": [
+        {
+          "title": "Volatility 3 Memory Forensics Master Reference",
+          "category": "Digital Forensics & Malware Analysis",
+          "difficulty": "Advanced",
+          "tags": ["Volatility", "Memory Forensics", "DFIR"],
+          "summary": "Commands for extracting process trees, DLL injections, network connections, and dumping suspicious binaries.",
+          "content": "### Volatility 3 Core Plugins\n```bash\n# Process list & tree examination\nvol -f memory.raw windows.pstree\n\n# Detect API hooking and DLL injection\nvol -f memory.raw windows.malfind\n\n# Dump suspicious binary from PID\nvol -f memory.raw -o ./output windows.dumpfiles --pid 4820\n\n# Active socket connections\nvol -f memory.raw windows.netscan\n```"
+        }
+      ]
+    },
+    {
+      "name": "Network Security & Packet Inspection",
+      "slug": "networking",
+      "description": "Wireshark display filters, TShark automation, Snort IDS rules, and TCP/IP protocol analysis.",
+      "items": [
+        {
+          "title": "Wireshark Display Filter Field Manual",
+          "category": "Network Security & Packet Inspection",
+          "difficulty": "Intermediate",
+          "tags": ["Wireshark", "Nmap", "Networking", "PCAP"],
+          "summary": "High-impact display filters for locating cleartext passwords, ARP spoofing, and HTTP payloads.",
+          "content": "### Essential Wireshark Filters\n- `http.request.method == \"POST\"`: Find HTTP POST requests with login forms\n- `tcp.flags.syn == 1 && tcp.flags.ack == 0`: Locate SYN scan sweeps\n- `dns.flags.response == 0`: Filter outbound DNS requests\n- `frame contains \"password\"`: Search raw payload buffers"
+        }
+      ]
+    },
+    {
+      "name": "Offensive Security & Pentesting",
+      "slug": "redteam",
+      "description": "Nmap scanning methodologies, Burp Suite proxying, OWASP Top 10 vulnerabilities, and SQLMap syntax.",
+      "items": [
+        {
+          "title": "Nmap Service Enumeration & NSE Scripting Guide",
+          "category": "Offensive Security & Pentesting",
+          "difficulty": "Beginner",
+          "tags": ["Nmap", "Pentesting", "Recon"],
+          "summary": "Optimized Nmap flags for silent stealth scans, version detection, and vulnerability probing scripts.",
+          "content": "### Command Reference\n```bash\n# Stealth SYN scan with OS and version detection\nnmap -sS -sV -O -p- 192.168.1.50\n\n# Execute default vulnerability scripts\nnmap --script vuln -p 80,445 192.168.1.50\n\n# Fast TCP SYN sweep outputting XML\nnmap -sS --top-ports 1000 -oX scan_results.xml 192.168.1.0/24\n```"
+        }
+      ]
+    }
+  ]
+}

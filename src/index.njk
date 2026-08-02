@@ -90,14 +90,13 @@
     <a href="#" class="nav-logo"><span class="br">[</span>{{ settings.portfolio_name }}<span class="nav-dot"></span><span class="br">]</span></a>
     <ul class="nav-links">
         <li><a href="#about">About</a></li>
-        <li><a href="#education">Education</a></li>
         <li><a href="#certifications">Certs</a></li>
         <li><a href="#skills">Skills</a></li>
-        <li><a href="#tools">Tools</a></li>
         <li><a href="#projects">Projects</a></li>
         <li><a href="#labs">Labs</a></li>
-        <li><a href="#domains">Domains</a></li>
-        <li><a href="#experience">Experience</a></li>
+        <li><a href="#kb">KB</a></li>
+        <li><a href="#reports">Reports</a></li>
+        <li><a href="#downloads">Downloads</a></li>
         <li><a href="#dashboard">Dashboard</a></li>
         <li><a href="#timeline">Timeline</a></li>
         <li><a href="#contact">Contact</a></li>
@@ -117,12 +116,12 @@
     <a href="#education">Education</a>
     <a href="#certifications">Certifications</a>
     <a href="#skills">Skills</a>
-    <a href="#tools">Tools</a>
     <a href="#projects">Projects</a>
     <a href="#labs">Labs</a>
-    <a href="#domains">Domains</a>
+    <a href="#kb">Knowledge Base</a>
+    <a href="#reports">Reports</a>
+    <a href="#downloads">Downloads</a>
     <a href="#experience">Experience</a>
-    <a href="#achievements">Achievements</a>
     <a href="#dashboard">Dashboard</a>
     <a href="#timeline">Timeline</a>
     <a href="#contact">Contact</a>
@@ -290,8 +289,8 @@
                     <h3>{{ cat.category_name }}</h3>
                 </div>
                 {% for sk in cat.skills %}
-                <div class="sk-item">
-                    <div class="sk-meta"><span class="sk-name">{{ sk.name }}</span><span class="sk-pct">{{ sk.percentage }}%</span></div>
+                <div class="sk-item" onclick='openSkillModal({{ sk | dump | safe }}, "{{ cat.category_name }}")' style="cursor:pointer; transition:transform 0.2s;" title="Click for Skill Intelligence">
+                    <div class="sk-meta"><span class="sk-name"><i class="fa-solid fa-circle-chevron-right fa-xs" style="color:var(--cyan); margin-right:4px;"></i> {{ sk.name }}</span><span class="sk-pct">{{ sk.percentage }}%</span></div>
                     <div class="sk-bar"><div class="sk-fill" data-w="{{ sk.percentage }}" style="width:0%; background:{{ sk.color or 'var(--cyan)' }}"></div></div>
                     {% if sk.description %}<div style="font-size:0.75rem; color:var(--muted); margin-top:0.2rem;">{{ sk.description }}</div>{% endif %}
                 </div>
@@ -318,7 +317,7 @@
     </div>
 </section>
 
-<!-- PROJECTS SECTION (Dynamic Counter) -->
+<!-- PROJECTS SECTION (Dynamic Counter & Advanced Filter) -->
 <section id="projects">
     <div class="container">
         <div class="reveal">
@@ -331,10 +330,21 @@
             </div>
             <div class="sec-rule"></div>
         </div>
+
+        <div class="filter-bar reveal">
+            <button class="filter-btn active" onclick="filterCategory('proj', 'all', this)">All Categories</button>
+            <button class="filter-btn" onclick="filterCategory('proj', 'Home Lab', this)">Home Lab</button>
+            <button class="filter-btn" onclick="filterCategory('proj', 'Automation', this)">Automation</button>
+            <button class="filter-btn" onclick="filterCategory('proj', 'Digital Forensics', this)">Digital Forensics</button>
+            <button class="filter-btn" onclick="filterCategory('proj', 'Networking', this)">Networking</button>
+            <button class="filter-btn" onclick="filterCategory('proj', 'Web Development', this)">Web App Security</button>
+            <button class="filter-btn" onclick="filterCategory('proj', 'Research', this)">Research</button>
+        </div>
         
-        <div class="proj-grid">
+        <div class="proj-grid" id="projGrid">
             {% for proj in projects.items %}
-            <div class="proj-card card reveal {% if loop.index % 3 == 2 %}rv1{% elif loop.index % 3 == 0 %}rv2{% endif %}"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+            <div class="proj-card card reveal proj-item {% if loop.index % 3 == 2 %}rv1{% elif loop.index % 3 == 0 %}rv2{% endif %}" data-category="{{ proj.category }}">
+                <div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
                 {% if proj.featured_image %}
                 <div style="margin:-1.5rem -1.5rem 1rem -1.5rem; max-height:160px; overflow:hidden; border-radius:12px 12px 0 0;">
                     <img src="{{ proj.featured_image }}" alt="{{ proj.title }}" style="width:100%; height:160px; object-fit:cover;" />
@@ -348,13 +358,13 @@
                 <p class="proj-desc">{{ proj.description }}</p>
                 <div class="proj-stack">
                     {% for tech in proj.technologies %}
-                    <span class="stag">{{ tech }}</span>
+                    <span class="stag" data-tech="{{ tech }}">{{ tech }}</span>
                     {% endfor %}
                 </div>
-                <div class="proj-links">
+                <div class="proj-links" style="margin-top:1rem; display:flex; gap:0.6rem; flex-wrap:wrap;">
+                    <button onclick='openProjModal({{ proj | dump | safe }})' class="plink" style="background:none; border:none; cursor:pointer;"><i class="fa-solid fa-circle-info fa-xs"></i> Full Specs</button>
                     {% if proj.github_link %}<a href="{{ proj.github_link }}" class="plink" target="_blank"><i class="fa-brands fa-github fa-xs"></i> GitHub</a>{% endif %}
                     {% if proj.live_demo %}<a href="{{ proj.live_demo }}" class="plink" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i> Live Demo</a>{% endif %}
-                    {% if proj.pdf %}<a href="{{ proj.pdf }}" class="plink" download><i class="fa-solid fa-file-pdf fa-xs"></i> PDF</a>{% endif %}
                 </div>
             </div>
             {% endfor %}
@@ -375,21 +385,79 @@
             </div>
             <div class="sec-rule"></div>
         </div>
-        <div class="proj-grid">
+
+        <div class="filter-bar reveal">
+            <button class="filter-btn active" onclick="filterCategory('lab', 'all', this)">All Platforms</button>
+            <button class="filter-btn" onclick="filterCategory('lab', 'TryHackMe', this)">TryHackMe</button>
+            <button class="filter-btn" onclick="filterCategory('lab', 'HackTheBox', this)">HackTheBox</button>
+            <button class="filter-btn" onclick="filterCategory('lab', 'Blue Team Labs', this)">Blue Team Labs</button>
+            <button class="filter-btn" onclick="filterCategory('lab', 'Local VirtualBox', this)">Local VM Labs</button>
+        </div>
+
+        <div class="proj-grid" id="labGrid">
             {% for lab in labs.items %}
-            <div class="proj-card card reveal {% if loop.index % 2 == 0 %}rv1{% endif %}"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+            <div class="proj-card card reveal lab-item {% if loop.index % 2 == 0 %}rv1{% endif %}" data-category="{{ lab.platform }}">
+                <div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
                 <div class="proj-hd"><div class="proj-num">// LAB {{ loop.index | string | padStart(2, '0') }}</div><div class="proj-type">{{ lab.platform }}</div></div>
                 <div class="proj-title">{{ lab.name }}</div>
                 <p class="proj-desc">{{ lab.description }}</p>
                 <div class="proj-stack">
                     {% for tool in lab.tools %}
-                    <span class="stag">{{ tool }}</span>
+                    <span class="stag" data-tech="{{ tool }}">{{ tool }}</span>
                     {% endfor %}
                 </div>
-                {% if lab.writeup_url %}
-                <div class="proj-links" style="margin-top:1rem;"><a href="{{ lab.writeup_url }}" class="plink"><i class="fa-solid fa-book-open fa-xs"></i> Read Write-up</a></div>
-                {% endif %}
+                <div class="proj-links" style="margin-top:1rem; display:flex; gap:0.6rem; flex-wrap:wrap;">
+                    <button onclick='openLabModal({{ lab | dump | safe }})' class="plink" style="background:none; border:none; cursor:pointer;"><i class="fa-solid fa-microscope fa-xs"></i> Lab Blueprint</button>
+                    {% if lab.writeup_url %}<a href="{{ lab.writeup_url }}" class="plink"><i class="fa-solid fa-book-open fa-xs"></i> Write-up</a>{% endif %}
+                </div>
             </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- KNOWLEDGE BASE & WRITE-UPS LIBRARY -->
+<section id="kb">
+    <div class="container">
+        <div class="reveal">
+            <div class="sec-eye">08 Knowledge Base</div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
+                <h2 class="sec-title">Searchable Knowledge Base & Guides</h2>
+                <div style="background:rgba(0,212,255,0.1); border:1px solid var(--border2); padding:0.4rem 1rem; border-radius:20px; color:var(--cyan); font-family:'JetBrains Mono',monospace; font-size:0.9rem;">
+                    <i class="fa-solid fa-book-journal-whills"></i> Technical Library
+                </div>
+            </div>
+            <div class="sec-rule"></div>
+        </div>
+
+        <div class="filter-bar reveal">
+            <button class="filter-btn active" onclick="filterCategory('kb', 'all', this)">All Topics</button>
+            {% for cat in knowledgebase.categories %}
+            <button class="filter-btn" onclick="filterCategory('kb', '{{ cat.name }}', this)">{{ cat.name }}</button>
+            {% endfor %}
+        </div>
+
+        <div class="proj-grid" id="kbGrid">
+            {% for cat in knowledgebase.categories %}
+            {% for item in cat.items %}
+            <div class="proj-card card reveal kb-item {% if loop.index % 2 == 0 %}rv1{% endif %}" data-category="{{ item.category }}">
+                <div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+                <div class="proj-hd">
+                    <div class="proj-num">// {{ item.difficulty | upper }}</div>
+                    <div class="proj-type" style="color:var(--cyan);">{{ item.category }}</div>
+                </div>
+                <div class="proj-title">{{ item.title }}</div>
+                <p class="proj-desc">{{ item.summary }}</p>
+                <div class="proj-stack">
+                    {% for tag in item.tags %}
+                    <span class="stag" data-tech="{{ tag }}">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+                <div class="proj-links" style="margin-top:1rem;">
+                    <button onclick='openKbModal({{ item | dump | safe }})' class="plink" style="background:none; border:none; cursor:pointer;"><i class="fa-solid fa-file-lines fa-xs"></i> Read Technical Guide</button>
+                </div>
+            </div>
+            {% endfor %}
             {% endfor %}
         </div>
     </div>
@@ -618,9 +686,17 @@
 <section id="timeline" style="background:linear-gradient(180deg,transparent,rgba(11,19,40,0.35),transparent);">
     <div class="container">
         <div class="reveal"><div class="sec-eye">13 Timeline</div><h2 class="sec-title">Cybersecurity Journey Timeline</h2><div class="sec-rule"></div></div>
-        <div class="tl-wrap">
+        
+        <div class="filter-bar reveal">
+            <button class="filter-btn active" onclick="filterCategory('tl', 'all', this)">All Years</button>
+            <button class="filter-btn" onclick="filterCategory('tl', '2026', this)">2026</button>
+            <button class="filter-btn" onclick="filterCategory('tl', '2025', this)">2025</button>
+            <button class="filter-btn" onclick="filterCategory('tl', '2024', this)">2024</button>
+        </div>
+
+        <div class="tl-wrap" id="tlWrap">
             {% for item in timeline.items %}
-            <div class="tl-item reveal">
+            <div class="tl-item reveal tl-card-item" data-category="{{ item.date or item.year }}">
                 <div class="tl-dot"></div>
                 <div class="tl-date">{{ item.date or item.year }}</div>
                 <div class="tl-title">{{ item.title }}</div>
@@ -758,8 +834,8 @@ window.addEventListener('scroll', () => {
     secs.forEach(s => { if (window.scrollY >= s.offsetTop - 130) cur = s.id; });
     links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '/#' + cur || a.getAttribute('href') === '#' + cur));
 });
-document.getElementById('ham').addEventListener('click', () => document.getElementById('mobNav').classList.toggle('open'));
-document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => document.getElementById('mobNav').classList.remove('open')));
+document.getElementById('ham')?.addEventListener('click', () => document.getElementById('mobNav')?.classList.toggle('open'));
+document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => document.getElementById('mobNav')?.classList.remove('open')));
 
 // HERO ROLE TYPEWRITER
 const roles = {{ hero.rotating_job_titles | dump | safe }};
@@ -835,9 +911,9 @@ const searchModal = document.getElementById('searchModal');
 const searchInput = document.getElementById('searchInput');
 const searchResults = document.getElementById('searchResults');
 
-document.getElementById('searchOpenBtn').addEventListener('click', () => {
-    searchModal.style.display = 'flex';
-    searchInput.focus();
+document.getElementById('searchOpenBtn')?.addEventListener('click', () => {
+    if (searchModal) searchModal.style.display = 'flex';
+    if (searchInput) searchInput.focus();
     if (searchData.length === 0) {
         fetch('/search.json')
             .then(res => res.json())
@@ -845,42 +921,47 @@ document.getElementById('searchOpenBtn').addEventListener('click', () => {
             .catch(() => {});
     }
 });
-document.getElementById('searchCloseBtn').addEventListener('click', () => {
-    searchModal.style.display = 'none';
+document.getElementById('searchCloseBtn')?.addEventListener('click', () => {
+    if (searchModal) searchModal.style.display = 'none';
 });
-searchModal.addEventListener('click', (e) => {
-    if (e.target === searchModal) searchModal.style.display = 'none';
-});
-
-searchInput.addEventListener('input', (e) => {
-    const q = e.target.value.toLowerCase().trim();
-    if (!q) {
-        searchResults.innerHTML = '<div style="text-align:center; color:var(--muted); padding:1rem; font-size:0.88rem;">Type a query to search across all cybersecurity records...</div>';
-        return;
-    }
-    const matches = searchData.filter(item => {
-        return (item.title && item.title.toLowerCase().includes(q)) ||
-               (item.description && item.description.toLowerCase().includes(q)) ||
-               (item.category && item.category.toLowerCase().includes(q)) ||
-               (item.type && item.type.toLowerCase().includes(q)) ||
-               (item.tags && item.tags.some(t => String(t).toLowerCase().includes(q)));
+if (searchModal) {
+    searchModal.addEventListener('click', (e) => {
+        if (e.target === searchModal) searchModal.style.display = 'none';
     });
+}
 
-    if (matches.length === 0) {
-        searchResults.innerHTML = '<div style="text-align:center; color:var(--amber); padding:1rem; font-size:0.88rem;"><i class="fa-solid fa-triangle-exclamation"></i> No threat vectors or records found matching "' + q + '".</div>';
-    } else {
-        searchResults.innerHTML = matches.map(item => `
-            <a href="${item.url}" onclick="document.getElementById('searchModal').style.display='none'" style="display:block; padding:0.8rem; background:rgba(11,19,40,0.6); border:1px solid var(--border); border-radius:6px; text-decoration:none; transition:border-color 0.2s;">
-                <div style="display:flex; justify-content:space-between; align-items:center;">
-                    <span style="font-size:0.75rem; font-family:'JetBrains Mono',monospace; color:var(--cyan); text-transform:uppercase;">[${item.type}] ${item.category || ''}</span>
-                    <i class="fa-solid fa-arrow-right fa-xs" style="color:var(--muted);"></i>
-                </div>
-                <div style="font-weight:600; color:var(--white); margin:0.3rem 0; font-size:0.95rem;">${item.title}</div>
-                <div style="font-size:0.82rem; color:var(--silver);">${item.description ? item.description.substring(0, 110) + '...' : ''}</div>
-            </a>
-        `).join('');
-    }
-});
+if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+        const q = e.target.value.toLowerCase().trim();
+        if (!q) {
+            if (searchResults) searchResults.innerHTML = '<div style="text-align:center; color:var(--muted); padding:1rem; font-size:0.88rem;">Type a query to search across all cybersecurity records...</div>';
+            return;
+        }
+        const matches = searchData.filter(item => {
+            return (item.title && item.title.toLowerCase().includes(q)) ||
+                   (item.description && item.description.toLowerCase().includes(q)) ||
+                   (item.category && item.category.toLowerCase().includes(q)) ||
+                   (item.type && item.type.toLowerCase().includes(q)) ||
+                   (item.tags && item.tags.some(t => String(t).toLowerCase().includes(q)));
+        });
+
+        if (!searchResults) return;
+        if (matches.length === 0) {
+            searchResults.innerHTML = '<div style="text-align:center; color:var(--amber); padding:1rem; font-size:0.88rem;"><i class="fa-solid fa-triangle-exclamation"></i> No threat vectors or records found matching "' + q + '".</div>';
+        } else {
+            searchResults.innerHTML = matches.map(item => `
+                <a href="${item.url}" onclick="const sm=document.getElementById('searchModal'); if(sm) sm.style.display='none';" style="display:block; padding:0.8rem; background:rgba(11,19,40,0.6); border:1px solid var(--border); border-radius:6px; text-decoration:none; transition:border-color 0.2s;">
+                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                        <span style="font-size:0.75rem; font-family:'JetBrains Mono',monospace; color:var(--cyan); text-transform:uppercase;">[${item.type}] ${item.category || ''}</span>
+                        <i class="fa-solid fa-arrow-right fa-xs" style="color:var(--muted);"></i>
+                    </div>
+                    <div style="font-weight:600; color:var(--white); margin:0.3rem 0; font-size:0.95rem;">${item.title}</div>
+                    <div style="font-size:0.82rem; color:var(--silver);">${item.description ? item.description.substring(0, 110) + '...' : ''}</div>
+                </a>
+            `).join('');
+        }
+    });
+}
 
 // SERVICE WORKER PWA REGISTRATION
 if ('serviceWorker' in navigator) {
@@ -888,6 +969,169 @@ if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/sw.js').catch(() => {});
     });
 }
+
+// ADVANCED CATEGORY & YEAR FILTERING SYSTEM
+function filterCategory(type, category, btn) {
+    // Toggle active button state in the filter bar
+    const bar = btn.parentElement;
+    bar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    let selector = '';
+    if (type === 'proj') selector = '.proj-item';
+    else if (type === 'lab') selector = '.lab-item';
+    else if (type === 'kb') selector = '.kb-item';
+    else if (type === 'tl') selector = '.tl-card-item';
+
+    const items = document.querySelectorAll(selector);
+    items.forEach(el => {
+        const cat = el.getAttribute('data-category') || '';
+        if (category === 'all' || cat.toLowerCase().includes(category.toLowerCase())) {
+            el.style.display = 'flex';
+            if (selector === '.tl-card-item') el.style.display = 'block';
+            el.classList.add('in');
+        } else {
+            el.style.display = 'none';
+        }
+    });
+}
+
+// TECHNOLOGY ICON RESOLVER ENGINE
+function getTechIcon(name) {
+    const n = name.toLowerCase();
+    if (n.includes('python')) return 'fa-brands fa-python';
+    if (n.includes('linux') || n.includes('ubuntu') || n.includes('kali')) return 'fa-brands fa-linux';
+    if (n.includes('docker')) return 'fa-brands fa-docker';
+    if (n.includes('aws') || n.includes('amazon')) return 'fa-brands fa-aws';
+    if (n.includes('git') || n.includes('github')) return 'fa-brands fa-git-alt';
+    if (n.includes('windows') || n.includes('active directory')) return 'fa-brands fa-windows';
+    if (n.includes('bash') || n.includes('shell') || n.includes('terminal')) return 'fa-solid fa-terminal';
+    if (n.includes('powershell')) return 'fa-solid fa-code';
+    if (n.includes('nmap') || n.includes('scanner') || n.includes('nessus')) return 'fa-solid fa-radar';
+    if (n.includes('wireshark') || n.includes('network') || n.includes('tcpdump')) return 'fa-solid fa-network-wired';
+    if (n.includes('burp') || n.includes('web') || n.includes('owasp')) return 'fa-solid fa-bug';
+    if (n.includes('metasploit') || n.includes('exploit') || n.includes('hydra') || n.includes('hashcat')) return 'fa-solid fa-skull-crossbones';
+    if (n.includes('forensics') || n.includes('autopsy') || n.includes('volatility')) return 'fa-solid fa-magnifying-glass-chart';
+    if (n.includes('snort') || n.includes('suricata') || n.includes('siem') || n.includes('wazuh') || n.includes('splunk')) return 'fa-solid fa-shield-cat';
+    return 'fa-solid fa-microchip';
+}
+
+// GENERIC DETAIL MODAL DISPLAY SYSTEM
+const detailModal = document.getElementById('detailModal');
+const modalTitle = document.getElementById('modalTitle');
+const modalBody = document.getElementById('modalBody');
+
+function closeDetailModal() {
+    if (detailModal) detailModal.style.display = 'none';
+}
+
+if (detailModal) {
+    detailModal.addEventListener('click', (e) => {
+        if (e.target === detailModal) closeDetailModal();
+    });
+}
+
+function openSkillModal(skill, categoryName) {
+    modalTitle.innerHTML = `<i class="fa-solid fa-code" style="color:var(--cyan);"></i> Skill Intelligence: ${skill.name}`;
+    modalBody.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.2rem; background:rgba(0,212,255,0.06); padding:0.8rem 1rem; border-radius:8px; border:1px solid var(--border);">
+            <div><span style="color:var(--muted); font-size:0.8rem;">Category:</span> <strong style="color:var(--cyan); font-family:'Space Grotesk',sans-serif;">${categoryName}</strong></div>
+            <div><span style="color:var(--muted); font-size:0.8rem;">Proficiency:</span> <strong style="color:var(--green); font-family:'JetBrains Mono',monospace;">${skill.percentage}%</strong></div>
+        </div>
+        <div style="margin-bottom:1.5rem;">
+            <div style="font-size:0.82rem; color:var(--muted); text-transform:uppercase; margin-bottom:0.4rem;">Skill Description & Practical Scope</div>
+            <p style="color:var(--silver); line-height:1.6; font-size:0.95rem;">${skill.description || 'Proficient in theoretical principles and practical command-line execution for defensive and offensive operations.'}</p>
+        </div>
+        <div style="margin-bottom:1.5rem;">
+            <div style="font-size:0.82rem; color:var(--muted); text-transform:uppercase; margin-bottom:0.4rem;">Associated Security Tools & Technologies</div>
+            <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+                <span class="tech-badge"><i class="${getTechIcon(skill.name)}"></i> ${skill.name} Engine</span>
+                <span class="tech-badge"><i class="fa-solid fa-terminal"></i> CLI Execution</span>
+                <span class="tech-badge"><i class="fa-solid fa-shield-halved"></i> Security Hardening</span>
+            </div>
+        </div>
+        <div style="background:var(--navy); padding:1rem; border-radius:8px; border:1px solid var(--border);">
+            <div style="font-size:0.82rem; color:var(--muted); text-transform:uppercase; margin-bottom:0.4rem;"><i class="fa-solid fa-graduation-cap" style="color:var(--cyan);"></i> Continuous Learning Roadmap</div>
+            <p style="font-size:0.88rem; color:var(--light);">Regularly updated via TryHackMe modules, lab exercises, and practical vulnerability write-ups.</p>
+        </div>
+    `;
+    detailModal.style.display = 'flex';
+}
+
+function openProjModal(proj) {
+    modalTitle.innerHTML = `<i class="fa-solid fa-folder-open" style="color:var(--green);"></i> Project Specs: ${proj.title}`;
+    const techBadges = (proj.technologies || []).map(t => `<span class="tech-badge"><i class="${getTechIcon(t)}"></i> ${t}</span>`).join('');
+    modalBody.innerHTML = `
+        <div style="margin-bottom:1rem; color:var(--cyan); font-family:'JetBrains Mono',monospace; font-size:0.85rem;">
+            CATEGORY: ${proj.category ? proj.category.toUpperCase() : 'CYBERSECURITY'}
+        </div>
+        <p style="color:var(--silver); font-size:0.95rem; line-height:1.6; margin-bottom:1.2rem;">${proj.description}</p>
+        <div style="margin-bottom:1.5rem;">
+            <div style="font-size:0.82rem; color:var(--muted); text-transform:uppercase; margin-bottom:0.5rem;">Technology Stack & Libraries</div>
+            <div style="display:flex; flex-wrap:wrap; gap:0.4rem;">${techBadges}</div>
+        </div>
+        <div style="display:flex; gap:1rem; flex-wrap:wrap; margin-top:1.5rem; border-top:1px solid var(--border); padding-top:1rem;">
+            ${proj.github_link ? `<a href="${proj.github_link}" target="_blank" class="res-dl" style="font-size:0.85rem; padding:8px 16px;"><i class="fa-brands fa-github"></i> GitHub Code</a>` : ''}
+            ${proj.live_demo ? `<a href="${proj.live_demo}" target="_blank" class="res-dl" style="font-size:0.85rem; padding:8px 16px; background:var(--panel); border:1px solid var(--border2); color:var(--cyan);"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>` : ''}
+            ${proj.pdf ? `<a href="${proj.pdf}" download class="res-dl" style="font-size:0.85rem; padding:8px 16px; background:rgba(124,58,237,0.2); color:var(--violet2);"><i class="fa-solid fa-file-pdf"></i> Download PDF Documentation</a>` : ''}
+        </div>
+    `;
+    detailModal.style.display = 'flex';
+}
+
+function openLabModal(lab) {
+    modalTitle.innerHTML = `<i class="fa-solid fa-flask" style="color:var(--violet2);"></i> Lab Blueprint: ${lab.name}`;
+    const toolBadges = (lab.tools || []).map(t => `<span class="tech-badge"><i class="${getTechIcon(t)}"></i> ${t}</span>`).join('');
+    modalBody.innerHTML = `
+        <div style="margin-bottom:1rem; color:var(--violet2); font-family:'JetBrains Mono',monospace; font-size:0.85rem;">
+            PLATFORM: ${lab.platform ? lab.platform.toUpperCase() : 'VIRTUAL LAB'}
+        </div>
+        <p style="color:var(--silver); font-size:0.95rem; line-height:1.6; margin-bottom:1.2rem;">${lab.description}</p>
+        <div style="margin-bottom:1.5rem;">
+            <div style="font-size:0.82rem; color:var(--muted); text-transform:uppercase; margin-bottom:0.5rem;">Security Tools & Environment</div>
+            <div style="display:flex; flex-wrap:wrap; gap:0.4rem;">${toolBadges}</div>
+        </div>
+        ${lab.writeup_url ? `
+        <div style="margin-top:1.5rem; border-top:1px solid var(--border); padding-top:1rem;">
+            <a href="${lab.writeup_url}" class="res-dl" style="font-size:0.85rem; padding:8px 16px;"><i class="fa-solid fa-book-open"></i> Access Full Lab Write-up</a>
+        </div>` : ''}
+    `;
+    detailModal.style.display = 'flex';
+}
+
+function openKbModal(item) {
+    modalTitle.innerHTML = `<i class="fa-solid fa-book-journal-whills" style="color:var(--cyan);"></i> ${item.title}`;
+    const tagBadges = (item.tags || []).map(t => `<span class="tech-badge"><i class="${getTechIcon(t)}"></i> ${t}</span>`).join('');
+    modalBody.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.2rem; background:rgba(0,212,255,0.06); padding:0.6rem 1rem; border-radius:8px; border:1px solid var(--border);">
+            <span style="color:var(--cyan); font-family:'JetBrains Mono',monospace; font-size:0.82rem;">TOPIC: ${item.category ? item.category.toUpperCase() : 'CYBERSECURITY'}</span>
+            <span style="color:var(--amber); font-family:'JetBrains Mono',monospace; font-size:0.82rem; text-transform:uppercase;">[${item.difficulty || 'GENERAL'}]</span>
+        </div>
+        <div style="margin-bottom:1.2rem;">
+            <div style="font-size:0.82rem; color:var(--muted); text-transform:uppercase; margin-bottom:0.4rem;">Executive Overview</div>
+            <p style="color:var(--silver); line-height:1.6; font-size:0.95rem;">${item.summary}</p>
+        </div>
+        <div style="margin-bottom:1.5rem;">
+            <div style="font-size:0.82rem; color:var(--muted); text-transform:uppercase; margin-bottom:0.5rem;">Key Concepts & Tags</div>
+            <div style="display:flex; flex-wrap:wrap; gap:0.4rem;">${tagBadges}</div>
+        </div>
+        ${item.content ? `
+        <div style="background:var(--void); padding:1.2rem; border-radius:8px; border:1px solid var(--border); margin-top:1rem;">
+            <div style="font-size:0.82rem; color:var(--cyan); text-transform:uppercase; font-family:'JetBrains Mono',monospace; margin-bottom:0.6rem;"><i class="fa-solid fa-code"></i> Reference Material / Guide</div>
+            <pre style="white-space:pre-wrap; font-family:'JetBrains Mono',monospace; font-size:0.85rem; color:var(--silver); line-height:1.5;">${item.content}</pre>
+        </div>` : ''}
+    `;
+    detailModal.style.display = 'flex';
+}
 </script>
+
+<!-- REUSABLE DETAIL MODAL OVERLAY -->
+<div id="detailModal" class="modal-overlay">
+    <div class="modal-card">
+        <button onclick="closeDetailModal()" class="modal-close" aria-label="Close modal">&times;</button>
+        <div id="modalTitle" style="font-family:'Space Grotesk',sans-serif; font-size:1.3rem; font-weight:700; color:var(--white); margin-bottom:1.2rem; padding-right:2rem;"></div>
+        <div id="modalBody"></div>
+    </div>
+</div>
 </body>
 </html>

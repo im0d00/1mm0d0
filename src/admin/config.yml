@@ -511,6 +511,28 @@ collections:
               - { label: "Size", name: "size", widget: "string" }
               - { label: "Description", name: "description", widget: "text" }
 
+      - name: "knowledgebase"
+        label: "Knowledge Base & Guides"
+        file: "src/_data/knowledgebase.json"
+        fields:
+          - name: "categories"
+            label: "Categories"
+            widget: "list"
+            fields:
+              - { label: "Category Name", name: "name", widget: "string" }
+              - { label: "Slug", name: "slug", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - name: "items"
+                label: "Knowledge Base Guides"
+                widget: "list"
+                fields:
+                  - { label: "Title", name: "title", widget: "string" }
+                  - { label: "Category", name: "category", widget: "string" }
+                  - { label: "Difficulty", name: "difficulty", widget: "select", options: ["Beginner", "Intermediate", "Advanced"] }
+                  - { label: "Tags", name: "tags", widget: "list" }
+                  - { label: "Summary", name: "summary", widget: "text" }
+                  - { label: "Markdown Content", name: "content", widget: "markdown" }
+
   - name: "posts"
     label: "Blog Posts"
     folder: "src/posts"

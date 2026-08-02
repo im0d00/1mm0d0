@@ -51,7 +51,19 @@ eleventyExcludeFromCollections: true
     "category": "Credentials",
     "tags": [{{ cert.provider | dump | safe }}],
     "url": "/#certifications"
+  },
+  {%- endfor %}
+  {%- for kbcat in knowledgebase.categories %}
+  {%- for item in kbcat.items %}
+  {
+    "type": "Knowledge Base",
+    "title": {{ item.title | dump | safe }},
+    "description": {{ item.summary | dump | safe }},
+    "category": {{ item.category | dump | safe }},
+    "tags": {{ item.tags | dump | safe }},
+    "url": "/#kb"
   }
-  {%- if not loop.last %},{% endif %}
+  {%- if not loop.last or not loop.parent.loop.last %},{% endif %}
+  {%- endfor %}
   {%- endfor %}
 ]
