@@ -58,6 +58,51 @@ collections:
               - { label: "URL", name: "url", widget: "string" }
               - { label: "Icon Class", name: "icon", widget: "string" }
 
+      - name: "footer"
+        label: "Footer & Website Credit Settings"
+        file: "src/_data/footer.json"
+        fields:
+          - { label: "Footer Visibility Enabled", name: "footer_enabled", widget: "boolean", default: true }
+          - { label: "Website Credit Branding Prefix", name: "footer_branding_style", widget: "select", options: ["Designed & Developed by", "Managed by", "Built and Maintained by", "Powered by", "Engineered by", "Created with ❤️ by", "Crafted by"], default: "Designed & Developed by" }
+          - { label: "Credit Company / Studio Name", name: "credit_text", widget: "string", default: "Lizzdo Studio" }
+          - { label: "Credit Website URL", name: "credit_url", widget: "string", default: "https://lizzdo.com" }
+          - { label: "Company Name", name: "company_name", widget: "string", default: "Lizzdo Studio" }
+          - { label: "Footer Logo / Branding Text", name: "footer_logo", widget: "string", default: "[Aimad•Security]" }
+          - { label: "Footer Description", name: "footer_description", widget: "text" }
+          - { label: "Copyright Notice Text", name: "copyright", widget: "string" }
+          - { label: "Website Version Tag", name: "footer_version", widget: "string", default: "v2.5.0" }
+          - { label: "Last Updated Date", name: "last_updated_date", widget: "string", default: "August 2026" }
+          - { label: "Show Last Updated Date", name: "show_last_updated", widget: "boolean", default: true }
+          - { label: "Show Sitemap & RSS Links", name: "show_sitemap_rss", widget: "boolean", default: true }
+          - { label: "Footer Visual Theme", name: "footer_theme", widget: "select", options: ["glassmorphic", "dark_minimal", "hud_tech"], default: "glassmorphic" }
+          - { label: "Footer Layout Style", name: "footer_layout", widget: "select", options: ["multi_column", "compact", "centered"], default: "multi_column" }
+          - name: "quick_links"
+            label: "Quick Navigation Links"
+            widget: "list"
+            fields:
+              - { label: "Link Label", name: "label", widget: "string" }
+              - { label: "Target URL", name: "url", widget: "string" }
+          - name: "legal_links"
+            label: "Legal & Sitemap Links"
+            widget: "list"
+            fields:
+              - { label: "Link Label", name: "label", widget: "string" }
+              - { label: "Target URL", name: "url", widget: "string" }
+          - name: "contact_info"
+            label: "Footer Contact Information"
+            widget: "object"
+            fields:
+              - { label: "Contact Email", name: "email", widget: "string" }
+              - { label: "Location", name: "location", widget: "string" }
+              - { label: "Availability Status", name: "status", widget: "string" }
+          - name: "social_links"
+            label: "Footer Social Media Links"
+            widget: "list"
+            fields:
+              - { label: "Platform Name", name: "platform", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+              - { label: "FontAwesome Icon Class", name: "icon", widget: "string" }
+
       - name: "hero"
         label: "Hero Section"
         file: "src/_data/hero.json"
@@ -78,8 +123,24 @@ collections:
             fields:
               - { label: "Status Badge Text", name: "status_text", widget: "string", default: "Available for Security Consulting" }
               - { label: "Degree Title", name: "degree", widget: "string", default: "BSc Computer Science" }
+              - { label: "Verification Badge Text", name: "verification_badge", widget: "string", default: "Verified Security Analyst" }
+              - { label: "Location", name: "location", widget: "string", default: "Peshawar, Pakistan" }
+              - { label: "Specialization", name: "specialization", widget: "string", default: "Blue Team & DFIR Operations" }
+              - { label: "Experience Metric", name: "experience", widget: "string", default: "7+ Years Tech" }
+              - { label: "Latest Certification", name: "latest_cert", widget: "string", default: "Cisco Ethical Hacking & Networking" }
+              - { label: "Current Focus", name: "current_focus", widget: "string", default: "SIEM Automation & Threat Hunting" }
+              - { label: "Learning Platform", name: "learning_platform", widget: "string", default: "TryHackMe & BlueCapeSecurity" }
               - { label: "Show HUD Metadata Box", name: "show_hud", widget: "boolean", default: true }
               - { label: "Glowing Orbital Border", name: "glow_border", widget: "boolean", default: true }
+          - { label: "Show Trust Badges Bar", name: "show_trust_badges", widget: "boolean", default: true }
+          - name: "trust_badges"
+            label: "Trust Badges"
+            widget: "list"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "FontAwesome Icon", name: "icon", widget: "string" }
+              - { label: "Label / Rank", name: "label", widget: "string" }
+          - { label: "Show Scroll Indicator", name: "show_scroll_indicator", widget: "boolean", default: true }
           - { label: "Resume Button Text", name: "resume_button_text", widget: "string" }
           - { label: "Resume Button Link", name: "resume_button_link", widget: "string" }
           - { label: "Contact Button Text", name: "contact_button_text", widget: "string" }
@@ -554,6 +615,20 @@ collections:
                   - { label: "Summary", name: "summary", widget: "text" }
                   - { label: "Markdown Content", name: "content", widget: "markdown" }
 
+  - name: "resources_pages"
+    label: "Resources & Legal Policies"
+    folder: "src/resources"
+    create: true
+    slug: "{{slug}}"
+    fields:
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Summary", name: "summary", widget: "text", required: false }
+      - { label: "Icon (FontAwesome Class)", name: "icon", widget: "string", default: "fa-solid fa-shield-halved" }
+      - { label: "Effective Date", name: "date", widget: "datetime", required: false }
+      - { label: "Last Revised Date", name: "updated", widget: "datetime", required: false }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/resource.njk" }
+      - { label: "Page Body", name: "body", widget: "markdown" }
+
   - name: "posts"
     label: "Blog Posts"
     folder: "src/posts"
@@ -565,13 +640,25 @@ collections:
       - { label: "Publish Date", name: "date", widget: "datetime" }
       - { label: "Updated Date", name: "updated", widget: "datetime", required: false }
       - { label: "Author", name: "author", widget: "string", default: "Aimad Ul Islam" }
-      - { label: "Excerpt", name: "excerpt", widget: "text" }
-      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Excerpt / Summary", name: "excerpt", widget: "text" }
+      - { label: "Thumbnail Image", name: "thumbnail", widget: "image", required: false }
+      - { label: "Featured / Hero Image", name: "image", widget: "image", required: false }
       - { label: "Image Alt Text", name: "imageAlt", widget: "string", required: false }
       - { label: "Emoji / Icon", name: "emoji", widget: "string", required: false }
+      - { label: "Difficulty Level", name: "difficulty", widget: "select", options: ["Beginner", "Intermediate", "Advanced", "Expert"], default: "Intermediate" }
       - { label: "Categories", name: "categories", widget: "list" }
       - { label: "Tags", name: "tags", widget: "list" }
+      - { label: "Status", name: "status", widget: "select", options: ["Published", "Draft", "Scheduled"], default: "Published" }
+      - { label: "Featured Article?", name: "featured", widget: "boolean", default: false }
+      - { label: "Pinned to Top?", name: "pinned", widget: "boolean", default: false }
       - { label: "Reading Time (minutes)", name: "readingTime", widget: "number", value_type: "int", required: false }
-      - { label: "Featured Post?", name: "featured", widget: "boolean", default: false }
+      - { label: "Estimated Views Count", name: "views", widget: "number", value_type: "int", default: 120, required: false }
+      - { label: "Estimated Likes Count", name: "likes", widget: "number", value_type: "int", default: 24, required: false }
+      - { label: "SEO Title", name: "seo_title", widget: "string", required: false }
+      - { label: "SEO Description", name: "seo_description", widget: "text", required: false }
+      - { label: "Canonical URL", name: "canonical_url", widget: "string", required: false }
+      - { label: "Related Tools / Hardware", name: "related_tools", widget: "list", required: false }
+      - { label: "Related Projects", name: "related_projects", widget: "list", required: false }
+      - { label: "Related Labs", name: "related_labs", widget: "list", required: false }
       - { label: "Body", name: "body", widget: "markdown" }
 

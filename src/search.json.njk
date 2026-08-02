@@ -53,6 +53,54 @@ eleventyExcludeFromCollections: true
     "url": "/#certifications"
   },
   {%- endfor %}
+  {
+    "type": "Resource",
+    "title": "Privacy Policy",
+    "description": "Our commitment to data privacy, zero intrusive tracking, and data protection.",
+    "category": "Legal & Governance",
+    "tags": ["privacy", "gdpr", "data", "legal"],
+    "url": "/resources/privacy-policy/"
+  },
+  {
+    "type": "Resource",
+    "title": "Terms of Use",
+    "description": "Terms governing site access, intellectual property, and educational boundaries.",
+    "category": "Legal & Governance",
+    "tags": ["terms", "legal", "usage", "policy"],
+    "url": "/resources/terms/"
+  },
+  {
+    "type": "Resource",
+    "title": "Vulnerability Disclosure",
+    "description": "Responsible vulnerability disclosure guidelines and PGP encryption channel.",
+    "category": "Security Defense",
+    "tags": ["vulnerability", "disclosure", "bug-bounty", "pgp"],
+    "url": "/resources/responsible-disclosure/"
+  },
+  {
+    "type": "Resource",
+    "title": "Infrastructure Security Policy",
+    "description": "Technical overview of system architecture, CSP, WAF, and SSL hardening.",
+    "category": "Security Defense",
+    "tags": ["security", "csp", "waf", "ssl"],
+    "url": "/resources/security-policy/"
+  },
+  {
+    "type": "Resource",
+    "title": "Frequently Asked Questions (FAQ)",
+    "description": "Answers about lab setups, DFIR research, certification journey, and consulting.",
+    "category": "Support",
+    "tags": ["faq", "help", "labs", "support"],
+    "url": "/resources/faq/"
+  },
+  {
+    "type": "Resource",
+    "title": "System Changelog",
+    "description": "Version history, feature releases, and architecture improvements.",
+    "category": "Releases",
+    "tags": ["changelog", "updates", "releases", "version"],
+    "url": "/resources/changelog/"
+  },
   {%- for kbcat in knowledgebase.categories %}
   {%- for item in kbcat.items %}
   {

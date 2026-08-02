@@ -1,29 +1,43 @@
 {
-  "footer_logo": "AimadSecurity_SOC",
-  "about_text": "Enterprise Security Operations Center & Cybersecurity Research Portfolio.",
+  "footer_enabled": true,
+  "footer_branding_style": "Designed & Developed by",
+  "credit_text": "Lizzdo Studio",
+  "credit_url": "https://lizzdo.com",
+  "company_name": "Lizzdo Studio",
+  "footer_logo": "[Aimad•Security]",
+  "footer_description": "Cybersecurity student, SOC enthusiast, and network security practitioner from Pakistan. Specializing in DFIR, Linux Systems, and Ethical Hacking.",
+  "copyright": "© 2026 Aimad Ul Islam. All Rights Reserved.",
+  "footer_version": "v2.5.0",
+  "last_updated_date": "August 2026",
+  "show_last_updated": true,
+  "show_sitemap_rss": true,
+  "footer_theme": "glassmorphism",
+  "footer_layout": "multi-column",
   "quick_links": [
-    { "label": "About Me", "url": "#about" },
-    { "label": "Projects", "url": "#projects" },
-    { "label": "Research Reports", "url": "#reports" },
-    { "label": "Download Center", "url": "#downloads" },
-    { "label": "Technical Blog", "url": "/blog/" }
+    { "label": "About Me", "url": "/#about" },
+    { "label": "Certifications", "url": "/#certifications" },
+    { "label": "Skills & Matrix", "url": "/#skills" },
+    { "label": "Security Projects", "url": "/#projects" },
+    { "label": "Virtual Labs", "url": "/#labs" },
+    { "label": "SOC Dashboard", "url": "/#dashboard" },
+    { "label": "Technical Blog", "url": "/blog/" },
+    { "label": "Get In Touch", "url": "/#contact" }
   ],
-  "policy_links": [
-    { "label": "Privacy Policy", "url": "#contact" },
-    { "label": "Terms of Service", "url": "#contact" },
-    { "label": "Security Policy & Disclosure", "url": "#contact" },
-    { "label": "Disclaimer", "url": "#contact" }
+  "legal_links": [
+    { "label": "Privacy Policy", "url": "/#contact" },
+    { "label": "Terms of Use", "url": "/#contact" },
+    { "label": "Sitemap", "url": "/sitemap.xml" },
+    { "label": "RSS Feed", "url": "/feed.xml" }
   ],
-  "social_links": [
-    { "platform": "GitHub", "url": "https://github.com", "icon": "fa-brands fa-github" },
-    { "platform": "LinkedIn", "url": "https://linkedin.com", "icon": "fa-brands fa-linkedin-in" },
-    { "platform": "Twitter", "url": "https://x.com", "icon": "fa-brands fa-x-twitter" },
-    { "platform": "YouTube", "url": "https://youtube.com", "icon": "fa-brands fa-youtube" }
-  ],
-  "newsletter": {
-    "enabled": true,
-    "title": "Subscribe to Security Bulletins",
-    "description": "Receive threat intelligence updates, pentest writeups, and vulnerability analysis directly in your inbox."
+  "contact_info": {
+    "email": "info@aimadulislam.dpdns.org",
+    "location": "Peshawar, Pakistan",
+    "status": "Available for Consulting & Roles"
   },
-  "copyright": "© 2026 Aimad Security Operations Center. All Rights Reserved."
+  "social_links": [
+    { "platform": "GitHub", "url": "https://github.com/aimadulislam", "icon": "fa-brands fa-github" },
+    { "platform": "LinkedIn", "url": "https://linkedin.com/in/aimadulislam", "icon": "fa-brands fa-linkedin-in" },
+    { "platform": "X (Twitter)", "url": "https://x.com/aimadulislam", "icon": "fa-brands fa-x-twitter" },
+    { "platform": "YouTube", "url": "https://youtube.com/@aimadulislam", "icon": "fa-brands fa-youtube" }
+  ]
 }

@@ -1,0 +1,22 @@
+---
+layout: layouts/resource.njk
+title: "Infrastructure Security Policy"
+summary: "Technical overview of system architecture, security controls, HTTPS configuration, and defense mechanisms."
+icon: "fa-solid fa-lock"
+date: 2026-08-01
+updated: 2026-08-01
+---
+
+<h2>1. Security Architecture</h2>
+<p>Our web infrastructure is architected according to Defense-in-Depth principles to ensure high availability, data integrity, and mitigation of automated cyber threats.</p>
+
+<h2>2. Core Technical Controls</h2>
+<ul>
+    <li><strong>TLS 1.3 Transport Encryption:</strong> Full end-to-end HTTPS enforcement using HSTS preloading and modern cipher suites.</li>
+    <li><strong>Content Security Policy (CSP):</strong> Strict headers limiting resource execution strictly to verified static origins.</li>
+    <li><strong>Cloudflare Web Application Firewall (WAF):</strong> Automated edge filtering against SQL Injection, XSS, and bot traffic.</li>
+    <li><strong>Immutable Jamstack Architecture:</strong> Static site generation via Eleventy (11ty) deployed onto serverless CDN edge nodes, eliminating traditional database injection attack vectors.</li>
+</ul>
+
+<h2>3. Incident Monitoring</h2>
+<p>Log telemetry is continuously analyzed for anomalous access spikes, HTTP error anomalies, and unauthorized administrative access attempts.</p>

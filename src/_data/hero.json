@@ -18,9 +18,24 @@
   "profile_card": {
     "status_text": "Available for Security Consulting",
     "degree": "BSc Computer Science",
+    "verification_badge": "Verified Security Analyst",
+    "location": "Peshawar, Pakistan",
+    "specialization": "Blue Team & DFIR Operations",
+    "experience": "7+ Years Tech",
+    "latest_cert": "Cisco Ethical Hacking & Networking",
+    "current_focus": "SIEM Automation & Threat Hunting",
+    "learning_platform": "TryHackMe & BlueCapeSecurity",
     "show_hud": true,
     "glow_border": true
   },
+  "show_trust_badges": true,
+  "trust_badges": [
+    { "name": "Cisco", "icon": "fa-solid fa-network-wired", "label": "Certified" },
+    { "name": "TryHackMe", "icon": "fa-solid fa-terminal", "label": "Top Rank" },
+    { "name": "BlueCape DFIR", "icon": "fa-solid fa-shield-cat", "label": "Incident Response" },
+    { "name": "Univ of Peshawar", "icon": "fa-solid fa-graduation-cap", "label": "BSc CompSci" }
+  ],
+  "show_scroll_indicator": true,
   "resume_button_text": "Download Resume",
   "resume_button_link": "#resume",
   "contact_button_text": "Contact Me",

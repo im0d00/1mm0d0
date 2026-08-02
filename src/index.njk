@@ -189,57 +189,154 @@
     <div class="hero-glow-spot"></div>
 
     <div class="hero-inner">
+        <!-- LEFT COLUMN: PROFILE CARD -->
         <div class="hero-profile reveal">
-            <div class="profile-outer">
-                <div class="orbit orbit1"></div>
-                <div class="orbit orbit2"></div>
-                <div class="profile-inner">
-                    <img src="{{ settings.profile_picture or hero.hero_image }}" alt="{{ hero.name }}"
-                    onerror="this.src='https://ui-avatars.com/api/?name={{ hero.name | urlencode }}&background=0A1628&color=00E5FF&size=290&bold=true'" />
+            <div class="profile-card-wrap">
+                <div class="profile-outer">
+                    <div class="orbit orbit1"></div>
+                    <div class="orbit orbit2"></div>
+                    <div class="profile-inner">
+                        <img src="{{ settings.profile_picture or hero.hero_image }}" alt="{{ hero.name }}"
+                        onerror="this.src='https://ui-avatars.com/api/?name={{ hero.name | urlencode }}&background=0A1628&color=00E5FF&size=290&bold=true'" />
+                        <span class="profile-verified-badge" title="Verified Cybersecurity Analyst">
+                            <i class="fa-solid fa-circle-check"></i>
+                        </span>
+                    </div>
                 </div>
-                {% if hero.profile_card.show_hud != false %}
-                <div class="profile-hud">
-                    <div class="hud-row"><span class="hud-dot"></span><span>{{ hero.profile_card.status_text or contact.availability or "Available for Security Consulting" }}</span></div>
-                    <div class="hud-row"><span style="color:var(--violet2)">◆</span><span>{{ hero.profile_card.degree or "BSc Computer Science" }}</span></div>
-                    <div class="hud-row"><span style="color:var(--amber)">◆</span><span>{{ certifications.items | length }} Active Certifications</span></div>
+
+                <div class="profile-meta-card">
+                    <div class="profile-status-pill">
+                        <span class="status-dot"></span>
+                        <span>{{ hero.profile_card.status_text or contact.availability or "Available for Consulting" }}</span>
+                    </div>
+
+                    <div class="profile-info-rows">
+                        <div class="info-row"><i class="fa-solid fa-graduation-cap info-icon"></i> <span>{{ hero.profile_card.degree or "BSc Computer Science" }}</span></div>
+                        <div class="info-row"><i class="fa-solid fa-location-dot info-icon"></i> <span>{{ hero.profile_card.location or "Peshawar, Pakistan" }}</span></div>
+                        <div class="info-row"><i class="fa-solid fa-shield-halved info-icon"></i> <span>{{ hero.profile_card.specialization or "Blue Team & DFIR" }}</span></div>
+                        <div class="info-row"><i class="fa-solid fa-certificate info-icon"></i> <span>{{ hero.profile_card.latest_cert or "Cisco Ethical Hacking" }}</span></div>
+                        <div class="info-row"><i class="fa-solid fa-crosshairs info-icon"></i> <span>{{ hero.profile_card.current_focus or "SIEM & Threat Hunting" }}</span></div>
+                    </div>
+
+                    <div class="profile-card-socs">
+                        {% for soc in settings.social_media_links or hero.social_icons %}
+                        <a href="{{ soc.url or soc.link }}" target="_blank" rel="noopener noreferrer" aria-label="{{ soc.platform }}"><i class="{{ soc.icon }}"></i></a>
+                        {% endfor %}
+                    </div>
+
+                    <a href="{{ resume.pdf_file or hero.resume_button_link }}" download class="btn primary card-cv-btn">
+                        <i class="fa-solid fa-file-pdf"></i> Download CV
+                    </a>
                 </div>
-                {% endif %}
             </div>
         </div>
 
+        <!-- RIGHT COLUMN: HERO TEXT & CONTENT -->
         <div class="hero-text reveal rv1">
-            <div class="hero-eyebrow"><i class="fa-solid fa-shield-halved fa-xs"></i> {{ hero.professional_title }}</div>
-            <h1 class="hero-name">{{ hero.name }}<br /><span class="name-accent">{{ hero.name_accent }}</span></h1>
-            <div class="hero-role-wrap"><div class="hero-role" id="heroRole">{{ hero.rotating_job_titles[0] }}_</div></div>
-            <p class="hero-desc">{{ hero.biography }}</p>
+            <div class="hero-eyebrow">
+                <i class="fa-solid fa-user-shield"></i> {{ hero.professional_title }}
+            </div>
+            
+            <h1 class="hero-name hero-name-animate">
+                <span class="name-first">{{ hero.name }}</span> <span class="name-accent">{{ hero.name_accent }}</span>
+            </h1>
 
-            <div class="hero-btns">
-                <a href="{{ resume.pdf_file or hero.resume_button_link }}" download class="btn primary"><i class="fa-solid fa-download fa-xs"></i> {{ hero.resume_button_text }}</a>
-                <a href="{{ hero.contact_button_link }}" class="btn outline"><i class="fa-solid fa-envelope fa-xs"></i> {{ hero.contact_button_text }}</a>
-                <a href="{{ hero.view_projects_button_link }}" class="btn outline"><i class="fa-solid fa-terminal fa-xs"></i> {{ hero.view_projects_button_text }}</a>
-                <a href="{{ hero.blog_button_link }}" class="btn outline"><i class="fa-solid fa-pen-nib fa-xs"></i> {{ hero.blog_button_text }}</a>
+            <div class="hero-role-wrap">
+                <span class="role-prefix">Specialization: </span>
+                <span class="hero-role" id="heroRole">{{ hero.rotating_job_titles[0] }}_</span>
             </div>
 
+            <p class="hero-desc">
+                BSc Computer Science graduate from the <strong>University of Peshawar</strong> with expertise in 
+                <span class="kw-highlight">Network Security</span>, <span class="kw-highlight">Ethical Hacking</span>, 
+                <span class="kw-highlight">Digital Forensics (DFIR)</span>, and <span class="kw-highlight">SOC Operations</span>. 
+                Cisco-certified in Networking & Linux Essentials; trained by <strong>BlueCapeSecurity</strong>.
+            </p>
+
+            <!-- CTA BUTTON SYSTEM -->
+            <div class="hero-btns">
+                <a href="{{ resume.pdf_file or hero.resume_button_link }}" download class="btn primary">
+                    <i class="fa-solid fa-download"></i> {{ hero.resume_button_text }}
+                </a>
+                <a href="{{ hero.view_projects_button_link }}" class="btn secondary">
+                    <i class="fa-solid fa-folder-open"></i> {{ hero.view_projects_button_text }}
+                </a>
+                <a href="{{ hero.blog_button_link }}" class="btn outline">
+                    <i class="fa-solid fa-pen-nib"></i> {{ hero.blog_button_text }}
+                </a>
+                <a href="{{ hero.contact_button_link }}" class="btn ghost">
+                    <i class="fa-solid fa-paper-plane"></i> {{ hero.contact_button_text }}
+                </a>
+            </div>
+
+            <!-- DASHBOARD STATISTIC CARDS -->
             <div class="hero-metrics">
                 <div class="metric-card">
+                    <div class="metric-header">
+                        <i class="fa-solid fa-award metric-icon"></i>
+                        <span class="trend-indicator"><i class="fa-solid fa-circle-check"></i> Active</span>
+                    </div>
                     <div class="metric-num" data-target="{{ certifications.items | length }}">0</div>
                     <div class="metric-lbl">Certifications</div>
                 </div>
                 <div class="metric-card">
+                    <div class="metric-header">
+                        <i class="fa-solid fa-layer-group metric-icon"></i>
+                        <span class="trend-indicator"><i class="fa-solid fa-arrow-trend-up"></i> Live</span>
+                    </div>
                     <div class="metric-num" data-target="{{ projects.items | length }}">0</div>
-                    <div class="metric-lbl">Projects</div>
+                    <div class="metric-lbl">Security Projects</div>
                 </div>
                 <div class="metric-card">
+                    <div class="metric-header">
+                        <i class="fa-solid fa-flask metric-icon"></i>
+                        <span class="trend-indicator"><i class="fa-solid fa-bolt"></i> Lab</span>
+                    </div>
                     <div class="metric-num" data-target="{{ labs.items | length }}">0</div>
                     <div class="metric-lbl">Virtual Labs</div>
                 </div>
                 <div class="metric-card">
+                    <div class="metric-header">
+                        <i class="fa-solid fa-brain metric-icon"></i>
+                        <span class="trend-indicator"><i class="fa-solid fa-fire"></i> +12h/wk</span>
+                    </div>
                     <div class="metric-num" data-target="{{ dashboard.learning_hours or 600 }}" data-suffix="+">0</div>
-                    <div class="metric-lbl">Hours Learned</div>
+                    <div class="metric-lbl">Learning Hours</div>
                 </div>
             </div>
+
+            <!-- TRUST BADGES BAR -->
+            {% if hero.show_trust_badges != false %}
+            <div class="trust-badges-bar">
+                <span class="trust-title">Validated Competencies & Badges:</span>
+                <div class="trust-badges-list">
+                    {% for badge in hero.trust_badges %}
+                    <div class="trust-badge-item" title="{{ badge.label }}">
+                        <i class="{{ badge.icon }}"></i>
+                        <span>{{ badge.name }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
         </div>
     </div>
+
+    <!-- SCROLL INDICATOR -->
+    {% if hero.show_scroll_indicator != false %}
+    <div class="hero-scroll-indicator" id="heroScrollIndicator">
+        <a href="#about" aria-label="Scroll down to About section">
+            <span class="scroll-mouse">
+                <span class="scroll-wheel"></span>
+            </span>
+            <span class="scroll-text">EXPLORE PLATFORM</span>
+            <i class="fa-solid fa-chevron-down scroll-arrow"></i>
+        </a>
+    </div>
+    {% endif %}
+
+    <!-- SECTION DIVIDER -->
+    <div class="section-divider hero-divider"></div>
 </section>
 
 <!-- ABOUT ME -->
@@ -848,15 +945,7 @@
 </section>
 
 <!-- FOOTER -->
-<footer style="padding:2.5rem 0; border-top:1px solid var(--border); text-align:center; font-size:0.88rem; color:var(--muted);">
-    <div class="container">
-        <div style="font-family:'Space Grotesk',sans-serif; font-size:1.2rem; font-weight:700; color:var(--cyan); margin-bottom:0.5rem;">
-            {{ settings.logo }}
-        </div>
-        <div>{{ settings.footer_text }}</div>
-        <div style="margin-top:0.5rem;">{{ settings.copyright }}</div>
-    </div>
-</footer>
+{% include "footer.njk" %}
 
 <script>
 // LOADER
@@ -1085,10 +1174,17 @@ window.addEventListener('load', () => {
     const ham = document.getElementById('ham');
     const mobCloseBtn = document.getElementById('mobCloseBtn');
 
+    const scrollIndicator = document.getElementById('heroScrollIndicator');
+
     window.addEventListener('scroll', () => {
         if (navbar) {
             if (window.scrollY > 40) navbar.classList.add('scrolled');
             else navbar.classList.remove('scrolled');
+        }
+
+        if (scrollIndicator) {
+            if (window.scrollY > 80) scrollIndicator.classList.add('hidden');
+            else scrollIndicator.classList.remove('hidden');
         }
 
         const secs = document.querySelectorAll('section[id]');

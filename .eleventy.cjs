@@ -86,6 +86,24 @@ module.exports = function(eleventyConfig) {
     return Array.from(categories).sort();
   });
 
+  eleventyConfig.addCollection("categoryCounts", function(collectionApi) {
+    let counts = {};
+    collectionApi.getFilteredByGlob("src/posts/*.md").forEach(item => {
+      if (item.data && item.data.categories) {
+        let cats = item.data.categories;
+        if (typeof cats === "string") cats = [cats];
+        if (Array.isArray(cats)) {
+          for (let cat of cats) {
+            if (cat) {
+              counts[cat] = (counts[cat] || 0) + 1;
+            }
+          }
+        }
+      }
+    });
+    return counts;
+  });
+
   return {
     dir: {
       input: "src",

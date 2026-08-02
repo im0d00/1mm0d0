@@ -1,0 +1,55 @@
+<nav id="navbar" class="site-nav" role="navigation" aria-label="Main Navigation">
+    <div class="nav-container">
+        <a href="/" class="nav-logo" aria-label="Aimad Ul Islam - Homepage">
+            <span class="logo-bracket">[</span><span class="logo-text">Aimad•Security</span><span class="logo-bracket">]</span>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="/" {% if page.url == '/' %}class="active"{% endif %}>Home</a></li>
+            <li><a href="/#about">About</a></li>
+            <li><a href="/#certifications">Certs</a></li>
+            <li><a href="/#skills">Skills</a></li>
+            <li><a href="/#projects">Projects</a></li>
+            <li><a href="/#labs">Labs</a></li>
+            <li><a href="/#dashboard">SOC</a></li>
+            <li><a href="/blog/" {% if 'blog' in page.url or 'posts' in page.url %}class="active"{% endif %}>Blog</a></li>
+            <li><a href="/resources/" {% if 'resources' in page.url %}class="active"{% endif %}>Resources</a></li>
+            <li><a href="/#contact">Contact</a></li>
+        </ul>
+
+        <div class="nav-actions">
+            <button class="nav-search-btn" onclick="openSearchModal()" title="Search (Ctrl + K)" aria-label="Search">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span class="search-kbd">⌘K</span>
+            </button>
+            <div class="nav-status-badge">
+                <span class="status-dot"></span>
+                <span class="status-txt">ONLINE</span>
+            </div>
+            <button class="hamburger" id="ham" aria-label="Toggle navigation menu">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- Mobile Drawer Overlay -->
+<div class="mob-overlay" id="mobOverlay"></div>
+<div class="mobile-nav" id="mobNav">
+    <div class="mob-header">
+        <span class="logo-text">[Aimad•Security]</span>
+        <button class="mob-close-btn" id="mobCloseBtn" aria-label="Close menu">&times;</button>
+    </div>
+    <ul class="mobile-links">
+        <li><a href="/">Home</a></li>
+        <li><a href="/#about">About Me</a></li>
+        <li><a href="/#certifications">Certifications</a></li>
+        <li><a href="/#skills">Skills Matrix</a></li>
+        <li><a href="/#projects">Projects</a></li>
+        <li><a href="/#labs">Virtual Labs</a></li>
+        <li><a href="/#dashboard">SOC Dashboard</a></li>
+        <li><a href="/blog/">Technical Blog</a></li>
+        <li><a href="/resources/">Resources Hub</a></li>
+        <li><a href="/#contact">Contact Me</a></li>
+    </ul>
+</div>

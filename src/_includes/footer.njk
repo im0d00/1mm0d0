@@ -1,0 +1,100 @@
+{% if footer.footer_enabled != false %}
+<footer class="site-footer" role="contentinfo">
+    <div class="footer-top-glow"></div>
+    <div class="container">
+        <div class="footer-grid">
+            <!-- Brand Column -->
+            <div class="footer-col footer-brand-col">
+                <div class="footer-logo-brand">
+                    <span class="logo-bracket">[</span><span class="logo-text">{{ footer.footer_logo or settings.logo or "Aimad•Security" }}</span><span class="logo-bracket">]</span>
+                </div>
+                <p class="footer-desc">
+                    {{ footer.footer_description or settings.website_description or "Cybersecurity student, SOC enthusiast, and network security practitioner from Pakistan. Specializing in DFIR, Linux Systems, and Ethical Hacking." }}
+                </p>
+                {% if footer.contact_info.status or contact.availability %}
+                <div class="footer-status-pill">
+                    <span class="status-dot"></span>
+                    <span>{{ footer.contact_info.status or contact.availability or "Available for Consulting & Roles" }}</span>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Quick Navigation Column -->
+            <div class="footer-col">
+                <h4 class="footer-heading"><i class="fa-solid fa-compass"></i> Navigation</h4>
+                <ul class="footer-links-list">
+                    <li><a href="/"><i class="fa-solid fa-chevron-right fa-xs"></i> Home</a></li>
+                    <li><a href="/#about"><i class="fa-solid fa-chevron-right fa-xs"></i> About Me</a></li>
+                    <li><a href="/#certifications"><i class="fa-solid fa-chevron-right fa-xs"></i> Certifications</a></li>
+                    <li><a href="/#skills"><i class="fa-solid fa-chevron-right fa-xs"></i> Skills & Matrix</a></li>
+                    <li><a href="/#projects"><i class="fa-solid fa-chevron-right fa-xs"></i> Security Projects</a></li>
+                    <li><a href="/#labs"><i class="fa-solid fa-chevron-right fa-xs"></i> Virtual Labs</a></li>
+                    <li><a href="/#dashboard"><i class="fa-solid fa-chevron-right fa-xs"></i> SOC Dashboard</a></li>
+                    <li><a href="/blog/"><i class="fa-solid fa-chevron-right fa-xs"></i> Technical Blog</a></li>
+                    <li><a href="/resources/"><i class="fa-solid fa-chevron-right fa-xs"></i> Resources Center</a></li>
+                </ul>
+            </div>
+
+            <!-- Resources & Legal Column -->
+            <div class="footer-col">
+                <h4 class="footer-heading"><i class="fa-solid fa-shield-halved"></i> Resources</h4>
+                <ul class="footer-links-list">
+                    <li><a href="/resources/privacy-policy/"><i class="fa-solid fa-chevron-right fa-xs"></i> Privacy Policy</a></li>
+                    <li><a href="/resources/terms/"><i class="fa-solid fa-chevron-right fa-xs"></i> Terms of Use</a></li>
+                    <li><a href="/resources/security-policy/"><i class="fa-solid fa-chevron-right fa-xs"></i> Security Policy</a></li>
+                    <li><a href="/resources/responsible-disclosure/"><i class="fa-solid fa-chevron-right fa-xs"></i> Disclosure Policy</a></li>
+                    <li><a href="/resources/faq/"><i class="fa-solid fa-chevron-right fa-xs"></i> FAQ & Support</a></li>
+                    <li><a href="/resources/changelog/"><i class="fa-solid fa-chevron-right fa-xs"></i> System Changelog</a></li>
+                    <li><a href="/sitemap.xml"><i class="fa-solid fa-chevron-right fa-xs"></i> XML Sitemap</a></li>
+                    <li><a href="/feed.xml"><i class="fa-solid fa-chevron-right fa-xs"></i> RSS Feed</a></li>
+                </ul>
+            </div>
+
+            <!-- Contact & Social Column -->
+            <div class="footer-col">
+                <h4 class="footer-heading"><i class="fa-solid fa-headset"></i> Connect</h4>
+                <div class="footer-contact-details">
+                    <div class="f-con-row"><i class="fa-solid fa-envelope"></i> <a href="mailto:{{ footer.contact_info.email or contact.email or 'info@aimadulislam.dpdns.org' }}">{{ footer.contact_info.email or contact.email or 'info@aimadulislam.dpdns.org' }}</a></div>
+                    <div class="f-con-row"><i class="fa-solid fa-location-dot"></i> <span>{{ footer.contact_info.location or contact.location or 'Peshawar, Pakistan' }}</span></div>
+                </div>
+                <div class="footer-soc-row">
+                    {% for soc in footer.social_links or settings.social_media_links %}
+                    <a href="{{ soc.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ soc.platform }}"><i class="{{ soc.icon }}"></i></a>
+                    {% else %}
+                    <a href="https://github.com/aimadulislam" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://linkedin.com/in/aimadulislam" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="https://x.com/aimadulislam" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="https://youtube.com/@aimadulislam" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER BOTTOM BAR & CREDIT LINE -->
+        <div class="footer-bottom-bar">
+            <div class="footer-bottom-flex">
+                <div class="footer-copyright">
+                    {{ footer.copyright or settings.copyright or "© 2026 Aimad Ul Islam. All Rights Reserved." }}
+                </div>
+                
+                {% if footer.show_last_updated != false or footer.footer_version %}
+                <div class="footer-meta-tags">
+                    {% if footer.footer_version %}<span class="footer-tag-version"><i class="fa-solid fa-code-branch"></i> {{ footer.footer_version }}</span>{% endif %}
+                    {% if footer.show_last_updated != false %}<span class="footer-tag-date"><i class="fa-regular fa-clock"></i> Updated: {{ footer.last_updated_date or "August 2026" }}</span>{% endif %}
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- WEBSITE CREDIT LINE FOR LIZZDO STUDIO -->
+            <div class="footer-credit-row">
+                <span class="credit-label">{{ footer.footer_branding_style or "Designed & Developed by" }}</span>
+                <a href="{{ footer.credit_url or "https://lizzdo.com" }}" target="_blank" rel="noopener noreferrer" class="lizzdo-credit-link" title="{{ footer.company_name or "Lizzdo Studio" }} — Official Site">
+                    <span class="credit-glow-dot"></span>
+                    <span class="credit-text-name">{{ footer.credit_text or "Lizzdo Studio" }}</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square credit-ext-icon"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+{% endif %}

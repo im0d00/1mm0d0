@@ -1,0 +1,26 @@
+---
+layout: layouts/resource.njk
+title: "RSS Feed & Content Syndication"
+summary: "Subscribe to new technical writeups, DFIR tutorials, and threat hunting articles via RSS."
+icon: "fa-solid fa-rss"
+date: 2026-08-01
+updated: 2026-08-01
+---
+
+<h2>1. What is an RSS Feed?</h2>
+<p>RSS (Really Simple Syndication) allows you to subscribe to technical writeups and blog updates without needing social media or email tracking. New articles deliver automatically to your favorite RSS reader (e.g., Feedly, NetNewsWire, Inoreader, or Thunderbird).</p>
+
+<h2>2. Our Feed Endpoint</h2>
+<div class="callout callout-info mb-4">
+    <i class="fa-solid fa-square-rss"></i>
+    <div>
+        <div class="callout-title">Official Feed URL</div>
+        <div class="callout-body">
+            <code>https://aimadulislam.dpdns.org/feed.xml</code><br>
+            <a href="/feed.xml" target="_blank" class="btn btn-sm btn-cyan mt-2"><i class="fa-solid fa-rss"></i> Open Raw RSS Feed XML</a>
+        </div>
+    </div>
+</div>
+
+<h2>3. Feed Compatibility</h2>
+<p>Our feed is formatted in standard Atom / RSS 2.0 XML schema generated dynamically during site build time by Eleventy. It includes full post titles, summaries, publish dates, categories, and direct links.</p>

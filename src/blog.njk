@@ -1,434 +1,503 @@
 ---
-title: Blog — Aimad Ul Islam | Cybersecurity, Linux, Networking & More
-description: Technical blog by Aimad Ul Islam — cybersecurity, ethical hacking, Linux, networking, programming, DFIR, and more. Practical guides and tutorials.
+title: Cybersecurity & Technical Blog | Aimad Ul Islam
+description: Technical articles, DFIR research, SOC playbooks, Linux tutorials, and network security guides by Aimad Ul Islam.
 ---
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-
-  <!-- SEO -->
+  
   <title>{{ title }}</title>
   <meta name="description" content="{{ description }}"/>
-  <meta name="author" content="{{ settings.author }}"/>
+  <meta name="author" content="Aimad Ul Islam"/>
   
   <!-- Open Graph -->
   <meta property="og:type" content="website"/>
   <meta property="og:title" content="{{ title }}"/>
   <meta property="og:description" content="{{ description }}"/>
-  <meta property="og:site_name" content="{{ settings.author }}"/>
-  <meta property="og:image" content="{{ settings.og_image }}"/>
-
-  <meta name="theme-color" content="{{ settings.theme_color }}"/>
-  <link rel="icon" type="image/svg+xml" href="{{ settings.favicon }}"/>
+  <meta property="og:url" content="https://aimadulislam.dpdns.org/blog/"/>
+  <meta name="theme-color" content="#080C1A"/>
 
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 
-  <!-- Blog CSS -->
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css"/>
   <link rel="stylesheet" href="/css/blog.css"/>
 </head>
-<body>
+<body class="blog-page-body">
 
-<!-- Reading Progress Bar -->
 <div id="reading-progress" role="progressbar" aria-label="Page reading progress"></div>
-
-<!-- Grid Background -->
 <div class="grid-bg" aria-hidden="true"></div>
 <div class="scan-line" aria-hidden="true"></div>
 
-<!-- NAVIGATION -->
-<nav class="blog-nav" id="navbar" role="navigation" aria-label="Main navigation">
-  <a href="/" class="nav-logo" aria-label="{{ settings.author }} — Home">
-    <span class="br">[</span>{{ settings.portfolio_name }}<span class="nav-dot" aria-hidden="true"></span><span class="br">]</span>
-  </a>
+<!-- UNIFIED HEADER -->
+{% include "header.njk" %}
 
-  <ul class="nav-links" role="list">
-    <li><a href="/#about">About</a></li>
-    <li><a href="/#certifications">Certs</a></li>
-    <li><a href="/#skills">Skills</a></li>
-    <li><a href="/#projects">Projects</a></li>
-    <li><a href="/blog/" class="active" aria-current="page">Blog</a></li>
-    <li><a href="/#contact">Contact</a></li>
-  </ul>
-
-  <div class="nav-right">
-    <div class="nav-status" aria-label="Availability status">
-      <div class="status-dot" aria-hidden="true"></div>
-      <span class="status-text">{{ contact.availability }}</span>
-    </div>
-    <button id="dark-mode-btn" class="dark-mode-btn" aria-label="Toggle dark mode" title="Toggle dark mode">
-      <i class="fa-solid fa-moon" aria-hidden="true"></i>
-    </button>
-    <a href="/#contact" class="nav-btn">Hire Me</a>
-  </div>
-
-  <button class="hamburger" id="ham" aria-label="Toggle mobile menu" aria-expanded="false">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-
-<!-- Mobile Nav -->
-<div class="mobile-nav" id="mobNav" role="navigation" aria-label="Mobile navigation">
-  <a href="/">Home</a>
-  <a href="/#about">About</a>
-  <a href="/#certifications">Certifications</a>
-  <a href="/#skills">Skills</a>
-  <a href="/#projects">Projects</a>
-  <a href="/blog/" aria-current="page">Blog</a>
-  <a href="/#contact">Contact</a>
-</div>
-
-<!-- HERO -->
+<!-- HERO SECTION -->
 <section id="blog-hero" aria-labelledby="blog-hero-title">
   <canvas id="blog-hero-canvas" aria-hidden="true"></canvas>
-  <div class="blog-hero-inner">
-    <div class="blog-hero-eye" aria-hidden="true">Technical Writing & Research</div>
+  <div class="blog-hero-inner container">
+    <div class="blog-hero-eye"><i class="fa-solid fa-terminal"></i> Security Operations & Technical Journal</div>
     <h1 class="blog-hero-title" id="blog-hero-title">
-      The <span class="accent">Cyber</span>security Blog
+      Cybersecurity <span class="accent">Knowledge Vault</span>
     </h1>
-    <p class="blog-hero-sub">Practical guides on ethical hacking, Linux, networking, DFIR, and more — written by a cybersecurity student who documents everything he learns.</p>
+    <p class="blog-hero-sub">In-depth technical writeups on Digital Forensics & Incident Response (DFIR), SOC operations, network security, Linux hardening, and ethical hacking.</p>
 
-    <!-- Search -->
-    <div class="search-wrap" role="search">
-      <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-      <label for="blog-search" class="visually-hidden">Search blog posts</label>
-      <input type="search" id="blog-search" placeholder="Search posts, topics, tools..." autocomplete="off" spellcheck="false" aria-label="Search blog posts"/>
+    <!-- Search & Filter Controls -->
+    <div class="search-filter-container card">
+      <div class="search-wrap" role="search">
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        <input type="search" id="blog-search" placeholder="Search writeups by title, CVE, tool, tag, or topic..." autocomplete="off" aria-label="Search blog posts"/>
+      </div>
+
+      <div class="filter-controls-row">
+        <div class="filter-group">
+          <label for="difficulty-select"><i class="fa-solid fa-layer-group"></i> Level:</label>
+          <select id="difficulty-select" class="cyber-select">
+            <option value="all">All Difficulties</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+            <option value="expert">Expert</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="sort-select"><i class="fa-solid fa-arrow-down-wide-short"></i> Sort By:</label>
+          <select id="sort-select" class="cyber-select">
+            <option value="newest">Newest Published</option>
+            <option value="oldest">Oldest First</option>
+            <option value="readtime">Reading Time</option>
+            <option value="title">Title (A-Z)</option>
+          </select>
+        </div>
+      </div>
     </div>
-    <p class="search-results-count" id="posts-count" aria-live="polite"></p>
 
-    <!-- Stats -->
-    <div class="blog-hero-stats" aria-label="Blog statistics">
-      <div class="text-center">
-        <div class="hero-stat-num">{{ collections.posts.length }}</div>
-        <div class="hero-stat-lbl">Articles</div>
-      </div>
-      <div class="text-center">
-        <div class="hero-stat-num">{{ collections.categories.length }}</div>
-        <div class="hero-stat-lbl">Categories</div>
-      </div>
-      <div class="text-center">
-        <div class="hero-stat-num">∞</div>
-        <div class="hero-stat-lbl">Learning</div>
+    <!-- Category Pills with Auto Counts -->
+    <div id="categories-bar" class="categories-bar-wrapper">
+      <div class="categories-scroll" role="list">
+        <button class="cat-btn active" data-cat="all" role="listitem">
+          <i class="fa-solid fa-border-all fa-xs"></i> All Writeups <span class="cat-count">({{ collections.posts.length }})</span>
+        </button>
+        {% for cat in collections.categories %}
+        <button class="cat-btn" data-cat="{{ cat }}" role="listitem">
+          <i class="fa-solid fa-folder-open fa-xs"></i> {{ cat }} <span class="cat-count">({{ collections.categoryCounts[cat] or 1 }})</span>
+        </button>
+        {% endfor %}
       </div>
     </div>
   </div>
 </section>
 
-<!-- CATEGORIES BAR -->
-<div id="categories-bar" role="navigation" aria-label="Filter by category">
-  <div class="categories-scroll" role="list">
-    <button class="cat-btn active" data-cat="all" role="listitem" aria-pressed="true">
-      <i class="fa-solid fa-border-all fa-xs" aria-hidden="true"></i> All Posts
-    </button>
-    {% for cat in collections.categories %}
-    <button class="cat-btn" data-cat="{{ cat }}" role="listitem" aria-pressed="false">
-      <i class="fa-solid fa-folder-open fa-xs" aria-hidden="true"></i> {{ cat }}
-    </button>
-    {% endfor %}
-  </div>
-</div>
-
 <!-- MAIN CONTENT -->
-<main>
-  <section id="articles-section" aria-labelledby="articles-heading">
-    <div class="container">
-
-      <!-- Breadcrumb -->
-      <nav class="breadcrumb" aria-label="Breadcrumb">
-        <a href="/"><i class="fa-solid fa-house fa-xs" aria-hidden="true"></i> Home</a>
-        <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
-        <span aria-current="page">Blog</span>
-      </nav>
-
-      <!-- Featured Post -->
-      <div class="articles-section-title" id="articles-heading" aria-hidden="true">
-        Featured Post
-      </div>
-      <div id="featured-post-wrap" aria-label="Featured post">
-        {% set featuredPost = collections.posts | head(1) | first %}
-        {% if featuredPost %}
-        <a href="{{ featuredPost.url }}" class="featured-post card" aria-label="Featured: {{ featuredPost.data.title }}">
-          <div class="card-glow"></div>
-          <div class="featured-img-wrap">
-            {% if featuredPost.data.image %}
-            <img src="{{ featuredPost.data.image }}" alt="{{ featuredPost.data.imageAlt }}" loading="lazy"/>
-            {% else %}
-            <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:5rem;background:linear-gradient(135deg,rgba(0,212,255,0.06),rgba(124,58,237,0.08));">{{ featuredPost.data.emoji | default("📄") }}</div>
-            {% endif %}
-            <div class="featured-img-overlay"></div>
-            <span class="featured-badge">Featured</span>
+<main class="container">
+  <!-- FEATURED ARTICLE SECTION -->
+  <section class="featured-section">
+    <div class="articles-section-title">
+      <i class="fa-solid fa-star text-cyan"></i> Featured Technical Writeup
+    </div>
+    <div id="featured-post-wrap">
+      {% set featuredPost = collections.posts | head(1) | first %}
+      {% if featuredPost %}
+      <article class="featured-post card" onclick="window.location='{{ featuredPost.url }}'">
+        <div class="card-glow"></div>
+        <div class="featured-img-wrap">
+          {% if featuredPost.data.image or featuredPost.data.thumbnail %}
+          <img src="{{ featuredPost.data.image or featuredPost.data.thumbnail }}" alt="{{ featuredPost.data.title }}" loading="lazy"/>
+          {% else %}
+          <div class="featured-img-placeholder">
+            <i class="fa-solid fa-shield-virus"></i>
+            <span class="placeholder-emoji">{{ featuredPost.data.emoji or '📄' }}</span>
           </div>
-          <div class="featured-content">
-            <div>
-              <div class="featured-cat">
-                {% for cat in featuredPost.data.categories | head(2) %}
-                <span class="tag tag-cyber">{{ cat }}</span>
-                {% endfor %}
-              </div>
-              <h2 class="featured-title">{{ featuredPost.data.title }}</h2>
-              <p class="featured-excerpt">{{ featuredPost.data.excerpt }}</p>
+          {% endif %}
+          <div class="featured-img-overlay"></div>
+          <span class="featured-badge"><i class="fa-solid fa-fire"></i> FEATURED</span>
+        </div>
+        <div class="featured-content">
+          <div>
+            <div class="featured-cat-row">
+              {% for cat in featuredPost.data.categories %}
+              <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> {{ cat }}</span>
+              {% endfor %}
+              <span class="tag tag-tut"><i class="fa-solid fa-gauge-high"></i> {{ featuredPost.data.difficulty or "Intermediate" }}</span>
             </div>
-            <div class="featured-meta">
-              <span class="meta-item"><i class="fa-solid fa-user"></i>{{ featuredPost.data.author | default("Aimad Ul Islam") }}</span>
-              <span class="meta-item"><i class="fa-regular fa-calendar"></i>{{ featuredPost.date | readableDate }}</span>
-              <span class="meta-item"><i class="fa-regular fa-clock"></i>{{ featuredPost.data.readingTime | default("5") }} min read</span>
-            </div>
+            <h2 class="featured-title">{{ featuredPost.data.title }}</h2>
+            <p class="featured-excerpt">{{ featuredPost.data.excerpt or featuredPost.data.subtitle }}</p>
           </div>
-        </a>
-        {% endif %}
-      </div>
-
-      <!-- Blog Layout: Articles + Sidebar -->
-      <div class="blog-layout">
-
-        <!-- Main: Articles Grid -->
-        <div>
-          <div class="articles-section-title" aria-hidden="true">Latest Articles</div>
-          <div id="articles-grid" class="articles-grid" role="list" aria-label="Blog articles">
-            {% for post in collections.posts %}
-            <article class="card article-card reveal" data-categories="{{ post.data.categories | join(',') | lower }}" data-title="{{ post.data.title | lower }}" onclick="window.location='{{ post.url }}'" role="link" tabindex="0">
-              <div class="card-glow"></div>
-              <div class="article-card-img-wrap">
-                {% if post.data.image %}
-                <img class="article-card-img" src="{{ post.data.image }}" alt="{{ post.data.imageAlt }}" loading="lazy"/>
-                {% else %}
-                <div class="article-card-img-placeholder">{{ post.data.emoji | default("📄") }}</div>
-                {% endif %}
-              </div>
-              <div class="article-card-body">
-                <div class="article-card-tags">
-                  {% for cat in post.data.categories | head(2) %}
-                  <span class="tag tag-cyber">{{ cat }}</span>
-                  {% endfor %}
-                </div>
-                <h3 class="article-card-title">{{ post.data.title }}</h3>
-                <p class="article-card-excerpt">{{ post.data.excerpt }}</p>
-                <div class="article-card-footer">
-                  <div class="article-meta-mini">
-                    <span><i class="fa-regular fa-calendar"></i> {{ post.date | readableDate }}</span>
-                    <span><i class="fa-regular fa-clock"></i> {{ post.data.readingTime | default("5") }} min</span>
-                  </div>
-                  <span class="read-more-link">Read <i class="fa-solid fa-arrow-right fa-xs"></i></span>
-                </div>
-              </div>
-            </article>
-            {% endfor %}
-          </div>
-          <div class="no-results" id="no-results" role="alert" aria-live="polite">
-            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
-            <h3>No posts found</h3>
-            <p>Try a different search term or browse all categories.</p>
-            <button class="btn btn-outline mt-1" onclick="resetSearch()">
-              <i class="fa-solid fa-rotate-left fa-xs" aria-hidden="true"></i> Reset Filters
-            </button>
+          <div class="featured-meta">
+            <span class="meta-item"><i class="fa-solid fa-user-astronaut"></i> {{ featuredPost.data.author or "Aimad Ul Islam" }}</span>
+            <span class="meta-item"><i class="fa-regular fa-calendar"></i> {{ featuredPost.date | readableDate }}</span>
+            <span class="meta-item"><i class="fa-regular fa-clock"></i> {{ featuredPost.data.readingTime or 10 }} min read</span>
+            <a href="{{ featuredPost.url }}" class="btn btn-sm btn-cyan ml-auto"><i class="fa-solid fa-book-open"></i> Read Full Guide</a>
           </div>
         </div>
-
-        <!-- Sidebar -->
-        <aside class="sidebar" aria-label="Sidebar">
-
-          <!-- Recent Posts -->
-          <div class="sidebar-widget card">
-            <div class="card-glow"></div>
-            <div class="widget-title"><i class="fa-regular fa-clock" aria-hidden="true"></i> Recent Posts</div>
-            <div id="recent-posts" role="list" aria-label="Recent posts">
-              {% for post in collections.posts | head(4) %}
-              <a href="{{ post.url }}" class="sidebar-post">
-                <div class="sidebar-post-thumb">
-                  {% if post.data.image %}
-                  <img src="{{ post.data.image }}" alt="{{ post.data.imageAlt }}" loading="lazy"/>
-                  {% else %}
-                  {{ post.data.emoji | default("📄") }}
-                  {% endif %}
-                </div>
-                <div>
-                  <div class="sidebar-post-title">{{ post.data.title }}</div>
-                  <div class="sidebar-post-meta">{{ post.date | readableDate }}</div>
-                </div>
-              </a>
-              {% endfor %}
-            </div>
-          </div>
-
-          <!-- Categories -->
-          <div class="sidebar-widget card">
-            <div class="card-glow"></div>
-            <div class="widget-title"><i class="fa-solid fa-folder-open" aria-hidden="true"></i> Categories</div>
-            <div id="cat-list" role="list" aria-label="Post categories">
-              {% for cat in collections.categories %}
-              <a href="?cat={{ cat }}" class="cat-list-item cat-sidebar-link" data-cat="{{ cat }}">
-                <span class="cat-list-name"><i class="fa-solid fa-folder" style="font-size:0.6rem"></i>{{ cat }}</span>
-              </a>
-              {% endfor %}
-            </div>
-          </div>
-
-          <!-- Newsletter Widget -->
-          <div class="sidebar-widget card">
-            <div class="card-glow"></div>
-            <div class="widget-title"><i class="fa-solid fa-envelope" aria-hidden="true"></i> Newsletter</div>
-            <p style="color:var(--muted);font-size:0.78rem;line-height:1.6;margin-bottom:1rem;">Get new posts delivered to your inbox. No spam, ever.</p>
-            <form class="newsletter-form newsletter-form-handler" novalidate>
-              <input type="email" class="newsletter-input" placeholder="your@email.com" aria-label="Email address for newsletter" required/>
-              <button type="submit" class="newsletter-btn">Subscribe</button>
-              <p class="newsletter-note">No spam · Unsubscribe anytime</p>
-            </form>
-          </div>
-
-        </aside>
-      </div>
+      </article>
+      {% endif %}
     </div>
   </section>
 
-  <!-- NEWSLETTER SECTION -->
-  <section id="newsletter-section" aria-labelledby="newsletter-heading">
-    <div class="container">
-      <div class="newsletter-big-wrap reveal">
-        <div class="newsletter-big-icon" aria-hidden="true"><i class="fa-solid fa-envelope-open-text"></i></div>
-        <h2 class="newsletter-big-title" id="newsletter-heading">Stay in the Loop</h2>
-        <p class="newsletter-big-desc">New cybersecurity guides, tool walkthroughs, and DFIR writeups — delivered straight to your inbox when they go live.</p>
-        <form class="newsletter-big-form newsletter-form-handler" novalidate>
-          <label for="newsletter-email" class="visually-hidden">Email address</label>
-          <input type="email" id="newsletter-email" placeholder="your@email.com" aria-label="Email address" required/>
-          <button type="submit" class="btn btn-primary">
-            <i class="fa-solid fa-paper-plane fa-xs" aria-hidden="true"></i> Subscribe
-          </button>
-        </form>
-        <p style="color:var(--muted);font-size:0.72rem;margin-top:0.85rem;">No spam · Unsubscribe anytime · Free forever</p>
+  <!-- ARTICLES GRID SECTION -->
+  <section id="articles-section" class="articles-main-section">
+    <div class="blog-layout">
+      <!-- Main Articles Grid -->
+      <div class="articles-column">
+        <div class="section-flex-header">
+          <h2 class="articles-section-title"><i class="fa-solid fa-newspaper"></i> All Published Guides</h2>
+          <span class="posts-count-badge" id="posts-count">{{ collections.posts.length }} Articles</span>
+        </div>
+
+        <div id="articles-grid" class="articles-grid">
+          {% for post in collections.posts %}
+          <article class="card article-card" 
+                   data-categories="{{ post.data.categories | join(',') | lower }}" 
+                   data-title="{{ post.data.title | lower }}"
+                   data-excerpt="{{ (post.data.excerpt or post.data.subtitle or '') | lower }}"
+                   data-tags="{{ (post.data.tags or []) | join(',') | lower }}"
+                   data-difficulty="{{ (post.data.difficulty or 'intermediate') | lower }}"
+                   data-date="{{ post.date | htmlDateString }}"
+                   data-readtime="{{ post.data.readingTime or 5 }}"
+                   onclick="window.location='{{ post.url }}'">
+            <div class="card-glow"></div>
+            <div class="article-card-img-wrap">
+              {% if post.data.image or post.data.thumbnail %}
+              <img class="article-card-img" src="{{ post.data.image or post.data.thumbnail }}" alt="{{ post.data.title }}" loading="lazy"/>
+              {% else %}
+              <div class="article-card-img-placeholder">
+                <span class="card-emoji">{{ post.data.emoji or "📄" }}</span>
+              </div>
+              {% endif %}
+              <span class="card-diff-badge {{ (post.data.difficulty or 'Intermediate') | lower }}">{{ post.data.difficulty or "Intermediate" }}</span>
+            </div>
+
+            <div class="article-card-body">
+              <div class="article-card-tags">
+                {% for cat in post.data.categories %}
+                <span class="tag tag-cyber">{{ cat }}</span>
+                {% endfor %}
+              </div>
+
+              <h3 class="article-card-title">{{ post.data.title }}</h3>
+              <p class="article-card-excerpt">{{ post.data.excerpt or post.data.subtitle }}</p>
+
+              {% if post.data.tags %}
+              <div class="article-tags-mini">
+                {% for tag in post.data.tags %}
+                <span class="mini-tag">#{{ tag }}</span>
+                {% endfor %}
+              </div>
+              {% endif %}
+
+              <div class="article-card-footer">
+                <div class="article-meta-mini">
+                  <span><i class="fa-regular fa-calendar"></i> {{ post.date | readableDate }}</span>
+                  <span><i class="fa-regular fa-clock"></i> {{ post.data.readingTime or 5 }}m</span>
+                </div>
+                <span class="read-more-link">Read Writeup <i class="fa-solid fa-arrow-right fa-xs"></i></span>
+              </div>
+            </div>
+          </article>
+          {% endfor %}
+        </div>
+
+        <!-- No Results Fallback -->
+        <div class="no-results card" id="no-results" style="display:none;">
+          <i class="fa-solid fa-robot"></i>
+          <h3>No Matching Security Writeups Found</h3>
+          <p>Try refining your search keyword, changing difficulty levels, or resetting category filters.</p>
+          <button class="btn btn-cyan mt-3" onclick="resetSearch()"><i class="fa-solid fa-rotate"></i> Reset All Filters</button>
+        </div>
+
+        <!-- Pagination Controls -->
+        <div class="pagination-container" id="pagination-controls" style="margin-top:2.5rem;">
+          <!-- Dynamically populated via JS -->
+        </div>
       </div>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <!-- Quick Stats -->
+        <div class="sidebar-widget card">
+          <h3 class="widget-title"><i class="fa-solid fa-chart-line"></i> Knowledge Index</h3>
+          <div class="sidebar-stats-grid">
+            <div class="s-stat-box">
+              <div class="s-stat-val">{{ collections.posts.length }}</div>
+              <div class="s-stat-lbl">Articles</div>
+            </div>
+            <div class="s-stat-box">
+              <div class="s-stat-val">{{ collections.categories.length }}</div>
+              <div class="s-stat-lbl">Categories</div>
+            </div>
+            <div class="s-stat-box">
+              <div class="s-stat-val">100%</div>
+              <div class="s-stat-lbl">Verified</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Categories Widget -->
+        <div class="sidebar-widget card">
+          <h3 class="widget-title"><i class="fa-solid fa-folder-tree"></i> Categories Breakdown</h3>
+          <div class="sidebar-cat-list">
+            {% for cat in collections.categories %}
+            <a href="#" class="sidebar-cat-item" data-cat="{{ cat }}">
+              <span class="cat-name"><i class="fa-solid fa-folder text-cyan"></i> {{ cat }}</span>
+              <span class="cat-count-badge">{{ collections.categoryCounts[cat] or 1 }}</span>
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Recent Articles -->
+        <div class="sidebar-widget card">
+          <h3 class="widget-title"><i class="fa-regular fa-clock"></i> Recent Publications</h3>
+          <div class="sidebar-posts">
+            {% for post in collections.posts | head(5) %}
+            <a href="{{ post.url }}" class="sidebar-post">
+              <div class="sidebar-post-thumb">
+                {% if post.data.thumbnail or post.data.image %}
+                <img src="{{ post.data.thumbnail or post.data.image }}" alt="{{ post.data.title }}"/>
+                {% else %}
+                <span class="thumb-emoji">{{ post.data.emoji or "📄" }}</span>
+                {% endif %}
+              </div>
+              <div class="sidebar-post-info">
+                <h4 class="sidebar-post-title">{{ post.data.title }}</h4>
+                <span class="sidebar-post-date"><i class="fa-regular fa-calendar"></i> {{ post.date | readableDate }}</span>
+              </div>
+            </a>
+            {% endfor %}
+          </div>
+        </div>
+
+        <!-- Newsletter Sub Widget -->
+        <div class="sidebar-widget card">
+          <h3 class="widget-title"><i class="fa-solid fa-paper-plane"></i> Security Digest</h3>
+          <p class="widget-desc">Get technical walkthroughs and threat intelligence briefs directly in your inbox.</p>
+          <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed to Security Digest successfully!');">
+            <input type="email" placeholder="security.analyst@domain.com" required class="cyber-input"/>
+            <button type="submit" class="btn btn-cyan btn-full mt-2"><i class="fa-solid fa-rss"></i> Subscribe</button>
+          </form>
+        </div>
+      </aside>
     </div>
   </section>
 </main>
 
-<!-- FOOTER -->
-<footer class="blog-footer" role="contentinfo">
-  <div class="container">
-    <div class="footer-grid">
-      <div>
-        <div class="footer-brand">[Aimad<span>.</span>Blog]</div>
-        <p class="footer-tagline">Cybersecurity student, SOC enthusiast, and Cisco Ethical Hacker from Peshawar, Pakistan. Writing about what I learn — one post at a time.</p>
+<!-- Search Modal -->
+<div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-label="Global Site Search">
+  <div class="search-modal-content card">
+      <div class="search-input-wrap">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="modalSearchInput" placeholder="Search writeups, tools, certs, policies..." autocomplete="off">
+          <button class="search-close-btn" onclick="closeSearchModal()">&times;</button>
       </div>
-      <div class="footer-col">
-        <h4>Navigation</h4>
-        <a href="/">Portfolio</a>
-        <a href="/blog/">Blog Home</a>
-        <a href="/#certifications">Certifications</a>
-        <a href="/#projects">Projects</a>
-        <a href="/#contact">Contact</a>
+      <div class="search-results" id="modalSearchResults">
+          <div class="search-empty-state"><i class="fa-solid fa-terminal"></i> Type to search posts, projects, or policies...</div>
       </div>
-      <div class="footer-col">
-        <h4>Connect</h4>
-        <a href="https://linkedin.com/in/aimadulislam" target="_blank" rel="noopener"><i class="fa-brands fa-linkedin-in fa-xs" aria-hidden="true"></i> LinkedIn</a>
-        <a href="https://github.com/Aimadulislam" target="_blank" rel="noopener"><i class="fa-brands fa-github fa-xs" aria-hidden="true"></i> GitHub</a>
-        <a href="https://aimad.lizzdo.com" target="_blank" rel="noopener"><i class="fa-solid fa-globe fa-xs" aria-hidden="true"></i> Lizzdo.com</a>
-        <a href="mailto:info@aimadulislam.dpdns.org"><i class="fa-solid fa-envelope fa-xs" aria-hidden="true"></i> Email</a>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <span class="footer-copy">© 2026 Aimad Ul Islam — All rights reserved.</span>
-      <div class="footer-socs">
-        <a href="https://linkedin.com/in/aimadulislam" target="_blank" rel="noopener" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in" aria-hidden="true"></i></a>
-        <a href="https://github.com/Aimadulislam" target="_blank" rel="noopener" aria-label="GitHub"><i class="fa-brands fa-github" aria-hidden="true"></i></a>
-        <a href="mailto:info@aimadulislam.dpdns.org" aria-label="Email"><i class="fa-solid fa-envelope" aria-hidden="true"></i></a>
-      </div>
-    </div>
   </div>
-</footer>
+</div>
 
-<!-- Scroll to Top -->
-<button id="scroll-top" aria-label="Scroll to top" title="Scroll to top">
-  <i class="fa-solid fa-chevron-up fa-xs" aria-hidden="true"></i>
-</button>
+<!-- UNIFIED FOOTER -->
+{% include "footer.njk" %}
 
-<script src="/js/blog.js"></script>
+<button id="scroll-top" aria-label="Scroll to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+<script src="/js/main.js"></script>
 <script>
-  // Simple client-side filtering logic for the Eleventy rendered list
-  document.addEventListener("DOMContentLoaded", () => {
-    const searchInput = document.getElementById("blog-search");
-    const catBtns = document.querySelectorAll(".cat-btn");
-    const sidebarCatLinks = document.querySelectorAll(".cat-sidebar-link");
-    const articles = document.querySelectorAll(".article-card");
-    const noResults = document.getElementById("no-results");
-    
-    let currentCat = "all";
-    let currentSearch = "";
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("blog-search");
+  const difficultySelect = document.getElementById("difficulty-select");
+  const sortSelect = document.getElementById("sort-select");
+  const catBtns = document.querySelectorAll(".cat-btn");
+  const sidebarCatLinks = document.querySelectorAll(".sidebar-cat-item");
+  const articlesGrid = document.getElementById("articles-grid");
+  const articles = Array.from(document.querySelectorAll(".article-card"));
+  const noResults = document.getElementById("no-results");
+  const postsCountBadge = document.getElementById("posts-count");
+  const paginationControls = document.getElementById("pagination-controls");
 
-    function applyFilters() {
-      let visibleCount = 0;
-      articles.forEach(article => {
-        const title = article.getAttribute("data-title");
-        const cats = article.getAttribute("data-categories");
-        
-        const matchesSearch = currentSearch === "" || title.includes(currentSearch) || cats.includes(currentSearch);
-        const matchesCat = currentCat === "all" || cats.includes(currentCat.toLowerCase());
+  let currentCat = "all";
+  let currentDifficulty = "all";
+  let currentSort = "newest";
+  let currentSearch = "";
+  let currentPage = 1;
+  const itemsPerPage = 6;
 
-        if (matchesSearch && matchesCat) {
-          article.style.display = "";
-          visibleCount++;
-        } else {
-          article.style.display = "none";
-        }
-      });
+  function updateDisplay() {
+    let filtered = articles.filter(article => {
+      const title = article.getAttribute("data-title") || "";
+      const excerpt = article.getAttribute("data-excerpt") || "";
+      const cats = article.getAttribute("data-categories") || "";
+      const tags = article.getAttribute("data-tags") || "";
+      const difficulty = article.getAttribute("data-difficulty") || "";
 
-      if (visibleCount === 0) {
-        noResults.style.display = "block";
-      } else {
-        noResults.style.display = "none";
+      const matchesSearch = currentSearch === "" || 
+                            title.includes(currentSearch) || 
+                            excerpt.includes(currentSearch) || 
+                            cats.includes(currentSearch) || 
+                            tags.includes(currentSearch);
+
+      const matchesCat = currentCat === "all" || cats.includes(currentCat.toLowerCase());
+      const matchesDiff = currentDifficulty === "all" || difficulty === currentDifficulty.toLowerCase();
+
+      return matchesSearch && matchesCat && matchesDiff;
+    });
+
+    // Sorting
+    filtered.sort((a, b) => {
+      if (currentSort === "newest") {
+        return new Date(b.getAttribute("data-date")) - new Date(a.getAttribute("data-date"));
+      } else if (currentSort === "oldest") {
+        return new Date(a.getAttribute("data-date")) - new Date(b.getAttribute("data-date"));
+      } else if (currentSort === "readtime") {
+        return parseInt(b.getAttribute("data-readtime")) - parseInt(a.getAttribute("data-readtime"));
+      } else if (currentSort === "title") {
+        return a.getAttribute("data-title").localeCompare(b.getAttribute("data-title"));
       }
-    }
-
-    if(searchInput) {
-      searchInput.addEventListener("input", (e) => {
-        currentSearch = e.target.value.toLowerCase().trim();
-        applyFilters();
-      });
-    }
-
-    function setActiveCategory(cat) {
-      currentCat = cat;
-      catBtns.forEach(b => {
-        if(b.getAttribute("data-cat") === cat) {
-          b.classList.add("active");
-        } else {
-          b.classList.remove("active");
-        }
-      });
-      applyFilters();
-    }
-
-    catBtns.forEach(btn => {
-      btn.addEventListener("click", (e) => {
-        setActiveCategory(btn.getAttribute("data-cat"));
-      });
+      return 0;
     });
 
-    sidebarCatLinks.forEach(link => {
-      link.addEventListener("click", (e) => {
-        e.preventDefault();
-        const targetCat = link.getAttribute("data-cat");
-        setActiveCategory(targetCat);
-        document.getElementById("articles-section").scrollIntoView({behavior: "smooth"});
-      });
+    // Count badge update
+    if (postsCountBadge) {
+      postsCountBadge.textContent = `${filtered.length} Articles`;
+    }
+
+    // Hide all
+    articles.forEach(a => a.style.display = "none");
+
+    if (filtered.length === 0) {
+      if (noResults) noResults.style.display = "block";
+      if (paginationControls) paginationControls.innerHTML = "";
+      return;
+    } else {
+      if (noResults) noResults.style.display = "none";
+    }
+
+    // Pagination
+    const totalPages = Math.ceil(filtered.length / itemsPerPage);
+    if (currentPage > totalPages) currentPage = 1;
+
+    const startIdx = (currentPage - 1) * itemsPerPage;
+    const endIdx = startIdx + itemsPerPage;
+    const pageItems = filtered.slice(startIdx, endIdx);
+
+    // Re-append sorted & paged items to grid
+    pageItems.forEach(item => {
+      item.style.display = "flex";
+      articlesGrid.appendChild(item);
     });
 
-    window.resetSearch = () => {
-      if(searchInput) searchInput.value = "";
-      currentSearch = "";
-      setActiveCategory("all");
-    };
+    renderPagination(totalPages);
+  }
 
-    // Handle URL params
-    const params = new URLSearchParams(window.location.search);
-    const urlCat = params.get('cat');
-    if(urlCat) {
-      setActiveCategory(urlCat);
+  function renderPagination(totalPages) {
+    if (!paginationControls || totalPages <= 1) {
+      if (paginationControls) paginationControls.innerHTML = "";
+      return;
     }
+
+    let html = `<div class="cyber-pagination">`;
+    html += `<button class="page-btn ${currentPage === 1 ? 'disabled' : ''}" onclick="changeBlogPage(${currentPage - 1})"><i class="fa-solid fa-chevron-left"></i> Prev</button>`;
+
+    for (let i = 1; i <= totalPages; i++) {
+      html += `<button class="page-num ${i === currentPage ? 'active' : ''}" onclick="changeBlogPage(${i})">${i}</button>`;
+    }
+
+    html += `<button class="page-btn ${currentPage === totalPages ? 'disabled' : ''}" onclick="changeBlogPage(${currentPage + 1})">Next <i class="fa-solid fa-chevron-right"></i></button>`;
+    html += `</div>`;
+
+    paginationControls.innerHTML = html;
+  }
+
+  window.changeBlogPage = (page) => {
+    currentPage = page;
+    updateDisplay();
+    document.getElementById("articles-section").scrollIntoView({ behavior: 'smooth' });
+  };
+
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      currentSearch = e.target.value.toLowerCase().trim();
+      currentPage = 1;
+      updateDisplay();
+    });
+  }
+
+  if (difficultySelect) {
+    difficultySelect.addEventListener("change", (e) => {
+      currentDifficulty = e.target.value;
+      currentPage = 1;
+      updateDisplay();
+    });
+  }
+
+  if (sortSelect) {
+    sortSelect.addEventListener("change", (e) => {
+      currentSort = e.target.value;
+      currentPage = 1;
+      updateDisplay();
+    });
+  }
+
+  catBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      catBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentCat = btn.getAttribute("data-cat");
+      currentPage = 1;
+      updateDisplay();
+    });
   });
+
+  sidebarCatLinks.forEach(link => {
+    link.addEventListener("click", (e) => {
+      e.preventDefault();
+      const targetCat = link.getAttribute("data-cat");
+      currentCat = targetCat;
+      catBtns.forEach(b => {
+        if(b.getAttribute("data-cat") === targetCat) b.classList.add("active");
+        else b.classList.remove("active");
+      });
+      currentPage = 1;
+      updateDisplay();
+      document.getElementById("articles-section").scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  window.resetSearch = () => {
+    if (searchInput) searchInput.value = "";
+    if (difficultySelect) difficultySelect.value = "all";
+    if (sortSelect) sortSelect.value = "newest";
+    currentSearch = "";
+    currentDifficulty = "all";
+    currentSort = "newest";
+    currentCat = "all";
+    catBtns.forEach(b => {
+      if (b.getAttribute("data-cat") === "all") b.classList.add("active");
+      else b.classList.remove("active");
+    });
+    currentPage = 1;
+    updateDisplay();
+  };
+
+  // Check URL query string
+  const urlParams = new URLSearchParams(window.location.search);
+  const catParam = urlParams.get('cat') || urlParams.get('category');
+  if (catParam) {
+    currentCat = catParam;
+    catBtns.forEach(b => {
+      if(b.getAttribute("data-cat").toLowerCase() === catParam.toLowerCase()) b.classList.add("active");
+      else b.classList.remove("active");
+    });
+  }
+
+  updateDisplay();
+});
 </script>
 </body>
 </html>
