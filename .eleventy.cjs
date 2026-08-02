@@ -20,6 +20,8 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/CNAME");
   eleventyConfig.addPassthroughCopy("src/manifest.json");
   eleventyConfig.addPassthroughCopy("src/sw.js");
+  eleventyConfig.addPassthroughCopy("src/humans.txt");
+  eleventyConfig.addPassthroughCopy("src/.well-known");
 
   // Markdown configuration
   let markdownLibrary = markdownIt({
