@@ -1,110 +1,73 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title or name }} | Virtual Cyber Lab | Aimad Ul Islam</title>
-    <meta name="description" content="{{ description or 'Cybersecurity lab documentation, topology, and challenge writeup by Aimad Ul Islam.' }}">
-    <meta name="author" content="Aimad Ul Islam">
-    <meta name="theme-color" content="#080C1A">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="{{ title or name }} | Aimad Ul Islam">
-    <meta property="og:description" content="{{ description }}">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://aimadulislam.dpdns.org{{ page.url }}">
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/blog.css">
-</head>
-<body class="post-page-body">
-    <div class="grid-bg"></div>
-    <div class="scan-line"></div>
+---
+layout: layouts/base.njk
+---
+<main class="container">
+    <article class="article-hero">
+        <div class="breadcrumb">
+            <a href="/"><i class="fa-solid fa-house"></i> Home</a>
+            <span>/</span>
+            <a href="/labs/">Labs</a>
+            <span>/</span>
+            <span class="current-title">{{ title or name }}</span>
+        </div>
 
-    <!-- UNIFIED HEADER -->
-    {% include "header.njk" %}
+        <div class="article-layout">
+            <div class="article-main">
+                <header class="article-header card">
+                    <div class="article-cats">
+                        <span class="tag tag-cyber"><i class="fa-solid fa-server"></i> {{ platform or category or "Virtual Lab" }}</span>
+                        <span class="tag tag-tut"><i class="fa-solid fa-gauge-high"></i> {{ difficulty or "Intermediate" }}</span>
+                        <span class="tag tag-status"><i class="fa-solid fa-bolt"></i> {{ status or "Active" }}</span>
+                    </div>
+                    
+                    <h1 class="article-title">{{ title or name }}</h1>
+                    
+                    {% if description %}
+                    <p class="article-subtitle">{{ description }}</p>
+                    {% endif %}
 
-    <main class="container">
-        <article class="article-hero">
-            <div class="breadcrumb">
-                <a href="/"><i class="fa-solid fa-house"></i> Home</a>
-                <span>/</span>
-                <a href="/labs/">Labs</a>
-                <span>/</span>
-                <span class="current-title">{{ title or name }}</span>
+                    {% if tools %}
+                    <div class="article-tags" style="margin-top: 1rem;">
+                        {% for tool in tools %}
+                        <span class="tag tag-tut"><i class="fa-solid fa-wrench"></i> {{ tool }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                        {% if writeup_url %}
+                        <a href="{{ writeup_url }}" class="btn btn-cyan btn-sm"><i class="fa-solid fa-book-open"></i> Read Technical Writeup</a>
+                        {% endif %}
+                        {% if config_download %}
+                        <a href="{{ config_download }}" class="btn btn-outline btn-sm"><i class="fa-solid fa-download"></i> Download Lab Config (.zip/.pcap)</a>
+                        {% endif %}
+                    </div>
+                </header>
+
+                <div class="article-body card">
+                    {{ content | safe }}
+                </div>
             </div>
 
-            <div class="article-layout">
-                <div class="article-main">
-                    <header class="article-header card">
-                        <div class="article-cats">
-                            <span class="tag tag-cyber"><i class="fa-solid fa-server"></i> {{ platform or category or "Virtual Lab" }}</span>
-                            <span class="tag tag-tut"><i class="fa-solid fa-gauge-high"></i> {{ difficulty or "Intermediate" }}</span>
-                            <span class="tag tag-status"><i class="fa-solid fa-bolt"></i> {{ status or "Active" }}</span>
+            <aside class="sidebar">
+                <div class="sidebar-widget card">
+                    <h3 class="widget-title"><i class="fa-solid fa-microchip"></i> Lab Specs</h3>
+                    <div class="sidebar-cat-list">
+                        <div class="sidebar-cat-item">
+                            <span>Platform:</span> <strong>{{ platform or "Virtual Box / HTB" }}</strong>
                         </div>
-                        
-                        <h1 class="article-title">{{ title or name }}</h1>
-                        
-                        {% if description %}
-                        <p class="article-subtitle">{{ description }}</p>
-                        {% endif %}
-
-                        {% if tools %}
-                        <div class="article-tags" style="margin-top: 1rem;">
-                            {% for tool in tools %}
-                            <span class="tag tag-tut"><i class="fa-solid fa-wrench"></i> {{ tool }}</span>
-                            {% endfor %}
+                        <div class="sidebar-cat-item">
+                            <span>Difficulty:</span> <strong>{{ difficulty or "Intermediate" }}</strong>
                         </div>
-                        {% endif %}
-
-                        <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-                            {% if writeup_url %}
-                            <a href="{{ writeup_url }}" class="btn btn-cyan btn-sm"><i class="fa-solid fa-book-open"></i> Read Technical Writeup</a>
-                            {% endif %}
-                            {% if config_download %}
-                            <a href="{{ config_download }}" class="btn btn-outline btn-sm"><i class="fa-solid fa-download"></i> Download Lab Config (.zip/.pcap)</a>
-                            {% endif %}
+                        <div class="sidebar-cat-item">
+                            <span>Status:</span> <strong style="color: var(--cyan);">{{ status or "Completed" }}</strong>
                         </div>
-                    </header>
-
-                    <div class="article-body card">
-                        {{ content | safe }}
                     </div>
                 </div>
-
-                <aside class="sidebar">
-                    <div class="sidebar-widget card">
-                        <h3 class="widget-title"><i class="fa-solid fa-microchip"></i> Lab Specs</h3>
-                        <div class="sidebar-cat-list">
-                            <div class="sidebar-cat-item">
-                                <span>Platform:</span> <strong>{{ platform or "Virtual Box / HTB" }}</strong>
-                            </div>
-                            <div class="sidebar-cat-item">
-                                <span>Difficulty:</span> <strong>{{ difficulty or "Intermediate" }}</strong>
-                            </div>
-                            <div class="sidebar-cat-item">
-                                <span>Status:</span> <strong style="color: var(--cyan);">{{ status or "Completed" }}</strong>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="sidebar-widget card">
-                        <a href="/labs/" class="btn btn-cyan btn-full"><i class="fa-solid fa-arrow-left"></i> All Cyber Labs</a>
-                    </div>
-                </aside>
-            </div>
-        </article>
-    </main>
-
-    {% include "footer.njk" %}
-    <script src="/js/main.js"></script>
-</body>
-</html>
+                <div class="sidebar-widget card">
+                    <a href="/labs/" class="btn btn-cyan btn-full"><i class="fa-solid fa-arrow-left"></i> All Cyber Labs</a>
+                </div>
+            </aside>
+        </div>
+    </article>
+</main>

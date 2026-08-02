@@ -15,18 +15,21 @@
   "footer_layout": "multi-column",
   "quick_links": [
     { "label": "About Me", "url": "/#about" },
-    { "label": "Certifications", "url": "/#certifications" },
-    { "label": "Skills & Matrix", "url": "/#skills" },
-    { "label": "Security Projects", "url": "/#projects" },
-    { "label": "Virtual Labs", "url": "/#labs" },
-    { "label": "SOC Dashboard", "url": "/#dashboard" },
+    { "label": "Security Projects", "url": "/projects/" },
+    { "label": "Virtual Cyber Labs", "url": "/labs/" },
+    { "label": "Research Reports", "url": "/research/" },
+    { "label": "Download Assets", "url": "/downloads/" },
     { "label": "Technical Blog", "url": "/blog/" },
+    { "label": "Resources Hub", "url": "/resources/" },
     { "label": "Get In Touch", "url": "/#contact" }
   ],
   "legal_links": [
-    { "label": "Privacy Policy", "url": "/#contact" },
-    { "label": "Terms of Use", "url": "/#contact" },
-    { "label": "Sitemap", "url": "/sitemap.xml" },
+    { "label": "Privacy Policy", "url": "/resources/privacy-policy/" },
+    { "label": "Terms of Use", "url": "/resources/terms/" },
+    { "label": "Cookie Policy", "url": "/resources/cookie-policy/" },
+    { "label": "Security Disclaimer", "url": "/resources/disclaimer/" },
+    { "label": "Human Sitemap", "url": "/resources/sitemap-page/" },
+    { "label": "XML Sitemap", "url": "/sitemap.xml" },
     { "label": "RSS Feed", "url": "/feed.xml" }
   ],
   "contact_info": {

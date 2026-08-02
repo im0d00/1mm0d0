@@ -1,168 +1,72 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} | Resources & Policy Center | Aimad Ul Islam</title>
-    <meta name="description" content="{{ description or summary or 'Cybersecurity policies, compliance standards, and resources center.' }}">
-    <meta name="theme-color" content="#080C1A">
-    
-    <!-- Open Graph / SEO -->
-    <meta property="og:title" content="{{ title }} | Aimad Ul Islam">
-    <meta property="og:description" content="{{ description or summary }}">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://aimadulislam.dpdns.org{{ page.url }}">
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/blog.css">
-</head>
-<body class="resource-body">
-    <div class="grid-bg"></div>
-    <div class="scan-line"></div>
-    <div id="reading-progress"></div>
-
-    <!-- Header -->
-    {% include "header.njk" %}
-
-    <main class="resource-container container" id="main-content">
-        <!-- Breadcrumb & Banner -->
-        <header class="resource-header card">
-            <div class="breadcrumb">
-                <a href="/"><i class="fa-solid fa-house"></i> Home</a>
-                <span>/</span>
-                <a href="/resources/">Resources Center</a>
-                <span>/</span>
-                <span class="current-page">{{ title }}</span>
-            </div>
-            <div class="resource-hero-title">
-                <div class="res-badge"><i class="{{ icon or 'fa-solid fa-shield-halved' }}"></i> COMPLIANCE & GOVERNANCE</div>
-                <h1>{{ title }}</h1>
-                {% if summary or subtitle %}
-                <p class="resource-subtitle">{{ summary or subtitle }}</p>
-                {% endif %}
-                <div class="resource-meta-row">
-                    <span><i class="fa-regular fa-calendar"></i> Effective: <strong>{{ date | readableDate if date else "August 2026" }}</strong></span>
-                    <span><i class="fa-solid fa-rotate"></i> Last Revised: <strong>{{ updated | readableDate if updated else "August 2026" }}</strong></span>
-                    <span><i class="fa-solid fa-shield-virus"></i> Classification: <strong>PUBLIC / VERIFIED</strong></span>
-                </div>
-            </div>
-        </header>
-
-        <div class="resource-grid-layout">
-            <!-- Resource Sidebar Navigation -->
-            <aside class="resource-sidebar">
-                <div class="resource-nav-widget card">
-                    <h3 class="res-nav-title"><i class="fa-solid fa-folder-tree"></i> Resource Directory</h3>
-                    <nav class="resource-menu">
-                        <a href="/resources/" {% if page.url == '/resources/' %}class="active"{% endif %}><i class="fa-solid fa-grid-2"></i> Overview Hub</a>
-                        <a href="/resources/privacy-policy/" {% if page.url == '/resources/privacy-policy/' %}class="active"{% endif %}><i class="fa-solid fa-user-shield"></i> Privacy Policy</a>
-                        <a href="/resources/terms/" {% if page.url == '/resources/terms/' %}class="active"{% endif %}><i class="fa-solid fa-file-contract"></i> Terms of Use</a>
-                        <a href="/resources/cookie-policy/" {% if page.url == '/resources/cookie-policy/' %}class="active"{% endif %}><i class="fa-solid fa-cookie-bite"></i> Cookie Policy</a>
-                        <a href="/resources/disclaimer/" {% if page.url == '/resources/disclaimer/' %}class="active"{% endif %}><i class="fa-solid fa-triangle-exclamation"></i> Disclaimer</a>
-                        <a href="/resources/responsible-disclosure/" {% if page.url == '/resources/responsible-disclosure/' %}class="active"{% endif %}><i class="fa-solid fa-bug"></i> Responsible Disclosure</a>
-                        <a href="/resources/security-policy/" {% if page.url == '/resources/security-policy/' %}class="active"{% endif %}><i class="fa-solid fa-lock"></i> Security Policy</a>
-                        <a href="/resources/acceptable-use/" {% if page.url == '/resources/acceptable-use/' %}class="active"{% endif %}><i class="fa-solid fa-gavel"></i> Acceptable Use Policy</a>
-                        <a href="/resources/copyright/" {% if page.url == '/resources/copyright/' %}class="active"{% endif %}><i class="fa-solid fa-copyright"></i> Copyright Notice</a>
-                        <a href="/resources/license/" {% if page.url == '/resources/license/' %}class="active"{% endif %}><i class="fa-solid fa-scale-balanced"></i> License Info</a>
-                        <a href="/resources/accessibility/" {% if page.url == '/resources/accessibility/' %}class="active"{% endif %}><i class="fa-solid fa-universal-access"></i> Accessibility Statement</a>
-                        <a href="/resources/support/" {% if page.url == '/resources/support/' %}class="active"{% endif %}><i class="fa-solid fa-headset"></i> Contact Support</a>
-                        <a href="/resources/faq/" {% if page.url == '/resources/faq/' %}class="active"{% endif %}><i class="fa-solid fa-circle-question"></i> FAQ</a>
-                        <a href="/resources/changelog/" {% if page.url == '/resources/changelog/' %}class="active"{% endif %}><i class="fa-solid fa-code-branch"></i> System Changelog</a>
-                        <a href="/resources/sitemap-page/" {% if page.url == '/resources/sitemap-page/' %}class="active"{% endif %}><i class="fa-solid fa-sitemap"></i> Sitemap (Human)</a>
-                        <a href="/resources/rss-info/" {% if page.url == '/resources/rss-info/' %}class="active"{% endif %}><i class="fa-solid fa-rss"></i> RSS Information</a>
-                    </nav>
-                </div>
-
-                <div class="resource-support-box card">
-                    <i class="fa-solid fa-envelope-open-text support-icon"></i>
-                    <h4>Need Special Assistance?</h4>
-                    <p>For security reports or legal inquiries, reach out directly to security operations.</p>
-                    <a href="mailto:info@aimadulislam.dpdns.org" class="btn btn-sm btn-cyan"><i class="fa-solid fa-paper-plane"></i> Contact Security</a>
-                </div>
-            </aside>
-
-            <!-- Resource Main Content -->
-            <article class="resource-content card">
-                <div class="article-body resource-body-text">
-                    {{ content | safe }}
-                </div>
-
-                <div class="resource-footer-note">
-                    <i class="fa-solid fa-circle-check"></i> Document maintained and verified by <strong>Aimad Ul Islam (SOC Operations)</strong>. Built & Maintained by <a href="https://lizzdo.com" target="_blank" rel="noopener noreferrer">Lizzdo Studio</a>.
-                </div>
-            </article>
+---
+layout: layouts/base.njk
+---
+<main class="resource-container container" id="main-content">
+    <!-- Breadcrumb & Banner -->
+    <header class="resource-header card">
+        <div class="breadcrumb">
+            <a href="/"><i class="fa-solid fa-house"></i> Home</a>
+            <span>/</span>
+            <a href="/resources/">Resources Center</a>
+            <span>/</span>
+            <span class="current-page">{{ title }}</span>
         </div>
-    </main>
-
-    <!-- Search Modal -->
-    <div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-label="Global Site Search">
-        <div class="search-modal-content card">
-            <div class="search-input-wrap">
-                <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                <input type="text" id="modalSearchInput" placeholder="Search writeups, tools, certs, policies..." autocomplete="off">
-                <button class="search-close-btn" onclick="closeSearchModal()">&times;</button>
-            </div>
-            <div class="search-results" id="modalSearchResults">
-                <div class="search-empty-state"><i class="fa-solid fa-terminal"></i> Type to search posts, projects, or policies...</div>
+        <div class="resource-hero-title">
+            <div class="res-badge"><i class="{{ icon or 'fa-solid fa-shield-halved' }}"></i> COMPLIANCE & GOVERNANCE</div>
+            <h1>{{ title }}</h1>
+            {% if summary or subtitle %}
+            <p class="resource-subtitle">{{ summary or subtitle }}</p>
+            {% endif %}
+            <div class="resource-meta-row">
+                <span><i class="fa-regular fa-calendar"></i> Effective: <strong>{{ date | readableDate if date else "August 2026" }}</strong></span>
+                <span><i class="fa-solid fa-rotate"></i> Last Revised: <strong>{{ updated | readableDate if updated else "August 2026" }}</strong></span>
+                <span><i class="fa-solid fa-shield-virus"></i> Classification: <strong>PUBLIC / VERIFIED</strong></span>
             </div>
         </div>
+    </header>
+
+    <div class="resource-grid-layout">
+        <!-- Resource Sidebar Navigation -->
+        <aside class="resource-sidebar">
+            <div class="resource-nav-widget card">
+                <h3 class="res-nav-title"><i class="fa-solid fa-folder-tree"></i> Resource Directory</h3>
+                <nav class="resource-menu">
+                    <a href="/resources/" {% if page.url == '/resources/' %}class="active"{% endif %}><i class="fa-solid fa-grid-2"></i> Overview Hub</a>
+                    <a href="/resources/privacy-policy/" {% if page.url == '/resources/privacy-policy/' %}class="active"{% endif %}><i class="fa-solid fa-user-shield"></i> Privacy Policy</a>
+                    <a href="/resources/terms/" {% if page.url == '/resources/terms/' %}class="active"{% endif %}><i class="fa-solid fa-file-contract"></i> Terms of Use</a>
+                    <a href="/resources/cookie-policy/" {% if page.url == '/resources/cookie-policy/' %}class="active"{% endif %}><i class="fa-solid fa-cookie-bite"></i> Cookie Policy</a>
+                    <a href="/resources/disclaimer/" {% if page.url == '/resources/disclaimer/' %}class="active"{% endif %}><i class="fa-solid fa-triangle-exclamation"></i> Disclaimer</a>
+                    <a href="/resources/responsible-disclosure/" {% if page.url == '/resources/responsible-disclosure/' %}class="active"{% endif %}><i class="fa-solid fa-bug"></i> Responsible Disclosure</a>
+                    <a href="/resources/security-policy/" {% if page.url == '/resources/security-policy/' %}class="active"{% endif %}><i class="fa-solid fa-lock"></i> Security Policy</a>
+                    <a href="/resources/acceptable-use/" {% if page.url == '/resources/acceptable-use/' %}class="active"{% endif %}><i class="fa-solid fa-gavel"></i> Acceptable Use Policy</a>
+                    <a href="/resources/copyright/" {% if page.url == '/resources/copyright/' %}class="active"{% endif %}><i class="fa-solid fa-copyright"></i> Copyright Notice</a>
+                    <a href="/resources/license/" {% if page.url == '/resources/license/' %}class="active"{% endif %}><i class="fa-solid fa-scale-balanced"></i> License Info</a>
+                    <a href="/resources/accessibility/" {% if page.url == '/resources/accessibility/' %}class="active"{% endif %}><i class="fa-solid fa-universal-access"></i> Accessibility Statement</a>
+                    <a href="/resources/support/" {% if page.url == '/resources/support/' %}class="active"{% endif %}><i class="fa-solid fa-headset"></i> Contact Support</a>
+                    <a href="/resources/faq/" {% if page.url == '/resources/faq/' %}class="active"{% endif %}><i class="fa-solid fa-circle-question"></i> FAQ</a>
+                    <a href="/resources/changelog/" {% if page.url == '/resources/changelog/' %}class="active"{% endif %}><i class="fa-solid fa-code-branch"></i> System Changelog</a>
+                    <a href="/resources/sitemap-page/" {% if page.url == '/resources/sitemap-page/' %}class="active"{% endif %}><i class="fa-solid fa-sitemap"></i> Sitemap (Human)</a>
+                    <a href="/resources/rss-info/" {% if page.url == '/resources/rss-info/' %}class="active"{% endif %}><i class="fa-solid fa-rss"></i> RSS Information</a>
+                </nav>
+            </div>
+
+            <div class="resource-support-box card">
+                <i class="fa-solid fa-envelope-open-text support-icon"></i>
+                <h4>Need Special Assistance?</h4>
+                <p>For security reports or legal inquiries, reach out directly to security operations.</p>
+                <a href="mailto:info@aimadulislam.dpdns.org" class="btn btn-sm btn-cyan"><i class="fa-solid fa-paper-plane"></i> Contact Security</a>
+            </div>
+        </aside>
+
+        <!-- Resource Main Content -->
+        <article class="resource-content card">
+            <div class="article-body resource-body-text">
+                {{ content | safe }}
+            </div>
+
+            <div class="resource-footer-note">
+                <i class="fa-solid fa-circle-check"></i> Document maintained and verified by <strong>Aimad Ul Islam (SOC Operations)</strong>. Built & Maintained by <a href="https://lizzdo.com" target="_blank" rel="noopener noreferrer">Lizzdo Studio</a>.
+            </div>
+        </article>
     </div>
-
-    <!-- Footer -->
-    {% include "footer.njk" %}
-
-    <button id="scroll-top" aria-label="Scroll to top"><i class="fa-solid fa-arrow-up"></i></button>
-
-    <script src="/js/main.js"></script>
-    <script>
-      // Reading progress bar
-      window.addEventListener('scroll', () => {
-          const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-          const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-          const scrolled = (winScroll / height) * 100;
-          const progress = document.getElementById('reading-progress');
-          if (progress) progress.style.width = scrolled + '%';
-      });
-
-      // Mobile Menu Toggle
-      const ham = document.getElementById('ham');
-      const mobNav = document.getElementById('mobNav');
-      const mobOverlay = document.getElementById('mobOverlay');
-      const mobCloseBtn = document.getElementById('mobCloseBtn');
-      if (ham && mobNav) {
-          ham.addEventListener('click', () => { mobNav.classList.add('open'); if (mobOverlay) mobOverlay.classList.add('open'); });
-          if (mobCloseBtn) mobCloseBtn.addEventListener('click', () => { mobNav.classList.remove('open'); if (mobOverlay) mobOverlay.classList.remove('open'); });
-          if (mobOverlay) mobOverlay.addEventListener('click', () => { mobNav.classList.remove('open'); mobOverlay.classList.remove('open'); });
-      }
-
-      // Search Modal Logic
-      function openSearchModal() {
-          const modal = document.getElementById('searchModal');
-          if(modal) {
-              modal.classList.add('open');
-              document.getElementById('modalSearchInput').focus();
-          }
-      }
-      function closeSearchModal() {
-          const modal = document.getElementById('searchModal');
-          if(modal) modal.classList.remove('open');
-      }
-      document.addEventListener('keydown', (e) => {
-          if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
-              e.preventDefault();
-              openSearchModal();
-          }
-          if (e.key === 'Escape') closeSearchModal();
-      });
-    </script>
-</body>
-</html>
+</main>

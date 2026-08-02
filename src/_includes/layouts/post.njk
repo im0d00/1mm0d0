@@ -1,192 +1,167 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} | Cybersecurity Writeup | Aimad Ul Islam</title>
-    <meta name="description" content="{{ subtitle or excerpt or 'Cybersecurity research writeup and tutorial by Aimad Ul Islam.' }}">
-    <meta name="author" content="{{ author or 'Aimad Ul Islam' }}">
-    <meta name="theme-color" content="#080C1A">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="{{ title }} | Aimad Ul Islam">
-    <meta property="og:description" content="{{ subtitle or excerpt }}">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://aimadulislam.dpdns.org{{ page.url }}">
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/blog.css">
-</head>
-<body class="post-page-body">
-    <div class="grid-bg"></div>
-    <div class="scan-line"></div>
-    <div id="reading-progress"></div>
+---
+layout: layouts/base.njk
+---
+<main class="container">
+    <article class="article-hero">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumb">
+            <a href="/"><i class="fa-solid fa-house"></i> Home</a>
+            <span>/</span>
+            <a href="/blog/">Blog</a>
+            <span>/</span>
+            <span class="current-title">{{ title }}</span>
+        </div>
 
-    <!-- UNIFIED HEADER -->
-    {% include "header.njk" %}
-
-    <main class="container">
-        <article class="article-hero">
-            <!-- Breadcrumbs -->
-            <div class="breadcrumb">
-                <a href="/"><i class="fa-solid fa-house"></i> Home</a>
-                <span>/</span>
-                <a href="/blog/">Blog</a>
-                <span>/</span>
-                <span class="current-title">{{ title }}</span>
-            </div>
-
-            <div class="article-layout">
-                <!-- Main Content Column -->
-                <div class="article-main">
-                    <header class="article-header card">
-                        <div class="article-cats">
-                            {% for cat in categories %}
-                            <a href="/blog/?cat={{ cat | urlencode }}" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> {{ cat }}</a>
-                            {% endfor %}
-                            <span class="tag tag-tut"><i class="fa-solid fa-gauge-high"></i> {{ difficulty or "Intermediate" }}</span>
+        <div class="article-layout">
+            <!-- Main Content Column -->
+            <div class="article-main">
+                <header class="article-header card">
+                    <div class="article-cats">
+                        {% for cat in categories %}
+                        <a href="/blog/?cat={{ cat | urlencode }}" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> {{ cat }}</a>
+                        {% endfor %}
+                        <span class="tag tag-tut"><i class="fa-solid fa-gauge-high"></i> {{ difficulty or "Intermediate" }}</span>
+                    </div>
+                    
+                    <h1 class="article-title">{{ title }}</h1>
+                    
+                    {% if subtitle or excerpt %}
+                    <p class="article-subtitle">{{ subtitle or excerpt }}</p>
+                    {% endif %}
+                    
+                    <div class="article-meta">
+                        <div class="article-meta-item">
+                            <i class="fa-solid fa-user-shield"></i>
+                            <span>Author: <strong>{{ author or "Aimad Ul Islam" }}</strong></span>
                         </div>
-                        
-                        <h1 class="article-title">{{ title }}</h1>
-                        
-                        {% if subtitle or excerpt %}
-                        <p class="article-subtitle">{{ subtitle or excerpt }}</p>
-                        {% endif %}
-                        
-                        <div class="article-meta">
-                            <div class="article-meta-item">
-                                <i class="fa-solid fa-user-shield"></i>
-                                <span>Author: <strong>{{ author or "Aimad Ul Islam" }}</strong></span>
-                            </div>
-                            <div class="article-meta-item">
-                                <i class="fa-regular fa-calendar"></i>
-                                <span>Published: <strong>{{ date | readableDate }}</strong></span>
-                            </div>
-                            {% if readingTime %}
-                            <div class="article-meta-item">
-                                <i class="fa-regular fa-clock"></i>
-                                <span>Est. Read: <strong>{{ readingTime }} min</strong></span>
-                            </div>
-                            {% endif %}
+                        <div class="article-meta-item">
+                            <i class="fa-regular fa-calendar"></i>
+                            <span>Published: <strong>{{ date | readableDate }}</strong></span>
                         </div>
-
-                        {% if tags %}
-                        <div class="article-tags">
-                            {% for tag in tags %}
-                            <span class="tag tag-tut">#{{ tag }}</span>
-                            {% endfor %}
+                        {% if readingTime %}
+                        <div class="article-meta-item">
+                            <i class="fa-regular fa-clock"></i>
+                            <span>Est. Read: <strong>{{ readingTime }} min</strong></span>
                         </div>
                         {% endif %}
-                    </header>
-
-                    <!-- Article Body -->
-                    <div class="article-body card">
-                        {{ content | safe }}
                     </div>
 
-                    <!-- Social Share & Actions -->
-                    <div class="social-share card">
-                        <span class="share-label"><i class="fa-solid fa-share-nodes"></i> Share Article:</span>
-                        <a href="https://x.com/intent/tweet?text={{ title | urlencode }}&url=https://aimadulislam.dpdns.org{{ page.url }}" target="_blank" rel="noopener noreferrer" class="share-btn twitter" aria-label="Share on X"><i class="fa-brands fa-x-twitter"></i></a>
-                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://aimadulislam.dpdns.org{{ page.url }}&title={{ title | urlencode }}" target="_blank" rel="noopener noreferrer" class="share-btn linkedin" aria-label="Share on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                        <button class="share-btn copy-url" id="copy-url-btn" data-url="https://aimadulislam.dpdns.org{{ page.url }}" aria-label="Copy URL"><i class="fa-solid fa-link"></i> Copy Link</button>
+                    {% if tags %}
+                    <div class="article-tags">
+                        {% for tag in tags %}
+                        <span class="tag tag-tut">#{{ tag }}</span>
+                        {% endfor %}
                     </div>
+                    {% endif %}
+                </header>
 
-                    <!-- Author Box -->
-                    <div class="author-box card">
-                        <div class="author-avatar"><i class="fa-solid fa-user-check"></i></div>
-                        <div class="author-info">
-                            <h3>{{ author or "Aimad Ul Islam" }}</h3>
-                            <p class="author-bio">Cybersecurity practitioner, SOC analyst enthusiast, and Linux system administrator. Documenting DFIR investigations, virtual network labs, and threat hunting workflows.</p>
-                            <div class="author-links">
-                                <a href="https://github.com/aimadulislam" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
-                                <a href="https://linkedin.com/in/aimadulislam" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Navigation Between Posts -->
-                    {% set previousPost = collections.posts | getPreviousCollectionItem(page) %}
-                    {% set nextPost = collections.posts | getNextCollectionItem(page) %}
-                    <nav class="article-nav">
-                        {% if previousPost %}
-                        <a href="{{ previousPost.url }}" class="article-nav-link prev card">
-                            <span class="article-nav-dir"><i class="fa-solid fa-angle-left"></i> Previous Article</span>
-                            <div class="article-nav-title">{{ previousPost.data.title }}</div>
-                        </a>
-                        {% else %}
-                        <div></div>
-                        {% endif %}
-                        
-                        {% if nextPost %}
-                        <a href="{{ nextPost.url }}" class="article-nav-link next card">
-                            <span class="article-nav-dir">Next Article <i class="fa-solid fa-angle-right"></i></span>
-                            <div class="article-nav-title">{{ nextPost.data.title }}</div>
-                        </a>
-                        {% endif %}
-                    </nav>
+                <!-- Article Body -->
+                <div class="article-body card">
+                    {{ content | safe }}
                 </div>
 
-                <!-- Article Sidebar -->
-                <aside class="sidebar">
-                    <!-- Table of Contents Widget -->
-                    <div class="sidebar-widget card" id="toc-widget">
-                        <h3 class="widget-title"><i class="fa-solid fa-list-ol"></i> Table of Contents</h3>
-                        <nav id="toc-list" class="toc-list"></nav>
-                    </div>
+                <!-- Social Share & Actions -->
+                <div class="social-share card">
+                    <span class="share-label"><i class="fa-solid fa-share-nodes"></i> Share Article:</span>
+                    <a href="https://x.com/intent/tweet?text={{ title | urlencode }}&url=https://aimadulislam.dpdns.org{{ page.url }}" target="_blank" rel="noopener noreferrer" class="share-btn twitter" aria-label="Share on X"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://aimadulislam.dpdns.org{{ page.url }}&title={{ title | urlencode }}" target="_blank" rel="noopener noreferrer" class="share-btn linkedin" aria-label="Share on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <button class="share-btn copy-url" id="copy-url-btn" data-url="https://aimadulislam.dpdns.org{{ page.url }}" aria-label="Copy URL"><i class="fa-solid fa-link"></i> Copy Link</button>
+                </div>
 
-                    <!-- Recent Articles Widget -->
-                    <div class="sidebar-widget card">
-                        <h3 class="widget-title"><i class="fa-solid fa-fire"></i> Related Writeups</h3>
-                        <div class="sidebar-posts">
-                            {% set count = 0 %}
-                            {% for post in collections.posts %}
-                                {% if count < 4 and post.url != page.url %}
-                                <a href="{{ post.url }}" class="sidebar-post">
-                                    <div class="sidebar-post-thumb">
-                                        <span class="thumb-emoji">{{ post.data.emoji or '📄' }}</span>
-                                    </div>
-                                    <div class="sidebar-post-content">
-                                        <h4 class="sidebar-post-title">{{ post.data.title }}</h4>
-                                        <span class="sidebar-post-meta"><i class="fa-regular fa-calendar"></i> {{ post.date | readableDate }}</span>
-                                    </div>
-                                </a>
-                                {% set count = count + 1 %}
-                                {% endif %}
-                            {% endfor %}
+                <!-- Author Box -->
+                <div class="author-box card">
+                    <div class="author-avatar"><i class="fa-solid fa-user-check"></i></div>
+                    <div class="author-info">
+                        <h3>{{ author or "Aimad Ul Islam" }}</h3>
+                        <p class="author-bio">Cybersecurity practitioner, SOC analyst enthusiast, and Linux system administrator. Documenting DFIR investigations, virtual network labs, and threat hunting workflows.</p>
+                        <div class="author-links">
+                            <a href="https://github.com/aimadulislam" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+                            <a href="https://linkedin.com/in/aimadulislam" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
                         </div>
                     </div>
+                </div>
 
-                    <!-- Quick Resources Link -->
-                    <div class="sidebar-widget card">
-                        <h3 class="widget-title"><i class="fa-solid fa-shield-halved"></i> Governance & Policies</h3>
-                        <p class="widget-desc">Check responsible disclosure policy or download open-source scripts.</p>
-                        <a href="/resources/" class="btn btn-sm btn-cyan btn-full"><i class="fa-solid fa-folder-tree"></i> Resources Center</a>
-                    </div>
-                </aside>
+                <!-- Navigation Between Posts -->
+                {% set previousPost = collections.posts | getPreviousCollectionItem(page) %}
+                {% set nextPost = collections.posts | getNextCollectionItem(page) %}
+                <nav class="article-nav">
+                    {% if previousPost %}
+                    <a href="{{ previousPost.url }}" class="article-nav-link prev card">
+                        <span class="article-nav-dir"><i class="fa-solid fa-angle-left"></i> Previous Article</span>
+                        <div class="article-nav-title">{{ previousPost.data.title }}</div>
+                    </a>
+                    {% else %}
+                    <div></div>
+                    {% endif %}
+                    
+                    {% if nextPost %}
+                    <a href="{{ nextPost.url }}" class="article-nav-link next card">
+                        <span class="article-nav-dir">Next Article <i class="fa-solid fa-angle-right"></i></span>
+                        <div class="article-nav-title">{{ nextPost.data.title }}</div>
+                    </a>
+                    {% endif %}
+                </nav>
             </div>
-        </article>
-    </main>
 
-    <!-- UNIFIED FOOTER -->
-    {% include "footer.njk" %}
+            <!-- Article Sidebar -->
+            <aside class="sidebar">
+                <!-- Table of Contents Widget -->
+                <div class="sidebar-widget card" id="toc-widget">
+                    <h3 class="widget-title"><i class="fa-solid fa-list-ol"></i> Table of Contents</h3>
+                    <nav id="toc-list" class="toc-list"></nav>
+                </div>
 
-    <button id="scroll-top" aria-label="Scroll to top"><i class="fa-solid fa-arrow-up"></i></button>
+                <!-- Recent Articles Widget -->
+                <div class="sidebar-widget card">
+                    <h3 class="widget-title"><i class="fa-solid fa-fire"></i> Related Writeups</h3>
+                    <div class="sidebar-posts">
+                        {% set count = 0 %}
+                        {% for post in collections.posts %}
+                            {% if count < 4 and post.url != page.url %}
+                            <a href="{{ post.url }}" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    <span class="thumb-emoji">{{ post.data.emoji or '📄' }}</span>
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">{{ post.data.title }}</h4>
+                                    <span class="sidebar-post-meta"><i class="fa-regular fa-calendar"></i> {{ post.date | readableDate }}</span>
+                                </div>
+                            </a>
+                            {% set count = count + 1 %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
 
-    <script src="/js/main.js"></script>
-    <script>
-        // Copy URL button
-        document.getElementById('copy-url-btn')?.addEventListener('click', function() {
-            navigator.clipboard.writeText(this.dataset.url).then(() => {
+                <!-- Quick Resources Link -->
+                <div class="sidebar-widget card">
+                    <h3 class="widget-title"><i class="fa-solid fa-shield-halved"></i> Governance & Policies</h3>
+                    <p class="widget-desc">Check responsible disclosure policy or download open-source scripts.</p>
+                    <a href="/resources/" class="btn btn-sm btn-cyan btn-full"><i class="fa-solid fa-folder-tree"></i> Resources Center</a>
+                </div>
+            </aside>
+        </div>
+    </article>
+</main>
+
+<script>
+    // Copy URL button
+    document.getElementById('copy-url-btn')?.addEventListener('click', function() {
+        navigator.clipboard.writeText(this.dataset.url).then(() => {
+            const originalHtml = this.innerHTML;
+            this.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+            setTimeout(() => {
+                this.innerHTML = originalHtml;
+            }, 2000);
+        });
+    });
+
+    // Code block copy buttons
+    document.querySelectorAll('.copy-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const pre = this.parentElement.querySelector('pre');
+            if (!pre) return;
+            navigator.clipboard.writeText(pre.innerText).then(() => {
                 const originalHtml = this.innerHTML;
                 this.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
                 setTimeout(() => {
@@ -194,51 +169,35 @@
                 }, 2000);
             });
         });
+    });
 
-        // Code block copy buttons
-        document.querySelectorAll('.copy-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const pre = this.parentElement.querySelector('pre');
-                if (!pre) return;
-                navigator.clipboard.writeText(pre.innerText).then(() => {
-                    const originalHtml = this.innerHTML;
-                    this.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
-                    setTimeout(() => {
-                        this.innerHTML = originalHtml;
-                    }, 2000);
+    // Table of Contents generator
+    document.addEventListener('DOMContentLoaded', () => {
+        const articleBody = document.querySelector('.article-body');
+        const tocList = document.getElementById('toc-list');
+        if (articleBody && tocList) {
+            const headings = articleBody.querySelectorAll('h2, h3');
+            if (headings.length === 0) {
+                document.getElementById('toc-widget').style.display = 'none';
+            } else {
+                headings.forEach((h, idx) => {
+                    if (!h.id) h.id = 'heading-' + idx;
+                    const link = document.createElement('a');
+                    link.href = '#' + h.id;
+                    link.textContent = h.textContent;
+                    link.className = h.tagName.toLowerCase() === 'h3' ? 'toc-sublink' : 'toc-mainlink';
+                    tocList.appendChild(link);
                 });
-            });
-        });
-
-        // Table of Contents generator
-        document.addEventListener('DOMContentLoaded', () => {
-            const articleBody = document.querySelector('.article-body');
-            const tocList = document.getElementById('toc-list');
-            if (articleBody && tocList) {
-                const headings = articleBody.querySelectorAll('h2, h3');
-                if (headings.length === 0) {
-                    document.getElementById('toc-widget').style.display = 'none';
-                } else {
-                    headings.forEach((h, idx) => {
-                        if (!h.id) h.id = 'heading-' + idx;
-                        const link = document.createElement('a');
-                        link.href = '#' + h.id;
-                        link.textContent = h.textContent;
-                        link.className = h.tagName.toLowerCase() === 'h3' ? 'toc-sublink' : 'toc-mainlink';
-                        tocList.appendChild(link);
-                    });
-                }
             }
-        });
+        }
+    });
 
-        // Reading progress bar
-        window.addEventListener('scroll', () => {
-            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-            const scrolled = (winScroll / height) * 100;
-            const progress = document.getElementById('reading-progress');
-            if (progress) progress.style.width = scrolled + '%';
-        });
-    </script>
-</body>
-</html>
+    // Reading progress bar
+    window.addEventListener('scroll', () => {
+        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const scrolled = (winScroll / height) * 100;
+        const progress = document.getElementById('reading-progress');
+        if (progress) progress.style.width = scrolled + '%';
+    });
+</script>

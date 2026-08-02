@@ -1,41 +1,8 @@
 ---
+layout: layouts/base.njk
 title: Cybersecurity & Technical Blog | Aimad Ul Islam
 description: Technical articles, DFIR research, SOC playbooks, Linux tutorials, and network security guides by Aimad Ul Islam.
 ---
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-  
-  <title>{{ title }}</title>
-  <meta name="description" content="{{ description }}"/>
-  <meta name="author" content="Aimad Ul Islam"/>
-  
-  <!-- Open Graph -->
-  <meta property="og:type" content="website"/>
-  <meta property="og:title" content="{{ title }}"/>
-  <meta property="og:description" content="{{ description }}"/>
-  <meta property="og:url" content="https://aimadulislam.dpdns.org/blog/"/>
-  <meta name="theme-color" content="#080C1A"/>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-
-  <!-- CSS -->
-  <link rel="stylesheet" href="/css/main.css"/>
-  <link rel="stylesheet" href="/css/blog.css"/>
-</head>
-<body class="blog-page-body">
-
-<div id="reading-progress" role="progressbar" aria-label="Page reading progress"></div>
-<div class="grid-bg" aria-hidden="true"></div>
-<div class="scan-line" aria-hidden="true"></div>
-
-<!-- UNIFIED HEADER -->
-{% include "header.njk" %}
 
 <!-- HERO SECTION -->
 <section id="blog-hero" aria-labelledby="blog-hero-title">
@@ -288,26 +255,6 @@ description: Technical articles, DFIR research, SOC playbooks, Linux tutorials, 
   </section>
 </main>
 
-<!-- Search Modal -->
-<div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-label="Global Site Search">
-  <div class="search-modal-content card">
-      <div class="search-input-wrap">
-          <i class="fa-solid fa-magnifying-glass search-icon"></i>
-          <input type="text" id="modalSearchInput" placeholder="Search writeups, tools, certs, policies..." autocomplete="off">
-          <button class="search-close-btn" onclick="closeSearchModal()">&times;</button>
-      </div>
-      <div class="search-results" id="modalSearchResults">
-          <div class="search-empty-state"><i class="fa-solid fa-terminal"></i> Type to search posts, projects, or policies...</div>
-      </div>
-  </div>
-</div>
-
-<!-- UNIFIED FOOTER -->
-{% include "footer.njk" %}
-
-<button id="scroll-top" aria-label="Scroll to top"><i class="fa-solid fa-arrow-up"></i></button>
-
-<script src="/js/main.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("blog-search");
@@ -499,5 +446,3 @@ document.addEventListener("DOMContentLoaded", () => {
   updateDisplay();
 });
 </script>
-</body>
-</html>

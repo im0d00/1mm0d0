@@ -1,187 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>{{ settings.website_title }}</title>
-<meta name="description" content="{{ settings.website_description }}"/>
-<meta name="keywords" content="{{ settings.keywords }}"/>
-<meta name="author" content="{{ settings.author }}"/>
-
-<!-- Open Graph / SEO -->
-<meta property="og:title" content="{{ settings.seo_title }}"/>
-<meta property="og:description" content="{{ settings.seo_description }}"/>
-<meta property="og:type" content="website"/>
-<meta property="og:image" content="{{ settings.og_image }}"/>
-<meta name="theme-color" content="{{ settings.theme_color }}"/>
-<link rel="icon" type="image/svg+xml" href="{{ settings.favicon }}"/>
-
-<!-- Fonts & FontAwesome -->
-<link rel="preconnect" href="https://fonts.googleapis.com"/>
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
-<link rel="stylesheet" href="css/main.css"/>
-<link rel="manifest" href="/manifest.json"/>
-<meta name="theme-color" content="{{ settings.theme_color or '#00D4FF' }}"/>
-
-{% if settings.google_analytics_id %}
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id={{ settings.google_analytics_id }}"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', '{{ settings.google_analytics_id }}');
-</script>
-{% endif %}
-
-{% if settings.google_search_console_verification %}
-<meta name="google-site-verification" content="{{ settings.google_search_console_verification }}" />
-{% endif %}
-
-{% if settings.microsoft_clarity_id %}
-<script type="text/javascript">
-    (function(c,l,a,r,i,t,y){
-        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-        t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "{{ settings.microsoft_clarity_id }}");
-</script>
-{% endif %}
-
-<!-- Structured Data (JSON-LD) -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "{{ settings.author }}",
-  "jobTitle": "{{ hero.professional_title }}",
-  "description": "{{ settings.website_description }}",
-  "url": "{{ settings.sitemap_settings.url }}",
-  "sameAs": [
-    "{{ contact.github }}",
-    "{{ contact.linkedin }}",
-    "{{ contact.x }}",
-    "{{ contact.youtube }}"
-  ]
-}
-</script>
-</head>
-<body>
-
-<div class="grid-bg"></div>
-<div class="scan-line"></div>
-
-<!-- LOADER SCREEN -->
-<div id="loader">
-    <div class="loader-ring"><div class="loader-icon"><i class="fa-solid fa-shield-halved"></i></div></div>
-    <div style="text-align:center;">
-        <div class="loader-text">{{ settings.logo }}</div>
-        <div style="height:0.5rem;"></div>
-        <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
-        <div style="height:0.5rem;"></div>
-        <div class="loader-status" id="lstat">Initializing Security Operations Center...</div>
-    </div>
-</div>
-
-<!-- NAVBAR -->
-<nav id="navbar">
-    <a href="/" class="nav-logo-wrap" aria-label="{{ settings.portfolio_name or 'Home' }}">
-        {% if settings.logo_image %}
-            <img src="{{ settings.logo_image }}" alt="{{ settings.portfolio_name }}" class="nav-logo-img dark-logo" style="max-height: {{ settings.logo_height or '34px' }}; max-width: {{ settings.logo_width or 'auto' }};" />
-            {% if settings.logo_image_light %}
-                <img src="{{ settings.logo_image_light }}" alt="{{ settings.portfolio_name }}" class="nav-logo-img light-logo" style="max-height: {{ settings.logo_height or '34px' }}; max-width: {{ settings.logo_width or 'auto' }};" />
-            {% endif %}
-            {% if settings.show_logo_text_with_image != false and settings.logo_text %}
-                <span class="nav-logo-text">{{ settings.logo_text }}</span>
-            {% endif %}
-        {% else %}
-            <span class="nav-logo"><span class="br">[</span>{{ settings.logo_text or settings.portfolio_name or "Aimad Security" }}<span class="nav-dot"></span><span class="br">]</span></span>
-        {% endif %}
-    </a>
-    
-    <ul class="nav-links">
-        <li><a href="#about"><i class="fa-solid fa-user-shield fa-xs"></i> About</a></li>
-        <li><a href="#certifications"><i class="fa-solid fa-award fa-xs"></i> Certs</a></li>
-        <li><a href="#skills"><i class="fa-solid fa-microchip fa-xs"></i> Skills</a></li>
-        <li><a href="#projects"><i class="fa-solid fa-folder-open fa-xs"></i> Projects</a></li>
-        <li><a href="#labs"><i class="fa-solid fa-flask fa-xs"></i> Labs</a></li>
-        <li><a href="#kb"><i class="fa-solid fa-book-journal-whills fa-xs"></i> KB</a></li>
-        <li><a href="#reports"><i class="fa-solid fa-file-lines fa-xs"></i> Reports</a></li>
-        <li><a href="#downloads"><i class="fa-solid fa-download fa-xs"></i> Downloads</a></li>
-        <li><a href="#dashboard"><i class="fa-solid fa-chart-line fa-xs"></i> SOC</a></li>
-        <li><a href="#contact"><i class="fa-solid fa-envelope fa-xs"></i> Contact</a></li>
-        <li><a href="/blog/"><i class="fa-solid fa-pen-nib fa-xs"></i> Blog</a></li>
-    </ul>
-
-    <div class="nav-right">
-        {% if settings.search_enabled != false %}
-        <button id="searchOpenBtn" class="search-trigger-btn" onclick="openSearchModal()" aria-label="Search site (Ctrl+K)">
-            <i class="fa-solid fa-magnifying-glass fa-xs"></i>
-            <span>Search</span>
-            <kbd class="kbd-badge">Ctrl+K</kbd>
-        </button>
-        {% endif %}
-        
-        {% if settings.status_badge_visible != false %}
-        <div class="nav-status">
-            <span class="status-dot" style="{% if settings.status_badge_color %}background: {{ settings.status_badge_color }}; box-shadow: 0 0 8px {{ settings.status_badge_color }};{% endif %}"></span>
-            <span class="status-text">{{ settings.status_badge_text or contact.availability or "Available" }}</span>
-        </div>
-        {% endif %}
-        
-        <a href="{{ resume.pdf_file or hero.resume_button_link }}" download class="nav-resume-btn" aria-label="Download Resume">
-            <i class="fa-solid fa-file-pdf"></i>
-            <span>Resume</span>
-            <i class="fa-solid fa-download dl-icon"></i>
-        </a>
-    </div>
-
-    <div class="hamburger" id="ham" aria-label="Toggle navigation menu">
-        <span></span><span></span><span></span>
-    </div>
-</nav>
-
-<!-- MOBILE OVERLAY & DRAWER -->
-<div class="mobile-overlay" id="mobOverlay"></div>
-<div class="mobile-nav" id="mobNav">
-    <div class="mobile-nav-header">
-        <div class="mobile-nav-brand">{{ settings.logo_text or settings.portfolio_name or "Aimad Security" }}</div>
-        <button class="mobile-nav-close" id="mobCloseBtn" aria-label="Close menu">&times;</button>
-    </div>
-    {% if settings.status_badge_visible != false %}
-    <div class="mobile-status-badge">
-        <span class="status-dot"></span>
-        <span>{{ settings.status_badge_text or contact.availability or "Available for Security Consulting" }}</span>
-    </div>
-    {% endif %}
-    <div class="mobile-links">
-        <a href="#about"><i class="fa-solid fa-user-shield"></i> About Me</a>
-        <a href="#certifications"><i class="fa-solid fa-award"></i> Certifications</a>
-        <a href="#skills"><i class="fa-solid fa-microchip"></i> Technical Skills</a>
-        <a href="#projects"><i class="fa-solid fa-folder-open"></i> Featured Projects</a>
-        <a href="#labs"><i class="fa-solid fa-flask"></i> Virtual Security Labs</a>
-        <a href="#kb"><i class="fa-solid fa-book-journal-whills"></i> Knowledge Base</a>
-        <a href="#reports"><i class="fa-solid fa-file-lines"></i> Security Reports</a>
-        <a href="#downloads"><i class="fa-solid fa-download"></i> Downloads</a>
-        <a href="#dashboard"><i class="fa-solid fa-chart-line"></i> SOC Dashboard</a>
-        <a href="#timeline"><i class="fa-solid fa-timeline"></i> Experience Timeline</a>
-        <a href="#contact"><i class="fa-solid fa-envelope"></i> Contact Me</a>
-        <a href="/blog/"><i class="fa-solid fa-pen-nib"></i> Technical Blog</a>
-    </div>
-    <div class="mobile-actions">
-        {% if settings.search_enabled != false %}
-        <button onclick="openSearchModal()" class="btn outline w-full"><i class="fa-solid fa-magnifying-glass"></i> Search Platform</button>
-        {% endif %}
-        <a href="{{ resume.pdf_file or hero.resume_button_link }}" download class="btn primary w-full"><i class="fa-solid fa-file-pdf"></i> Download Resume</a>
-    </div>
-    <div class="mobile-socs">
-        {% for soc in settings.social_media_links %}
-        <a href="{{ soc.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ soc.platform }}"><i class="{{ soc.icon }}"></i></a>
-        {% endfor %}
-    </div>
-</div>
+---
+layout: layouts/base.njk
+---
 
 <!-- HERO SECTION -->
 <section id="hero">
@@ -944,18 +763,15 @@
     </div>
 </section>
 
-<!-- FOOTER -->
-{% include "footer.njk" %}
-
 <script>
 // LOADER
 const statuses = ['Initializing security modules...', 'Loading profile data...', 'Establishing secure connection...', 'Verifying credentials...', 'Rendering interface...', 'System ready.'];
 let si = 0;
 const lstat = document.getElementById('lstat');
-const sint = setInterval(() => { if (si < statuses.length - 1) { si++; lstat.textContent = statuses[si]; } }, 350);
+const sint = setInterval(() => { if (si < statuses.length - 1) { si++; if (lstat) lstat.textContent = statuses[si]; } }, 350);
 window.addEventListener('load', () => {
     clearInterval(sint);
-    lstat.textContent = 'System ready.';
+    if (lstat) lstat.textContent = 'System ready.';
     setTimeout(() => document.getElementById('loader')?.classList.add('hide'), 1000);
 });
 
@@ -1291,10 +1107,16 @@ function handleForm(e) {
     const endpoint = "{{ contact.contact_form_endpoint }}";
     if (!endpoint || endpoint === '#' || endpoint === '') {
         e.preventDefault();
-        const txt = `Name: ${document.getElementById('cn').value}\nEmail: ${document.getElementById('ce').value}\nOrg: ${document.getElementById('co').value}\nType: ${document.getElementById('ct').value}\n\nMessage:\n${document.getElementById('cm').value}`;
+        const cn = document.getElementById('cn')?.value || '';
+        const ce = document.getElementById('ce')?.value || '';
+        const co = document.getElementById('co')?.value || '';
+        const ct = document.getElementById('ct')?.value || '';
+        const cm = document.getElementById('cm')?.value || '';
+        const txt = `Name: ${cn}\nEmail: ${ce}\nOrg: ${co}\nType: ${ct}\n\nMessage:\n${cm}`;
         navigator.clipboard.writeText(txt).catch(() => {});
-        document.getElementById('formOk').style.display = 'block';
-        e.target.reset();
+        const okEl = document.getElementById('formOk');
+        if (okEl) okEl.style.display = 'block';
+        if (e.target && typeof e.target.reset === 'function') e.target.reset();
     }
 }
 </script>
@@ -1445,8 +1267,8 @@ if (detailModal) {
 }
 
 function openSkillModal(skill, categoryName) {
-    modalTitle.innerHTML = `<i class="fa-solid fa-code" style="color:var(--cyan);"></i> Skill Intelligence: ${skill.name}`;
-    modalBody.innerHTML = `
+    if (modalTitle) modalTitle.innerHTML = `<i class="fa-solid fa-code" style="color:var(--cyan);"></i> Skill Intelligence: ${skill.name}`;
+    if (modalBody) modalBody.innerHTML = `
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.2rem; background:rgba(0,212,255,0.06); padding:0.8rem 1rem; border-radius:8px; border:1px solid var(--border);">
             <div><span style="color:var(--muted); font-size:0.8rem;">Category:</span> <strong style="color:var(--cyan); font-family:'Space Grotesk',sans-serif;">${categoryName}</strong></div>
             <div><span style="color:var(--muted); font-size:0.8rem;">Proficiency:</span> <strong style="color:var(--green); font-family:'JetBrains Mono',monospace;">${skill.percentage}%</strong></div>
@@ -1468,13 +1290,13 @@ function openSkillModal(skill, categoryName) {
             <p style="font-size:0.88rem; color:var(--light);">Regularly updated via TryHackMe modules, lab exercises, and practical vulnerability write-ups.</p>
         </div>
     `;
-    detailModal.style.display = 'flex';
+    if (detailModal) detailModal.style.display = 'flex';
 }
 
 function openProjModal(proj) {
-    modalTitle.innerHTML = `<i class="fa-solid fa-folder-open" style="color:var(--green);"></i> Project Specs: ${proj.title}`;
+    if (modalTitle) modalTitle.innerHTML = `<i class="fa-solid fa-folder-open" style="color:var(--green);"></i> Project Specs: ${proj.title}`;
     const techBadges = (proj.technologies || []).map(t => `<span class="tech-badge"><i class="${getTechIcon(t)}"></i> ${t}</span>`).join('');
-    modalBody.innerHTML = `
+    if (modalBody) modalBody.innerHTML = `
         <div style="margin-bottom:1rem; color:var(--cyan); font-family:'JetBrains Mono',monospace; font-size:0.85rem;">
             CATEGORY: ${proj.category ? proj.category.toUpperCase() : 'CYBERSECURITY'}
         </div>
@@ -1489,13 +1311,13 @@ function openProjModal(proj) {
             ${proj.pdf ? `<a href="${proj.pdf}" download class="res-dl" style="font-size:0.85rem; padding:8px 16px; background:rgba(124,58,237,0.2); color:var(--violet2);"><i class="fa-solid fa-file-pdf"></i> Download PDF Documentation</a>` : ''}
         </div>
     `;
-    detailModal.style.display = 'flex';
+    if (detailModal) detailModal.style.display = 'flex';
 }
 
 function openLabModal(lab) {
-    modalTitle.innerHTML = `<i class="fa-solid fa-flask" style="color:var(--violet2);"></i> Lab Blueprint: ${lab.name}`;
+    if (modalTitle) modalTitle.innerHTML = `<i class="fa-solid fa-flask" style="color:var(--violet2);"></i> Lab Blueprint: ${lab.name}`;
     const toolBadges = (lab.tools || []).map(t => `<span class="tech-badge"><i class="${getTechIcon(t)}"></i> ${t}</span>`).join('');
-    modalBody.innerHTML = `
+    if (modalBody) modalBody.innerHTML = `
         <div style="margin-bottom:1rem; color:var(--violet2); font-family:'JetBrains Mono',monospace; font-size:0.85rem;">
             PLATFORM: ${lab.platform ? lab.platform.toUpperCase() : 'VIRTUAL LAB'}
         </div>
@@ -1509,13 +1331,13 @@ function openLabModal(lab) {
             <a href="${lab.writeup_url}" class="res-dl" style="font-size:0.85rem; padding:8px 16px;"><i class="fa-solid fa-book-open"></i> Access Full Lab Write-up</a>
         </div>` : ''}
     `;
-    detailModal.style.display = 'flex';
+    if (detailModal) detailModal.style.display = 'flex';
 }
 
 function openKbModal(item) {
-    modalTitle.innerHTML = `<i class="fa-solid fa-book-journal-whills" style="color:var(--cyan);"></i> ${item.title}`;
+    if (modalTitle) modalTitle.innerHTML = `<i class="fa-solid fa-book-journal-whills" style="color:var(--cyan);"></i> ${item.title}`;
     const tagBadges = (item.tags || []).map(t => `<span class="tech-badge"><i class="${getTechIcon(t)}"></i> ${t}</span>`).join('');
-    modalBody.innerHTML = `
+    if (modalBody) modalBody.innerHTML = `
         <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.2rem; background:rgba(0,212,255,0.06); padding:0.6rem 1rem; border-radius:8px; border:1px solid var(--border);">
             <span style="color:var(--cyan); font-family:'JetBrains Mono',monospace; font-size:0.82rem;">TOPIC: ${item.category ? item.category.toUpperCase() : 'CYBERSECURITY'}</span>
             <span style="color:var(--amber); font-family:'JetBrains Mono',monospace; font-size:0.82rem; text-transform:uppercase;">[${item.difficulty || 'GENERAL'}]</span>
@@ -1534,7 +1356,7 @@ function openKbModal(item) {
             <pre style="white-space:pre-wrap; font-family:'JetBrains Mono',monospace; font-size:0.85rem; color:var(--silver); line-height:1.5;">${item.content}</pre>
         </div>` : ''}
     `;
-    detailModal.style.display = 'flex';
+    if (detailModal) detailModal.style.display = 'flex';
 }
 </script>
 
@@ -1546,5 +1368,3 @@ function openKbModal(item) {
         <div id="modalBody"></div>
     </div>
 </div>
-</body>
-</html>

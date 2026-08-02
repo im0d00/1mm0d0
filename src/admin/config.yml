@@ -59,6 +59,27 @@ collections:
               - { label: "URL", name: "url", widget: "string" }
               - { label: "Icon Class", name: "icon", widget: "string" }
 
+      - name: "navigation"
+        label: "Header Navigation Menu"
+        file: "src/_data/navigation.json"
+        fields:
+          - name: "main_menu"
+            label: "Main Navigation Items"
+            widget: "list"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+              - { label: "Icon Class", name: "icon", widget: "string", required: false }
+              - { label: "Target", name: "target", widget: "string", required: false, default: "_self" }
+              - name: "children"
+                label: "Submenu Items (Dropdown)"
+                widget: "list"
+                required: false
+                fields:
+                  - { label: "Label", name: "label", widget: "string" }
+                  - { label: "URL", name: "url", widget: "string" }
+                  - { label: "Icon Class", name: "icon", widget: "string", required: false }
+
       - name: "homepage"
         label: "Homepage Builder"
         file: "src/_data/homepage.json"

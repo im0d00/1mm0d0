@@ -4,24 +4,64 @@ eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  {% set siteUrl = settings.sitemap_settings.url or "https://aimadulislam.dpdns.org" %}
   <url>
-    <loc>{{ settings.sitemap_settings.url }}/</loc>
+    <loc>{{ siteUrl }}/</loc>
     <lastmod>{{ "now" | htmlDateString }}</lastmod>
-    <changefreq>weekly</changefreq>
+    <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>{{ settings.sitemap_settings.url }}/blog/</loc>
+    <loc>{{ siteUrl }}/projects/</loc>
+    <lastmod>{{ "now" | htmlDateString }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>{{ siteUrl }}/labs/</loc>
+    <lastmod>{{ "now" | htmlDateString }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>{{ siteUrl }}/research/</loc>
+    <lastmod>{{ "now" | htmlDateString }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>{{ siteUrl }}/downloads/</loc>
+    <lastmod>{{ "now" | htmlDateString }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>{{ siteUrl }}/blog/</loc>
     <lastmod>{{ "now" | htmlDateString }}</lastmod>
     <changefreq>daily</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>{{ siteUrl }}/resources/</loc>
+    <lastmod>{{ "now" | htmlDateString }}</lastmod>
+    <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
-  {% for post in collections.posts %}
   <url>
-    <loc>{{ settings.sitemap_settings.url }}{{ post.url }}</loc>
-    <lastmod>{{ post.date | htmlDateString }}</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <loc>{{ siteUrl }}/resources/sitemap-page/</loc>
+    <lastmod>{{ "now" | htmlDateString }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
   </url>
+
+  {% for pageItem in collections.all %}
+    {% if pageItem.url and pageItem.url != '/' and pageItem.url != '/blog/' and pageItem.url != '/projects/' and pageItem.url != '/labs/' and pageItem.url != '/research/' and pageItem.url != '/downloads/' and pageItem.url != '/resources/' and pageItem.url != '/resources/sitemap-page/' and not pageItem.data.eleventyExcludeFromCollections %}
+  <url>
+    <loc>{{ siteUrl }}{{ pageItem.url }}</loc>
+    <lastmod>{% if pageItem.date %}{{ pageItem.date | htmlDateString }}{% else %}{{ "now" | htmlDateString }}{% endif %}</lastmod>
+    <changefreq>{% if 'posts' in pageItem.url %}monthly{% else %}weekly{% endif %}</changefreq>
+    <priority>{% if 'posts' in pageItem.url %}0.8{% else %}0.7{% endif %}</priority>
+  </url>
+    {% endif %}
   {% endfor %}
 </urlset>

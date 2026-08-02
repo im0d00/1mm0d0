@@ -1,29 +1,72 @@
 ---
 layout: layouts/resource.njk
 title: "Human-Readable Visual Sitemap"
-summary: "Structured visual directory of all sections, technical blog posts, labs, and resources pages."
+summary: "Structured visual directory of all sections, technical blog posts, virtual labs, security projects, research reports, and compliance resources."
 icon: "fa-solid fa-sitemap"
 date: 2026-08-01
 updated: 2026-08-01
 ---
 
-<div class="human-sitemap-grid">
+<div class="human-sitemap-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
     <div class="sm-section card">
-        <h3><i class="fa-solid fa-house"></i> Main Navigation</h3>
+        <h3><i class="fa-solid fa-compass" style="color:var(--cyan);"></i> Core Directory & Hubs</h3>
         <ul>
             <li><a href="/">Homepage Overview</a></li>
             <li><a href="/#about">About Aimad Ul Islam</a></li>
             <li><a href="/#certifications">Verified Certifications</a></li>
-            <li><a href="/#skills">Skills Matrix</a></li>
-            <li><a href="/#projects">Security Projects</a></li>
-            <li><a href="/#labs">Virtual Labs</a></li>
-            <li><a href="/#dashboard">SOC Live Metrics</a></li>
-            <li><a href="/#contact">Contact Terminal</a></li>
+            <li><a href="/#skills">Technical Skills Matrix</a></li>
+            <li><a href="/projects/">Projects Showcase Center</a></li>
+            <li><a href="/labs/">Virtual Cyber Practice Range</a></li>
+            <li><a href="/research/">Research & Whitepapers Vault</a></li>
+            <li><a href="/downloads/">Download Hub & Software Tools</a></li>
+            <li><a href="/blog/">Technical Writeups & Blog</a></li>
+            <li><a href="/resources/">Governance & Resources Hub</a></li>
+            <li><a href="/#contact">Contact & Incident Desk</a></li>
         </ul>
     </div>
 
     <div class="sm-section card">
-        <h3><i class="fa-solid fa-newspaper"></i> Technical Blog & Writeups</h3>
+        <h3><i class="fa-solid fa-folder-open" style="color:var(--green);"></i> Security Projects</h3>
+        <ul>
+            <li><a href="/projects/">All Security Projects Overview</a></li>
+            {% for item in collections.projects %}
+            <li><a href="{{ item.url }}">{{ item.data.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="sm-section card">
+        <h3><i class="fa-solid fa-vial" style="color:var(--violet2);"></i> Virtual Cyber Labs</h3>
+        <ul>
+            <li><a href="/labs/">All Labs & Practice Blueprints</a></li>
+            {% for item in collections.labs %}
+            <li><a href="{{ item.url }}">{{ item.data.title or item.data.name }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="sm-section card">
+        <h3><i class="fa-solid fa-file-contract" style="color:var(--amber);"></i> Research & Whitepapers</h3>
+        <ul>
+            <li><a href="/research/">Research Center Index</a></li>
+            {% for item in collections.research %}
+            <li><a href="{{ item.url }}">{{ item.data.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="sm-section card">
+        <h3><i class="fa-solid fa-download" style="color:var(--cyan);"></i> Download Assets</h3>
+        <ul>
+            <li><a href="/downloads/">Downloads Directory</a></li>
+            {% for item in collections.downloads %}
+            <li><a href="{{ item.url }}">{{ item.data.title }}</a></li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="sm-section card">
+        <h3><i class="fa-solid fa-pen-nib" style="color:var(--cyan);"></i> Technical Writeups & Blog</h3>
         <ul>
             <li><a href="/blog/">Blog Main Index</a></li>
             {% for post in collections.posts %}
@@ -33,9 +76,9 @@ updated: 2026-08-01
     </div>
 
     <div class="sm-section card">
-        <h3><i class="fa-solid fa-folder-tree"></i> Resources & Policy Center</h3>
+        <h3><i class="fa-solid fa-shield-halved" style="color:var(--green);"></i> Governance, Legal & Policy</h3>
         <ul>
-            <li><a href="/resources/">Resources Hub</a></li>
+            <li><a href="/resources/">Resources Hub Overview</a></li>
             <li><a href="/resources/privacy-policy/">Privacy Policy</a></li>
             <li><a href="/resources/terms/">Terms of Use</a></li>
             <li><a href="/resources/cookie-policy/">Cookie Policy</a></li>
@@ -47,10 +90,18 @@ updated: 2026-08-01
             <li><a href="/resources/license/">MIT License Info</a></li>
             <li><a href="/resources/accessibility/">Accessibility Statement</a></li>
             <li><a href="/resources/support/">Support & Contact Desk</a></li>
-            <li><a href="/resources/faq/">FAQ</a></li>
+            <li><a href="/resources/faq/">FAQ & Support</a></li>
             <li><a href="/resources/changelog/">System Changelog</a></li>
-            <li><a href="/sitemap.xml">XML Machine Sitemap</a></li>
-            <li><a href="/feed.xml">RSS XML Feed</a></li>
+        </ul>
+    </div>
+
+    <div class="sm-section card">
+        <h3><i class="fa-solid fa-rss" style="color:var(--amber);"></i> Machine Feeds & Indexes</h3>
+        <ul>
+            <li><a href="/sitemap.xml" target="_blank">XML Machine Sitemap (sitemap.xml)</a></li>
+            <li><a href="/feed.xml" target="_blank">RSS Atom Feed (feed.xml)</a></li>
+            <li><a href="/robots.txt" target="_blank">Robots Directive File (robots.txt)</a></li>
+            <li><a href="/manifest.json" target="_blank">PWA Manifest (manifest.json)</a></li>
         </ul>
     </div>
 </div>

@@ -47,6 +47,12 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addFilter("htmlDateString", (dateObj) => {
     return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat('yyyy-LL-dd');
   });
+
+  eleventyConfig.addFilter("dateToRfc3339", (dateObj) => {
+    if (!dateObj) return DateTime.now().toISO();
+    const d = dateObj instanceof Date ? dateObj : new Date(dateObj);
+    return DateTime.fromJSDate(d, {zone: 'utc'}).toISO();
+  });
   
   eleventyConfig.addFilter("head", (array, n) => {
     if( n < 0 ) {

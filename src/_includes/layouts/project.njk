@@ -1,198 +1,156 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="dark">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }} | Security Engineering Project | Aimad Ul Islam</title>
-    <meta name="description" content="{{ description or summary or 'Cybersecurity project documentation by Aimad Ul Islam.' }}">
-    <meta name="author" content="{{ author or 'Aimad Ul Islam' }}">
-    <meta name="theme-color" content="#080C1A">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="{{ title }} | Aimad Ul Islam">
-    <meta property="og:description" content="{{ description or summary }}">
-    <meta property="og:type" content="article">
-    <meta property="og:url" content="https://aimadulislam.dpdns.org{{ page.url }}">
-    {% if featured_image or image %}<meta property="og:image" content="{{ featured_image or image }}">{% endif %}
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    
-    <!-- CSS -->
-    <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/blog.css">
-</head>
-<body class="post-page-body">
-    <div class="grid-bg"></div>
-    <div class="scan-line"></div>
-    <div id="reading-progress"></div>
+---
+layout: layouts/base.njk
+---
+<main class="container">
+    <article class="article-hero">
+        <!-- Breadcrumbs -->
+        <div class="breadcrumb">
+            <a href="/"><i class="fa-solid fa-house"></i> Home</a>
+            <span>/</span>
+            <a href="/projects/">Projects</a>
+            <span>/</span>
+            <span class="current-title">{{ title }}</span>
+        </div>
 
-    <!-- UNIFIED HEADER -->
-    {% include "header.njk" %}
+        <div class="article-layout">
+            <!-- Main Content Column -->
+            <div class="article-main">
+                <header class="article-header card">
+                    <div class="article-cats">
+                        <span class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> {{ category or "Security Engineering" }}</span>
+                        <span class="tag tag-tut"><i class="fa-solid fa-layer-group"></i> {{ difficulty or "Intermediate" }}</span>
+                        <span class="tag tag-status"><i class="fa-solid fa-circle-check"></i> {{ status or "Completed" }}</span>
+                    </div>
+                    
+                    <h1 class="article-title">{{ title }}</h1>
+                    
+                    {% if description %}
+                    <p class="article-subtitle">{{ description }}</p>
+                    {% endif %}
+                    
+                    <div class="article-meta">
+                        <div class="article-meta-item">
+                            <i class="fa-solid fa-user-shield"></i>
+                            <span>Engineer: <strong>{{ author or "Aimad Ul Islam" }}</strong></span>
+                        </div>
+                        <div class="article-meta-item">
+                            <i class="fa-regular fa-calendar"></i>
+                            <span>Date: <strong>{{ date | readableDate if date else "2026" }}</strong></span>
+                        </div>
+                    </div>
 
-    <main class="container">
-        <article class="article-hero">
-            <!-- Breadcrumbs -->
-            <div class="breadcrumb">
-                <a href="/"><i class="fa-solid fa-house"></i> Home</a>
-                <span>/</span>
-                <a href="/projects/">Projects</a>
-                <span>/</span>
-                <span class="current-title">{{ title }}</span>
+                    {% if technologies %}
+                    <div class="article-tags" style="margin-top: 1rem;">
+                        {% for tech in technologies %}
+                        <span class="tag tag-tut"><i class="fa-solid fa-microchip"></i> {{ tech }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+
+                    <div class="project-links-row" style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                        {% if github_link %}
+                        <a href="{{ github_link }}" target="_blank" rel="noopener noreferrer" class="btn btn-cyan btn-sm"><i class="fa-brands fa-github"></i> View GitHub Repository</a>
+                        {% endif %}
+                        {% if live_demo %}
+                        <a href="{{ live_demo }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
+                        {% endif %}
+                        {% if pdf %}
+                        <a href="{{ pdf }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm"><i class="fa-solid fa-file-pdf"></i> Download PDF Report</a>
+                        {% endif %}
+                    </div>
+                </header>
+
+                <!-- Featured Image -->
+                {% if featured_image or image %}
+                <div class="project-hero-media card" style="margin-bottom: 2rem; overflow: hidden;">
+                    <img src="{{ featured_image or image }}" alt="{{ title }}" style="width: 100%; max-height: 480px; object-fit: cover; border-radius: var(--radius);"/>
+                </div>
+                {% endif %}
+
+                <!-- Key Sections (Problem Statement, Methodology, Objectives) -->
+                {% if problem_statement or methodology or objectives %}
+                <div class="project-spec-grid card" style="margin-bottom: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; padding: 1.5rem;">
+                    {% if problem_statement %}
+                    <div class="spec-block">
+                        <h3 style="color: var(--cyan); font-size: 1.1rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-triangle-exclamation"></i> Problem Statement</h3>
+                        <p style="font-size: 0.95rem; color: var(--light);">{{ problem_statement }}</p>
+                    </div>
+                    {% endif %}
+                    {% if methodology %}
+                    <div class="spec-block">
+                        <h3 style="color: var(--violet2); font-size: 1.1rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-diagram-project"></i> Methodology</h3>
+                        <p style="font-size: 0.95rem; color: var(--light);">{{ methodology }}</p>
+                    </div>
+                    {% endif %}
+                </div>
+                {% endif %}
+
+                <!-- Article Body -->
+                <div class="article-body card">
+                    {{ content | safe }}
+                </div>
+
+                <!-- Lessons Learned & Future Improvements -->
+                {% if lessons_learned or future_improvements %}
+                <div class="lessons-grid card" style="margin-top: 2rem; padding: 1.5rem;">
+                    {% if lessons_learned %}
+                    <h3 style="color: var(--cyan); margin-bottom: 0.5rem;"><i class="fa-solid fa-lightbulb"></i> Lessons Learned</h3>
+                    <p style="margin-bottom: 1rem; color: var(--light);">{{ lessons_learned }}</p>
+                    {% endif %}
+                    {% if future_improvements %}
+                    <h3 style="color: var(--green); margin-bottom: 0.5rem;"><i class="fa-solid fa-rocket"></i> Future Enhancements</h3>
+                    <p style="color: var(--light);">{{ future_improvements }}</p>
+                    {% endif %}
+                </div>
+                {% endif %}
+
+                <!-- Author Box -->
+                <div class="author-box card" style="margin-top: 2rem;">
+                    <div class="author-avatar"><i class="fa-solid fa-user-check"></i></div>
+                    <div class="author-info">
+                        <h3>{{ author or "Aimad Ul Islam" }}</h3>
+                        <p class="author-bio">Cybersecurity practitioner & security engineer specializing in digital forensics, SOC triage, network security, and automated threat parsers.</p>
+                        <div class="author-links">
+                            <a href="https://github.com/aimadulislam" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+                            <a href="https://linkedin.com/in/aimadulislam" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
             </div>
 
-            <div class="article-layout">
-                <!-- Main Content Column -->
-                <div class="article-main">
-                    <header class="article-header card">
-                        <div class="article-cats">
-                            <span class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> {{ category or "Security Engineering" }}</span>
-                            <span class="tag tag-tut"><i class="fa-solid fa-layer-group"></i> {{ difficulty or "Intermediate" }}</span>
-                            <span class="tag tag-status"><i class="fa-solid fa-circle-check"></i> {{ status or "Completed" }}</span>
-                        </div>
-                        
-                        <h1 class="article-title">{{ title }}</h1>
-                        
-                        {% if description %}
-                        <p class="article-subtitle">{{ description }}</p>
-                        {% endif %}
-                        
-                        <div class="article-meta">
-                            <div class="article-meta-item">
-                                <i class="fa-solid fa-user-shield"></i>
-                                <span>Engineer: <strong>{{ author or "Aimad Ul Islam" }}</strong></span>
-                            </div>
-                            <div class="article-meta-item">
-                                <i class="fa-regular fa-calendar"></i>
-                                <span>Date: <strong>{{ date | readableDate if date else "2026" }}</strong></span>
-                            </div>
-                        </div>
-
-                        {% if technologies %}
-                        <div class="article-tags" style="margin-top: 1rem;">
-                            {% for tech in technologies %}
-                            <span class="tag tag-tut"><i class="fa-solid fa-microchip"></i> {{ tech }}</span>
-                            {% endfor %}
-                        </div>
-                        {% endif %}
-
-                        <div class="project-links-row" style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-                            {% if github_link %}
-                            <a href="{{ github_link }}" target="_blank" rel="noopener noreferrer" class="btn btn-cyan btn-sm"><i class="fa-brands fa-github"></i> View GitHub Repository</a>
-                            {% endif %}
-                            {% if live_demo %}
-                            <a href="{{ live_demo }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm"><i class="fa-solid fa-arrow-up-right-from-square"></i> Live Demo</a>
-                            {% endif %}
-                            {% if pdf %}
-                            <a href="{{ pdf }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm"><i class="fa-solid fa-file-pdf"></i> Download PDF Report</a>
-                            {% endif %}
-                        </div>
-                    </header>
-
-                    <!-- Featured Image -->
-                    {% if featured_image or image %}
-                    <div class="project-hero-media card" style="margin-bottom: 2rem; overflow: hidden;">
-                        <img src="{{ featured_image or image }}" alt="{{ title }}" style="width: 100%; max-height: 480px; object-fit: cover; border-radius: var(--radius);"/>
+            <!-- Article Sidebar -->
+            <aside class="sidebar">
+                <!-- Tech Stack Widget -->
+                <div class="sidebar-widget card">
+                    <h3 class="widget-title"><i class="fa-solid fa-screwdriver-wrench"></i> Stack & Tools</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
+                        {% for tech in technologies or tools %}
+                        <span class="tag tag-cyber">{{ tech }}</span>
+                        {% endfor %}
                     </div>
-                    {% endif %}
+                </div>
 
-                    <!-- Key Sections (Problem Statement, Methodology, Objectives) -->
-                    {% if problem_statement or methodology or objectives %}
-                    <div class="project-spec-grid card" style="margin-bottom: 2rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; padding: 1.5rem;">
-                        {% if problem_statement %}
-                        <div class="spec-block">
-                            <h3 style="color: var(--cyan); font-size: 1.1rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-triangle-exclamation"></i> Problem Statement</h3>
-                            <p style="font-size: 0.95rem; color: var(--light);">{{ problem_statement }}</p>
+                <!-- Project Quick Meta -->
+                <div class="sidebar-widget card">
+                    <h3 class="widget-title"><i class="fa-solid fa-circle-info"></i> Details</h3>
+                    <div class="sidebar-cat-list">
+                        <div class="sidebar-cat-item">
+                            <span>Category:</span> <strong>{{ category }}</strong>
                         </div>
-                        {% endif %}
-                        {% if methodology %}
-                        <div class="spec-block">
-                            <h3 style="color: var(--violet2); font-size: 1.1rem; margin-bottom: 0.5rem;"><i class="fa-solid fa-diagram-project"></i> Methodology</h3>
-                            <p style="font-size: 0.95rem; color: var(--light);">{{ methodology }}</p>
+                        <div class="sidebar-cat-item">
+                            <span>Difficulty:</span> <strong>{{ difficulty }}</strong>
                         </div>
-                        {% endif %}
-                    </div>
-                    {% endif %}
-
-                    <!-- Article Body -->
-                    <div class="article-body card">
-                        {{ content | safe }}
-                    </div>
-
-                    <!-- Lessons Learned & Future Improvements -->
-                    {% if lessons_learned or future_improvements %}
-                    <div class="lessons-grid card" style="margin-top: 2rem; padding: 1.5rem;">
-                        {% if lessons_learned %}
-                        <h3 style="color: var(--cyan); margin-bottom: 0.5rem;"><i class="fa-solid fa-lightbulb"></i> Lessons Learned</h3>
-                        <p style="margin-bottom: 1rem; color: var(--light);">{{ lessons_learned }}</p>
-                        {% endif %}
-                        {% if future_improvements %}
-                        <h3 style="color: var(--green); margin-bottom: 0.5rem;"><i class="fa-solid fa-rocket"></i> Future Enhancements</h3>
-                        <p style="color: var(--light);">{{ future_improvements }}</p>
-                        {% endif %}
-                    </div>
-                    {% endif %}
-
-                    <!-- Author Box -->
-                    <div class="author-box card" style="margin-top: 2rem;">
-                        <div class="author-avatar"><i class="fa-solid fa-user-check"></i></div>
-                        <div class="author-info">
-                            <h3>{{ author or "Aimad Ul Islam" }}</h3>
-                            <p class="author-bio">Cybersecurity practitioner & security engineer specializing in digital forensics, SOC triage, network security, and automated threat parsers.</p>
-                            <div class="author-links">
-                                <a href="https://github.com/aimadulislam" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
-                                <a href="https://linkedin.com/in/aimadulislam" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
-                            </div>
+                        <div class="sidebar-cat-item">
+                            <span>Status:</span> <strong style="color: var(--green);">{{ status }}</strong>
                         </div>
                     </div>
                 </div>
 
-                <!-- Article Sidebar -->
-                <aside class="sidebar">
-                    <!-- Tech Stack Widget -->
-                    <div class="sidebar-widget card">
-                        <h3 class="widget-title"><i class="fa-solid fa-screwdriver-wrench"></i> Stack & Tools</h3>
-                        <div style="display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                            {% for tech in technologies or tools %}
-                            <span class="tag tag-cyber">{{ tech }}</span>
-                            {% endfor %}
-                        </div>
-                    </div>
-
-                    <!-- Project Quick Meta -->
-                    <div class="sidebar-widget card">
-                        <h3 class="widget-title"><i class="fa-solid fa-circle-info"></i> Details</h3>
-                        <div class="sidebar-cat-list">
-                            <div class="sidebar-cat-item">
-                                <span>Category:</span> <strong>{{ category }}</strong>
-                            </div>
-                            <div class="sidebar-cat-item">
-                                <span>Difficulty:</span> <strong>{{ difficulty }}</strong>
-                            </div>
-                            <div class="sidebar-cat-item">
-                                <span>Status:</span> <strong style="color: var(--green);">{{ status }}</strong>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Back to Projects -->
-                    <div class="sidebar-widget card">
-                        <a href="/projects/" class="btn btn-cyan btn-full"><i class="fa-solid fa-arrow-left"></i> All Projects</a>
-                    </div>
-                </aside>
-            </div>
-        </article>
-    </main>
-
-    <!-- UNIFIED FOOTER -->
-    {% include "footer.njk" %}
-
-    <button id="scroll-top" aria-label="Scroll to top"><i class="fa-solid fa-arrow-up"></i></button>
-    <script src="/js/main.js"></script>
-</body>
-</html>
+                <!-- Back to Projects -->
+                <div class="sidebar-widget card">
+                    <a href="/projects/" class="btn btn-cyan btn-full"><i class="fa-solid fa-arrow-left"></i> All Projects</a>
+                </div>
+            </aside>
+        </div>
+    </article>
+</main>

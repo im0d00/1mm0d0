@@ -23,6 +23,9 @@
             <div class="footer-col">
                 <h4 class="footer-heading"><i class="fa-solid fa-compass"></i> Navigation</h4>
                 <ul class="footer-links-list">
+                    {% for item in footer.quick_links %}
+                    <li><a href="{{ item.url }}"><i class="fa-solid fa-chevron-right fa-xs"></i> {{ item.label }}</a></li>
+                    {% else %}
                     <li><a href="/"><i class="fa-solid fa-chevron-right fa-xs"></i> Home</a></li>
                     <li><a href="/projects/"><i class="fa-solid fa-chevron-right fa-xs"></i> Projects Center</a></li>
                     <li><a href="/labs/"><i class="fa-solid fa-chevron-right fa-xs"></i> Virtual Cyber Labs</a></li>
@@ -30,21 +33,25 @@
                     <li><a href="/downloads/"><i class="fa-solid fa-chevron-right fa-xs"></i> Download Hub</a></li>
                     <li><a href="/blog/"><i class="fa-solid fa-chevron-right fa-xs"></i> Technical Blog</a></li>
                     <li><a href="/resources/"><i class="fa-solid fa-chevron-right fa-xs"></i> Resources Center</a></li>
+                    {% endfor %}
                 </ul>
             </div>
 
             <!-- Resources & Legal Column -->
             <div class="footer-col">
-                <h4 class="footer-heading"><i class="fa-solid fa-shield-halved"></i> Resources</h4>
+                <h4 class="footer-heading"><i class="fa-solid fa-shield-halved"></i> Resources & Legal</h4>
                 <ul class="footer-links-list">
+                    {% for item in footer.legal_links %}
+                    <li><a href="{{ item.url }}"><i class="fa-solid fa-chevron-right fa-xs"></i> {{ item.label }}</a></li>
+                    {% else %}
                     <li><a href="/resources/privacy-policy/"><i class="fa-solid fa-chevron-right fa-xs"></i> Privacy Policy</a></li>
                     <li><a href="/resources/terms/"><i class="fa-solid fa-chevron-right fa-xs"></i> Terms of Use</a></li>
                     <li><a href="/resources/security-policy/"><i class="fa-solid fa-chevron-right fa-xs"></i> Security Policy</a></li>
                     <li><a href="/resources/responsible-disclosure/"><i class="fa-solid fa-chevron-right fa-xs"></i> Disclosure Policy</a></li>
-                    <li><a href="/resources/faq/"><i class="fa-solid fa-chevron-right fa-xs"></i> FAQ & Support</a></li>
-                    <li><a href="/resources/changelog/"><i class="fa-solid fa-chevron-right fa-xs"></i> System Changelog</a></li>
+                    <li><a href="/resources/sitemap-page/"><i class="fa-solid fa-chevron-right fa-xs"></i> Human Sitemap</a></li>
                     <li><a href="/sitemap.xml"><i class="fa-solid fa-chevron-right fa-xs"></i> XML Sitemap</a></li>
                     <li><a href="/feed.xml"><i class="fa-solid fa-chevron-right fa-xs"></i> RSS Feed</a></li>
+                    {% endfor %}
                 </ul>
             </div>
 

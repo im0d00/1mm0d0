@@ -3,24 +3,39 @@ permalink: /feed.xml
 eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom">
-  <title>{{ settings.website_title }}</title>
-  <subtitle>{{ settings.website_description }}</subtitle>
-  <link href="{{ settings.sitemap_settings.url }}/feed.xml" rel="self"/>
-  <link href="{{ settings.sitemap_settings.url }}/"/>
-  <updated>{% if collections.posts | length > 0 %}{{ collections.posts[0].date | htmlDateString }}T00:00:00Z{% else %}{{ "now" | htmlDateString }}T00:00:00Z{% endif %}</updated>
-  <id>{{ settings.sitemap_settings.url }}/</id>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+  <title>{{ settings.website_title or "Aimad Ul Islam — Cybersecurity & Network Security Portfolio" }}</title>
+  <subtitle>{{ settings.website_description or "In-depth technical writeups on Digital Forensics, SOC operations, network security, and ethical hacking." }}</subtitle>
+  <link href="{{ settings.sitemap_settings.url or 'https://aimadulislam.dpdns.org' }}/feed.xml" rel="self" type="application/atom+xml"/>
+  <link href="{{ settings.sitemap_settings.url or 'https://aimadulislam.dpdns.org' }}/" rel="alternate" type="text/html"/>
+  <updated>{% if collections.posts | length > 0 %}{{ collections.posts[0].date | dateToRfc3339 }}{% else %}{{ "now" | dateToRfc3339 }}{% endif %}</updated>
+  <id>{{ settings.sitemap_settings.url or 'https://aimadulislam.dpdns.org' }}/</id>
+  <language>en-US</language>
   <author>
-    <name>{{ settings.author }}</name>
-    <email>{{ contact.email }}</email>
+    <name>{{ settings.author or "Aimad Ul Islam" }}</name>
+    <email>{{ footer.contact_info.email or contact.email or "info@aimadulislam.dpdns.org" }}</email>
+    <uri>{{ settings.sitemap_settings.url or 'https://aimadulislam.dpdns.org' }}</uri>
   </author>
   {% for post in collections.posts %}
   <entry>
     <title>{{ post.data.title }}</title>
-    <link href="{{ settings.sitemap_settings.url }}{{ post.url }}"/>
-    <updated>{{ post.date | htmlDateString }}T00:00:00Z</updated>
-    <id>{{ settings.sitemap_settings.url }}{{ post.url }}</id>
-    <summary>{{ post.data.excerpt }}</summary>
+    <link href="{{ settings.sitemap_settings.url or 'https://aimadulislam.dpdns.org' }}{{ post.url }}"/>
+    <updated>{{ post.date | dateToRfc3339 }}</updated>
+    <id>{{ settings.sitemap_settings.url or 'https://aimadulislam.dpdns.org' }}{{ post.url }}</id>
+    <summary type="html"><![CDATA[{{ post.data.excerpt or post.data.subtitle or post.data.description }}]]></summary>
+    <content type="html"><![CDATA[{{ post.templateContent | safe }}]]></content>
+    <author>
+      <name>{{ post.data.author or settings.author or "Aimad Ul Islam" }}</name>
+    </author>
+    {% if post.data.categories %}
+      {% for cat in post.data.categories %}
+    <category term="{{ cat }}"/>
+      {% endfor %}
+    {% endif %}
+    {% set thumb = post.data.thumbnail or post.data.image or post.data.featured_image or settings.og_image %}
+    {% if thumb %}
+    <media:thumbnail url="{{ thumb }}"/>
+    {% endif %}
   </entry>
   {% endfor %}
 </feed>
