@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "eleventy --serve --config=.eleventy.cjs",
     "build": "eleventy --config=.eleventy.cjs",
+    "lint": "eleventy --config=.eleventy.cjs",
     "start": "eleventy --serve --config=.eleventy.cjs",
     "clean": "rm -rf _site"
   },
