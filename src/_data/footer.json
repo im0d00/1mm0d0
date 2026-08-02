@@ -1,0 +1,29 @@
+{
+  "footer_logo": "AimadSecurity_SOC",
+  "about_text": "Enterprise Security Operations Center & Cybersecurity Research Portfolio.",
+  "quick_links": [
+    { "label": "About Me", "url": "#about" },
+    { "label": "Projects", "url": "#projects" },
+    { "label": "Research Reports", "url": "#reports" },
+    { "label": "Download Center", "url": "#downloads" },
+    { "label": "Technical Blog", "url": "/blog/" }
+  ],
+  "policy_links": [
+    { "label": "Privacy Policy", "url": "#contact" },
+    { "label": "Terms of Service", "url": "#contact" },
+    { "label": "Security Policy & Disclosure", "url": "#contact" },
+    { "label": "Disclaimer", "url": "#contact" }
+  ],
+  "social_links": [
+    { "platform": "GitHub", "url": "https://github.com", "icon": "fa-brands fa-github" },
+    { "platform": "LinkedIn", "url": "https://linkedin.com", "icon": "fa-brands fa-linkedin-in" },
+    { "platform": "Twitter", "url": "https://x.com", "icon": "fa-brands fa-x-twitter" },
+    { "platform": "YouTube", "url": "https://youtube.com", "icon": "fa-brands fa-youtube" }
+  ],
+  "newsletter": {
+    "enabled": true,
+    "title": "Subscribe to Security Bulletins",
+    "description": "Receive threat intelligence updates, pentest writeups, and vulnerability analysis directly in your inbox."
+  },
+  "copyright": "© 2026 Aimad Security Operations Center. All Rights Reserved."
+}

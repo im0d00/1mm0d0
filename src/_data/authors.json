@@ -1,0 +1,17 @@
+{
+  "items": [
+    {
+      "name": "Aimad Ul Islam",
+      "slug": "aimad-ul-islam",
+      "role": "Lead Security Engineer & SOC Analyst",
+      "photo": "https://ui-avatars.com/api/?name=Aimad+Ul+Islam&background=0A1628&color=00E5FF&size=200&bold=true",
+      "biography": "Cybersecurity researcher and SOC specialist focused on threat detection, network defenses, and automation.",
+      "email": "contact@aimadsecurity.org",
+      "website": "https://aimadsecurity.org",
+      "social_links": [
+        { "platform": "GitHub", "url": "https://github.com" },
+        { "platform": "LinkedIn", "url": "https://linkedin.com" }
+      ]
+    }
+  ]
+}

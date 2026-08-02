@@ -394,6 +394,123 @@ collections:
               - { label: "Image", name: "image", widget: "image", required: false }
               - { label: "Category", name: "category", widget: "string" }
 
+  - name: "site_structure"
+    label: "Navigation & Footer"
+    delete: false
+    files:
+      - name: "navigation"
+        label: "Navigation Menu"
+        file: "src/_data/navigation.json"
+        fields:
+          - name: "main_menu"
+            label: "Main Menu Links"
+            widget: "list"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+              - { label: "Icon Class", name: "icon", widget: "string" }
+              - { label: "Target", name: "target", widget: "select", options: ["_self", "_blank"] }
+
+      - name: "footer"
+        label: "Footer Settings"
+        file: "src/_data/footer.json"
+        fields:
+          - { label: "Footer Logo", name: "footer_logo", widget: "string" }
+          - { label: "About Text", name: "about_text", widget: "text" }
+          - { label: "Copyright", name: "copyright", widget: "string" }
+          - name: "quick_links"
+            label: "Quick Links"
+            widget: "list"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+          - name: "policy_links"
+            label: "Policy Links"
+            widget: "list"
+            fields:
+              - { label: "Label", name: "label", widget: "string" }
+              - { label: "URL", name: "url", widget: "string" }
+
+  - name: "content_taxonomy"
+    label: "Categories, Tags & Authors"
+    delete: false
+    files:
+      - name: "categories"
+        label: "Categories"
+        file: "src/_data/categorylist.json"
+        fields:
+          - name: "items"
+            label: "Category Items"
+            widget: "list"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Slug", name: "slug", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+              - { label: "Icon Class", name: "icon", widget: "string" }
+              - { label: "Color", name: "color", widget: "string" }
+
+      - name: "tags"
+        label: "Tags"
+        file: "src/_data/taglist.json"
+        fields:
+          - name: "items"
+            label: "Tag Items"
+            widget: "list"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Slug", name: "slug", widget: "string" }
+
+      - name: "authors"
+        label: "Authors"
+        file: "src/_data/authors.json"
+        fields:
+          - name: "items"
+            label: "Author Profiles"
+            widget: "list"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Slug", name: "slug", widget: "string" }
+              - { label: "Role", name: "role", widget: "string" }
+              - { label: "Photo URL", name: "photo", widget: "image" }
+              - { label: "Biography", name: "biography", widget: "text" }
+              - { label: "Email", name: "email", widget: "string" }
+
+  - name: "downloads_reports"
+    label: "Reports & Downloads"
+    delete: false
+    files:
+      - name: "reports"
+        label: "Research Reports Library"
+        file: "src/_data/reports.json"
+        fields:
+          - name: "items"
+            label: "Reports"
+            widget: "list"
+            fields:
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Category", name: "category", widget: "string" }
+              - { label: "Date", name: "date", widget: "string" }
+              - { label: "Summary", name: "summary", widget: "text" }
+              - { label: "Author", name: "author", widget: "string" }
+              - { label: "PDF File / URL", name: "pdf_url", widget: "file" }
+              - { label: "Version", name: "version", widget: "string" }
+              - { label: "File Size", name: "file_size", widget: "string" }
+
+      - name: "downloads"
+        label: "Download Center Items"
+        file: "src/_data/downloads.json"
+        fields:
+          - name: "items"
+            label: "Downloads"
+            widget: "list"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Category", name: "category", widget: "string" }
+              - { label: "Format", name: "format", widget: "string" }
+              - { label: "File URL", name: "file_url", widget: "file" }
+              - { label: "Size", name: "size", widget: "string" }
+              - { label: "Description", name: "description", widget: "text" }
+
   - name: "posts"
     label: "Blog Posts"
     folder: "src/posts"
@@ -414,3 +531,4 @@ collections:
       - { label: "Reading Time (minutes)", name: "readingTime", widget: "number", value_type: "int", required: false }
       - { label: "Featured Post?", name: "featured", widget: "boolean", default: false }
       - { label: "Body", name: "body", widget: "markdown" }
+

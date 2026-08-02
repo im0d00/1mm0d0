@@ -1,0 +1,30 @@
+---
+layout: false
+title: "Offline Mode | Security Operations Center"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Offline - Air-Gapped Mode | SOC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="/css/main.css"/>
+</head>
+<body style="display:flex; align-items:center; justify-content:center; min-height:100vh; text-align:center; padding:2rem; background:var(--bg-dark); color:var(--white); font-family:'Space Grotesk',sans-serif;">
+  <div class="card" style="max-width:550px; width:100%; padding:3rem 2rem; position:relative; overflow:hidden;">
+    <div class="card-glow"></div>
+    <div style="font-size:3.5rem; color:var(--amber); font-family:'JetBrains Mono',monospace; font-weight:700; margin-bottom:1rem;">
+      <i class="fa-solid fa-wifi-slash"></i> AIR-GAPPED
+    </div>
+    <h1 style="font-size:1.8rem; font-weight:700; margin-bottom:0.8rem; color:var(--white);">Network Connection Unavailable</h1>
+    <p style="color:var(--silver); font-size:0.95rem; line-height:1.6; margin-bottom:2rem;">
+      You are currently viewing this terminal in offline mode. Previously cached threat intelligence and blog posts remain accessible locally.
+    </p>
+    <button onclick="window.location.reload()" class="btn primary"><i class="fa-solid fa-rotate-right fa-xs"></i> Retry Connection</button>
+  </div>
+</body>
+</html>

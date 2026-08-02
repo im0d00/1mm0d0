@@ -1,0 +1,12 @@
+{
+  "items": [
+    { "name": "Splunk", "slug": "splunk" },
+    { "name": "Wireshark", "slug": "wireshark" },
+    { "name": "Python", "slug": "python" },
+    { "name": "Incident Response", "slug": "incident-response" },
+    { "name": "SIEM", "slug": "siem" },
+    { "name": "MITRE ATT&CK", "slug": "mitre-attack" },
+    { "name": "CCNA", "slug": "ccna" },
+    { "name": "Linux", "slug": "linux" }
+  ]
+}

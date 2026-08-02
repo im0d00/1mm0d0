@@ -1,0 +1,57 @@
+---
+permalink: /search.json
+eleventyExcludeFromCollections: true
+---
+[
+  {%- for post in collections.posts %}
+  {
+    "type": "Blog Post",
+    "title": {{ post.data.title | dump | safe }},
+    "description": {{ (post.data.excerpt or "") | dump | safe }},
+    "category": {{ (post.data.categories[0] or "General") | dump | safe }},
+    "tags": {{ (post.data.tags or []) | dump | safe }},
+    "url": {{ post.url | dump | safe }}
+  },
+  {%- endfor %}
+  {%- for proj in projects.items %}
+  {
+    "type": "Project",
+    "title": {{ proj.title | dump | safe }},
+    "description": {{ proj.description | dump | safe }},
+    "category": {{ proj.category | dump | safe }},
+    "tags": {{ proj.technologies | dump | safe }},
+    "url": "/#projects"
+  },
+  {%- endfor %}
+  {%- for lab in labs.items %}
+  {
+    "type": "Lab",
+    "title": {{ lab.name | dump | safe }},
+    "description": {{ lab.description | dump | safe }},
+    "category": {{ lab.platform | dump | safe }},
+    "tags": {{ lab.tools | dump | safe }},
+    "url": "/#labs"
+  },
+  {%- endfor %}
+  {%- for report in reports.items %}
+  {
+    "type": "Research Report",
+    "title": {{ report.title | dump | safe }},
+    "description": {{ report.summary | dump | safe }},
+    "category": {{ report.category | dump | safe }},
+    "tags": ["Research", "PDF", "Security Report"],
+    "url": "/#reports"
+  },
+  {%- endfor %}
+  {%- for cert in certifications.items %}
+  {
+    "type": "Certification",
+    "title": {{ cert.name | dump | safe }},
+    "description": {{ (cert.provider + " - " + cert.status) | dump | safe }},
+    "category": "Credentials",
+    "tags": [{{ cert.provider | dump | safe }}],
+    "url": "/#certifications"
+  }
+  {%- if not loop.last %},{% endif %}
+  {%- endfor %}
+]

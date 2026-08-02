@@ -1,0 +1,9 @@
+{
+  "items": [
+    { "name": "SOC Operations", "slug": "soc-operations", "description": "Security Operations Center monitoring and incident response", "icon": "fa-solid fa-shield-halved", "color": "#00D4FF" },
+    { "name": "Threat Hunting", "slug": "threat-hunting", "description": "Proactive threat detection, SIEM log analysis, and malware triage", "icon": "fa-solid fa-crosshairs", "color": "#A78BFA" },
+    { "name": "Penetration Testing", "slug": "penetration-testing", "description": "Ethical hacking, vulnerability assessment, and exploitation", "icon": "fa-solid fa-bug", "color": "#FF0055" },
+    { "name": "Network Security", "slug": "network-security", "description": "Firewalls, packet inspection, VPNs, and router hardening", "icon": "fa-solid fa-network-wired", "color": "#00FF88" },
+    { "name": "Cloud & IAM", "slug": "cloud-iam", "description": "Identity access management, AWS/Azure posture management", "icon": "fa-solid fa-cloud-shield", "color": "#FFB700" }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "main_menu": [
+    { "label": "About", "url": "#about", "icon": "fa-solid fa-user", "target": "_self" },
+    { "label": "Education", "url": "#education", "icon": "fa-solid fa-graduation-cap", "target": "_self" },
+    { "label": "Certifications", "url": "#certifications", "icon": "fa-solid fa-award", "target": "_self" },
+    { "label": "Skills", "url": "#skills", "icon": "fa-solid fa-code", "target": "_self" },
+    { "label": "Tools", "url": "#tools", "icon": "fa-solid fa-screwdriver-wrench", "target": "_self" },
+    { "label": "Projects", "url": "#projects", "icon": "fa-solid fa-terminal", "target": "_self" },
+    { "label": "Labs", "url": "#labs", "icon": "fa-solid fa-vial", "target": "_self" },
+    { "label": "Reports", "url": "#reports", "icon": "fa-solid fa-file-contract", "target": "_self" },
+    { "label": "Downloads", "url": "#downloads", "icon": "fa-solid fa-download", "target": "_self" },
+    { "label": "Experience", "url": "#experience", "icon": "fa-solid fa-briefcase", "target": "_self" },
+    { "label": "Dashboard", "url": "#dashboard", "icon": "fa-solid fa-chart-line", "target": "_self" },
+    { "label": "Timeline", "url": "#timeline", "icon": "fa-solid fa-clock-rotate-left", "target": "_self" },
+    { "label": "Contact", "url": "#contact", "icon": "fa-solid fa-envelope", "target": "_self" },
+    { "label": "Blog", "url": "/blog/", "icon": "fa-solid fa-pen-nib", "target": "_self" }
+  ]
+}

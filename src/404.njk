@@ -1,0 +1,33 @@
+---
+layout: false
+title: "404 - Threat Vector Not Found | Security Operations Center"
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>404 - Threat Vector Not Found | SOC</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="/css/main.css"/>
+</head>
+<body style="display:flex; align-items:center; justify-content:center; min-height:100vh; text-align:center; padding:2rem; background:var(--bg-dark); color:var(--white); font-family:'Space Grotesk',sans-serif;">
+  <div class="card" style="max-width:550px; width:100%; padding:3rem 2rem; position:relative; overflow:hidden;">
+    <div class="card-glow"></div>
+    <div style="font-size:4rem; color:var(--red); font-family:'JetBrains Mono',monospace; font-weight:700; margin-bottom:1rem;">
+      <i class="fa-solid fa-triangle-exclamation"></i> 404
+    </div>
+    <h1 style="font-size:1.8rem; font-weight:700; margin-bottom:0.8rem; color:var(--white);">Access Denied / Segment Missing</h1>
+    <p style="color:var(--silver); font-size:0.95rem; line-height:1.6; margin-bottom:2rem;">
+      The requested resource or threat path could not be located in our Security Operations Center logs. It may have been relocated, deleted, or sandboxed.
+    </p>
+    <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
+      <a href="/" class="btn primary"><i class="fa-solid fa-house fa-xs"></i> Return to SOC Homepage</a>
+      <a href="/blog/" class="btn outline"><i class="fa-solid fa-pen-nib fa-xs"></i> Technical Blog</a>
+    </div>
+  </div>
+</body>
+</html>

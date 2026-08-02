@@ -18,6 +18,8 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/favicon.ico");
   eleventyConfig.addPassthroughCopy("src/robots.txt");
   eleventyConfig.addPassthroughCopy("src/CNAME");
+  eleventyConfig.addPassthroughCopy("src/manifest.json");
+  eleventyConfig.addPassthroughCopy("src/sw.js");
 
   // Markdown configuration
   let markdownLibrary = markdownIt({
@@ -67,13 +69,15 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addCollection("categories", function(collectionApi) {
     let categories = new Set();
     collectionApi.getFilteredByGlob("src/posts/*.md").forEach(item => {
-      if ('categories' in item.data) {
+      if (item.data && item.data.categories) {
         let cats = item.data.categories;
         if (typeof cats === "string") {
-            cats = [cats];
+          cats = [cats];
         }
-        for (let cat of cats) {
-            categories.add(cat);
+        if (Array.isArray(cats)) {
+          for (let cat of cats) {
+            if (cat) categories.add(cat);
+          }
         }
       }
     });

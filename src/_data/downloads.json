@@ -1,0 +1,28 @@
+{
+  "items": [
+    {
+      "name": "Professional Cybersecurity Resume (PDF)",
+      "category": "Resume",
+      "format": "PDF",
+      "file_url": "https://www.w3.org/W3C/DesignIssues/pdf.pdf",
+      "size": "1.2 MB",
+      "description": "Comprehensive CV highlighting SOC experience, CCNA certification, and lab achievements."
+    },
+    {
+      "name": "Incident Response & Cheat Sheet",
+      "category": "Cheat Sheet",
+      "format": "PDF",
+      "file_url": "https://www.w3.org/W3C/DesignIssues/pdf.pdf",
+      "size": "850 KB",
+      "description": "Quick reference guide for Linux CLI forensic commands, Memory analysis, and Volatility 3."
+    },
+    {
+      "name": "SIEM Log Automation Scripts Pack",
+      "category": "Scripts",
+      "format": "ZIP",
+      "file_url": "https://www.w3.org/W3C/DesignIssues/pdf.pdf",
+      "size": "450 KB",
+      "description": "Python utility scripts for parsing Sysmon logs, normalizing JSON, and sending alerts via Webhooks."
+    }
+  ]
+}
