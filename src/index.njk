@@ -87,81 +87,156 @@
 
 <!-- NAVBAR -->
 <nav id="navbar">
-    <a href="#" class="nav-logo"><span class="br">[</span>{{ settings.portfolio_name }}<span class="nav-dot"></span><span class="br">]</span></a>
+    <a href="/" class="nav-logo-wrap" aria-label="{{ settings.portfolio_name or 'Home' }}">
+        {% if settings.logo_image %}
+            <img src="{{ settings.logo_image }}" alt="{{ settings.portfolio_name }}" class="nav-logo-img dark-logo" style="max-height: {{ settings.logo_height or '34px' }}; max-width: {{ settings.logo_width or 'auto' }};" />
+            {% if settings.logo_image_light %}
+                <img src="{{ settings.logo_image_light }}" alt="{{ settings.portfolio_name }}" class="nav-logo-img light-logo" style="max-height: {{ settings.logo_height or '34px' }}; max-width: {{ settings.logo_width or 'auto' }};" />
+            {% endif %}
+            {% if settings.show_logo_text_with_image != false and settings.logo_text %}
+                <span class="nav-logo-text">{{ settings.logo_text }}</span>
+            {% endif %}
+        {% else %}
+            <span class="nav-logo"><span class="br">[</span>{{ settings.logo_text or settings.portfolio_name or "Aimad Security" }}<span class="nav-dot"></span><span class="br">]</span></span>
+        {% endif %}
+    </a>
+    
     <ul class="nav-links">
-        <li><a href="#about">About</a></li>
-        <li><a href="#certifications">Certs</a></li>
-        <li><a href="#skills">Skills</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#labs">Labs</a></li>
-        <li><a href="#kb">KB</a></li>
-        <li><a href="#reports">Reports</a></li>
-        <li><a href="#downloads">Downloads</a></li>
-        <li><a href="#dashboard">Dashboard</a></li>
-        <li><a href="#timeline">Timeline</a></li>
-        <li><a href="#contact">Contact</a></li>
-        <li><a href="/blog/"><i class="fa-solid fa-pen-nib" style="font-size:0.6rem"></i> Blog</a></li>
+        <li><a href="#about"><i class="fa-solid fa-user-shield fa-xs"></i> About</a></li>
+        <li><a href="#certifications"><i class="fa-solid fa-award fa-xs"></i> Certs</a></li>
+        <li><a href="#skills"><i class="fa-solid fa-microchip fa-xs"></i> Skills</a></li>
+        <li><a href="#projects"><i class="fa-solid fa-folder-open fa-xs"></i> Projects</a></li>
+        <li><a href="#labs"><i class="fa-solid fa-flask fa-xs"></i> Labs</a></li>
+        <li><a href="#kb"><i class="fa-solid fa-book-journal-whills fa-xs"></i> KB</a></li>
+        <li><a href="#reports"><i class="fa-solid fa-file-lines fa-xs"></i> Reports</a></li>
+        <li><a href="#downloads"><i class="fa-solid fa-download fa-xs"></i> Downloads</a></li>
+        <li><a href="#dashboard"><i class="fa-solid fa-chart-line fa-xs"></i> SOC</a></li>
+        <li><a href="#contact"><i class="fa-solid fa-envelope fa-xs"></i> Contact</a></li>
+        <li><a href="/blog/"><i class="fa-solid fa-pen-nib fa-xs"></i> Blog</a></li>
     </ul>
+
     <div class="nav-right">
-        <button id="searchOpenBtn" class="nav-resume" style="background:rgba(0,212,255,0.1); border:1px solid var(--border); margin-right:0.5rem; cursor:pointer;" aria-label="Search"><i class="fa-solid fa-magnifying-glass fa-xs"></i> Search</button>
-        <div class="nav-status"><div class="status-dot"></div><span class="status-text">{{ contact.availability }}</span></div>
-        <a href="{{ resume.pdf_file }}" download class="nav-resume"><i class="fa-solid fa-download fa-xs"></i> Resume</a>
+        {% if settings.search_enabled != false %}
+        <button id="searchOpenBtn" class="search-trigger-btn" onclick="openSearchModal()" aria-label="Search site (Ctrl+K)">
+            <i class="fa-solid fa-magnifying-glass fa-xs"></i>
+            <span>Search</span>
+            <kbd class="kbd-badge">Ctrl+K</kbd>
+        </button>
+        {% endif %}
+        
+        {% if settings.status_badge_visible != false %}
+        <div class="nav-status">
+            <span class="status-dot" style="{% if settings.status_badge_color %}background: {{ settings.status_badge_color }}; box-shadow: 0 0 8px {{ settings.status_badge_color }};{% endif %}"></span>
+            <span class="status-text">{{ settings.status_badge_text or contact.availability or "Available" }}</span>
+        </div>
+        {% endif %}
+        
+        <a href="{{ resume.pdf_file or hero.resume_button_link }}" download class="nav-resume-btn" aria-label="Download Resume">
+            <i class="fa-solid fa-file-pdf"></i>
+            <span>Resume</span>
+            <i class="fa-solid fa-download dl-icon"></i>
+        </a>
     </div>
-    <div class="hamburger" id="ham"><span></span><span></span><span></span></div>
+
+    <div class="hamburger" id="ham" aria-label="Toggle navigation menu">
+        <span></span><span></span><span></span>
+    </div>
 </nav>
 
-<!-- MOBILE NAV -->
+<!-- MOBILE OVERLAY & DRAWER -->
+<div class="mobile-overlay" id="mobOverlay"></div>
 <div class="mobile-nav" id="mobNav">
-    <a href="#about">About</a>
-    <a href="#education">Education</a>
-    <a href="#certifications">Certifications</a>
-    <a href="#skills">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#labs">Labs</a>
-    <a href="#kb">Knowledge Base</a>
-    <a href="#reports">Reports</a>
-    <a href="#downloads">Downloads</a>
-    <a href="#experience">Experience</a>
-    <a href="#dashboard">Dashboard</a>
-    <a href="#timeline">Timeline</a>
-    <a href="#contact">Contact</a>
-    <a href="/blog/"><i class="fa-solid fa-pen-nib" style="font-size:0.75rem"></i> Blog</a>
+    <div class="mobile-nav-header">
+        <div class="mobile-nav-brand">{{ settings.logo_text or settings.portfolio_name or "Aimad Security" }}</div>
+        <button class="mobile-nav-close" id="mobCloseBtn" aria-label="Close menu">&times;</button>
+    </div>
+    {% if settings.status_badge_visible != false %}
+    <div class="mobile-status-badge">
+        <span class="status-dot"></span>
+        <span>{{ settings.status_badge_text or contact.availability or "Available for Security Consulting" }}</span>
+    </div>
+    {% endif %}
+    <div class="mobile-links">
+        <a href="#about"><i class="fa-solid fa-user-shield"></i> About Me</a>
+        <a href="#certifications"><i class="fa-solid fa-award"></i> Certifications</a>
+        <a href="#skills"><i class="fa-solid fa-microchip"></i> Technical Skills</a>
+        <a href="#projects"><i class="fa-solid fa-folder-open"></i> Featured Projects</a>
+        <a href="#labs"><i class="fa-solid fa-flask"></i> Virtual Security Labs</a>
+        <a href="#kb"><i class="fa-solid fa-book-journal-whills"></i> Knowledge Base</a>
+        <a href="#reports"><i class="fa-solid fa-file-lines"></i> Security Reports</a>
+        <a href="#downloads"><i class="fa-solid fa-download"></i> Downloads</a>
+        <a href="#dashboard"><i class="fa-solid fa-chart-line"></i> SOC Dashboard</a>
+        <a href="#timeline"><i class="fa-solid fa-timeline"></i> Experience Timeline</a>
+        <a href="#contact"><i class="fa-solid fa-envelope"></i> Contact Me</a>
+        <a href="/blog/"><i class="fa-solid fa-pen-nib"></i> Technical Blog</a>
+    </div>
+    <div class="mobile-actions">
+        {% if settings.search_enabled != false %}
+        <button onclick="openSearchModal()" class="btn outline w-full"><i class="fa-solid fa-magnifying-glass"></i> Search Platform</button>
+        {% endif %}
+        <a href="{{ resume.pdf_file or hero.resume_button_link }}" download class="btn primary w-full"><i class="fa-solid fa-file-pdf"></i> Download Resume</a>
+    </div>
+    <div class="mobile-socs">
+        {% for soc in settings.social_media_links %}
+        <a href="{{ soc.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ soc.platform }}"><i class="{{ soc.icon }}"></i></a>
+        {% endfor %}
+    </div>
 </div>
 
 <!-- HERO SECTION -->
 <section id="hero">
-    <canvas id="hero-canvas"></canvas>
+    <canvas id="hero-canvas" data-speed="{{ hero.bg_animation_speed or 'normal' }}" data-opacity="{{ hero.bg_animation_opacity or 0.85 }}"></canvas>
+    <div class="hero-glow-spot"></div>
+
     <div class="hero-inner">
         <div class="hero-profile reveal">
             <div class="profile-outer">
-                <div class="orbit orbit1"></div><div class="orbit orbit2"></div>
+                <div class="orbit orbit1"></div>
+                <div class="orbit orbit2"></div>
                 <div class="profile-inner">
                     <img src="{{ settings.profile_picture or hero.hero_image }}" alt="{{ hero.name }}"
                     onerror="this.src='https://ui-avatars.com/api/?name={{ hero.name | urlencode }}&background=0A1628&color=00E5FF&size=290&bold=true'" />
                 </div>
+                {% if hero.profile_card.show_hud != false %}
                 <div class="profile-hud">
-                    <div class="hud-row"><span class="hud-dot"></span><span>Status: {{ contact.availability }}</span></div>
-                    <div class="hud-row"><span style="color:var(--violet2)">◆</span><span>{{ education.items[0].degree }}</span></div>
-                    <div class="hud-row"><span style="color:var(--amber)">◆</span><span>{{ certifications.items | length }} Certifications</span></div>
+                    <div class="hud-row"><span class="hud-dot"></span><span>{{ hero.profile_card.status_text or contact.availability or "Available for Security Consulting" }}</span></div>
+                    <div class="hud-row"><span style="color:var(--violet2)">◆</span><span>{{ hero.profile_card.degree or "BSc Computer Science" }}</span></div>
+                    <div class="hud-row"><span style="color:var(--amber)">◆</span><span>{{ certifications.items | length }} Active Certifications</span></div>
                 </div>
+                {% endif %}
             </div>
         </div>
+
         <div class="hero-text reveal rv1">
-            <div class="hero-eyebrow">{{ hero.professional_title }}</div>
+            <div class="hero-eyebrow"><i class="fa-solid fa-shield-halved fa-xs"></i> {{ hero.professional_title }}</div>
             <h1 class="hero-name">{{ hero.name }}<br /><span class="name-accent">{{ hero.name_accent }}</span></h1>
             <div class="hero-role-wrap"><div class="hero-role" id="heroRole">{{ hero.rotating_job_titles[0] }}_</div></div>
             <p class="hero-desc">{{ hero.biography }}</p>
+
             <div class="hero-btns">
-                <a href="{{ resume.pdf_file }}" download class="btn primary"><i class="fa-solid fa-download fa-xs"></i> {{ hero.resume_button_text }}</a>
+                <a href="{{ resume.pdf_file or hero.resume_button_link }}" download class="btn primary"><i class="fa-solid fa-download fa-xs"></i> {{ hero.resume_button_text }}</a>
                 <a href="{{ hero.contact_button_link }}" class="btn outline"><i class="fa-solid fa-envelope fa-xs"></i> {{ hero.contact_button_text }}</a>
                 <a href="{{ hero.view_projects_button_link }}" class="btn outline"><i class="fa-solid fa-terminal fa-xs"></i> {{ hero.view_projects_button_text }}</a>
                 <a href="{{ hero.blog_button_link }}" class="btn outline"><i class="fa-solid fa-pen-nib fa-xs"></i> {{ hero.blog_button_text }}</a>
             </div>
+
             <div class="hero-metrics">
-                <div class="metric"><div class="metric-num">{{ hero.statistics_override.years_tech or "7+" }}</div><div class="metric-lbl">Years Tech</div></div>
-                <div class="metric"><div class="metric-num">{{ certifications.items | length }}</div><div class="metric-lbl">Certifications</div></div>
-                <div class="metric"><div class="metric-num">{{ projects.items | length }}</div><div class="metric-lbl">Projects</div></div>
-                <div class="metric"><div class="metric-num">{{ dashboard.learning_hours }}+</div><div class="metric-lbl">Hours Learned</div></div>
+                <div class="metric-card">
+                    <div class="metric-num" data-target="{{ certifications.items | length }}">0</div>
+                    <div class="metric-lbl">Certifications</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-num" data-target="{{ projects.items | length }}">0</div>
+                    <div class="metric-lbl">Projects</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-num" data-target="{{ labs.items | length }}">0</div>
+                    <div class="metric-lbl">Virtual Labs</div>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-num" data-target="{{ dashboard.learning_hours or 600 }}" data-suffix="+">0</div>
+                    <div class="metric-lbl">Hours Learned</div>
+                </div>
             </div>
         </div>
     </div>
@@ -792,56 +867,298 @@ const sint = setInterval(() => { if (si < statuses.length - 1) { si++; lstat.tex
 window.addEventListener('load', () => {
     clearInterval(sint);
     lstat.textContent = 'System ready.';
-    setTimeout(() => document.getElementById('loader').classList.add('hide'), 1200);
+    setTimeout(() => document.getElementById('loader')?.classList.add('hide'), 1000);
 });
 
-// HERO CANVAS
+// MULTI-LAYERED CYBERSECURITY HERO CANVAS
 (() => {
-    const c = document.getElementById('hero-canvas'), ctx = c.getContext('2d');
-    let W, H, nodes = [];
-    const N = 52;
-    function resize() { W = c.width = c.offsetWidth; H = c.height = c.offsetHeight; }
+    const c = document.getElementById('hero-canvas');
+    if (!c) return;
+    const ctx = c.getContext('2d');
+    let W, H, nodes = [], logLines = [];
+    const nodeCount = 65;
+    let animId = null;
+    let isHeroVisible = true;
+    let mouse = { x: -1000, y: -1000 };
+
+    // Canvas sizing
+    function resize() {
+        W = c.width = c.offsetWidth || window.innerWidth;
+        H = c.height = c.offsetHeight || window.innerHeight;
+    }
     window.addEventListener('resize', resize);
     resize();
-    for (let i = 0; i < N; i++) nodes.push({ x: Math.random() * W, y: Math.random() * H, vx: (Math.random() - .5) * .38, vy: (Math.random() - .5) * .38, r: Math.random() * 1.7 + 1, p: Math.random() * Math.PI * 2, t: Math.random() > .72 ? 'v' : 'c' });
+
+    // Track mouse for interactive node displacement
+    c.parentElement?.addEventListener('mousemove', (e) => {
+        const rect = c.getBoundingClientRect();
+        mouse.x = e.clientX - rect.left;
+        mouse.y = e.clientY - rect.top;
+    });
+    c.parentElement?.addEventListener('mouseleave', () => {
+        mouse.x = -1000; mouse.y = -1000;
+    });
+
+    // Node initialization
+    const types = ['cyan', 'violet', 'green'];
+    for (let i = 0; i < nodeCount; i++) {
+        nodes.push({
+            x: Math.random() * W,
+            y: Math.random() * H,
+            vx: (Math.random() - 0.5) * 0.45,
+            vy: (Math.random() - 0.5) * 0.45,
+            r: Math.random() * 2 + 1,
+            pulse: Math.random() * Math.PI * 2,
+            type: types[Math.floor(Math.random() * types.length)]
+        });
+    }
+
+    // Terminal log streams for Layer 4
+    const logPool = [
+        '[SOC-LOG] 10.0.4.12:443 -> TCP SYN_ACK',
+        '[SIEM] Snort Rule Match #1002 ALARM_LOW',
+        '[DFIR] Volatility Memory Dump Proc...',
+        '[NET] BGP Neighbor 172.16.0.1 ESTABLISHED',
+        '[CRYPT] Ed25519 Signature Verified',
+        '[CERT] Cisco CCNA / Cybersecurity Verified'
+    ];
+    for (let i = 0; i < 6; i++) {
+        logLines.push({
+            text: logPool[i % logPool.length],
+            x: Math.random() * (W - 250) + 20,
+            y: Math.random() * H,
+            speed: 0.25 + Math.random() * 0.35,
+            opacity: 0.12 + Math.random() * 0.18
+        });
+    }
+
     function draw() {
+        if (!isHeroVisible) return;
         ctx.clearRect(0, 0, W, H);
-        nodes.forEach(n => { n.x += n.vx; n.y += n.vy; n.p += .017; if (n.x < 0 || n.x > W) n.vx *= -1; if (n.y < 0 || n.y > H) n.vy *= -1; });
-        for (let i = 0; i < N; i++) for (let j = i + 1; j < N; j++) {
-            const dx = nodes[i].x - nodes[j].x, dy = nodes[i].y - nodes[j].y, d = Math.sqrt(dx * dx + dy * dy);
-            if (d < 175) {
-                const a = (1 - d / 175) * .22;
-                ctx.strokeStyle = nodes[i].t === 'c' ? `rgba(0,212,255,${a})` : `rgba(167,139,250,${a})`;
-                ctx.lineWidth = .55; ctx.beginPath(); ctx.moveTo(nodes[i].x, nodes[i].y); ctx.lineTo(nodes[j].x, nodes[j].y); ctx.stroke();
+
+        // 1. Draw Layer: Grid Mesh Lines
+        ctx.strokeStyle = 'rgba(0,212,255,0.03)';
+        ctx.lineWidth = 1;
+        const gridSize = 60;
+        for (let x = 0; x < W; x += gridSize) {
+            ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, H); ctx.stroke();
+        }
+        for (let y = 0; y < H; y += gridSize) {
+            ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(W, y); ctx.stroke();
+        }
+
+        // 2. Draw Layer: Floating SOC Log Stream
+        ctx.font = '10px "JetBrains Mono", monospace';
+        logLines.forEach(l => {
+            l.y -= l.speed;
+            if (l.y < -20) {
+                l.y = H + 20;
+                l.x = Math.random() * (W - 250) + 20;
+            }
+            ctx.fillStyle = `rgba(0,212,255,${l.opacity})`;
+            ctx.fillText(l.text, l.x, l.y);
+        });
+
+        // 3. Draw Layer: Neural Network Nodes & Distance Connections
+        nodes.forEach(n => {
+            n.x += n.vx;
+            n.y += n.vy;
+            n.pulse += 0.02;
+
+            if (n.x < 0 || n.x > W) n.vx *= -1;
+            if (n.y < 0 || n.y > H) n.vy *= -1;
+
+            // Mouse displacement effect
+            const mdx = n.x - mouse.x;
+            const mdy = n.y - mouse.y;
+            const mdist = Math.sqrt(mdx * mdx + mdy * mdy);
+            if (mdist < 120 && mdist > 0) {
+                const force = (120 - mdist) / 120;
+                n.x += (mdx / mdist) * force * 1.5;
+                n.y += (mdy / mdist) * force * 1.5;
+            }
+        });
+
+        // Inter-node connection lines
+        for (let i = 0; i < nodeCount; i++) {
+            for (let j = i + 1; j < nodeCount; j++) {
+                const dx = nodes[i].x - nodes[j].x;
+                const dy = nodes[i].y - nodes[j].y;
+                const d = Math.sqrt(dx * dx + dy * dy);
+
+                if (d < 165) {
+                    const alpha = (1 - d / 165) * 0.22;
+                    if (nodes[i].type === 'cyan') ctx.strokeStyle = `rgba(0,212,255,${alpha})`;
+                    else if (nodes[i].type === 'violet') ctx.strokeStyle = `rgba(167,139,250,${alpha})`;
+                    else ctx.strokeStyle = `rgba(0,255,136,${alpha})`;
+
+                    ctx.lineWidth = 0.6;
+                    ctx.beginPath();
+                    ctx.moveTo(nodes[i].x, nodes[i].y);
+                    ctx.lineTo(nodes[j].x, nodes[j].y);
+                    ctx.stroke();
+                }
             }
         }
+
+        // Render Nodes
         nodes.forEach(n => {
-            const p = .5 + .5 * Math.sin(n.p);
-            ctx.beginPath(); ctx.arc(n.x, n.y, n.r * (.65 + .35 * p), 0, Math.PI * 2);
-            ctx.fillStyle = n.t === 'c' ? `rgba(0,212,255,${p*.75})` : `rgba(167,139,250,${p*.65})`;
+            const p = 0.6 + 0.4 * Math.sin(n.pulse);
+            ctx.beginPath();
+            ctx.arc(n.x, n.y, n.r * (0.8 + 0.3 * p), 0, Math.PI * 2);
+            if (n.type === 'cyan') ctx.fillStyle = `rgba(0,212,255,${p * 0.8})`;
+            else if (n.type === 'violet') ctx.fillStyle = `rgba(167,139,250,${p * 0.7})`;
+            else ctx.fillStyle = `rgba(0,255,136,${p * 0.8})`;
             ctx.fill();
         });
-        requestAnimationFrame(draw);
+
+        animId = requestAnimationFrame(draw);
     }
+
+    // Pause canvas when out of view for performance optimization
+    const heroSec = document.getElementById('hero');
+    if (heroSec && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                isHeroVisible = entry.isIntersecting;
+                if (isHeroVisible) {
+                    if (!animId) draw();
+                } else if (animId) {
+                    cancelAnimationFrame(animId);
+                    animId = null;
+                }
+            });
+        }, { threshold: 0.05 });
+        observer.observe(heroSec);
+    }
+
     draw();
 })();
 
-// NAV HIGHLIGHTING & MOBILE NAV
-window.addEventListener('scroll', () => {
-    const secs = document.querySelectorAll('section[id]');
-    const links = document.querySelectorAll('.nav-links a');
-    let cur = '';
-    secs.forEach(s => { if (window.scrollY >= s.offsetTop - 130) cur = s.id; });
-    links.forEach(a => a.classList.toggle('active', a.getAttribute('href') === '/#' + cur || a.getAttribute('href') === '#' + cur));
+// METRIC CARD COUNTER ANIMATION
+(() => {
+    const metrics = document.querySelectorAll('.metric-num[data-target]');
+    if (metrics.length === 0) return;
+
+    let animated = false;
+    function startCounting() {
+        if (animated) return;
+        animated = true;
+
+        metrics.forEach(el => {
+            const target = parseInt(el.getAttribute('data-target'), 10) || 0;
+            const suffix = el.getAttribute('data-suffix') || '';
+            const duration = 1500;
+            const stepTime = 30;
+            const steps = duration / stepTime;
+            const increment = target / steps;
+            let current = 0;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    el.textContent = target + suffix;
+                    clearInterval(timer);
+                } else {
+                    el.textContent = Math.floor(current) + suffix;
+                }
+            }, stepTime);
+        });
+    }
+
+    const heroSection = document.getElementById('hero');
+    if (heroSection && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(entries => {
+            if (entries[0].isIntersecting) startCounting();
+        }, { threshold: 0.2 });
+        observer.observe(heroSection);
+    } else {
+        startCounting();
+    }
+})();
+
+// STICKY NAVBAR & ACTIVE SECTION HIGHLIGHTING
+(() => {
+    const navbar = document.getElementById('navbar');
+    const mobNav = document.getElementById('mobNav');
+    const mobOverlay = document.getElementById('mobOverlay');
+    const ham = document.getElementById('ham');
+    const mobCloseBtn = document.getElementById('mobCloseBtn');
+
+    window.addEventListener('scroll', () => {
+        if (navbar) {
+            if (window.scrollY > 40) navbar.classList.add('scrolled');
+            else navbar.classList.remove('scrolled');
+        }
+
+        const secs = document.querySelectorAll('section[id]');
+        const links = document.querySelectorAll('.nav-links a');
+        let cur = '';
+        secs.forEach(s => {
+            if (window.scrollY >= s.offsetTop - 140) cur = s.id;
+        });
+        links.forEach(a => {
+            const href = a.getAttribute('href');
+            a.classList.toggle('active', href === '#' + cur || href === '/#' + cur);
+        });
+    });
+
+    function openMobileDrawer() {
+        mobNav?.classList.add('open');
+        mobOverlay?.classList.add('visible');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeMobileDrawer() {
+        mobNav?.classList.remove('open');
+        mobOverlay?.classList.remove('visible');
+        document.body.style.overflow = '';
+    }
+
+    ham?.addEventListener('click', openMobileDrawer);
+    mobCloseBtn?.addEventListener('click', closeMobileDrawer);
+    mobOverlay?.addEventListener('click', closeMobileDrawer);
+
+    document.querySelectorAll('.mobile-links a').forEach(a => {
+        a.addEventListener('click', closeMobileDrawer);
+    });
+})();
+
+// KEYBOARD SHORTCUT (CTRL+K / CMD+K) FOR SEARCH
+window.addEventListener('keydown', (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        openSearchModal();
+    }
+    if (e.key === 'Escape') {
+        const searchModal = document.getElementById('searchModal');
+        if (searchModal) searchModal.style.display = 'none';
+        const detailModal = document.getElementById('detailModal');
+        if (detailModal) detailModal.style.display = 'none';
+        document.getElementById('mobNav')?.classList.remove('open');
+        document.getElementById('mobOverlay')?.classList.remove('visible');
+        document.body.style.overflow = '';
+    }
 });
-document.getElementById('ham')?.addEventListener('click', () => document.getElementById('mobNav')?.classList.toggle('open'));
-document.querySelectorAll('.mobile-nav a').forEach(a => a.addEventListener('click', () => document.getElementById('mobNav')?.classList.remove('open')));
+
+function openSearchModal() {
+    const searchModal = document.getElementById('searchModal');
+    const searchInput = document.getElementById('searchInput');
+    if (searchModal) searchModal.style.display = 'flex';
+    if (searchInput) searchInput.focus();
+    if (typeof searchData !== 'undefined' && searchData.length === 0) {
+        fetch('/search.json')
+            .then(res => res.json())
+            .then(data => { searchData = data; })
+            .catch(() => {});
+    }
+}
 
 // HERO ROLE TYPEWRITER
 const roles = {{ hero.rotating_job_titles | dump | safe }};
 let ri = 0;
 const roleEl = document.getElementById('heroRole');
-if (roleEl && roles.length > 0) {
+if (roleEl && Array.isArray(roles) && roles.length > 0) {
     setInterval(() => {
         roleEl.style.opacity = '0';
         roleEl.style.transform = 'translateY(-10px)';

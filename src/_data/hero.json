@@ -12,6 +12,15 @@
   "biography": "BSc Computer Science graduate from the University of Peshawar with a deep passion for network security, ethical hacking, digital forensics, and security operations. Cisco-certified in Networking, Cybersecurity, Linux Essentials, and Ethical Hacking. Trained in Digital Forensics & Incident Response (DFIR) by BlueCapeSecurity.",
   "hero_image": "https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg",
   "background_image": "",
+  "bg_animation_enabled": true,
+  "bg_animation_speed": "normal",
+  "bg_animation_opacity": 0.85,
+  "profile_card": {
+    "status_text": "Available for Security Consulting",
+    "degree": "BSc Computer Science",
+    "show_hud": true,
+    "glow_border": true
+  },
   "resume_button_text": "Download Resume",
   "resume_button_link": "#resume",
   "contact_button_text": "Contact Me",
