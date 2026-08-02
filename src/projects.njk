@@ -1,0 +1,384 @@
+---
+title: Security Projects & Engineering Center | Aimad Ul Islam
+description: Comprehensive directory of cybersecurity engineering projects, DFIR tools, SOC automation scripts, and network defense architectures by Aimad Ul Islam.
+---
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}"/>
+  <meta name="author" content="Aimad Ul Islam"/>
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="{{ title }}"/>
+  <meta property="og:description" content="{{ description }}"/>
+  <meta property="og:url" content="https://aimadulislam.dpdns.org/projects/"/>
+  <meta name="theme-color" content="#080C1A"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css"/>
+  <link rel="stylesheet" href="/css/blog.css"/>
+</head>
+<body class="blog-page-body">
+
+<div id="reading-progress" role="progressbar" aria-label="Page reading progress"></div>
+<div class="grid-bg" aria-hidden="true"></div>
+<div class="scan-line" aria-hidden="true"></div>
+
+<!-- UNIFIED HEADER -->
+{% include "header.njk" %}
+
+<!-- HERO SECTION -->
+<section id="blog-hero" aria-labelledby="projects-hero-title" style="padding-bottom: 3rem;">
+  <canvas id="blog-hero-canvas" aria-hidden="true"></canvas>
+  <div class="blog-hero-inner container">
+    <div class="blog-hero-eye"><i class="fa-solid fa-code-branch"></i> Security Engineering & Development Vault</div>
+    <h1 class="blog-hero-title" id="projects-hero-title">
+      Projects <span class="accent">Showcase Center</span>
+    </h1>
+    <p class="blog-hero-sub">Hands-on security engineering, custom threat parsers, SIEM automation scripts, packet analysis engines, and enterprise virtual network setups.</p>
+
+    <!-- Quick Stats Bar -->
+    <div class="sidebar-stats-grid" style="grid-template-columns: repeat(4, 1fr); max-width: 800px; margin: 1.5rem auto 2rem auto;">
+      <div class="s-stat-box card">
+        <div class="s-stat-val" id="stat-proj-count">{{ projects.items.length + collections.projects.length }}</div>
+        <div class="s-stat-lbl">Projects</div>
+      </div>
+      <div class="s-stat-box card">
+        <div class="s-stat-val">100%</div>
+        <div class="s-stat-lbl">Open Source</div>
+      </div>
+      <div class="s-stat-box card">
+        <div class="s-stat-val">15+</div>
+        <div class="s-stat-lbl">Tools & Frameworks</div>
+      </div>
+      <div class="s-stat-box card">
+        <div class="s-stat-val" style="color: var(--green);">Active</div>
+        <div class="s-stat-lbl">Status</div>
+      </div>
+    </div>
+
+    <!-- Search & Filter Controls -->
+    <div class="search-filter-container card">
+      <div class="search-wrap" role="search">
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        <input type="search" id="proj-search" placeholder="Search projects by title, tool (Splunk, Scapy, Burp), category, or tag..." autocomplete="off" aria-label="Search projects"/>
+      </div>
+
+      <div class="filter-controls-row">
+        <div class="filter-group">
+          <label for="difficulty-select"><i class="fa-solid fa-layer-group"></i> Level:</label>
+          <select id="difficulty-select" class="cyber-select">
+            <option value="all">All Difficulties</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+            <option value="expert">Expert</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="status-select"><i class="fa-solid fa-circle-check"></i> Status:</label>
+          <select id="status-select" class="cyber-select">
+            <option value="all">All Statuses</option>
+            <option value="completed">Completed</option>
+            <option value="active">Active</option>
+            <option value="in-progress">In-Progress</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="sort-select"><i class="fa-solid fa-arrow-down-wide-short"></i> Sort By:</label>
+          <select id="sort-select" class="cyber-select">
+            <option value="newest">Latest Added</option>
+            <option value="title">Title (A-Z)</option>
+            <option value="difficulty">Difficulty</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Pills with Auto Counts -->
+    <div id="categories-bar" class="categories-bar-wrapper">
+      <div class="categories-scroll" role="list">
+        <button class="cat-btn active" data-cat="all" role="listitem">
+          <i class="fa-solid fa-border-all fa-xs"></i> All Categories
+        </button>
+        <button class="cat-btn" data-cat="home lab" role="listitem">
+          <i class="fa-solid fa-server fa-xs"></i> Home Lab
+        </button>
+        <button class="cat-btn" data-cat="automation" role="listitem">
+          <i class="fa-solid fa-robot fa-xs"></i> Automation
+        </button>
+        <button class="cat-btn" data-cat="digital forensics" role="listitem">
+          <i class="fa-solid fa-magnifying-glass-location fa-xs"></i> DFIR
+        </button>
+        <button class="cat-btn" data-cat="networking" role="listitem">
+          <i class="fa-solid fa-network-wired fa-xs"></i> Network Security
+        </button>
+        <button class="cat-btn" data-cat="web security" role="listitem">
+          <i class="fa-solid fa-globe fa-xs"></i> Web Security
+        </button>
+        <button class="cat-btn" data-cat="penetration testing" role="listitem">
+          <i class="fa-solid fa-user-ninja fa-xs"></i> Pentesting
+        </button>
+        <button class="cat-btn" data-cat="malware analysis" role="listitem">
+          <i class="fa-solid fa-bug fa-xs"></i> Malware
+        </button>
+        <button class="cat-btn" data-cat="cloud security" role="listitem">
+          <i class="fa-solid fa-cloud fa-xs"></i> Cloud Security
+        </button>
+        <button class="cat-btn" data-cat="python" role="listitem">
+          <i class="fa-brands fa-python fa-xs"></i> Python
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT GRID -->
+<main class="container">
+  <section id="projects-section" class="articles-main-section">
+    <div class="section-flex-header">
+      <h2 class="articles-section-title"><i class="fa-solid fa-cubes-stacked"></i> Engineering Projects Directory</h2>
+      <span class="posts-count-badge" id="projects-count">Displaying All Projects</span>
+    </div>
+
+    <div id="projects-grid" class="articles-grid" style="grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));">
+      
+      <!-- Data items from JSON -->
+      {% for proj in projects.items %}
+      <article class="card article-card project-card"
+               data-category="{{ (proj.category or 'General') | lower }}"
+               data-title="{{ proj.title | lower }}"
+               data-description="{{ proj.description | lower }}"
+               data-tech="{% if proj.technologies %}{% for t in proj.technologies %}{{ t | lower }} {% endfor %}{% endif %}"
+               data-difficulty="{{ (proj.difficulty or 'intermediate') | lower }}"
+               data-status="{{ (proj.status or 'completed') | lower }}">
+        <div class="card-glow"></div>
+        <div class="article-card-img-wrap" style="height: 190px;">
+          {% if proj.featured_image %}
+          <img class="article-card-img" src="{{ proj.featured_image }}" alt="{{ proj.title }}" loading="lazy"/>
+          {% else %}
+          <div class="article-card-img-placeholder">
+            <i class="fa-solid fa-diagram-project text-cyan" style="font-size: 2.5rem;"></i>
+          </div>
+          {% endif %}
+          <span class="card-diff-badge {{ (proj.difficulty or 'Intermediate') | lower }}">{{ proj.difficulty or "Intermediate" }}</span>
+        </div>
+
+        <div class="article-card-body">
+          <div class="article-card-tags">
+            <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> {{ proj.category }}</span>
+            <span class="tag tag-tut" style="color: var(--green); border-color: rgba(0,255,136,0.3);"><i class="fa-solid fa-circle-check"></i> {{ proj.status or "Completed" }}</span>
+          </div>
+
+          <h3 class="article-card-title">{{ proj.title }}</h3>
+          <p class="article-card-excerpt">{{ proj.description }}</p>
+
+          {% if proj.technologies %}
+          <div class="article-tags-mini" style="margin-top: 0.8rem;">
+            {% for tech in proj.technologies %}
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> {{ tech }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <div class="article-card-footer" style="margin-top: 1.2rem;">
+            <div class="project-actions" style="display: flex; gap: 0.5rem; width: 100%;">
+              {% if proj.github_link %}
+              <a href="{{ proj.github_link }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" style="flex: 1; text-align: center;"><i class="fa-brands fa-github"></i> Code</a>
+              {% endif %}
+              {% if proj.live_demo %}
+              <a href="{{ proj.live_demo }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-cyan" style="flex: 1; text-align: center;"><i class="fa-solid fa-arrow-up-right-from-square"></i> Demo</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+
+      <!-- Markdown Collection Items from Decap CMS -->
+      {% for proj in collections.projects %}
+      <article class="card article-card project-card"
+               data-category="{{ (proj.data.category or 'General') | lower }}"
+               data-title="{{ proj.data.title | lower }}"
+               data-description="{{ (proj.data.description or proj.data.summary or '') | lower }}"
+               data-tech="{% if proj.data.technologies %}{% for t in proj.data.technologies %}{{ t | lower }} {% endfor %}{% endif %}"
+               data-difficulty="{{ (proj.data.difficulty or 'intermediate') | lower }}"
+               data-status="{{ (proj.data.status or 'completed') | lower }}"
+               onclick="window.location='{{ proj.url }}'">
+        <div class="card-glow"></div>
+        <div class="article-card-img-wrap" style="height: 190px;">
+          {% if proj.data.featured_image or proj.data.image %}
+          <img class="article-card-img" src="{{ proj.data.featured_image or proj.data.image }}" alt="{{ proj.data.title }}" loading="lazy"/>
+          {% else %}
+          <div class="article-card-img-placeholder">
+            <i class="fa-solid fa-code-branch text-cyan" style="font-size: 2.5rem;"></i>
+          </div>
+          {% endif %}
+          <span class="card-diff-badge {{ (proj.data.difficulty or 'Intermediate') | lower }}">{{ proj.data.difficulty or "Intermediate" }}</span>
+        </div>
+
+        <div class="article-card-body">
+          <div class="article-card-tags">
+            <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> {{ proj.data.category }}</span>
+            <span class="tag tag-tut" style="color: var(--green); border-color: rgba(0,255,136,0.3);"><i class="fa-solid fa-circle-check"></i> {{ proj.data.status or "Completed" }}</span>
+          </div>
+
+          <h3 class="article-card-title">{{ proj.data.title }}</h3>
+          <p class="article-card-excerpt">{{ proj.data.description or proj.data.summary }}</p>
+
+          {% if proj.data.technologies %}
+          <div class="article-tags-mini" style="margin-top: 0.8rem;">
+            {% for tech in proj.data.technologies %}
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> {{ tech }}</span>
+            {% endfor %}
+          </div>
+          {% endif %}
+
+          <div class="article-card-footer" style="margin-top: 1.2rem;">
+            <a href="{{ proj.url }}" class="btn btn-sm btn-cyan btn-full"><i class="fa-solid fa-book-open"></i> Full Project Blueprint</a>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+
+    </div>
+
+    <!-- No Results Fallback -->
+    <div class="no-results card" id="no-proj-results" style="display:none; text-align: center; padding: 3rem 1.5rem;">
+      <i class="fa-solid fa-laptop-code text-cyan" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+      <h3>No Security Projects Match Your Query</h3>
+      <p>Try clearing difficulty filters, clearing search inputs, or selecting another technical category.</p>
+      <button class="btn btn-cyan mt-3" onclick="resetProjSearch()"><i class="fa-solid fa-rotate"></i> Reset All Filters</button>
+    </div>
+  </section>
+</main>
+
+<!-- Search Modal -->
+<div class="search-modal" id="searchModal" role="dialog" aria-modal="true" aria-label="Global Site Search">
+  <div class="search-modal-content card">
+      <div class="search-input-wrap">
+          <i class="fa-solid fa-magnifying-glass search-icon"></i>
+          <input type="text" id="modalSearchInput" placeholder="Search projects, labs, tools, certs, blog..." autocomplete="off">
+          <button class="search-close-btn" onclick="closeSearchModal()">&times;</button>
+      </div>
+      <div class="search-results" id="modalSearchResults">
+          <div class="search-empty-state"><i class="fa-solid fa-terminal"></i> Type to search projects, labs, reports, or policies...</div>
+      </div>
+  </div>
+</div>
+
+{% include "footer.njk" %}
+
+<button id="scroll-top" aria-label="Scroll to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+<script src="/js/main.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("proj-search");
+  const diffSelect = document.getElementById("difficulty-select");
+  const statusSelect = document.getElementById("status-select");
+  const sortSelect = document.getElementById("sort-select");
+  const catBtns = document.querySelectorAll(".cat-btn");
+  const cards = Array.from(document.querySelectorAll(".project-card"));
+  const countBadge = document.getElementById("projects-count");
+  const noResults = document.getElementById("no-proj-results");
+
+  let currentSearch = "";
+  let currentCat = "all";
+  let currentDiff = "all";
+  let currentStatus = "all";
+  let currentSort = "newest";
+
+  function filterProjects() {
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const title = card.getAttribute("data-title") || "";
+      const desc = card.getAttribute("data-description") || "";
+      const cat = card.getAttribute("data-category") || "";
+      const tech = card.getAttribute("data-tech") || "";
+      const diff = card.getAttribute("data-difficulty") || "";
+      const status = card.getAttribute("data-status") || "";
+
+      const matchSearch = currentSearch === "" || 
+                          title.includes(currentSearch) || 
+                          desc.includes(currentSearch) || 
+                          cat.includes(currentSearch) || 
+                          tech.includes(currentSearch);
+
+      const matchCat = currentCat === "all" || cat.includes(currentCat.toLowerCase());
+      const matchDiff = currentDiff === "all" || diff === currentDiff.toLowerCase();
+      const matchStatus = currentStatus === "all" || status === currentStatus.toLowerCase();
+
+      if (matchSearch && matchCat && matchDiff && matchStatus) {
+        card.style.display = "flex";
+        visibleCount++;
+      } else {
+        card.style.display = "none";
+      }
+    });
+
+    if (countBadge) countBadge.textContent = `${visibleCount} Projects Displayed`;
+    if (noResults) noResults.style.display = visibleCount === 0 ? "block" : "none";
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      currentSearch = e.target.value.toLowerCase().trim();
+      filterProjects();
+    });
+  }
+
+  if (diffSelect) {
+    diffSelect.addEventListener("change", (e) => {
+      currentDiff = e.target.value;
+      filterProjects();
+    });
+  }
+
+  if (statusSelect) {
+    statusSelect.addEventListener("change", (e) => {
+      currentStatus = e.target.value;
+      filterProjects();
+    });
+  }
+
+  catBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      catBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentCat = btn.getAttribute("data-cat");
+      filterProjects();
+    });
+  });
+
+  window.resetProjSearch = () => {
+    if (searchInput) searchInput.value = "";
+    if (diffSelect) diffSelect.value = "all";
+    if (statusSelect) statusSelect.value = "all";
+    currentSearch = "";
+    currentCat = "all";
+    currentDiff = "all";
+    currentStatus = "all";
+    catBtns.forEach(b => {
+      if (b.getAttribute("data-cat") === "all") b.classList.add("active");
+      else b.classList.remove("active");
+    });
+    filterProjects();
+  };
+});
+</script>
+</body>
+</html>

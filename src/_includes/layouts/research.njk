@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ title }} | Cybersecurity Research Paper | Aimad Ul Islam</title>
+    <meta name="description" content="{{ summary or 'Cybersecurity research, white paper, and threat intelligence report by Aimad Ul Islam.' }}">
+    <meta name="author" content="{{ author or 'Aimad Ul Islam' }}">
+    <meta name="theme-color" content="#080C1A">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="{{ title }} | Aimad Ul Islam">
+    <meta property="og:description" content="{{ summary }}">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aimadulislam.dpdns.org{{ page.url }}">
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/blog.css">
+</head>
+<body class="post-page-body">
+    <div class="grid-bg"></div>
+    <div class="scan-line"></div>
+
+    <!-- UNIFIED HEADER -->
+    {% include "header.njk" %}
+
+    <main class="container">
+        <article class="article-hero">
+            <div class="breadcrumb">
+                <a href="/"><i class="fa-solid fa-house"></i> Home</a>
+                <span>/</span>
+                <a href="/research/">Research</a>
+                <span>/</span>
+                <span class="current-title">{{ title }}</span>
+            </div>
+
+            <div class="article-layout">
+                <div class="article-main">
+                    <header class="article-header card">
+                        <div class="article-cats">
+                            <span class="tag tag-cyber"><i class="fa-solid fa-flask"></i> {{ category or "Research Report" }}</span>
+                            {% if version %}<span class="tag tag-tut"><i class="fa-solid fa-code-branch"></i> {{ version }}</span>{% endif %}
+                            {% if file_size %}<span class="tag tag-status"><i class="fa-solid fa-file-pdf"></i> {{ file_size }}</span>{% endif %}
+                        </div>
+                        
+                        <h1 class="article-title">{{ title }}</h1>
+                        
+                        {% if summary %}
+                        <p class="article-subtitle">{{ summary }}</p>
+                        {% endif %}
+                        
+                        <div class="article-meta">
+                            <div class="article-meta-item">
+                                <i class="fa-solid fa-user-shield"></i>
+                                <span>Researcher: <strong>{{ author or "Aimad Ul Islam" }}</strong></span>
+                            </div>
+                            <div class="article-meta-item">
+                                <i class="fa-regular fa-calendar"></i>
+                                <span>Published: <strong>{{ date | readableDate if date else "2026" }}</strong></span>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                            {% if pdf_url or pdf %}
+                            <a href="{{ pdf_url or pdf }}" target="_blank" class="btn btn-cyan btn-sm"><i class="fa-solid fa-file-arrow-down"></i> Download Full Paper (PDF)</a>
+                            {% endif %}
+                        </div>
+                    </header>
+
+                    <div class="article-body card">
+                        {{ content | safe }}
+                    </div>
+                </div>
+
+                <aside class="sidebar">
+                    <div class="sidebar-widget card">
+                        <h3 class="widget-title"><i class="fa-solid fa-shield-halved"></i> Paper Metadata</h3>
+                        <div class="sidebar-cat-list">
+                            <div class="sidebar-cat-item">
+                                <span>Type:</span> <strong>{{ category or "White Paper" }}</strong>
+                            </div>
+                            <div class="sidebar-cat-item">
+                                <span>Author:</span> <strong>{{ author or "Aimad Ul Islam" }}</strong>
+                            </div>
+                            <div class="sidebar-cat-item">
+                                <span>Version:</span> <strong>{{ version or "v1.0" }}</strong>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="sidebar-widget card">
+                        <a href="/research/" class="btn btn-cyan btn-full"><i class="fa-solid fa-arrow-left"></i> Research Library</a>
+                    </div>
+                </aside>
+            </div>
+        </article>
+    </main>
+
+    {% include "footer.njk" %}
+    <script src="/js/main.js"></script>
+</body>
+</html>

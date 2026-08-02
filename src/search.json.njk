@@ -19,8 +19,18 @@ eleventyExcludeFromCollections: true
     "title": {{ proj.title | dump | safe }},
     "description": {{ proj.description | dump | safe }},
     "category": {{ proj.category | dump | safe }},
-    "tags": {{ proj.technologies | dump | safe }},
-    "url": "/#projects"
+    "tags": {{ (proj.technologies or []) | dump | safe }},
+    "url": "/projects/"
+  },
+  {%- endfor %}
+  {%- for proj in collections.projects %}
+  {
+    "type": "Project",
+    "title": {{ proj.data.title | dump | safe }},
+    "description": {{ (proj.data.description or proj.data.summary or "") | dump | safe }},
+    "category": {{ (proj.data.category or "Project") | dump | safe }},
+    "tags": {{ (proj.data.technologies or []) | dump | safe }},
+    "url": {{ proj.url | dump | safe }}
   },
   {%- endfor %}
   {%- for lab in labs.items %}
@@ -29,8 +39,18 @@ eleventyExcludeFromCollections: true
     "title": {{ lab.name | dump | safe }},
     "description": {{ lab.description | dump | safe }},
     "category": {{ lab.platform | dump | safe }},
-    "tags": {{ lab.tools | dump | safe }},
-    "url": "/#labs"
+    "tags": {{ (lab.tools or []) | dump | safe }},
+    "url": "/labs/"
+  },
+  {%- endfor %}
+  {%- for lab in collections.labs %}
+  {
+    "type": "Lab",
+    "title": {{ (lab.data.title or lab.data.name) | dump | safe }},
+    "description": {{ (lab.data.description or "") | dump | safe }},
+    "category": {{ (lab.data.platform or "Lab") | dump | safe }},
+    "tags": {{ (lab.data.tools or []) | dump | safe }},
+    "url": {{ lab.url | dump | safe }}
   },
   {%- endfor %}
   {%- for report in reports.items %}
@@ -40,7 +60,37 @@ eleventyExcludeFromCollections: true
     "description": {{ report.summary | dump | safe }},
     "category": {{ report.category | dump | safe }},
     "tags": ["Research", "PDF", "Security Report"],
-    "url": "/#reports"
+    "url": "/research/"
+  },
+  {%- endfor %}
+  {%- for rep in collections.research %}
+  {
+    "type": "Research Report",
+    "title": {{ rep.data.title | dump | safe }},
+    "description": {{ (rep.data.summary or rep.data.description or "") | dump | safe }},
+    "category": {{ (rep.data.category or "Research") | dump | safe }},
+    "tags": ["Research", "PDF", "Whitepaper"],
+    "url": {{ rep.url | dump | safe }}
+  },
+  {%- endfor %}
+  {%- for dl in downloads.items %}
+  {
+    "type": "Download Asset",
+    "title": {{ dl.name | dump | safe }},
+    "description": {{ dl.description | dump | safe }},
+    "category": {{ dl.category | dump | safe }},
+    "tags": ["Download", {{ (dl.format or "PDF") | dump | safe }}],
+    "url": "/downloads/"
+  },
+  {%- endfor %}
+  {%- for dl in collections.downloads %}
+  {
+    "type": "Download Asset",
+    "title": {{ (dl.data.title or dl.data.name) | dump | safe }},
+    "description": {{ (dl.data.description or "") | dump | safe }},
+    "category": {{ (dl.data.category or "Download") | dump | safe }},
+    "tags": ["Download", {{ (dl.data.format or "PDF") | dump | safe }}],
+    "url": {{ dl.url | dump | safe }}
   },
   {%- endfor %}
   {%- for cert in certifications.items %}

@@ -1,0 +1,257 @@
+---
+title: Cybersecurity Research Center & Threat Intelligence | Aimad Ul Islam
+description: Peer-reviewed research, threat intelligence whitepapers, malware case studies, vulnerability advisories, and DFIR investigation reports by Aimad Ul Islam.
+---
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+  
+  <title>{{ title }}</title>
+  <meta name="description" content="{{ description }}"/>
+  <meta name="author" content="Aimad Ul Islam"/>
+  
+  <!-- Open Graph -->
+  <meta property="og:type" content="website"/>
+  <meta property="og:title" content="{{ title }}"/>
+  <meta property="og:description" content="{{ description }}"/>
+  <meta property="og:url" content="https://aimadulislam.dpdns.org/research/"/>
+  <meta name="theme-color" content="#080C1A"/>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="/css/main.css"/>
+  <link rel="stylesheet" href="/css/blog.css"/>
+</head>
+<body class="blog-page-body">
+
+<div id="reading-progress" role="progressbar" aria-label="Page reading progress"></div>
+<div class="grid-bg" aria-hidden="true"></div>
+<div class="scan-line" aria-hidden="true"></div>
+
+<!-- UNIFIED HEADER -->
+{% include "header.njk" %}
+
+<!-- HERO SECTION -->
+<section id="blog-hero" aria-labelledby="research-hero-title" style="padding-bottom: 3rem;">
+  <canvas id="blog-hero-canvas" aria-hidden="true"></canvas>
+  <div class="blog-hero-inner container">
+    <div class="blog-hero-eye"><i class="fa-solid fa-microscope"></i> Threat Intelligence & Whitepaper Vault</div>
+    <h1 class="blog-hero-title" id="research-hero-title">
+      Security <span class="accent">Research Center</span>
+    </h1>
+    <p class="blog-hero-sub">In-depth technical white papers, zero-trust implementation blueprints, automated malware triage reports, and SOC threat intelligence digests.</p>
+
+    <!-- Research Stats -->
+    <div class="sidebar-stats-grid" style="grid-template-columns: repeat(4, 1fr); max-width: 800px; margin: 1.5rem auto 2rem auto;">
+      <div class="s-stat-box card">
+        <div class="s-stat-val">{{ reports.items.length + collections.research.length }}</div>
+        <div class="s-stat-lbl">White Papers</div>
+      </div>
+      <div class="s-stat-box card">
+        <div class="s-stat-val" style="color: var(--cyan);">PDF</div>
+        <div class="s-stat-lbl">Open Standard</div>
+      </div>
+      <div class="s-stat-box card">
+        <div class="s-stat-val">2026</div>
+        <div class="s-stat-lbl">Latest Edition</div>
+      </div>
+      <div class="s-stat-box card">
+        <div class="s-stat-val" style="color: var(--green);">Verified</div>
+        <div class="s-stat-lbl">Peer-Reviewed</div>
+      </div>
+    </div>
+
+    <!-- Search & Filters -->
+    <div class="search-filter-container card">
+      <div class="search-wrap" role="search">
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        <input type="search" id="research-search" placeholder="Search papers by CVE, title, malware analysis, SIEM, or keyword..." autocomplete="off" aria-label="Search research papers"/>
+      </div>
+
+      <div class="filter-controls-row">
+        <div class="filter-group">
+          <label for="research-cat-select"><i class="fa-solid fa-folder"></i> Category:</label>
+          <select id="research-cat-select" class="cyber-select">
+            <option value="all">All Document Types</option>
+            <option value="whitepaper">White Papers</option>
+            <option value="security report">Security Reports</option>
+            <option value="case study">Case Studies</option>
+            <option value="advisory">Security Advisories</option>
+            <option value="malware">Malware Reports</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Pills -->
+    <div id="categories-bar" class="categories-bar-wrapper">
+      <div class="categories-scroll" role="list">
+        <button class="cat-btn active" data-cat="all" role="listitem"><i class="fa-solid fa-border-all fa-xs"></i> All Publications</button>
+        <button class="cat-btn" data-cat="whitepaper" role="listitem"><i class="fa-solid fa-file-invoice fa-xs"></i> White Papers</button>
+        <button class="cat-btn" data-cat="security report" role="listitem"><i class="fa-solid fa-shield-halved fa-xs"></i> Security Reports</button>
+        <button class="cat-btn" data-cat="case study" role="listitem"><i class="fa-solid fa-flask-vial fa-xs"></i> Case Studies</button>
+        <button class="cat-btn" data-cat="malware" role="listitem"><i class="fa-solid fa-bug fa-xs"></i> Threat Analysis</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT -->
+<main class="container">
+  <section id="research-section" class="articles-main-section">
+    <div class="section-flex-header">
+      <h2 class="articles-section-title"><i class="fa-solid fa-book-journal-whills"></i> Publications & Technical Reports</h2>
+      <span class="posts-count-badge" id="research-count">Showing All Reports</span>
+    </div>
+
+    <div id="research-grid" class="articles-grid" style="grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));">
+      
+      <!-- Data items from JSON -->
+      {% for rep in reports.items %}
+      <article class="card article-card research-card"
+               data-category="{{ (rep.category or 'Whitepaper') | lower }}"
+               data-title="{{ rep.title | lower }}"
+               data-summary="{{ rep.summary | lower }}"
+               data-author="{{ (rep.author or 'Aimad Ul Islam') | lower }}">
+        <div class="card-glow"></div>
+        <div class="article-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(0,212,255,0.1));">
+          <div class="article-card-img-placeholder" style="background: none;">
+            <i class="fa-solid fa-file-pdf text-cyan" style="font-size: 3rem;"></i>
+          </div>
+          <span class="card-diff-badge intermediate">{{ rep.version or "v1.0" }}</span>
+        </div>
+
+        <div class="article-card-body">
+          <div class="article-card-tags">
+            <span class="tag tag-cyber"><i class="fa-solid fa-flask"></i> {{ rep.category }}</span>
+            <span class="tag tag-tut"><i class="fa-solid fa-hard-drive"></i> {{ rep.file_size or "2.0 MB" }}</span>
+          </div>
+
+          <h3 class="article-card-title">{{ rep.title }}</h3>
+          <p class="article-card-excerpt">{{ rep.summary }}</p>
+
+          <div class="article-card-footer" style="margin-top: 1.2rem; display: flex; gap: 0.5rem;">
+            {% if rep.pdf_url %}
+            <a href="{{ rep.pdf_url }}" target="_blank" class="btn btn-sm btn-cyan btn-full"><i class="fa-solid fa-file-arrow-down"></i> Download PDF Paper</a>
+            {% endif %}
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+
+      <!-- Markdown Collection Items from Decap CMS -->
+      {% for rep in collections.research %}
+      <article class="card article-card research-card"
+               data-category="{{ (rep.data.category or 'Research') | lower }}"
+               data-title="{{ rep.data.title | lower }}"
+               data-summary="{{ (rep.data.summary or rep.data.description or '') | lower }}"
+               data-author="{{ (rep.data.author or 'Aimad Ul Islam') | lower }}"
+               onclick="window.location='{{ rep.url }}'">
+        <div class="card-glow"></div>
+        <div class="article-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(0,255,136,0.1));">
+          <div class="article-card-img-placeholder" style="background: none;">
+            <i class="fa-solid fa-microscope text-cyan" style="font-size: 3rem;"></i>
+          </div>
+          <span class="card-diff-badge {{ (rep.data.difficulty or 'Intermediate') | lower }}">{{ rep.data.version or "v1.0" }}</span>
+        </div>
+
+        <div class="article-card-body">
+          <div class="article-card-tags">
+            <span class="tag tag-cyber"><i class="fa-solid fa-shield-halved"></i> {{ rep.data.category }}</span>
+            <span class="tag tag-tut"><i class="fa-solid fa-hard-drive"></i> {{ rep.data.file_size or "PDF" }}</span>
+          </div>
+
+          <h3 class="article-card-title">{{ rep.data.title }}</h3>
+          <p class="article-card-excerpt">{{ rep.data.summary or rep.data.description }}</p>
+
+          <div class="article-card-footer" style="margin-top: 1.2rem;">
+            <a href="{{ rep.url }}" class="btn btn-sm btn-cyan btn-full"><i class="fa-solid fa-book-open"></i> Read Full Whitepaper</a>
+          </div>
+        </div>
+      </article>
+      {% endfor %}
+
+    </div>
+
+    <!-- No Results Fallback -->
+    <div class="no-results card" id="no-research-results" style="display:none; text-align: center; padding: 3rem 1.5rem;">
+      <i class="fa-solid fa-folder-open text-cyan" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+      <h3>No Publications Found</h3>
+      <p>Try refining your keyword search or resetting publication categories.</p>
+      <button class="btn btn-cyan mt-3" onclick="resetResearchSearch()"><i class="fa-solid fa-rotate"></i> Reset All Filters</button>
+    </div>
+  </section>
+</main>
+
+{% include "footer.njk" %}
+
+<button id="scroll-top" aria-label="Scroll to top"><i class="fa-solid fa-arrow-up"></i></button>
+<script src="/js/main.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("research-search");
+  const catSelect = document.getElementById("research-cat-select");
+  const catBtns = document.querySelectorAll(".cat-btn");
+  const cards = Array.from(document.querySelectorAll(".research-card"));
+  const countBadge = document.getElementById("research-count");
+  const noResults = document.getElementById("no-research-results");
+
+  let currentSearch = "";
+  let currentCat = "all";
+
+  function filterResearch() {
+    let visible = 0;
+
+    cards.forEach(card => {
+      const title = card.getAttribute("data-title") || "";
+      const summary = card.getAttribute("data-summary") || "";
+      const cat = card.getAttribute("data-category") || "";
+
+      const matchSearch = currentSearch === "" || title.includes(currentSearch) || summary.includes(currentSearch) || cat.includes(currentSearch);
+      const matchCat = currentCat === "all" || cat.includes(currentCat.toLowerCase());
+
+      if (matchSearch && matchCat) {
+        card.style.display = "flex";
+        visible++;
+      } else {
+        card.style.display = "none";
+      }
+    });
+
+    if (countBadge) countBadge.textContent = `${visible} Research Papers Available`;
+    if (noResults) noResults.style.display = visible === 0 ? "block" : "none";
+  }
+
+  if (searchInput) searchInput.addEventListener("input", (e) => { currentSearch = e.target.value.toLowerCase().trim(); filterResearch(); });
+  if (catSelect) catSelect.addEventListener("change", (e) => { currentCat = e.target.value; filterResearch(); });
+
+  catBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      catBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentCat = btn.getAttribute("data-cat");
+      filterResearch();
+    });
+  });
+
+  window.resetResearchSearch = () => {
+    if (searchInput) searchInput.value = "";
+    if (catSelect) catSelect.value = "all";
+    currentSearch = "";
+    currentCat = "all";
+    catBtns.forEach(b => {
+      if (b.getAttribute("data-cat") === "all") b.classList.add("active");
+      else b.classList.remove("active");
+    });
+    filterResearch();
+  };
+});
+</script>
+</body>
+</html>

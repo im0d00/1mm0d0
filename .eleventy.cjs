@@ -67,15 +67,29 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addCollection("posts", function(collectionApi) {
     return collectionApi.getFilteredByGlob("src/posts/*.md").reverse();
   });
+
+  eleventyConfig.addCollection("projects", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("src/projects/*.md").reverse();
+  });
+
+  eleventyConfig.addCollection("labs", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("src/labs/*.md").reverse();
+  });
+
+  eleventyConfig.addCollection("research", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("src/research/*.md").reverse();
+  });
+
+  eleventyConfig.addCollection("downloads", function(collectionApi) {
+    return collectionApi.getFilteredByGlob("src/downloads/*.md").reverse();
+  });
   
   eleventyConfig.addCollection("categories", function(collectionApi) {
     let categories = new Set();
     collectionApi.getFilteredByGlob("src/posts/*.md").forEach(item => {
       if (item.data && item.data.categories) {
         let cats = item.data.categories;
-        if (typeof cats === "string") {
-          cats = [cats];
-        }
+        if (typeof cats === "string") cats = [cats];
         if (Array.isArray(cats)) {
           for (let cat of cats) {
             if (cat) categories.add(cat);

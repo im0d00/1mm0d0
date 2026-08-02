@@ -6,12 +6,10 @@
 
         <ul class="nav-links">
             <li><a href="/" {% if page.url == '/' %}class="active"{% endif %}>Home</a></li>
-            <li><a href="/#about">About</a></li>
-            <li><a href="/#certifications">Certs</a></li>
-            <li><a href="/#skills">Skills</a></li>
-            <li><a href="/#projects">Projects</a></li>
-            <li><a href="/#labs">Labs</a></li>
-            <li><a href="/#dashboard">SOC</a></li>
+            <li><a href="/projects/" {% if 'projects' in page.url %}class="active"{% endif %}>Projects</a></li>
+            <li><a href="/labs/" {% if 'labs' in page.url %}class="active"{% endif %}>Labs</a></li>
+            <li><a href="/research/" {% if 'research' in page.url %}class="active"{% endif %}>Research</a></li>
+            <li><a href="/downloads/" {% if 'downloads' in page.url %}class="active"{% endif %}>Downloads</a></li>
             <li><a href="/blog/" {% if 'blog' in page.url or 'posts' in page.url %}class="active"{% endif %}>Blog</a></li>
             <li><a href="/resources/" {% if 'resources' in page.url %}class="active"{% endif %}>Resources</a></li>
             <li><a href="/#contact">Contact</a></li>
@@ -42,12 +40,10 @@
     </div>
     <ul class="mobile-links">
         <li><a href="/">Home</a></li>
-        <li><a href="/#about">About Me</a></li>
-        <li><a href="/#certifications">Certifications</a></li>
-        <li><a href="/#skills">Skills Matrix</a></li>
-        <li><a href="/#projects">Projects</a></li>
-        <li><a href="/#labs">Virtual Labs</a></li>
-        <li><a href="/#dashboard">SOC Dashboard</a></li>
+        <li><a href="/projects/">Projects Center</a></li>
+        <li><a href="/labs/">Virtual Labs</a></li>
+        <li><a href="/research/">Research Center</a></li>
+        <li><a href="/downloads/">Download Hub</a></li>
         <li><a href="/blog/">Technical Blog</a></li>
         <li><a href="/resources/">Resources Hub</a></li>
         <li><a href="/#contact">Contact Me</a></li>
