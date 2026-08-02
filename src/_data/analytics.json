@@ -1,0 +1,38 @@
+{
+  "analytics_provider": "Google Analytics 4 & Custom Telemetry",
+  "visitors_count": "14,850",
+  "page_views": "52,430",
+  "popular_pages": [
+    { "page": "/projects/", "views": "14,200", "trend": "+18%" },
+    { "page": "/labs/", "views": "11,850", "trend": "+24%" },
+    { "page": "/blog/", "views": "9,300", "trend": "+12%" },
+    { "page": "/research/", "views": "7,120", "trend": "+15%" },
+    { "page": "/downloads/", "views": "5,460", "trend": "+30%" }
+  ],
+  "popular_blogs": [
+    { "title": "Linux Security Essentials Guide", "views": "4,120", "category": "Linux" },
+    { "title": "Metasploitable Complete Walkthrough", "views": "3,890", "category": "Ethical Hacking" },
+    { "title": "DFIR Incident Response Framework", "views": "3,410", "category": "DFIR" },
+    { "title": "Nmap Network Scanning Deep Dive", "views": "2,980", "category": "Networking" }
+  ],
+  "downloads_count": "4,820",
+  "top_search_queries": [
+    "Volatility 3 Cheat Sheet",
+    "Active Directory Homelab Topology",
+    "Packet Tracer Subnetting",
+    "DFIR Memory Forensics",
+    "Metasploitable 2 Exploitation"
+  ],
+  "top_categories": [
+    { "name": "Cybersecurity", "count": 28 },
+    { "name": "DFIR", "count": 14 },
+    { "name": "Linux", "count": 19 },
+    { "name": "Networking", "count": 16 },
+    { "name": "Ethical Hacking", "count": 22 }
+  ],
+  "most_viewed_projects": [
+    { "title": "Automated Memory Forensics Framework", "views": "6,420" },
+    { "title": "Network Traffic Threat Analyzer", "views": "5,110" },
+    { "title": "SIEM Log Parser & Alerting Script", "views": "4,300" }
+  ]
+}

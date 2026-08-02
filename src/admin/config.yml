@@ -46,6 +46,7 @@ collections:
           - { label: "Copyright", name: "copyright", widget: "string" }
           - { label: "Google Analytics ID", name: "google_analytics_id", widget: "string", required: false }
           - { label: "Google Search Console Verification", name: "google_search_console_verification", widget: "string", required: false }
+          - { label: "Cloudflare Turnstile Public Key", name: "cloudflare_turnstile_key", widget: "string", required: false }
           - { label: "Microsoft Clarity ID", name: "microsoft_clarity_id", widget: "string", required: false }
           - { label: "Cloudflare Analytics Token", name: "cloudflare_analytics", widget: "string", required: false }
           - { label: "Open Graph Image", name: "og_image", widget: "image", required: false }
@@ -57,6 +58,134 @@ collections:
               - { label: "Platform Name", name: "platform", widget: "string" }
               - { label: "URL", name: "url", widget: "string" }
               - { label: "Icon Class", name: "icon", widget: "string" }
+
+      - name: "homepage"
+        label: "Homepage Builder"
+        file: "src/_data/homepage.json"
+        fields:
+          - name: "section_order"
+            label: "Homepage Section Order"
+            widget: "list"
+            field: { label: "Section ID", widget: "string" }
+          - name: "sections"
+            label: "Section Settings & Configurations"
+            widget: "object"
+            fields:
+              - name: "hero"
+                label: "Hero Section Settings"
+                widget: "object"
+                fields:
+                  - { label: "Enable Hero Section", name: "enabled", widget: "boolean", default: true }
+                  - { label: "Section Title", name: "title", widget: "string" }
+                  - { label: "Section Subtitle", name: "subtitle", widget: "string" }
+                  - { label: "Background Animation Style", name: "bg_style", widget: "select", options: ["grid_and_scanlines", "matrix_rain", "hud_grid", "cyber_particles", "minimal"] }
+              - name: "about"
+                label: "About Section Settings"
+                widget: "object"
+                fields:
+                  - { label: "Enable Section", name: "enabled", widget: "boolean", default: true }
+                  - { label: "Section Title", name: "title", widget: "string" }
+                  - { label: "Section Subtitle", name: "subtitle", widget: "string" }
+              - name: "certifications"
+                label: "Certifications Section Settings"
+                widget: "object"
+                fields:
+                  - { label: "Enable Section", name: "enabled", widget: "boolean", default: true }
+                  - { label: "Section Title", name: "title", widget: "string" }
+                  - { label: "Section Subtitle", name: "subtitle", widget: "string" }
+              - name: "skills"
+                label: "Skills Section Settings"
+                widget: "object"
+                fields:
+                  - { label: "Enable Section", name: "enabled", widget: "boolean", default: true }
+                  - { label: "Section Title", name: "title", widget: "string" }
+                  - { label: "Section Subtitle", name: "subtitle", widget: "string" }
+              - name: "projects"
+                label: "Projects Section Settings"
+                widget: "object"
+                fields:
+                  - { label: "Enable Section", name: "enabled", widget: "boolean", default: true }
+                  - { label: "Section Title", name: "title", widget: "string" }
+                  - { label: "Section Subtitle", name: "subtitle", widget: "string" }
+              - name: "labs"
+                label: "Virtual Labs Section Settings"
+                widget: "object"
+                fields:
+                  - { label: "Enable Section", name: "enabled", widget: "boolean", default: true }
+                  - { label: "Section Title", name: "title", widget: "string" }
+                  - { label: "Section Subtitle", name: "subtitle", widget: "string" }
+              - name: "reports"
+                label: "Research & Reports Section Settings"
+                widget: "object"
+                fields:
+                  - { label: "Enable Section", name: "enabled", widget: "boolean", default: true }
+                  - { label: "Section Title", name: "title", widget: "string" }
+                  - { label: "Section Subtitle", name: "subtitle", widget: "string" }
+              - name: "downloads"
+                label: "Download Hub Section Settings"
+                widget: "object"
+                fields:
+                  - { label: "Enable Section", name: "enabled", widget: "boolean", default: true }
+                  - { label: "Section Title", name: "title", widget: "string" }
+                  - { label: "Section Subtitle", name: "subtitle", widget: "string" }
+
+      - name: "theme"
+        label: "Theme & Visual Customizer"
+        file: "src/_data/theme.json"
+        fields:
+          - { label: "Primary Theme Color (Hex)", name: "primary_color", widget: "string", default: "#00D4FF" }
+          - { label: "Secondary Color (Hex)", name: "secondary_color", widget: "string", default: "#7C3AED" }
+          - { label: "Accent Color (Hex)", name: "accent_color", widget: "string", default: "#00FF88" }
+          - { label: "Background Base Color", name: "background_color", widget: "string", default: "#080C1A" }
+          - { label: "Card Styling Archetype", name: "card_style", widget: "select", options: ["glassmorphism", "neon_hud", "flat_cyber", "minimal_dark"], default: "glassmorphism" }
+          - { label: "Corner Radius (px or rem)", name: "border_radius", widget: "string", default: "12px" }
+          - { label: "Shadow & Glow Style", name: "shadows", widget: "select", options: ["cyan_glow", "purple_glow", "green_glow", "subtle"], default: "cyan_glow" }
+          - { label: "Typography Font Family", name: "font_family", widget: "string", default: "Space Grotesk, Inter, sans-serif" }
+          - { label: "Base Font Size", name: "font_size", widget: "string", default: "16px" }
+          - { label: "Button Visual Style", name: "button_style", widget: "select", options: ["cyber_glow", "solid_neon", "ghost_border"], default: "cyber_glow" }
+          - { label: "Icon Set Preference", name: "icon_style", widget: "select", options: ["fontawesome", "lucide", "heroicons"], default: "fontawesome" }
+          - { label: "Animation Intensity", name: "animation_intensity", widget: "select", options: ["off", "minimal", "normal", "high"], default: "normal" }
+
+      - name: "analytics"
+        label: "Website Analytics Widgets"
+        file: "src/_data/analytics.json"
+        fields:
+          - { label: "Analytics Telemetry Provider", name: "analytics_provider", widget: "string" }
+          - { label: "Total Visitors Count", name: "visitors_count", widget: "string" }
+          - { label: "Total Page Views", name: "page_views", widget: "string" }
+          - name: "popular_pages"
+            label: "Most Visited Pages"
+            widget: "list"
+            fields:
+              - { label: "Page Path", name: "page", widget: "string" }
+              - { label: "Views", name: "views", widget: "string" }
+              - { label: "Trend Growth", name: "trend", widget: "string" }
+          - name: "popular_blogs"
+            label: "Popular Blog Posts"
+            widget: "list"
+            fields:
+              - { label: "Blog Title", name: "title", widget: "string" }
+              - { label: "Views", name: "views", widget: "string" }
+              - { label: "Category", name: "category", widget: "string" }
+          - { label: "Total Asset Downloads", name: "downloads_count", widget: "string" }
+          - { label: "Top Search Queries", name: "top_search_queries", widget: "list" }
+
+      - name: "backups"
+        label: "Backup & System Maintenance"
+        file: "src/_data/backups.json"
+        fields:
+          - { label: "Last Automated Backup Date", name: "last_backup_date", widget: "string" }
+          - { label: "Backup Schedule Frequency", name: "backup_frequency", widget: "string" }
+          - name: "history"
+            label: "Publishing & Backup Version History"
+            widget: "list"
+            fields:
+              - { label: "Version Tag", name: "version", widget: "string" }
+              - { label: "Timestamp", name: "timestamp", widget: "string" }
+              - { label: "Author", name: "author", widget: "string" }
+              - { label: "Changes Overview", name: "changes", widget: "text" }
+              - { label: "Archive Size", name: "file_size", widget: "string" }
+              - { label: "Status", name: "status", widget: "string" }
 
       - name: "footer"
         label: "Footer & Website Credit Settings"

@@ -1,0 +1,118 @@
+{
+  "section_order": [
+    "hero",
+    "about",
+    "education",
+    "certifications",
+    "skills",
+    "tools",
+    "projects",
+    "labs",
+    "reports",
+    "downloads",
+    "experience",
+    "dashboard",
+    "timeline",
+    "contact"
+  ],
+  "sections": {
+    "hero": {
+      "enabled": true,
+      "title": "Hero Section",
+      "subtitle": "Cybersecurity & Network Security Portfolio",
+      "bg_style": "grid_and_scanlines",
+      "animation": "fade_in_up"
+    },
+    "about": {
+      "enabled": true,
+      "title": "About Me",
+      "subtitle": "Cybersecurity Student & SOC Enthusiast",
+      "bg_style": "subtle_dark",
+      "animation": "slide_left"
+    },
+    "education": {
+      "enabled": true,
+      "title": "Education & Academic Credentials",
+      "subtitle": "Formal Qualifications & Academic Honors",
+      "bg_style": "glass_card",
+      "animation": "fade_in"
+    },
+    "certifications": {
+      "enabled": true,
+      "title": "Certifications & Professional Badges",
+      "subtitle": "Verified Industry Credentials",
+      "bg_style": "hud_grid",
+      "animation": "zoom_in"
+    },
+    "skills": {
+      "enabled": true,
+      "title": "Technical Skills Matrix",
+      "subtitle": "Core Competencies & Expertise Levels",
+      "bg_style": "subtle_dark",
+      "animation": "stagger_children"
+    },
+    "tools": {
+      "enabled": true,
+      "title": "Tools & Security Arsenal",
+      "subtitle": "Platforms, Utilities & Environment",
+      "bg_style": "glass_card",
+      "animation": "fade_in_up"
+    },
+    "projects": {
+      "enabled": true,
+      "title": "Featured Security Projects",
+      "subtitle": "Engineering, Automation & Tool Development",
+      "bg_style": "hud_grid",
+      "animation": "fade_in"
+    },
+    "labs": {
+      "enabled": true,
+      "title": "Virtual Cyber Labs & Ranges",
+      "subtitle": "Active Directory, SIEM & DFIR Environments",
+      "bg_style": "subtle_dark",
+      "animation": "slide_right"
+    },
+    "reports": {
+      "enabled": true,
+      "title": "Research Papers & Advisories",
+      "subtitle": "Whitepapers & Vulnerability Analysis",
+      "bg_style": "glass_card",
+      "animation": "fade_in_up"
+    },
+    "downloads": {
+      "enabled": true,
+      "title": "Resource & Download Center",
+      "subtitle": "Forensic Cheat Sheets, Scripts & Guides",
+      "bg_style": "subtle_dark",
+      "animation": "zoom_in"
+    },
+    "experience": {
+      "enabled": true,
+      "title": "Professional Experience & Work History",
+      "subtitle": "Roles & Project Track Record",
+      "bg_style": "hud_grid",
+      "animation": "stagger_children"
+    },
+    "dashboard": {
+      "enabled": true,
+      "title": "Live SOC Threat Operations Dashboard",
+      "subtitle": "Real-time Metrics & Triage Statistics",
+      "bg_style": "glass_card",
+      "animation": "fade_in"
+    },
+    "timeline": {
+      "enabled": true,
+      "title": "Career & Learning Milestones",
+      "subtitle": "Chronological Growth Track",
+      "bg_style": "subtle_dark",
+      "animation": "slide_left"
+    },
+    "contact": {
+      "enabled": true,
+      "title": "Contact & Security Advisory Engagement",
+      "subtitle": "Get in Touch for Opportunities & Inquiries",
+      "bg_style": "hud_grid",
+      "animation": "fade_in_up"
+    }
+  }
+}

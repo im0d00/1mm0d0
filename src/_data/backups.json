@@ -1,0 +1,30 @@
+{
+  "last_backup_date": "2026-08-01 21:30:00",
+  "backup_frequency": "Automated Daily",
+  "history": [
+    {
+      "version": "v2.5.2",
+      "timestamp": "2026-08-01 21:30:00",
+      "author": "Aimad Ul Islam",
+      "changes": "Updated Volatility 3 cheatsheet and Research paper metadata",
+      "file_size": "2.4 MB",
+      "status": "Verified"
+    },
+    {
+      "version": "v2.5.1",
+      "timestamp": "2026-07-28 14:15:22",
+      "author": "Aimad Ul Islam",
+      "changes": "Added Active Directory Homelab guide and revised skills matrix",
+      "file_size": "2.3 MB",
+      "status": "Archived"
+    },
+    {
+      "version": "v2.5.0",
+      "timestamp": "2026-07-20 09:44:00",
+      "author": "Aimad Ul Islam",
+      "changes": "Major redesign of SOC Dashboard & Decap CMS configuration",
+      "file_size": "2.1 MB",
+      "status": "Archived"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "primary_color": "#00D4FF",
+  "secondary_color": "#7C3AED",
+  "accent_color": "#00FF88",
+  "background_color": "#080C1A",
+  "card_style": "glassmorphism",
+  "border_radius": "12px",
+  "shadows": "cyan_glow",
+  "font_family": "Space Grotesk, Inter, sans-serif",
+  "font_size": "16px",
+  "button_style": "cyber_glow",
+  "icon_style": "fontawesome",
+  "animation_intensity": "normal",
+  "header_blur": "16px",
+  "enable_scanlines": true,
+  "enable_matrix_particles": true
+}
