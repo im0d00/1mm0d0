@@ -5,14 +5,17 @@ description: "The requested resource or threat path could not be located in our 
 ---
 
 <div class="container" style="display:flex; align-items:center; justify-content:center; min-height:70vh; text-align:center; padding:4rem 1.5rem;">
-  <div class="card" style="max-width:580px; width:100%; padding:3.5rem 2rem; position:relative; overflow:hidden;">
+  <div class="card" style="max-width:620px; width:100%; padding:2.5rem 2rem; position:relative; overflow:hidden;">
     <div class="card-glow"></div>
-    <div style="font-size:4.5rem; color:var(--red); font-family:'JetBrains Mono',monospace; font-weight:700; margin-bottom:1rem;">
-      <i class="fa-solid fa-triangle-exclamation"></i> 404
+    <div style="margin-bottom:1.5rem; overflow:hidden; border-radius:10px; border:1px solid var(--border); background:#060d1a;">
+      <img src="/assets/images/cybersecurity_404_illustration_1785883295131.jpg" alt="Cybersecurity 404 Threat Vector Not Found Illustration" style="width:100%; height:auto; display:block;" referrerPolicy="no-referrer" />
     </div>
-    <h1 style="font-size:1.8rem; font-weight:700; margin-bottom:0.8rem; color:var(--white);">Access Denied / Resource Missing</h1>
+    <div style="font-size:3rem; color:var(--red); font-family:'JetBrains Mono',monospace; font-weight:700; margin-bottom:0.5rem; display:flex; align-items:center; justify-content:center; gap:0.6rem;">
+      <i class="fa-solid fa-shield-halved fa-xs" style="color:var(--red);"></i> 404: VECTOR NOT FOUND
+    </div>
+    <h1 style="font-size:1.6rem; font-weight:700; margin-bottom:0.8rem; color:var(--white);">Access Denied / Resource Missing</h1>
     <p style="color:var(--silver); font-size:0.95rem; line-height:1.6; margin-bottom:2rem;">
-      The requested resource or threat path could not be located in our Security Operations Center logs. It may have been relocated, deleted, or sandboxed.
+      The requested threat path or resource could not be located in our Security Operations Center logs. It may have been relocated, purged, or sandboxed.
     </p>
     <div style="display:flex; gap:1rem; justify-content:center; flex-wrap:wrap;">
       <a href="/" class="btn primary" style="padding:0.75rem 1.5rem; background:var(--cyan); color:#080c1a; font-weight:600; text-decoration:none; border-radius:6px; display:inline-flex; align-items:center; gap:0.5rem;"><i class="fa-solid fa-house fa-xs"></i> Return to SOC Homepage</a>
