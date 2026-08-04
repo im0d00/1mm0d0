@@ -19,7 +19,7 @@ layout: layouts/base.njk
             </nav>
 
             <div class="article-quick-tools">
-                <a href="/blog/" class="btn btn-ghost btn-xs"><i class="fa-solid fa-arrow-left"></i> All Articles</a>
+                <a href="/blog/" class="btn btn-ghost btn-xs"><i class="fa-solid fa-arrow-left"></i> All Writeups</a>
                 <button class="btn btn-ghost btn-xs copy-url-btn" data-url="https://aimadulislam.dpdns.org{{ page.url }}" title="Copy Article Link">
                     <i class="fa-solid fa-link"></i> <span class="btn-text">Share</span>
                 </button>
@@ -29,10 +29,10 @@ layout: layouts/base.njk
             </div>
         </div>
 
-        <!-- Hero Featured Cover Image / Cybersecurity Tech Banner -->
+        <!-- Featured Cover Image / Header Banner (Single Unified Title Layout) -->
         {% set postImage = image or featured_image or thumbnail %}
+        {% if postImage %}
         <div class="article-cover-container">
-            {% if postImage %}
             <div class="article-cover-banner">
                 <img src="{{ postImage }}" alt="{{ imageAlt or title }}" class="article-cover-img" />
                 <div class="article-cover-overlay"></div>
@@ -54,119 +54,103 @@ layout: layouts/base.njk
                     </div>
                 </div>
             </div>
-            {% else %}
-            <div class="article-cyber-hero-banner">
-                <div class="cyber-banner-grid"></div>
-                <div class="cyber-banner-content">
-                    <div class="cyber-banner-header">
-                        <span class="hud-badge hud-badge-green"><i class="fa-solid fa-terminal"></i> SEC_WRITEUP_ID: {{ page.fileSlug | upper }}</span>
-                        <span class="difficulty-badge {{ (difficulty or 'Intermediate') | lower }}">
-                            <i class="fa-solid fa-gauge-high"></i> {{ difficulty or "Intermediate" }}
-                        </span>
+        </div>
+        {% endif %}
+
+        <!-- Unified Article Header Meta Card -->
+        <header class="article-header-card card">
+            <div class="card-glow"></div>
+            
+            <div class="article-header-meta-top">
+                <div class="article-cats">
+                    <span class="hud-badge hud-badge-green"><i class="fa-solid fa-terminal"></i> SEC_ID: {{ page.fileSlug | upper }}</span>
+                    {% for cat in categories %}
+                    <a href="/blog/?cat={{ cat | urlencode }}" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> {{ cat }}</a>
+                    {% endfor %}
+                </div>
+                <span class="difficulty-badge {{ (difficulty or 'Intermediate') | lower }}">
+                    <i class="fa-solid fa-layer-group"></i> {{ difficulty or "Intermediate" }}
+                </span>
+            </div>
+
+            <!-- Prominent H1 Article Title (Single Instance) -->
+            <h1 class="article-main-title">{{ title }}</h1>
+
+            {% if subtitle or description or excerpt %}
+            <p class="article-subtitle">{{ subtitle or description or excerpt }}</p>
+            {% endif %}
+
+            <!-- High-Tech Cyber HUD Metadata Bar -->
+            <div class="article-meta-hud">
+                <div class="meta-hud-item">
+                    <div class="meta-hud-icon"><i class="fa-solid fa-user-shield"></i></div>
+                    <div class="meta-hud-info">
+                        <span class="meta-hud-label">Author</span>
+                        <span class="meta-hud-val">{{ author or "Aimad Ul Islam" }}</span>
                     </div>
-                    <div class="cyber-banner-body">
-                        <span class="cyber-banner-emoji">{{ emoji or "🔬" }}</span>
-                        <div class="cyber-banner-titles">
-                            <span class="cyber-banner-eye">// TECHNICAL RESEARCH & THREAT HUNTING</span>
-                            <h1 class="cyber-banner-title">{{ title }}</h1>
-                        </div>
+                </div>
+
+                <div class="meta-hud-item">
+                    <div class="meta-hud-icon"><i class="fa-regular fa-calendar-check"></i></div>
+                    <div class="meta-hud-info">
+                        <span class="meta-hud-label">Published</span>
+                        <span class="meta-hud-val">{{ date | readableDate }}</span>
                     </div>
+                </div>
+
+                {% set updatedDate = updated or last_updated %}
+                {% if updatedDate %}
+                <div class="meta-hud-item">
+                    <div class="meta-hud-icon"><i class="fa-solid fa-rotate"></i></div>
+                    <div class="meta-hud-info">
+                        <span class="meta-hud-label">Last Updated</span>
+                        <span class="meta-hud-val">{{ updatedDate | readableDate }}</span>
+                    </div>
+                </div>
+                {% endif %}
+
+                <div class="meta-hud-item">
+                    <div class="meta-hud-icon"><i class="fa-regular fa-clock"></i></div>
+                    <div class="meta-hud-info">
+                        <span class="meta-hud-label">Est. Read Time</span>
+                        <span class="meta-hud-val">{{ readingTime or 12 }} min read</span>
+                    </div>
+                </div>
+
+                {% if views %}
+                <div class="meta-hud-item">
+                    <div class="meta-hud-icon"><i class="fa-solid fa-eye"></i></div>
+                    <div class="meta-hud-info">
+                        <span class="meta-hud-label">Reads / Views</span>
+                        <span class="meta-hud-val">{{ views }}</span>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+
+            {% if tags and tags.length > 0 %}
+            <div class="article-tags-wrapper">
+                <span class="tags-label"><i class="fa-solid fa-tags"></i> Tags:</span>
+                <div class="article-tags">
+                    {% for tag in tags %}
+                    <a href="/blog/?tag={{ tag | urlencode }}" class="tag tag-tut">#{{ tag }}</a>
+                    {% endfor %}
                 </div>
             </div>
             {% endif %}
-        </div>
+        </header>
 
-        <!-- Article Layout: Main Column + Sidebar -->
+        <!-- Article Layout: Main Column + Responsive Sidebar -->
         <div class="article-layout">
             <!-- Left Main Article Column -->
             <div class="article-main">
-                <!-- Header Info Box -->
-                <header class="article-header-card card">
-                    <div class="card-glow"></div>
-                    <div class="article-header-meta-top">
-                        <div class="article-cats">
-                            {% for cat in categories %}
-                            <a href="/blog/?cat={{ cat | urlencode }}" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> {{ cat }}</a>
-                            {% endfor %}
-                        </div>
-                        <span class="difficulty-badge {{ (difficulty or 'Intermediate') | lower }}">
-                            <i class="fa-solid fa-layer-group"></i> {{ difficulty or "Intermediate" }}
-                        </span>
-                    </div>
-
-                    <h1 class="article-main-title">{{ title }}</h1>
-
-                    {% if subtitle or excerpt %}
-                    <p class="article-subtitle">{{ subtitle or excerpt }}</p>
-                    {% endif %}
-
-                    <!-- Comprehensive HUD Metadata Grid -->
-                    <div class="article-meta-hud">
-                        <div class="meta-hud-item">
-                            <div class="meta-hud-icon"><i class="fa-solid fa-user-shield"></i></div>
-                            <div class="meta-hud-info">
-                                <span class="meta-hud-label">Author</span>
-                                <span class="meta-hud-val">{{ author or "Aimad Ul Islam" }}</span>
-                            </div>
-                        </div>
-
-                        <div class="meta-hud-item">
-                            <div class="meta-hud-icon"><i class="fa-regular fa-calendar-check"></i></div>
-                            <div class="meta-hud-info">
-                                <span class="meta-hud-label">Published</span>
-                                <span class="meta-hud-val">{{ date | readableDate }}</span>
-                            </div>
-                        </div>
-
-                        {% set updatedDate = updated or last_updated %}
-                        {% if updatedDate %}
-                        <div class="meta-hud-item">
-                            <div class="meta-hud-icon"><i class="fa-solid fa-rotate"></i></div>
-                            <div class="meta-hud-info">
-                                <span class="meta-hud-label">Updated</span>
-                                <span class="meta-hud-val">{{ updatedDate | readableDate }}</span>
-                            </div>
-                        </div>
-                        {% endif %}
-
-                        <div class="meta-hud-item">
-                            <div class="meta-hud-icon"><i class="fa-regular fa-clock"></i></div>
-                            <div class="meta-hud-info">
-                                <span class="meta-hud-label">Reading Time</span>
-                                <span class="meta-hud-val">{{ readingTime or 12 }} min read</span>
-                            </div>
-                        </div>
-
-                        {% if views %}
-                        <div class="meta-hud-item">
-                            <div class="meta-hud-icon"><i class="fa-solid fa-eye"></i></div>
-                            <div class="meta-hud-info">
-                                <span class="meta-hud-label">Views</span>
-                                <span class="meta-hud-val">{{ views }}</span>
-                            </div>
-                        </div>
-                        {% endif %}
-                    </div>
-
-                    {% if tags and tags.length > 0 %}
-                    <div class="article-tags-wrapper">
-                        <span class="tags-label"><i class="fa-solid fa-tags"></i> Tags:</span>
-                        <div class="article-tags">
-                            {% for tag in tags %}
-                            <a href="/blog/?tag={{ tag | urlencode }}" class="tag tag-tut">#{{ tag }}</a>
-                            {% endfor %}
-                        </div>
-                    </div>
-                    {% endif %}
-                </header>
-
-                <!-- Article Body -->
+                <!-- Main Markdown Article Body -->
                 <div class="article-body card">
                     <div class="card-glow"></div>
                     {{ content | safe }}
                 </div>
 
-                <!-- Social Share & Article Controls -->
+                <!-- Social Share Bar -->
                 <div class="social-share card">
                     <div class="share-header">
                         <i class="fa-solid fa-share-nodes text-cyan"></i>
@@ -196,9 +180,13 @@ layout: layouts/base.njk
                     <div class="card-glow"></div>
                     <div class="author-avatar-wrap">
                         <div class="author-avatar-inner">
+                            {% if author_avatar %}
+                            <img src="{{ author_avatar }}" alt="{{ author or 'Aimad Ul Islam' }}" class="author-avatar-img" />
+                            {% else %}
                             <i class="fa-solid fa-user-shield"></i>
+                            {% endif %}
                         </div>
-                        <span class="author-verified-dot" title="Verified Security Analyst"></span>
+                        <span class="author-verified-dot" title="Verified Security Researcher"></span>
                     </div>
                     <div class="author-info">
                         <div class="author-header">
@@ -206,10 +194,10 @@ layout: layouts/base.njk
                                 <h3 class="author-name">{{ author or "Aimad Ul Islam" }}</h3>
                                 <span class="author-role">Cybersecurity Practitioner & SOC Analyst</span>
                             </div>
-                            <a href="/#contact" class="btn btn-xs btn-outline"><i class="fa-solid fa-paper-plane"></i> Contact</a>
+                            <a href="/#contact" class="btn btn-xs btn-outline"><i class="fa-solid fa-paper-plane"></i> Contact Author</a>
                         </div>
                         <p class="author-bio">
-                            Cybersecurity professional specializing in DFIR investigations, SOC operations, SIEM automation, and virtual threat research. Documenting ethical hacking labs, network architecture, and security policies.
+                            Cybersecurity professional specializing in DFIR investigations, SOC operations, SIEM automation, and threat research. Documenting ethical hacking labs, network architecture, and security policies.
                         </p>
                         <div class="author-links">
                             <a href="https://github.com/aimadulislam" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
@@ -219,7 +207,7 @@ layout: layouts/base.njk
                     </div>
                 </div>
 
-                <!-- Navigation Between Posts -->
+                <!-- Prev / Next Post Navigation -->
                 {% set previousPost = collections.posts | getPreviousCollectionItem(page) %}
                 {% set nextPost = collections.posts | getNextCollectionItem(page) %}
                 <nav class="article-nav" aria-label="Article navigation">
@@ -241,11 +229,62 @@ layout: layouts/base.njk
                     </a>
                     {% endif %}
                 </nav>
+
+                <!-- Related Research Section -->
+                <div class="related-posts-section">
+                    <div class="related-header">
+                        <h3 class="related-title"><i class="fa-solid fa-layer-group text-cyan"></i> Recommended Writeups</h3>
+                        <a href="/blog/" class="btn btn-ghost btn-xs">View All Research <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                    <div class="related-grid">
+                        {% set relCount = 0 %}
+                        {% for post in collections.posts %}
+                            {% if relCount < 3 and post.url != page.url %}
+                            <a href="{{ post.url }}" class="card related-card">
+                                <div class="card-glow"></div>
+                                <div class="related-card-meta">
+                                    <span class="tag tag-cyber"><i class="fa-solid fa-tag"></i> {{ post.data.categories[0] or "Security" }}</span>
+                                    <span class="related-date"><i class="fa-regular fa-calendar"></i> {{ post.date | readableDate }}</span>
+                                </div>
+                                <h4 class="related-card-title">{{ post.data.title }}</h4>
+                                <p class="related-card-desc">{{ post.data.subtitle or post.data.description or post.data.excerpt or "Explore technical analysis and security research." }}</p>
+                            </a>
+                            {% set relCount = relCount + 1 %}
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Peer Review & Discussion / Comments Placeholder Section -->
+                <div class="comments-section card">
+                    <div class="card-glow"></div>
+                    <div class="comments-header">
+                        <div class="comments-title-wrap">
+                            <i class="fa-solid fa-comments text-cyan comments-icon"></i>
+                            <div>
+                                <h3 class="comments-title">Peer Review & Threat Discussion</h3>
+                                <p class="comments-sub">Join the technical conversation or share insights regarding this writeup.</p>
+                            </div>
+                        </div>
+                        <span class="hud-badge hud-badge-violet"><i class="fa-solid fa-lock"></i> Giscus / Disqus Ready</span>
+                    </div>
+                    
+                    <div id="comments-container" class="comments-placeholder">
+                        <div class="comments-placeholder-inner">
+                            <i class="fa-solid fa-terminal text-muted" style="font-size: 2.2rem; margin-bottom: 0.8rem;"></i>
+                            <p>Interactive peer discussions are powered by GitHub Discussions / Giscus.</p>
+                            <a href="https://github.com/aimadulislam" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline mt-1">
+                                <i class="fa-brands fa-github"></i> Open Discussion on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
             <!-- Right Sticky Sidebar -->
             <aside class="sidebar">
-                <!-- Interactive Table of Contents Widget -->
+                <!-- Dynamic Table of Contents Widget -->
                 <div class="sidebar-widget card" id="toc-widget">
                     <div class="card-glow"></div>
                     <div class="widget-title">
@@ -255,10 +294,29 @@ layout: layouts/base.njk
                     <nav id="toc-list" class="toc-list"></nav>
                 </div>
 
-                <!-- Related Writeups Widget -->
+                <!-- Quick Author Widget -->
                 <div class="sidebar-widget card">
                     <div class="card-glow"></div>
-                    <h3 class="widget-title"><i class="fa-solid fa-fire text-amber"></i> Related Research</h3>
+                    <h3 class="widget-title"><i class="fa-solid fa-user-shield text-cyan"></i> Research Author</h3>
+                    <div class="sidebar-author-row">
+                        <div class="author-avatar-inner" style="width:48px; height:48px; font-size:1.1rem;">
+                            {% if author_avatar %}
+                            <img src="{{ author_avatar }}" alt="{{ author or 'Aimad Ul Islam' }}" class="author-avatar-img" />
+                            {% else %}
+                            <i class="fa-solid fa-user-shield"></i>
+                            {% endif %}
+                        </div>
+                        <div>
+                            <div class="sidebar-author-name">{{ author or "Aimad Ul Islam" }}</div>
+                            <div class="sidebar-author-title">SOC Specialist & DFIR Researcher</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Writeups Widget -->
+                <div class="sidebar-widget card">
+                    <div class="card-glow"></div>
+                    <h3 class="widget-title"><i class="fa-solid fa-fire text-amber"></i> Recent Research</h3>
                     <div class="sidebar-posts">
                         {% set count = 0 %}
                         {% for post in collections.posts %}
@@ -282,29 +340,51 @@ layout: layouts/base.njk
                     </div>
                 </div>
 
-                <!-- Security Advisory / Governance Link -->
+                <!-- Categories List Widget -->
                 <div class="sidebar-widget card">
                     <div class="card-glow"></div>
-                    <h3 class="widget-title"><i class="fa-solid fa-shield-halved text-cyan"></i> Governance & Policies</h3>
-                    <p class="widget-desc">Explore responsible disclosure guidelines, download open-source scripts, or review security policies.</p>
+                    <h3 class="widget-title"><i class="fa-solid fa-folder-tree text-cyan"></i> Research Categories</h3>
+                    <div class="sidebar-cat-list">
+                        {% for cat in collections.categories %}
+                        {% set count = collections.categoryCounts[cat] or 1 %}
+                        <a href="/blog/?cat={{ cat | urlencode }}" class="sidebar-cat-item">
+                            <span><i class="fa-solid fa-folder-open text-cyan" style="font-size:0.75rem;"></i> {{ cat }}</span>
+                            <span class="sidebar-cat-count">{{ count }}</span>
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+
+                <!-- Security Advisory / Governance Center Link -->
+                <div class="sidebar-widget card">
+                    <div class="card-glow"></div>
+                    <h3 class="widget-title"><i class="fa-solid fa-shield-halved text-cyan"></i> Security Center</h3>
+                    <p class="widget-desc">Review security disclosures, download vulnerability advisories, or inspect open source tooling.</p>
                     <a href="/resources/" class="btn btn-sm btn-outline btn-full mt-1">
-                        <i class="fa-solid fa-folder-tree"></i> Security Center
+                        <i class="fa-solid fa-folder-open"></i> Governance & Policies
                     </a>
                 </div>
 
-                <!-- Newsletter / Threat Intel Alerts -->
+                <!-- Newsletter / Threat Alerts Form -->
                 <div class="sidebar-widget card">
                     <div class="card-glow"></div>
-                    <h3 class="widget-title"><i class="fa-solid fa-bell text-violet"></i> Security Updates</h3>
-                    <p class="widget-desc">Get notified when new writeups, exploit analysis, or home lab guides are published.</p>
-                    <form class="newsletter-form mt-1" onsubmit="event.preventDefault(); alert('Subscribed! Thank you for following the security research feed.'); this.reset();">
-                        <input type="email" class="newsletter-input" placeholder="security@domain.com" required aria-label="Email address for security updates" />
+                    <h3 class="widget-title"><i class="fa-solid fa-bell text-violet"></i> Security Alerts</h3>
+                    <p class="widget-desc">Subscribe for instant notifications when new security writeups or lab walkthroughs are released.</p>
+                    <form class="newsletter-form mt-1" onsubmit="event.preventDefault(); alert('Subscribed to Security Alerts feed!'); this.reset();">
+                        <input type="email" class="newsletter-input" placeholder="secops@domain.com" required aria-label="Email address for security updates" />
                         <button type="submit" class="newsletter-btn"><i class="fa-solid fa-paper-plane"></i> Subscribe</button>
                     </form>
                 </div>
             </aside>
         </div>
     </div>
+</div>
+
+<!-- Lightbox Modal Overlay for Images -->
+<div id="imageLightbox" class="lightbox-modal" style="display:none;" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightboxImg" class="lightbox-content" alt="Enlarged figure view" />
+    <div id="lightboxCaption" class="lightbox-caption"></div>
 </div>
 
 <script>
@@ -371,6 +451,24 @@ layout: layouts/base.njk
                     });
                 });
             });
+
+            // Click-to-zoom Lightbox for Article Images
+            const images = articleBody.querySelectorAll('img');
+            images.forEach(img => {
+                img.style.cursor = 'zoom-in';
+                img.addEventListener('click', () => {
+                    const lightbox = document.getElementById('imageLightbox');
+                    const lightboxImg = document.getElementById('lightboxImg');
+                    const lightboxCaption = document.getElementById('lightboxCaption');
+                    if (lightbox && lightboxImg) {
+                        lightbox.style.display = 'flex';
+                        lightboxImg.src = img.src;
+                        if (lightboxCaption) {
+                            lightboxCaption.textContent = img.alt || img.title || 'Image view';
+                        }
+                    }
+                });
+            });
         }
 
         // 3. Dynamic Table of Contents Generator + Live Scroll Spy Highlight
@@ -403,7 +501,7 @@ layout: layouts/base.njk
                         e.preventDefault();
                         const target = document.getElementById(h.id);
                         if (target) {
-                            const offset = 90;
+                            const offset = 95;
                             const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
                             window.scrollTo({ top: targetPosition, behavior: 'smooth' });
                             history.pushState(null, null, '#' + h.id);
@@ -418,7 +516,7 @@ layout: layouts/base.njk
                 // Scroll Spy for TOC active link
                 const observerOptions = {
                     root: null,
-                    rootMargin: '-100px 0px -66% 0px',
+                    rootMargin: '-100px 0px -65% 0px',
                     threshold: 0
                 };
 
@@ -452,4 +550,9 @@ layout: layouts/base.njk
             if (progress) progress.style.width = scrolled + '%';
         });
     });
+
+    function closeLightbox() {
+        const lightbox = document.getElementById('imageLightbox');
+        if (lightbox) lightbox.style.display = 'none';
+    }
 </script>
