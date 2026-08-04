@@ -28,8 +28,11 @@ if (process.env.NODE_ENV !== "production") {
 app.use(express.static(sitePath));
 
 app.use((req, res) => {
+  const notFoundHtml = path.join(sitePath, "404.html");
   const notFoundPath = path.join(sitePath, "404", "index.html");
-  if (fs.existsSync(notFoundPath)) {
+  if (fs.existsSync(notFoundHtml)) {
+    res.status(404).sendFile(notFoundHtml);
+  } else if (fs.existsSync(notFoundPath)) {
     res.status(404).sendFile(notFoundPath);
   } else {
     res.status(404).send("404 - Page Not Found");
