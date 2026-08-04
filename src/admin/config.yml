@@ -902,27 +902,34 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
       - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Updated Date", name: "updated", widget: "datetime", required: false }
-      - { label: "Author", name: "author", widget: "string", default: "Aimad Ul Islam" }
-      - { label: "Excerpt / Summary", name: "excerpt", widget: "text" }
+      - { label: "Last Updated Date", name: "updated", widget: "datetime", required: false }
+      - { label: "Author Name", name: "author", widget: "string", default: "Aimad Ul Islam" }
+      - { label: "Author Avatar / Photo", name: "author_avatar", widget: "image", required: false }
+      - { label: "Summary / Excerpt", name: "excerpt", widget: "text" }
       - { label: "Thumbnail Image", name: "thumbnail", widget: "image", required: false }
-      - { label: "Featured / Hero Image", name: "image", widget: "image", required: false }
+      - { label: "Cover / Featured Image", name: "image", widget: "image", required: false }
       - { label: "Image Alt Text", name: "imageAlt", widget: "string", required: false }
       - { label: "Emoji / Icon", name: "emoji", widget: "string", required: false }
       - { label: "Difficulty Level", name: "difficulty", widget: "select", options: ["Beginner", "Intermediate", "Advanced", "Expert"], default: "Intermediate" }
       - { label: "Categories", name: "categories", widget: "list" }
       - { label: "Tags", name: "tags", widget: "list" }
-      - { label: "Status", name: "status", widget: "select", options: ["Published", "Draft", "Scheduled"], default: "Published" }
-      - { label: "Featured Article?", name: "featured", widget: "boolean", default: false }
-      - { label: "Pinned to Top?", name: "pinned", widget: "boolean", default: false }
+      - { label: "Draft/Published Status", name: "status", widget: "select", options: ["Published", "Draft", "Scheduled"], default: "Published" }
+      - { label: "Featured Article Toggle", name: "featured", widget: "boolean", default: false }
+      - { label: "Pinned to Top Toggle", name: "pinned", widget: "boolean", default: false }
       - { label: "Reading Time (minutes)", name: "readingTime", widget: "number", value_type: "int", required: false }
       - { label: "Estimated Views Count", name: "views", widget: "number", value_type: "int", default: 120, required: false }
       - { label: "Estimated Likes Count", name: "likes", widget: "number", value_type: "int", default: 24, required: false }
+      - { label: "GitHub Repository Link", name: "github_link", widget: "string", required: false }
+      - { label: "Download URL / PDF Link", name: "download_url", widget: "file", required: false }
+      - { label: "External Resources & Links", name: "external_resources", widget: "list", required: false, fields: [{ label: "Resource Title", name: "title", widget: "string" }, { label: "URL", name: "url", widget: "string" }] }
+      - { label: "Gallery Images", name: "gallery", widget: "list", required: false, field: { label: "Image", widget: "image" } }
       - { label: "SEO Title", name: "seo_title", widget: "string", required: false }
       - { label: "SEO Description", name: "seo_description", widget: "text", required: false }
+      - { label: "Open Graph Image", name: "og_image", widget: "image", required: false }
       - { label: "Canonical URL", name: "canonical_url", widget: "string", required: false }
       - { label: "Related Tools / Hardware", name: "related_tools", widget: "list", required: false }
       - { label: "Related Projects", name: "related_projects", widget: "list", required: false }
       - { label: "Related Labs", name: "related_labs", widget: "list", required: false }
-      - { label: "Body", name: "body", widget: "markdown" }
+      - { label: "Related Posts Slugs / Titles", name: "related_posts", widget: "list", required: false }
+      - { label: "Article Content (Markdown / HTML)", name: "body", widget: "markdown" }
 

@@ -19,6 +19,12 @@ layout: layouts/base.njk
             </nav>
 
             <div class="article-quick-tools">
+                {% if github_link %}
+                <a href="{{ github_link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-xs" title="GitHub Repository"><i class="fa-brands fa-github"></i> Repository</a>
+                {% endif %}
+                {% if download_url %}
+                <a href="{{ download_url }}" download class="btn btn-cyan btn-xs" title="Download Resource / PDF"><i class="fa-solid fa-download"></i> Assets</a>
+                {% endif %}
                 <a href="/blog/" class="btn btn-ghost btn-xs"><i class="fa-solid fa-arrow-left"></i> All Writeups</a>
                 <button class="btn btn-ghost btn-xs copy-url-btn" data-url="https://aimadulislam.dpdns.org{{ page.url }}" title="Copy Article Link">
                     <i class="fa-solid fa-link"></i> <span class="btn-text">Share</span>
@@ -148,6 +154,39 @@ layout: layouts/base.njk
                 <div class="article-body card">
                     <div class="card-glow"></div>
                     {{ content | safe }}
+
+                    {% if gallery and gallery.length > 0 %}
+                    <div class="article-gallery-section" style="margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+                        <h3 style="font-size:1.15rem; color:var(--white); margin-bottom:1.2rem; display:flex; align-items:center; gap:0.6rem; font-family:'Space Grotesk',sans-serif;">
+                            <i class="fa-solid fa-images text-cyan"></i> Research Evidence & Figure Gallery
+                        </h3>
+                        <div class="gallery-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:1rem;">
+                            {% for img in gallery %}
+                            <div class="gallery-item card" style="overflow:hidden; border-radius:8px; cursor:zoom-in; border:1px solid var(--border2); background:rgba(10,22,40,0.6);" onclick="openLightboxImage('{{ img }}', 'Research Evidence Figure')">
+                                <img src="{{ img }}" alt="Research Evidence Figure" style="width:100%; height:140px; object-fit:cover; transition:transform 0.3s;" />
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    {% if external_resources and external_resources.length > 0 %}
+                    <div class="article-references-section" style="margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid var(--border);">
+                        <h3 style="font-size:1.15rem; color:var(--white); margin-bottom:1.2rem; display:flex; align-items:center; gap:0.6rem; font-family:'Space Grotesk',sans-serif;">
+                            <i class="fa-solid fa-book-bookmark text-cyan"></i> External Resources & Citations
+                        </h3>
+                        <ul class="references-list" style="list-style:none; padding:0; display:flex; flex-direction:column; gap:0.6rem;">
+                            {% for res in external_resources %}
+                            <li style="padding:0.75rem 1.2rem; background:rgba(10,22,40,0.6); border:1px solid var(--border2); border-radius:8px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:0.6rem;">
+                                <span style="color:var(--white); font-weight:600; font-size:0.92rem;"><i class="fa-solid fa-link text-cyan" style="font-size:0.85rem; margin-right:0.4rem;"></i> {{ res.title }}</span>
+                                <a href="{{ res.url }}" target="_blank" rel="noopener noreferrer" class="btn btn-xs btn-outline" style="font-size:0.78rem;">
+                                    <i class="fa-solid fa-arrow-up-right-from-square"></i> Open Resource
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    {% endif %}
                 </div>
 
                 <!-- Social Share Bar -->

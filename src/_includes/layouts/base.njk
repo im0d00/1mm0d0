@@ -24,12 +24,53 @@
     {% endif %}
     <link rel="manifest" href="/manifest.json">
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="{% if title %}{{ title }} | Aimad Ul Islam{% else %}{{ settings.portfolio_name or 'Aimad Ul Islam' }}{% endif %}">
-    <meta property="og:description" content="{{ description or excerpt or summary or settings.website_description }}">
-    <meta property="og:type" content="website">
+    <!-- Open Graph & Meta -->
+    <meta property="og:title" content="{% if seo_title %}{{ seo_title }}{% elif title %}{{ title }} | Aimad Ul Islam{% else %}{{ settings.portfolio_name or 'Aimad Ul Islam' }}{% endif %}">
+    <meta property="og:description" content="{{ seo_description or description or excerpt or summary or settings.website_description }}">
+    <meta property="og:type" content="{% if layout == 'layouts/post.njk' %}article{% else %}website{% endif %}">
     <meta property="og:url" content="https://aimadulislam.dpdns.org{{ page.url }}">
-    <meta property="og:image" content="{{ featured_image or image or brand.og_image or settings.og_image or 'https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg' }}">
+    <meta property="og:image" content="{{ og_image or featured_image or image or thumbnail or brand.og_image or settings.og_image or 'https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg' }}">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% if seo_title %}{{ seo_title }}{% elif title %}{{ title }} | Aimad Ul Islam{% else %}{{ settings.portfolio_name or 'Aimad Ul Islam' }}{% endif %}">
+    <meta name="twitter:description" content="{{ seo_description or description or excerpt or summary or settings.website_description }}">
+    <meta name="twitter:image" content="{{ og_image or featured_image or image or thumbnail or brand.og_image or settings.og_image or 'https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg' }}">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="{{ canonical_url or ('https://aimadulislam.dpdns.org' + page.url) }}">
+
+    <!-- Schema.org JSON-LD Structured Data -->
+    {% if layout == "layouts/post.njk" %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": {{ (title or "") | dump | safe }},
+      "description": {{ (seo_description or description or excerpt or summary or "") | dump | safe }},
+      "image": {{ (og_image or featured_image or image or thumbnail or brand.og_image or settings.og_image or "https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg") | dump | safe }},
+      "author": {
+        "@type": "Person",
+        "name": {{ (author or settings.author or "Aimad Ul Islam") | dump | safe }}
+      },
+      "datePublished": "{{ date | htmlDateString }}",
+      "dateModified": "{{ (updated or date) | htmlDateString }}",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://aimadulislam.dpdns.org{{ page.url }}"
+      }
+    }
+    </script>
+    {% else %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": {{ (settings.portfolio_name or "Aimad Ul Islam") | dump | safe }},
+      "url": "https://aimadulislam.dpdns.org/"
+    }
+    </script>
+    {% endif %}
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
