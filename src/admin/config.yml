@@ -110,7 +110,7 @@ collections:
           - name: "section_order"
             label: "Homepage Section Order"
             widget: "list"
-            field: { label: "Section ID", widget: "string" }
+            field: { label: "Section ID", name: "section_id", widget: "string" }
           - name: "sections"
             label: "Section Settings & Configurations"
             widget: "object"
@@ -557,9 +557,9 @@ collections:
               - { label: "Documentation Link / Summary", name: "documentation", widget: "string", required: false }
               - { label: "Report Title / Ref", name: "report", widget: "string", required: false }
               - { label: "PDF File / Link", name: "pdf", widget: "file", required: false }
-              - { label: "Screenshots", name: "screenshots", widget: "list", field: { label: "Screenshot", widget: "image" }, required: false }
+              - { label: "Screenshots", name: "screenshots", widget: "list", field: { label: "Screenshot", name: "image", widget: "image" }, required: false }
               - { label: "Gallery Images", name: "gallery", widget: "list", field: { label: "Image", name: "image", widget: "image" }, required: false }
-              - { label: "Videos", name: "videos", widget: "list", field: { label: "Video URL", widget: "string" }, required: false }
+              - { label: "Videos", name: "videos", widget: "list", field: { label: "Video URL", name: "url", widget: "string" }, required: false }
 
   - name: "labs_collection"
     label: "Labs & CTFs"
@@ -577,7 +577,7 @@ collections:
               - { label: "Platform", name: "platform", widget: "select", options: ["Hack The Box", "TryHackMe", "Blue Team Labs", "PortSwigger", "OverTheWire", "PicoCTF", "Custom Home Lab"] }
               - { label: "Description", name: "description", widget: "text" }
               - { label: "Tools Used", name: "tools", widget: "list" }
-              - { label: "Screenshots", name: "screenshots", widget: "list", field: { label: "Image", widget: "image" }, required: false }
+              - { label: "Screenshots", name: "screenshots", widget: "list", field: { label: "Image", name: "image", widget: "image" }, required: false }
               - { label: "Write-up Link", name: "writeup_url", widget: "string", required: false }
               - { label: "Tags", name: "tags", widget: "list" }
 
@@ -839,7 +839,7 @@ collections:
       - { label: "Live Demo URL", name: "live_demo", widget: "string", required: false, pattern: ['^https?://.*', 'Must be a valid URL'] }
       - { label: "Documentation Link", name: "documentation", widget: "string", required: false }
       - { label: "PDF Report Download URL", name: "pdf", widget: "string", required: false }
-      - { label: "Screenshots", name: "screenshots", widget: "list", field: { label: "Screenshot", widget: "image" }, required: false }
+      - { label: "Screenshots", name: "screenshots", widget: "list", field: { label: "Screenshot", name: "image", widget: "image" }, required: false }
       - { label: "Lessons Learned", name: "lessons_learned", widget: "text", required: false }
       - { label: "Future Enhancements", name: "future_improvements", widget: "text", required: false }
       - { label: "SEO Title", name: "seo_title", widget: "string", required: false }
@@ -942,7 +942,7 @@ collections:
       - { label: "GitHub Repository Link", name: "github_link", widget: "string", required: false }
       - { label: "Download URL / PDF Link", name: "download_url", widget: "file", required: false }
       - { label: "External Resources & Links", name: "external_resources", widget: "list", required: false, fields: [{ label: "Resource Title", name: "title", widget: "string" }, { label: "URL", name: "url", widget: "string" }] }
-      - { label: "Gallery Images", name: "gallery", widget: "list", required: false, field: { label: "Image", widget: "image" } }
+      - { label: "Gallery Images", name: "gallery", widget: "list", required: false, field: { label: "Image", name: "image", widget: "image" } }
       - { label: "SEO Title", name: "seo_title", widget: "string", required: false }
       - { label: "SEO Description", name: "seo_description", widget: "text", required: false }
       - { label: "Open Graph Image", name: "og_image", widget: "image", required: false }
@@ -1033,7 +1033,7 @@ collections:
             widget: "object"
             fields:
               - { label: "Gallery Title", name: "title", widget: "string", required: false }
-              - { label: "Images", name: "images", widget: "list", field: { label: "Image", widget: "image" } }
+              - { label: "Images", name: "images", widget: "list", field: { label: "Image", name: "image", widget: "image" } }
           - label: "Video Block"
             name: "video_block"
             widget: "object"
