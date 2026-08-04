@@ -18,7 +18,6 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy("src/favicon.ico");
   eleventyConfig.addPassthroughCopy("src/robots.txt");
   eleventyConfig.addPassthroughCopy("src/CNAME");
-  eleventyConfig.addPassthroughCopy("src/manifest.json");
   eleventyConfig.addPassthroughCopy("src/sw.js");
   eleventyConfig.addPassthroughCopy("src/humans.txt");
   eleventyConfig.addPassthroughCopy("src/.well-known");
@@ -72,6 +71,11 @@ module.exports = function(eleventyConfig) {
   // Collections
   eleventyConfig.addCollection("posts", function(collectionApi) {
     return collectionApi.getFilteredByGlob("src/posts/*.md").reverse();
+  });
+
+  eleventyConfig.addCollection("featuredPosts", function(collectionApi) {
+    const posts = collectionApi.getFilteredByGlob("src/posts/*.md").reverse();
+    return posts.filter(post => post.data && (post.data.featured === true || post.data.pinned === true));
   });
 
   eleventyConfig.addCollection("projects", function(collectionApi) {

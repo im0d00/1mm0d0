@@ -5,7 +5,7 @@ description: Comprehensive directory of cybersecurity engineering projects, DFIR
 ---
 
 <!-- HERO SECTION -->
-<section id="blog-hero" aria-labelledby="projects-hero-title" style="padding-bottom: 3rem;">
+<section id="blog-hero" aria-labelledby="projects-hero-title">
   <canvas id="blog-hero-canvas" aria-hidden="true"></canvas>
   <div class="blog-hero-inner container">
     <div class="blog-hero-eye"><i class="fa-solid fa-code-branch"></i> Security Engineering & Development Vault</div>
@@ -15,7 +15,7 @@ description: Comprehensive directory of cybersecurity engineering projects, DFIR
     <p class="blog-hero-sub">Hands-on security engineering, custom threat parsers, SIEM automation scripts, packet analysis engines, and enterprise virtual network setups.</p>
 
     <!-- Quick Stats Bar -->
-    <div class="sidebar-stats-grid" style="grid-template-columns: repeat(4, 1fr); max-width: 800px; margin: 1.5rem auto 2rem auto;">
+    <div class="sidebar-stats-grid">
       <div class="s-stat-box card">
         <div class="s-stat-val" id="stat-proj-count">{{ projects.items.length + collections.projects.length }}</div>
         <div class="s-stat-lbl">Projects</div>
@@ -29,7 +29,7 @@ description: Comprehensive directory of cybersecurity engineering projects, DFIR
         <div class="s-stat-lbl">Tools & Frameworks</div>
       </div>
       <div class="s-stat-box card">
-        <div class="s-stat-val" style="color: var(--green);">Active</div>
+        <div class="s-stat-val text-cyan">Active</div>
         <div class="s-stat-lbl">Status</div>
       </div>
     </div>
@@ -120,7 +120,7 @@ description: Comprehensive directory of cybersecurity engineering projects, DFIR
       <span class="posts-count-badge" id="projects-count">Displaying All Projects</span>
     </div>
 
-    <div id="projects-grid" class="articles-grid" style="grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));">
+    <div id="projects-grid" class="articles-grid">
       
       <!-- Data items from JSON -->
       {% for proj in projects.items %}
@@ -132,7 +132,7 @@ description: Comprehensive directory of cybersecurity engineering projects, DFIR
                data-difficulty="{{ (proj.difficulty or 'intermediate') | lower }}"
                data-status="{{ (proj.status or 'completed') | lower }}">
         <div class="card-glow"></div>
-        <div class="article-card-img-wrap" style="height: 190px;">
+        <div class="article-card-img-wrap" style="height: 180px;">
           {% if proj.featured_image %}
           <img class="article-card-img" src="{{ proj.featured_image }}" alt="{{ proj.title }}" loading="lazy"/>
           {% else %}
@@ -146,7 +146,7 @@ description: Comprehensive directory of cybersecurity engineering projects, DFIR
         <div class="article-card-body">
           <div class="article-card-tags">
             <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> {{ proj.category }}</span>
-            <span class="tag tag-tut" style="color: var(--green); border-color: rgba(0,255,136,0.3);"><i class="fa-solid fa-circle-check"></i> {{ proj.status or "Completed" }}</span>
+            <span class="tag tag-tut text-cyan"><i class="fa-solid fa-circle-check"></i> {{ proj.status or "Completed" }}</span>
           </div>
 
           <h3 class="article-card-title">{{ proj.title }}</h3>
@@ -185,7 +185,7 @@ description: Comprehensive directory of cybersecurity engineering projects, DFIR
                data-status="{{ (proj.data.status or 'completed') | lower }}"
                onclick="window.location='{{ proj.url }}'">
         <div class="card-glow"></div>
-        <div class="article-card-img-wrap" style="height: 190px;">
+        <div class="article-card-img-wrap" style="height: 180px;">
           {% if proj.data.featured_image or proj.data.image %}
           <img class="article-card-img" src="{{ proj.data.featured_image or proj.data.image }}" alt="{{ proj.data.title }}" loading="lazy"/>
           {% else %}
@@ -199,7 +199,7 @@ description: Comprehensive directory of cybersecurity engineering projects, DFIR
         <div class="article-card-body">
           <div class="article-card-tags">
             <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> {{ proj.data.category }}</span>
-            <span class="tag tag-tut" style="color: var(--green); border-color: rgba(0,255,136,0.3);"><i class="fa-solid fa-circle-check"></i> {{ proj.data.status or "Completed" }}</span>
+            <span class="tag tag-tut text-cyan"><i class="fa-solid fa-circle-check"></i> {{ proj.data.status or "Completed" }}</span>
           </div>
 
           <h3 class="article-card-title">{{ proj.data.title }}</h3>
@@ -229,6 +229,11 @@ description: Comprehensive directory of cybersecurity engineering projects, DFIR
       <p>Try clearing difficulty filters, clearing search inputs, or selecting another technical category.</p>
       <button class="btn btn-cyan mt-3" onclick="resetProjSearch()"><i class="fa-solid fa-rotate"></i> Reset All Filters</button>
     </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination-container" id="proj-pagination-controls">
+      <!-- Dynamically rendered -->
+    </div>
   </section>
 </main>
 
@@ -239,20 +244,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const statusSelect = document.getElementById("status-select");
   const sortSelect = document.getElementById("sort-select");
   const catBtns = document.querySelectorAll(".cat-btn");
+  const projectsGrid = document.getElementById("projects-grid");
   const cards = Array.from(document.querySelectorAll(".project-card"));
   const countBadge = document.getElementById("projects-count");
   const noResults = document.getElementById("no-proj-results");
+  const paginationControls = document.getElementById("proj-pagination-controls");
 
   let currentSearch = "";
   let currentCat = "all";
   let currentDiff = "all";
   let currentStatus = "all";
   let currentSort = "newest";
+  let currentPage = 1;
+  const itemsPerPage = 6;
 
   function filterProjects() {
-    let visibleCount = 0;
-
-    cards.forEach(card => {
+    let filtered = cards.filter(card => {
       const title = card.getAttribute("data-title") || "";
       const desc = card.getAttribute("data-description") || "";
       const cat = card.getAttribute("data-category") || "";
@@ -270,21 +277,75 @@ document.addEventListener("DOMContentLoaded", () => {
       const matchDiff = currentDiff === "all" || diff === currentDiff.toLowerCase();
       const matchStatus = currentStatus === "all" || status === currentStatus.toLowerCase();
 
-      if (matchSearch && matchCat && matchDiff && matchStatus) {
-        card.style.display = "flex";
-        visibleCount++;
-      } else {
-        card.style.display = "none";
-      }
+      return matchSearch && matchCat && matchDiff && matchStatus;
     });
 
-    if (countBadge) countBadge.textContent = `${visibleCount} Projects Displayed`;
-    if (noResults) noResults.style.display = visibleCount === 0 ? "block" : "none";
+    // Sort
+    filtered.sort((a, b) => {
+      if (currentSort === "title") {
+        return (a.getAttribute("data-title") || "").localeCompare(b.getAttribute("data-title") || "");
+      } else if (currentSort === "difficulty") {
+        return (a.getAttribute("data-difficulty") || "").localeCompare(b.getAttribute("data-difficulty") || "");
+      }
+      return 0;
+    });
+
+    if (countBadge) countBadge.textContent = `${filtered.length} Projects Displayed`;
+
+    cards.forEach(c => c.style.display = "none");
+
+    if (filtered.length === 0) {
+      if (noResults) noResults.style.display = "block";
+      if (paginationControls) paginationControls.innerHTML = "";
+      return;
+    } else {
+      if (noResults) noResults.style.display = "none";
+    }
+
+    const totalPages = Math.ceil(filtered.length / itemsPerPage);
+    if (currentPage > totalPages) currentPage = 1;
+
+    const startIdx = (currentPage - 1) * itemsPerPage;
+    const endIdx = startIdx + itemsPerPage;
+    const pageItems = filtered.slice(startIdx, endIdx);
+
+    pageItems.forEach(item => {
+      item.style.display = "flex";
+      projectsGrid.appendChild(item);
+    });
+
+    renderPagination(totalPages);
   }
+
+  function renderPagination(totalPages) {
+    if (!paginationControls || totalPages <= 1) {
+      if (paginationControls) paginationControls.innerHTML = "";
+      return;
+    }
+
+    let html = `<div class="cyber-pagination">`;
+    html += `<button class="page-btn ${currentPage === 1 ? 'disabled' : ''}" onclick="changeProjPage(${currentPage - 1})"><i class="fa-solid fa-chevron-left"></i> Prev</button>`;
+
+    for (let i = 1; i <= totalPages; i++) {
+      html += `<button class="page-num ${i === currentPage ? 'active' : ''}" onclick="changeProjPage(${i})">${i}</button>`;
+    }
+
+    html += `<button class="page-btn ${currentPage === totalPages ? 'disabled' : ''}" onclick="changeProjPage(${currentPage + 1})">Next <i class="fa-solid fa-chevron-right"></i></button>`;
+    html += `</div>`;
+
+    paginationControls.innerHTML = html;
+  }
+
+  window.changeProjPage = (page) => {
+    currentPage = page;
+    filterProjects();
+    document.getElementById("projects-section").scrollIntoView({ behavior: 'smooth' });
+  };
 
   if (searchInput) {
     searchInput.addEventListener("input", (e) => {
       currentSearch = e.target.value.toLowerCase().trim();
+      currentPage = 1;
       filterProjects();
     });
   }
@@ -292,6 +353,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (diffSelect) {
     diffSelect.addEventListener("change", (e) => {
       currentDiff = e.target.value;
+      currentPage = 1;
       filterProjects();
     });
   }
@@ -299,6 +361,15 @@ document.addEventListener("DOMContentLoaded", () => {
   if (statusSelect) {
     statusSelect.addEventListener("change", (e) => {
       currentStatus = e.target.value;
+      currentPage = 1;
+      filterProjects();
+    });
+  }
+
+  if (sortSelect) {
+    sortSelect.addEventListener("change", (e) => {
+      currentSort = e.target.value;
+      currentPage = 1;
       filterProjects();
     });
   }
@@ -308,6 +379,7 @@ document.addEventListener("DOMContentLoaded", () => {
       catBtns.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
       currentCat = btn.getAttribute("data-cat");
+      currentPage = 1;
       filterProjects();
     });
   });
@@ -316,15 +388,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (searchInput) searchInput.value = "";
     if (diffSelect) diffSelect.value = "all";
     if (statusSelect) statusSelect.value = "all";
+    if (sortSelect) sortSelect.value = "newest";
     currentSearch = "";
     currentCat = "all";
     currentDiff = "all";
     currentStatus = "all";
+    currentSort = "newest";
     catBtns.forEach(b => {
       if (b.getAttribute("data-cat") === "all") b.classList.add("active");
       else b.classList.remove("active");
     });
+    currentPage = 1;
     filterProjects();
   };
+
+  filterProjects();
 });
 </script>

@@ -49,6 +49,7 @@ function updateThemeIcon(theme) {
 
 function initThemeToggle() {
     const savedTheme = localStorage.getItem('aimad-theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', savedTheme);
     updateThemeIcon(savedTheme);
 }
 

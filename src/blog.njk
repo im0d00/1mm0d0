@@ -69,7 +69,7 @@ description: Technical articles, DFIR research, SOC playbooks, Linux tutorials, 
       <i class="fa-solid fa-star text-cyan"></i> Featured Technical Writeup
     </div>
     <div id="featured-post-wrap">
-      {% set featuredPost = collections.posts | head(1) | first %}
+      {% set featuredPost = collections.featuredPosts | first or collections.posts | head(1) | first %}
       {% if featuredPost %}
       <article class="featured-post card" onclick="window.location='{{ featuredPost.url }}'">
         <div class="card-glow"></div>

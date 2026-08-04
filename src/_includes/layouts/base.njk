@@ -7,12 +7,29 @@
     <meta name="description" content="{{ description or excerpt or summary or settings.website_description or 'Cybersecurity Professional, SOC Specialist & Technical Researcher' }}">
     <meta name="theme-color" content="#080C1A">
     
+    <!-- Dynamic Favicons & Icons -->
+    {% if brand.favicon_ico or settings.favicon %}
+    <link rel="icon" type="image/x-icon" href="{{ brand.favicon_ico or settings.favicon }}">
+    {% else %}
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    {% endif %}
+    {% if brand.favicon_png %}
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ brand.favicon_png }}">
+    {% endif %}
+    {% if brand.favicon_svg %}
+    <link rel="icon" type="image/svg+xml" href="{{ brand.favicon_svg }}">
+    {% endif %}
+    {% if brand.apple_touch_icon %}
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ brand.apple_touch_icon }}">
+    {% endif %}
+    <link rel="manifest" href="/manifest.json">
+
     <!-- Open Graph -->
     <meta property="og:title" content="{% if title %}{{ title }} | Aimad Ul Islam{% else %}{{ settings.portfolio_name or 'Aimad Ul Islam' }}{% endif %}">
     <meta property="og:description" content="{{ description or excerpt or summary or settings.website_description }}">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://aimadulislam.dpdns.org{{ page.url }}">
-    <meta property="og:image" content="{{ featured_image or image or settings.og_image or 'https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg' }}">
+    <meta property="og:image" content="{{ featured_image or image or brand.og_image or settings.og_image or 'https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg' }}">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -29,10 +46,11 @@
     <script>
       (function() {
         var localTheme = localStorage.getItem('aimad-theme');
-        if (localTheme === 'light' || (!localTheme && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+        if (localTheme === 'light') {
           document.documentElement.setAttribute('data-theme', 'light');
         } else {
           document.documentElement.setAttribute('data-theme', 'dark');
+          localStorage.setItem('aimad-theme', 'dark');
         }
       })();
     </script>

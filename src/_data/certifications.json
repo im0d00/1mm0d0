@@ -6,10 +6,14 @@
       "badge_image": "https://img.shields.io/badge/Cisco-Learn--A--Thon-00B4FF?style=for-the-badge&logo=cisco",
       "provider_logo": "fa-solid fa-award",
       "credential_id": "CSCO-LAT-2026-991A",
+      "credential_url": "https://www.credly.com",
       "verification_url": "https://netacad.com",
       "issue_date": "2026-03-01",
       "expiration_date": "Never",
-      "status": "Active"
+      "status": "Verified",
+      "certificate_pdf": "/downloads/cisco-learnathon-2026.pdf",
+      "skill_tags": ["Networking", "Cybersecurity", "Cisco NetAcad"],
+      "description": "Recognized for outstanding technical achievement in Cisco's global Learn-A-Thon competition."
     },
     {
       "name": "Linux Essentials Certification",
@@ -17,10 +21,14 @@
       "badge_image": "https://img.shields.io/badge/Linux-Essentials-00FF88?style=for-the-badge&logo=linux",
       "provider_logo": "fa-brands fa-linux",
       "credential_id": "CSCO-LNX-8821B",
+      "credential_url": "https://www.credly.com",
       "verification_url": "https://netacad.com",
       "issue_date": "2026-01-15",
       "expiration_date": "Never",
-      "status": "Active"
+      "status": "Verified",
+      "certificate_pdf": "/downloads/linux-essentials.pdf",
+      "skill_tags": ["Linux Administration", "Bash Scripting", "System Administration"],
+      "description": "Demonstrated core competency in Linux command-line operations, permissions, and system administration."
     },
     {
       "name": "Ethical Hacker Certification",
@@ -28,10 +36,14 @@
       "badge_image": "https://img.shields.io/badge/Cisco-Ethical_Hacker-7C3AED?style=for-the-badge&logo=cisco",
       "provider_logo": "fa-solid fa-user-ninja",
       "credential_id": "CSCO-EH-3301C",
+      "credential_url": "https://www.credly.com",
       "verification_url": "https://netacad.com",
       "issue_date": "2026-02-10",
       "expiration_date": "Never",
-      "status": "Active"
+      "status": "Verified",
+      "certificate_pdf": "/downloads/cisco-ethical-hacker.pdf",
+      "skill_tags": ["Ethical Hacking", "Penetration Testing", "Vulnerability Assessment"],
+      "description": "Comprehensive training in offensive security methodologies, reconnaissance, exploitation, and counter-measures."
     },
     {
       "name": "Digital Forensics & Incident Response (DFIR)",
@@ -39,10 +51,14 @@
       "badge_image": "https://img.shields.io/badge/BlueCape-DFIR-00D4FF?style=for-the-badge",
       "provider_logo": "fa-solid fa-microscope",
       "credential_id": "BCS-DFIR-2026-04",
+      "credential_url": "https://bluecapesecurity.com",
       "verification_url": "https://bluecapesecurity.com",
       "issue_date": "2026-04-01",
       "expiration_date": "Never",
-      "status": "Active"
+      "status": "Verified",
+      "certificate_pdf": "/downloads/bluecape-dfir.pdf",
+      "skill_tags": ["DFIR", "Memory Forensics", "Log Analysis", "Volatilty"],
+      "description": "Hands-on incident response methodology, disk and RAM artifact acquisition, timeline analysis, and threat containment."
     },
     {
       "name": "Mastercard Cybersecurity Job Simulation",
@@ -50,10 +66,14 @@
       "badge_image": "https://img.shields.io/badge/Mastercard-Cybersecurity-FFB700?style=for-the-badge&logo=mastercard",
       "provider_logo": "fa-solid fa-shield-cat",
       "credential_id": "FORAGE-MC-7729",
+      "credential_url": "https://theforage.com",
       "verification_url": "https://theforage.com",
       "issue_date": "2025-11-20",
       "expiration_date": "Never",
-      "status": "Completed"
+      "status": "Completed",
+      "certificate_pdf": "/downloads/mastercard-forage.pdf",
+      "skill_tags": ["Security Analysis", "Phishing Analysis", "Enterprise Defense"],
+      "description": "Completed practical tasks in identifying phishing campaigns, analyzing technical security threats, and recommending security controls."
     },
     {
       "name": "Networking Essentials Certification",
@@ -61,10 +81,14 @@
       "badge_image": "https://img.shields.io/badge/Cisco-Networking_Essentials-00D4FF?style=for-the-badge&logo=cisco",
       "provider_logo": "fa-solid fa-network-wired",
       "credential_id": "CSCO-NET-1029D",
+      "credential_url": "https://netacad.com",
       "verification_url": "https://netacad.com",
       "issue_date": "2025-08-14",
       "expiration_date": "Never",
-      "status": "Active"
+      "status": "Verified",
+      "certificate_pdf": "/downloads/cisco-networking-essentials.pdf",
+      "skill_tags": ["TCP/IP", "Subnetting", "Routing & Switching", "Network Security"],
+      "description": "Fundamental networking architecture, IP addressing, Ethernet protocols, and router/switch configurations."
     },
     {
       "name": "CompTIA Security+ (SY0-701)",
@@ -72,10 +96,14 @@
       "badge_image": "https://img.shields.io/badge/CompTIA-Security%2B-FF3860?style=for-the-badge&logo=comptia",
       "provider_logo": "fa-solid fa-shield-halved",
       "credential_id": "COMP-SEC-701-PLAN",
+      "credential_url": "https://comptia.org",
       "verification_url": "",
       "issue_date": "2026-09-01",
       "expiration_date": "",
-      "status": "In Progress"
+      "status": "In Progress",
+      "certificate_pdf": "",
+      "skill_tags": ["CompTIA Security+", "SOC Analysis", "Threat Hunting"],
+      "description": "Currently completing exam preparation covering threats, attacks, vulnerabilities, architecture, and incident response."
     }
   ]
 }

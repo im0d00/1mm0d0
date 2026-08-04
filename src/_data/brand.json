@@ -1,0 +1,20 @@
+{
+  "main_logo": "",
+  "logo_dark": "",
+  "logo_light": "",
+  "footer_logo": "[Aimad•Security]",
+  "mobile_logo": "",
+  "favicon_ico": "/favicon.ico",
+  "favicon_png": "",
+  "favicon_svg": "",
+  "apple_touch_icon": "",
+  "android_icon_192": "",
+  "android_icon_512": "",
+  "pwa_icon": "",
+  "logo_width": "auto",
+  "logo_height": "34px",
+  "logo_padding": "0px",
+  "logo_alignment": "left",
+  "logo_link": "/",
+  "og_image": "https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg"
+}

@@ -6,7 +6,11 @@
             <!-- Brand Column -->
             <div class="footer-col footer-brand-col">
                 <div class="footer-logo-brand">
-                    <span class="logo-bracket">[</span><span class="logo-text">{{ footer.footer_logo or settings.logo or "Aimad•Security" }}</span><span class="logo-bracket">]</span>
+                    {% if brand.logo_dark or brand.main_logo %}
+                        <img src="{{ brand.logo_dark or brand.main_logo }}" alt="{{ settings.portfolio_name or 'Aimad Security' }}" style="max-height: 36px; max-width: auto; margin-bottom: 0.5rem;" />
+                    {% else %}
+                        <span class="logo-bracket">[</span><span class="logo-text">{{ brand.footer_logo or footer.footer_logo or settings.logo or "Aimad•Security" }}</span><span class="logo-bracket">]</span>
+                    {% endif %}
                 </div>
                 <p class="footer-desc">
                     {{ footer.footer_description or settings.website_description or "Cybersecurity student, SOC enthusiast, and network security practitioner from Pakistan. Specializing in DFIR, Linux Systems, and Ethical Hacking." }}
@@ -66,10 +70,10 @@
                     {% for soc in footer.social_links or settings.social_media_links %}
                     <a href="{{ soc.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ soc.platform }}"><i class="{{ soc.icon }}"></i></a>
                     {% else %}
-                    <a href="https://github.com/aimadulislam" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-                    <a href="https://linkedin.com/in/aimadulislam" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                    <a href="https://x.com/aimadulislam" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
-                    <a href="https://youtube.com/@aimadulislam" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    <a href="{{ contact.github or settings.github_url or 'https://github.com/aimadulislam' }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="{{ contact.linkedin or settings.linkedin_url or 'https://linkedin.com/in/aimadulislam' }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="{{ contact.x or settings.x_url or 'https://x.com/aimadulislam' }}" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="{{ contact.youtube or settings.youtube_url or 'https://youtube.com/@aimadulislam' }}" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
                     {% endfor %}
                 </div>
             </div>

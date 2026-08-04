@@ -59,6 +59,29 @@ collections:
               - { label: "URL", name: "url", widget: "string" }
               - { label: "Icon Class", name: "icon", widget: "string" }
 
+      - name: "brand"
+        label: "Brand & Logo Settings"
+        file: "src/_data/brand.json"
+        fields:
+          - { label: "Main Logo Image", name: "main_logo", widget: "image", required: false }
+          - { label: "Dark Theme Logo", name: "logo_dark", widget: "image", required: false }
+          - { label: "Light Theme Logo", name: "logo_light", widget: "image", required: false }
+          - { label: "Footer Logo / Text", name: "footer_logo", widget: "string", default: "[Aimad•Security]" }
+          - { label: "Mobile Logo Image", name: "mobile_logo", widget: "image", required: false }
+          - { label: "Favicon (.ico)", name: "favicon_ico", widget: "file", required: false }
+          - { label: "Favicon (.png)", name: "favicon_png", widget: "image", required: false }
+          - { label: "SVG Favicon (.svg)", name: "favicon_svg", widget: "file", required: false }
+          - { label: "Apple Touch Icon", name: "apple_touch_icon", widget: "image", required: false }
+          - { label: "Android Chrome Icon (192x192)", name: "android_icon_192", widget: "image", required: false }
+          - { label: "Android Chrome Icon (512x512)", name: "android_icon_512", widget: "image", required: false }
+          - { label: "PWA Application Icon", name: "pwa_icon", widget: "image", required: false }
+          - { label: "Logo Max Width", name: "logo_width", widget: "string", default: "auto" }
+          - { label: "Logo Max Height", name: "logo_height", widget: "string", default: "34px" }
+          - { label: "Logo Padding", name: "logo_padding", widget: "string", default: "0px" }
+          - { label: "Logo Alignment", name: "logo_alignment", widget: "select", options: ["left", "center", "right"], default: "left" }
+          - { label: "Logo Link Target", name: "logo_link", widget: "string", default: "/" }
+          - { label: "Default Open Graph Social Sharing Image", name: "og_image", widget: "image", required: false }
+
       - name: "navigation"
         label: "Header Navigation Menu"
         file: "src/_data/navigation.json"
@@ -350,23 +373,27 @@ collections:
         label: "Contact & Availability"
         file: "src/_data/contact.json"
         fields:
-          - { label: "Email Address", name: "email", widget: "string" }
+          - { label: "Primary Email Address", name: "email", widget: "string", pattern: ['^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', 'Must be a valid email address'] }
+          - { label: "Secondary Email Address", name: "secondary_email", widget: "string", required: false, pattern: ['^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', 'Must be a valid email address'] }
+          - { label: "Contact Form Recipient Email", name: "contact_form_email", widget: "string", required: false, pattern: ['^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', 'Must be a valid email address'] }
           - { label: "Phone Number", name: "phone", widget: "string" }
-          - { label: "Website URL", name: "website", widget: "string" }
-          - { label: "Portfolio URL", name: "portfolio", widget: "string" }
-          - { label: "GitHub Profile", name: "github", widget: "string" }
-          - { label: "LinkedIn Profile", name: "linkedin", widget: "string" }
-          - { label: "YouTube Channel", name: "youtube", widget: "string" }
-          - { label: "Instagram", name: "instagram", widget: "string" }
-          - { label: "X (Twitter)", name: "x", widget: "string" }
-          - { label: "Facebook", name: "facebook", widget: "string" }
-          - { label: "Discord Tag", name: "discord", widget: "string" }
-          - { label: "Location", name: "location", widget: "string" }
+          - { label: "Website URL", name: "website", widget: "string", pattern: ['^https?://.*', 'Must be a valid URL starting with http:// or https://'] }
+          - { label: "Portfolio URL", name: "portfolio", widget: "string", pattern: ['^https?://.*', 'Must be a valid URL starting with http:// or https://'] }
+          - { label: "GitHub Profile URL", name: "github", widget: "string", pattern: ['^https?://.*github\.com/.*', 'Must be a valid GitHub URL'] }
+          - { label: "LinkedIn Profile URL", name: "linkedin", widget: "string", pattern: ['^https?://.*linkedin\.com/.*', 'Must be a valid LinkedIn URL'] }
+          - { label: "YouTube Channel URL", name: "youtube", widget: "string", required: false }
+          - { label: "Instagram Profile URL", name: "instagram", widget: "string", required: false }
+          - { label: "X (Twitter) Profile URL", name: "x", widget: "string", required: false }
+          - { label: "Facebook Profile URL", name: "facebook", widget: "string", required: false }
+          - { label: "Discord Username / Tag", name: "discord", widget: "string", required: false }
+          - { label: "Telegram Profile URL", name: "telegram", widget: "string", required: false }
+          - { label: "Office Location / City", name: "location", widget: "string" }
+          - { label: "Google Maps Link", name: "google_maps_link", widget: "string", required: false, pattern: ['^https?://.*', 'Must be a valid URL'] }
           - { label: "Availability Status", name: "availability", widget: "string" }
           - { label: "Timezone", name: "timezone", widget: "string" }
           - { label: "Working Hours", name: "working_hours", widget: "string" }
-          - { label: "Calendly Link", name: "calendly_link", widget: "string", required: false }
-          - { label: "Contact Form Endpoint", name: "contact_form_endpoint", widget: "string", required: false }
+          - { label: "Calendly Scheduling Link", name: "calendly_link", widget: "string", required: false }
+          - { label: "Contact Form Endpoint URL", name: "contact_form_endpoint", widget: "string", required: false }
 
       - name: "dashboard"
         label: "SOC Dashboard Metrics"
@@ -424,14 +451,18 @@ collections:
             widget: "list"
             fields:
               - { label: "Certification Name", name: "name", widget: "string" }
-              - { label: "Provider", name: "provider", widget: "string" }
+              - { label: "Issuing Organization", name: "provider", widget: "string" }
               - { label: "Badge Image URL", name: "badge_image", widget: "string", required: false }
               - { label: "Provider Logo Class / Image", name: "provider_logo", widget: "string" }
               - { label: "Credential ID", name: "credential_id", widget: "string", required: false }
-              - { label: "Verification URL", name: "verification_url", widget: "string", required: false }
+              - { label: "Credential URL", name: "credential_url", widget: "string", required: false, pattern: ['^https?://.*', 'Must be a valid URL'] }
+              - { label: "Verification Link", name: "verification_url", widget: "string", required: false, pattern: ['^https?://.*', 'Must be a valid URL'] }
               - { label: "Issue Date", name: "issue_date", widget: "string" }
               - { label: "Expiration Date", name: "expiration_date", widget: "string", required: false }
-              - { label: "Status", name: "status", widget: "select", options: ["Completed", "Active", "Expired", "In Progress", "Planned"] }
+              - { label: "Status", name: "status", widget: "select", options: ["Verified", "Completed", "Active", "Expired", "In Progress", "Planned"] }
+              - { label: "Certificate PDF File / Link", name: "certificate_pdf", widget: "file", required: false }
+              - { label: "Skill Tags", name: "skill_tags", widget: "list", required: false }
+              - { label: "Description", name: "description", widget: "text", required: false }
 
   - name: "experience_collection"
     label: "Experience"
@@ -511,20 +542,23 @@ collections:
             label: "Projects"
             widget: "list"
             fields:
-              - { label: "Project Title", name: "title", widget: "string" }
+              - { label: "Project Name", name: "title", widget: "string" }
               - { label: "Category", name: "category", widget: "select", options: ["Home Lab", "Research", "Simulation", "CTF", "Web Development", "Networking", "Automation", "Digital Forensics", "Malware Analysis", "Reverse Engineering", "Cloud Security"] }
-              - { label: "Featured Image", name: "featured_image", widget: "image" }
-              - { label: "Gallery Images", name: "gallery", widget: "list", field: { label: "Image", name: "image", widget: "image" }, required: false }
+              - { label: "Cover / Featured Image", name: "featured_image", widget: "image" }
               - { label: "Description", name: "description", widget: "text" }
+              - { label: "GitHub Repository URL", name: "github_link", widget: "string", required: false, pattern: ['^https?://.*github\.com/.*', 'Must be a valid GitHub URL'] }
+              - { label: "Live Demo URL", name: "live_demo", widget: "string", required: false, pattern: ['^https?://.*', 'Must be a valid URL'] }
               - { label: "Technologies Used", name: "technologies", widget: "list" }
+              - { label: "Programming Languages", name: "programming_languages", widget: "list", required: false }
               - { label: "Difficulty Level", name: "difficulty", widget: "select", options: ["Beginner", "Intermediate", "Advanced", "Expert"] }
-              - { label: "Status", name: "status", widget: "select", options: ["Completed", "In Progress", "Planned"] }
-              - { label: "GitHub Link", name: "github_link", widget: "string", required: false }
-              - { label: "Live Demo URL", name: "live_demo", widget: "string", required: false }
-              - { label: "Documentation URL / Summary", name: "documentation", widget: "string", required: false }
+              - { label: "Status", name: "status", widget: "select", options: ["Completed", "In Progress", "Planned", "Active", "Archived"] }
+              - { label: "Version Tag", name: "version", widget: "string", required: false, default: "v1.0" }
+              - { label: "Last Updated Date", name: "last_updated", widget: "string", required: false }
+              - { label: "Documentation Link / Summary", name: "documentation", widget: "string", required: false }
               - { label: "Report Title / Ref", name: "report", widget: "string", required: false }
               - { label: "PDF File / Link", name: "pdf", widget: "file", required: false }
               - { label: "Screenshots", name: "screenshots", widget: "list", field: { label: "Screenshot", widget: "image" }, required: false }
+              - { label: "Gallery Images", name: "gallery", widget: "list", field: { label: "Image", name: "image", widget: "image" }, required: false }
               - { label: "Videos", name: "videos", widget: "list", field: { label: "Video URL", widget: "string" }, required: false }
 
   - name: "labs_collection"
@@ -789,14 +823,19 @@ collections:
       - { label: "Category", name: "category", widget: "select", options: ["Web Security", "Network Security", "Penetration Testing", "Ethical Hacking", "Digital Forensics", "DFIR", "Malware Analysis", "Active Directory", "Linux", "Windows", "Python", "Bash", "Automation", "Cloud Security", "AI Security", "OSINT", "Reverse Engineering", "SOC", "Blue Team", "Red Team", "Home Lab"], default: "Digital Forensics" }
       - { label: "Difficulty Level", name: "difficulty", widget: "select", options: ["Beginner", "Intermediate", "Advanced", "Expert"], default: "Intermediate" }
       - { label: "Status", name: "status", widget: "select", options: ["Completed", "Active", "In-Progress", "Archived"], default: "Completed" }
+      - { label: "Version Tag", name: "version", widget: "string", required: false, default: "v1.0" }
+      - { label: "Last Updated Date", name: "last_updated", widget: "datetime", required: false }
       - { label: "Short Description", name: "description", widget: "text" }
-      - { label: "Featured Image", name: "featured_image", widget: "image", required: false }
+      - { label: "Cover / Featured Image", name: "featured_image", widget: "image", required: false }
       - { label: "Problem Statement", name: "problem_statement", widget: "text", required: false }
       - { label: "Methodology", name: "methodology", widget: "text", required: false }
       - { label: "Technologies & Stack", name: "technologies", widget: "list", required: false }
-      - { label: "GitHub Repository URL", name: "github_link", widget: "string", required: false }
-      - { label: "Live Demo URL", name: "live_demo", widget: "string", required: false }
+      - { label: "Programming Languages", name: "programming_languages", widget: "list", required: false }
+      - { label: "GitHub Repository URL", name: "github_link", widget: "string", required: false, pattern: ['^https?://.*github\.com/.*', 'Must be a valid GitHub URL'] }
+      - { label: "Live Demo URL", name: "live_demo", widget: "string", required: false, pattern: ['^https?://.*', 'Must be a valid URL'] }
+      - { label: "Documentation Link", name: "documentation", widget: "string", required: false }
       - { label: "PDF Report Download URL", name: "pdf", widget: "string", required: false }
+      - { label: "Screenshots", name: "screenshots", widget: "list", field: { label: "Screenshot", widget: "image" }, required: false }
       - { label: "Lessons Learned", name: "lessons_learned", widget: "text", required: false }
       - { label: "Future Enhancements", name: "future_improvements", widget: "text", required: false }
       - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/project.njk" }

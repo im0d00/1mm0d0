@@ -5,7 +5,7 @@ description: Comprehensive collection of hands-on virtual lab environments, Pack
 ---
 
 <!-- HERO SECTION -->
-<section id="blog-hero" aria-labelledby="labs-hero-title" style="padding-bottom: 3rem;">
+<section id="blog-hero" aria-labelledby="labs-hero-title">
   <canvas id="blog-hero-canvas" aria-hidden="true"></canvas>
   <div class="blog-hero-inner container">
     <div class="blog-hero-eye"><i class="fa-solid fa-flask-vial"></i> Interactive Cyber Training Range</div>
@@ -15,13 +15,13 @@ description: Comprehensive collection of hands-on virtual lab environments, Pack
     <p class="blog-hero-sub">Hands-on threat simulation, PCAP analysis, Blue Team incident response, Packet Tracer network design, and offensive security exercises.</p>
 
     <!-- Lab Stats -->
-    <div class="sidebar-stats-grid" style="grid-template-columns: repeat(4, 1fr); max-width: 800px; margin: 1.5rem auto 2rem auto;">
+    <div class="sidebar-stats-grid">
       <div class="s-stat-box card">
         <div class="s-stat-val">{{ labs.items.length + collections.labs.length }}</div>
         <div class="s-stat-lbl">Active Labs</div>
       </div>
       <div class="s-stat-box card">
-        <div class="s-stat-val" style="color: var(--cyan);">100%</div>
+        <div class="s-stat-val text-cyan">100%</div>
         <div class="s-stat-lbl">Documented</div>
       </div>
       <div class="s-stat-box card">
@@ -29,7 +29,7 @@ description: Comprehensive collection of hands-on virtual lab environments, Pack
         <div class="s-stat-lbl">Platforms</div>
       </div>
       <div class="s-stat-box card">
-        <div class="s-stat-val" style="color: var(--green);">Ready</div>
+        <div class="s-stat-val text-green">Ready</div>
         <div class="s-stat-lbl">Download Configs</div>
       </div>
     </div>
@@ -89,7 +89,7 @@ description: Comprehensive collection of hands-on virtual lab environments, Pack
       <span class="posts-count-badge" id="labs-count">Showing All Labs</span>
     </div>
 
-    <div id="labs-grid" class="articles-grid" style="grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));">
+    <div id="labs-grid" class="articles-grid">
       
       <!-- Data items from JSON -->
       {% for lab in labs.items %}
@@ -100,8 +100,8 @@ description: Comprehensive collection of hands-on virtual lab environments, Pack
                data-tools="{% if lab.tools %}{% for t in lab.tools %}{{ t | lower }} {% endfor %}{% endif %}"
                data-tags="{% if lab.tags %}{% for t in lab.tags %}{{ t | lower }} {% endfor %}{% endif %}">
         <div class="card-glow"></div>
-        <div class="article-card-img-wrap" style="height: 170px; background: linear-gradient(135deg, rgba(0,212,255,0.1), rgba(124,58,237,0.15));">
-          <div class="article-card-img-placeholder" style="background: none;">
+        <div class="article-card-img-wrap" style="height: 170px;">
+          <div class="article-card-img-placeholder">
             <i class="fa-solid fa-flask-vial text-cyan" style="font-size: 2.8rem;"></i>
           </div>
           <span class="card-diff-badge intermediate">{{ lab.platform or "Virtual Lab" }}</span>
@@ -110,7 +110,7 @@ description: Comprehensive collection of hands-on virtual lab environments, Pack
         <div class="article-card-body">
           <div class="article-card-tags">
             <span class="tag tag-cyber"><i class="fa-solid fa-microchip"></i> {{ lab.platform }}</span>
-            <span class="tag tag-tut"><i class="fa-solid fa-circle-check"></i> Verified Lab</span>
+            <span class="tag tag-tut text-green"><i class="fa-solid fa-circle-check"></i> Verified Lab</span>
           </div>
 
           <h3 class="article-card-title">{{ lab.name }}</h3>
@@ -138,28 +138,32 @@ description: Comprehensive collection of hands-on virtual lab environments, Pack
       <!-- Markdown Collection Items from Decap CMS -->
       {% for lab in collections.labs %}
       <article class="card article-card lab-card"
-               data-platform="{{ (lab.data.platform or lab.data.category or 'Virtual Lab') | lower }}"
+               data-platform="{{ (lab.data.platform or 'Virtual Lab') | lower }}"
                data-name="{{ (lab.data.title or lab.data.name) | lower }}"
-               data-description="{{ (lab.data.description or '') | lower }}"
+               data-description="{{ (lab.data.summary or lab.data.description or '') | lower }}"
                data-tools="{% if lab.data.tools %}{% for t in lab.data.tools %}{{ t | lower }} {% endfor %}{% endif %}"
-               data-difficulty="{{ (lab.data.difficulty or 'intermediate') | lower }}"
+               data-tags="{% if lab.data.tags %}{% for t in lab.data.tags %}{{ t | lower }} {% endfor %}{% endif %}"
                onclick="window.location='{{ lab.url }}'">
         <div class="card-glow"></div>
-        <div class="article-card-img-wrap" style="height: 170px; background: linear-gradient(135deg, rgba(0,255,136,0.1), rgba(0,212,255,0.15));">
-          <div class="article-card-img-placeholder" style="background: none;">
-            <i class="fa-solid fa-server text-cyan" style="font-size: 2.8rem;"></i>
+        <div class="article-card-img-wrap" style="height: 170px;">
+          {% if lab.data.featured_image or lab.data.image %}
+          <img class="article-card-img" src="{{ lab.data.featured_image or lab.data.image }}" alt="{{ lab.data.title }}" loading="lazy"/>
+          {% else %}
+          <div class="article-card-img-placeholder">
+            <i class="fa-solid fa-network-wired text-cyan" style="font-size: 2.8rem;"></i>
           </div>
+          {% endif %}
           <span class="card-diff-badge {{ (lab.data.difficulty or 'Intermediate') | lower }}">{{ lab.data.difficulty or "Intermediate" }}</span>
         </div>
 
         <div class="article-card-body">
           <div class="article-card-tags">
-            <span class="tag tag-cyber"><i class="fa-solid fa-cubes"></i> {{ lab.data.platform or lab.data.category }}</span>
-            <span class="tag tag-tut" style="color: var(--green); border-color: rgba(0,255,136,0.3);"><i class="fa-solid fa-bolt"></i> {{ lab.data.status or "Active" }}</span>
+            <span class="tag tag-cyber"><i class="fa-solid fa-microchip"></i> {{ lab.data.platform or "Hands-on Lab" }}</span>
+            <span class="tag tag-tut text-green"><i class="fa-solid fa-circle-check"></i> Verified Lab</span>
           </div>
 
           <h3 class="article-card-title">{{ lab.data.title or lab.data.name }}</h3>
-          <p class="article-card-excerpt">{{ lab.data.description }}</p>
+          <p class="article-card-excerpt">{{ lab.data.summary or lab.data.description }}</p>
 
           {% if lab.data.tools %}
           <div class="article-tags-mini" style="margin-top: 0.8rem;">
@@ -170,7 +174,7 @@ description: Comprehensive collection of hands-on virtual lab environments, Pack
           {% endif %}
 
           <div class="article-card-footer" style="margin-top: 1.2rem;">
-            <a href="{{ lab.url }}" class="btn btn-sm btn-cyan btn-full"><i class="fa-solid fa-terminal"></i> View Lab Details</a>
+            <a href="{{ lab.url }}" class="btn btn-sm btn-cyan btn-full"><i class="fa-solid fa-book-open"></i> Full Lab Blueprint</a>
           </div>
         </div>
       </article>
@@ -180,10 +184,15 @@ description: Comprehensive collection of hands-on virtual lab environments, Pack
 
     <!-- No Results Fallback -->
     <div class="no-results card" id="no-lab-results" style="display:none; text-align: center; padding: 3rem 1.5rem;">
-      <i class="fa-solid fa-vial-circle-check text-cyan" style="font-size: 3rem; margin-bottom: 1rem;"></i>
-      <h3>No Lab Environments Match Your Criteria</h3>
-      <p>Try clearing search text or selecting a different virtual lab platform.</p>
+      <i class="fa-solid fa-flask-vial text-cyan" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+      <h3>No Security Labs Found</h3>
+      <p>Try searching for specific platforms like VirtualBox, Cisco, HTB, or Wireshark tools.</p>
       <button class="btn btn-cyan mt-3" onclick="resetLabSearch()"><i class="fa-solid fa-rotate"></i> Reset All Filters</button>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination-container" id="lab-pagination-controls">
+      <!-- Dynamically rendered -->
     </div>
   </section>
 </main>
@@ -194,58 +203,113 @@ document.addEventListener("DOMContentLoaded", () => {
   const platformSelect = document.getElementById("platform-select");
   const diffSelect = document.getElementById("lab-diff-select");
   const catBtns = document.querySelectorAll(".cat-btn");
+  const labsGrid = document.getElementById("labs-grid");
   const cards = Array.from(document.querySelectorAll(".lab-card"));
   const countBadge = document.getElementById("labs-count");
   const noResults = document.getElementById("no-lab-results");
+  const paginationControls = document.getElementById("lab-pagination-controls");
 
   let currentSearch = "";
+  let currentCat = "all";
   let currentPlatform = "all";
   let currentDiff = "all";
-  let currentCat = "all";
+  let currentPage = 1;
+  const itemsPerPage = 6;
 
   function filterLabs() {
-    let visible = 0;
-
-    cards.forEach(card => {
+    let filtered = cards.filter(card => {
       const name = card.getAttribute("data-name") || "";
       const desc = card.getAttribute("data-description") || "";
       const platform = card.getAttribute("data-platform") || "";
       const tools = card.getAttribute("data-tools") || "";
-      const diff = card.getAttribute("data-difficulty") || "";
       const tags = card.getAttribute("data-tags") || "";
 
       const matchSearch = currentSearch === "" || 
                           name.includes(currentSearch) || 
                           desc.includes(currentSearch) || 
                           platform.includes(currentSearch) || 
-                          tools.includes(currentSearch) ||
-                          tags.includes(currentSearch);
+                          tools.includes(currentSearch);
 
-      const matchPlatform = currentPlatform === "all" || platform.includes(currentPlatform.toLowerCase());
-      const matchDiff = currentDiff === "all" || diff.includes(currentDiff.toLowerCase());
       const matchCat = currentCat === "all" || platform.includes(currentCat.toLowerCase()) || tags.includes(currentCat.toLowerCase());
+      const matchPlatform = currentPlatform === "all" || platform.includes(currentPlatform.toLowerCase());
 
-      if (matchSearch && matchPlatform && matchDiff && matchCat) {
-        card.style.display = "flex";
-        visible++;
-      } else {
-        card.style.display = "none";
-      }
+      return matchSearch && matchCat && matchPlatform;
     });
 
-    if (countBadge) countBadge.textContent = `${visible} Virtual Labs Active`;
-    if (noResults) noResults.style.display = visible === 0 ? "block" : "none";
+    if (countBadge) countBadge.textContent = `${filtered.length} Labs Displayed`;
+
+    cards.forEach(c => c.style.display = "none");
+
+    if (filtered.length === 0) {
+      if (noResults) noResults.style.display = "block";
+      if (paginationControls) paginationControls.innerHTML = "";
+      return;
+    } else {
+      if (noResults) noResults.style.display = "none";
+    }
+
+    const totalPages = Math.ceil(filtered.length / itemsPerPage);
+    if (currentPage > totalPages) currentPage = 1;
+
+    const startIdx = (currentPage - 1) * itemsPerPage;
+    const endIdx = startIdx + itemsPerPage;
+    const pageItems = filtered.slice(startIdx, endIdx);
+
+    pageItems.forEach(item => {
+      item.style.display = "flex";
+      labsGrid.appendChild(item);
+    });
+
+    renderPagination(totalPages);
   }
 
-  if (searchInput) searchInput.addEventListener("input", (e) => { currentSearch = e.target.value.toLowerCase().trim(); filterLabs(); });
-  if (platformSelect) platformSelect.addEventListener("change", (e) => { currentPlatform = e.target.value; filterLabs(); });
-  if (diffSelect) diffSelect.addEventListener("change", (e) => { currentDiff = e.target.value; filterLabs(); });
+  function renderPagination(totalPages) {
+    if (!paginationControls || totalPages <= 1) {
+      if (paginationControls) paginationControls.innerHTML = "";
+      return;
+    }
+
+    let html = `<div class="cyber-pagination">`;
+    html += `<button class="page-btn ${currentPage === 1 ? 'disabled' : ''}" onclick="changeLabPage(${currentPage - 1})"><i class="fa-solid fa-chevron-left"></i> Prev</button>`;
+
+    for (let i = 1; i <= totalPages; i++) {
+      html += `<button class="page-num ${i === currentPage ? 'active' : ''}" onclick="changeLabPage(${i})">${i}</button>`;
+    }
+
+    html += `<button class="page-btn ${currentPage === totalPages ? 'disabled' : ''}" onclick="changeLabPage(${currentPage + 1})">Next <i class="fa-solid fa-chevron-right"></i></button>`;
+    html += `</div>`;
+
+    paginationControls.innerHTML = html;
+  }
+
+  window.changeLabPage = (page) => {
+    currentPage = page;
+    filterLabs();
+    document.getElementById("labs-section").scrollIntoView({ behavior: 'smooth' });
+  };
+
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      currentSearch = e.target.value.toLowerCase().trim();
+      currentPage = 1;
+      filterLabs();
+    });
+  }
+
+  if (platformSelect) {
+    platformSelect.addEventListener("change", (e) => {
+      currentPlatform = e.target.value;
+      currentPage = 1;
+      filterLabs();
+    });
+  }
 
   catBtns.forEach(btn => {
     btn.addEventListener("click", () => {
       catBtns.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
       currentCat = btn.getAttribute("data-cat");
+      currentPage = 1;
       filterLabs();
     });
   });
@@ -253,16 +317,17 @@ document.addEventListener("DOMContentLoaded", () => {
   window.resetLabSearch = () => {
     if (searchInput) searchInput.value = "";
     if (platformSelect) platformSelect.value = "all";
-    if (diffSelect) diffSelect.value = "all";
     currentSearch = "";
-    currentPlatform = "all";
-    currentDiff = "all";
     currentCat = "all";
+    currentPlatform = "all";
     catBtns.forEach(b => {
       if (b.getAttribute("data-cat") === "all") b.classList.add("active");
       else b.classList.remove("active");
     });
+    currentPage = 1;
     filterLabs();
   };
+
+  filterLabs();
 });
 </script>

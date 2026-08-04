@@ -4,87 +4,336 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Metasploitable 2: The Ultimate Beginner&#39;s Guide to Exploitation | Aimad Ul Islam</title>
-    <meta name="description" content="Cybersecurity Professional &amp; Technical Writer">
+    <meta name="description" content="Learn how to hack Metasploitable 2 from scratch using Metasploit – exploit vsftpd, UnrealIRCd, and more.">
     <meta name="theme-color" content="#080C1A">
     
+    <!-- Open Graph -->
+    <meta property="og:title" content="Metasploitable 2: The Ultimate Beginner&#39;s Guide to Exploitation | Aimad Ul Islam">
+    <meta property="og:description" content="Learn how to hack Metasploitable 2 from scratch using Metasploit – exploit vsftpd, UnrealIRCd, and more.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aimadulislam.dpdns.org/posts/metasploitable-complete-guide/">
+    <meta property="og:image" content="https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg">
+
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
     
     <!-- FontAwesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
     
     <!-- CSS -->
+    <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/blog.css">
     
     <script>
-      // Apply theme early to prevent flash
       (function() {
         var localTheme = localStorage.getItem('aimad-theme');
-        if (localTheme === 'light' || (!localTheme && window.matchMedia('(prefers-color-scheme: light)').matches)) {
+        if (localTheme === 'light') {
           document.documentElement.setAttribute('data-theme', 'light');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          localStorage.setItem('aimad-theme', 'dark');
         }
       })();
     </script>
 </head>
-<body>
+<body class="site-base-body">
     <div class="grid-bg"></div>
     <div class="scan-line"></div>
     <div id="reading-progress"></div>
 
-    <!-- Navigation -->
-    <nav class="blog-nav">
-        <a href="/" class="nav-logo">AIMAD<span class="br">/</span>ISLAM<span class="nav-dot"></span></a>
-        
+    <!-- SHARED GLOBAL HEADER -->
+    <nav id="navbar" class="site-nav" role="navigation" aria-label="Main Navigation">
+    <div class="nav-container" style="width: 100%; max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+        <a href="/" class="nav-logo-wrap" aria-label="Aimad Security">
+            
+                <span class="nav-logo"><span class="br">[</span>Aimad Security<span class="nav-dot"></span><span class="br">]</span></span>
+            
+        </a>
+
         <ul class="nav-links">
-            <li><a href="/" >Portfolio</a></li>
-            <li><a href="/blog" class="active">Blog</a></li>
+            
+                
+                <li>
+                    <a href="/" >
+                        <i class="fa-solid fa-house fa-xs"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a href="/projects/" >
+                        <i class="fa-solid fa-folder-open fa-xs"></i>
+                        <span>Projects</span>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a href="/labs/" >
+                        <i class="fa-solid fa-flask fa-xs"></i>
+                        <span>Labs</span>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a href="/research/" >
+                        <i class="fa-solid fa-file-contract fa-xs"></i>
+                        <span>Research</span>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a href="/blog/" >
+                        <i class="fa-solid fa-pen-nib fa-xs"></i>
+                        <span>Blog</span>
+                    </a>
+                </li>
+                
+            
+                
+                <li class="nav-item-dropdown">
+                    <a href="/resources/" class="dropdown-toggle ">
+                        <i class="fa-solid fa-shield-halved fa-xs"></i>
+                        <span>Resources</span>
+                        <i class="fa-solid fa-chevron-down nav-arrow"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        <li>
+                            <a href="/resources/" >
+                                <i class="fa-solid fa-layer-group fa-xs"></i>
+                                <span>All Resources</span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="/downloads/" >
+                                <i class="fa-solid fa-download fa-xs"></i>
+                                <span>Download Hub</span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="/resources/security-policy/" >
+                                <i class="fa-solid fa-lock fa-xs"></i>
+                                <span>Security Policy</span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="/resources/responsible-disclosure/" >
+                                <i class="fa-solid fa-bug fa-xs"></i>
+                                <span>Disclosure Policy</span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="/resources/sitemap-page/" >
+                                <i class="fa-solid fa-sitemap fa-xs"></i>
+                                <span>Human Sitemap</span>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                
+            
+                
+                <li>
+                    <a href="/#contact" >
+                        <i class="fa-solid fa-envelope fa-xs"></i>
+                        <span>Contact</span>
+                    </a>
+                </li>
+                
+            
         </ul>
 
         <div class="nav-right">
-            <div class="nav-status">
-                <span class="status-dot"></span>
-                <span class="status-text">SYSTEM_ONLINE</span>
+            
+            <button id="searchOpenBtn" class="search-trigger-btn" onclick="openSearchModal()" aria-label="Search site (Ctrl+K)">
+                <i class="fa-solid fa-magnifying-glass fa-xs"></i>
+                <span>Search</span>
+                <kbd class="kbd-badge">Ctrl+K</kbd>
+            </button>
+            
+            
+            
+            <div class="nav-status" title="Available for Security Consulting">
+                <span class="status-dot" style="background: #00FF88; box-shadow: 0 0 8px #00FF88;"></span>
+                <span class="status-text">Available for Security Consulting</span>
             </div>
-            <button class="dark-mode-btn" id="theme-toggle" aria-label="Toggle theme">
-                <i class="fa-regular fa-moon"></i>
+            
+
+            <button class="dark-mode-btn" id="theme-toggle" aria-label="Toggle dark/light theme" onclick="toggleTheme()" style="background: rgba(13,26,48,0.7); border: 1px solid var(--border); color: var(--silver); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition);">
+                <i class="fa-regular fa-moon" id="theme-toggle-icon"></i>
             </button>
-            <button class="hamburger" aria-label="Menu" aria-expanded="false" id="mobile-menu-btn">
+
+            <a href="/assets/Aimad_Ul_Islam_Resume.pdf" download class="nav-resume-btn" aria-label="Download Resume">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>Resume</span>
+                <i class="fa-solid fa-download dl-icon"></i>
+            </a>
+
+            <div class="hamburger" id="ham" aria-label="Toggle navigation menu">
                 <span></span><span></span><span></span>
-            </button>
+            </div>
         </div>
-    </nav>
-
-    <!-- Mobile Nav -->
-    <div class="mobile-nav" id="mobile-nav">
-        <a href="/">Portfolio</a>
-        <a href="/blog">Blog</a>
     </div>
+</nav>
 
-    <main class="container">
+<!-- MOBILE OVERLAY & DRAWER -->
+<div class="mobile-overlay" id="mobOverlay" onclick="closeMobileNav()"></div>
+<div class="mobile-nav" id="mobNav">
+    <div class="mobile-nav-header">
+        <div class="mobile-nav-brand">Aimad Security</div>
+        <button class="mob-close-btn" id="mobCloseBtn" onclick="closeMobileNav()" aria-label="Close menu">&times;</button>
+    </div>
+    
+    <div class="mobile-status-badge">
+        <span class="status-dot" style="background: #00FF88;"></span>
+        <span>Available for Security Consulting</span>
+    </div>
+    
+    <ul class="mobile-links">
+        
+        <li>
+            <a href="/" onclick="closeMobileNav()">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </a>
+        </li>
+            
+        
+        <li>
+            <a href="/projects/" onclick="closeMobileNav()">
+                <i class="fa-solid fa-folder-open"></i>
+                <span>Projects</span>
+            </a>
+        </li>
+            
+        
+        <li>
+            <a href="/labs/" onclick="closeMobileNav()">
+                <i class="fa-solid fa-flask"></i>
+                <span>Labs</span>
+            </a>
+        </li>
+            
+        
+        <li>
+            <a href="/research/" onclick="closeMobileNav()">
+                <i class="fa-solid fa-file-contract"></i>
+                <span>Research</span>
+            </a>
+        </li>
+            
+        
+        <li>
+            <a href="/blog/" onclick="closeMobileNav()">
+                <i class="fa-solid fa-pen-nib"></i>
+                <span>Blog</span>
+            </a>
+        </li>
+            
+        
+        <li>
+            <a href="/resources/" onclick="closeMobileNav()">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Resources</span>
+            </a>
+        </li>
+            
+                
+                <li style="padding-left: 1rem;">
+                    <a href="/resources/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <span>All Resources</span>
+                    </a>
+                </li>
+                
+                <li style="padding-left: 1rem;">
+                    <a href="/downloads/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Download Hub</span>
+                    </a>
+                </li>
+                
+                <li style="padding-left: 1rem;">
+                    <a href="/resources/security-policy/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                        <i class="fa-solid fa-lock"></i>
+                        <span>Security Policy</span>
+                    </a>
+                </li>
+                
+                <li style="padding-left: 1rem;">
+                    <a href="/resources/responsible-disclosure/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                        <i class="fa-solid fa-bug"></i>
+                        <span>Disclosure Policy</span>
+                    </a>
+                </li>
+                
+                <li style="padding-left: 1rem;">
+                    <a href="/resources/sitemap-page/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                        <i class="fa-solid fa-sitemap"></i>
+                        <span>Human Sitemap</span>
+                    </a>
+                </li>
+                
+            
+        
+        <li>
+            <a href="/#contact" onclick="closeMobileNav()">
+                <i class="fa-solid fa-envelope"></i>
+                <span>Contact</span>
+            </a>
+        </li>
+            
+        
+    </ul>
+    <div class="mobile-actions">
+        
+        <button onclick="openSearchModal(); closeMobileNav();" class="btn outline w-full" style="display:flex; align-items:center; justify-content:center; gap:0.5rem; padding:0.65rem 1rem; border:1px solid var(--border); border-radius:20px; background:rgba(13,26,48,0.7); color:var(--cyan); cursor:pointer;"><i class="fa-solid fa-magnifying-glass"></i> Search Platform</button>
+        
+        <a href="/assets/Aimad_Ul_Islam_Resume.pdf" download class="btn primary w-full" style="display:flex; align-items:center; justify-content:center; gap:0.5rem; padding:0.65rem 1rem; border-radius:20px; background:linear-gradient(135deg, var(--cyan), var(--cyan2)); color:var(--void); font-weight:600; text-decoration:none;"><i class="fa-solid fa-file-pdf"></i> Download Resume</a>
+    </div>
+</div>
+
+
+    <main id="main-content">
+        <main class="container">
     <article class="article-hero">
+        <!-- Breadcrumbs -->
         <div class="breadcrumb">
-            <a href="/"><i class="fa-solid fa-house"></i></a>
+            <a href="/"><i class="fa-solid fa-house"></i> Home</a>
             <span>/</span>
-            <a href="/blog">Blog</a>
+            <a href="/blog/">Blog</a>
             <span>/</span>
-            <span style="color:var(--white);">Metasploitable 2: The Ultimate Beginner&#39;s Guide to Exploitation</span>
+            <span class="current-title">Metasploitable 2: The Ultimate Beginner&#39;s Guide to Exploitation</span>
         </div>
 
         <div class="article-layout">
-            
-            <!-- Main Content -->
+            <!-- Main Content Column -->
             <div class="article-main">
-                <header class="article-header">
+                <header class="article-header card">
                     <div class="article-cats">
                         
-                        <a href="/blog?category=Cybersecurity" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Cybersecurity</a>
+                        <a href="/blog/?cat=Cybersecurity" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Cybersecurity</a>
                         
-                        <a href="/blog?category=Tutorials" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Tutorials</a>
+                        <a href="/blog/?cat=Tutorials" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Tutorials</a>
                         
-                        <a href="/blog?category=Linux" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Linux</a>
+                        <a href="/blog/?cat=Linux" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Linux</a>
                         
+                        <span class="tag tag-tut"><i class="fa-solid fa-gauge-high"></i> Intermediate</span>
                     </div>
                     
                     <h1 class="article-title">Metasploitable 2: The Ultimate Beginner&#39;s Guide to Exploitation</h1>
@@ -95,19 +344,19 @@
                     
                     <div class="article-meta">
                         <div class="article-meta-item">
+                            <i class="fa-solid fa-user-shield"></i>
+                            <span>Author: <strong>Aimad Ul Islam</strong></span>
+                        </div>
+                        <div class="article-meta-item">
                             <i class="fa-regular fa-calendar"></i>
                             <span>Published: <strong>25 Jul 2026</strong></span>
                         </div>
                         
                         <div class="article-meta-item">
                             <i class="fa-regular fa-clock"></i>
-                            <span>Read time: <strong>20 min</strong></span>
+                            <span>Est. Read: <strong>20 min</strong></span>
                         </div>
                         
-                        <div class="article-meta-item">
-                            <i class="fa-solid fa-terminal"></i>
-                            <span>Author: <strong>Aimad Ul Islam</strong></span>
-                        </div>
                     </div>
 
                     
@@ -127,7 +376,8 @@
                     
                 </header>
 
-                <div class="article-body">
+                <!-- Article Body -->
+                <div class="article-body card">
                     <h2 id="introduction" tabindex="-1">Introduction <a class="direct-link" href="#introduction" aria-hidden="true">#</a></h2>
 <p>Metasploitable 2 is the go‑to target for every beginner penetration tester. It’s a deliberately vulnerable Linux virtual machine packed with multiple exploitable services, making it the perfect environment to learn how to use Metasploit, discover vulnerabilities, and practice your hacking skills – all legally.</p>
 <p>In this guide, I’ll walk you through the entire process: from setting up Metasploitable 2 in VirtualBox to exploiting two of its most famous vulnerabilities – the vsftpd backdoor and the UnrealIRCd backdoor – and then performing post‑exploitation steps. By the end, you’ll have a solid understanding of how Metasploit works and how to use it in real engagements.</p>
@@ -281,14 +531,28 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
 
                 </div>
 
-                <div class="social-share">
-                    <span class="share-label">Share article</span>
-                    <a href="https://twitter.com/intent/tweet?text=Metasploitable%202%3A%20The%20Ultimate%20Beginner&#39;s%20Guide%20to%20Exploitation&url=https://aimadulislam.dpdns.org/posts/metasploitable-complete-guide/" target="_blank" rel="noopener" class="share-btn twitter" aria-label="Share on Twitter"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://aimadulislam.dpdns.org/posts/metasploitable-complete-guide/&title=Metasploitable%202%3A%20The%20Ultimate%20Beginner&#39;s%20Guide%20to%20Exploitation" target="_blank" rel="noopener" class="share-btn linkedin" aria-label="Share on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                    <button class="share-btn copy-url" aria-label="Copy Link" id="copy-url-btn" data-url="https://aimadulislam.dpdns.org/posts/metasploitable-complete-guide/"><i class="fa-solid fa-link"></i></button>
+                <!-- Social Share & Actions -->
+                <div class="social-share card">
+                    <span class="share-label"><i class="fa-solid fa-share-nodes"></i> Share Article:</span>
+                    <a href="https://x.com/intent/tweet?text=Metasploitable%202%3A%20The%20Ultimate%20Beginner&#39;s%20Guide%20to%20Exploitation&url=https://aimadulislam.dpdns.org/posts/metasploitable-complete-guide/" target="_blank" rel="noopener noreferrer" class="share-btn twitter" aria-label="Share on X"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://aimadulislam.dpdns.org/posts/metasploitable-complete-guide/&title=Metasploitable%202%3A%20The%20Ultimate%20Beginner&#39;s%20Guide%20to%20Exploitation" target="_blank" rel="noopener noreferrer" class="share-btn linkedin" aria-label="Share on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <button class="share-btn copy-url" id="copy-url-btn" data-url="https://aimadulislam.dpdns.org/posts/metasploitable-complete-guide/" aria-label="Copy URL"><i class="fa-solid fa-link"></i> Copy Link</button>
                 </div>
 
-                <!-- Navigation between posts -->
+                <!-- Author Box -->
+                <div class="author-box card">
+                    <div class="author-avatar"><i class="fa-solid fa-user-check"></i></div>
+                    <div class="author-info">
+                        <h3>Aimad Ul Islam</h3>
+                        <p class="author-bio">Cybersecurity practitioner, SOC analyst enthusiast, and Linux system administrator. Documenting DFIR investigations, virtual network labs, and threat hunting workflows.</p>
+                        <div class="author-links">
+                            <a href="https://github.com/aimadulislam" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+                            <a href="https://linkedin.com/in/aimadulislam" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation Between Posts -->
                 
                 
                 <nav class="article-nav">
@@ -297,18 +561,25 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
                     
                     
                     
-                    <a href="/posts/kali-linux-setup-guide/" class="article-nav-link next">
-                        <span class="article-nav-dir">Next Post <i class="fa-solid fa-angle-right"></i></span>
+                    <a href="/posts/kali-linux-setup-guide/" class="article-nav-link next card">
+                        <span class="article-nav-dir">Next Article <i class="fa-solid fa-angle-right"></i></span>
                         <div class="article-nav-title">Getting Started with Kali Linux: Complete Beginner Setup Guide</div>
                     </a>
                     
                 </nav>
             </div>
 
-            <!-- Sidebar -->
+            <!-- Article Sidebar -->
             <aside class="sidebar">
+                <!-- Table of Contents Widget -->
+                <div class="sidebar-widget card" id="toc-widget">
+                    <h3 class="widget-title"><i class="fa-solid fa-list-ol"></i> Table of Contents</h3>
+                    <nav id="toc-list" class="toc-list"></nav>
+                </div>
+
+                <!-- Recent Articles Widget -->
                 <div class="sidebar-widget card">
-                    <h3 class="widget-title"><i class="fa-solid fa-fire"></i> Recent Articles</h3>
+                    <h3 class="widget-title"><i class="fa-solid fa-fire"></i> Related Writeups</h3>
                     <div class="sidebar-posts">
                         
                         
@@ -317,11 +588,11 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
                             
                             <a href="/posts/kali-linux-setup-guide/" class="sidebar-post">
                                 <div class="sidebar-post-thumb">
-                                    🐉
+                                    <span class="thumb-emoji">🐉</span>
                                 </div>
                                 <div class="sidebar-post-content">
                                     <h4 class="sidebar-post-title">Getting Started with Kali Linux: Complete Beginner Setup Guide</h4>
-                                    <span class="sidebar-post-meta">15 Jul 2026</span>
+                                    <span class="sidebar-post-meta"><i class="fa-regular fa-calendar"></i> 15 Jul 2026</span>
                                 </div>
                             </a>
                             
@@ -330,11 +601,11 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
                             
                             <a href="/posts/nmap-complete-guide/" class="sidebar-post">
                                 <div class="sidebar-post-thumb">
-                                    🗺️
+                                    <span class="thumb-emoji">🗺️</span>
                                 </div>
                                 <div class="sidebar-post-content">
                                     <h4 class="sidebar-post-title">Nmap Deep Dive: From Port Scanning to Full Network Enumeration</h4>
-                                    <span class="sidebar-post-meta">10 Jul 2026</span>
+                                    <span class="sidebar-post-meta"><i class="fa-regular fa-calendar"></i> 10 Jul 2026</span>
                                 </div>
                             </a>
                             
@@ -343,11 +614,11 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
                             
                             <a href="/posts/dfir-introduction/" class="sidebar-post">
                                 <div class="sidebar-post-thumb">
-                                    🔬
+                                    <span class="thumb-emoji">🔬</span>
                                 </div>
                                 <div class="sidebar-post-content">
                                     <h4 class="sidebar-post-title">Digital Forensics &amp; Incident Response: A Hands-On Introduction</h4>
-                                    <span class="sidebar-post-meta">05 Jul 2026</span>
+                                    <span class="sidebar-post-meta"><i class="fa-regular fa-calendar"></i> 05 Jul 2026</span>
                                 </div>
                             </a>
                             
@@ -356,11 +627,11 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
                             
                             <a href="/posts/linux-essentials-guide/" class="sidebar-post">
                                 <div class="sidebar-post-thumb">
-                                    🐧
+                                    <span class="thumb-emoji">🐧</span>
                                 </div>
                                 <div class="sidebar-post-content">
                                     <h4 class="sidebar-post-title">Linux Essentials: Every Command You Actually Need</h4>
-                                    <span class="sidebar-post-meta">28 Jun 2026</span>
+                                    <span class="sidebar-post-meta"><i class="fa-regular fa-calendar"></i> 28 Jun 2026</span>
                                 </div>
                             </a>
                             
@@ -373,13 +644,11 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
                     </div>
                 </div>
 
+                <!-- Quick Resources Link -->
                 <div class="sidebar-widget card">
-                    <h3 class="widget-title"><i class="fa-solid fa-envelope"></i> Terminal Feed</h3>
-                    <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
-                        <input type="email" class="newsletter-input" placeholder="root@localhost:~# _" required>
-                        <button type="submit" class="newsletter-btn">EXECUTE /SUBSCRIBE</button>
-                        <p class="newsletter-note">Get new tutorials and writeups directly in your inbox. No spam.</p>
-                    </form>
+                    <h3 class="widget-title"><i class="fa-solid fa-shield-halved"></i> Governance & Policies</h3>
+                    <p class="widget-desc">Check responsible disclosure policy or download open-source scripts.</p>
+                    <a href="/resources/" class="btn btn-sm btn-cyan btn-full"><i class="fa-solid fa-folder-tree"></i> Resources Center</a>
                 </div>
             </aside>
         </div>
@@ -391,11 +660,9 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
     document.getElementById('copy-url-btn')?.addEventListener('click', function() {
         navigator.clipboard.writeText(this.dataset.url).then(() => {
             const originalHtml = this.innerHTML;
-            this.innerHTML = '<i class="fa-solid fa-check"></i>';
-            this.classList.add('copied');
+            this.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
             setTimeout(() => {
                 this.innerHTML = originalHtml;
-                this.classList.remove('copied');
             }, 2000);
         });
     });
@@ -405,17 +672,35 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
         btn.addEventListener('click', function() {
             const pre = this.parentElement.querySelector('pre');
             if (!pre) return;
-            
             navigator.clipboard.writeText(pre.innerText).then(() => {
                 const originalHtml = this.innerHTML;
-                this.innerHTML = '<i class="fa-solid fa-check"></i> Copied';
-                this.classList.add('copied');
+                this.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
                 setTimeout(() => {
                     this.innerHTML = originalHtml;
-                    this.classList.remove('copied');
                 }, 2000);
             });
         });
+    });
+
+    // Table of Contents generator
+    document.addEventListener('DOMContentLoaded', () => {
+        const articleBody = document.querySelector('.article-body');
+        const tocList = document.getElementById('toc-list');
+        if (articleBody && tocList) {
+            const headings = articleBody.querySelectorAll('h2, h3');
+            if (headings.length === 0) {
+                document.getElementById('toc-widget').style.display = 'none';
+            } else {
+                headings.forEach((h, idx) => {
+                    if (!h.id) h.id = 'heading-' + idx;
+                    const link = document.createElement('a');
+                    link.href = '#' + h.id;
+                    link.textContent = h.textContent;
+                    link.className = h.tagName.toLowerCase() === 'h3' ? 'toc-sublink' : 'toc-mainlink';
+                    tocList.appendChild(link);
+                });
+            }
+        }
     });
 
     // Reading progress bar
@@ -428,99 +713,148 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
     });
 </script>
 
+    </main>
 
-    <!-- Footer -->
-    <footer class="blog-footer">
-        <div class="container">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <div class="footer-brand">AIMAD<span>/</span>ISLAM</div>
-                    <p class="footer-tagline">Offensive Security & Technical Writing. Securing the perimeter, one post at a time.</p>
+    <!-- SHARED GLOBAL FOOTER -->
+    
+<footer class="site-footer" role="contentinfo">
+    <div class="footer-top-glow"></div>
+    <div class="container">
+        <div class="footer-grid">
+            <!-- Brand Column -->
+            <div class="footer-col footer-brand-col">
+                <div class="footer-logo-brand">
+                    <span class="logo-bracket">[</span><span class="logo-text">[Aimad•Security]</span><span class="logo-bracket">]</span>
                 </div>
-                <div class="footer-col">
-                    <h4>Navigation</h4>
-                    <a href="/">Portfolio</a>
-                    <a href="/blog">Blog</a>
+                <p class="footer-desc">
+                    Cybersecurity student, SOC enthusiast, and network security practitioner from Pakistan. Specializing in DFIR, Linux Systems, and Ethical Hacking.
+                </p>
+                
+                <div class="footer-status-pill">
+                    <span class="status-dot"></span>
+                    <span>Available for Consulting &amp; Roles</span>
                 </div>
-                <div class="footer-col">
-                    <h4>Connect</h4>
-                    <a href="https://linkedin.com/in/aimad-ul-islam" target="_blank" rel="noopener noreferrer">LinkedIn <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.6rem; margin-left:0.2rem;"></i></a>
-                    <a href="https://github.com/aimad-ul-islam" target="_blank" rel="noopener noreferrer">GitHub <i class="fa-solid fa-arrow-up-right-from-square" style="font-size:0.6rem; margin-left:0.2rem;"></i></a>
-                </div>
+                
             </div>
-            <div class="footer-bottom">
-                <div class="footer-copy">© 2026 Aimad Ul Islam. All rights reserved.</div>
-                <div class="footer-socs">
-                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="#" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+
+            <!-- Quick Navigation Column -->
+            <div class="footer-col">
+                <h4 class="footer-heading"><i class="fa-solid fa-compass"></i> Navigation</h4>
+                <ul class="footer-links-list">
+                    
+                    <li><a href="/#about"><i class="fa-solid fa-chevron-right fa-xs"></i> About Me</a></li>
+                    
+                    <li><a href="/projects/"><i class="fa-solid fa-chevron-right fa-xs"></i> Security Projects</a></li>
+                    
+                    <li><a href="/labs/"><i class="fa-solid fa-chevron-right fa-xs"></i> Virtual Cyber Labs</a></li>
+                    
+                    <li><a href="/research/"><i class="fa-solid fa-chevron-right fa-xs"></i> Research Reports</a></li>
+                    
+                    <li><a href="/downloads/"><i class="fa-solid fa-chevron-right fa-xs"></i> Download Assets</a></li>
+                    
+                    <li><a href="/blog/"><i class="fa-solid fa-chevron-right fa-xs"></i> Technical Blog</a></li>
+                    
+                    <li><a href="/resources/"><i class="fa-solid fa-chevron-right fa-xs"></i> Resources Hub</a></li>
+                    
+                    <li><a href="/#contact"><i class="fa-solid fa-chevron-right fa-xs"></i> Get In Touch</a></li>
+                    
+                </ul>
+            </div>
+
+            <!-- Resources & Legal Column -->
+            <div class="footer-col">
+                <h4 class="footer-heading"><i class="fa-solid fa-shield-halved"></i> Resources & Legal</h4>
+                <ul class="footer-links-list">
+                    
+                    <li><a href="/resources/privacy-policy/"><i class="fa-solid fa-chevron-right fa-xs"></i> Privacy Policy</a></li>
+                    
+                    <li><a href="/resources/terms/"><i class="fa-solid fa-chevron-right fa-xs"></i> Terms of Use</a></li>
+                    
+                    <li><a href="/resources/cookie-policy/"><i class="fa-solid fa-chevron-right fa-xs"></i> Cookie Policy</a></li>
+                    
+                    <li><a href="/resources/disclaimer/"><i class="fa-solid fa-chevron-right fa-xs"></i> Security Disclaimer</a></li>
+                    
+                    <li><a href="/resources/sitemap-page/"><i class="fa-solid fa-chevron-right fa-xs"></i> Human Sitemap</a></li>
+                    
+                    <li><a href="/sitemap.xml"><i class="fa-solid fa-chevron-right fa-xs"></i> XML Sitemap</a></li>
+                    
+                    <li><a href="/feed.xml"><i class="fa-solid fa-chevron-right fa-xs"></i> RSS Feed</a></li>
+                    
+                </ul>
+            </div>
+
+            <!-- Contact & Social Column -->
+            <div class="footer-col">
+                <h4 class="footer-heading"><i class="fa-solid fa-headset"></i> Connect</h4>
+                <div class="footer-contact-details">
+                    <div class="f-con-row"><i class="fa-solid fa-envelope"></i> <a href="mailto:info@aimadulislam.dpdns.org">info@aimadulislam.dpdns.org</a></div>
+                    <div class="f-con-row"><i class="fa-solid fa-location-dot"></i> <span>Peshawar, Pakistan</span></div>
+                </div>
+                <div class="footer-soc-row">
+                    
+                    <a href="https://github.com/aimadulislam" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    
+                    <a href="https://linkedin.com/in/aimadulislam" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    
+                    <a href="https://x.com/aimadulislam" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                    
+                    <a href="https://youtube.com/@aimadulislam" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    
                 </div>
             </div>
         </div>
-    </footer>
+
+        <!-- FOOTER BOTTOM BAR & CREDIT LINE -->
+        <div class="footer-bottom-bar">
+            <div class="footer-bottom-flex">
+                <div class="footer-copyright">
+                    © 2026 Aimad Ul Islam. All Rights Reserved.
+                </div>
+                
+                
+                <div class="footer-meta-tags">
+                    <span class="footer-tag-version"><i class="fa-solid fa-code-branch"></i> v2.5.0</span>
+                    <span class="footer-tag-date"><i class="fa-regular fa-clock"></i> Updated: August 2026</span>
+                </div>
+                
+            </div>
+
+            <!-- WEBSITE CREDIT LINE FOR LIZZDO STUDIO -->
+            <div class="footer-credit-row">
+                <span class="credit-label">Designed &amp; Developed by</span>
+                <a href="https://lizzdo.com" target="_blank" rel="noopener noreferrer" class="lizzdo-credit-link" title="Lizzdo Studio — Official Site">
+                    <span class="credit-glow-dot"></span>
+                    <span class="credit-text-name">Lizzdo Studio</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square credit-ext-icon"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
 
     <button id="scroll-top" aria-label="Scroll to top"><i class="fa-solid fa-arrow-up"></i></button>
 
-    <script>
-      // Basic Navigation & UI Interactions
-      document.addEventListener('DOMContentLoaded', () => {
-          // Mobile Menu
-          const menuBtn = document.getElementById('mobile-menu-btn');
-          const mobileNav = document.getElementById('mobile-nav');
-          if(menuBtn && mobileNav) {
-              menuBtn.addEventListener('click', () => {
-                  mobileNav.classList.toggle('open');
-              });
-          }
+    <!-- SEARCH MODAL OVERLAY -->
+    <div id="searchModal" style="display:none; position:fixed; inset:0; z-index:99999; background:rgba(5,8,16,0.88); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); padding:2rem 1rem; align-items:flex-start; justify-content:center; overflow-y:auto;">
+        <div class="card" style="max-width:720px; width:100%; margin-top:6vh; padding:1.8rem; position:relative; border:1px solid var(--border2); background:var(--panel); box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(0,212,255,0.15);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.2rem;">
+                <div style="font-family:'Space Grotesk',sans-serif; font-size:1.15rem; font-weight:700; color:var(--cyan); display:flex; align-items:center; gap:0.6rem;">
+                    <i class="fa-solid fa-terminal"></i> Security Search Engine
+                </div>
+                <button id="searchCloseBtn" style="background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:50%; width:32px; height:32px; color:var(--silver); font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s;" aria-label="Close search">&times;</button>
+            </div>
+            <div style="position:relative; margin-bottom:1.2rem;">
+                <input type="text" id="searchInput" placeholder="Search projects, labs, posts, tools, certs..." style="width:100%; padding:0.85rem 1rem 0.85rem 2.6rem; background:rgba(10,22,40,0.85); border:1px solid var(--border2); border-radius:8px; color:var(--white); font-family:'JetBrains Mono',monospace; font-size:0.92rem; outline:none;" />
+                <i class="fa-solid fa-magnifying-glass" style="position:absolute; left:1rem; top:50%; transform:translateY(-50%); color:var(--cyan); font-size:0.9rem;"></i>
+            </div>
+            <div id="searchResults" style="max-height:420px; overflow-y:auto; display:flex; flex-direction:column; gap:0.6rem; padding-right:4px;">
+                <div style="textalign:center; color:var(--muted); padding:1.5rem; font-size:0.88rem;">Type a query to search across all platform records...</div>
+            </div>
+        </div>
+    </div>
 
-          // Dark Mode Toggle
-          const themeToggle = document.getElementById('theme-toggle');
-          const html = document.documentElement;
-          
-          if(themeToggle) {
-              // Set initial icon
-              if(html.getAttribute('data-theme') === 'light') {
-                  themeToggle.innerHTML = '<i class="fa-regular fa-sun"></i>';
-              }
-              
-              themeToggle.addEventListener('click', () => {
-                  if (html.getAttribute('data-theme') === 'dark') {
-                      html.setAttribute('data-theme', 'light');
-                      localStorage.setItem('aimad-theme', 'light');
-                      themeToggle.innerHTML = '<i class="fa-regular fa-sun"></i>';
-                  } else {
-                      html.setAttribute('data-theme', 'dark');
-                      localStorage.setItem('aimad-theme', 'dark');
-                      themeToggle.innerHTML = '<i class="fa-regular fa-moon"></i>';
-                  }
-              });
-          }
-
-          // Nav Scroll Effect
-          const nav = document.querySelector('.blog-nav');
-          window.addEventListener('scroll', () => {
-              if (window.scrollY > 50) {
-                  nav.classList.add('scrolled');
-              } else {
-                  nav.classList.remove('scrolled');
-              }
-          });
-
-          // Scroll to Top
-          const scrollTopBtn = document.getElementById('scroll-top');
-          if(scrollTopBtn) {
-              window.addEventListener('scroll', () => {
-                  if (window.scrollY > 500) {
-                      scrollTopBtn.classList.add('visible');
-                  } else {
-                      scrollTopBtn.classList.remove('visible');
-                  }
-              });
-              scrollTopBtn.addEventListener('click', () => {
-                  window.scrollTo({ top: 0, behavior: 'smooth' });
-              });
-          }
-      });
-    </script>
+    <script src="/js/main.js"></script>
 </body>
 </html>

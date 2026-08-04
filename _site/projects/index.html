@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Projects &amp; Engineering Center | Aimad Ul Islam | Aimad Ul Islam</title>
+    <meta name="description" content="Comprehensive directory of cybersecurity engineering projects, DFIR tools, SOC automation scripts, and network defense architectures by Aimad Ul Islam.">
+    <meta name="theme-color" content="#080C1A">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="Security Projects &amp; Engineering Center | Aimad Ul Islam | Aimad Ul Islam">
+    <meta property="og:description" content="Comprehensive directory of cybersecurity engineering projects, DFIR tools, SOC automation scripts, and network defense architectures by Aimad Ul Islam.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://aimadulislam.dpdns.org/projects/">
+    <meta property="og:image" content="https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/blog.css">
+    
+    <script>
+      (function() {
+        var localTheme = localStorage.getItem('aimad-theme');
+        if (localTheme === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          localStorage.setItem('aimad-theme', 'dark');
+        }
+      })();
+    </script>
+</head>
+<body class="site-base-body">
+    <div class="grid-bg"></div>
+    <div class="scan-line"></div>
+    <div id="reading-progress"></div>
+
+    <!-- SHARED GLOBAL HEADER -->
+    <nav id="navbar" class="site-nav" role="navigation" aria-label="Main Navigation">
+    <div class="nav-container" style="width: 100%; max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+        <a href="/" class="nav-logo-wrap" aria-label="Aimad Security">
+            
+                <span class="nav-logo"><span class="br">[</span>Aimad Security<span class="nav-dot"></span><span class="br">]</span></span>
+            
+        </a>
+
+        <ul class="nav-links">
+            
+                
+                <li>
+                    <a href="/" >
+                        <i class="fa-solid fa-house fa-xs"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a href="/projects/" class="active">
+                        <i class="fa-solid fa-folder-open fa-xs"></i>
+                        <span>Projects</span>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a href="/labs/" >
+                        <i class="fa-solid fa-flask fa-xs"></i>
+                        <span>Labs</span>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a href="/research/" >
+                        <i class="fa-solid fa-file-contract fa-xs"></i>
+                        <span>Research</span>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a href="/blog/" >
+                        <i class="fa-solid fa-pen-nib fa-xs"></i>
+                        <span>Blog</span>
+                    </a>
+                </li>
+                
+            
+                
+                <li class="nav-item-dropdown">
+                    <a href="/resources/" class="dropdown-toggle ">
+                        <i class="fa-solid fa-shield-halved fa-xs"></i>
+                        <span>Resources</span>
+                        <i class="fa-solid fa-chevron-down nav-arrow"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        <li>
+                            <a href="/resources/" >
+                                <i class="fa-solid fa-layer-group fa-xs"></i>
+                                <span>All Resources</span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="/downloads/" >
+                                <i class="fa-solid fa-download fa-xs"></i>
+                                <span>Download Hub</span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="/resources/security-policy/" >
+                                <i class="fa-solid fa-lock fa-xs"></i>
+                                <span>Security Policy</span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="/resources/responsible-disclosure/" >
+                                <i class="fa-solid fa-bug fa-xs"></i>
+                                <span>Disclosure Policy</span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="/resources/sitemap-page/" >
+                                <i class="fa-solid fa-sitemap fa-xs"></i>
+                                <span>Human Sitemap</span>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                
+            
+                
+                <li>
+                    <a href="/#contact" >
+                        <i class="fa-solid fa-envelope fa-xs"></i>
+                        <span>Contact</span>
+                    </a>
+                </li>
+                
+            
+        </ul>
+
+        <div class="nav-right">
+            
+            <button id="searchOpenBtn" class="search-trigger-btn" onclick="openSearchModal()" aria-label="Search site (Ctrl+K)">
+                <i class="fa-solid fa-magnifying-glass fa-xs"></i>
+                <span>Search</span>
+                <kbd class="kbd-badge">Ctrl+K</kbd>
+            </button>
+            
+            
+            
+            <div class="nav-status" title="Available for Security Consulting">
+                <span class="status-dot" style="background: #00FF88; box-shadow: 0 0 8px #00FF88;"></span>
+                <span class="status-text">Available for Security Consulting</span>
+            </div>
+            
+
+            <button class="dark-mode-btn" id="theme-toggle" aria-label="Toggle dark/light theme" onclick="toggleTheme()" style="background: rgba(13,26,48,0.7); border: 1px solid var(--border); color: var(--silver); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition);">
+                <i class="fa-regular fa-moon" id="theme-toggle-icon"></i>
+            </button>
+
+            <a href="/assets/Aimad_Ul_Islam_Resume.pdf" download class="nav-resume-btn" aria-label="Download Resume">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>Resume</span>
+                <i class="fa-solid fa-download dl-icon"></i>
+            </a>
+
+            <div class="hamburger" id="ham" aria-label="Toggle navigation menu">
+                <span></span><span></span><span></span>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- MOBILE OVERLAY & DRAWER -->
+<div class="mobile-overlay" id="mobOverlay" onclick="closeMobileNav()"></div>
+<div class="mobile-nav" id="mobNav">
+    <div class="mobile-nav-header">
+        <div class="mobile-nav-brand">Aimad Security</div>
+        <button class="mob-close-btn" id="mobCloseBtn" onclick="closeMobileNav()" aria-label="Close menu">&times;</button>
+    </div>
+    
+    <div class="mobile-status-badge">
+        <span class="status-dot" style="background: #00FF88;"></span>
+        <span>Available for Security Consulting</span>
+    </div>
+    
+    <ul class="mobile-links">
+        
+        <li>
+            <a href="/" onclick="closeMobileNav()">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </a>
+        </li>
+            
+        
+        <li>
+            <a href="/projects/" onclick="closeMobileNav()">
+                <i class="fa-solid fa-folder-open"></i>
+                <span>Projects</span>
+            </a>
+        </li>
+            
+        
+        <li>
+            <a href="/labs/" onclick="closeMobileNav()">
+                <i class="fa-solid fa-flask"></i>
+                <span>Labs</span>
+            </a>
+        </li>
+            
+        
+        <li>
+            <a href="/research/" onclick="closeMobileNav()">
+                <i class="fa-solid fa-file-contract"></i>
+                <span>Research</span>
+            </a>
+        </li>
+            
+        
+        <li>
+            <a href="/blog/" onclick="closeMobileNav()">
+                <i class="fa-solid fa-pen-nib"></i>
+                <span>Blog</span>
+            </a>
+        </li>
+            
+        
+        <li>
+            <a href="/resources/" onclick="closeMobileNav()">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Resources</span>
+            </a>
+        </li>
+            
+                
+                <li style="padding-left: 1rem;">
+                    <a href="/resources/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <span>All Resources</span>
+                    </a>
+                </li>
+                
+                <li style="padding-left: 1rem;">
+                    <a href="/downloads/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Download Hub</span>
+                    </a>
+                </li>
+                
+                <li style="padding-left: 1rem;">
+                    <a href="/resources/security-policy/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                        <i class="fa-solid fa-lock"></i>
+                        <span>Security Policy</span>
+                    </a>
+                </li>
+                
+                <li style="padding-left: 1rem;">
+                    <a href="/resources/responsible-disclosure/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                        <i class="fa-solid fa-bug"></i>
+                        <span>Disclosure Policy</span>
+                    </a>
+                </li>
+                
+                <li style="padding-left: 1rem;">
+                    <a href="/resources/sitemap-page/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                        <i class="fa-solid fa-sitemap"></i>
+                        <span>Human Sitemap</span>
+                    </a>
+                </li>
+                
+            
+        
+        <li>
+            <a href="/#contact" onclick="closeMobileNav()">
+                <i class="fa-solid fa-envelope"></i>
+                <span>Contact</span>
+            </a>
+        </li>
+            
+        
+    </ul>
+    <div class="mobile-actions">
+        
+        <button onclick="openSearchModal(); closeMobileNav();" class="btn outline w-full" style="display:flex; align-items:center; justify-content:center; gap:0.5rem; padding:0.65rem 1rem; border:1px solid var(--border); border-radius:20px; background:rgba(13,26,48,0.7); color:var(--cyan); cursor:pointer;"><i class="fa-solid fa-magnifying-glass"></i> Search Platform</button>
+        
+        <a href="/assets/Aimad_Ul_Islam_Resume.pdf" download class="btn primary w-full" style="display:flex; align-items:center; justify-content:center; gap:0.5rem; padding:0.65rem 1rem; border-radius:20px; background:linear-gradient(135deg, var(--cyan), var(--cyan2)); color:var(--void); font-weight:600; text-decoration:none;"><i class="fa-solid fa-file-pdf"></i> Download Resume</a>
+    </div>
+</div>
+
+
+    <main id="main-content">
+        
+<!-- HERO SECTION -->
+<section id="blog-hero" aria-labelledby="projects-hero-title" style="padding-bottom: 3rem;">
+  <canvas id="blog-hero-canvas" aria-hidden="true"></canvas>
+  <div class="blog-hero-inner container">
+    <div class="blog-hero-eye"><i class="fa-solid fa-code-branch"></i> Security Engineering & Development Vault</div>
+    <h1 class="blog-hero-title" id="projects-hero-title">
+      Projects <span class="accent">Showcase Center</span>
+    </h1>
+    <p class="blog-hero-sub">Hands-on security engineering, custom threat parsers, SIEM automation scripts, packet analysis engines, and enterprise virtual network setups.</p>
+
+    <!-- Quick Stats Bar -->
+    <div class="sidebar-stats-grid" style="grid-template-columns: repeat(4, 1fr); max-width: 800px; margin: 1.5rem auto 2rem auto;">
+      <div class="s-stat-box card">
+        <div class="s-stat-val" id="stat-proj-count">7</div>
+        <div class="s-stat-lbl">Projects</div>
+      </div>
+      <div class="s-stat-box card">
+        <div class="s-stat-val">100%</div>
+        <div class="s-stat-lbl">Open Source</div>
+      </div>
+      <div class="s-stat-box card">
+        <div class="s-stat-val">15+</div>
+        <div class="s-stat-lbl">Tools & Frameworks</div>
+      </div>
+      <div class="s-stat-box card">
+        <div class="s-stat-val" style="color: var(--green);">Active</div>
+        <div class="s-stat-lbl">Status</div>
+      </div>
+    </div>
+
+    <!-- Search & Filter Controls -->
+    <div class="search-filter-container card">
+      <div class="search-wrap" role="search">
+        <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+        <input type="search" id="proj-search" placeholder="Search projects by title, tool (Splunk, Scapy, Burp), category, or tag..." autocomplete="off" aria-label="Search projects"/>
+      </div>
+
+      <div class="filter-controls-row">
+        <div class="filter-group">
+          <label for="difficulty-select"><i class="fa-solid fa-layer-group"></i> Level:</label>
+          <select id="difficulty-select" class="cyber-select">
+            <option value="all">All Difficulties</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+            <option value="expert">Expert</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="status-select"><i class="fa-solid fa-circle-check"></i> Status:</label>
+          <select id="status-select" class="cyber-select">
+            <option value="all">All Statuses</option>
+            <option value="completed">Completed</option>
+            <option value="active">Active</option>
+            <option value="in-progress">In-Progress</option>
+          </select>
+        </div>
+
+        <div class="filter-group">
+          <label for="sort-select"><i class="fa-solid fa-arrow-down-wide-short"></i> Sort By:</label>
+          <select id="sort-select" class="cyber-select">
+            <option value="newest">Latest Added</option>
+            <option value="title">Title (A-Z)</option>
+            <option value="difficulty">Difficulty</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <!-- Category Pills with Auto Counts -->
+    <div id="categories-bar" class="categories-bar-wrapper">
+      <div class="categories-scroll" role="list">
+        <button class="cat-btn active" data-cat="all" role="listitem">
+          <i class="fa-solid fa-border-all fa-xs"></i> All Categories
+        </button>
+        <button class="cat-btn" data-cat="home lab" role="listitem">
+          <i class="fa-solid fa-server fa-xs"></i> Home Lab
+        </button>
+        <button class="cat-btn" data-cat="automation" role="listitem">
+          <i class="fa-solid fa-robot fa-xs"></i> Automation
+        </button>
+        <button class="cat-btn" data-cat="digital forensics" role="listitem">
+          <i class="fa-solid fa-magnifying-glass-location fa-xs"></i> DFIR
+        </button>
+        <button class="cat-btn" data-cat="networking" role="listitem">
+          <i class="fa-solid fa-network-wired fa-xs"></i> Network Security
+        </button>
+        <button class="cat-btn" data-cat="web security" role="listitem">
+          <i class="fa-solid fa-globe fa-xs"></i> Web Security
+        </button>
+        <button class="cat-btn" data-cat="penetration testing" role="listitem">
+          <i class="fa-solid fa-user-ninja fa-xs"></i> Pentesting
+        </button>
+        <button class="cat-btn" data-cat="malware analysis" role="listitem">
+          <i class="fa-solid fa-bug fa-xs"></i> Malware
+        </button>
+        <button class="cat-btn" data-cat="cloud security" role="listitem">
+          <i class="fa-solid fa-cloud fa-xs"></i> Cloud Security
+        </button>
+        <button class="cat-btn" data-cat="python" role="listitem">
+          <i class="fa-brands fa-python fa-xs"></i> Python
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MAIN CONTENT GRID -->
+<main class="container">
+  <section id="projects-section" class="articles-main-section">
+    <div class="section-flex-header">
+      <h2 class="articles-section-title"><i class="fa-solid fa-cubes-stacked"></i> Engineering Projects Directory</h2>
+      <span class="posts-count-badge" id="projects-count">Displaying All Projects</span>
+    </div>
+
+    <div id="projects-grid" class="articles-grid" style="grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));">
+      
+      <!-- Data items from JSON -->
+      
+      <article class="card article-card project-card"
+               data-category="home lab"
+               data-title="home lab soc setup with splunk &amp; snort"
+               data-description="configured a complete virtual soc environment using virtualbox, snort ids, splunk enterprise, and kali linux. simulated real attack traffic and crafted custom detection rules for brute-force and port scanning attacks."
+               data-tech="splunk snort ids virtualbox ubuntu server kali linux "
+               data-difficulty="advanced"
+               data-status="completed">
+        <div class="card-glow"></div>
+        <div class="article-card-img-wrap" style="height: 190px;">
+          
+          <img class="article-card-img" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Home Lab SOC Setup with Splunk &amp; Snort" loading="lazy"/>
+          
+          <span class="card-diff-badge advanced">Advanced</span>
+        </div>
+
+        <div class="article-card-body">
+          <div class="article-card-tags">
+            <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> Home Lab</span>
+            <span class="tag tag-tut" style="color: var(--green); border-color: rgba(0,255,136,0.3);"><i class="fa-solid fa-circle-check"></i> Completed</span>
+          </div>
+
+          <h3 class="article-card-title">Home Lab SOC Setup with Splunk &amp; Snort</h3>
+          <p class="article-card-excerpt">Configured a complete virtual SOC environment using VirtualBox, Snort IDS, Splunk Enterprise, and Kali Linux. Simulated real attack traffic and crafted custom detection rules for brute-force and port scanning attacks.</p>
+
+          
+          <div class="article-tags-mini" style="margin-top: 0.8rem;">
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> Splunk</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> Snort IDS</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> VirtualBox</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> Ubuntu Server</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> Kali Linux</span>
+            
+          </div>
+          
+
+          <div class="article-card-footer" style="margin-top: 1.2rem;">
+            <div class="project-actions" style="display: flex; gap: 0.5rem; width: 100%;">
+              
+              <a href="https://github.com/aimadulislam/soc-home-lab" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" style="flex: 1; text-align: center;"><i class="fa-brands fa-github"></i> Code</a>
+              
+              
+            </div>
+          </div>
+        </div>
+      </article>
+      
+      <article class="card article-card project-card"
+               data-category="automation"
+               data-title="automated python pcap analyzer &amp; threat parser"
+               data-description="developed a custom python script using scapy and pyshark to parse raw network capture files (.pcap), extract suspicious dns queries, detect plain-text credentials, and output structured json summaries."
+               data-tech="python scapy pyshark wireshark json "
+               data-difficulty="intermediate"
+               data-status="completed">
+        <div class="card-glow"></div>
+        <div class="article-card-img-wrap" style="height: 190px;">
+          
+          <img class="article-card-img" src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Automated Python PCAP Analyzer &amp; Threat Parser" loading="lazy"/>
+          
+          <span class="card-diff-badge intermediate">Intermediate</span>
+        </div>
+
+        <div class="article-card-body">
+          <div class="article-card-tags">
+            <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> Automation</span>
+            <span class="tag tag-tut" style="color: var(--green); border-color: rgba(0,255,136,0.3);"><i class="fa-solid fa-circle-check"></i> Completed</span>
+          </div>
+
+          <h3 class="article-card-title">Automated Python PCAP Analyzer &amp; Threat Parser</h3>
+          <p class="article-card-excerpt">Developed a custom Python script using Scapy and PyShark to parse raw network capture files (.pcap), extract suspicious DNS queries, detect plain-text credentials, and output structured JSON summaries.</p>
+
+          
+          <div class="article-tags-mini" style="margin-top: 0.8rem;">
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> Python</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> Scapy</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> PyShark</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> Wireshark</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> JSON</span>
+            
+          </div>
+          
+
+          <div class="article-card-footer" style="margin-top: 1.2rem;">
+            <div class="project-actions" style="display: flex; gap: 0.5rem; width: 100%;">
+              
+              <a href="https://github.com/aimadulislam/pcap-analyzer" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" style="flex: 1; text-align: center;"><i class="fa-brands fa-github"></i> Code</a>
+              
+              
+            </div>
+          </div>
+        </div>
+      </article>
+      
+      <article class="card article-card project-card"
+               data-category="digital forensics"
+               data-title="digital forensics memory &amp; disk investigation case"
+               data-description="conducted a complete memory and disk forensic investigation on an infected windows 10 image. used volatility 3 to extract injected dlls and autopsy to reconstruct file access timelines."
+               data-tech="volatility 3 autopsy ftk imager hex editors "
+               data-difficulty="advanced"
+               data-status="completed">
+        <div class="card-glow"></div>
+        <div class="article-card-img-wrap" style="height: 190px;">
+          
+          <img class="article-card-img" src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Digital Forensics Memory &amp; Disk Investigation Case" loading="lazy"/>
+          
+          <span class="card-diff-badge advanced">Advanced</span>
+        </div>
+
+        <div class="article-card-body">
+          <div class="article-card-tags">
+            <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> Digital Forensics</span>
+            <span class="tag tag-tut" style="color: var(--green); border-color: rgba(0,255,136,0.3);"><i class="fa-solid fa-circle-check"></i> Completed</span>
+          </div>
+
+          <h3 class="article-card-title">Digital Forensics Memory &amp; Disk Investigation Case</h3>
+          <p class="article-card-excerpt">Conducted a complete memory and disk forensic investigation on an infected Windows 10 image. Used Volatility 3 to extract injected DLLs and Autopsy to reconstruct file access timelines.</p>
+
+          
+          <div class="article-tags-mini" style="margin-top: 0.8rem;">
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> Volatility 3</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> Autopsy</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> FTK Imager</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> Hex Editors</span>
+            
+          </div>
+          
+
+          <div class="article-card-footer" style="margin-top: 1.2rem;">
+            <div class="project-actions" style="display: flex; gap: 0.5rem; width: 100%;">
+              
+              <a href="https://github.com/aimadulislam/dfir-investigation" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" style="flex: 1; text-align: center;"><i class="fa-brands fa-github"></i> Code</a>
+              
+              
+            </div>
+          </div>
+        </div>
+      </article>
+      
+      <article class="card article-card project-card"
+               data-category="networking"
+               data-title="enterprise network infrastructure simulation"
+               data-description="designed a multi-vlan enterprise network architecture in cisco packet tracer with ospf routing, access control lists (acls), dhcp snooping, and ipsec vpn tunnel between branch offices."
+               data-tech="cisco packet tracer ospf acls dhcp snooping ipsec vpn "
+               data-difficulty="intermediate"
+               data-status="completed">
+        <div class="card-glow"></div>
+        <div class="article-card-img-wrap" style="height: 190px;">
+          
+          <img class="article-card-img" src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Enterprise Network Infrastructure Simulation" loading="lazy"/>
+          
+          <span class="card-diff-badge intermediate">Intermediate</span>
+        </div>
+
+        <div class="article-card-body">
+          <div class="article-card-tags">
+            <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> Networking</span>
+            <span class="tag tag-tut" style="color: var(--green); border-color: rgba(0,255,136,0.3);"><i class="fa-solid fa-circle-check"></i> Completed</span>
+          </div>
+
+          <h3 class="article-card-title">Enterprise Network Infrastructure Simulation</h3>
+          <p class="article-card-excerpt">Designed a multi-VLAN enterprise network architecture in Cisco Packet Tracer with OSPF routing, Access Control Lists (ACLs), DHCP snooping, and IPsec VPN tunnel between branch offices.</p>
+
+          
+          <div class="article-tags-mini" style="margin-top: 0.8rem;">
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> Cisco Packet Tracer</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> OSPF</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> ACLs</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> DHCP Snooping</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> IPsec VPN</span>
+            
+          </div>
+          
+
+          <div class="article-card-footer" style="margin-top: 1.2rem;">
+            <div class="project-actions" style="display: flex; gap: 0.5rem; width: 100%;">
+              
+              <a href="https://github.com/aimadulislam/cisco-enterprise-net" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" style="flex: 1; text-align: center;"><i class="fa-brands fa-github"></i> Code</a>
+              
+              
+            </div>
+          </div>
+        </div>
+      </article>
+      
+      <article class="card article-card project-card"
+               data-category="web development"
+               data-title="web application penetration testing lab"
+               data-description="performed ethical penetration testing against owasp juice shop and dvwa. documented vulnerabilities including blind sql injection, cross-site scripting (xss), and insecure direct object references (idor)."
+               data-tech="burp suite owasp juice shop dvwa sqlmap owasp top 10 "
+               data-difficulty="intermediate"
+               data-status="completed">
+        <div class="card-glow"></div>
+        <div class="article-card-img-wrap" style="height: 190px;">
+          
+          <img class="article-card-img" src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Web Application Penetration Testing Lab" loading="lazy"/>
+          
+          <span class="card-diff-badge intermediate">Intermediate</span>
+        </div>
+
+        <div class="article-card-body">
+          <div class="article-card-tags">
+            <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> Web Development</span>
+            <span class="tag tag-tut" style="color: var(--green); border-color: rgba(0,255,136,0.3);"><i class="fa-solid fa-circle-check"></i> Completed</span>
+          </div>
+
+          <h3 class="article-card-title">Web Application Penetration Testing Lab</h3>
+          <p class="article-card-excerpt">Performed ethical penetration testing against OWASP Juice Shop and DVWA. Documented vulnerabilities including Blind SQL Injection, Cross-Site Scripting (XSS), and Insecure Direct Object References (IDOR).</p>
+
+          
+          <div class="article-tags-mini" style="margin-top: 0.8rem;">
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> Burp Suite</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> OWASP Juice Shop</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> DVWA</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> SQLMap</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> OWASP Top 10</span>
+            
+          </div>
+          
+
+          <div class="article-card-footer" style="margin-top: 1.2rem;">
+            <div class="project-actions" style="display: flex; gap: 0.5rem; width: 100%;">
+              
+              <a href="https://github.com/aimadulislam/webapp-pentest" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" style="flex: 1; text-align: center;"><i class="fa-brands fa-github"></i> Code</a>
+              
+              
+            </div>
+          </div>
+        </div>
+      </article>
+      
+      <article class="card article-card project-card"
+               data-category="research"
+               data-title="metasploitable 2 vulnerability assessment &amp; hardening"
+               data-description="audited metasploitable 2 using nmap, nessus, and manual exploitation techniques. formulated a mitigation blueprint detailing service patching, ssh key enforcement, and firewall configuration."
+               data-tech="nmap nessus metasploit linux security hardening "
+               data-difficulty="intermediate"
+               data-status="completed">
+        <div class="card-glow"></div>
+        <div class="article-card-img-wrap" style="height: 190px;">
+          
+          <img class="article-card-img" src="https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Metasploitable 2 Vulnerability Assessment &amp; Hardening" loading="lazy"/>
+          
+          <span class="card-diff-badge intermediate">Intermediate</span>
+        </div>
+
+        <div class="article-card-body">
+          <div class="article-card-tags">
+            <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> Research</span>
+            <span class="tag tag-tut" style="color: var(--green); border-color: rgba(0,255,136,0.3);"><i class="fa-solid fa-circle-check"></i> Completed</span>
+          </div>
+
+          <h3 class="article-card-title">Metasploitable 2 Vulnerability Assessment &amp; Hardening</h3>
+          <p class="article-card-excerpt">Audited Metasploitable 2 using Nmap, Nessus, and manual exploitation techniques. Formulated a mitigation blueprint detailing service patching, SSH key enforcement, and firewall configuration.</p>
+
+          
+          <div class="article-tags-mini" style="margin-top: 0.8rem;">
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> Nmap</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> Nessus</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> Metasploit</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> Linux Security Hardening</span>
+            
+          </div>
+          
+
+          <div class="article-card-footer" style="margin-top: 1.2rem;">
+            <div class="project-actions" style="display: flex; gap: 0.5rem; width: 100%;">
+              
+              <a href="https://github.com/aimadulislam/metasploitable-hardening" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline" style="flex: 1; text-align: center;"><i class="fa-brands fa-github"></i> Code</a>
+              
+              
+            </div>
+          </div>
+        </div>
+      </article>
+      
+
+      <!-- Markdown Collection Items from Decap CMS -->
+      
+      <article class="card article-card project-card"
+               data-category="digital forensics"
+               data-title="automated volatility 3 memory forensic parser"
+               data-description="a python-based automated memory analysis parser that extracts processes, network sockets, dll injections, and suspicious handles from windows ram dumps using volatility 3."
+               data-tech="python volatility 3 yara linux bash "
+               data-difficulty="advanced"
+               data-status="completed"
+               onclick="window.location='/projects/automated-memory-forensics/'">
+        <div class="card-glow"></div>
+        <div class="article-card-img-wrap" style="height: 190px;">
+          
+          <img class="article-card-img" src="/img/memory-forensics-hero.jpg" alt="Automated Volatility 3 Memory Forensic Parser" loading="lazy"/>
+          
+          <span class="card-diff-badge advanced">Advanced</span>
+        </div>
+
+        <div class="article-card-body">
+          <div class="article-card-tags">
+            <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> Digital Forensics</span>
+            <span class="tag tag-tut" style="color: var(--green); border-color: rgba(0,255,136,0.3);"><i class="fa-solid fa-circle-check"></i> Completed</span>
+          </div>
+
+          <h3 class="article-card-title">Automated Volatility 3 Memory Forensic Parser</h3>
+          <p class="article-card-excerpt">A Python-based automated memory analysis parser that extracts processes, network sockets, DLL injections, and suspicious handles from Windows RAM dumps using Volatility 3.</p>
+
+          
+          <div class="article-tags-mini" style="margin-top: 0.8rem;">
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> Python</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> Volatility 3</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> YARA</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> Linux</span>
+            
+            <span class="mini-tag"><i class="fa-solid fa-microchip fa-xs"></i> Bash</span>
+            
+          </div>
+          
+
+          <div class="article-card-footer" style="margin-top: 1.2rem;">
+            <a href="/projects/automated-memory-forensics/" class="btn btn-sm btn-cyan btn-full"><i class="fa-solid fa-book-open"></i> Full Project Blueprint</a>
+          </div>
+        </div>
+      </article>
+      
+
+    </div>
+
+    <!-- No Results Fallback -->
+    <div class="no-results card" id="no-proj-results" style="display:none; text-align: center; padding: 3rem 1.5rem;">
+      <i class="fa-solid fa-laptop-code text-cyan" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+      <h3>No Security Projects Match Your Query</h3>
+      <p>Try clearing difficulty filters, clearing search inputs, or selecting another technical category.</p>
+      <button class="btn btn-cyan mt-3" onclick="resetProjSearch()"><i class="fa-solid fa-rotate"></i> Reset All Filters</button>
+    </div>
+  </section>
+</main>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const searchInput = document.getElementById("proj-search");
+  const diffSelect = document.getElementById("difficulty-select");
+  const statusSelect = document.getElementById("status-select");
+  const sortSelect = document.getElementById("sort-select");
+  const catBtns = document.querySelectorAll(".cat-btn");
+  const cards = Array.from(document.querySelectorAll(".project-card"));
+  const countBadge = document.getElementById("projects-count");
+  const noResults = document.getElementById("no-proj-results");
+
+  let currentSearch = "";
+  let currentCat = "all";
+  let currentDiff = "all";
+  let currentStatus = "all";
+  let currentSort = "newest";
+
+  function filterProjects() {
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const title = card.getAttribute("data-title") || "";
+      const desc = card.getAttribute("data-description") || "";
+      const cat = card.getAttribute("data-category") || "";
+      const tech = card.getAttribute("data-tech") || "";
+      const diff = card.getAttribute("data-difficulty") || "";
+      const status = card.getAttribute("data-status") || "";
+
+      const matchSearch = currentSearch === "" || 
+                          title.includes(currentSearch) || 
+                          desc.includes(currentSearch) || 
+                          cat.includes(currentSearch) || 
+                          tech.includes(currentSearch);
+
+      const matchCat = currentCat === "all" || cat.includes(currentCat.toLowerCase());
+      const matchDiff = currentDiff === "all" || diff === currentDiff.toLowerCase();
+      const matchStatus = currentStatus === "all" || status === currentStatus.toLowerCase();
+
+      if (matchSearch && matchCat && matchDiff && matchStatus) {
+        card.style.display = "flex";
+        visibleCount++;
+      } else {
+        card.style.display = "none";
+      }
+    });
+
+    if (countBadge) countBadge.textContent = `${visibleCount} Projects Displayed`;
+    if (noResults) noResults.style.display = visibleCount === 0 ? "block" : "none";
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      currentSearch = e.target.value.toLowerCase().trim();
+      filterProjects();
+    });
+  }
+
+  if (diffSelect) {
+    diffSelect.addEventListener("change", (e) => {
+      currentDiff = e.target.value;
+      filterProjects();
+    });
+  }
+
+  if (statusSelect) {
+    statusSelect.addEventListener("change", (e) => {
+      currentStatus = e.target.value;
+      filterProjects();
+    });
+  }
+
+  catBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      catBtns.forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentCat = btn.getAttribute("data-cat");
+      filterProjects();
+    });
+  });
+
+  window.resetProjSearch = () => {
+    if (searchInput) searchInput.value = "";
+    if (diffSelect) diffSelect.value = "all";
+    if (statusSelect) statusSelect.value = "all";
+    currentSearch = "";
+    currentCat = "all";
+    currentDiff = "all";
+    currentStatus = "all";
+    catBtns.forEach(b => {
+      if (b.getAttribute("data-cat") === "all") b.classList.add("active");
+      else b.classList.remove("active");
+    });
+    filterProjects();
+  };
+});
+</script>
+
+    </main>
+
+    <!-- SHARED GLOBAL FOOTER -->
+    
+<footer class="site-footer" role="contentinfo">
+    <div class="footer-top-glow"></div>
+    <div class="container">
+        <div class="footer-grid">
+            <!-- Brand Column -->
+            <div class="footer-col footer-brand-col">
+                <div class="footer-logo-brand">
+                    <span class="logo-bracket">[</span><span class="logo-text">[Aimad•Security]</span><span class="logo-bracket">]</span>
+                </div>
+                <p class="footer-desc">
+                    Cybersecurity student, SOC enthusiast, and network security practitioner from Pakistan. Specializing in DFIR, Linux Systems, and Ethical Hacking.
+                </p>
+                
+                <div class="footer-status-pill">
+                    <span class="status-dot"></span>
+                    <span>Available for Consulting &amp; Roles</span>
+                </div>
+                
+            </div>
+
+            <!-- Quick Navigation Column -->
+            <div class="footer-col">
+                <h4 class="footer-heading"><i class="fa-solid fa-compass"></i> Navigation</h4>
+                <ul class="footer-links-list">
+                    
+                    <li><a href="/#about"><i class="fa-solid fa-chevron-right fa-xs"></i> About Me</a></li>
+                    
+                    <li><a href="/projects/"><i class="fa-solid fa-chevron-right fa-xs"></i> Security Projects</a></li>
+                    
+                    <li><a href="/labs/"><i class="fa-solid fa-chevron-right fa-xs"></i> Virtual Cyber Labs</a></li>
+                    
+                    <li><a href="/research/"><i class="fa-solid fa-chevron-right fa-xs"></i> Research Reports</a></li>
+                    
+                    <li><a href="/downloads/"><i class="fa-solid fa-chevron-right fa-xs"></i> Download Assets</a></li>
+                    
+                    <li><a href="/blog/"><i class="fa-solid fa-chevron-right fa-xs"></i> Technical Blog</a></li>
+                    
+                    <li><a href="/resources/"><i class="fa-solid fa-chevron-right fa-xs"></i> Resources Hub</a></li>
+                    
+                    <li><a href="/#contact"><i class="fa-solid fa-chevron-right fa-xs"></i> Get In Touch</a></li>
+                    
+                </ul>
+            </div>
+
+            <!-- Resources & Legal Column -->
+            <div class="footer-col">
+                <h4 class="footer-heading"><i class="fa-solid fa-shield-halved"></i> Resources & Legal</h4>
+                <ul class="footer-links-list">
+                    
+                    <li><a href="/resources/privacy-policy/"><i class="fa-solid fa-chevron-right fa-xs"></i> Privacy Policy</a></li>
+                    
+                    <li><a href="/resources/terms/"><i class="fa-solid fa-chevron-right fa-xs"></i> Terms of Use</a></li>
+                    
+                    <li><a href="/resources/cookie-policy/"><i class="fa-solid fa-chevron-right fa-xs"></i> Cookie Policy</a></li>
+                    
+                    <li><a href="/resources/disclaimer/"><i class="fa-solid fa-chevron-right fa-xs"></i> Security Disclaimer</a></li>
+                    
+                    <li><a href="/resources/sitemap-page/"><i class="fa-solid fa-chevron-right fa-xs"></i> Human Sitemap</a></li>
+                    
+                    <li><a href="/sitemap.xml"><i class="fa-solid fa-chevron-right fa-xs"></i> XML Sitemap</a></li>
+                    
+                    <li><a href="/feed.xml"><i class="fa-solid fa-chevron-right fa-xs"></i> RSS Feed</a></li>
+                    
+                </ul>
+            </div>
+
+            <!-- Contact & Social Column -->
+            <div class="footer-col">
+                <h4 class="footer-heading"><i class="fa-solid fa-headset"></i> Connect</h4>
+                <div class="footer-contact-details">
+                    <div class="f-con-row"><i class="fa-solid fa-envelope"></i> <a href="mailto:info@aimadulislam.dpdns.org">info@aimadulislam.dpdns.org</a></div>
+                    <div class="f-con-row"><i class="fa-solid fa-location-dot"></i> <span>Peshawar, Pakistan</span></div>
+                </div>
+                <div class="footer-soc-row">
+                    
+                    <a href="https://github.com/aimadulislam" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    
+                    <a href="https://linkedin.com/in/aimadulislam" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    
+                    <a href="https://x.com/aimadulislam" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                    
+                    <a href="https://youtube.com/@aimadulislam" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER BOTTOM BAR & CREDIT LINE -->
+        <div class="footer-bottom-bar">
+            <div class="footer-bottom-flex">
+                <div class="footer-copyright">
+                    © 2026 Aimad Ul Islam. All Rights Reserved.
+                </div>
+                
+                
+                <div class="footer-meta-tags">
+                    <span class="footer-tag-version"><i class="fa-solid fa-code-branch"></i> v2.5.0</span>
+                    <span class="footer-tag-date"><i class="fa-regular fa-clock"></i> Updated: August 2026</span>
+                </div>
+                
+            </div>
+
+            <!-- WEBSITE CREDIT LINE FOR LIZZDO STUDIO -->
+            <div class="footer-credit-row">
+                <span class="credit-label">Designed &amp; Developed by</span>
+                <a href="https://lizzdo.com" target="_blank" rel="noopener noreferrer" class="lizzdo-credit-link" title="Lizzdo Studio — Official Site">
+                    <span class="credit-glow-dot"></span>
+                    <span class="credit-text-name">Lizzdo Studio</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square credit-ext-icon"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    <button id="scroll-top" aria-label="Scroll to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <!-- SEARCH MODAL OVERLAY -->
+    <div id="searchModal" style="display:none; position:fixed; inset:0; z-index:99999; background:rgba(5,8,16,0.88); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); padding:2rem 1rem; align-items:flex-start; justify-content:center; overflow-y:auto;">
+        <div class="card" style="max-width:720px; width:100%; margin-top:6vh; padding:1.8rem; position:relative; border:1px solid var(--border2); background:var(--panel); box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(0,212,255,0.15);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.2rem;">
+                <div style="font-family:'Space Grotesk',sans-serif; font-size:1.15rem; font-weight:700; color:var(--cyan); display:flex; align-items:center; gap:0.6rem;">
+                    <i class="fa-solid fa-terminal"></i> Security Search Engine
+                </div>
+                <button id="searchCloseBtn" style="background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:50%; width:32px; height:32px; color:var(--silver); font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s;" aria-label="Close search">&times;</button>
+            </div>
+            <div style="position:relative; margin-bottom:1.2rem;">
+                <input type="text" id="searchInput" placeholder="Search projects, labs, posts, tools, certs..." style="width:100%; padding:0.85rem 1rem 0.85rem 2.6rem; background:rgba(10,22,40,0.85); border:1px solid var(--border2); border-radius:8px; color:var(--white); font-family:'JetBrains Mono',monospace; font-size:0.92rem; outline:none;" />
+                <i class="fa-solid fa-magnifying-glass" style="position:absolute; left:1rem; top:50%; transform:translateY(-50%); color:var(--cyan); font-size:0.9rem;"></i>
+            </div>
+            <div id="searchResults" style="max-height:420px; overflow-y:auto; display:flex; flex-direction:column; gap:0.6rem; padding-right:4px;">
+                <div style="textalign:center; color:var(--muted); padding:1.5rem; font-size:0.88rem;">Type a query to search across all platform records...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

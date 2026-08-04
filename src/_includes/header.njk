@@ -1,16 +1,18 @@
 <nav id="navbar" class="site-nav" role="navigation" aria-label="Main Navigation">
     <div class="nav-container" style="width: 100%; max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
-        <a href="/" class="nav-logo-wrap" aria-label="{{ settings.portfolio_name or 'Home' }}">
-            {% if settings.logo_image %}
-                <img src="{{ settings.logo_image }}" alt="{{ settings.portfolio_name or 'Aimad Security' }}" class="nav-logo-img dark-logo" style="max-height: {{ settings.logo_height or '34px' }}; max-width: {{ settings.logo_width or 'auto' }};" />
-                {% if settings.logo_image_light %}
-                    <img src="{{ settings.logo_image_light }}" alt="{{ settings.portfolio_name or 'Aimad Security' }}" class="nav-logo-img light-logo" style="max-height: {{ settings.logo_height or '34px' }}; max-width: {{ settings.logo_width or 'auto' }};" />
+        <a href="{{ brand.logo_link or '/' }}" class="nav-logo-wrap" aria-label="{{ settings.portfolio_name or 'Home' }}">
+            {% set darkLogo = brand.logo_dark or brand.main_logo or settings.logo_image %}
+            {% set lightLogo = brand.logo_light or brand.main_logo or settings.logo_image_light or darkLogo %}
+            {% if darkLogo %}
+                <img src="{{ darkLogo }}" alt="{{ settings.portfolio_name or 'Aimad Security' }}" class="nav-logo-img dark-logo" style="max-height: {{ brand.logo_height or settings.logo_height or '34px' }}; max-width: {{ brand.logo_width or settings.logo_width or 'auto' }}; padding: {{ brand.logo_padding or '0px' }};" />
+                {% if lightLogo and lightLogo != darkLogo %}
+                    <img src="{{ lightLogo }}" alt="{{ settings.portfolio_name or 'Aimad Security' }}" class="nav-logo-img light-logo" style="max-height: {{ brand.logo_height or settings.logo_height or '34px' }}; max-width: {{ brand.logo_width or settings.logo_width or 'auto' }}; padding: {{ brand.logo_padding or '0px' }};" />
                 {% endif %}
                 {% if settings.show_logo_text_with_image != false and settings.logo_text %}
                     <span class="nav-logo-text">{{ settings.logo_text }}</span>
                 {% endif %}
             {% else %}
-                <span class="nav-logo"><span class="br">[</span>{{ settings.logo_text or settings.portfolio_name or "Aimad Security" }}<span class="nav-dot"></span><span class="br">]</span></span>
+                <span class="nav-logo"><span class="br">[</span>{{ brand.footer_logo or settings.logo_text or settings.portfolio_name or "Aimad Security" }}<span class="nav-dot"></span><span class="br">]</span></span>
             {% endif %}
         </a>
 
@@ -90,7 +92,13 @@
 <div class="mobile-overlay" id="mobOverlay" onclick="closeMobileNav()"></div>
 <div class="mobile-nav" id="mobNav">
     <div class="mobile-nav-header">
-        <div class="mobile-nav-brand">{{ settings.logo_text or settings.portfolio_name or "Aimad Security" }}</div>
+        <div class="mobile-nav-brand">
+            {% if brand.mobile_logo or brand.main_logo %}
+                <img src="{{ brand.mobile_logo or brand.main_logo }}" alt="{{ settings.portfolio_name or 'Aimad Security' }}" style="max-height: 28px; max-width: auto;" />
+            {% else %}
+                {{ brand.footer_logo or settings.logo_text or settings.portfolio_name or "Aimad Security" }}
+            {% endif %}
+        </div>
         <button class="mob-close-btn" id="mobCloseBtn" onclick="closeMobileNav()" aria-label="Close menu">&times;</button>
     </div>
     {% if settings.status_badge_visible != false %}

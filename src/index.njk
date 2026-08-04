@@ -220,12 +220,12 @@ layout: layouts/base.njk
     </div>
 </section>
 
-<!-- CERTIFICATIONS SECTION (Dynamic Counter) -->
+<!-- CERTIFICATIONS SECTION (Dynamic Counters & Badges) -->
 <section id="certifications" style="background:linear-gradient(180deg,transparent,rgba(11,19,40,0.4),transparent);">
     <div class="container">
         <div class="reveal">
             <div class="sec-eye">03 Certifications</div>
-            <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
+            <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap; gap:1rem;">
                 <h2 class="sec-title">Credentials & Certifications</h2>
                 <div class="cert-counter-badge" style="background:rgba(0,212,255,0.1); border:1px solid var(--border2); padding:0.4rem 1rem; border-radius:20px; color:var(--cyan); font-family:'JetBrains Mono',monospace; font-size:0.9rem;">
                     <i class="fa-solid fa-award"></i> {{ certifications.items | length }} Certifications Total
@@ -233,6 +233,43 @@ layout: layouts/base.njk
             </div>
             <div class="sec-rule"></div>
         </div>
+
+        <!-- CERTIFICATION METRICS COUNTER BAR -->
+        <div class="cert-stats-grid reveal" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:1rem; margin-bottom:2rem;">
+            <div class="card" style="padding:1rem 1.2rem; display:flex; align-items:center; gap:1rem; background:rgba(10,22,40,0.6);">
+                <div style="width:40px; height:40px; border-radius:10px; background:rgba(0,212,255,0.15); display:flex; align-items:center; justify-content:center; color:var(--cyan); font-size:1.2rem;"><i class="fa-solid fa-certificate"></i></div>
+                <div>
+                    <div style="font-size:1.5rem; font-weight:700; color:var(--white); font-family:'JetBrains Mono',monospace;">{{ certifications.items | length }}</div>
+                    <div style="font-size:0.78rem; color:var(--silver);">Total Certifications</div>
+                </div>
+            </div>
+            <div class="card" style="padding:1rem 1.2rem; display:flex; align-items:center; gap:1rem; background:rgba(10,22,40,0.6);">
+                <div style="width:40px; height:40px; border-radius:10px; background:rgba(0,255,136,0.15); display:flex; align-items:center; justify-content:center; color:var(--green); font-size:1.2rem;"><i class="fa-solid fa-circle-check"></i></div>
+                <div>
+                    <div style="font-size:1.5rem; font-weight:700; color:var(--green); font-family:'JetBrains Mono',monospace;">
+                        {% set vCount = 0 %}{% for c in certifications.items %}{% if c.status == 'Verified' or c.status == 'Active' or c.status == 'Completed' %}{% set vCount = vCount + 1 %}{% endif %}{% endfor %}{{ vCount }}
+                    </div>
+                    <div style="font-size:0.78rem; color:var(--silver);">Verified Credentials</div>
+                </div>
+            </div>
+            <div class="card" style="padding:1rem 1.2rem; display:flex; align-items:center; gap:1rem; background:rgba(10,22,40,0.6);">
+                <div style="width:40px; height:40px; border-radius:10px; background:rgba(124,58,237,0.15); display:flex; align-items:center; justify-content:center; color:var(--violet2); font-size:1.2rem;"><i class="fa-solid fa-shield-halved"></i></div>
+                <div>
+                    <div style="font-size:1.5rem; font-weight:700; color:var(--violet2); font-family:'JetBrains Mono',monospace;">
+                        {% set aCount = 0 %}{% for c in certifications.items %}{% if c.status == 'Active' or c.status == 'Verified' %}{% set aCount = aCount + 1 %}{% endif %}{% endfor %}{{ aCount }}
+                    </div>
+                    <div style="font-size:0.78rem; color:var(--silver);">Active Certifications</div>
+                </div>
+            </div>
+            <div class="card" style="padding:1rem 1.2rem; display:flex; align-items:center; gap:1rem; background:rgba(10,22,40,0.6);">
+                <div style="width:40px; height:40px; border-radius:10px; background:rgba(255,183,0,0.15); display:flex; align-items:center; justify-content:center; color:var(--amber); font-size:1.2rem;"><i class="fa-solid fa-stopwatch"></i></div>
+                <div>
+                    <div style="font-size:1.5rem; font-weight:700; color:var(--amber); font-family:'JetBrains Mono',monospace;">{{ dashboard.learning_hours or 350 }}+</div>
+                    <div style="font-size:0.78rem; color:var(--silver);">Learning Hours Logged</div>
+                </div>
+            </div>
+        </div>
+
         <div class="cert-grid">
             {% for cert in certifications.items %}
             <div class="cert-card card reveal {% if loop.index % 3 == 2 %}rv1{% elif loop.index % 3 == 0 %}rv2{% endif %}"><div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
@@ -249,9 +286,19 @@ layout: layouts/base.njk
                 {% if cert.credential_id %}
                 <div style="font-size:0.78rem; font-family:'JetBrains Mono',monospace; color:var(--muted); margin-bottom:0.4rem;">ID: {{ cert.credential_id }}</div>
                 {% endif %}
+                {% if cert.description %}
+                <p style="font-size:0.82rem; color:var(--silver); margin:0.4rem 0 0.6rem; line-height:1.4;">{{ cert.description }}</p>
+                {% endif %}
+                {% if cert.skill_tags and cert.skill_tags.length > 0 %}
+                <div style="display:flex; gap:0.3rem; flex-wrap:wrap; margin-bottom:0.6rem;">
+                    {% for tag in cert.skill_tags %}
+                    <span style="font-size:0.72rem; padding:1px 6px; border-radius:4px; background:rgba(0,212,255,0.08); border:1px solid rgba(0,212,255,0.2); color:var(--cyan);">{{ tag }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
                 <div class="cert-foot">
                     <span class="cert-date">Issued: {{ cert.issue_date }}</span>
-                    {% if cert.status == "Active" or cert.status == "Completed" %}
+                    {% if cert.status == "Verified" or cert.status == "Active" or cert.status == "Completed" %}
                     <span class="badge b-earned">{{ cert.status }}</span>
                     {% elif cert.status == "In Progress" %}
                     <span class="badge b-prog">{{ cert.status }}</span>
@@ -259,9 +306,14 @@ layout: layouts/base.njk
                     <span class="badge b-plan">{{ cert.status }}</span>
                     {% endif %}
                 </div>
-                {% if cert.verification_url %}
-                <a href="{{ cert.verification_url }}" target="_blank" style="font-size:0.8rem; margin-top:0.5rem; display:inline-block;"><i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i> Verify Credential</a>
-                {% endif %}
+                <div style="display:flex; gap:0.6rem; margin-top:0.6rem; flex-wrap:wrap;">
+                    {% if cert.verification_url or cert.credential_url %}
+                    <a href="{{ cert.verification_url or cert.credential_url }}" target="_blank" rel="noopener noreferrer" class="plink" style="font-size:0.78rem;"><i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i> Verify Credential</a>
+                    {% endif %}
+                    {% if cert.certificate_pdf %}
+                    <a href="{{ cert.certificate_pdf }}" download class="plink" style="font-size:0.78rem; color:var(--green);"><i class="fa-solid fa-file-pdf fa-xs"></i> Certificate PDF</a>
+                    {% endif %}
+                </div>
             </div>
             {% endfor %}
         </div>
@@ -316,7 +368,7 @@ layout: layouts/base.njk
             <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
                 <h2 class="sec-title">Projects & Security Repositories</h2>
                 <div style="background:rgba(0,255,136,0.1); border:1px solid rgba(0,255,136,0.3); padding:0.4rem 1rem; border-radius:20px; color:var(--green); font-family:'JetBrains Mono',monospace; font-size:0.9rem;">
-                    <i class="fa-solid fa-terminal"></i> {{ projects.items | length }} Projects Completed
+                    <i class="fa-solid fa-terminal"></i> {{ (projects.items | length) + (collections.projects | length) }} Projects Completed
                 </div>
             </div>
             <div class="sec-rule"></div>
@@ -356,6 +408,32 @@ layout: layouts/base.njk
                     <button onclick='openProjModal({{ proj | dump | safe }})' class="plink" style="background:none; border:none; cursor:pointer;"><i class="fa-solid fa-circle-info fa-xs"></i> Full Specs</button>
                     {% if proj.github_link %}<a href="{{ proj.github_link }}" class="plink" target="_blank"><i class="fa-brands fa-github fa-xs"></i> GitHub</a>{% endif %}
                     {% if proj.live_demo %}<a href="{{ proj.live_demo }}" class="plink" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i> Live Demo</a>{% endif %}
+                </div>
+            </div>
+            {% endfor %}
+            {% for proj in collections.projects %}
+            <div class="proj-card card reveal proj-item" data-category="{{ proj.data.category }}">
+                <div class="card-glow"></div><div class="corner tl"></div><div class="corner br"></div>
+                {% if proj.data.featured_image or proj.data.cover_image %}
+                <div style="margin:-1.5rem -1.5rem 1rem -1.5rem; max-height:160px; overflow:hidden; border-radius:12px 12px 0 0;">
+                    <img src="{{ proj.data.featured_image or proj.data.cover_image }}" alt="{{ proj.data.title }}" style="width:100%; height:160px; object-fit:cover;" />
+                </div>
+                {% endif %}
+                <div class="proj-hd">
+                    <div class="proj-num">// CMS PROJECT</div>
+                    <div class="proj-type">{{ proj.data.category | upper }}</div>
+                </div>
+                <div class="proj-title">{{ proj.data.title }}</div>
+                <p class="proj-desc">{{ proj.data.description or proj.data.excerpt }}</p>
+                <div class="proj-stack">
+                    {% for tech in proj.data.technologies %}
+                    <span class="stag" data-tech="{{ tech }}">{{ tech }}</span>
+                    {% endfor %}
+                </div>
+                <div class="proj-links" style="margin-top:1rem; display:flex; gap:0.6rem; flex-wrap:wrap;">
+                    <a href="{{ proj.url }}" class="plink"><i class="fa-solid fa-circle-info fa-xs"></i> View Project</a>
+                    {% if proj.data.github_link or proj.data.github_url %}<a href="{{ proj.data.github_link or proj.data.github_url }}" class="plink" target="_blank"><i class="fa-brands fa-github fa-xs"></i> GitHub</a>{% endif %}
+                    {% if proj.data.live_demo or proj.data.demo_url %}<a href="{{ proj.data.live_demo or proj.data.demo_url }}" class="plink" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i> Live Demo</a>{% endif %}
                 </div>
             </div>
             {% endfor %}
@@ -485,6 +563,54 @@ layout: layouts/base.njk
                 <div class="plat-sub">{{ plat.courses_completed }} Courses · {{ plat.certificates }} Certs · {{ plat.hours_learned }} Hours</div>
                 <div class="plat-prog" style="margin-top:0.8rem;"><div class="pp" style="width:{{ plat.progress }}%"></div></div>
             </div>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+<!-- LATEST ARTICLES / BLOG JOURNAL -->
+<section id="blog-journal" style="background:linear-gradient(180deg,transparent,rgba(11,19,40,0.35),transparent);">
+    <div class="container">
+        <div class="reveal">
+            <div class="sec-eye">09 Blog & Writeups</div>
+            <div style="display:flex; justify-content:space-between; align-items:baseline; flex-wrap:wrap;">
+                <h2 class="sec-title">Latest Technical Articles & DFIR Writeups</h2>
+                <a href="/blog/" style="background:rgba(0,212,255,0.1); border:1px solid var(--border2); padding:0.4rem 1rem; border-radius:20px; color:var(--cyan); font-family:'JetBrains Mono',monospace; font-size:0.9rem; text-decoration:none;">
+                    <i class="fa-solid fa-pen-nib"></i> View All {{ collections.posts | length }} Writeups <i class="fa-solid fa-arrow-right fa-xs"></i>
+                </a>
+            </div>
+            <div class="sec-rule"></div>
+        </div>
+
+        <div class="articles-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(320px, 1fr)); gap:1.8rem;">
+            {% for post in collections.posts | head(3) %}
+            <article class="card article-card reveal {% if loop.index == 2 %}rv1{% elif loop.index == 3 %}rv2{% endif %}" onclick="window.location='{{ post.url }}'" style="cursor:pointer; display:flex; flex-direction:column; background:var(--panel); border:1px solid var(--border2); border-radius:var(--radius-lg); overflow:hidden; transition:transform 0.3s, border-color 0.3s;">
+                <div class="card-glow"></div>
+                <div class="article-card-img-wrap" style="height:180px; position:relative; overflow:hidden; background:rgba(10,22,40,0.8); display:flex; align-items:center; justify-content:center;">
+                    {% if post.data.image or post.data.thumbnail %}
+                    <img class="article-card-img" src="{{ post.data.image or post.data.thumbnail }}" alt="{{ post.data.title }}" loading="lazy" style="width:100%; height:100%; object-fit:cover;" />
+                    {% else %}
+                    <span style="font-size:3rem;">{{ post.data.emoji or "📄" }}</span>
+                    {% endif %}
+                    <span class="card-diff-badge {{ (post.data.difficulty or 'Intermediate') | lower }}" style="position:absolute; top:12px; right:12px; background:rgba(5,8,16,0.85); border:1px solid var(--border2); padding:3px 10px; border-radius:12px; font-size:0.75rem; color:var(--cyan); font-family:'JetBrains Mono',monospace;">{{ post.data.difficulty or "Intermediate" }}</span>
+                </div>
+
+                <div class="article-card-body" style="padding:1.5rem; display:flex; flex-direction:column; flex:1;">
+                    <div class="article-card-tags" style="display:flex; gap:0.4rem; flex-wrap:wrap; margin-bottom:0.8rem;">
+                        {% for cat in post.data.categories %}
+                        <span class="tag tag-cyber" style="background:rgba(0,212,255,0.08); border:1px solid rgba(0,212,255,0.2); padding:2px 8px; border-radius:4px; font-size:0.75rem; color:var(--cyan);">{{ cat }}</span>
+                        {% endfor %}
+                    </div>
+
+                    <h3 class="article-card-title" style="font-size:1.15rem; font-weight:700; color:var(--white); margin-bottom:0.6rem; line-height:1.4;">{{ post.data.title }}</h3>
+                    <p class="article-card-excerpt" style="font-size:0.88rem; color:var(--silver); line-height:1.5; margin-bottom:1.2rem; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">{{ post.data.excerpt or post.data.subtitle or post.data.description }}</p>
+
+                    <div class="article-card-footer" style="margin-top:auto; display:flex; justify-content:space-between; align-items:center; font-size:0.8rem; color:var(--muted); border-top:1px solid var(--border); padding-top:0.8rem;">
+                        <span><i class="fa-regular fa-calendar"></i> {{ post.date | readableDate }}</span>
+                        <span style="color:var(--cyan); font-weight:600;">Read Writeup <i class="fa-solid fa-arrow-right fa-xs"></i></span>
+                    </div>
+                </div>
+            </article>
             {% endfor %}
         </div>
     </div>

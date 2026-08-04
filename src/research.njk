@@ -5,7 +5,7 @@ description: Peer-reviewed research, threat intelligence whitepapers, malware ca
 ---
 
 <!-- HERO SECTION -->
-<section id="blog-hero" aria-labelledby="research-hero-title" style="padding-bottom: 3rem;">
+<section id="blog-hero" aria-labelledby="research-hero-title">
   <canvas id="blog-hero-canvas" aria-hidden="true"></canvas>
   <div class="blog-hero-inner container">
     <div class="blog-hero-eye"><i class="fa-solid fa-microscope"></i> Threat Intelligence & Whitepaper Vault</div>
@@ -15,13 +15,13 @@ description: Peer-reviewed research, threat intelligence whitepapers, malware ca
     <p class="blog-hero-sub">In-depth technical white papers, zero-trust implementation blueprints, automated malware triage reports, and SOC threat intelligence digests.</p>
 
     <!-- Research Stats -->
-    <div class="sidebar-stats-grid" style="grid-template-columns: repeat(4, 1fr); max-width: 800px; margin: 1.5rem auto 2rem auto;">
+    <div class="sidebar-stats-grid">
       <div class="s-stat-box card">
         <div class="s-stat-val">{{ reports.items.length + collections.research.length }}</div>
         <div class="s-stat-lbl">White Papers</div>
       </div>
       <div class="s-stat-box card">
-        <div class="s-stat-val" style="color: var(--cyan);">PDF</div>
+        <div class="s-stat-val text-cyan">PDF</div>
         <div class="s-stat-lbl">Open Standard</div>
       </div>
       <div class="s-stat-box card">
@@ -29,7 +29,7 @@ description: Peer-reviewed research, threat intelligence whitepapers, malware ca
         <div class="s-stat-lbl">Latest Edition</div>
       </div>
       <div class="s-stat-box card">
-        <div class="s-stat-val" style="color: var(--green);">Verified</div>
+        <div class="s-stat-val text-green">Verified</div>
         <div class="s-stat-lbl">Peer-Reviewed</div>
       </div>
     </div>
@@ -77,7 +77,7 @@ description: Peer-reviewed research, threat intelligence whitepapers, malware ca
       <span class="posts-count-badge" id="research-count">Showing All Reports</span>
     </div>
 
-    <div id="research-grid" class="articles-grid" style="grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));">
+    <div id="research-grid" class="articles-grid">
       
       <!-- Data items from JSON -->
       {% for rep in reports.items %}
@@ -87,8 +87,8 @@ description: Peer-reviewed research, threat intelligence whitepapers, malware ca
                data-summary="{{ rep.summary | lower }}"
                data-author="{{ (rep.author or 'Aimad Ul Islam') | lower }}">
         <div class="card-glow"></div>
-        <div class="article-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(0,212,255,0.1));">
-          <div class="article-card-img-placeholder" style="background: none;">
+        <div class="article-card-img-wrap" style="height: 180px;">
+          <div class="article-card-img-placeholder">
             <i class="fa-solid fa-file-pdf text-cyan" style="font-size: 3rem;"></i>
           </div>
           <span class="card-diff-badge intermediate">{{ rep.version or "v1.0" }}</span>
@@ -103,7 +103,7 @@ description: Peer-reviewed research, threat intelligence whitepapers, malware ca
           <h3 class="article-card-title">{{ rep.title }}</h3>
           <p class="article-card-excerpt">{{ rep.summary }}</p>
 
-          <div class="article-card-footer" style="margin-top: 1.2rem; display: flex; gap: 0.5rem;">
+          <div class="article-card-footer" style="margin-top: 1.2rem;">
             {% if rep.pdf_url %}
             <a href="{{ rep.pdf_url }}" target="_blank" class="btn btn-sm btn-cyan btn-full"><i class="fa-solid fa-file-arrow-down"></i> Download PDF Paper</a>
             {% endif %}
@@ -121,24 +121,28 @@ description: Peer-reviewed research, threat intelligence whitepapers, malware ca
                data-author="{{ (rep.data.author or 'Aimad Ul Islam') | lower }}"
                onclick="window.location='{{ rep.url }}'">
         <div class="card-glow"></div>
-        <div class="article-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(0,255,136,0.1));">
-          <div class="article-card-img-placeholder" style="background: none;">
-            <i class="fa-solid fa-microscope text-cyan" style="font-size: 3rem;"></i>
+        <div class="article-card-img-wrap" style="height: 180px;">
+          {% if rep.data.featured_image or rep.data.image %}
+          <img class="article-card-img" src="{{ rep.data.featured_image or rep.data.image }}" alt="{{ rep.data.title }}" loading="lazy"/>
+          {% else %}
+          <div class="article-card-img-placeholder">
+            <i class="fa-solid fa-book-journal-whills text-cyan" style="font-size: 3rem;"></i>
           </div>
-          <span class="card-diff-badge {{ (rep.data.difficulty or 'Intermediate') | lower }}">{{ rep.data.version or "v1.0" }}</span>
+          {% endif %}
+          <span class="card-diff-badge intermediate">{{ rep.data.category or "Research" }}</span>
         </div>
 
         <div class="article-card-body">
           <div class="article-card-tags">
-            <span class="tag tag-cyber"><i class="fa-solid fa-shield-halved"></i> {{ rep.data.category }}</span>
-            <span class="tag tag-tut"><i class="fa-solid fa-hard-drive"></i> {{ rep.data.file_size or "PDF" }}</span>
+            <span class="tag tag-cyber"><i class="fa-solid fa-flask"></i> {{ rep.data.category or "Threat Research" }}</span>
+            <span class="tag tag-tut text-green"><i class="fa-solid fa-shield-halved"></i> Peer-Reviewed</span>
           </div>
 
           <h3 class="article-card-title">{{ rep.data.title }}</h3>
           <p class="article-card-excerpt">{{ rep.data.summary or rep.data.description }}</p>
 
           <div class="article-card-footer" style="margin-top: 1.2rem;">
-            <a href="{{ rep.url }}" class="btn btn-sm btn-cyan btn-full"><i class="fa-solid fa-book-open"></i> Read Full Whitepaper</a>
+            <a href="{{ rep.url }}" class="btn btn-sm btn-cyan btn-full"><i class="fa-solid fa-book-open"></i> Read Research Paper</a>
           </div>
         </div>
       </article>
@@ -148,10 +152,15 @@ description: Peer-reviewed research, threat intelligence whitepapers, malware ca
 
     <!-- No Results Fallback -->
     <div class="no-results card" id="no-research-results" style="display:none; text-align: center; padding: 3rem 1.5rem;">
-      <i class="fa-solid fa-folder-open text-cyan" style="font-size: 3rem; margin-bottom: 1rem;"></i>
-      <h3>No Publications Found</h3>
-      <p>Try refining your keyword search or resetting publication categories.</p>
+      <i class="fa-solid fa-book-journal-whills text-cyan" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+      <h3>No Research Reports Match Query</h3>
+      <p>Try searching for CVE identifiers, threat intelligence, malware, or SIEM automation.</p>
       <button class="btn btn-cyan mt-3" onclick="resetResearchSearch()"><i class="fa-solid fa-rotate"></i> Reset All Filters</button>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination-container" id="research-pagination-controls">
+      <!-- Dynamically rendered -->
     </div>
   </section>
 </main>
@@ -161,44 +170,107 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("research-search");
   const catSelect = document.getElementById("research-cat-select");
   const catBtns = document.querySelectorAll(".cat-btn");
+  const researchGrid = document.getElementById("research-grid");
   const cards = Array.from(document.querySelectorAll(".research-card"));
   const countBadge = document.getElementById("research-count");
   const noResults = document.getElementById("no-research-results");
+  const paginationControls = document.getElementById("research-pagination-controls");
 
   let currentSearch = "";
   let currentCat = "all";
+  let currentPage = 1;
+  const itemsPerPage = 6;
 
   function filterResearch() {
-    let visible = 0;
-
-    cards.forEach(card => {
+    let filtered = cards.filter(card => {
       const title = card.getAttribute("data-title") || "";
       const summary = card.getAttribute("data-summary") || "";
       const cat = card.getAttribute("data-category") || "";
 
-      const matchSearch = currentSearch === "" || title.includes(currentSearch) || summary.includes(currentSearch) || cat.includes(currentSearch);
+      const matchSearch = currentSearch === "" || 
+                          title.includes(currentSearch) || 
+                          summary.includes(currentSearch) || 
+                          cat.includes(currentSearch);
+
       const matchCat = currentCat === "all" || cat.includes(currentCat.toLowerCase());
 
-      if (matchSearch && matchCat) {
-        card.style.display = "flex";
-        visible++;
-      } else {
-        card.style.display = "none";
-      }
+      return matchSearch && matchCat;
     });
 
-    if (countBadge) countBadge.textContent = `${visible} Research Papers Available`;
-    if (noResults) noResults.style.display = visible === 0 ? "block" : "none";
+    if (countBadge) countBadge.textContent = `${filtered.length} Reports Displayed`;
+
+    cards.forEach(c => c.style.display = "none");
+
+    if (filtered.length === 0) {
+      if (noResults) noResults.style.display = "block";
+      if (paginationControls) paginationControls.innerHTML = "";
+      return;
+    } else {
+      if (noResults) noResults.style.display = "none";
+    }
+
+    const totalPages = Math.ceil(filtered.length / itemsPerPage);
+    if (currentPage > totalPages) currentPage = 1;
+
+    const startIdx = (currentPage - 1) * itemsPerPage;
+    const endIdx = startIdx + itemsPerPage;
+    const pageItems = filtered.slice(startIdx, endIdx);
+
+    pageItems.forEach(item => {
+      item.style.display = "flex";
+      researchGrid.appendChild(item);
+    });
+
+    renderPagination(totalPages);
   }
 
-  if (searchInput) searchInput.addEventListener("input", (e) => { currentSearch = e.target.value.toLowerCase().trim(); filterResearch(); });
-  if (catSelect) catSelect.addEventListener("change", (e) => { currentCat = e.target.value; filterResearch(); });
+  function renderPagination(totalPages) {
+    if (!paginationControls || totalPages <= 1) {
+      if (paginationControls) paginationControls.innerHTML = "";
+      return;
+    }
+
+    let html = `<div class="cyber-pagination">`;
+    html += `<button class="page-btn ${currentPage === 1 ? 'disabled' : ''}" onclick="changeResearchPage(${currentPage - 1})"><i class="fa-solid fa-chevron-left"></i> Prev</button>`;
+
+    for (let i = 1; i <= totalPages; i++) {
+      html += `<button class="page-num ${i === currentPage ? 'active' : ''}" onclick="changeResearchPage(${i})">${i}</button>`;
+    }
+
+    html += `<button class="page-btn ${currentPage === totalPages ? 'disabled' : ''}" onclick="changeResearchPage(${currentPage + 1})">Next <i class="fa-solid fa-chevron-right"></i></button>`;
+    html += `</div>`;
+
+    paginationControls.innerHTML = html;
+  }
+
+  window.changeResearchPage = (page) => {
+    currentPage = page;
+    filterResearch();
+    document.getElementById("research-section").scrollIntoView({ behavior: 'smooth' });
+  };
+
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      currentSearch = e.target.value.toLowerCase().trim();
+      currentPage = 1;
+      filterResearch();
+    });
+  }
+
+  if (catSelect) {
+    catSelect.addEventListener("change", (e) => {
+      currentCat = e.target.value;
+      currentPage = 1;
+      filterResearch();
+    });
+  }
 
   catBtns.forEach(btn => {
     btn.addEventListener("click", () => {
       catBtns.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
       currentCat = btn.getAttribute("data-cat");
+      currentPage = 1;
       filterResearch();
     });
   });
@@ -212,7 +284,10 @@ document.addEventListener("DOMContentLoaded", () => {
       if (b.getAttribute("data-cat") === "all") b.classList.add("active");
       else b.classList.remove("active");
     });
+    currentPage = 1;
     filterResearch();
   };
+
+  filterResearch();
 });
 </script>

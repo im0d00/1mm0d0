@@ -1,0 +1,362 @@
+[
+  {
+    "type": "Blog Post",
+    "title": "Metasploitable 2: The Ultimate Beginner's Guide to Exploitation",
+    "description": "Learn how to hack Metasploitable 2 from scratch using Metasploit – exploit vsftpd, UnrealIRCd, and more.",
+    "category": "Cybersecurity",
+    "tags": ["metasploitable","metasploit","exploitation","penetration-testing","ethical-hacking"],
+    "url": "/posts/metasploitable-complete-guide/"
+  },
+  {
+    "type": "Blog Post",
+    "title": "Getting Started with Kali Linux: Complete Beginner Setup Guide",
+    "description": "Set up your ethical hacking lab from scratch — VirtualBox, Kali Linux, Metasploitable 2, and DVWA.",
+    "category": "Cybersecurity",
+    "tags": ["kali-linux","virtualbox","ethical-hacking","lab-setup","beginners"],
+    "url": "/posts/kali-linux-setup-guide/"
+  },
+  {
+    "type": "Blog Post",
+    "title": "Nmap Deep Dive: From Port Scanning to Full Network Enumeration",
+    "description": "Master Nmap — every flag, scan type, NSE script, output format, and professional methodology explained with real examples.",
+    "category": "Cybersecurity",
+    "tags": ["nmap","port-scanning","enumeration","penetration-testing","networking","nse-scripts","ethical-hacking"],
+    "url": "/posts/nmap-complete-guide/"
+  },
+  {
+    "type": "Blog Post",
+    "title": "Digital Forensics & Incident Response: A Hands-On Introduction",
+    "description": "Windows forensics, memory analysis, Splunk, and Velociraptor — what I learned from BlueCapeSecurity DFIR certification.",
+    "category": "Cybersecurity",
+    "tags": ["dfir","forensics","splunk","velociraptor","incident-response","blue-team"],
+    "url": "/posts/dfir-introduction/"
+  },
+  {
+    "type": "Blog Post",
+    "title": "Linux Essentials: Every Command You Actually Need",
+    "description": "From file permissions to bash scripting — the complete Linux reference guide for cybersecurity professionals.",
+    "category": "Linux",
+    "tags": ["linux","bash","command-line","permissions","scripting","lpi"],
+    "url": "/posts/linux-essentials-guide/"
+  },
+  {
+    "type": "Blog Post",
+    "title": "Python for Hackers: Security Automation Scripts from Scratch",
+    "description": "Port scanners, password sprayers, subdomain enumerators — building real security tools in Python from scratch.",
+    "category": "Programming",
+    "tags": ["python","automation","security-scripting","penetration-testing","tools"],
+    "url": "/posts/python-for-security/"
+  },
+  {
+    "type": "Blog Post",
+    "title": "Building a Cybersecurity Home Lab on a Budget",
+    "description": "You don't need expensive hardware or software to build a professional cybersecurity lab. This guide covers everything.",
+    "category": "Cybersecurity",
+    "tags": ["home-lab","virtualbox","lab-setup","beginners","free-tools"],
+    "url": "/posts/home-lab-setup/"
+  },
+  {
+    "type": "Project",
+    "title": "Home Lab SOC Setup with Splunk & Snort",
+    "description": "Configured a complete virtual SOC environment using VirtualBox, Snort IDS, Splunk Enterprise, and Kali Linux. Simulated real attack traffic and crafted custom detection rules for brute-force and port scanning attacks.",
+    "category": "Home Lab",
+    "tags": ["Splunk","Snort IDS","VirtualBox","Ubuntu Server","Kali Linux"],
+    "url": "/projects/"
+  },
+  {
+    "type": "Project",
+    "title": "Automated Python PCAP Analyzer & Threat Parser",
+    "description": "Developed a custom Python script using Scapy and PyShark to parse raw network capture files (.pcap), extract suspicious DNS queries, detect plain-text credentials, and output structured JSON summaries.",
+    "category": "Automation",
+    "tags": ["Python","Scapy","PyShark","Wireshark","JSON"],
+    "url": "/projects/"
+  },
+  {
+    "type": "Project",
+    "title": "Digital Forensics Memory & Disk Investigation Case",
+    "description": "Conducted a complete memory and disk forensic investigation on an infected Windows 10 image. Used Volatility 3 to extract injected DLLs and Autopsy to reconstruct file access timelines.",
+    "category": "Digital Forensics",
+    "tags": ["Volatility 3","Autopsy","FTK Imager","Hex Editors"],
+    "url": "/projects/"
+  },
+  {
+    "type": "Project",
+    "title": "Enterprise Network Infrastructure Simulation",
+    "description": "Designed a multi-VLAN enterprise network architecture in Cisco Packet Tracer with OSPF routing, Access Control Lists (ACLs), DHCP snooping, and IPsec VPN tunnel between branch offices.",
+    "category": "Networking",
+    "tags": ["Cisco Packet Tracer","OSPF","ACLs","DHCP Snooping","IPsec VPN"],
+    "url": "/projects/"
+  },
+  {
+    "type": "Project",
+    "title": "Web Application Penetration Testing Lab",
+    "description": "Performed ethical penetration testing against OWASP Juice Shop and DVWA. Documented vulnerabilities including Blind SQL Injection, Cross-Site Scripting (XSS), and Insecure Direct Object References (IDOR).",
+    "category": "Web Development",
+    "tags": ["Burp Suite","OWASP Juice Shop","DVWA","SQLMap","OWASP Top 10"],
+    "url": "/projects/"
+  },
+  {
+    "type": "Project",
+    "title": "Metasploitable 2 Vulnerability Assessment & Hardening",
+    "description": "Audited Metasploitable 2 using Nmap, Nessus, and manual exploitation techniques. Formulated a mitigation blueprint detailing service patching, SSH key enforcement, and firewall configuration.",
+    "category": "Research",
+    "tags": ["Nmap","Nessus","Metasploit","Linux Security Hardening"],
+    "url": "/projects/"
+  },
+  {
+    "type": "Project",
+    "title": "Automated Volatility 3 Memory Forensic Parser",
+    "description": "A Python-based automated memory analysis parser that extracts processes, network sockets, DLL injections, and suspicious handles from Windows RAM dumps using Volatility 3.",
+    "category": "Digital Forensics",
+    "tags": ["Python","Volatility 3","YARA","Linux","Bash"],
+    "url": "/projects/automated-memory-forensics/"
+  },
+  {
+    "type": "Lab",
+    "title": "Blue Team Labs — Incident Response Challenge",
+    "description": "Analyzed suspicious PowerShell execution logs and PCAP files to trace an initial access vector, C2 communication, and data exfiltration.",
+    "category": "Blue Team Labs",
+    "tags": ["Wireshark","PowerShell Logs","Timeline Explorer"],
+    "url": "/labs/"
+  },
+  {
+    "type": "Lab",
+    "title": "TryHackMe — Wireshark 101 & Packet Analysis",
+    "description": "Completed hands-on packet capture analysis challenges focusing on HTTP headers, DNS exfiltration, and TCP stream reconstruction.",
+    "category": "TryHackMe",
+    "tags": ["Wireshark","TShark"],
+    "url": "/labs/"
+  },
+  {
+    "type": "Lab",
+    "title": "Hack The Box — Starting Point Track",
+    "description": "Pwned machines across Tier 0 to Tier 2 covering FTP anonymous logins, SMB enumeration, Telnet exploits, and privilege escalation.",
+    "category": "Hack The Box",
+    "tags": ["Nmap","Metasploit","Gobuster","Netcat"],
+    "url": "/labs/"
+  },
+  {
+    "type": "Lab",
+    "title": "PortSwigger Web Security Academy — SQL Injection",
+    "description": "Solved SQLi labs involving UNION attacks, error-based exploitation, and blind SQL injection with time delays.",
+    "category": "PortSwigger",
+    "tags": ["Burp Suite","SQLMap"],
+    "url": "/labs/"
+  },
+  {
+    "type": "Lab",
+    "title": "Enterprise Active Directory & SOC Homelab Range",
+    "description": "Multi-VM Enterprise Active Directory lab featuring Windows Server 2022 Domain Controller, Windows 11 workstation targets, Sysmon, Splunk Universal Forwarders, and pfSense firewall segmentation.",
+    "category": "VirtualBox / Home Lab",
+    "tags": {"items":[{"name":"Wireshark","category":"Packet Analysis","icon":"fa-solid fa-fish","logo":"","skill_level":"Expert"},{"name":"Nmap","category":"Network Scanner","icon":"fa-solid fa-radar","logo":"","skill_level":"Expert"},{"name":"Cisco Packet Tracer","category":"Network Simulation","icon":"fa-solid fa-network-wired","logo":"","skill_level":"Expert"},{"name":"Burp Suite","category":"Web Security","icon":"fa-solid fa-bug","logo":"","skill_level":"Advanced"},{"name":"Metasploit","category":"Penetration Testing","icon":"fa-solid fa-skull","logo":"","skill_level":"Advanced"},{"name":"Autopsy","category":"Digital Forensics","icon":"fa-solid fa-microscope","logo":"","skill_level":"Advanced"},{"name":"Volatility","category":"Memory Forensics","icon":"fa-solid fa-memory","logo":"","skill_level":"Advanced"},{"name":"FTK Imager","category":"Disk Evidence","icon":"fa-solid fa-hard-drive","logo":"","skill_level":"Advanced"},{"name":"Python Security","category":"Scripting","icon":"fa-brands fa-python","logo":"","skill_level":"Advanced"},{"name":"Linux CLI (Kali / Ubuntu)","category":"OS Administration","icon":"fa-brands fa-linux","logo":"","skill_level":"Expert"},{"name":"Snort / Suricata","category":"IDS / IPS","icon":"fa-solid fa-shield-cat","logo":"","skill_level":"Intermediate"},{"name":"Splunk / SIEM","category":"Log Analysis","icon":"fa-solid fa-chart-column","logo":"","skill_level":"Intermediate"},{"name":"VirtualBox / VMware","category":"Virtualization & Labs","icon":"fa-solid fa-cubes","logo":"","skill_level":"Expert"},{"name":"Docker","category":"Containerization","icon":"fa-brands fa-docker","logo":"","skill_level":"Intermediate"},{"name":"John the Ripper / Hashcat","category":"Password Auditing","icon":"fa-solid fa-key","logo":"","skill_level":"Intermediate"},{"name":"Hydra","category":"Authentication Auditing","icon":"fa-solid fa-unlock-keyhole","logo":"","skill_level":"Intermediate"},{"name":"SQLMap","category":"Database Security","icon":"fa-solid fa-database","logo":"","skill_level":"Intermediate"},{"name":"Gobuster / FFUF","category":"Directory Enumeration","icon":"fa-solid fa-folder-tree","logo":"","skill_level":"Advanced"}]},
+    "url": "/labs/active-directory-homelab/"
+  },
+  {
+    "type": "Research Report",
+    "title": "Enterprise Threat Landscape & Incident Response Playbook 2026",
+    "description": "In-depth research on ransomware mitigation vectors, log aggregation with Splunk, and automated SIEM triage.",
+    "category": "Security Report",
+    "tags": ["Research", "PDF", "Security Report"],
+    "url": "/research/"
+  },
+  {
+    "type": "Research Report",
+    "title": "Zero Trust Architecture Implementation in Hybrid Networks",
+    "description": "A comprehensive guide on micro-segmentation, identity-aware proxies, and continuous authentication.",
+    "category": "Whitepaper",
+    "tags": ["Research", "PDF", "Security Report"],
+    "url": "/research/"
+  },
+  {
+    "type": "Research Report",
+    "title": "Automated Malware Triage using Python & Cuckoo Sandbox",
+    "description": "Step-by-step case study detailing dynamic malware analysis pipelines and IOC extraction.",
+    "category": "Case Study",
+    "tags": ["Research", "PDF", "Security Report"],
+    "url": "/research/"
+  },
+  {
+    "type": "Research Report",
+    "title": "Zero-Trust Architecture & Microsegmentation Framework 2026",
+    "description": "An architectural guide on establishing zero-trust access, identity-aware proxies, and granular eBPF microsegmentation across hybrid multi-cloud environments.",
+    "category": "White Paper",
+    "tags": ["Research", "PDF", "Whitepaper"],
+    "url": "/research/zero-trust-architecture-2026/"
+  },
+  {
+    "type": "Download Asset",
+    "title": "Professional Cybersecurity Resume (PDF)",
+    "description": "Comprehensive CV highlighting SOC experience, CCNA certification, and lab achievements.",
+    "category": "Resume",
+    "tags": ["Download", "PDF"],
+    "url": "/downloads/"
+  },
+  {
+    "type": "Download Asset",
+    "title": "Incident Response & Cheat Sheet",
+    "description": "Quick reference guide for Linux CLI forensic commands, Memory analysis, and Volatility 3.",
+    "category": "Cheat Sheet",
+    "tags": ["Download", "PDF"],
+    "url": "/downloads/"
+  },
+  {
+    "type": "Download Asset",
+    "title": "SIEM Log Automation Scripts Pack",
+    "description": "Python utility scripts for parsing Sysmon logs, normalizing JSON, and sending alerts via Webhooks.",
+    "category": "Scripts",
+    "tags": ["Download", "ZIP"],
+    "url": "/downloads/"
+  },
+  {
+    "type": "Download Asset",
+    "title": "Volatility 3 CLI Forensics Cheat Sheet & Command Guide",
+    "description": "Comprehensive command reference guide for Volatility 3 memory analysis, covering Windows, Linux, and Mac memory plugin execution, YARA scans, and symbol table setups.",
+    "category": "Cheat Sheet",
+    "tags": ["Download", "PDF"],
+    "url": "/downloads/volatility3-cheatsheet/"
+  },
+  {
+    "type": "Certification",
+    "title": "Cisco Learn-A-Thon 2026 Achievement Award",
+    "description": "Cisco Networking Academy - Active",
+    "category": "Credentials",
+    "tags": ["Cisco Networking Academy"],
+    "url": "/#certifications"
+  },
+  {
+    "type": "Certification",
+    "title": "Linux Essentials Certification",
+    "description": "Cisco Networking Academy / LPI - Active",
+    "category": "Credentials",
+    "tags": ["Cisco Networking Academy / LPI"],
+    "url": "/#certifications"
+  },
+  {
+    "type": "Certification",
+    "title": "Ethical Hacker Certification",
+    "description": "Cisco Networking Academy - Active",
+    "category": "Credentials",
+    "tags": ["Cisco Networking Academy"],
+    "url": "/#certifications"
+  },
+  {
+    "type": "Certification",
+    "title": "Digital Forensics & Incident Response (DFIR)",
+    "description": "BlueCapeSecurity - Active",
+    "category": "Credentials",
+    "tags": ["BlueCapeSecurity"],
+    "url": "/#certifications"
+  },
+  {
+    "type": "Certification",
+    "title": "Mastercard Cybersecurity Job Simulation",
+    "description": "Mastercard / Forage - Completed",
+    "category": "Credentials",
+    "tags": ["Mastercard / Forage"],
+    "url": "/#certifications"
+  },
+  {
+    "type": "Certification",
+    "title": "Networking Essentials Certification",
+    "description": "Cisco Networking Academy - Active",
+    "category": "Credentials",
+    "tags": ["Cisco Networking Academy"],
+    "url": "/#certifications"
+  },
+  {
+    "type": "Certification",
+    "title": "CompTIA Security+ (SY0-701)",
+    "description": "CompTIA - In Progress",
+    "category": "Credentials",
+    "tags": ["CompTIA"],
+    "url": "/#certifications"
+  },
+  {
+    "type": "Resource",
+    "title": "Privacy Policy",
+    "description": "Our commitment to data privacy, zero intrusive tracking, and data protection.",
+    "category": "Legal & Governance",
+    "tags": ["privacy", "gdpr", "data", "legal"],
+    "url": "/resources/privacy-policy/"
+  },
+  {
+    "type": "Resource",
+    "title": "Terms of Use",
+    "description": "Terms governing site access, intellectual property, and educational boundaries.",
+    "category": "Legal & Governance",
+    "tags": ["terms", "legal", "usage", "policy"],
+    "url": "/resources/terms/"
+  },
+  {
+    "type": "Resource",
+    "title": "Vulnerability Disclosure",
+    "description": "Responsible vulnerability disclosure guidelines and PGP encryption channel.",
+    "category": "Security Defense",
+    "tags": ["vulnerability", "disclosure", "bug-bounty", "pgp"],
+    "url": "/resources/responsible-disclosure/"
+  },
+  {
+    "type": "Resource",
+    "title": "Infrastructure Security Policy",
+    "description": "Technical overview of system architecture, CSP, WAF, and SSL hardening.",
+    "category": "Security Defense",
+    "tags": ["security", "csp", "waf", "ssl"],
+    "url": "/resources/security-policy/"
+  },
+  {
+    "type": "Resource",
+    "title": "Frequently Asked Questions (FAQ)",
+    "description": "Answers about lab setups, DFIR research, certification journey, and consulting.",
+    "category": "Support",
+    "tags": ["faq", "help", "labs", "support"],
+    "url": "/resources/faq/"
+  },
+  {
+    "type": "Resource",
+    "title": "System Changelog",
+    "description": "Version history, feature releases, and architecture improvements.",
+    "category": "Releases",
+    "tags": ["changelog", "updates", "releases", "version"],
+    "url": "/resources/changelog/"
+  },
+  {
+    "type": "Knowledge Base",
+    "title": "Splunk SPL Threat Hunting Cheat Sheet",
+    "description": "Essential SPL commands for detecting brute force, beaconing traffic, and privilege escalation in Sysmon logs.",
+    "category": "SOC & Incident Response",
+    "tags": ["Splunk","SIEM","Threat Hunting","SPL"],
+    "url": "/#kb"
+  },
+  {
+    "type": "Knowledge Base",
+    "title": "Sysmon Configuration & Event ID Reference",
+    "description": "Core Windows Event IDs for SOC analysts examining process creation, network connection, and file modification.",
+    "category": "SOC & Incident Response",
+    "tags": ["Sysmon","Windows","Blue Team"],
+    "url": "/#kb"
+  },
+  {
+    "type": "Knowledge Base",
+    "title": "Volatility 3 Memory Forensics Master Reference",
+    "description": "Commands for extracting process trees, DLL injections, network connections, and dumping suspicious binaries.",
+    "category": "Digital Forensics & Malware Analysis",
+    "tags": ["Volatility","Memory Forensics","DFIR"],
+    "url": "/#kb"
+  },
+  {
+    "type": "Knowledge Base",
+    "title": "Wireshark Display Filter Field Manual",
+    "description": "High-impact display filters for locating cleartext passwords, ARP spoofing, and HTTP payloads.",
+    "category": "Network Security & Packet Inspection",
+    "tags": ["Wireshark","Nmap","Networking","PCAP"],
+    "url": "/#kb"
+  },
+  {
+    "type": "Knowledge Base",
+    "title": "Nmap Service Enumeration & NSE Scripting Guide",
+    "description": "Optimized Nmap flags for silent stealth scans, version detection, and vulnerability probing scripts.",
+    "category": "Offensive Security & Pentesting",
+    "tags": ["Nmap","Pentesting","Recon"],
+    "url": "/#kb"
+  },
+]
