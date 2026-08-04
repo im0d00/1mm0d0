@@ -914,6 +914,12 @@ section { padding: 5rem 0; position:relative; z-index:2; }
 .newsletter-big-form .btn-primary { flex-shrink:0; white-space:nowrap; }
 
 /* ── BREADCRUMB & TOOLBAR ───────────────────────────────────── */
+.article-hero-wrapper {
+  padding-top: 100px;
+  padding-bottom: 4rem;
+  position: relative;
+  z-index: 2;
+}
 .breadcrumb-toolbar {
   display: flex;
   justify-content: space-between;
@@ -1456,17 +1462,26 @@ section { padding: 5rem 0; position:relative; z-index:2; }
 .copy-btn:hover { color:var(--cyan); border-color:var(--border2); }
 .copy-btn.copied { color:var(--green); border-color:rgba(0,255,136,0.3); }
 .article-body pre {
-  background: #020A14;
+  background: #060D1A;
   border: 1px solid var(--border);
   border-left: 3px solid var(--cyan);
   border-radius: var(--radius);
-  padding: 3rem 1.5rem 1.5rem;
+  padding: 1.25rem 1.4rem;
   overflow-x: auto;
   font-family: 'JetBrains Mono', monospace;
   font-size: 0.85rem;
   line-height: 1.65;
   color: #E2E8F0;
-  margin: 0;
+  margin: 1.5rem 0;
+}
+.code-block-wrap pre,
+.article-body .code-block-wrap pre {
+  margin: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-top: none !important;
+  border-left: 3px solid var(--cyan) !important;
+  padding: 1.25rem 1.4rem !important;
 }
 .article-body code:not(pre code) {
   font-family: 'JetBrains Mono', monospace;
