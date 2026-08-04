@@ -931,5 +931,105 @@ collections:
       - { label: "Related Projects", name: "related_projects", widget: "list", required: false }
       - { label: "Related Labs", name: "related_labs", widget: "list", required: false }
       - { label: "Related Posts Slugs / Titles", name: "related_posts", widget: "list", required: false }
-      - { label: "Article Content (Markdown / HTML)", name: "body", widget: "markdown" }
+      - label: "Structured Content Blocks (Modular Editor)"
+        name: "content_blocks"
+        widget: "list"
+        required: false
+        types:
+          - label: "Basic Paragraph / Text"
+            name: "paragraph"
+            widget: "object"
+            fields:
+              - { label: "Content (Markdown / Text)", name: "content", widget: "markdown" }
+          - label: "Heading"
+            name: "heading"
+            widget: "object"
+            fields:
+              - { label: "Heading Text", name: "text", widget: "string" }
+              - { label: "Level", name: "level", widget: "select", options: ["h2", "h3", "h4"], default: "h2" }
+              - { label: "Subtitle / Description", name: "subtitle", widget: "string", required: false }
+          - label: "Code Block"
+            name: "code_block"
+            widget: "object"
+            fields:
+              - { label: "File Name", name: "filename", widget: "string", default: "script.py" }
+              - { label: "Programming Language", name: "language", widget: "select", options: ["Python", "Bash", "PowerShell", "C/C++", "Go", "Rust", "JavaScript", "TypeScript", "HTML", "CSS", "JSON", "YAML", "SQL", "Markdown", "Text"], default: "Python" }
+              - { label: "Code Content", name: "code", widget: "code" }
+              - { label: "Optional Description", name: "description", widget: "string", required: false }
+          - label: "Terminal Block"
+            name: "terminal_block"
+            widget: "object"
+            fields:
+              - { label: "Terminal Title", name: "title", widget: "string", default: "Terminal Console" }
+              - { label: "Operating System", name: "os", widget: "select", options: ["Linux / Kali", "Windows PowerShell", "macOS Zsh", "Docker Container"], default: "Linux / Kali" }
+              - { label: "Commands", name: "commands", widget: "text" }
+              - { label: "Command Output / Description", name: "description", widget: "text", required: false }
+          - label: "File Tree Block"
+            name: "file_tree"
+            widget: "object"
+            fields:
+              - { label: "Tree Title", name: "title", widget: "string", default: "Project Directory Structure" }
+              - { label: "File Tree Hierarchy (ASCII)", name: "tree_content", widget: "text" }
+          - label: "Alert / Callout Box"
+            name: "alert"
+            widget: "object"
+            fields:
+              - { label: "Alert Type", name: "alert_type", widget: "select", options: ["info", "tip", "warning", "success", "danger", "note"], default: "info" }
+              - { label: "Alert Title", name: "title", widget: "string", default: "Important Notice" }
+              - { label: "Alert Content", name: "content", widget: "text" }
+          - label: "API Endpoint Block"
+            name: "api_endpoint"
+            widget: "object"
+            fields:
+              - { label: "HTTP Method", name: "method", widget: "select", options: ["GET", "POST", "PUT", "DELETE", "PATCH"], default: "GET" }
+              - { label: "Endpoint Path", name: "path", widget: "string", default: "/api/v1/resource" }
+              - { label: "Description", name: "description", widget: "string", required: false }
+              - { label: "Request Headers / Query Params", name: "headers", widget: "text", required: false }
+              - { label: "Request Body (JSON)", name: "request_body", widget: "code", default_language: "json", required: false }
+              - { label: "Response Example (JSON)", name: "response_example", widget: "code", default_language: "json", required: false }
+          - label: "Quote / Citation"
+            name: "quote"
+            widget: "object"
+            fields:
+              - { label: "Quote Text", name: "quote", widget: "text" }
+              - { label: "Author", name: "author", widget: "string", required: false }
+              - { label: "Source / Citation", name: "cite", widget: "string", required: false }
+          - label: "Data Table"
+            name: "table"
+            widget: "object"
+            fields:
+              - { label: "Table Caption", name: "caption", widget: "string", required: false }
+              - { label: "Column Headers", name: "headers", widget: "list" }
+              - { label: "Rows", name: "rows", widget: "list", fields: [{ label: "Row Cells", name: "cells", widget: "list" }] }
+          - label: "Image Block"
+            name: "image_block"
+            widget: "object"
+            fields:
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Caption", name: "caption", widget: "string", required: false }
+              - { label: "Alt Text", name: "alt", widget: "string", required: false }
+          - label: "Gallery Block"
+            name: "gallery_block"
+            widget: "object"
+            fields:
+              - { label: "Gallery Title", name: "title", widget: "string", required: false }
+              - { label: "Images", name: "images", widget: "list", field: { label: "Image", widget: "image" } }
+          - label: "Video Block"
+            name: "video_block"
+            widget: "object"
+            fields:
+              - { label: "Video Embed URL", name: "embed_url", widget: "string" }
+              - { label: "Caption", name: "caption", widget: "string", required: false }
+          - label: "Checklist"
+            name: "checklist"
+            widget: "object"
+            fields:
+              - { label: "Checklist Title", name: "title", widget: "string", default: "Task Checklist" }
+              - { label: "Items", name: "items", widget: "list", fields: [{ label: "Task Text", name: "text", widget: "string" }, { label: "Completed?", name: "checked", widget: "boolean", default: false }] }
+          - label: "Section Divider"
+            name: "divider"
+            widget: "object"
+            fields:
+              - { label: "Style", name: "style", widget: "select", options: ["glow", "line", "dots"], default: "glow" }
+      - { label: "Full Article Markdown Body (Fallback)", name: "body", widget: "markdown", required: false }
 

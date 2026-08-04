@@ -151,9 +151,190 @@ layout: layouts/base.njk
             <!-- Left Main Article Column -->
             <div class="article-main">
                 <!-- Main Markdown Article Body -->
+                <!-- Main Article Body: Handles structured content blocks OR standard markdown -->
                 <div class="article-body card">
                     <div class="card-glow"></div>
-                    {{ content | safe }}
+
+                    {% if content_blocks and content_blocks.length > 0 %}
+                    <div class="article-blocks-container">
+                        {% for block in content_blocks %}
+                            {% if block.type == "paragraph" %}
+                                <div class="block-paragraph">
+                                    {{ block.content | safe }}
+                                </div>
+
+                            {% elif block.type == "heading" %}
+                                <div class="block-heading-wrap" style="margin-top:2.2rem; margin-bottom:1rem;">
+                                    {% if block.level == "h3" %}
+                                        <h3 id="sec-block-{{ loop.index }}" class="block-heading" style="font-size:1.3rem; color:var(--white); font-family:'Space Grotesk',sans-serif; font-weight:700;">{{ block.text }}</h3>
+                                    {% elif block.level == "h4" %}
+                                        <h4 id="sec-block-{{ loop.index }}" class="block-heading" style="font-size:1.05rem; color:var(--cyan); font-family:'JetBrains Mono',monospace; text-transform:uppercase; letter-spacing:0.05em;">{{ block.text }}</h4>
+                                    {% else %}
+                                        <h2 id="sec-block-{{ loop.index }}" class="block-heading" style="font-size:1.65rem; color:var(--white); font-family:'Space Grotesk',sans-serif; font-weight:700; border-bottom:1px solid var(--border); padding-bottom:0.5rem;">{{ block.text }}</h2>
+                                    {% endif %}
+                                    {% if block.subtitle %}
+                                        <p class="block-sub" style="font-size:0.88rem; color:var(--muted); margin-top:0.3rem;">{{ block.subtitle }}</p>
+                                    {% endif %}
+                                </div>
+
+                            {% elif block.type == "code_block" %}
+                                <div class="code-block-wrap" style="margin:1.75rem 0;">
+                                    <div class="code-block-header">
+                                        <span class="code-block-filename"><i class="fa-solid fa-file-code text-cyan"></i> {{ block.filename or "script.py" }}</span>
+                                        <div style="display:flex; align-items:center; gap:0.6rem;">
+                                            <span class="code-block-lang">{{ (block.language or "CODE") | upper }}</span>
+                                            <button class="copy-code-btn" onclick="copyCodeBlockText(this)"><i class="fa-regular fa-copy"></i> Copy</button>
+                                        </div>
+                                    </div>
+                                    <pre><code class="language-{{ (block.language or 'text') | lower }}">{{ block.code }}</code></pre>
+                                    {% if block.description %}<p class="code-block-desc" style="font-size:0.8rem; color:var(--muted); margin-top:0.4rem; font-family:'JetBrains Mono',monospace;">// {{ block.description }}</p>{% endif %}
+                                </div>
+
+                            {% elif block.type == "terminal_block" %}
+                                <div class="terminal-block-wrap card" style="margin:1.75rem 0; overflow:hidden; border-radius:8px; border:1px solid var(--border);">
+                                    <div class="terminal-header">
+                                        <div class="terminal-dots">
+                                            <span class="dot red"></span>
+                                            <span class="dot yellow"></span>
+                                            <span class="dot green"></span>
+                                        </div>
+                                        <div class="terminal-title"><i class="fa-solid fa-terminal text-green" style="margin-right:0.4rem;"></i> {{ block.title or 'Terminal' }} <span style="font-size:0.7rem; color:var(--muted);">[{{ block.os or 'Linux' }}]</span></div>
+                                        <button class="copy-terminal-btn" onclick="copyCodeBlockText(this)"><i class="fa-regular fa-copy"></i> Copy Commands</button>
+                                    </div>
+                                    <pre class="terminal-body"><code><span class="term-prompt">root@kali:~# </span>{{ block.commands }}</code></pre>
+                                    {% if block.description %}<p class="terminal-desc" style="padding:0.6rem 1.25rem; font-size:0.82rem; color:var(--muted); background:rgba(6,12,24,0.9); border-top:1px solid var(--border); font-family:'JetBrains Mono',monospace;">> {{ block.description }}</p>{% endif %}
+                                </div>
+
+                            {% elif block.type == "file_tree" %}
+                                <div class="file-tree-wrap card" style="margin:1.75rem 0; border-radius:8px; overflow:hidden; border:1px solid var(--border);">
+                                    <div class="file-tree-header" style="padding:0.6rem 1rem; background:rgba(15,23,42,0.8); border-bottom:1px solid var(--border); font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:var(--amber);">
+                                        <i class="fa-solid fa-folder-tree" style="margin-right:0.4rem;"></i> {{ block.title or 'Project Directory Tree' }}
+                                    </div>
+                                    <pre class="file-tree-body"><code>{{ block.tree_content }}</code></pre>
+                                </div>
+
+                            {% elif block.type == "alert" %}
+                                <div class="callout callout-{{ block.alert_type or 'info' }}">
+                                    <div class="callout-icon">
+                                        {% if block.alert_type == 'danger' %}<i class="fa-solid fa-triangle-exclamation"></i>
+                                        {% elif block.alert_type == 'warning' or block.alert_type == 'warn' %}<i class="fa-solid fa-circle-exclamation"></i>
+                                        {% elif block.alert_type == 'success' %}<i class="fa-solid fa-circle-check"></i>
+                                        {% elif block.alert_type == 'tip' %}<i class="fa-solid fa-lightbulb"></i>
+                                        {% else %}<i class="fa-solid fa-circle-info"></i>{% endif %}
+                                    </div>
+                                    <div class="callout-content">
+                                        {% if block.title %}<strong class="callout-title">{{ block.title }}</strong>{% endif %}
+                                        <div class="callout-body"><p>{{ block.content }}</p></div>
+                                    </div>
+                                </div>
+
+                            {% elif block.type == "api_endpoint" %}
+                                <div class="api-endpoint-card card" style="margin:1.75rem 0; border-radius:8px; overflow:hidden; border:1px solid var(--border);">
+                                    <div class="api-header">
+                                        <span class="api-method method-{{ (block.method or 'GET') | lower }}">{{ block.method or 'GET' }}</span>
+                                        <code class="api-path">{{ block.path }}</code>
+                                    </div>
+                                    <div style="padding:1.2rem;">
+                                        {% if block.description %}<p style="font-size:0.9rem; color:var(--silver); margin-bottom:0.8rem;">{{ block.description }}</p>{% endif %}
+                                        {% if block.headers %}
+                                        <div style="margin-top:0.75rem;">
+                                            <span style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--cyan); text-transform:uppercase;">Headers / Params:</span>
+                                            <pre style="background:#040914; padding:0.6rem 0.8rem; border-radius:4px; font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:var(--silver); margin-top:0.3rem;"><code>{{ block.headers }}</code></pre>
+                                        </div>
+                                        {% endif %}
+                                        {% if block.request_body %}
+                                        <div style="margin-top:0.75rem;">
+                                            <span style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--green); text-transform:uppercase;">Request Body:</span>
+                                            <pre style="background:#040914; padding:0.6rem 0.8rem; border-radius:4px; font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:var(--green); margin-top:0.3rem;"><code>{{ block.request_body }}</code></pre>
+                                        </div>
+                                        {% endif %}
+                                        {% if block.response_example %}
+                                        <div style="margin-top:0.75rem;">
+                                            <span style="font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--amber); text-transform:uppercase;">Response Example:</span>
+                                            <pre style="background:#040914; padding:0.6rem 0.8rem; border-radius:4px; font-family:'JetBrains Mono',monospace; font-size:0.8rem; color:var(--silver); margin-top:0.3rem;"><code>{{ block.response_example }}</code></pre>
+                                        </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+
+                            {% elif block.type == "quote" %}
+                                <blockquote class="custom-quote">
+                                    <p>"{{ block.quote }}"</p>
+                                    {% if block.author %}<cite>— {{ block.author }}{% if block.cite %}, <span style="color:var(--muted);">{{ block.cite }}</span>{% endif %}</cite>{% endif %}
+                                </blockquote>
+
+                            {% elif block.type == "table" %}
+                                <div class="table-responsive">
+                                    <table class="custom-table">
+                                        {% if block.caption %}<caption style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--muted); margin-bottom:0.5rem; caption-side:bottom;">{{ block.caption }}</caption>{% endif %}
+                                        {% if block.headers and block.headers.length > 0 %}
+                                        <thead>
+                                            <tr>
+                                                {% for h in block.headers %}<th>{{ h }}</th>{% endfor %}
+                                            </tr>
+                                        </thead>
+                                        {% endif %}
+                                        {% if block.rows %}
+                                        <tbody>
+                                            {% for row in block.rows %}
+                                            <tr>
+                                                {% for cell in row.cells or row %}
+                                                <td>{{ cell }}</td>
+                                                {% endfor %}
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                        {% endif %}
+                                    </table>
+                                </div>
+
+                            {% elif block.type == "image_block" %}
+                                <figure class="article-figure" style="margin:1.75rem 0; text-align:center;">
+                                    <img src="{{ block.image }}" alt="{{ block.alt or block.caption or 'Article Image' }}" style="max-width:100%; border-radius:8px; border:1px solid var(--border); cursor:zoom-in;" onclick="openLightboxImage('{{ block.image }}', '{{ block.caption or '' }}')" />
+                                    {% if block.caption %}<figcaption style="font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--muted); margin-top:0.5rem;"><i class="fa-solid fa-camera text-cyan"></i> {{ block.caption }}</figcaption>{% endif %}
+                                </figure>
+
+                            {% elif block.type == "gallery_block" %}
+                                <div class="article-gallery-block" style="margin:2rem 0;">
+                                    {% if block.title %}<h4 style="font-family:'Space Grotesk',sans-serif; font-size:1.1rem; color:var(--white); margin-bottom:1rem;"><i class="fa-solid fa-images text-cyan"></i> {{ block.title }}</h4>{% endif %}
+                                    <div class="gallery-grid" style="display:grid; grid-template-columns:repeat(auto-fit, minmax(180px, 1fr)); gap:1rem;">
+                                        {% for img in block.images %}
+                                        <div class="gallery-item card" style="overflow:hidden; border-radius:8px; cursor:zoom-in; border:1px solid var(--border2); background:rgba(10,22,40,0.6);" onclick="openLightboxImage('{{ img }}', 'Gallery Image')">
+                                            <img src="{{ img }}" alt="Gallery Image" style="width:100%; height:140px; object-fit:cover;" />
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+
+                            {% elif block.type == "video_block" %}
+                                <div class="video-embed-wrap" style="margin:1.75rem 0; border-radius:8px; overflow:hidden; border:1px solid var(--border); background:#000;">
+                                    <div style="position:relative; padding-bottom:56.25%; height:0; overflow:hidden;">
+                                        <iframe src="{{ block.embed_url }}" title="{{ block.caption or 'Video' }}" style="position:absolute; top:0; left:0; width:100%; height:100%; border:0;" allowfullscreen></iframe>
+                                    </div>
+                                    {% if block.caption %}<p style="padding:0.6rem 1rem; font-family:'JetBrains Mono',monospace; font-size:0.75rem; color:var(--muted); text-align:center;">{{ block.caption }}</p>{% endif %}
+                                </div>
+
+                            {% elif block.type == "checklist" %}
+                                <div class="checklist-block card" style="padding:1.2rem 1.5rem; margin:1.75rem 0; border:1px solid var(--border);">
+                                    {% if block.title %}<h4 style="font-family:'Space Grotesk',sans-serif; font-size:1.05rem; color:var(--white); margin-bottom:0.8rem;"><i class="fa-solid fa-list-check text-cyan"></i> {{ block.title }}</h4>{% endif %}
+                                    <ul style="list-style:none; padding:0; display:flex; flex-direction:column; gap:0.5rem;">
+                                        {% for item in block.items %}
+                                        <li style="display:flex; align-items:center; gap:0.6rem; font-size:0.92rem; color:var(--silver);">
+                                            <i class="fa-solid {% if item.checked %}fa-square-check text-green{% else %}fa-square text-muted{% endif %}"></i>
+                                            <span style="{% if item.checked %}text-decoration:line-through; opacity:0.7;{% endif %}">{{ item.text }}</span>
+                                        </li>
+                                        {% endfor %}
+                                    </ul>
+                                </div>
+
+                            {% elif block.type == "divider" %}
+                                <hr class="article-divider divider-{{ block.style or 'glow' }}" style="margin:2.2rem 0; border:none; border-top:1px solid var(--border);" />
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                    {% else %}
+                        {{ content | safe }}
+                    {% endif %}
 
                     {% if gallery and gallery.length > 0 %}
                     <div class="article-gallery-section" style="margin-top:2.5rem; padding-top:1.5rem; border-top:1px solid var(--border);">
@@ -593,5 +774,41 @@ layout: layouts/base.njk
     function closeLightbox() {
         const lightbox = document.getElementById('imageLightbox');
         if (lightbox) lightbox.style.display = 'none';
+    }
+
+    function openLightboxImage(src, caption) {
+        const lightbox = document.getElementById('imageLightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+        if (lightbox && lightboxImg) {
+            lightbox.style.display = 'flex';
+            lightboxImg.src = src;
+            if (lightboxCaption) {
+                lightboxCaption.textContent = caption || 'Image view';
+            }
+        }
+    }
+
+    function copyCodeBlockText(btn) {
+        if (!btn) return;
+        const parent = btn.closest('.code-block-wrap') || btn.closest('.terminal-block-wrap');
+        let codeText = '';
+        if (parent) {
+            const pre = parent.querySelector('pre');
+            if (pre) codeText = pre.innerText || pre.textContent;
+        }
+        if (!codeText) return;
+
+        navigator.clipboard.writeText(codeText.trim()).then(() => {
+            const originalHtml = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-check text-green"></i> Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.innerHTML = originalHtml;
+                btn.classList.remove('copied');
+            }, 2000);
+        }).catch(() => {
+            alert('Code copied!');
+        });
     }
 </script>
