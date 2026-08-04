@@ -810,6 +810,10 @@ collections:
       - { label: "Icon (FontAwesome Class)", name: "icon", widget: "string", default: "fa-solid fa-shield-halved" }
       - { label: "Effective Date", name: "date", widget: "datetime", required: false }
       - { label: "Last Revised Date", name: "updated", widget: "datetime", required: false }
+      - { label: "SEO Title", name: "seo_title", widget: "string", required: false }
+      - { label: "SEO Description", name: "seo_description", widget: "text", required: false }
+      - { label: "Open Graph / SEO Image", name: "og_image", widget: "image", required: false }
+      - { label: "Canonical URL", name: "canonical_url", widget: "string", required: false }
       - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/resource.njk" }
       - { label: "Page Body", name: "body", widget: "markdown" }
 
@@ -838,6 +842,10 @@ collections:
       - { label: "Screenshots", name: "screenshots", widget: "list", field: { label: "Screenshot", widget: "image" }, required: false }
       - { label: "Lessons Learned", name: "lessons_learned", widget: "text", required: false }
       - { label: "Future Enhancements", name: "future_improvements", widget: "text", required: false }
+      - { label: "SEO Title", name: "seo_title", widget: "string", required: false }
+      - { label: "SEO Description", name: "seo_description", widget: "text", required: false }
+      - { label: "Open Graph / SEO Image", name: "og_image", widget: "image", required: false }
+      - { label: "Canonical URL", name: "canonical_url", widget: "string", required: false }
       - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/project.njk" }
       - { label: "Detailed Specification Body", name: "body", widget: "markdown" }
 
@@ -856,6 +864,10 @@ collections:
       - { label: "Skills Learned", name: "skills_learned", widget: "list", required: false }
       - { label: "Writeup URL", name: "writeup_url", widget: "string", required: false }
       - { label: "Config / PCAP Download URL", name: "config_download", widget: "string", required: false }
+      - { label: "SEO Title", name: "seo_title", widget: "string", required: false }
+      - { label: "SEO Description", name: "seo_description", widget: "text", required: false }
+      - { label: "Open Graph / SEO Image", name: "og_image", widget: "image", required: false }
+      - { label: "Canonical URL", name: "canonical_url", widget: "string", required: false }
       - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/lab.njk" }
       - { label: "Lab Documentation Body", name: "body", widget: "markdown" }
 
@@ -874,6 +886,10 @@ collections:
       - { label: "Version Tag", name: "version", widget: "string", default: "v1.0" }
       - { label: "File Size", name: "file_size", widget: "string", default: "2.5 MB" }
       - { label: "CVE Identification (if any)", name: "cve_id", widget: "string", required: false }
+      - { label: "SEO Title", name: "seo_title", widget: "string", required: false }
+      - { label: "SEO Description", name: "seo_description", widget: "text", required: false }
+      - { label: "Open Graph / SEO Image", name: "og_image", widget: "image", required: false }
+      - { label: "Canonical URL", name: "canonical_url", widget: "string", required: false }
       - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/research.njk" }
       - { label: "Executive Body", name: "body", widget: "markdown" }
 
@@ -890,6 +906,10 @@ collections:
       - { label: "File Size", name: "size", widget: "string", default: "1.5 MB" }
       - { label: "Description", name: "description", widget: "text" }
       - { label: "SHA256 Hash", name: "sha256", widget: "string", required: false }
+      - { label: "SEO Title", name: "seo_title", widget: "string", required: false }
+      - { label: "SEO Description", name: "seo_description", widget: "text", required: false }
+      - { label: "Open Graph / SEO Image", name: "og_image", widget: "image", required: false }
+      - { label: "Canonical URL", name: "canonical_url", widget: "string", required: false }
       - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/download.njk" }
       - { label: "Details / Documentation", name: "body", widget: "markdown" }
 

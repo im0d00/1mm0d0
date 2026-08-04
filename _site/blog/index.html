@@ -7,12 +7,42 @@
     <meta name="description" content="Technical articles, DFIR research, SOC playbooks, Linux tutorials, and network security guides by Aimad Ul Islam.">
     <meta name="theme-color" content="#080C1A">
     
-    <!-- Open Graph -->
+    <!-- Dynamic Favicons & Icons -->
+    
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    
+    
+    
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Open Graph & Meta -->
     <meta property="og:title" content="Cybersecurity &amp; Technical Blog | Aimad Ul Islam | Aimad Ul Islam">
     <meta property="og:description" content="Technical articles, DFIR research, SOC playbooks, Linux tutorials, and network security guides by Aimad Ul Islam.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://aimadulislam.dpdns.org/blog/">
     <meta property="og:image" content="https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cybersecurity &amp; Technical Blog | Aimad Ul Islam | Aimad Ul Islam">
+    <meta name="twitter:description" content="Technical articles, DFIR research, SOC playbooks, Linux tutorials, and network security guides by Aimad Ul Islam.">
+    <meta name="twitter:image" content="https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://aimadulislam.dpdns.org/blog/">
+
+    <!-- Schema.org JSON-LD Structured Data -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Aimad Security",
+      "url": "https://aimadulislam.dpdns.org/"
+    }
+    </script>
+    
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,7 +78,9 @@
     <div class="nav-container" style="width: 100%; max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
         <a href="/" class="nav-logo-wrap" aria-label="Aimad Security">
             
-                <span class="nav-logo"><span class="br">[</span>Aimad Security<span class="nav-dot"></span><span class="br">]</span></span>
+            
+            
+                <span class="nav-logo"><span class="br">[</span>[Aimad•Security]<span class="nav-dot"></span><span class="br">]</span></span>
             
         </a>
 
@@ -195,7 +227,11 @@
 <div class="mobile-overlay" id="mobOverlay" onclick="closeMobileNav()"></div>
 <div class="mobile-nav" id="mobNav">
     <div class="mobile-nav-header">
-        <div class="mobile-nav-brand">Aimad Security</div>
+        <div class="mobile-nav-brand">
+            
+                [Aimad•Security]
+            
+        </div>
         <button class="mob-close-btn" id="mobCloseBtn" onclick="closeMobileNav()" aria-label="Close menu">&times;</button>
     </div>
     
@@ -356,11 +392,11 @@
     <div id="categories-bar" class="categories-bar-wrapper">
       <div class="categories-scroll" role="list">
         <button class="cat-btn active" data-cat="all" role="listitem">
-          <i class="fa-solid fa-border-all fa-xs"></i> All Writeups <span class="cat-count">(7)</span>
+          <i class="fa-solid fa-border-all fa-xs"></i> All Writeups <span class="cat-count">(9)</span>
         </button>
         
         <button class="cat-btn" data-cat="Cybersecurity" role="listitem">
-          <i class="fa-solid fa-folder-open fa-xs"></i> Cybersecurity <span class="cat-count">(6)</span>
+          <i class="fa-solid fa-folder-open fa-xs"></i> Cybersecurity <span class="cat-count">(8)</span>
         </button>
         
         <button class="cat-btn" data-cat="Linux" role="listitem">
@@ -376,11 +412,11 @@
         </button>
         
         <button class="cat-btn" data-cat="Programming" role="listitem">
-          <i class="fa-solid fa-folder-open fa-xs"></i> Programming <span class="cat-count">(1)</span>
+          <i class="fa-solid fa-folder-open fa-xs"></i> Programming <span class="cat-count">(3)</span>
         </button>
         
         <button class="cat-btn" data-cat="Tutorials" role="listitem">
-          <i class="fa-solid fa-folder-open fa-xs"></i> Tutorials <span class="cat-count">(6)</span>
+          <i class="fa-solid fa-folder-open fa-xs"></i> Tutorials <span class="cat-count">(8)</span>
         </button>
         
       </div>
@@ -398,13 +434,13 @@
     <div id="featured-post-wrap">
       
       
-      <article class="featured-post card" onclick="window.location='/posts/metasploitable-complete-guide/'">
+      <article class="featured-post card" onclick="window.location='/posts/python-backdoor-injection/'">
         <div class="card-glow"></div>
         <div class="featured-img-wrap">
           
           <div class="featured-img-placeholder">
             <i class="fa-solid fa-shield-virus"></i>
-            <span class="placeholder-emoji">🎯</span>
+            <span class="placeholder-emoji">🐉</span>
           </div>
           
           <div class="featured-img-overlay"></div>
@@ -414,22 +450,22 @@
           <div>
             <div class="featured-cat-row">
               
+              <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> Programming</span>
+              
               <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> Cybersecurity</span>
               
               <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> Tutorials</span>
               
-              <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> Linux</span>
-              
               <span class="tag tag-tut"><i class="fa-solid fa-gauge-high"></i> Intermediate</span>
             </div>
-            <h2 class="featured-title">Metasploitable 2: The Ultimate Beginner&#39;s Guide to Exploitation</h2>
-            <p class="featured-excerpt">Learn how to hack Metasploitable 2 from scratch using Metasploit – exploit vsftpd, UnrealIRCd, and more.</p>
+            <h2 class="featured-title">DLL &amp; Code Injection: Build a Stealthy Python Backdoor from Scratch</h2>
+            <p class="featured-excerpt">Master remote thread creation, DLL injection, and code injection to build a professional-grade Python backdoor with process execution redirection.</p>
           </div>
           <div class="featured-meta">
             <span class="meta-item"><i class="fa-solid fa-user-astronaut"></i> Aimad Ul Islam</span>
-            <span class="meta-item"><i class="fa-regular fa-calendar"></i> 25 Jul 2026</span>
-            <span class="meta-item"><i class="fa-regular fa-clock"></i> 20 min read</span>
-            <a href="/posts/metasploitable-complete-guide/" class="btn btn-sm btn-cyan ml-auto"><i class="fa-solid fa-book-open"></i> Read Full Guide</a>
+            <span class="meta-item"><i class="fa-regular fa-calendar"></i> 05 Aug 2026</span>
+            <span class="meta-item"><i class="fa-regular fa-clock"></i> 24 min read</span>
+            <a href="/posts/python-backdoor-injection/" class="btn btn-sm btn-cyan ml-auto"><i class="fa-solid fa-book-open"></i> Read Full Guide</a>
           </div>
         </div>
       </article>
@@ -444,10 +480,128 @@
       <div class="articles-column">
         <div class="section-flex-header">
           <h2 class="articles-section-title"><i class="fa-solid fa-newspaper"></i> All Published Guides</h2>
-          <span class="posts-count-badge" id="posts-count">7 Articles</span>
+          <span class="posts-count-badge" id="posts-count">9 Articles</span>
         </div>
 
         <div id="articles-grid" class="articles-grid">
+          
+          <article class="card article-card" 
+                   data-categories="programming,cybersecurity,tutorials" 
+                   data-title="dll &amp; code injection: build a stealthy python backdoor from scratch"
+                   data-excerpt="master remote thread creation, dll injection, and code injection to build a professional-grade python backdoor with process execution redirection."
+                   data-tags="python,dll-injection,code-injection,backdoor,penetration-testing"
+                   data-difficulty="intermediate"
+                   data-date="2026-08-05"
+                   data-readtime="24"
+                   onclick="window.location='/posts/python-backdoor-injection/'">
+            <div class="card-glow"></div>
+            <div class="article-card-img-wrap">
+              
+              <div class="article-card-img-placeholder">
+                <span class="card-emoji">🐉</span>
+              </div>
+              
+              <span class="card-diff-badge intermediate">Intermediate</span>
+            </div>
+
+            <div class="article-card-body">
+              <div class="article-card-tags">
+                
+                <span class="tag tag-cyber">Programming</span>
+                
+                <span class="tag tag-cyber">Cybersecurity</span>
+                
+                <span class="tag tag-cyber">Tutorials</span>
+                
+              </div>
+
+              <h3 class="article-card-title">DLL &amp; Code Injection: Build a Stealthy Python Backdoor from Scratch</h3>
+              <p class="article-card-excerpt">Master remote thread creation, DLL injection, and code injection to build a professional-grade Python backdoor with process execution redirection.</p>
+
+              
+              <div class="article-tags-mini">
+                
+                <span class="mini-tag">#python</span>
+                
+                <span class="mini-tag">#dll-injection</span>
+                
+                <span class="mini-tag">#code-injection</span>
+                
+                <span class="mini-tag">#backdoor</span>
+                
+                <span class="mini-tag">#penetration-testing</span>
+                
+              </div>
+              
+
+              <div class="article-card-footer">
+                <div class="article-meta-mini">
+                  <span><i class="fa-regular fa-calendar"></i> 05 Aug 2026</span>
+                  <span><i class="fa-regular fa-clock"></i> 24m</span>
+                </div>
+                <span class="read-more-link">Read Writeup <i class="fa-solid fa-arrow-right fa-xs"></i></span>
+              </div>
+            </div>
+          </article>
+          
+          <article class="card article-card" 
+                   data-categories="cybersecurity,programming,tutorials" 
+                   data-title="educational keylogger: how keyboard monitoring works &amp; defenses"
+                   data-excerpt="a deep dive into the mechanics of keyloggers, storage methods, and defensive strategies—strictly for educational purposes."
+                   data-tags="keylogger,pynput,ethical-hacking,defenses,cybersecurity-education"
+                   data-difficulty="intermediate"
+                   data-date="2026-08-02"
+                   data-readtime="21"
+                   onclick="window.location='/posts/educational-keylogger-guide/'">
+            <div class="card-glow"></div>
+            <div class="article-card-img-wrap">
+              
+              <div class="article-card-img-placeholder">
+                <span class="card-emoji">🎹</span>
+              </div>
+              
+              <span class="card-diff-badge intermediate">Intermediate</span>
+            </div>
+
+            <div class="article-card-body">
+              <div class="article-card-tags">
+                
+                <span class="tag tag-cyber">Cybersecurity</span>
+                
+                <span class="tag tag-cyber">Programming</span>
+                
+                <span class="tag tag-cyber">Tutorials</span>
+                
+              </div>
+
+              <h3 class="article-card-title">Educational Keylogger: How Keyboard Monitoring Works &amp; Defenses</h3>
+              <p class="article-card-excerpt">A deep dive into the mechanics of keyloggers, storage methods, and defensive strategies—strictly for educational purposes.</p>
+
+              
+              <div class="article-tags-mini">
+                
+                <span class="mini-tag">#keylogger</span>
+                
+                <span class="mini-tag">#pynput</span>
+                
+                <span class="mini-tag">#ethical-hacking</span>
+                
+                <span class="mini-tag">#defenses</span>
+                
+                <span class="mini-tag">#cybersecurity-education</span>
+                
+              </div>
+              
+
+              <div class="article-card-footer">
+                <div class="article-meta-mini">
+                  <span><i class="fa-regular fa-calendar"></i> 02 Aug 2026</span>
+                  <span><i class="fa-regular fa-clock"></i> 21m</span>
+                </div>
+                <span class="read-more-link">Read Writeup <i class="fa-solid fa-arrow-right fa-xs"></i></span>
+              </div>
+            </div>
+          </article>
           
           <article class="card article-card" 
                    data-categories="cybersecurity,tutorials,linux" 
@@ -887,7 +1041,7 @@
           <h3 class="widget-title"><i class="fa-solid fa-chart-line"></i> Knowledge Index</h3>
           <div class="sidebar-stats-grid">
             <div class="s-stat-box">
-              <div class="s-stat-val">7</div>
+              <div class="s-stat-val">9</div>
               <div class="s-stat-lbl">Articles</div>
             </div>
             <div class="s-stat-box">
@@ -908,7 +1062,7 @@
             
             <a href="#" class="sidebar-cat-item" data-cat="Cybersecurity">
               <span class="cat-name"><i class="fa-solid fa-folder text-cyan"></i> Cybersecurity</span>
-              <span class="cat-count-badge">6</span>
+              <span class="cat-count-badge">8</span>
             </a>
             
             <a href="#" class="sidebar-cat-item" data-cat="Linux">
@@ -928,12 +1082,12 @@
             
             <a href="#" class="sidebar-cat-item" data-cat="Programming">
               <span class="cat-name"><i class="fa-solid fa-folder text-cyan"></i> Programming</span>
-              <span class="cat-count-badge">1</span>
+              <span class="cat-count-badge">3</span>
             </a>
             
             <a href="#" class="sidebar-cat-item" data-cat="Tutorials">
               <span class="cat-name"><i class="fa-solid fa-folder text-cyan"></i> Tutorials</span>
-              <span class="cat-count-badge">6</span>
+              <span class="cat-count-badge">8</span>
             </a>
             
           </div>
@@ -943,6 +1097,30 @@
         <div class="sidebar-widget card">
           <h3 class="widget-title"><i class="fa-regular fa-clock"></i> Recent Publications</h3>
           <div class="sidebar-posts">
+            
+            <a href="/posts/python-backdoor-injection/" class="sidebar-post">
+              <div class="sidebar-post-thumb">
+                
+                <span class="thumb-emoji">🐉</span>
+                
+              </div>
+              <div class="sidebar-post-info">
+                <h4 class="sidebar-post-title">DLL &amp; Code Injection: Build a Stealthy Python Backdoor from Scratch</h4>
+                <span class="sidebar-post-date"><i class="fa-regular fa-calendar"></i> 05 Aug 2026</span>
+              </div>
+            </a>
+            
+            <a href="/posts/educational-keylogger-guide/" class="sidebar-post">
+              <div class="sidebar-post-thumb">
+                
+                <span class="thumb-emoji">🎹</span>
+                
+              </div>
+              <div class="sidebar-post-info">
+                <h4 class="sidebar-post-title">Educational Keylogger: How Keyboard Monitoring Works &amp; Defenses</h4>
+                <span class="sidebar-post-date"><i class="fa-regular fa-calendar"></i> 02 Aug 2026</span>
+              </div>
+            </a>
             
             <a href="/posts/metasploitable-complete-guide/" class="sidebar-post">
               <div class="sidebar-post-thumb">
@@ -977,30 +1155,6 @@
               <div class="sidebar-post-info">
                 <h4 class="sidebar-post-title">Nmap Deep Dive: From Port Scanning to Full Network Enumeration</h4>
                 <span class="sidebar-post-date"><i class="fa-regular fa-calendar"></i> 10 Jul 2026</span>
-              </div>
-            </a>
-            
-            <a href="/posts/dfir-introduction/" class="sidebar-post">
-              <div class="sidebar-post-thumb">
-                
-                <span class="thumb-emoji">🔬</span>
-                
-              </div>
-              <div class="sidebar-post-info">
-                <h4 class="sidebar-post-title">Digital Forensics &amp; Incident Response: A Hands-On Introduction</h4>
-                <span class="sidebar-post-date"><i class="fa-regular fa-calendar"></i> 05 Jul 2026</span>
-              </div>
-            </a>
-            
-            <a href="/posts/linux-essentials-guide/" class="sidebar-post">
-              <div class="sidebar-post-thumb">
-                
-                <span class="thumb-emoji">🐧</span>
-                
-              </div>
-              <div class="sidebar-post-info">
-                <h4 class="sidebar-post-title">Linux Essentials: Every Command You Actually Need</h4>
-                <span class="sidebar-post-date"><i class="fa-regular fa-calendar"></i> 28 Jun 2026</span>
               </div>
             </a>
             
@@ -1224,7 +1378,9 @@ document.addEventListener("DOMContentLoaded", () => {
             <!-- Brand Column -->
             <div class="footer-col footer-brand-col">
                 <div class="footer-logo-brand">
-                    <span class="logo-bracket">[</span><span class="logo-text">[Aimad•Security]</span><span class="logo-bracket">]</span>
+                    
+                        <span class="logo-bracket">[</span><span class="logo-text">[Aimad•Security]</span><span class="logo-bracket">]</span>
+                    
                 </div>
                 <p class="footer-desc">
                     Cybersecurity student, SOC enthusiast, and network security practitioner from Pakistan. Specializing in DFIR, Linux Systems, and Ethical Hacking.

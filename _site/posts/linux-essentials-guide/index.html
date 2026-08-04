@@ -7,12 +7,53 @@
     <meta name="description" content="From file permissions to bash scripting — the complete Linux reference guide for cybersecurity professionals.">
     <meta name="theme-color" content="#080C1A">
     
-    <!-- Open Graph -->
+    <!-- Dynamic Favicons & Icons -->
+    
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    
+    
+    
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Open Graph & Meta -->
     <meta property="og:title" content="Linux Essentials: Every Command You Actually Need | Aimad Ul Islam">
     <meta property="og:description" content="From file permissions to bash scripting — the complete Linux reference guide for cybersecurity professionals.">
-    <meta property="og:type" content="website">
+    <meta property="og:type" content="article">
     <meta property="og:url" content="https://aimadulislam.dpdns.org/posts/linux-essentials-guide/">
     <meta property="og:image" content="https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Linux Essentials: Every Command You Actually Need | Aimad Ul Islam">
+    <meta name="twitter:description" content="From file permissions to bash scripting — the complete Linux reference guide for cybersecurity professionals.">
+    <meta name="twitter:image" content="https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://aimadulislam.dpdns.org/posts/linux-essentials-guide/">
+
+    <!-- Schema.org JSON-LD Structured Data -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Linux Essentials: Every Command You Actually Need",
+      "description": "From file permissions to bash scripting — the complete Linux reference guide for cybersecurity professionals.",
+      "image": "https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg",
+      "author": {
+        "@type": "Person",
+        "name": "Aimad Ul Islam"
+      },
+      "datePublished": "2026-06-28",
+      "dateModified": "2026-07-01",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://aimadulislam.dpdns.org/posts/linux-essentials-guide/"
+      }
+    }
+    </script>
+    
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,7 +89,9 @@
     <div class="nav-container" style="width: 100%; max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
         <a href="/" class="nav-logo-wrap" aria-label="Aimad Security">
             
-                <span class="nav-logo"><span class="br">[</span>Aimad Security<span class="nav-dot"></span><span class="br">]</span></span>
+            
+            
+                <span class="nav-logo"><span class="br">[</span>[Aimad•Security]<span class="nav-dot"></span><span class="br">]</span></span>
             
         </a>
 
@@ -195,7 +238,11 @@
 <div class="mobile-overlay" id="mobOverlay" onclick="closeMobileNav()"></div>
 <div class="mobile-nav" id="mobNav">
     <div class="mobile-nav-header">
-        <div class="mobile-nav-brand">Aimad Security</div>
+        <div class="mobile-nav-brand">
+            
+                [Aimad•Security]
+            
+        </div>
         <button class="mob-close-btn" id="mobCloseBtn" onclick="closeMobileNav()" aria-label="Close menu">&times;</button>
     </div>
     
@@ -310,75 +357,138 @@
 
 
     <main id="main-content">
-        <main class="container">
-    <article class="article-hero">
-        <!-- Breadcrumbs -->
-        <div class="breadcrumb">
-            <a href="/"><i class="fa-solid fa-house"></i> Home</a>
-            <span>/</span>
-            <a href="/blog/">Blog</a>
-            <span>/</span>
-            <span class="current-title">Linux Essentials: Every Command You Actually Need</span>
+        
+<div class="article-hero-wrapper">
+    <div class="container">
+        <!-- Top Breadcrumbs & Quick Toolbar -->
+        <div class="breadcrumb-toolbar">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/"><i class="fa-solid fa-house"></i> Home</a>
+                <i class="fa-solid fa-chevron-right breadcrumb-separator"></i>
+                <a href="/blog/">Blog</a>
+                
+                <i class="fa-solid fa-chevron-right breadcrumb-separator"></i>
+                <a href="/blog/?cat=Linux">Linux</a>
+                
+                <i class="fa-solid fa-chevron-right breadcrumb-separator"></i>
+                <span class="current-title">Linux Essentials: Every Command You Actually Need</span>
+            </nav>
+
+            <div class="article-quick-tools">
+                
+                
+                <a href="/blog/" class="btn btn-ghost btn-xs"><i class="fa-solid fa-arrow-left"></i> All Writeups</a>
+                <button class="btn btn-ghost btn-xs copy-url-btn" data-url="https://aimadulislam.dpdns.org/posts/linux-essentials-guide/" title="Copy Article Link">
+                    <i class="fa-solid fa-link"></i> <span class="btn-text">Share</span>
+                </button>
+                <button class="btn btn-ghost btn-xs" onclick="window.print()" title="Print / Export PDF">
+                    <i class="fa-solid fa-print"></i> <span class="btn-text">Print</span>
+                </button>
+            </div>
         </div>
 
+        <!-- Featured Cover Image / Header Banner (Single Unified Title Layout) -->
+        
+        
+
+        <!-- Unified Article Header Meta Card -->
+        <header class="article-header-card card">
+            <div class="card-glow"></div>
+            
+            <div class="article-header-meta-top">
+                <div class="article-cats">
+                    <span class="hud-badge hud-badge-green"><i class="fa-solid fa-terminal"></i> SEC_ID: LINUX-ESSENTIALS-GUIDE</span>
+                    
+                    <a href="/blog/?cat=Linux" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Linux</a>
+                    
+                    <a href="/blog/?cat=Tutorials" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Tutorials</a>
+                    
+                </div>
+                <span class="difficulty-badge intermediate">
+                    <i class="fa-solid fa-layer-group"></i> Intermediate
+                </span>
+            </div>
+
+            <!-- Prominent H1 Article Title (Single Instance) -->
+            <h1 class="article-main-title">Linux Essentials: Every Command You Actually Need</h1>
+
+            
+            <p class="article-subtitle">From file permissions to bash scripting — the complete Linux reference guide for cybersecurity professionals, built during my Cisco Linux Essentials (LPI PDC) certification.</p>
+            
+
+            <!-- High-Tech Cyber HUD Metadata Bar -->
+            <div class="article-meta-hud">
+                <div class="meta-hud-item">
+                    <div class="meta-hud-icon"><i class="fa-solid fa-user-shield"></i></div>
+                    <div class="meta-hud-info">
+                        <span class="meta-hud-label">Author</span>
+                        <span class="meta-hud-val">Aimad Ul Islam</span>
+                    </div>
+                </div>
+
+                <div class="meta-hud-item">
+                    <div class="meta-hud-icon"><i class="fa-regular fa-calendar-check"></i></div>
+                    <div class="meta-hud-info">
+                        <span class="meta-hud-label">Published</span>
+                        <span class="meta-hud-val">28 Jun 2026</span>
+                    </div>
+                </div>
+
+                
+                
+                <div class="meta-hud-item">
+                    <div class="meta-hud-icon"><i class="fa-solid fa-rotate"></i></div>
+                    <div class="meta-hud-info">
+                        <span class="meta-hud-label">Last Updated</span>
+                        <span class="meta-hud-val">01 Jul 2026</span>
+                    </div>
+                </div>
+                
+
+                <div class="meta-hud-item">
+                    <div class="meta-hud-icon"><i class="fa-regular fa-clock"></i></div>
+                    <div class="meta-hud-info">
+                        <span class="meta-hud-label">Est. Read Time</span>
+                        <span class="meta-hud-val">20 min read</span>
+                    </div>
+                </div>
+
+                
+            </div>
+
+            
+            <div class="article-tags-wrapper">
+                <span class="tags-label"><i class="fa-solid fa-tags"></i> Tags:</span>
+                <div class="article-tags">
+                    
+                    <a href="/blog/?tag=linux" class="tag tag-tut">#linux</a>
+                    
+                    <a href="/blog/?tag=bash" class="tag tag-tut">#bash</a>
+                    
+                    <a href="/blog/?tag=command-line" class="tag tag-tut">#command-line</a>
+                    
+                    <a href="/blog/?tag=permissions" class="tag tag-tut">#permissions</a>
+                    
+                    <a href="/blog/?tag=scripting" class="tag tag-tut">#scripting</a>
+                    
+                    <a href="/blog/?tag=lpi" class="tag tag-tut">#lpi</a>
+                    
+                </div>
+            </div>
+            
+        </header>
+
+        <!-- Article Layout: Main Column + Responsive Sidebar -->
         <div class="article-layout">
-            <!-- Main Content Column -->
+            <!-- Left Main Article Column -->
             <div class="article-main">
-                <header class="article-header card">
-                    <div class="article-cats">
-                        
-                        <a href="/blog/?cat=Linux" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Linux</a>
-                        
-                        <a href="/blog/?cat=Tutorials" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Tutorials</a>
-                        
-                        <span class="tag tag-tut"><i class="fa-solid fa-gauge-high"></i> Intermediate</span>
-                    </div>
-                    
-                    <h1 class="article-title">Linux Essentials: Every Command You Actually Need</h1>
-                    
-                    
-                    <p class="article-subtitle">From file permissions to bash scripting — the complete Linux reference guide for cybersecurity professionals, built during my Cisco Linux Essentials (LPI PDC) certification.</p>
-                    
-                    
-                    <div class="article-meta">
-                        <div class="article-meta-item">
-                            <i class="fa-solid fa-user-shield"></i>
-                            <span>Author: <strong>Aimad Ul Islam</strong></span>
-                        </div>
-                        <div class="article-meta-item">
-                            <i class="fa-regular fa-calendar"></i>
-                            <span>Published: <strong>28 Jun 2026</strong></span>
-                        </div>
-                        
-                        <div class="article-meta-item">
-                            <i class="fa-regular fa-clock"></i>
-                            <span>Est. Read: <strong>20 min</strong></span>
-                        </div>
-                        
-                    </div>
-
-                    
-                    <div class="article-tags">
-                        
-                        <span class="tag tag-tut">#linux</span>
-                        
-                        <span class="tag tag-tut">#bash</span>
-                        
-                        <span class="tag tag-tut">#command-line</span>
-                        
-                        <span class="tag tag-tut">#permissions</span>
-                        
-                        <span class="tag tag-tut">#scripting</span>
-                        
-                        <span class="tag tag-tut">#lpi</span>
-                        
-                    </div>
-                    
-                </header>
-
-                <!-- Article Body -->
+                <!-- Main Markdown Article Body -->
+                <!-- Main Article Body: Handles structured content blocks OR standard markdown -->
                 <div class="article-body card">
-                    <h2 id="introduction" tabindex="-1">Introduction <a class="direct-link" href="#introduction" aria-hidden="true">#</a></h2>
+                    <div class="card-glow"></div>
+
+                    
+                        <h2 id="introduction" tabindex="-1">Introduction <a class="direct-link" href="#introduction" aria-hidden="true">#</a></h2>
 <p>Linux is the undisputed backbone of modern IT infrastructure. From cloud servers (AWS, Azure, GCP) to container orchestration (Kubernetes, Docker) and enterprise networks, Linux runs over 90% of the world's servers. More importantly for us cybersecurity professionals, <strong>Kali Linux</strong> is the industry standard for penetration testing.</p>
 <p>During my <strong>Cisco Linux Essentials</strong> certification (aligned with the <strong>LPI Linux Professional Institute Certification - Linux Essentials (010-160)</strong>), I built this comprehensive reference guide. It condenses everything you need to know into practical, executable commands.</p>
 <div class="callout callout-info">
@@ -598,67 +708,251 @@ sudo dpkg-reconfigure --priority=low unattended-upgrades</code></pre></p>
 </ul>
 <p>The terminal is your most powerful weapon in cybersecurity. Keep typing, keep learning, and stay curious.</p>
 
+                    
+
+                    
+
+                    
                 </div>
 
-                <!-- Social Share & Actions -->
+                <!-- Social Share Bar -->
                 <div class="social-share card">
-                    <span class="share-label"><i class="fa-solid fa-share-nodes"></i> Share Article:</span>
-                    <a href="https://x.com/intent/tweet?text=Linux%20Essentials%3A%20Every%20Command%20You%20Actually%20Need&url=https://aimadulislam.dpdns.org/posts/linux-essentials-guide/" target="_blank" rel="noopener noreferrer" class="share-btn twitter" aria-label="Share on X"><i class="fa-brands fa-x-twitter"></i></a>
-                    <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://aimadulislam.dpdns.org/posts/linux-essentials-guide/&title=Linux%20Essentials%3A%20Every%20Command%20You%20Actually%20Need" target="_blank" rel="noopener noreferrer" class="share-btn linkedin" aria-label="Share on LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-                    <button class="share-btn copy-url" id="copy-url-btn" data-url="https://aimadulislam.dpdns.org/posts/linux-essentials-guide/" aria-label="Copy URL"><i class="fa-solid fa-link"></i> Copy Link</button>
+                    <div class="share-header">
+                        <i class="fa-solid fa-share-nodes text-cyan"></i>
+                        <span class="share-label">Share Writeup:</span>
+                    </div>
+                    <div class="share-buttons">
+                        <a href="https://x.com/intent/tweet?text=Linux%20Essentials%3A%20Every%20Command%20You%20Actually%20Need&url=https://aimadulislam.dpdns.org/posts/linux-essentials-guide/" target="_blank" rel="noopener noreferrer" class="share-btn twitter" aria-label="Share on X (Twitter)" title="Share on X">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://aimadulislam.dpdns.org/posts/linux-essentials-guide/&title=Linux%20Essentials%3A%20Every%20Command%20You%20Actually%20Need" target="_blank" rel="noopener noreferrer" class="share-btn linkedin" aria-label="Share on LinkedIn" title="Share on LinkedIn">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://t.me/share/url?url=https://aimadulislam.dpdns.org/posts/linux-essentials-guide/&text=Linux%20Essentials%3A%20Every%20Command%20You%20Actually%20Need" target="_blank" rel="noopener noreferrer" class="share-btn telegram" aria-label="Share on Telegram" title="Share on Telegram">
+                            <i class="fa-brands fa-telegram"></i>
+                        </a>
+                        <a href="https://api.whatsapp.com/send?text=Linux%20Essentials%3A%20Every%20Command%20You%20Actually%20Need%20https://aimadulislam.dpdns.org/posts/linux-essentials-guide/" target="_blank" rel="noopener noreferrer" class="share-btn whatsapp" aria-label="Share on WhatsApp" title="Share on WhatsApp">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                        <button class="share-btn copy-url copy-url-btn" data-url="https://aimadulislam.dpdns.org/posts/linux-essentials-guide/" aria-label="Copy Direct Article Link" title="Copy Article Link">
+                            <i class="fa-solid fa-link"></i> <span class="share-btn-text">Copy Link</span>
+                        </button>
+                    </div>
                 </div>
 
-                <!-- Author Box -->
+                <!-- Cybersecurity Specialist Author Box -->
                 <div class="author-box card">
-                    <div class="author-avatar"><i class="fa-solid fa-user-check"></i></div>
+                    <div class="card-glow"></div>
+                    <div class="author-avatar-wrap">
+                        <div class="author-avatar-inner">
+                            
+                            <i class="fa-solid fa-user-shield"></i>
+                            
+                        </div>
+                        <span class="author-verified-dot" title="Verified Security Researcher"></span>
+                    </div>
                     <div class="author-info">
-                        <h3>Aimad Ul Islam</h3>
-                        <p class="author-bio">Cybersecurity practitioner, SOC analyst enthusiast, and Linux system administrator. Documenting DFIR investigations, virtual network labs, and threat hunting workflows.</p>
+                        <div class="author-header">
+                            <div>
+                                <h3 class="author-name">Aimad Ul Islam</h3>
+                                <span class="author-role">Cybersecurity Practitioner & SOC Analyst</span>
+                            </div>
+                            <a href="/#contact" class="btn btn-xs btn-outline"><i class="fa-solid fa-paper-plane"></i> Contact Author</a>
+                        </div>
+                        <p class="author-bio">
+                            Cybersecurity professional specializing in DFIR investigations, SOC operations, SIEM automation, and threat research. Documenting ethical hacking labs, network architecture, and security policies.
+                        </p>
                         <div class="author-links">
                             <a href="https://github.com/aimadulislam" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
                             <a href="https://linkedin.com/in/aimadulislam" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                            <a href="/resources/"><i class="fa-solid fa-shield-halved"></i> Resources</a>
                         </div>
                     </div>
                 </div>
 
-                <!-- Navigation Between Posts -->
+                <!-- Prev / Next Post Navigation -->
                 
                 
-                <nav class="article-nav">
+                <nav class="article-nav" aria-label="Article navigation">
                     
                     <a href="/posts/dfir-introduction/" class="article-nav-link prev card">
-                        <span class="article-nav-dir"><i class="fa-solid fa-angle-left"></i> Previous Article</span>
+                        <div class="card-glow"></div>
+                        <span class="article-nav-dir"><i class="fa-solid fa-arrow-left"></i> Previous Writeup</span>
                         <div class="article-nav-title">Digital Forensics &amp; Incident Response: A Hands-On Introduction</div>
                     </a>
                     
-                    
+
                     
                     <a href="/posts/python-for-security/" class="article-nav-link next card">
-                        <span class="article-nav-dir">Next Article <i class="fa-solid fa-angle-right"></i></span>
+                        <div class="card-glow"></div>
+                        <span class="article-nav-dir">Next Writeup <i class="fa-solid fa-arrow-right"></i></span>
                         <div class="article-nav-title">Python for Hackers: Security Automation Scripts from Scratch</div>
                     </a>
                     
                 </nav>
+
+                <!-- Related Research Section -->
+                <div class="related-posts-section">
+                    <div class="related-header">
+                        <h3 class="related-title"><i class="fa-solid fa-layer-group text-cyan"></i> Recommended Writeups</h3>
+                        <a href="/blog/" class="btn btn-ghost btn-xs">View All Research <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                    <div class="related-grid">
+                        
+                        
+                            
+                            <a href="/posts/python-backdoor-injection/" class="card related-card">
+                                <div class="card-glow"></div>
+                                <div class="related-card-meta">
+                                    <span class="tag tag-cyber"><i class="fa-solid fa-tag"></i> Programming</span>
+                                    <span class="related-date"><i class="fa-regular fa-calendar"></i> 05 Aug 2026</span>
+                                </div>
+                                <h4 class="related-card-title">DLL &amp; Code Injection: Build a Stealthy Python Backdoor from Scratch</h4>
+                                <p class="related-card-desc">Master remote thread creation, DLL injection, and code injection to build a professional-grade Python backdoor with process execution redirection.</p>
+                            </a>
+                            
+                            
+                        
+                            
+                            <a href="/posts/educational-keylogger-guide/" class="card related-card">
+                                <div class="card-glow"></div>
+                                <div class="related-card-meta">
+                                    <span class="tag tag-cyber"><i class="fa-solid fa-tag"></i> Cybersecurity</span>
+                                    <span class="related-date"><i class="fa-regular fa-calendar"></i> 02 Aug 2026</span>
+                                </div>
+                                <h4 class="related-card-title">Educational Keylogger: How Keyboard Monitoring Works &amp; Defenses</h4>
+                                <p class="related-card-desc">A deep dive into the mechanics of keyloggers, storage methods, and defensive strategies—strictly for educational purposes.</p>
+                            </a>
+                            
+                            
+                        
+                            
+                            <a href="/posts/metasploitable-complete-guide/" class="card related-card">
+                                <div class="card-glow"></div>
+                                <div class="related-card-meta">
+                                    <span class="tag tag-cyber"><i class="fa-solid fa-tag"></i> Cybersecurity</span>
+                                    <span class="related-date"><i class="fa-regular fa-calendar"></i> 25 Jul 2026</span>
+                                </div>
+                                <h4 class="related-card-title">Metasploitable 2: The Ultimate Beginner&#39;s Guide to Exploitation</h4>
+                                <p class="related-card-desc">Learn how to hack Metasploitable 2 from scratch using Metasploit – exploit vsftpd, UnrealIRCd, and more. Step‑by‑step guide for beginners.</p>
+                            </a>
+                            
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                    </div>
+                </div>
+
+                <!-- Peer Review & Discussion / Comments Placeholder Section -->
+                <div class="comments-section card">
+                    <div class="card-glow"></div>
+                    <div class="comments-header">
+                        <div class="comments-title-wrap">
+                            <i class="fa-solid fa-comments text-cyan comments-icon"></i>
+                            <div>
+                                <h3 class="comments-title">Peer Review & Threat Discussion</h3>
+                                <p class="comments-sub">Join the technical conversation or share insights regarding this writeup.</p>
+                            </div>
+                        </div>
+                        <span class="hud-badge hud-badge-violet"><i class="fa-solid fa-lock"></i> Giscus / Disqus Ready</span>
+                    </div>
+                    
+                    <div id="comments-container" class="comments-placeholder">
+                        <div class="comments-placeholder-inner">
+                            <i class="fa-solid fa-terminal text-muted" style="font-size: 2.2rem; margin-bottom: 0.8rem;"></i>
+                            <p>Interactive peer discussions are powered by GitHub Discussions / Giscus.</p>
+                            <a href="https://github.com/aimadulislam" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline mt-1">
+                                <i class="fa-brands fa-github"></i> Open Discussion on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <!-- Article Sidebar -->
+            <!-- Right Sticky Sidebar -->
             <aside class="sidebar">
-                <!-- Table of Contents Widget -->
+                <!-- Dynamic Table of Contents Widget -->
                 <div class="sidebar-widget card" id="toc-widget">
-                    <h3 class="widget-title"><i class="fa-solid fa-list-ol"></i> Table of Contents</h3>
+                    <div class="card-glow"></div>
+                    <div class="widget-title">
+                        <span><i class="fa-solid fa-list-check text-cyan"></i> Table of Contents</span>
+                        <span class="toc-count-badge" id="toc-count">0 sections</span>
+                    </div>
                     <nav id="toc-list" class="toc-list"></nav>
                 </div>
 
-                <!-- Recent Articles Widget -->
+                <!-- Quick Author Widget -->
                 <div class="sidebar-widget card">
-                    <h3 class="widget-title"><i class="fa-solid fa-fire"></i> Related Writeups</h3>
+                    <div class="card-glow"></div>
+                    <h3 class="widget-title"><i class="fa-solid fa-user-shield text-cyan"></i> Research Author</h3>
+                    <div class="sidebar-author-row">
+                        <div class="author-avatar-inner" style="width:48px; height:48px; font-size:1.1rem;">
+                            
+                            <i class="fa-solid fa-user-shield"></i>
+                            
+                        </div>
+                        <div>
+                            <div class="sidebar-author-name">Aimad Ul Islam</div>
+                            <div class="sidebar-author-title">SOC Specialist & DFIR Researcher</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Writeups Widget -->
+                <div class="sidebar-widget card">
+                    <div class="card-glow"></div>
+                    <h3 class="widget-title"><i class="fa-solid fa-fire text-amber"></i> Recent Research</h3>
                     <div class="sidebar-posts">
                         
                         
                             
+                            <a href="/posts/python-backdoor-injection/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    
+                                    <span class="thumb-emoji">🐉</span>
+                                    
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">DLL &amp; Code Injection: Build a Stealthy Python Backdoor from Scratch</h4>
+                                    <span class="sidebar-post-meta"><i class="fa-regular fa-calendar"></i> 05 Aug 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                            <a href="/posts/educational-keylogger-guide/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    
+                                    <span class="thumb-emoji">🎹</span>
+                                    
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">Educational Keylogger: How Keyboard Monitoring Works &amp; Defenses</h4>
+                                    <span class="sidebar-post-meta"><i class="fa-regular fa-calendar"></i> 02 Aug 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
                             <a href="/posts/metasploitable-complete-guide/" class="sidebar-post">
                                 <div class="sidebar-post-thumb">
+                                    
                                     <span class="thumb-emoji">🎯</span>
+                                    
                                 </div>
                                 <div class="sidebar-post-content">
                                     <h4 class="sidebar-post-title">Metasploitable 2: The Ultimate Beginner&#39;s Guide to Exploitation</h4>
@@ -671,7 +965,9 @@ sudo dpkg-reconfigure --priority=low unattended-upgrades</code></pre></p>
                             
                             <a href="/posts/kali-linux-setup-guide/" class="sidebar-post">
                                 <div class="sidebar-post-thumb">
+                                    
                                     <span class="thumb-emoji">🐉</span>
+                                    
                                 </div>
                                 <div class="sidebar-post-content">
                                     <h4 class="sidebar-post-title">Getting Started with Kali Linux: Complete Beginner Setup Guide</h4>
@@ -682,29 +978,7 @@ sudo dpkg-reconfigure --priority=low unattended-upgrades</code></pre></p>
                             
                         
                             
-                            <a href="/posts/nmap-complete-guide/" class="sidebar-post">
-                                <div class="sidebar-post-thumb">
-                                    <span class="thumb-emoji">🗺️</span>
-                                </div>
-                                <div class="sidebar-post-content">
-                                    <h4 class="sidebar-post-title">Nmap Deep Dive: From Port Scanning to Full Network Enumeration</h4>
-                                    <span class="sidebar-post-meta"><i class="fa-regular fa-calendar"></i> 10 Jul 2026</span>
-                                </div>
-                            </a>
-                            
-                            
                         
-                            
-                            <a href="/posts/dfir-introduction/" class="sidebar-post">
-                                <div class="sidebar-post-thumb">
-                                    <span class="thumb-emoji">🔬</span>
-                                </div>
-                                <div class="sidebar-post-content">
-                                    <h4 class="sidebar-post-title">Digital Forensics &amp; Incident Response: A Hands-On Introduction</h4>
-                                    <span class="sidebar-post-meta"><i class="fa-regular fa-calendar"></i> 05 Jul 2026</span>
-                                </div>
-                            </a>
-                            
                             
                         
                             
@@ -716,73 +990,287 @@ sudo dpkg-reconfigure --priority=low unattended-upgrades</code></pre></p>
                     </div>
                 </div>
 
-                <!-- Quick Resources Link -->
+                <!-- Categories List Widget -->
                 <div class="sidebar-widget card">
-                    <h3 class="widget-title"><i class="fa-solid fa-shield-halved"></i> Governance & Policies</h3>
-                    <p class="widget-desc">Check responsible disclosure policy or download open-source scripts.</p>
-                    <a href="/resources/" class="btn btn-sm btn-cyan btn-full"><i class="fa-solid fa-folder-tree"></i> Resources Center</a>
+                    <div class="card-glow"></div>
+                    <h3 class="widget-title"><i class="fa-solid fa-folder-tree text-cyan"></i> Research Categories</h3>
+                    <div class="sidebar-cat-list">
+                        
+                        
+                        <a href="/blog/?cat=Cybersecurity" class="sidebar-cat-item">
+                            <span><i class="fa-solid fa-folder-open text-cyan" style="font-size:0.75rem;"></i> Cybersecurity</span>
+                            <span class="sidebar-cat-count">8</span>
+                        </a>
+                        
+                        
+                        <a href="/blog/?cat=Linux" class="sidebar-cat-item">
+                            <span><i class="fa-solid fa-folder-open text-cyan" style="font-size:0.75rem;"></i> Linux</span>
+                            <span class="sidebar-cat-count">3</span>
+                        </a>
+                        
+                        
+                        <a href="/blog/?cat=Networking" class="sidebar-cat-item">
+                            <span><i class="fa-solid fa-folder-open text-cyan" style="font-size:0.75rem;"></i> Networking</span>
+                            <span class="sidebar-cat-count">1</span>
+                        </a>
+                        
+                        
+                        <a href="/blog/?cat=Personal%20Projects" class="sidebar-cat-item">
+                            <span><i class="fa-solid fa-folder-open text-cyan" style="font-size:0.75rem;"></i> Personal Projects</span>
+                            <span class="sidebar-cat-count">1</span>
+                        </a>
+                        
+                        
+                        <a href="/blog/?cat=Programming" class="sidebar-cat-item">
+                            <span><i class="fa-solid fa-folder-open text-cyan" style="font-size:0.75rem;"></i> Programming</span>
+                            <span class="sidebar-cat-count">3</span>
+                        </a>
+                        
+                        
+                        <a href="/blog/?cat=Tutorials" class="sidebar-cat-item">
+                            <span><i class="fa-solid fa-folder-open text-cyan" style="font-size:0.75rem;"></i> Tutorials</span>
+                            <span class="sidebar-cat-count">8</span>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                <!-- Security Advisory / Governance Center Link -->
+                <div class="sidebar-widget card">
+                    <div class="card-glow"></div>
+                    <h3 class="widget-title"><i class="fa-solid fa-shield-halved text-cyan"></i> Security Center</h3>
+                    <p class="widget-desc">Review security disclosures, download vulnerability advisories, or inspect open source tooling.</p>
+                    <a href="/resources/" class="btn btn-sm btn-outline btn-full mt-1">
+                        <i class="fa-solid fa-folder-open"></i> Governance & Policies
+                    </a>
+                </div>
+
+                <!-- Newsletter / Threat Alerts Form -->
+                <div class="sidebar-widget card">
+                    <div class="card-glow"></div>
+                    <h3 class="widget-title"><i class="fa-solid fa-bell text-violet"></i> Security Alerts</h3>
+                    <p class="widget-desc">Subscribe for instant notifications when new security writeups or lab walkthroughs are released.</p>
+                    <form class="newsletter-form mt-1" onsubmit="event.preventDefault(); alert('Subscribed to Security Alerts feed!'); this.reset();">
+                        <input type="email" class="newsletter-input" placeholder="secops@domain.com" required aria-label="Email address for security updates" />
+                        <button type="submit" class="newsletter-btn"><i class="fa-solid fa-paper-plane"></i> Subscribe</button>
+                    </form>
                 </div>
             </aside>
         </div>
-    </article>
-</main>
+    </div>
+</div>
+
+<!-- Lightbox Modal Overlay for Images -->
+<div id="imageLightbox" class="lightbox-modal" style="display:none;" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightboxImg" class="lightbox-content" alt="Enlarged figure view" />
+    <div id="lightboxCaption" class="lightbox-caption"></div>
+</div>
 
 <script>
-    // Copy URL button
-    document.getElementById('copy-url-btn')?.addEventListener('click', function() {
-        navigator.clipboard.writeText(this.dataset.url).then(() => {
-            const originalHtml = this.innerHTML;
-            this.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
-            setTimeout(() => {
-                this.innerHTML = originalHtml;
-            }, 2000);
-        });
-    });
-
-    // Code block copy buttons
-    document.querySelectorAll('.copy-btn').forEach(btn => {
-        btn.addEventListener('click', function() {
-            const pre = this.parentElement.querySelector('pre');
-            if (!pre) return;
-            navigator.clipboard.writeText(pre.innerText).then(() => {
-                const originalHtml = this.innerHTML;
-                this.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
-                setTimeout(() => {
-                    this.innerHTML = originalHtml;
-                }, 2000);
+    document.addEventListener('DOMContentLoaded', () => {
+        // 1. Copy URL functionality for all copy buttons
+        document.querySelectorAll('.copy-url-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const url = this.getAttribute('data-url') || window.location.href;
+                navigator.clipboard.writeText(url).then(() => {
+                    const originalHtml = this.innerHTML;
+                    this.innerHTML = '<i class="fa-solid fa-check text-green"></i> <span class="btn-text">Copied!</span>';
+                    setTimeout(() => {
+                        this.innerHTML = originalHtml;
+                    }, 2200);
+                }).catch(() => {
+                    alert('Copied URL: ' + url);
+                });
             });
         });
-    });
 
-    // Table of Contents generator
-    document.addEventListener('DOMContentLoaded', () => {
+        // 2. Wrap Markdown code blocks with copy bar and language label
         const articleBody = document.querySelector('.article-body');
+        if (articleBody) {
+            const preBlocks = articleBody.querySelectorAll('pre');
+            preBlocks.forEach((pre, idx) => {
+                if (pre.parentElement.classList.contains('code-block-wrap')) return;
+
+                const code = pre.querySelector('code');
+                let lang = 'CODE';
+                if (code) {
+                    const match = code.className.match(/language-([a-zA-Z0-9_\-]+)/);
+                    if (match) {
+                        lang = match[1].toUpperCase();
+                    }
+                }
+
+                const wrapper = document.createElement('div');
+                wrapper.className = 'code-block-wrap';
+
+                const header = document.createElement('div');
+                header.className = 'code-block-header';
+                header.innerHTML = `
+                    <span class="code-block-lang"><i class="fa-solid fa-terminal"></i> ${lang}</span>
+                    <button class="copy-code-btn" aria-label="Copy code block">
+                        <i class="fa-regular fa-copy"></i> Copy
+                    </button>
+                `;
+
+                pre.parentNode.insertBefore(wrapper, pre);
+                wrapper.appendChild(header);
+                wrapper.appendChild(pre);
+
+                const copyBtn = header.querySelector('.copy-code-btn');
+                copyBtn.addEventListener('click', () => {
+                    const codeText = pre.innerText || pre.textContent;
+                    navigator.clipboard.writeText(codeText).then(() => {
+                        copyBtn.innerHTML = '<i class="fa-solid fa-check text-green"></i> Copied!';
+                        copyBtn.classList.add('copied');
+                        setTimeout(() => {
+                            copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+                            copyBtn.classList.remove('copied');
+                        }, 2000);
+                    });
+                });
+            });
+
+            // Click-to-zoom Lightbox for Article Images
+            const images = articleBody.querySelectorAll('img');
+            images.forEach(img => {
+                img.style.cursor = 'zoom-in';
+                img.addEventListener('click', () => {
+                    const lightbox = document.getElementById('imageLightbox');
+                    const lightboxImg = document.getElementById('lightboxImg');
+                    const lightboxCaption = document.getElementById('lightboxCaption');
+                    if (lightbox && lightboxImg) {
+                        lightbox.style.display = 'flex';
+                        lightboxImg.src = img.src;
+                        if (lightboxCaption) {
+                            lightboxCaption.textContent = img.alt || img.title || 'Image view';
+                        }
+                    }
+                });
+            });
+        }
+
+        // 3. Dynamic Table of Contents Generator + Live Scroll Spy Highlight
+        const tocWidget = document.getElementById('toc-widget');
         const tocList = document.getElementById('toc-list');
+        const tocCount = document.getElementById('toc-count');
+
         if (articleBody && tocList) {
             const headings = articleBody.querySelectorAll('h2, h3');
             if (headings.length === 0) {
-                document.getElementById('toc-widget').style.display = 'none';
+                if (tocWidget) tocWidget.style.display = 'none';
             } else {
+                if (tocCount) tocCount.textContent = headings.length + ' sections';
+                
+                const tocLinks = [];
+
                 headings.forEach((h, idx) => {
-                    if (!h.id) h.id = 'heading-' + idx;
+                    if (!h.id) {
+                        h.id = 'sec-' + idx + '-' + h.textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+                    }
+
+                    const li = document.createElement('li');
+                    li.className = 'toc-item ' + (h.tagName.toLowerCase() === 'h3' ? 'h3' : 'h2');
+
                     const link = document.createElement('a');
                     link.href = '#' + h.id;
-                    link.textContent = h.textContent;
-                    link.className = h.tagName.toLowerCase() === 'h3' ? 'toc-sublink' : 'toc-mainlink';
-                    tocList.appendChild(link);
+                    link.innerHTML = `<i class="fa-solid fa-angle-right toc-bullet"></i> ${h.textContent.replace(/^#+\s*/, '')}`;
+                    
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const target = document.getElementById(h.id);
+                        if (target) {
+                            const offset = 95;
+                            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                            history.pushState(null, null, '#' + h.id);
+                        }
+                    });
+
+                    li.appendChild(link);
+                    tocList.appendChild(li);
+                    tocLinks.push({ heading: h, link: link });
                 });
+
+                // Scroll Spy for TOC active link
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '-100px 0px -65% 0px',
+                    threshold: 0
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const id = entry.target.id;
+                            tocLinks.forEach(item => {
+                                if (item.heading.id === id) {
+                                    item.link.classList.add('active');
+                                    item.link.parentElement.classList.add('active');
+                                } else {
+                                    item.link.classList.remove('active');
+                                    item.link.parentElement.classList.remove('active');
+                                }
+                            });
+                        }
+                    });
+                }, observerOptions);
+
+                headings.forEach(h => observer.observe(h));
             }
         }
+
+        // 4. Reading Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            const progress = document.getElementById('reading-progress');
+            if (progress) progress.style.width = scrolled + '%';
+        });
     });
 
-    // Reading progress bar
-    window.addEventListener('scroll', () => {
-        const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
-        const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const scrolled = (winScroll / height) * 100;
-        const progress = document.getElementById('reading-progress');
-        if (progress) progress.style.width = scrolled + '%';
-    });
+    function closeLightbox() {
+        const lightbox = document.getElementById('imageLightbox');
+        if (lightbox) lightbox.style.display = 'none';
+    }
+
+    function openLightboxImage(src, caption) {
+        const lightbox = document.getElementById('imageLightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+        if (lightbox && lightboxImg) {
+            lightbox.style.display = 'flex';
+            lightboxImg.src = src;
+            if (lightboxCaption) {
+                lightboxCaption.textContent = caption || 'Image view';
+            }
+        }
+    }
+
+    function copyCodeBlockText(btn) {
+        if (!btn) return;
+        const parent = btn.closest('.code-block-wrap') || btn.closest('.terminal-block-wrap');
+        let codeText = '';
+        if (parent) {
+            const pre = parent.querySelector('pre');
+            if (pre) codeText = pre.innerText || pre.textContent;
+        }
+        if (!codeText) return;
+
+        navigator.clipboard.writeText(codeText.trim()).then(() => {
+            const originalHtml = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-check text-green"></i> Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.innerHTML = originalHtml;
+                btn.classList.remove('copied');
+            }, 2000);
+        }).catch(() => {
+            alert('Code copied!');
+        });
+    }
 </script>
 
     </main>
@@ -796,7 +1284,9 @@ sudo dpkg-reconfigure --priority=low unattended-upgrades</code></pre></p>
             <!-- Brand Column -->
             <div class="footer-col footer-brand-col">
                 <div class="footer-logo-brand">
-                    <span class="logo-bracket">[</span><span class="logo-text">[Aimad•Security]</span><span class="logo-bracket">]</span>
+                    
+                        <span class="logo-bracket">[</span><span class="logo-text">[Aimad•Security]</span><span class="logo-bracket">]</span>
+                    
                 </div>
                 <p class="footer-desc">
                     Cybersecurity student, SOC enthusiast, and network security practitioner from Pakistan. Specializing in DFIR, Linux Systems, and Ethical Hacking.

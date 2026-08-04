@@ -1,0 +1,23 @@
+{
+  "name": "Aimad Ul Islam — Cybersecurity &amp; Network Security Portfolio",
+  "short_name": "Aimad Security",
+  "description": "Cybersecurity student, SOC enthusiast, and network security learner from Pakistan. BSc Computer Science, Cisco certified.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#080C1A",
+  "theme_color": "#00D4FF",
+  "icons": [
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 64 64&#39;%3E%3Ccircle cx=&#39;32&#39; cy=&#39;32&#39; r=&#39;30&#39; fill=&#39;%23050810&#39;/%3E%3Ccircle cx=&#39;32&#39; cy=&#39;32&#39; r=&#39;30&#39; fill=&#39;none&#39; stroke=&#39;%2300D4FF&#39; stroke-width=&#39;2.5&#39;/%3E%3Ctext x=&#39;32&#39; y=&#39;39&#39; text-anchor=&#39;middle&#39; font-family=&#39;Arial Black,Arial&#39; font-weight=&#39;900&#39; font-size=&#39;26&#39; fill=&#39;%2300D4FF&#39;%3EA%3C/text%3E%3C/svg%3E",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "data:image/svg+xml,%3Csvg xmlns=&#39;http://www.w3.org/2000/svg&#39; viewBox=&#39;0 0 64 64&#39;%3E%3Ccircle cx=&#39;32&#39; cy=&#39;32&#39; r=&#39;30&#39; fill=&#39;%23050810&#39;/%3E%3Ccircle cx=&#39;32&#39; cy=&#39;32&#39; r=&#39;30&#39; fill=&#39;none&#39; stroke=&#39;%2300D4FF&#39; stroke-width=&#39;2.5&#39;/%3E%3Ctext x=&#39;32&#39; y=&#39;39&#39; text-anchor=&#39;middle&#39; font-family=&#39;Arial Black,Arial&#39; font-weight=&#39;900&#39; font-size=&#39;26&#39; fill=&#39;%2300D4FF&#39;%3EA%3C/text%3E%3C/svg%3E",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
