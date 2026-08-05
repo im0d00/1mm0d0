@@ -9,8 +9,7 @@
   <!-- Tailwind CSS & FontAwesome -->
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-  <!-- Netlify Identity -->
-  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+  <!-- GitHub OAuth authentication via Decap CMS -->
 
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap');
@@ -816,7 +815,7 @@
         <p class="text-xs text-slate-400 mb-6">Export site data, create backups, or restore previous data checkpoints.</p>
 
         <div class="flex flex-wrap items-center gap-3 mb-6">
-          <button onclick="exportSiteBackup()" class="px-4 py-2 rounded-lg bg-teal-600 hover:bg-teal-500 text-white font-medium text-xs shadow-lg transition flex items-center gap-2">
+          <button onclick="confirmExportSiteBackup()" class="px-4 py-2 rounded-lg bg-teal-600 hover:bg-teal-500 text-white font-medium text-xs shadow-lg transition flex items-center gap-2">
             <i class="fa-solid fa-file-export"></i> Export Complete JSON Backup
           </button>
           <button onclick="alert('Backup restored successfully.')" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 font-medium text-xs border border-slate-700 transition flex items-center gap-2">
@@ -825,6 +824,40 @@
         </div>
       </div>
     </section>
+
+    <!-- BACKUP CONFIRMATION MODAL -->
+    <div id="backupConfirmModal" class="fixed inset-0 bg-slate-950/80 backdrop-blur-md z-50 flex items-center justify-center p-4 hidden">
+      <div class="cyber-glass border border-slate-700 rounded-2xl p-6 max-w-md w-full shadow-2xl space-y-4 animate-in fade-in zoom-in duration-150">
+        <div class="flex items-center gap-3 text-teal-400">
+          <div class="w-10 h-10 rounded-xl bg-teal-500/10 border border-teal-500/30 flex items-center justify-center text-teal-400 text-lg">
+            <i class="fa-solid fa-cloud-arrow-down"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-white">Confirm Data Export</h3>
+            <p class="text-xs text-slate-400">Export Complete JSON Backup</p>
+          </div>
+        </div>
+        
+        <p class="text-xs text-slate-300 leading-relaxed">
+          Are you sure you want to download a full JSON backup of the CMS content, configuration schema, and system metadata?
+        </p>
+
+        <div class="p-3 rounded-lg bg-slate-900/90 border border-slate-800 text-[11px] text-slate-400 space-y-1 font-mono-code">
+          <div class="flex justify-between"><span>Format:</span> <span class="text-teal-400">JSON</span></div>
+          <div class="flex justify-between"><span>Timestamp:</span> <span class="text-slate-200" id="modalTimestamp">2026-08-05</span></div>
+          <div class="flex justify-between"><span>Includes:</span> <span class="text-slate-200">All Collections & Settings</span></div>
+        </div>
+
+        <div class="flex items-center justify-end gap-3 pt-2">
+          <button onclick="closeBackupModal()" class="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium text-xs transition">
+            Cancel
+          </button>
+          <button onclick="executeExportSiteBackup()" class="px-4 py-2 rounded-lg bg-teal-600 hover:bg-teal-500 text-white font-semibold text-xs shadow-lg shadow-teal-500/20 transition flex items-center gap-2">
+            <i class="fa-solid fa-download"></i> Confirm & Download
+          </button>
+        </div>
+      </div>
+    </div>
 
     <!-- TAB 11: WORKFLOW & ACTIVITY (Req 11, 12) -->
     <section id="workflowTab" class="tab-content hidden space-y-6">
@@ -959,8 +992,21 @@
       dropdown.classList.remove('hidden');
     }
 
-    // Export JSON Backup
-    function exportSiteBackup() {
+    // Modal Export JSON Backup Functions
+    function confirmExportSiteBackup() {
+      const modal = document.getElementById('backupConfirmModal');
+      const timestampEl = document.getElementById('modalTimestamp');
+      if (timestampEl) timestampEl.innerText = new Date().toLocaleString();
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeBackupModal() {
+      const modal = document.getElementById('backupConfirmModal');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function executeExportSiteBackup() {
+      closeBackupModal();
       const backupData = {
         timestamp: new Date().toISOString(),
         site: "Aimad Ul Islam Cybersecurity Portfolio",
