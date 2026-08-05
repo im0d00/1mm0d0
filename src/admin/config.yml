@@ -1,7 +1,12 @@
 backend:
-  name: github
+  name: git-gateway
   repo: aimad-ul-islam/cybersecurity-portfolio
   branch: main
+  auth_type: implicit
+  auth_scope: repo
+  identity_service: firebase
+  open_authoring: false
+  require_repo_write_access: true
 
 media_folder: "src/images"
 public_folder: "/images"
