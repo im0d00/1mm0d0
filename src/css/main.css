@@ -760,43 +760,66 @@ body {
 .hamburger span { width: 22px; height: 2px; background: var(--white); border-radius: 2px; transition: var(--transition); }
 
 /* Mobile Navigation Drawer */
+body.menu-open {
+  overflow: hidden !important;
+}
+
 .mobile-nav {
-  position: fixed; top: 0; right: 0; width: 320px; height: 100vh;
-  background: rgba(5,8,16,0.96); backdrop-filter: blur(24px);
-  padding: 2rem 1.5rem; display: flex; flex-direction: column; gap: 1.2rem;
+  position: fixed; top: 0; right: 0; width: 320px; max-width: 90vw; height: 100vh;
+  background: rgba(5,8,16,0.98); backdrop-filter: blur(24px);
+  padding: 1.5rem 1.25rem; display: flex; flex-direction: column; gap: 1rem;
   border-left: 1px solid var(--border2);
   transform: translateX(100%); transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   z-index: 2000;
   box-shadow: -10px 0 40px rgba(0,0,0,0.6);
   overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 .mobile-nav.open { transform: translateX(0); }
 .mobile-nav-header {
   display: flex; justify-content: space-between; align-items: center;
-  padding-bottom: 1rem; border-bottom: 1px solid var(--border);
+  padding-bottom: 0.85rem; border-bottom: 1px solid var(--border);
 }
 .mobile-nav-brand {
   font-family: 'Space Grotesk', sans-serif; font-size: 1.1rem; font-weight: 700; color: var(--cyan);
 }
-.mobile-nav-close {
-  background: transparent; border: none; color: var(--white); font-size: 1.8rem; cursor: pointer; line-height: 1;
+.mob-close-btn, .mobile-nav-close {
+  background: rgba(255,255,255,0.05); border: 1px solid var(--border); color: var(--white); font-size: 1.5rem; cursor: pointer; line-height: 1;
+  width: 38px; height: 38px; min-width: 38px; min-height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  transition: var(--transition);
+}
+.mob-close-btn:hover, .mobile-nav-close:hover {
+  background: rgba(255,56,96,0.15); border-color: var(--red); color: var(--red);
 }
 .mobile-status-badge {
   display: flex; align-items: center; gap: 8px; font-family: 'JetBrains Mono', monospace;
-  font-size: 0.78rem; color: var(--green); background: rgba(0,255,136,0.06);
+  font-size: 0.75rem; color: var(--green); background: rgba(0,255,136,0.06);
   padding: 6px 12px; border-radius: 8px; border: 1px solid rgba(0,255,136,0.2);
 }
-.mobile-links { display: flex; flex-direction: column; gap: 0.4rem; margin: 0.5rem 0; }
+.mobile-links { display: flex; flex-direction: column; gap: 0.35rem; margin: 0.4rem 0; list-style: none; padding: 0; }
+.mob-item-wrap { display: flex; flex-direction: column; }
 .mobile-links a {
   font-family: 'Space Grotesk', sans-serif; font-size: 0.95rem; color: var(--silver);
   padding: 10px 12px; border-radius: 8px; transition: var(--transition);
-  display: flex; align-items: center; gap: 10px;
+  display: flex; align-items: center; gap: 10px; min-height: 44px;
 }
-.mobile-links a:hover { color: var(--cyan); background: rgba(0,212,255,0.08); }
+.mobile-links a:hover, .mobile-links a.active { color: var(--cyan); background: rgba(0,212,255,0.08); }
+.mob-sublinks {
+  list-style: none; padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.25rem; margin: 0.2rem 0 0.4rem 0;
+}
+.mob-sublinks a {
+  font-size: 0.85rem !important; color: var(--muted) !important; padding: 6px 12px !important; min-height: 38px !important;
+}
+.mob-sublinks a:hover, .mob-sublinks a.active {
+  color: var(--cyan) !important; background: rgba(0,212,255,0.06) !important;
+}
 .mobile-actions { display: flex; flex-direction: column; gap: 0.8rem; margin-top: auto; padding-top: 1rem; border-top: 1px solid var(--border); }
-.mobile-actions .w-full { width: 100%; justify-content: center; }
+.mob-action-btn {
+  display: flex !important; align-items: center !important; justify-content: center !important; gap: 0.5rem !important;
+  padding: 0.7rem 1rem !important; border-radius: 20px !important; min-height: 44px !important; font-size: 0.9rem !important; font-weight: 600 !important;
+}
 .mobile-socs { display: flex; gap: 1rem; justify-content: center; margin-top: 0.5rem; }
-.mobile-socs a { color: var(--muted); font-size: 1.1rem; transition: var(--transition); }
+.mobile-socs a { color: var(--muted); font-size: 1.1rem; transition: var(--transition); padding: 8px; min-width: 44px; min-height: 44px; display: flex; align-items: center; justify-content: center; }
 .mobile-socs a:hover { color: var(--cyan); transform: translateY(-2px); }
 
 /* Overlay for mobile drawer */
@@ -2240,12 +2263,26 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
   .table-responsive, table {
     display: block;
     width: 100%;
+    max-width: 100%;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
   table th, table td {
     padding: 8px 10px;
     font-size: 0.82rem;
+  }
+
+  pre, code {
+    max-width: 100%;
+  }
+  pre {
+    overflow-x: auto;
+    white-space: pre;
+    word-wrap: normal;
+    word-break: normal;
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    -webkit-overflow-scrolling: touch;
   }
 }
 
