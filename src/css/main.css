@@ -1927,15 +1927,24 @@ html, body {
   max-width: 100vw;
   overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+*, ::before, ::after {
+  box-sizing: border-box;
 }
 
 img, svg, video, canvas, iframe {
   max-width: 100%;
   height: auto;
+  display: block;
 }
 
 input, select, textarea {
   font-size: 16px !important; /* Prevents auto-zoom on iOS Safari */
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobile-nav-close {
@@ -1945,7 +1954,7 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
 /* Tablet & Mobile Layout Breakpoint (<= 992px) */
 @media (max-width: 992px) {
   #navbar {
-    padding: 0 1rem;
+    padding: 0 1.25rem;
     height: 64px;
   }
   .nav-logo-text {
@@ -1957,30 +1966,114 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
   .nav-links, .nav-status, .nav-resume-btn {
     display: none !important;
   }
+  .search-btn-text, .kbd-badge {
+    display: none !important;
+  }
+  .search-trigger-btn {
+    padding: 8px;
+    width: 38px;
+    height: 38px;
+    min-width: 38px;
+    min-height: 38px;
+    border-radius: 50%;
+    justify-content: center;
+  }
+  .dark-mode-btn {
+    width: 38px !important;
+    height: 38px !important;
+    min-width: 38px !important;
+    min-height: 38px !important;
+  }
   .hamburger {
     display: flex !important;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 5px;
     width: 44px;
     height: 44px;
+    min-width: 44px;
     min-height: 44px;
     border-radius: 8px;
-    background: rgba(13,26,48,0.6);
+    background: rgba(13,26,48,0.7);
     border: 1px solid var(--border);
+    color: var(--white);
+    cursor: pointer;
+    transition: var(--transition);
+    padding: 0;
+  }
+  .hamburger:hover, .hamburger:focus {
+    border-color: var(--cyan);
+    color: var(--cyan);
+    background: rgba(0,212,255,0.1);
+  }
+  .hamburger span {
+    width: 20px;
+    height: 2px;
+    background: currentColor;
+    border-radius: 2px;
+    transition: all 0.3s ease;
   }
   
   .hero-inner {
     grid-template-columns: 1fr;
     gap: 2rem;
     text-align: center;
+    width: 100%;
+    max-width: 100%;
+    padding: 0 1rem;
+    box-sizing: border-box;
   }
   .hero-profile {
     justify-content: center;
+    width: 100%;
+    align-items: center;
+  }
+  .profile-card-wrap {
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+    align-items: center;
+  }
+  .profile-outer {
+    width: 180px;
+    height: 180px;
+    margin-bottom: 0.2rem;
+  }
+  .profile-inner {
+    width: 145px;
+    height: 145px;
+  }
+  .orbit1 { width: 165px; height: 165px; }
+  .orbit2 { width: 185px; height: 185px; }
+
+  .hero-text {
+    align-items: center;
+    text-align: center;
+    width: 100%;
   }
   .hero-eyebrow, .hero-desc {
     margin: 0 auto;
+    max-width: 100%;
+  }
+  .hero-name {
+    font-size: clamp(2rem, 5vw, 2.6rem);
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  .hero-role-wrap {
+    justify-content: center;
+    flex-wrap: wrap;
   }
   .hero-btns {
+    justify-content: center;
+    width: 100%;
+  }
+  .trust-badges-bar {
+    align-items: center;
+    text-align: center;
+  }
+  .trust-badges-list {
     justify-content: center;
   }
   
@@ -1998,24 +2091,68 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
 /* Standard Mobile Breakpoint (<= 768px) */
 @media (max-width: 768px) {
   section {
-    padding: 3.5rem 0;
+    padding: 3.2rem 0;
   }
   .container {
     padding: 0 1rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
   }
   
   .sec-title {
-    font-size: 1.75rem;
+    font-size: 1.7rem;
   }
   .sec-eye {
     font-size: 0.78rem;
   }
   
+  /* Hero Profile Circle Size Optimization */
+  .profile-outer {
+    width: 150px;
+    height: 150px;
+    margin-bottom: 0.2rem;
+  }
+  .profile-inner {
+    width: 120px;
+    height: 120px;
+  }
+  .orbit1 { width: 138px; height: 138px; }
+  .orbit2 { width: 156px; height: 156px; }
+  .profile-verified-badge {
+    width: 26px;
+    height: 26px;
+    font-size: 0.85rem;
+    bottom: 4px; right: 8px;
+  }
+  .profile-meta-card {
+    padding: 1rem;
+    border-radius: var(--radius-sm);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .profile-info-rows {
+    font-size: 0.74rem;
+    gap: 0.45rem;
+  }
+  .info-row span {
+    word-break: break-word;
+    overflow-wrap: anywhere;
+  }
+  .card-cv-btn {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    font-size: 0.85rem;
+    padding: 10px 14px;
+    justify-content: center;
+  }
+  
   .hero-name {
-    font-size: 2.3rem;
+    font-size: 2.1rem;
   }
   .hero-role {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
   }
   .hero-desc {
     font-size: 0.95rem;
@@ -2026,16 +2163,16 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
     gap: 0.75rem;
   }
   .metric-card {
-    padding: 0.85rem 1rem;
+    padding: 0.85rem 0.9rem;
   }
   .metric-num {
     font-size: 1.6rem;
   }
   .metric-lbl {
-    font-size: 0.7rem;
+    font-size: 0.68rem;
   }
   
-  /* Grids to Single Column */
+  /* Single Column Grids for Cards */
   .proj-grid, .cert-grid, .skills-grid, .tools-grid, 
   .spec-grid, .plat-grid, .ach-grid, .dash-grid, 
   .articles-grid, .resources-grid-cards, .stats-grid,
@@ -2076,7 +2213,7 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
     padding: 1.2rem 1.25rem;
   }
   .resource-hero-title h1 {
-    font-size: 1.6rem;
+    font-size: 1.55rem;
   }
   .resource-meta-row {
     flex-direction: column;
@@ -2115,28 +2252,22 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
 /* Small Phones Breakpoint (<= 480px / 320px–375px) */
 @media (max-width: 480px) {
   #hero {
-    padding-top: 80px;
+    padding-top: 78px;
     padding-bottom: 2.5rem;
   }
   .profile-outer {
-    width: 210px;
-    height: 210px;
+    width: 130px;
+    height: 130px;
   }
   .profile-inner {
-    width: 170px;
-    height: 170px;
+    width: 100px;
+    height: 100px;
   }
-  .orbit1 { width: 195px; height: 195px; }
-  .orbit2 { width: 220px; height: 220px; }
-  .profile-hud {
-    width: 220px;
-    padding: 8px 12px;
-    font-size: 0.68rem;
-    bottom: -20px;
-  }
+  .orbit1 { width: 115px; height: 115px; }
+  .orbit2 { width: 132px; height: 132px; }
   
   .hero-name {
-    font-size: 1.85rem;
+    font-size: 1.8rem;
   }
   .hero-btns {
     flex-direction: column;
@@ -2150,7 +2281,7 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
   }
   
   .mobile-nav {
-    width: 88vw;
+    width: 90vw;
     padding: 1.25rem 1rem;
   }
   
@@ -2170,6 +2301,18 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
     flex-direction: column;
     gap: 0.85rem;
     padding: 1.1rem;
+  }
+
+  /* Search Modal Mobile Adaptation */
+  #searchModal {
+    padding: 1rem 0.5rem !important;
+  }
+  #searchModal .card {
+    margin-top: 2vh !important;
+    padding: 1.1rem !important;
+  }
+  #searchResults {
+    max-height: 52vh !important;
   }
 }
 

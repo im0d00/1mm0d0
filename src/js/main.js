@@ -54,15 +54,39 @@ function initThemeToggle() {
 }
 
 // 3. Mobile Navigation Drawer
+function toggleMobileNav() {
+    const mobNav = document.getElementById('mobNav');
+    if (mobNav && mobNav.classList.contains('open')) {
+        closeMobileNav();
+    } else {
+        openMobileNav();
+    }
+}
+
+function openMobileNav() {
+    const mobNav = document.getElementById('mobNav');
+    const mobOverlay = document.getElementById('mobOverlay');
+    if (mobNav) mobNav.classList.add('open');
+    if (mobOverlay) mobOverlay.classList.add('visible');
+    document.body.classList.add('menu-open');
+}
+
+function closeMobileNav() {
+    const mobNav = document.getElementById('mobNav');
+    const mobOverlay = document.getElementById('mobOverlay');
+    if (mobNav) mobNav.classList.remove('open');
+    if (mobOverlay) mobOverlay.classList.remove('visible');
+    document.body.classList.remove('menu-open');
+}
+
 function initMobileNav() {
     const ham = document.getElementById('ham');
-    const mobNav = document.getElementById('mobNav');
     const mobOverlay = document.getElementById('mobOverlay');
 
     if (ham) {
-        ham.addEventListener('click', () => {
-            if (mobNav) mobNav.classList.toggle('open');
-            if (mobOverlay) mobOverlay.classList.toggle('visible');
+        ham.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMobileNav();
         });
     }
 
@@ -75,13 +99,13 @@ function initMobileNav() {
     mobileLinks.forEach(link => {
         link.addEventListener('click', closeMobileNav);
     });
-}
 
-function closeMobileNav() {
-    const mobNav = document.getElementById('mobNav');
-    const mobOverlay = document.getElementById('mobOverlay');
-    if (mobNav) mobNav.classList.remove('open');
-    if (mobOverlay) mobOverlay.classList.remove('visible');
+    // Handle swipe/escape to close
+    window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeMobileNav();
+        }
+    });
 }
 
 // 4. Global Search Engine (Modal & Real-time Filter)
