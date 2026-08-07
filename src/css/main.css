@@ -1917,3 +1917,260 @@ section { padding: 6rem 0; position: relative; }
   text-decoration: none;
 }
 
+/* ============================================================
+   COMPREHENSIVE MOBILE-FIRST & BREAKPOINT OPTIMIZATION
+   ============================================================ */
+
+/* Mobile Touch & Viewport Safeguards */
+html, body {
+  width: 100%;
+  max-width: 100vw;
+  overflow-x: hidden;
+  -webkit-text-size-adjust: 100%;
+}
+
+img, svg, video, canvas, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+input, select, textarea {
+  font-size: 16px !important; /* Prevents auto-zoom on iOS Safari */
+}
+
+button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobile-nav-close {
+  touch-action: manipulation;
+}
+
+/* Tablet & Mobile Layout Breakpoint (<= 992px) */
+@media (max-width: 992px) {
+  #navbar {
+    padding: 0 1rem;
+    height: 64px;
+  }
+  .nav-logo-text {
+    font-size: 0.95rem;
+  }
+  .nav-logo-img {
+    max-height: 28px;
+  }
+  .nav-links, .nav-status, .nav-resume-btn {
+    display: none !important;
+  }
+  .hamburger {
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    min-height: 44px;
+    border-radius: 8px;
+    background: rgba(13,26,48,0.6);
+    border: 1px solid var(--border);
+  }
+  
+  .hero-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+  .hero-profile {
+    justify-content: center;
+  }
+  .hero-eyebrow, .hero-desc {
+    margin: 0 auto;
+  }
+  .hero-btns {
+    justify-content: center;
+  }
+  
+  .about-grid, .con-grid, .article-layout, .resource-grid-layout {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+  
+  .resource-sidebar {
+    position: static;
+    width: 100%;
+  }
+}
+
+/* Standard Mobile Breakpoint (<= 768px) */
+@media (max-width: 768px) {
+  section {
+    padding: 3.5rem 0;
+  }
+  .container {
+    padding: 0 1rem;
+  }
+  
+  .sec-title {
+    font-size: 1.75rem;
+  }
+  .sec-eye {
+    font-size: 0.78rem;
+  }
+  
+  .hero-name {
+    font-size: 2.3rem;
+  }
+  .hero-role {
+    font-size: 1.1rem;
+  }
+  .hero-desc {
+    font-size: 0.95rem;
+  }
+  
+  .hero-metrics {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+  .metric-card {
+    padding: 0.85rem 1rem;
+  }
+  .metric-num {
+    font-size: 1.6rem;
+  }
+  .metric-lbl {
+    font-size: 0.7rem;
+  }
+  
+  /* Grids to Single Column */
+  .proj-grid, .cert-grid, .skills-grid, .tools-grid, 
+  .spec-grid, .plat-grid, .ach-grid, .dash-grid, 
+  .articles-grid, .resources-grid-cards, .stats-grid,
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+  
+  /* Search / Filters on Mobile */
+  .search-filter-container {
+    padding: 1.1rem;
+    margin: 1.2rem auto;
+  }
+  .filter-controls-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.85rem;
+  }
+  .filter-group {
+    min-width: 100%;
+  }
+  .categories-scroll {
+    justify-content: flex-start;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    -webkit-overflow-scrolling: touch;
+  }
+  .cat-btn {
+    flex-shrink: 0;
+  }
+  
+  /* Resource & Legal Pages Padding */
+  .resource-container {
+    padding-top: 80px;
+    padding-bottom: 3rem;
+  }
+  .resource-header {
+    padding: 1.2rem 1.25rem;
+  }
+  .resource-hero-title h1 {
+    font-size: 1.6rem;
+  }
+  .resource-meta-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  .resource-content {
+    padding: 1.25rem;
+  }
+  
+  /* Footer Mobile Alignment */
+  .footer-bottom-flex {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.8rem;
+    text-align: center;
+  }
+  .footer-credit-row {
+    justify-content: center;
+    width: 100%;
+  }
+  
+  /* Code & Table Scrolling Protection */
+  .table-responsive, table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  table th, table td {
+    padding: 8px 10px;
+    font-size: 0.82rem;
+  }
+}
+
+/* Small Phones Breakpoint (<= 480px / 320px–375px) */
+@media (max-width: 480px) {
+  #hero {
+    padding-top: 80px;
+    padding-bottom: 2.5rem;
+  }
+  .profile-outer {
+    width: 210px;
+    height: 210px;
+  }
+  .profile-inner {
+    width: 170px;
+    height: 170px;
+  }
+  .orbit1 { width: 195px; height: 195px; }
+  .orbit2 { width: 220px; height: 220px; }
+  .profile-hud {
+    width: 220px;
+    padding: 8px 12px;
+    font-size: 0.68rem;
+    bottom: -20px;
+  }
+  
+  .hero-name {
+    font-size: 1.85rem;
+  }
+  .hero-btns {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+  }
+  .hero-btns .btn {
+    width: 100%;
+    justify-content: center;
+    min-height: 44px;
+  }
+  
+  .mobile-nav {
+    width: 88vw;
+    padding: 1.25rem 1rem;
+  }
+  
+  .mob-close-btn, .mobile-nav-close {
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .card {
+    padding: 1.1rem;
+  }
+  
+  .res-card-link {
+    flex-direction: column;
+    gap: 0.85rem;
+    padding: 1.1rem;
+  }
+}
+
+

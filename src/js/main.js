@@ -65,6 +65,16 @@ function initMobileNav() {
             if (mobOverlay) mobOverlay.classList.toggle('visible');
         });
     }
+
+    if (mobOverlay) {
+        mobOverlay.addEventListener('click', closeMobileNav);
+    }
+
+    // Close mobile nav when clicking any link inside
+    const mobileLinks = document.querySelectorAll('.mobile-links a, .mobile-actions a');
+    mobileLinks.forEach(link => {
+        link.addEventListener('click', closeMobileNav);
+    });
 }
 
 function closeMobileNav() {
