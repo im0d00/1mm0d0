@@ -1,12 +1,19 @@
 // Main JavaScript for Aimad Security Website
-document.addEventListener('DOMContentLoaded', () => {
+
+function initApp() {
     initHeaderScroll();
     initThemeToggle();
     initMobileNav();
     initSearchModal();
     initScrollTop();
     initScrollReveal();
-});
+}
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initApp);
+} else {
+    initApp();
+}
 
 // 1. Header Scroll Effect
 function initHeaderScroll() {
@@ -35,6 +42,7 @@ function toggleTheme() {
     
     updateThemeIcon(newTheme);
 }
+window.toggleTheme = toggleTheme;
 
 function updateThemeIcon(theme) {
     const icon = document.getElementById('theme-toggle-icon');
@@ -54,7 +62,10 @@ function initThemeToggle() {
 }
 
 // 3. Mobile Navigation Drawer
-function toggleMobileNav() {
+function toggleMobileNav(e) {
+    if (e && typeof e.stopPropagation === 'function') {
+        e.stopPropagation();
+    }
     const mobNav = document.getElementById('mobNav');
     if (mobNav && mobNav.classList.contains('open')) {
         closeMobileNav();
@@ -66,41 +77,71 @@ function toggleMobileNav() {
 function openMobileNav() {
     const mobNav = document.getElementById('mobNav');
     const mobOverlay = document.getElementById('mobOverlay');
+    const ham = document.getElementById('ham');
     if (mobNav) mobNav.classList.add('open');
     if (mobOverlay) mobOverlay.classList.add('visible');
+    if (ham) ham.setAttribute('aria-expanded', 'true');
     document.body.classList.add('menu-open');
 }
 
 function closeMobileNav() {
     const mobNav = document.getElementById('mobNav');
     const mobOverlay = document.getElementById('mobOverlay');
+    const ham = document.getElementById('ham');
     if (mobNav) mobNav.classList.remove('open');
     if (mobOverlay) mobOverlay.classList.remove('visible');
+    if (ham) ham.setAttribute('aria-expanded', 'false');
     document.body.classList.remove('menu-open');
 }
+
+window.toggleMobileNav = toggleMobileNav;
+window.openMobileNav = openMobileNav;
+window.closeMobileNav = closeMobileNav;
 
 function initMobileNav() {
     const ham = document.getElementById('ham');
     const mobOverlay = document.getElementById('mobOverlay');
+    const mobCloseBtn = document.getElementById('mobCloseBtn');
+    const mobSearchBtn = document.getElementById('mobSearchBtn');
 
     if (ham) {
-        ham.addEventListener('click', (e) => {
-            e.stopPropagation();
-            toggleMobileNav();
-        });
+        ham.onclick = function(e) {
+            e.preventDefault();
+            toggleMobileNav(e);
+        };
     }
 
     if (mobOverlay) {
-        mobOverlay.addEventListener('click', closeMobileNav);
+        mobOverlay.onclick = function(e) {
+            e.preventDefault();
+            closeMobileNav();
+        };
+    }
+
+    if (mobCloseBtn) {
+        mobCloseBtn.onclick = function(e) {
+            e.preventDefault();
+            closeMobileNav();
+        };
+    }
+
+    if (mobSearchBtn) {
+        mobSearchBtn.onclick = function(e) {
+            e.preventDefault();
+            closeMobileNav();
+            openSearchModal();
+        };
     }
 
     // Close mobile nav when clicking any link inside
-    const mobileLinks = document.querySelectorAll('.mobile-links a, .mobile-actions a');
+    const mobileLinks = document.querySelectorAll('.mobile-links a, .mobile-actions a:not(#mobSearchBtn)');
     mobileLinks.forEach(link => {
-        link.addEventListener('click', closeMobileNav);
+        link.onclick = function() {
+            closeMobileNav();
+        };
     });
 
-    // Handle swipe/escape to close
+    // Handle Escape key to close
     window.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
             closeMobileNav();

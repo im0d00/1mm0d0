@@ -81,7 +81,7 @@
                 <i class="fa-solid fa-download dl-icon"></i>
             </a>
 
-            <button class="hamburger" id="ham" aria-label="Toggle navigation menu" onclick="toggleMobileNav()">
+            <button class="hamburger" id="ham" aria-label="Toggle navigation menu" aria-expanded="false" onclick="toggleMobileNav(event)">
                 <span></span><span></span><span></span>
             </button>
         </div>
@@ -89,7 +89,7 @@
 </nav>
 
 <!-- MOBILE OVERLAY & DRAWER -->
-<div class="mobile-overlay" id="mobOverlay" onclick="closeMobileNav()"></div>
+<div class="mobile-overlay" id="mobOverlay" onclick="closeMobileNav(event)"></div>
 <div class="mobile-nav" id="mobNav" aria-label="Mobile Navigation">
     <div class="mobile-nav-header">
         <div class="mobile-nav-brand">
@@ -100,7 +100,7 @@
                 <span class="nav-logo"><span class="br">[</span>{{ brand.footer_logo or settings.logo_text or settings.portfolio_name or "Aimad Security" }}<span class="nav-dot"></span><span class="br">]</span></span>
             {% endif %}
         </div>
-        <button class="mob-close-btn" id="mobCloseBtn" onclick="closeMobileNav()" aria-label="Close menu">&times;</button>
+        <button class="mob-close-btn" id="mobCloseBtn" aria-label="Close menu" onclick="closeMobileNav(event)">&times;</button>
     </div>
     {% if settings.status_badge_visible != false %}
     <div class="mobile-status-badge">
@@ -111,7 +111,7 @@
     <ul class="mobile-links">
         {% for item in navigation.main_menu %}
         <li class="mob-item-wrap">
-            <a href="{{ item.url }}" class="{% if page.url == item.url or (item.url != '/' and item.url != '/#' and item.url in page.url) %}active{% endif %}" onclick="closeMobileNav()">
+            <a href="{{ item.url }}" class="{% if page.url == item.url or (item.url != '/' and item.url != '/#' and item.url in page.url) %}active{% endif %}">
                 <i class="{{ item.icon or 'fa-solid fa-chevron-right' }}"></i>
                 <span>{{ item.label }}</span>
             </a>
@@ -119,7 +119,7 @@
             <ul class="mob-sublinks">
                 {% for child in item.children %}
                 <li>
-                    <a href="{{ child.url }}" class="{% if child.url == page.url %}active{% endif %}" onclick="closeMobileNav()">
+                    <a href="{{ child.url }}" class="{% if child.url == page.url %}active{% endif %}">
                         <i class="{{ child.icon or 'fa-solid fa-angle-right' }}"></i>
                         <span>{{ child.label }}</span>
                     </a>
@@ -129,18 +129,18 @@
             {% endif %}
         </li>
         {% else %}
-        <li><a href="/" class="{% if page.url == '/' %}active{% endif %}" onclick="closeMobileNav()"><i class="fa-solid fa-house"></i> Home</a></li>
-        <li><a href="/projects/" class="{% if 'projects' in page.url %}active{% endif %}" onclick="closeMobileNav()"><i class="fa-solid fa-folder-open"></i> Projects</a></li>
-        <li><a href="/labs/" class="{% if 'labs' in page.url %}active{% endif %}" onclick="closeMobileNav()"><i class="fa-solid fa-flask"></i> Labs</a></li>
-        <li><a href="/research/" class="{% if 'research' in page.url %}active{% endif %}" onclick="closeMobileNav()"><i class="fa-solid fa-file-contract"></i> Research</a></li>
-        <li><a href="/blog/" class="{% if 'blog' in page.url %}active{% endif %}" onclick="closeMobileNav()"><i class="fa-solid fa-pen-nib"></i> Blog</a></li>
-        <li><a href="/resources/" class="{% if 'resources' in page.url %}active{% endif %}" onclick="closeMobileNav()"><i class="fa-solid fa-shield-halved"></i> Resources</a></li>
-        <li><a href="/#contact" onclick="closeMobileNav()"><i class="fa-solid fa-envelope"></i> Contact</a></li>
+        <li><a href="/" class="{% if page.url == '/' %}active{% endif %}"><i class="fa-solid fa-house"></i> Home</a></li>
+        <li><a href="/projects/" class="{% if 'projects' in page.url %}active{% endif %}"><i class="fa-solid fa-folder-open"></i> Projects</a></li>
+        <li><a href="/labs/" class="{% if 'labs' in page.url %}active{% endif %}"><i class="fa-solid fa-flask"></i> Labs</a></li>
+        <li><a href="/research/" class="{% if 'research' in page.url %}active{% endif %}"><i class="fa-solid fa-file-contract"></i> Research</a></li>
+        <li><a href="/blog/" class="{% if 'blog' in page.url %}active{% endif %}"><i class="fa-solid fa-pen-nib"></i> Blog</a></li>
+        <li><a href="/resources/" class="{% if 'resources' in page.url %}active{% endif %}"><i class="fa-solid fa-shield-halved"></i> Resources</a></li>
+        <li><a href="/#contact"><i class="fa-solid fa-envelope"></i> Contact</a></li>
         {% endfor %}
     </ul>
     <div class="mobile-actions">
         {% if settings.search_enabled != false %}
-        <button onclick="openSearchModal(); closeMobileNav();" class="btn outline w-full mob-action-btn">
+        <button id="mobSearchBtn" class="btn outline w-full mob-action-btn">
             <i class="fa-solid fa-magnifying-glass"></i> Search Platform
         </button>
         {% endif %}
