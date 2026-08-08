@@ -2115,7 +2115,7 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
 /* Standard Mobile Breakpoint (<= 768px) */
 @media (max-width: 768px) {
   section {
-    padding: 3rem 0;
+    padding: 2.8rem 0;
   }
   .container {
     padding: 0 1rem;
@@ -2125,8 +2125,9 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
   }
   
   .sec-title {
-    font-size: 1.65rem;
+    font-size: 1.55rem;
     word-break: break-word;
+    overflow-wrap: anywhere;
   }
   .sec-eye {
     font-size: 0.78rem;
@@ -2154,6 +2155,7 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
     padding: 1rem;
     border-radius: var(--radius-sm);
     width: 100%;
+    max-width: 100%;
     box-sizing: border-box;
   }
   .profile-info-rows {
@@ -2174,15 +2176,22 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
   }
   
   .hero-name {
-    font-size: clamp(1.8rem, 6vw, 2.5rem);
+    font-size: clamp(1.75rem, 6.5vw, 2.4rem);
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    line-height: 1.15;
+  }
+  .hero-role {
+    font-size: 0.95rem;
+  }
+  .hero-desc {
+    font-size: 0.92rem;
+    line-height: 1.65;
     word-break: break-word;
     overflow-wrap: anywhere;
   }
-  .hero-role {
-    font-size: 1.05rem;
-  }
-  .hero-desc {
-    font-size: 0.95rem;
+  .kw-highlight {
+    display: inline;
     word-break: break-word;
   }
   
@@ -2190,15 +2199,41 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
     grid-template-columns: repeat(2, 1fr);
     gap: 0.75rem;
     width: 100%;
+    box-sizing: border-box;
   }
   .metric-card {
     padding: 0.85rem 0.9rem;
+    width: 100%;
+    box-sizing: border-box;
   }
   .metric-num {
     font-size: 1.6rem;
   }
   .metric-lbl {
     font-size: 0.68rem;
+  }
+  
+  .trust-badges-bar {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+  .trust-badges-list {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  .trust-badge-item {
+    font-size: 0.72rem;
+    padding: 4px 10px;
+    max-width: 100%;
+    box-sizing: border-box;
+    word-break: break-word;
+  }
+  .f-con-row a {
+    word-break: break-all;
+    overflow-wrap: anywhere;
   }
   
   /* Education & Experience Responsive Layouts */
