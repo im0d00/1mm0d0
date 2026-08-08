@@ -66,7 +66,7 @@ img { max-width: 100%; height: auto; display: block; }
 /* Grid Background & Scan Line */
 .grid-bg {
   position: fixed;
-  top: 0; left: 0; width: 100vw; height: 100vh;
+  top: 0; left: 0; width: 100%; height: 100vh;
   background-image: 
     linear-gradient(to right, rgba(0, 212, 255, 0.03) 1px, transparent 1px),
     linear-gradient(to bottom, rgba(0, 212, 255, 0.03) 1px, transparent 1px);
@@ -1947,7 +1947,8 @@ section { padding: 6rem 0; position: relative; }
 /* Mobile Touch & Viewport Safeguards */
 html, body {
   width: 100%;
-  max-width: 100vw;
+  max-width: 100%;
+  box-sizing: border-box;
   overflow-x: hidden;
   -webkit-text-size-adjust: 100%;
   margin: 0;
@@ -2114,7 +2115,7 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
 /* Standard Mobile Breakpoint (<= 768px) */
 @media (max-width: 768px) {
   section {
-    padding: 3.2rem 0;
+    padding: 3rem 0;
   }
   .container {
     padding: 0 1rem;
@@ -2124,7 +2125,8 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
   }
   
   .sec-title {
-    font-size: 1.7rem;
+    font-size: 1.65rem;
+    word-break: break-word;
   }
   .sec-eye {
     font-size: 0.78rem;
@@ -2172,18 +2174,22 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
   }
   
   .hero-name {
-    font-size: 2.1rem;
+    font-size: clamp(1.8rem, 6vw, 2.5rem);
+    word-break: break-word;
+    overflow-wrap: anywhere;
   }
   .hero-role {
     font-size: 1.05rem;
   }
   .hero-desc {
     font-size: 0.95rem;
+    word-break: break-word;
   }
   
   .hero-metrics {
     grid-template-columns: repeat(2, 1fr);
     gap: 0.75rem;
+    width: 100%;
   }
   .metric-card {
     padding: 0.85rem 0.9rem;
@@ -2195,19 +2201,102 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
     font-size: 0.68rem;
   }
   
+  /* Education & Experience Responsive Layouts */
+  .edu-card {
+    flex-direction: column;
+    padding: 1.25rem;
+    gap: 1rem;
+    align-items: flex-start;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .edu-ic {
+    width: 44px;
+    height: 44px;
+    font-size: 1.2rem;
+  }
+  .edu-h {
+    font-size: 1.1rem;
+    word-break: break-word;
+  }
+  .edu-org {
+    font-size: 0.88rem;
+  }
+  .edu-meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+    font-size: 0.75rem;
+    margin: 0.4rem 0 0.6rem;
+  }
+  .edu-detail {
+    font-size: 0.88rem;
+  }
+
+  .exp-tl {
+    padding-left: 1.2rem;
+    gap: 1.2rem;
+  }
+  .exp-tl::before {
+    left: 5px;
+  }
+  .exp-dot {
+    left: -1.2rem;
+    width: 12px;
+    height: 12px;
+    top: 1.2rem;
+  }
+  .exp-inner {
+    padding: 1.25rem;
+  }
+  .exp-hd {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4rem;
+  }
+  
   /* Single Column Grids for Cards */
   .proj-grid, .cert-grid, .skills-grid, .tools-grid, 
   .spec-grid, .plat-grid, .ach-grid, .dash-grid, 
   .articles-grid, .resources-grid-cards, .stats-grid,
-  .footer-grid {
+  .footer-grid, .sidebar-stats-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .cert-card, .proj-card, .card {
+    padding: 1.2rem;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .cert-foot {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tags, .proj-stack, .filter-bar, .tech-badge, .profile-card-socs, .soc-row, .footer-soc-row {
+    flex-wrap: wrap;
+    max-width: 100%;
+  }
+
+  .con-grid {
     grid-template-columns: 1fr;
-    gap: 1.1rem;
+    gap: 2rem;
+  }
+  .con-form {
+    padding: 1.25rem;
+    width: 100%;
+    box-sizing: border-box;
   }
   
   /* Search / Filters on Mobile */
   .search-filter-container {
     padding: 1.1rem;
     margin: 1.2rem auto;
+    width: 100%;
+    box-sizing: border-box;
   }
   .filter-controls-row {
     flex-direction: column;
@@ -2227,6 +2316,26 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
     flex-shrink: 0;
   }
   
+  /* Article & Post Detail Layouts */
+  .breadcrumb, .breadcrumb-toolbar {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    word-break: break-word;
+  }
+  .breadcrumb-toolbar {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .article-quick-tools {
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 0.4rem;
+  }
+  .article-quick-tools .btn {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+  
   /* Resource & Legal Pages Padding */
   .resource-container {
     padding-top: 80px;
@@ -2237,6 +2346,7 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
   }
   .resource-hero-title h1 {
     font-size: 1.55rem;
+    word-break: break-word;
   }
   .resource-meta-row {
     flex-direction: column;
@@ -2257,6 +2367,8 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
   .footer-credit-row {
     justify-content: center;
     width: 100%;
+    flex-direction: column;
+    gap: 6px;
   }
   
   /* Code & Table Scrolling Protection */
@@ -2274,6 +2386,7 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
 
   pre, code {
     max-width: 100%;
+    box-sizing: border-box;
   }
   pre {
     overflow-x: auto;
@@ -2304,7 +2417,7 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
   .orbit2 { width: 132px; height: 132px; }
   
   .hero-name {
-    font-size: 1.8rem;
+    font-size: 1.7rem;
   }
   .hero-btns {
     flex-direction: column;
@@ -2315,6 +2428,11 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
     width: 100%;
     justify-content: center;
     min-height: 44px;
+    box-sizing: border-box;
+  }
+
+  .hero-metrics {
+    grid-template-columns: 1fr !important;
   }
   
   .mobile-nav {
@@ -2330,8 +2448,8 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
     justify-content: center;
   }
   
-  .card {
-    padding: 1.1rem;
+  .card, .profile-meta-card, .con-form, .resource-content, .resource-header {
+    padding: 1rem;
   }
   
   .res-card-link {
