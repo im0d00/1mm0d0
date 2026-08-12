@@ -66,10 +66,7 @@ layout: layouts/base.njk
             </div>
 
             <p class="hero-desc">
-                BSc Computer Science graduate from the <strong>University of Peshawar</strong> with expertise in 
-                <span class="kw-highlight">Network Security</span>, <span class="kw-highlight">Ethical Hacking</span>, 
-                <span class="kw-highlight">Digital Forensics (DFIR)</span>, and <span class="kw-highlight">SOC Operations</span>. 
-                Cisco-certified in Networking & Linux Essentials; trained by <strong>BlueCapeSecurity</strong>.
+                {{ hero.biography | safe }}
             </p>
 
             <!-- CTA BUTTON SYSTEM -->
@@ -174,6 +171,15 @@ layout: layouts/base.njk
                     <span class="ctag tc">{{ skillTag }}</span>
                     {% endfor %}
                 </div>
+
+                {% if about.interests and about.interests | length > 0 %}
+                <div style="margin-top:1.2rem; display:flex; gap:0.5rem; flex-wrap:wrap; font-size:0.88rem; color:var(--silver); align-items:center;">
+                    <strong style="color:var(--white);"><i class="fa-solid fa-crosshairs"></i> Core Focus:</strong>
+                    {% for interest in about.interests %}
+                    <span class="ctag tc" style="border-color:rgba(0,212,255,0.3); color:var(--cyan);">{{ interest }}</span>
+                    {% endfor %}
+                </div>
+                {% endif %}
 
                 {% if about.languages | length > 0 %}
                 <div style="margin-top:1.5rem; display:flex; gap:1rem; flex-wrap:wrap; font-size:0.88rem; color:var(--silver);">
@@ -376,12 +382,20 @@ layout: layouts/base.njk
 
         <div class="filter-bar reveal">
             <button class="filter-btn active" onclick="filterCategory('proj', 'all', this)">All Categories</button>
-            <button class="filter-btn" onclick="filterCategory('proj', 'Home Lab', this)">Home Lab</button>
-            <button class="filter-btn" onclick="filterCategory('proj', 'Automation', this)">Automation</button>
-            <button class="filter-btn" onclick="filterCategory('proj', 'Digital Forensics', this)">Digital Forensics</button>
-            <button class="filter-btn" onclick="filterCategory('proj', 'Networking', this)">Networking</button>
-            <button class="filter-btn" onclick="filterCategory('proj', 'Web Development', this)">Web App Security</button>
-            <button class="filter-btn" onclick="filterCategory('proj', 'Research', this)">Research</button>
+            {% set projCats = [] %}
+            {% for item in projects.items %}
+                {% if item.category and item.category not in projCats %}
+                    {% set projCats = (projCats.push(item.category), projCats) %}
+                {% endif %}
+            {% endfor %}
+            {% for proj in collections.projects %}
+                {% if proj.data.category and proj.data.category not in projCats %}
+                    {% set projCats = (projCats.push(proj.data.category), projCats) %}
+                {% endif %}
+            {% endfor %}
+            {% for cat in projCats %}
+            <button class="filter-btn" onclick="filterCategory('proj', '{{ cat }}', this)">{{ cat }}</button>
+            {% endfor %}
         </div>
         
         <div class="proj-grid" id="projGrid">
@@ -457,10 +471,20 @@ layout: layouts/base.njk
 
         <div class="filter-bar reveal">
             <button class="filter-btn active" onclick="filterCategory('lab', 'all', this)">All Platforms</button>
-            <button class="filter-btn" onclick="filterCategory('lab', 'TryHackMe', this)">TryHackMe</button>
-            <button class="filter-btn" onclick="filterCategory('lab', 'HackTheBox', this)">HackTheBox</button>
-            <button class="filter-btn" onclick="filterCategory('lab', 'Blue Team Labs', this)">Blue Team Labs</button>
-            <button class="filter-btn" onclick="filterCategory('lab', 'Local VirtualBox', this)">Local VM Labs</button>
+            {% set labPlatforms = [] %}
+            {% for item in labs.items %}
+                {% if item.platform and item.platform not in labPlatforms %}
+                    {% set labPlatforms = (labPlatforms.push(item.platform), labPlatforms) %}
+                {% endif %}
+            {% endfor %}
+            {% for lab in collections.labs %}
+                {% if lab.data.platform and lab.data.platform not in labPlatforms %}
+                    {% set labPlatforms = (labPlatforms.push(lab.data.platform), labPlatforms) %}
+                {% endif %}
+            {% endfor %}
+            {% for plat in labPlatforms %}
+            <button class="filter-btn" onclick="filterCategory('lab', '{{ plat }}', this)">{{ plat }}</button>
+            {% endfor %}
         </div>
 
         <div class="proj-grid" id="labGrid">
@@ -806,9 +830,16 @@ layout: layouts/base.njk
         
         <div class="filter-bar reveal">
             <button class="filter-btn active" onclick="filterCategory('tl', 'all', this)">All Years</button>
-            <button class="filter-btn" onclick="filterCategory('tl', '2026', this)">2026</button>
-            <button class="filter-btn" onclick="filterCategory('tl', '2025', this)">2025</button>
-            <button class="filter-btn" onclick="filterCategory('tl', '2024', this)">2024</button>
+            {% set tlYears = [] %}
+            {% for item in timeline.items %}
+                {% set yr = item.year or item.date %}
+                {% if yr and yr not in tlYears %}
+                    {% set tlYears = (tlYears.push(yr), tlYears) %}
+                {% endif %}
+            {% endfor %}
+            {% for yr in tlYears %}
+            <button class="filter-btn" onclick="filterCategory('tl', '{{ yr }}', this)">{{ yr }}</button>
+            {% endfor %}
         </div>
 
         <div class="tl-wrap" id="tlWrap">
