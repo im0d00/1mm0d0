@@ -1,6 +1,7 @@
 {
   "main_menu": [
     { "label": "Home", "url": "/", "icon": "fa-solid fa-house", "target": "_self" },
+    { "label": "About", "url": "/#about", "icon": "fa-solid fa-user", "target": "_self" },
     { "label": "Projects", "url": "/projects/", "icon": "fa-solid fa-folder-open", "target": "_self" },
     { "label": "Labs", "url": "/labs/", "icon": "fa-solid fa-flask", "target": "_self" },
     { "label": "Research", "url": "/research/", "icon": "fa-solid fa-file-contract", "target": "_self" },

@@ -80,7 +80,10 @@ function openMobileNav() {
     const ham = document.getElementById('ham');
     if (mobNav) mobNav.classList.add('open');
     if (mobOverlay) mobOverlay.classList.add('visible');
-    if (ham) ham.setAttribute('aria-expanded', 'true');
+    if (ham) {
+        ham.setAttribute('aria-expanded', 'true');
+        ham.classList.add('is-active');
+    }
     document.body.classList.add('menu-open');
 }
 
@@ -90,7 +93,10 @@ function closeMobileNav() {
     const ham = document.getElementById('ham');
     if (mobNav) mobNav.classList.remove('open');
     if (mobOverlay) mobOverlay.classList.remove('visible');
-    if (ham) ham.setAttribute('aria-expanded', 'false');
+    if (ham) {
+        ham.setAttribute('aria-expanded', 'false');
+        ham.classList.remove('is-active');
+    }
     document.body.classList.remove('menu-open');
 }
 
