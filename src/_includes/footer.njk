@@ -6,11 +6,24 @@
             <!-- Brand Column -->
             <div class="footer-col footer-brand-col">
                 <div class="footer-logo-brand">
-                    {% if brand.logo_dark or brand.main_logo %}
-                        <img src="{{ brand.logo_dark or brand.main_logo }}" alt="{{ settings.portfolio_name or 'Aimad Security' }}" style="max-height: 36px; max-width: auto; margin-bottom: 0.5rem;" />
-                    {% else %}
-                        <span class="logo-bracket">[</span><span class="logo-text">{{ brand.footer_logo or footer.footer_logo or settings.logo or "Aimad•Security" }}</span><span class="logo-bracket">]</span>
-                    {% endif %}
+                    {% set footerLogoImg = brand.footer_logo_image or footer.footer_logo_image or settings.footer_logo_image or brand.header_logo or settings.header_logo or brand.main_logo or settings.logo_image or brand.logo_dark %}
+                    {% set footerBrandText = footer.brand_name or footer.footer_logo or brand.brand_name or brand.logo_text or settings.logo_text or settings.portfolio_name %}
+
+                    <a href="{{ brand.logo_link or '/' }}" class="footer-logo-link" aria-label="{{ footerBrandText or 'Home' }}">
+                        {% if footerLogoImg %}
+                            <div class="footer-logo-wrapper">
+                                <img src="{{ footerLogoImg }}" alt="{{ footerBrandText or 'Footer Logo' }}" class="footer-logo-img" />
+                            </div>
+                        {% endif %}
+
+                        {% if footerBrandText %}
+                            {% if footerLogoImg %}
+                                <span class="footer-brand-title">{{ footerBrandText }}</span>
+                            {% else %}
+                                <span class="footer-logo-text"><span class="logo-bracket">[</span><span class="logo-text-inner">{{ footerBrandText }}</span><span class="logo-bracket">]</span></span>
+                            {% endif %}
+                        {% endif %}
+                    </a>
                 </div>
                 <p class="footer-desc">
                     {{ footer.footer_description or settings.website_description or "Cybersecurity student, SOC enthusiast, and network security practitioner from Pakistan. Specializing in DFIR, Linux Systems, and Ethical Hacking." }}

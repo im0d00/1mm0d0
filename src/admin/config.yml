@@ -30,8 +30,11 @@ collections:
           - { label: "Keywords", name: "keywords", widget: "string" }
           - { label: "Author", name: "author", widget: "string" }
           - { label: "Portfolio Name", name: "portfolio_name", widget: "string" }
+          - { label: "Header Logo Image", name: "header_logo", widget: "image", required: false }
+          - { label: "Footer Logo Image", name: "footer_logo_image", widget: "image", required: false }
           - { label: "Header Logo Image (Dark)", name: "logo_image", widget: "image", required: false }
           - { label: "Header Logo Image (Light)", name: "logo_image_light", widget: "image", required: false }
+          - { label: "Brand Name / Text", name: "brand_name", widget: "string", required: false }
           - { label: "Logo Max Width", name: "logo_width", widget: "string", required: false, default: "auto" }
           - { label: "Logo Max Height", name: "logo_height", widget: "string", required: false, default: "34px" }
           - { label: "Logo Text", name: "logo_text", widget: "string", required: false }
@@ -67,10 +70,13 @@ collections:
         label: "Brand & Logo Settings"
         file: "src/_data/brand.json"
         fields:
+          - { label: "Header Logo Image", name: "header_logo", widget: "image", required: false }
+          - { label: "Footer Logo Image", name: "footer_logo_image", widget: "image", required: false }
+          - { label: "Brand Name / Text", name: "brand_name", widget: "string", required: false }
           - { label: "Main Logo Image", name: "main_logo", widget: "image", required: false }
           - { label: "Dark Theme Logo", name: "logo_dark", widget: "image", required: false }
           - { label: "Light Theme Logo", name: "logo_light", widget: "image", required: false }
-          - { label: "Footer Logo / Text", name: "footer_logo", widget: "string", default: "[Aimad•Security]" }
+          - { label: "Footer Logo / Text", name: "footer_logo", widget: "string", required: false }
           - { label: "Mobile Logo Image", name: "mobile_logo", widget: "image", required: false }
           - { label: "Favicon (.ico)", name: "favicon_ico", widget: "file", required: false }
           - { label: "Favicon (.png)", name: "favicon_png", widget: "image", required: false }
@@ -244,7 +250,9 @@ collections:
           - { label: "Credit Company / Studio Name", name: "credit_text", widget: "string", default: "Lizzdo Studio" }
           - { label: "Credit Website URL", name: "credit_url", widget: "string", default: "https://lizzdo.com" }
           - { label: "Company Name", name: "company_name", widget: "string", default: "Lizzdo Studio" }
-          - { label: "Footer Logo / Branding Text", name: "footer_logo", widget: "string", default: "[Aimad•Security]" }
+          - { label: "Footer Logo Image", name: "footer_logo_image", widget: "image", required: false }
+          - { label: "Footer Brand Text", name: "brand_name", widget: "string", required: false }
+          - { label: "Footer Logo / Branding Text", name: "footer_logo", widget: "string", required: false }
           - { label: "Footer Description", name: "footer_description", widget: "text" }
           - { label: "Copyright Notice Text", name: "copyright", widget: "string" }
           - { label: "Website Version Tag", name: "footer_version", widget: "string", default: "v2.5.0" }

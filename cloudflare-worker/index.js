@@ -57,7 +57,8 @@ export default {
 
       try {
         // Exchange code for access token with GitHub
-        const tokenResponse = await fetch("https://github.com/login/oauth/access_token", {
+        const oauthEndpoint = env.OAUTH_ENDPOINT || "https://github.com/login/oauth/access_token";
+        const tokenResponse = await fetch(oauthEndpoint, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
