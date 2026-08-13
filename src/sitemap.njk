@@ -4,7 +4,7 @@ eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  {% set siteUrl = settings.sitemap_settings.url or "https://aimadulislam.dpdns.org" %}
+  {% set siteUrl = (settings.sitemap_settings.url or settings.portfolio_url or "https://aimadulislam.dpdns.org") | replace(r/\/$/, "") %}
   <url>
     <loc>{{ siteUrl }}/</loc>
     <lastmod>{{ "now" | htmlDateString }}</lastmod>
@@ -55,12 +55,15 @@ eleventyExcludeFromCollections: true
   </url>
 
   {% for pageItem in collections.all %}
-    {% if pageItem.url and pageItem.url != '/' and pageItem.url != '/blog/' and pageItem.url != '/projects/' and pageItem.url != '/labs/' and pageItem.url != '/research/' and pageItem.url != '/downloads/' and pageItem.url != '/resources/' and pageItem.url != '/resources/sitemap-page/' and not pageItem.data.eleventyExcludeFromCollections %}
+    {% set isDraft = pageItem.data.draft or pageItem.data.draft == 'true' or pageItem.data.published == false or pageItem.data.published == 'false' or pageItem.data.status == 'Draft' or pageItem.data.status == 'draft' or pageItem.data.status == 'Unpublished' or pageItem.data.status == 'unpublished' %}
+    {% set isExcluded = pageItem.data.eleventyExcludeFromCollections or pageItem.data.noindex or ('/admin' in pageItem.url) or ('/404' in pageItem.url) or ('/offline' in pageItem.url) or pageItem.url == '/search.json' or pageItem.url == '/feed.xml' or pageItem.url == '/manifest.json' or pageItem.url == '/robots.txt' or pageItem.url == '/sitemap.xml' or pageItem.url == '/llms.txt' %}
+    {% set isMainPage = pageItem.url == '/' or pageItem.url == '/blog/' or pageItem.url == '/projects/' or pageItem.url == '/labs/' or pageItem.url == '/research/' or pageItem.url == '/downloads/' or pageItem.url == '/resources/' or pageItem.url == '/resources/sitemap-page/' %}
+    {% if pageItem.url and pageItem.url != false and not isDraft and not isExcluded and not isMainPage %}
   <url>
     <loc>{{ siteUrl }}{{ pageItem.url }}</loc>
-    <lastmod>{% if pageItem.date %}{{ pageItem.date | htmlDateString }}{% else %}{{ "now" | htmlDateString }}{% endif %}</lastmod>
-    <changefreq>{% if 'posts' in pageItem.url %}monthly{% else %}weekly{% endif %}</changefreq>
-    <priority>{% if 'posts' in pageItem.url %}0.8{% else %}0.7{% endif %}</priority>
+    <lastmod>{{ (pageItem.data.updatedAt or pageItem.data.updated or pageItem.data.last_updated or pageItem.data.lastmod or pageItem.date or "now") | htmlDateString }}</lastmod>
+    <changefreq>{% if '/posts/' in pageItem.url or '/blog/' in pageItem.url %}weekly{% else %}monthly{% endif %}</changefreq>
+    <priority>{% if '/posts/' in pageItem.url or '/projects/' in pageItem.url or '/research/' in pageItem.url %}0.8{% else %}0.7{% endif %}</priority>
   </url>
     {% endif %}
   {% endfor %}

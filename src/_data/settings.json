@@ -60,7 +60,7 @@
   "microsoft_clarity_id": "CLARITY_ID",
   "cloudflare_analytics": "CF_ANALYTICS_TOKEN",
   "og_image": "https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg",
-  "robots_settings": "User-agent: *\nAllow: /\nSitemap: https://aimadulislam.dpdns.org/sitemap.xml",
+  "robots_settings": "User-agent: *\nAllow: /\nDisallow: /admin/\n\nSitemap: https://aimadulislam.dpdns.org/sitemap.xml",
   "sitemap_settings": {
     "enabled": true,
     "url": "https://aimadulislam.dpdns.org"

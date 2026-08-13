@@ -1,0 +1,82 @@
+---
+permalink: /llms.txt
+eleventyExcludeFromCollections: true
+---
+# {{ settings.author or settings.site_name or "Aimad Ul Islam" }} — Cybersecurity & Network Security Portfolio
+
+> {{ settings.website_description or "Cybersecurity student, SOC enthusiast, and network security engineering portfolio and technical writeups." }}
+
+## About
+Aimad Ul Islam is a Cybersecurity student, SOC analyst enthusiast, and network security learner based in Pakistan. Specializes in Digital Forensics & Incident Response (DFIR), Security Operations Center (SOC) monitoring, Cisco networking, and ethical hacking.
+
+## Professional Focus
+- Security Operations Center (SOC) Analysis & Threat Detection
+- Digital Forensics & Incident Response (DFIR)
+- Network Security Engineering & Cisco Systems
+- Threat Hunting & SIEM Log Analysis
+- Vulnerability Assessment & Ethical Hacking
+
+## Important Pages
+- Home: https://aimadulislam.dpdns.org/
+- Projects Portfolio: https://aimadulislam.dpdns.org/projects/
+- Security Blog & Writeups: https://aimadulislam.dpdns.org/blog/
+- Research Reports: https://aimadulislam.dpdns.org/research/
+- Hands-on Security Labs: https://aimadulislam.dpdns.org/labs/
+- Downloadable Assets & Cheat Sheets: https://aimadulislam.dpdns.org/downloads/
+- Resources & Legal Policies: https://aimadulislam.dpdns.org/resources/
+
+{% if collections.projects and collections.projects.length > 0 %}
+## Featured Projects
+{% for item in collections.projects %}
+{% set isDraft = item.data.draft or item.data.draft == 'true' or item.data.published == false or item.data.status == 'Draft' or item.data.status == 'draft' %}
+{% if not isDraft and item.url %}
+- [{{ item.data.title }}](https://aimadulislam.dpdns.org{{ item.url }}): {{ item.data.description or item.data.excerpt or "Security engineering project" }}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if collections.research and collections.research.length > 0 %}
+## Security Research & Whitepapers
+{% for item in collections.research %}
+{% set isDraft = item.data.draft or item.data.draft == 'true' or item.data.published == false or item.data.status == 'Draft' or item.data.status == 'draft' %}
+{% if not isDraft and item.url %}
+- [{{ item.data.title }}](https://aimadulislam.dpdns.org{{ item.url }}): {{ item.data.summary or item.data.description or "Cybersecurity research publication" }}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if collections.labs and collections.labs.length > 0 %}
+## Virtual Security Labs & Walkthroughs
+{% for item in collections.labs %}
+{% set isDraft = item.data.draft or item.data.draft == 'true' or item.data.published == false or item.data.status == 'Draft' or item.data.status == 'draft' %}
+{% if not isDraft and item.url %}
+- [{{ item.data.title }}](https://aimadulislam.dpdns.org{{ item.url }}): {{ item.data.description or "Security homelab walkthrough and documentation" }}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if collections.posts and collections.posts.length > 0 %}
+## Technical Blog & Writeups
+{% for item in collections.posts %}
+{% set isDraft = item.data.draft or item.data.draft == 'true' or item.data.published == false or item.data.status == 'Draft' or item.data.status == 'draft' %}
+{% if not isDraft and item.url %}
+- [{{ item.data.title }}](https://aimadulislam.dpdns.org{{ item.url }}): {{ item.data.excerpt or item.data.description or "Technical security article" }} (Published: {{ item.date | htmlDateString }})
+{% endif %}
+{% endfor %}
+{% endif %}
+
+{% if collections.downloads and collections.downloads.length > 0 %}
+## Tools & Downloadable Resources
+{% for item in collections.downloads %}
+{% set isDraft = item.data.draft or item.data.draft == 'true' or item.data.published == false or item.data.status == 'Draft' or item.data.status == 'draft' %}
+{% if not isDraft and item.url %}
+- [{{ item.data.title }}](https://aimadulislam.dpdns.org{{ item.url }}): {{ item.data.description or "Security resource and cheat sheet" }}
+{% endif %}
+{% endfor %}
+{% endif %}
+
+## Contact & Professional Profiles
+- Email: {{ settings.contact_email or settings.email or "info@aimadulislam.dpdns.org" }}
+- GitHub: {{ settings.github_url or "https://github.com/aimadulislam" }}
+- LinkedIn: {{ settings.linkedin_url or "https://linkedin.com/in/aimadulislam" }}
+- X / Twitter: {{ settings.x_url or "https://x.com/aimadulislam" }}

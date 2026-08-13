@@ -42,17 +42,39 @@ module.exports = function(eleventyConfig) {
 
   // Filters
   eleventyConfig.addFilter("readableDate", dateObj => {
-    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("dd LLL yyyy");
+    if (!dateObj) return DateTime.now().toFormat("dd LLL yyyy");
+    if (dateObj instanceof Date) return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("dd LLL yyyy");
+    if (typeof dateObj === "string") {
+      const dt = DateTime.fromISO(dateObj, {zone: 'utc'});
+      if (dt.isValid) return dt.toFormat("dd LLL yyyy");
+      const d = new Date(dateObj);
+      if (!isNaN(d.getTime())) return DateTime.fromJSDate(d, {zone: 'utc'}).toFormat("dd LLL yyyy");
+    }
+    return DateTime.now().toFormat("dd LLL yyyy");
   });
 
   eleventyConfig.addFilter("htmlDateString", (dateObj) => {
-    return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat('yyyy-LL-dd');
+    if (!dateObj) return DateTime.now().toFormat('yyyy-LL-dd');
+    if (dateObj instanceof Date) return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat('yyyy-LL-dd');
+    if (typeof dateObj === "string") {
+      const dt = DateTime.fromISO(dateObj, {zone: 'utc'});
+      if (dt.isValid) return dt.toFormat('yyyy-LL-dd');
+      const d = new Date(dateObj);
+      if (!isNaN(d.getTime())) return DateTime.fromJSDate(d, {zone: 'utc'}).toFormat('yyyy-LL-dd');
+    }
+    return DateTime.now().toFormat('yyyy-LL-dd');
   });
 
   eleventyConfig.addFilter("dateToRfc3339", (dateObj) => {
     if (!dateObj) return DateTime.now().toISO();
-    const d = dateObj instanceof Date ? dateObj : new Date(dateObj);
-    return DateTime.fromJSDate(d, {zone: 'utc'}).toISO();
+    if (dateObj instanceof Date) return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toISO();
+    if (typeof dateObj === "string") {
+      const dt = DateTime.fromISO(dateObj, {zone: 'utc'});
+      if (dt.isValid) return dt.toISO();
+      const d = new Date(dateObj);
+      if (!isNaN(d.getTime())) return DateTime.fromJSDate(d, {zone: 'utc'}).toISO();
+    }
+    return DateTime.now().toISO();
   });
   
   eleventyConfig.addFilter("head", (array, n) => {

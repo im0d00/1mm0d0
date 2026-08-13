@@ -41,6 +41,28 @@
     <link rel="canonical" href="{{ canonical_url or ('https://aimadulislam.dpdns.org' + page.url) }}">
 
     <!-- Schema.org JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": {{ (settings.author or "Aimad Ul Islam") | dump | safe }},
+      "url": "https://aimadulislam.dpdns.org",
+      "jobTitle": "Cybersecurity & Network Security Specialist",
+      "sameAs": [
+        "{{ settings.github_url or 'https://github.com/aimadulislam' }}",
+        "{{ settings.linkedin_url or 'https://linkedin.com/in/aimadulislam' }}",
+        "{{ settings.x_url or 'https://x.com/aimadulislam' }}"
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": {{ (settings.portfolio_name or "Aimad Ul Islam") | dump | safe }},
+      "url": "https://aimadulislam.dpdns.org/"
+    }
+    </script>
     {% if layout == "layouts/post.njk" %}
     <script type="application/ld+json">
     {
@@ -54,20 +76,11 @@
         "name": {{ (author or settings.author or "Aimad Ul Islam") | dump | safe }}
       },
       "datePublished": "{{ date | htmlDateString }}",
-      "dateModified": "{{ (updated or date) | htmlDateString }}",
+      "dateModified": "{{ (updated or last_updated or date) | htmlDateString }}",
       "mainEntityOfPage": {
         "@type": "WebPage",
         "@id": "https://aimadulislam.dpdns.org{{ page.url }}"
       }
-    }
-    </script>
-    {% else %}
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "name": {{ (settings.portfolio_name or "Aimad Ul Islam") | dump | safe }},
-      "url": "https://aimadulislam.dpdns.org/"
     }
     </script>
     {% endif %}
