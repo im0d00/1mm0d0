@@ -92,6 +92,24 @@ module.exports = function(eleventyConfig) {
     return String(val).padStart(Number(len), char);
   });
 
+  eleventyConfig.addFilter("resolveLogo", (url) => {
+    if (!url || typeof url !== 'string') return '';
+    url = url.trim();
+    if (!url) return '';
+    if (url.startsWith('data:') || url.startsWith('http://') || url.startsWith('https://')) {
+      return url;
+    }
+    if (url.startsWith('src/')) {
+      url = url.replace(/^src\//, '/');
+    } else if (url.startsWith('public/')) {
+      url = url.replace(/^public\//, '/');
+    }
+    if (!url.startsWith('/')) {
+      url = '/' + url;
+    }
+    return url;
+  });
+
   // Collections
   eleventyConfig.addCollection("posts", function(collectionApi) {
     return collectionApi.getFilteredByGlob("src/posts/*.md").reverse();

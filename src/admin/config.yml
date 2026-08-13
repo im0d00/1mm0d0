@@ -31,16 +31,17 @@ collections:
           - { label: "Author", name: "author", widget: "string" }
           - { label: "Portfolio Name", name: "portfolio_name", widget: "string" }
           - { label: "Site Name", name: "site_name", widget: "string", required: false }
-          - { label: "Site Logo", name: "logo", widget: "image", required: false }
-          - { label: "Header Logo Image", name: "header_logo", widget: "image", required: false }
-          - { label: "Footer Logo Image", name: "footer_logo_image", widget: "image", required: false }
-          - { label: "Header Logo Image (Dark)", name: "logo_image", widget: "image", required: false }
-          - { label: "Header Logo Image (Light)", name: "logo_image_light", widget: "image", required: false }
+          - { label: "Primary Site Logo (Header & Footer)", name: "logo", widget: "image", required: false }
+          - { label: "Logo Shape / Style", name: "logo_shape", widget: "select", options: ["circular", "rectangular", "auto"], default: "circular", required: false }
+          - { label: "Header Logo Image (Optional Override)", name: "header_logo", widget: "image", required: false }
+          - { label: "Footer Logo Image (Optional Override)", name: "footer_logo_image", widget: "image", required: false }
+          - { label: "Header Logo Image (Dark Theme)", name: "logo_image", widget: "image", required: false }
+          - { label: "Header Logo Image (Light Theme)", name: "logo_image_light", widget: "image", required: false }
           - { label: "Brand Name / Text", name: "brand_name", widget: "string", required: false }
           - { label: "Logo Max Width", name: "logo_width", widget: "string", required: false, default: "auto" }
           - { label: "Logo Max Height", name: "logo_height", widget: "string", required: false, default: "34px" }
           - { label: "Logo Text", name: "logo_text", widget: "string", required: false }
-          - { label: "Show Text Beside Logo Image", name: "show_logo_text_with_image", widget: "boolean", default: true }
+          - { label: "Show Text Beside Logo Image", name: "show_logo_text_with_image", widget: "boolean", default: false }
           - { label: "Enable Search Button in Header", name: "search_enabled", widget: "boolean", default: true }
           - { label: "Status Badge Text", name: "status_badge_text", widget: "string", required: false }
           - { label: "Status Badge Color (Hex/CSS)", name: "status_badge_color", widget: "string", required: false }
@@ -75,9 +76,10 @@ collections:
         file: "src/_data/brand.json"
         fields:
           - { label: "Site Name", name: "site_name", widget: "string", required: false }
-          - { label: "Site Logo", name: "logo", widget: "image", required: false }
-          - { label: "Header Logo Image", name: "header_logo", widget: "image", required: false }
-          - { label: "Footer Logo Image", name: "footer_logo_image", widget: "image", required: false }
+          - { label: "Primary Site Logo (Header & Footer)", name: "logo", widget: "image", required: false }
+          - { label: "Logo Shape / Style", name: "logo_shape", widget: "select", options: ["circular", "rectangular", "auto"], default: "circular", required: false }
+          - { label: "Header Logo Image (Optional Override)", name: "header_logo", widget: "image", required: false }
+          - { label: "Footer Logo Image (Optional Override)", name: "footer_logo_image", widget: "image", required: false }
           - { label: "Brand Name / Text", name: "brand_name", widget: "string", required: false }
           - { label: "Main Logo Image", name: "main_logo", widget: "image", required: false }
           - { label: "Dark Theme Logo", name: "logo_dark", widget: "image", required: false }
