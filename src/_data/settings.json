@@ -1,4 +1,5 @@
 {
+  "site_name": "Aimad Security",
   "website_name": "Aimad Security",
   "website_title": "Aimad Ul Islam — Cybersecurity & Network Security Portfolio",
   "website_tagline": "Cybersecurity & Network Security Engineering Portfolio",
@@ -9,6 +10,7 @@
   "author": "Aimad Ul Islam",
   "portfolio_name": "Aimad Security",
   "brand_name": "Aimad Security",
+  "logo": "",
   "header_logo": "",
   "footer_logo_image": "",
   "logo_image": "",
@@ -25,7 +27,6 @@
   "availability_status": "Available for Full-time SOC, Remote & On-site Cybersecurity Roles",
   "profile_picture": "https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg",
   "favicon": "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%23050810'/%3E%3Ccircle cx='32' cy='32' r='30' fill='none' stroke='%2300D4FF' stroke-width='2.5'/%3E%3Ctext x='32' y='39' text-anchor='middle' font-family='Arial Black,Arial' font-weight='900' font-size='26' fill='%2300D4FF'%3EA%3C/text%3E%3C/svg%3E",
-  "logo": "Aimad Security",
   "hero_background": "grid_and_scanlines",
   "theme_color": "#00D4FF",
   "accent_color": "#7C3AED",

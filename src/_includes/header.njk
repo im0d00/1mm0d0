@@ -1,24 +1,24 @@
 <nav id="navbar" class="site-nav" role="navigation" aria-label="Main Navigation">
     <div class="nav-container" style="width: 100%; max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
-        {% set headerLogoImg = brand.header_logo or settings.header_logo or brand.main_logo or settings.logo_image or brand.logo_dark %}
+        {% set headerLogoImg = settings.logo or brand.logo or brand.header_logo or settings.header_logo or brand.main_logo or settings.logo_image or brand.logo_dark %}
         {% set headerLogoLightImg = brand.logo_light or settings.logo_image_light %}
-        {% set brandText = brand.brand_name or settings.brand_name or brand.logo_text or settings.logo_text or settings.portfolio_name %}
+        {% set siteName = settings.site_name or brand.site_name or settings.website_name or brand.brand_name or settings.brand_name or brand.logo_text or settings.logo_text or settings.portfolio_name %}
 
-        <a href="{{ brand.logo_link or '/' }}" class="nav-logo-wrap" aria-label="{{ brandText or 'Home' }}">
+        <a href="{{ brand.logo_link or '/' }}" class="nav-logo-wrap" aria-label="{{ siteName or 'Home' }}">
             {% if headerLogoImg %}
-                <div class="nav-logo-wrapper">
-                    <img src="{{ headerLogoImg }}" alt="{{ brandText or 'Logo' }}" class="nav-logo-img {% if headerLogoLightImg and headerLogoLightImg != headerLogoImg %}dark-logo{% endif %}" />
+                <div class="nav-logo-wrapper site-logo">
+                    <img src="{{ headerLogoImg }}" alt="{{ siteName or 'Logo' }}" class="nav-logo-img {% if headerLogoLightImg and headerLogoLightImg != headerLogoImg %}dark-logo{% endif %}" />
                     {% if headerLogoLightImg and headerLogoLightImg != headerLogoImg %}
-                        <img src="{{ headerLogoLightImg }}" alt="{{ brandText or 'Logo' }}" class="nav-logo-img light-logo" />
+                        <img src="{{ headerLogoLightImg }}" alt="{{ siteName or 'Logo' }}" class="nav-logo-img light-logo" />
                     {% endif %}
                 </div>
             {% endif %}
 
-            {% if brandText and (settings.show_logo_text_with_image != false or not headerLogoImg) %}
+            {% if siteName and (settings.show_logo_text_with_image != false or not headerLogoImg) %}
                 {% if headerLogoImg %}
-                    <span class="nav-logo-text">{{ brandText }}</span>
+                    <span class="nav-logo-text">{{ siteName }}</span>
                 {% else %}
-                    <span class="nav-logo"><span class="br">[</span>{{ brandText }}<span class="nav-dot"></span><span class="br">]</span></span>
+                    <span class="nav-logo"><span class="br">[</span>{{ siteName }}<span class="nav-dot"></span><span class="br">]</span></span>
                 {% endif %}
             {% endif %}
         </a>
@@ -100,17 +100,17 @@
 <div class="mobile-nav" id="mobNav" aria-label="Mobile Navigation">
     <div class="mobile-nav-header">
         <div class="mobile-nav-brand">
-            <a href="{{ brand.logo_link or '/' }}" class="nav-logo-wrap" aria-label="{{ brandText or 'Home' }}">
+            <a href="{{ brand.logo_link or '/' }}" class="nav-logo-wrap" aria-label="{{ siteName or 'Home' }}">
                 {% if headerLogoImg %}
-                    <div class="nav-logo-wrapper">
-                        <img src="{{ headerLogoImg }}" alt="{{ brandText or 'Logo' }}" class="nav-logo-img" />
+                    <div class="nav-logo-wrapper site-logo">
+                        <img src="{{ headerLogoImg }}" alt="{{ siteName or 'Logo' }}" class="nav-logo-img" />
                     </div>
                 {% endif %}
-                {% if brandText %}
+                {% if siteName %}
                     {% if headerLogoImg %}
-                        <span class="nav-logo-text">{{ brandText }}</span>
+                        <span class="nav-logo-text">{{ siteName }}</span>
                     {% else %}
-                        <span class="nav-logo"><span class="br">[</span>{{ brandText }}<span class="nav-dot"></span><span class="br">]</span></span>
+                        <span class="nav-logo"><span class="br">[</span>{{ siteName }}<span class="nav-dot"></span><span class="br">]</span></span>
                     {% endif %}
                 {% endif %}
             </a>

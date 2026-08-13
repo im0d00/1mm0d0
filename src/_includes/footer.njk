@@ -6,21 +6,22 @@
             <!-- Brand Column -->
             <div class="footer-col footer-brand-col">
                 <div class="footer-logo-brand">
-                    {% set footerLogoImg = brand.footer_logo_image or footer.footer_logo_image or settings.footer_logo_image or brand.header_logo or settings.header_logo or brand.main_logo or settings.logo_image or brand.logo_dark %}
-                    {% set footerBrandText = footer.brand_name or footer.footer_logo or brand.brand_name or brand.logo_text or settings.logo_text or settings.portfolio_name %}
+                    {% set siteLogo = settings.logo or brand.logo or brand.header_logo or settings.header_logo or brand.main_logo or settings.logo_image %}
+                    {% set footerLogoImg = footer.footer_logo_image or brand.footer_logo_image or settings.footer_logo_image or siteLogo %}
+                    {% set siteName = settings.site_name or brand.site_name or footer.site_name or footer.brand_name or footer.footer_logo or brand.brand_name or brand.logo_text or settings.logo_text or settings.portfolio_name %}
 
-                    <a href="{{ brand.logo_link or '/' }}" class="footer-logo-link" aria-label="{{ footerBrandText or 'Home' }}">
+                    <a href="{{ brand.logo_link or '/' }}" class="footer-logo-link" aria-label="{{ siteName or 'Home' }}">
                         {% if footerLogoImg %}
-                            <div class="footer-logo-wrapper">
-                                <img src="{{ footerLogoImg }}" alt="{{ footerBrandText or 'Footer Logo' }}" class="footer-logo-img" />
+                            <div class="footer-logo-wrapper site-logo">
+                                <img src="{{ footerLogoImg }}" alt="{{ siteName or 'Footer Logo' }}" class="footer-logo-img" />
                             </div>
                         {% endif %}
 
-                        {% if footerBrandText %}
+                        {% if siteName %}
                             {% if footerLogoImg %}
-                                <span class="footer-brand-title">{{ footerBrandText }}</span>
+                                <span class="footer-brand-title">{{ siteName }}</span>
                             {% else %}
-                                <span class="footer-logo-text"><span class="logo-bracket">[</span><span class="logo-text-inner">{{ footerBrandText }}</span><span class="logo-bracket">]</span></span>
+                                <span class="footer-logo-text"><span class="logo-bracket">[</span><span class="logo-text-inner">{{ siteName }}</span><span class="logo-bracket">]</span></span>
                             {% endif %}
                         {% endif %}
                     </a>

@@ -30,6 +30,8 @@ collections:
           - { label: "Keywords", name: "keywords", widget: "string" }
           - { label: "Author", name: "author", widget: "string" }
           - { label: "Portfolio Name", name: "portfolio_name", widget: "string" }
+          - { label: "Site Name", name: "site_name", widget: "string", required: false }
+          - { label: "Site Logo", name: "logo", widget: "image", required: false }
           - { label: "Header Logo Image", name: "header_logo", widget: "image", required: false }
           - { label: "Footer Logo Image", name: "footer_logo_image", widget: "image", required: false }
           - { label: "Header Logo Image (Dark)", name: "logo_image", widget: "image", required: false }
@@ -44,8 +46,7 @@ collections:
           - { label: "Status Badge Color (Hex/CSS)", name: "status_badge_color", widget: "string", required: false }
           - { label: "Status Badge Visible", name: "status_badge_visible", widget: "boolean", default: true }
           - { label: "Profile Picture", name: "profile_picture", widget: "image" }
-          - { label: "Favicon", name: "favicon", widget: "image" }
-          - { label: "Fallback Text Logo", name: "logo", widget: "string" }
+          - { label: "Favicon", name: "favicon", widget: "image", required: false }
           - { label: "Hero Background Style", name: "hero_background", widget: "string" }
           - { label: "Theme Color (Hex)", name: "theme_color", widget: "string" }
           - { label: "Accent Color (Hex)", name: "accent_color", widget: "string" }
@@ -70,6 +71,8 @@ collections:
         label: "Brand & Logo Settings"
         file: "src/_data/brand.json"
         fields:
+          - { label: "Site Name", name: "site_name", widget: "string", required: false }
+          - { label: "Site Logo", name: "logo", widget: "image", required: false }
           - { label: "Header Logo Image", name: "header_logo", widget: "image", required: false }
           - { label: "Footer Logo Image", name: "footer_logo_image", widget: "image", required: false }
           - { label: "Brand Name / Text", name: "brand_name", widget: "string", required: false }
@@ -693,9 +696,12 @@ collections:
         label: "Footer Settings"
         file: "src/_data/footer.json"
         fields:
-          - { label: "Footer Logo", name: "footer_logo", widget: "string" }
-          - { label: "About Text", name: "about_text", widget: "text" }
-          - { label: "Copyright", name: "copyright", widget: "string" }
+          - { label: "Site Name", name: "site_name", widget: "string", required: false }
+          - { label: "Footer Logo Image", name: "footer_logo_image", widget: "image", required: false }
+          - { label: "Footer Brand Text", name: "brand_name", widget: "string", required: false }
+          - { label: "Footer Logo / Branding Text", name: "footer_logo", widget: "string", required: false }
+          - { label: "Footer Description", name: "footer_description", widget: "text", required: false }
+          - { label: "Copyright Notice", name: "copyright", widget: "string", required: false }
           - name: "quick_links"
             label: "Quick Links"
             widget: "list"
