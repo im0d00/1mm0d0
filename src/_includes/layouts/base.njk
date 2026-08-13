@@ -58,12 +58,29 @@
       "@type": "Person",
       "name": {{ (settings.author or "Aimad Ul Islam") | dump | safe }},
       "url": "https://aimadulislam.dpdns.org",
+      "image": {{ (settings.og_image or "https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg") | dump | safe }},
       "jobTitle": "Cybersecurity Specialist & Network Security Researcher",
       "description": {{ (settings.website_description or "Cybersecurity student, SOC enthusiast, and network security engineering portfolio and technical writeups.") | dump | safe }},
+      "knowsAbout": [
+        "Cybersecurity",
+        "Network Security",
+        "Digital Forensics & Incident Response (DFIR)",
+        "Security Operations Center (SOC)",
+        "Ethical Hacking",
+        "Penetration Testing",
+        "Linux System Administration",
+        "Python Security Automation"
+      ],
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "University of Peshawar",
+        "sameAs": "https://uop.edu.pk"
+      },
       "sameAs": [
         "{{ settings.github_url or 'https://github.com/im0d00' }}",
         "{{ settings.linkedin_url or 'https://linkedin.com/in/aimadulislam' }}",
-        "{{ settings.x_url or 'https://x.com/aimadulislam' }}"
+        "{{ settings.x_url or 'https://x.com/aimadulislam' }}",
+        "{{ settings.youtube_url or 'https://youtube.com/@aimadulislam' }}"
       ]
     }
     </script>

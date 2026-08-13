@@ -13,7 +13,7 @@ technologies:
   - "YARA"
   - "Linux"
   - "Bash"
-github_link: "https://github.com/aimadulislam/volatility-auto-parser"
+github_link: "https://github.com/im0d00/volatility-auto-parser"
 live_demo: "https://aimadulislam.dpdns.org/projects/"
 pdf: "/downloads/volatility3-cheatsheet.pdf"
 lessons_learned: "Optimized multi-threading across Volatility symbol tables to cut RAM extraction time by 68%."

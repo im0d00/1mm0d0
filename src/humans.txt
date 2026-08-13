@@ -1,7 +1,8 @@
 /* TEAM */
   Cybersecurity Architect: Aimad Ul Islam
-  Contact: aimad@example.com
-  Twitter: @AimadSec
+  Contact: info@aimadulislam.dpdns.org
+  GitHub: https://github.com/im0d00
+  Twitter: @aimadulislam
 
 /* SITE */
   Standards: HTML5, CSS3, ES6+, WAI-ARIA

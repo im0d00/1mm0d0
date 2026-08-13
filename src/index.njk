@@ -312,9 +312,13 @@ layout: layouts/base.njk
                     <span class="badge b-plan">{{ cert.status }}</span>
                     {% endif %}
                 </div>
-                <div style="display:flex; gap:0.6rem; margin-top:0.6rem; flex-wrap:wrap;">
-                    {% if cert.verification_url or cert.credential_url %}
-                    <a href="{{ cert.verification_url or cert.credential_url }}" target="_blank" rel="noopener noreferrer" class="plink" style="font-size:0.78rem;"><i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i> Verify Credential</a>
+                <div style="display:flex; gap:0.6rem; margin-top:0.6rem; flex-wrap:wrap; align-items:center;">
+                    {% if cert.verification_url %}
+                    <a href="{{ cert.verification_url }}" target="_blank" rel="noopener noreferrer" class="plink" style="font-size:0.78rem;"><i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i> Verify Credential</a>
+                    {% elif cert.credential_url %}
+                    <a href="{{ cert.credential_url }}" target="_blank" rel="noopener noreferrer" class="plink" style="font-size:0.78rem;"><i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i> Issuer Portal</a>
+                    {% else %}
+                    <span style="font-size:0.75rem; color:var(--muted);"><i class="fa-solid fa-circle-info fa-xs"></i> Verification unavailable</span>
                     {% endif %}
                     {% if cert.certificate_pdf %}
                     <a href="{{ cert.certificate_pdf }}" download class="plink" style="font-size:0.78rem; color:var(--green);"><i class="fa-solid fa-file-pdf fa-xs"></i> Certificate PDF</a>
