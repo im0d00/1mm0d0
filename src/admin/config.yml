@@ -2,9 +2,12 @@ backend:
   name: github
   repo: im0d00/1mm0d0
   branch: main
-  base_url: https://decap-oauth.im0d00.workers.dev
+  base_url: https://decap-oauth.aikhanpma.workers.dev
   auth_endpoint: /auth
   auth_scope: repo
+
+site_url: https://aimadulislam.dpdns.org
+display_url: https://aimadulislam.dpdns.org
 
 media_folder: "src/images"
 public_folder: "/images"

@@ -6,14 +6,14 @@ Decap CMS provides an open-source, git-based content management system allowing 
 ## Configuration & Authentication
 - **Repository**: `im0d00/1mm0d0`
 - **Branch**: `main`
-- **Authentication Proxy**: Cloudflare Worker OAuth (`https://decap-oauth.im0d00.workers.dev`)
+- **Authentication Proxy**: Cloudflare Worker OAuth (`https://decap-oauth.aikhanpma.workers.dev`)
 - **Authorized User**: **`im0d00` ONLY**. Server-side identity validation rejects any unauthorized accounts.
 
 ## Setup & GitHub OAuth Application Configuration
 1. Go to **GitHub Settings -> Developer Settings -> OAuth Apps -> New OAuth App**.
 2. **Application Name**: `1mm0d0 Decap CMS`
-3. **Homepage URL**: `https://im0d00.github.io/1mm0d0/` (or custom domain)
-4. **Authorization callback URL**: `https://decap-oauth.im0d00.workers.dev/callback`
+3. **Homepage URL**: `https://aimadulislam.dpdns.org/`
+4. **Authorization callback URL**: `https://decap-oauth.aikhanpma.workers.dev/callback`
 5. Generate Client ID and Client Secret.
 6. Store Client ID and Secret in Cloudflare Worker secrets via Wrangler:
    ```bash
