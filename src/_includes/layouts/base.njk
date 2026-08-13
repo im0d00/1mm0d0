@@ -3,9 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if title %}{{ title }} | Aimad Ul Islam{% else %}{{ settings.portfolio_name or "Aimad Ul Islam" }} | Cybersecurity Professional{% endif %}</title>
-    <meta name="description" content="{{ description or excerpt or summary or settings.website_description or 'Cybersecurity Professional, SOC Specialist & Technical Researcher' }}">
+    <title>{% if seo_title %}{{ seo_title }}{% elif title %}{% if "Aimad Ul Islam" in title %}{{ title }}{% else %}{{ title }} | Aimad Ul Islam{% endif %}{% else %}{{ settings.seo_title or settings.portfolio_name or "Aimad Ul Islam" }} | Cybersecurity Professional & Security Researcher{% endif %}</title>
+    <meta name="description" content="{{ seo_description or description or excerpt or summary or settings.seo_description or settings.website_description or 'Aimad Ul Islam — Cybersecurity Professional, SOC Specialist, Network Security Engineer & Technical Researcher' }}">
     <meta name="theme-color" content="#080C1A">
+
+    <!-- Search Engine & IndexNow Verifications -->
+    {% if settings.google_search_console_verification %}
+    <meta name="google-site-verification" content="{{ settings.google_search_console_verification }}">
+    {% endif %}
+    {% if settings.bing_site_verification %}
+    <meta name="msvalidate.01" content="{{ settings.bing_site_verification }}">
+    {% endif %}
+    {% if settings.indexnow_key %}
+    <meta name="indexnow-key" content="{{ settings.indexnow_key }}">
+    {% endif %}
     
     <!-- Dynamic Favicons & Icons -->
     {% if brand.favicon_ico or settings.favicon %}
@@ -25,16 +36,16 @@
     <link rel="manifest" href="/manifest.json">
 
     <!-- Open Graph & Meta -->
-    <meta property="og:title" content="{% if seo_title %}{{ seo_title }}{% elif title %}{{ title }} | Aimad Ul Islam{% else %}{{ settings.portfolio_name or 'Aimad Ul Islam' }}{% endif %}">
-    <meta property="og:description" content="{{ seo_description or description or excerpt or summary or settings.website_description }}">
+    <meta property="og:title" content="{% if seo_title %}{{ seo_title }}{% elif title %}{% if 'Aimad Ul Islam' in title %}{{ title }}{% else %}{{ title }} | Aimad Ul Islam{% endif %}{% else %}{{ settings.portfolio_name or 'Aimad Ul Islam' }} | Cybersecurity Professional{% endif %}">
+    <meta property="og:description" content="{{ seo_description or description or excerpt or summary or settings.seo_description or settings.website_description }}">
     <meta property="og:type" content="{% if layout == 'layouts/post.njk' %}article{% else %}website{% endif %}">
     <meta property="og:url" content="https://aimadulislam.dpdns.org{{ page.url }}">
     <meta property="og:image" content="{{ og_image or featured_image or image or thumbnail or brand.og_image or settings.og_image or 'https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg' }}">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{% if seo_title %}{{ seo_title }}{% elif title %}{{ title }} | Aimad Ul Islam{% else %}{{ settings.portfolio_name or 'Aimad Ul Islam' }}{% endif %}">
-    <meta name="twitter:description" content="{{ seo_description or description or excerpt or summary or settings.website_description }}">
+    <meta name="twitter:title" content="{% if seo_title %}{{ seo_title }}{% elif title %}{% if 'Aimad Ul Islam' in title %}{{ title }}{% else %}{{ title }} | Aimad Ul Islam{% endif %}{% else %}{{ settings.portfolio_name or 'Aimad Ul Islam' }} | Cybersecurity Professional{% endif %}">
+    <meta name="twitter:description" content="{{ seo_description or description or excerpt or summary or settings.seo_description or settings.website_description }}">
     <meta name="twitter:image" content="{{ og_image or featured_image or image or thumbnail or brand.og_image or settings.og_image or 'https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg' }}">
 
     <!-- Canonical URL -->
@@ -47,7 +58,8 @@
       "@type": "Person",
       "name": {{ (settings.author or "Aimad Ul Islam") | dump | safe }},
       "url": "https://aimadulislam.dpdns.org",
-      "jobTitle": "Cybersecurity & Network Security Specialist",
+      "jobTitle": "Cybersecurity Specialist & Network Security Researcher",
+      "description": {{ (settings.website_description or "Cybersecurity student, SOC enthusiast, and network security engineering portfolio and technical writeups.") | dump | safe }},
       "sameAs": [
         "{{ settings.github_url or 'https://github.com/aimadulislam' }}",
         "{{ settings.linkedin_url or 'https://linkedin.com/in/aimadulislam' }}",
@@ -63,6 +75,36 @@
       "url": "https://aimadulislam.dpdns.org/"
     }
     </script>
+    {% if page.url and page.url != "/" %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://aimadulislam.dpdns.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": {% if "/posts/" in page.url or "/blog/" in page.url %}"Blog"{% elif "/projects/" in page.url %}"Projects"{% elif "/labs/" in page.url %}"Labs"{% elif "/research/" in page.url %}"Research"{% elif "/downloads/" in page.url %}"Downloads"{% elif "/resources/" in page.url %}"Resources"{% else %}{{ (title or "Page") | dump | safe }}{% endif %},
+          "item": {% if "/posts/" in page.url or "/blog/" in page.url %}"https://aimadulislam.dpdns.org/blog/"{% elif "/projects/" in page.url %}"https://aimadulislam.dpdns.org/projects/"{% elif "/labs/" in page.url %}"https://aimadulislam.dpdns.org/labs/"{% elif "/research/" in page.url %}"https://aimadulislam.dpdns.org/research/"{% elif "/downloads/" in page.url %}"https://aimadulislam.dpdns.org/downloads/"{% elif "/resources/" in page.url %}"https://aimadulislam.dpdns.org/resources/"{% else %}"https://aimadulislam.dpdns.org{{ page.url }}"{% endif %}
+        }
+        {% if page.url != "/blog/" and page.url != "/projects/" and page.url != "/labs/" and page.url != "/research/" and page.url != "/downloads/" and page.url != "/resources/" %},
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": {{ (title or "Item") | dump | safe }},
+          "item": "https://aimadulislam.dpdns.org{{ page.url }}"
+        }
+        {% endif %}
+      ]
+    }
+    </script>
+    {% endif %}
     {% if layout == "layouts/post.njk" %}
     <script type="application/ld+json">
     {

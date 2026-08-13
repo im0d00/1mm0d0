@@ -54,6 +54,9 @@ collections:
           - { label: "Copyright", name: "copyright", widget: "string" }
           - { label: "Google Analytics ID", name: "google_analytics_id", widget: "string", required: false }
           - { label: "Google Search Console Verification", name: "google_search_console_verification", widget: "string", required: false }
+          - { label: "Bing Webmaster Verification Token", name: "bing_site_verification", widget: "string", required: false }
+          - { label: "IndexNow API Key / Token", name: "indexnow_key", widget: "string", required: false }
+          - { label: "Canonical Site Base URL", name: "canonical_url", widget: "string", required: false }
           - { label: "Cloudflare Turnstile Public Key", name: "cloudflare_turnstile_key", widget: "string", required: false }
           - { label: "Microsoft Clarity ID", name: "microsoft_clarity_id", widget: "string", required: false }
           - { label: "Cloudflare Analytics Token", name: "cloudflare_analytics", widget: "string", required: false }

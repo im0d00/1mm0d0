@@ -56,7 +56,10 @@
     { "platform": "Email", "url": "mailto:aimad@lizzdo.com", "icon": "fa-solid fa-envelope" }
   ],
   "google_analytics_id": "G-MEASUREMENT_ID",
-  "google_search_console_verification": "GSC_VERIFICATION_TOKEN",
+  "google_search_console_verification": "",
+  "bing_site_verification": "",
+  "indexnow_key": "4a706e23293e4590b0e50f3b7b257db1",
+  "canonical_url": "https://aimadulislam.dpdns.org",
   "microsoft_clarity_id": "CLARITY_ID",
   "cloudflare_analytics": "CF_ANALYTICS_TOKEN",
   "og_image": "https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg",
