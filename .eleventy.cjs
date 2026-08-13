@@ -1,6 +1,7 @@
 const eleventy = require("@11ty/eleventy");
 const markdownIt = require("markdown-it");
 const markdownItAnchor = require("markdown-it-anchor");
+const markdownItPrism = require("markdown-it-prism");
 const { DateTime } = require("luxon");
 
 module.exports = function(eleventyConfig) {
@@ -29,7 +30,8 @@ module.exports = function(eleventyConfig) {
     html: true,
     breaks: true,
     linkify: true
-  }).use(markdownItAnchor, {
+  })
+  .use(markdownItAnchor, {
     permalink: markdownItAnchor.permalink.ariaHidden({
       placement: "after",
       class: "direct-link",
@@ -37,10 +39,18 @@ module.exports = function(eleventyConfig) {
     }),
     level: [1,2,3,4],
     slugify: eleventyConfig.getFilter("slugify")
+  })
+  .use(markdownItPrism, {
+    defaultLanguage: "text"
   });
   eleventyConfig.setLibrary("md", markdownLibrary);
 
   // Filters
+  eleventyConfig.addFilter("markdown", (content) => {
+    if (!content) return "";
+    return markdownLibrary.render(content);
+  });
+
   eleventyConfig.addFilter("readableDate", dateObj => {
     if (!dateObj) return DateTime.now().toFormat("dd LLL yyyy");
     if (dateObj instanceof Date) return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("dd LLL yyyy");

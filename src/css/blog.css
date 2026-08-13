@@ -1183,14 +1183,6 @@ section { padding: 5rem 0; position:relative; z-index:2; }
 }
 .copy-code-btn:hover { color: var(--cyan); border-color: var(--border2); background: rgba(0,212,255,0.1); }
 .copy-code-btn.copied { color: var(--green); border-color: rgba(0,255,136,0.4); background: rgba(0,255,136,0.1); }
-.article-body pre {
-  margin: 0 !important;
-  border-top-left-radius: 0 !important;
-  border-top-right-radius: 0 !important;
-  border: none !important;
-  border-left: 3px solid var(--cyan) !important;
-  padding: 1.25rem 1.4rem !important;
-}
 
 /* ── SOCIAL SHARE CARD ──────────────────────────────────────── */
 .social-share {
@@ -1568,45 +1560,89 @@ section { padding: 5rem 0; position:relative; z-index:2; }
   align-items: center;
   gap: 0.4rem;
 }
-.code-block-lang {
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.65rem;
-  color: var(--cyan);
-  background: rgba(0,212,255,0.1);
-  border: 1px solid rgba(0,212,255,0.25);
-  padding: 0.15rem 0.5rem;
-  border-radius: 4px;
+.code-block-wrap {
+  position: relative;
+  margin: 1.75rem 0;
+  border-radius: var(--radius, 8px);
+  border: 1px solid var(--border, rgba(0, 212, 255, 0.2));
+  background: #040914;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
-.copy-code-btn {
+
+.code-block-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.55rem 1rem;
+  background: rgba(10, 18, 32, 0.95);
+  border-bottom: 1px solid var(--border, rgba(0, 212, 255, 0.15));
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.7rem;
-  color: var(--muted);
-  background: transparent;
-  border: 1px solid var(--border);
-  padding: 0.2rem 0.6rem;
+}
+
+.code-block-lang {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--cyan, #00d4ff);
+  letter-spacing: 0.05em;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.code-block-filename {
+  font-size: 0.75rem;
+  color: var(--silver, #cbd5e1);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.copy-code-btn, .copy-btn, .copy-terminal-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.72rem;
+  color: var(--silver, #cbd5e1);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border, rgba(255, 255, 255, 0.15));
+  padding: 0.3rem 0.7rem;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.2s ease;
   display: flex;
   align-items: center;
-  gap: 0.3rem;
+  gap: 0.35rem;
+  user-select: none;
 }
-.copy-code-btn:hover { color: var(--cyan); border-color: var(--border2); }
-.copy-code-btn.copied { color: var(--green); border-color: rgba(0,255,136,0.3); }
+
+.copy-code-btn:hover, .copy-btn:hover, .copy-terminal-btn:hover {
+  color: var(--cyan, #00d4ff);
+  border-color: var(--cyan, #00d4ff);
+  background: rgba(0, 212, 255, 0.1);
+}
+
+.copy-code-btn.copied, .copy-btn.copied, .copy-terminal-btn.copied {
+  color: var(--green, #00ff88);
+  border-color: rgba(0, 255, 136, 0.4);
+  background: rgba(0, 255, 136, 0.1);
+}
 
 .article-body pre {
-  background: #040914;
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--cyan);
-  border-radius: var(--radius);
+  margin: 0;
   padding: 1.25rem 1.4rem;
-  overflow-x: auto;
-  font-family: 'JetBrains Mono', monospace;
-  font-size: 0.85rem;
+  background: #040914;
+  border: 1px solid var(--border, rgba(0, 212, 255, 0.15));
+  border-left: 3px solid var(--cyan, #00d4ff);
+  border-radius: var(--radius, 8px);
+  font-family: 'JetBrains Mono', 'Fira Code', monospace;
+  font-size: 0.86rem;
   line-height: 1.65;
-  color: #E2E8F0;
-  margin: 1.5rem 0;
+  color: #e2e8f0;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  white-space: pre;
+  tab-size: 4;
 }
+
 .code-block-wrap pre {
   margin: 0 !important;
   border: none !important;
@@ -1614,14 +1650,85 @@ section { padding: 5rem 0; position:relative; z-index:2; }
   background: #040914 !important;
   padding: 1.25rem 1.4rem !important;
 }
+
+.article-body pre code {
+  font-family: inherit;
+  font-size: inherit;
+  background: transparent !important;
+  padding: 0 !important;
+  border: none !important;
+  color: inherit;
+}
+
+/* Inline Code */
 .article-body code:not(pre code) {
   font-family: 'JetBrains Mono', monospace;
-  font-size: 0.83em;
-  color: var(--cyan);
-  background: rgba(0,212,255,0.06);
-  border: 1px solid rgba(0,212,255,0.15);
-  padding: 0.1em 0.4em;
-  border-radius: 3px;
+  font-size: 0.85em;
+  color: var(--cyan, #00d4ff);
+  background: rgba(0, 212, 255, 0.08);
+  border: 1px solid rgba(0, 212, 255, 0.2);
+  padding: 0.15em 0.45em;
+  border-radius: 4px;
+  word-break: break-word;
+}
+
+/* ── PRISM SYNTAX HIGHLIGHTING TOKENS ──────────────────────── */
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #64748b;
+  font-style: italic;
+}
+
+.token.punctuation {
+  color: #94a3b8;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #ff79c6;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: #00ff88;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: #00d4ff;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: #00d4ff;
+  font-weight: 600;
+}
+
+.token.function,
+.token.class-name {
+  color: #ffb800;
+  font-weight: 600;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: #a78bfa;
 }
 
 /* Terminal Window Blocks */

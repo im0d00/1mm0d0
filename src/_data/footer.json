@@ -1,110 +1,49 @@
 {
-  "brand_name": "Aimad Security",
   "site_name": "Aimad Security",
-  "footer_theme": "glassmorphism",
-  "show_sitemap_rss": true,
-  "social_links": [
-    {
-      "platform": "GitHub",
-      "url": "https://github.com/im0d00",
-      "icon": "fa-brands fa-github"
-    },
-    {
-      "platform": "LinkedIn",
-      "url": "https://linkedin.com/in/aimad-ulislam",
-      "icon": "fa-brands fa-linkedin-in"
-    },
-    {
-      "platform": "X (Twitter)",
-      "url": "https://x.com/aimadulislam",
-      "icon": "fa-brands fa-x-twitter"
-    },
-    {
-      "platform": "YouTube",
-      "url": "https://youtube.com/@aimadulislam",
-      "icon": "fa-brands fa-youtube"
-    }
-  ],
-  "quick_links": [
-    {
-      "label": "About Me",
-      "url": "/#about"
-    },
-    {
-      "label": "Security Projects",
-      "url": "/projects/"
-    },
-    {
-      "label": "Virtual Cyber Labs",
-      "url": "/labs/"
-    },
-    {
-      "label": "Research Reports",
-      "url": "/research/"
-    },
-    {
-      "label": "Download Assets",
-      "url": "/downloads/"
-    },
-    {
-      "label": "Technical Blog",
-      "url": "/blog/"
-    },
-    {
-      "label": "Resources Hub",
-      "url": "/resources/"
-    },
-    {
-      "label": "Get In Touch",
-      "url": "/#contact"
-    }
-  ],
-  "copyright": "© 2026 Aimad Ul Islam. All Rights Reserved.",
-  "credit_url": "https://lizzdo.com",
-  "footer_logo_image": "",
-  "company_name": "Lizzdo Studio",
-  "contact_info": {
-    "email": "info@aimadulislam.dpdns.org",
-    "location": "Pakistan",
-    "status": "Available"
-  },
-  "footer_layout": "multi-column",
-  "footer_logo": "Aimad",
+  "footer_enabled": true,
   "footer_branding_style": "Designed & Developed by",
   "credit_text": "Lizzdo Studio",
-  "legal_links": [
-    {
-      "label": "Privacy Policy",
-      "url": "/resources/privacy-policy/"
-    },
-    {
-      "label": "Terms of Use",
-      "url": "/resources/terms/"
-    },
-    {
-      "label": "Cookie Policy",
-      "url": "/resources/cookie-policy/"
-    },
-    {
-      "label": "Security Disclaimer",
-      "url": "/resources/disclaimer/"
-    },
-    {
-      "label": "Human Sitemap",
-      "url": "/resources/sitemap-page/"
-    },
-    {
-      "label": "XML Sitemap",
-      "url": "/sitemap.xml"
-    },
-    {
-      "label": "RSS Feed",
-      "url": "/feed.xml"
-    }
-  ],
-  "show_last_updated": false,
-  "footer_version": "1",
+  "credit_url": "https://lizzdo.com",
+  "company_name": "Lizzdo Studio",
+  "footer_logo_image": "",
+  "brand_name": "Aimad Security",
+  "footer_logo": "Aimad Security",
   "footer_description": "Cybersecurity student, SOC enthusiast, and network security practitioner from Pakistan. Specializing in DFIR, Linux Systems, and Ethical Hacking.",
+  "copyright": "© 2026 Aimad Ul Islam. All Rights Reserved.",
+  "footer_version": "v2.5.0",
   "last_updated_date": "August 2026",
-  "footer_enabled": true
+  "show_last_updated": true,
+  "show_sitemap_rss": true,
+  "footer_theme": "glassmorphism",
+  "footer_layout": "multi-column",
+  "quick_links": [
+    { "label": "About Me", "url": "/#about" },
+    { "label": "Security Projects", "url": "/projects/" },
+    { "label": "Virtual Cyber Labs", "url": "/labs/" },
+    { "label": "Research Reports", "url": "/research/" },
+    { "label": "Download Assets", "url": "/downloads/" },
+    { "label": "Technical Blog", "url": "/blog/" },
+    { "label": "Resources Hub", "url": "/resources/" },
+    { "label": "Get In Touch", "url": "/#contact" }
+  ],
+  "legal_links": [
+    { "label": "Privacy Policy", "url": "/resources/privacy-policy/" },
+    { "label": "Terms of Use", "url": "/resources/terms/" },
+    { "label": "Cookie Policy", "url": "/resources/cookie-policy/" },
+    { "label": "Security Disclaimer", "url": "/resources/disclaimer/" },
+    { "label": "Human Sitemap", "url": "/resources/sitemap-page/" },
+    { "label": "XML Sitemap", "url": "/sitemap.xml" },
+    { "label": "RSS Feed", "url": "/feed.xml" }
+  ],
+  "contact_info": {
+    "email": "info@aimadulislam.dpdns.org",
+    "location": "Peshawar, Pakistan",
+    "status": "Available for Consulting & Roles"
+  },
+  "social_links": [
+    { "platform": "GitHub", "url": "https://github.com/im0d00", "icon": "fa-brands fa-github" },
+    { "platform": "LinkedIn", "url": "https://linkedin.com/in/aimadulislam", "icon": "fa-brands fa-linkedin-in" },
+    { "platform": "X (Twitter)", "url": "https://x.com/aimadulislam", "icon": "fa-brands fa-x-twitter" },
+    { "platform": "YouTube", "url": "https://youtube.com/@aimadulislam", "icon": "fa-brands fa-youtube" }
+  ]
 }

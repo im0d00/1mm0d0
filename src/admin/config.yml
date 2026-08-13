@@ -974,6 +974,7 @@ collections:
       - { label: "Related Projects", name: "related_projects", widget: "list", required: false }
       - { label: "Related Labs", name: "related_labs", widget: "list", required: false }
       - { label: "Related Posts Slugs / Titles", name: "related_posts", widget: "list", required: false }
+      - { label: "Article Content (Markdown Body)", name: "body", widget: "markdown", required: false }
       - label: "Structured Content Blocks (Modular Editor)"
         name: "content_blocks"
         widget: "list"
@@ -995,9 +996,9 @@ collections:
             name: "code_block"
             widget: "object"
             fields:
-              - { label: "File Name", name: "filename", widget: "string", default: "script.py" }
+              - { label: "File Name", name: "filename", widget: "string", default: "script.py", required: false }
               - { label: "Programming Language", name: "language", widget: "select", options: ["Python", "Bash", "PowerShell", "C/C++", "Go", "Rust", "JavaScript", "TypeScript", "HTML", "CSS", "JSON", "YAML", "SQL", "Markdown", "Text"], default: "Python" }
-              - { label: "Code Content", name: "code", widget: "code" }
+              - { label: "Code Content", name: "code", widget: "text" }
               - { label: "Optional Description", name: "description", widget: "string", required: false }
           - label: "Terminal Block"
             name: "terminal_block"
