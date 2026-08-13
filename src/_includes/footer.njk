@@ -84,7 +84,7 @@
                     {% for soc in footer.social_links or settings.social_media_links %}
                     <a href="{{ soc.url }}" target="_blank" rel="noopener noreferrer" aria-label="{{ soc.platform }}"><i class="{{ soc.icon }}"></i></a>
                     {% else %}
-                    <a href="{{ contact.github or settings.github_url or 'https://github.com/aimadulislam' }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="{{ contact.github or settings.github_url or 'https://github.com/im0d00' }}" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
                     <a href="{{ contact.linkedin or settings.linkedin_url or 'https://linkedin.com/in/aimadulislam' }}" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
                     <a href="{{ contact.x or settings.x_url or 'https://x.com/aimadulislam' }}" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
                     <a href="{{ contact.youtube or settings.youtube_url or 'https://youtube.com/@aimadulislam' }}" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>

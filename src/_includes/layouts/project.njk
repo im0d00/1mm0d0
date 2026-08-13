@@ -111,7 +111,7 @@ layout: layouts/base.njk
                         <h3>{{ author or "Aimad Ul Islam" }}</h3>
                         <p class="author-bio">Cybersecurity practitioner & security engineer specializing in digital forensics, SOC triage, network security, and automated threat parsers.</p>
                         <div class="author-links">
-                            <a href="https://github.com/aimadulislam" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+                            <a href="{{ contact.github or settings.github_url or 'https://github.com/im0d00' }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
                             <a href="https://linkedin.com/in/aimadulislam" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
                         </div>
                     </div>
