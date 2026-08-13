@@ -119,7 +119,7 @@ layout: layouts/base.njk
                     <div class="meta-hud-icon"><i class="fa-regular fa-clock"></i></div>
                     <div class="meta-hud-info">
                         <span class="meta-hud-label">Est. Read Time</span>
-                        <span class="meta-hud-val">{{ readingTime or 12 }} min read</span>
+                        <span class="meta-hud-val">{{ content | calcReadingTime(readingTime) }} min read</span>
                     </div>
                 </div>
 
@@ -159,8 +159,8 @@ layout: layouts/base.njk
                     <div class="article-blocks-container">
                         {% for block in content_blocks %}
                             {% if block.type == "paragraph" %}
-                                <div class="block-paragraph">
-                                    {{ block.content | safe }}
+                                <div class="block-paragraph" style="margin:1.5rem 0;">
+                                    {{ block.content | markdown | safe }}
                                 </div>
 
                             {% elif block.type == "heading" %}
@@ -332,8 +332,12 @@ layout: layouts/base.njk
                             {% endif %}
                         {% endfor %}
                     </div>
-                    {% else %}
+                    {% endif %}
+
+                    {% if not (content_blocks and content_blocks.length > 0) or (content and content | trim | length > 0) %}
+                    <div class="article-markdown-body">
                         {{ content | safe }}
+                    </div>
                     {% endif %}
 
                     {% if gallery and gallery.length > 0 %}
@@ -457,9 +461,13 @@ layout: layouts/base.njk
                         <a href="/blog/" class="btn btn-ghost btn-xs">View All Research <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                     <div class="related-grid">
+                        {% set currentCat = categories[0] if (categories and categories.length > 0) else "Security" %}
                         {% set relCount = 0 %}
+                        {% set shownUrls = [page.url] %}
+                        
+                        {# First pass: posts matching category #}
                         {% for post in collections.posts %}
-                            {% if relCount < 3 and post.url != page.url %}
+                            {% if relCount < 3 and post.url not in shownUrls and (currentCat in post.data.categories) %}
                             <a href="{{ post.url }}" class="card related-card">
                                 <div class="card-glow"></div>
                                 <div class="related-card-meta">
@@ -470,8 +478,28 @@ layout: layouts/base.njk
                                 <p class="related-card-desc">{{ post.data.subtitle or post.data.description or post.data.excerpt or "Explore technical analysis and security research." }}</p>
                             </a>
                             {% set relCount = relCount + 1 %}
+                            {% set shownUrls = (shownUrls.push(post.url), shownUrls) %}
                             {% endif %}
                         {% endfor %}
+
+                        {# Second pass: fill up to 3 posts #}
+                        {% if relCount < 3 %}
+                            {% for post in collections.posts %}
+                                {% if relCount < 3 and post.url not in shownUrls %}
+                                <a href="{{ post.url }}" class="card related-card">
+                                    <div class="card-glow"></div>
+                                    <div class="related-card-meta">
+                                        <span class="tag tag-cyber"><i class="fa-solid fa-tag"></i> {{ post.data.categories[0] or "Security" }}</span>
+                                        <span class="related-date"><i class="fa-regular fa-calendar"></i> {{ post.date | readableDate }}</span>
+                                    </div>
+                                    <h4 class="related-card-title">{{ post.data.title }}</h4>
+                                    <p class="related-card-desc">{{ post.data.subtitle or post.data.description or post.data.excerpt or "Explore technical analysis and security research." }}</p>
+                                </a>
+                                {% set relCount = relCount + 1 %}
+                                {% set shownUrls = (shownUrls.push(post.url), shownUrls) %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endif %}
                     </div>
                 </div>
 
@@ -630,17 +658,28 @@ layout: layouts/base.njk
         const articleBody = document.querySelector('.article-body');
         if (articleBody) {
             const preBlocks = articleBody.querySelectorAll('pre');
-            preBlocks.forEach((pre, idx) => {
-                if (pre.parentElement.classList.contains('code-block-wrap')) return;
+            preBlocks.forEach((pre) => {
+                if (pre.closest('.code-block-wrap') || pre.closest('.terminal-block-wrap') || pre.closest('.file-tree-wrap')) return;
 
-                const code = pre.querySelector('code');
+                const code = pre.querySelector('code') || pre;
                 let lang = 'CODE';
-                if (code) {
-                    const match = code.className.match(/language-([a-zA-Z0-9_\-]+)/);
-                    if (match) {
-                        lang = match[1].toUpperCase();
-                    }
+                const classList = (code.className || '') + ' ' + (pre.className || '');
+                const match = classList.match(/language-([a-zA-Z0-9_\-+]+)/);
+                if (match) {
+                    lang = match[1].toUpperCase();
                 }
+
+                const langMap = {
+                    'PY': 'PYTHON', 'PYTHON': 'PYTHON',
+                    'SH': 'BASH', 'BASH': 'BASH', 'SHELL': 'BASH', 'ZSH': 'BASH',
+                    'PS1': 'POWERSHELL', 'POWERSHELL': 'POWERSHELL',
+                    'JS': 'JAVASCRIPT', 'JAVASCRIPT': 'JAVASCRIPT',
+                    'TS': 'TYPESCRIPT', 'TYPESCRIPT': 'TYPESCRIPT',
+                    'HTML': 'HTML', 'MARKUP': 'HTML',
+                    'CSS': 'CSS', 'JSON': 'JSON', 'YAML': 'YAML', 'YML': 'YAML',
+                    'SQL': 'SQL', 'C': 'C', 'CPP': 'C++', 'GO': 'GO', 'RUST': 'RUST'
+                };
+                const displayLang = langMap[lang] || lang;
 
                 const wrapper = document.createElement('div');
                 wrapper.className = 'code-block-wrap';
@@ -648,8 +687,8 @@ layout: layouts/base.njk
                 const header = document.createElement('div');
                 header.className = 'code-block-header';
                 header.innerHTML = `
-                    <span class="code-block-lang"><i class="fa-solid fa-terminal"></i> ${lang}</span>
-                    <button class="copy-code-btn" aria-label="Copy code block">
+                    <span class="code-block-lang"><i class="fa-solid fa-code text-cyan"></i> ${displayLang}</span>
+                    <button class="copy-code-btn" aria-label="Copy code block" onclick="copyCodeBlockText(this)">
                         <i class="fa-regular fa-copy"></i> Copy
                     </button>
                 `;
@@ -657,19 +696,13 @@ layout: layouts/base.njk
                 pre.parentNode.insertBefore(wrapper, pre);
                 wrapper.appendChild(header);
                 wrapper.appendChild(pre);
+            });
 
-                const copyBtn = header.querySelector('.copy-code-btn');
-                copyBtn.addEventListener('click', () => {
-                    const codeText = pre.innerText || pre.textContent;
-                    navigator.clipboard.writeText(codeText).then(() => {
-                        copyBtn.innerHTML = '<i class="fa-solid fa-check text-green"></i> Copied!';
-                        copyBtn.classList.add('copied');
-                        setTimeout(() => {
-                            copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
-                            copyBtn.classList.remove('copied');
-                        }, 2000);
-                    });
-                });
+            // Handle pre-existing copy buttons (e.g. from manual HTML)
+            articleBody.querySelectorAll('.copy-btn, .copy-code-btn').forEach(btn => {
+                if (!btn.getAttribute('onclick')) {
+                    btn.addEventListener('click', () => copyCodeBlockText(btn));
+                }
             });
 
             // Click-to-zoom Lightbox for Article Images
@@ -791,15 +824,16 @@ layout: layouts/base.njk
 
     function copyCodeBlockText(btn) {
         if (!btn) return;
-        const parent = btn.closest('.code-block-wrap') || btn.closest('.terminal-block-wrap');
-        let codeText = '';
-        if (parent) {
-            const pre = parent.querySelector('pre');
-            if (pre) codeText = pre.innerText || pre.textContent;
-        }
+        const parent = btn.closest('.code-block-wrap') || btn.closest('.terminal-block-wrap') || btn.closest('.file-tree-wrap') || btn.parentElement;
+        if (!parent) return;
+
+        let codeEl = parent.querySelector('pre code') || parent.querySelector('code') || parent.querySelector('pre');
+        if (!codeEl) return;
+
+        let codeText = codeEl.textContent || '';
         if (!codeText) return;
 
-        navigator.clipboard.writeText(codeText.trim()).then(() => {
+        function showSuccess() {
             const originalHtml = btn.innerHTML;
             btn.innerHTML = '<i class="fa-solid fa-check text-green"></i> Copied!';
             btn.classList.add('copied');
@@ -807,8 +841,32 @@ layout: layouts/base.njk
                 btn.innerHTML = originalHtml;
                 btn.classList.remove('copied');
             }, 2000);
-        }).catch(() => {
-            alert('Code copied!');
-        });
+        }
+
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(codeText).then(showSuccess).catch(() => {
+                fallbackCopy(codeText, showSuccess);
+            });
+        } else {
+            fallbackCopy(codeText, showSuccess);
+        }
+    }
+
+    function fallbackCopy(text, callback) {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-9999px';
+        textArea.style.top = '-9999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            if (callback) callback();
+        } catch (err) {
+            console.error('Copy fallback error:', err);
+        }
+        document.body.removeChild(textArea);
     }
 </script>

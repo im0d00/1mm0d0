@@ -51,6 +51,14 @@ module.exports = function(eleventyConfig) {
     return markdownLibrary.render(content);
   });
 
+  eleventyConfig.addFilter("calcReadingTime", (content, overrideTime) => {
+    if (overrideTime && Number(overrideTime) > 0) return Number(overrideTime);
+    if (!content) return 5;
+    const words = String(content).replace(/<[^>]*>/g, "").split(/\s+/).filter(Boolean).length;
+    const mins = Math.ceil(words / 200);
+    return mins > 0 ? mins : 1;
+  });
+
   eleventyConfig.addFilter("readableDate", dateObj => {
     if (!dateObj) return DateTime.now().toFormat("dd LLL yyyy");
     if (dateObj instanceof Date) return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("dd LLL yyyy");
@@ -120,13 +128,26 @@ module.exports = function(eleventyConfig) {
     return url;
   });
 
+  // Helper to filter published posts
+  function isPublishedPost(item) {
+    if (!item || !item.data) return false;
+    if (item.data.status && String(item.data.status).toLowerCase() === "draft") return false;
+    if (item.data.draft === true) return false;
+    if (item.data.published === false) return false;
+    return true;
+  }
+
   // Collections
   eleventyConfig.addCollection("posts", function(collectionApi) {
-    return collectionApi.getFilteredByGlob("src/posts/*.md").reverse();
+    return collectionApi.getFilteredByGlob("src/posts/*.md")
+      .filter(isPublishedPost)
+      .reverse();
   });
 
   eleventyConfig.addCollection("featuredPosts", function(collectionApi) {
-    const posts = collectionApi.getFilteredByGlob("src/posts/*.md").reverse();
+    const posts = collectionApi.getFilteredByGlob("src/posts/*.md")
+      .filter(isPublishedPost)
+      .reverse();
     return posts.filter(post => post.data && (post.data.featured === true || post.data.pinned === true));
   });
 
@@ -148,35 +169,39 @@ module.exports = function(eleventyConfig) {
   
   eleventyConfig.addCollection("categories", function(collectionApi) {
     let categories = new Set();
-    collectionApi.getFilteredByGlob("src/posts/*.md").forEach(item => {
-      if (item.data && item.data.categories) {
-        let cats = item.data.categories;
-        if (typeof cats === "string") cats = [cats];
-        if (Array.isArray(cats)) {
-          for (let cat of cats) {
-            if (cat) categories.add(cat);
+    collectionApi.getFilteredByGlob("src/posts/*.md")
+      .filter(isPublishedPost)
+      .forEach(item => {
+        if (item.data && item.data.categories) {
+          let cats = item.data.categories;
+          if (typeof cats === "string") cats = [cats];
+          if (Array.isArray(cats)) {
+            for (let cat of cats) {
+              if (cat) categories.add(cat);
+            }
           }
         }
-      }
-    });
+      });
     return Array.from(categories).sort();
   });
 
   eleventyConfig.addCollection("categoryCounts", function(collectionApi) {
     let counts = {};
-    collectionApi.getFilteredByGlob("src/posts/*.md").forEach(item => {
-      if (item.data && item.data.categories) {
-        let cats = item.data.categories;
-        if (typeof cats === "string") cats = [cats];
-        if (Array.isArray(cats)) {
-          for (let cat of cats) {
-            if (cat) {
-              counts[cat] = (counts[cat] || 0) + 1;
+    collectionApi.getFilteredByGlob("src/posts/*.md")
+      .filter(isPublishedPost)
+      .forEach(item => {
+        if (item.data && item.data.categories) {
+          let cats = item.data.categories;
+          if (typeof cats === "string") cats = [cats];
+          if (Array.isArray(cats)) {
+            for (let cat of cats) {
+              if (cat) {
+                counts[cat] = (counts[cat] || 0) + 1;
+              }
             }
           }
         }
-      }
-    });
+      });
     return counts;
   });
 

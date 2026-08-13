@@ -7,8 +7,11 @@ eleventyExcludeFromCollections: true
   {
     "type": "Blog Post",
     "title": {{ post.data.title | dump | safe }},
+    "subtitle": {{ (post.data.subtitle or "") | dump | safe }},
     "description": {{ (post.data.excerpt or "") | dump | safe }},
+    "author": {{ (post.data.author or "Aimad Ul Islam") | dump | safe }},
     "category": {{ (post.data.categories[0] or "General") | dump | safe }},
+    "categories": {{ (post.data.categories or []) | dump | safe }},
     "tags": {{ (post.data.tags or []) | dump | safe }},
     "url": {{ post.url | dump | safe }}
   },
