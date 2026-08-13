@@ -1,0 +1,13 @@
+{
+  "name": "decap-oauth-worker",
+  "version": "1.0.0",
+  "description": "Cloudflare Worker OAuth Proxy for Decap CMS with strict identity verification for im0d00",
+  "main": "index.js",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^3.0.0"
+  }
+}

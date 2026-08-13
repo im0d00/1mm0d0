@@ -7,12 +7,42 @@
     <meta name="description" content="Peer-reviewed research, threat intelligence whitepapers, malware case studies, vulnerability advisories, and DFIR investigation reports by Aimad Ul Islam.">
     <meta name="theme-color" content="#080C1A">
     
-    <!-- Open Graph -->
+    <!-- Dynamic Favicons & Icons -->
+    
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    
+    
+    
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Open Graph & Meta -->
     <meta property="og:title" content="Cybersecurity Research Center &amp; Threat Intelligence | Aimad Ul Islam | Aimad Ul Islam">
     <meta property="og:description" content="Peer-reviewed research, threat intelligence whitepapers, malware case studies, vulnerability advisories, and DFIR investigation reports by Aimad Ul Islam.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://aimadulislam.dpdns.org/research/">
     <meta property="og:image" content="https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Cybersecurity Research Center &amp; Threat Intelligence | Aimad Ul Islam | Aimad Ul Islam">
+    <meta name="twitter:description" content="Peer-reviewed research, threat intelligence whitepapers, malware case studies, vulnerability advisories, and DFIR investigation reports by Aimad Ul Islam.">
+    <meta name="twitter:image" content="https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://aimadulislam.dpdns.org/research/">
+
+    <!-- Schema.org JSON-LD Structured Data -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Aimad Security",
+      "url": "https://aimadulislam.dpdns.org/"
+    }
+    </script>
+    
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,7 +78,9 @@
     <div class="nav-container" style="width: 100%; max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
         <a href="/" class="nav-logo-wrap" aria-label="Aimad Security">
             
-                <span class="nav-logo"><span class="br">[</span>Aimad Security<span class="nav-dot"></span><span class="br">]</span></span>
+            
+            
+                <span class="nav-logo"><span class="br">[</span>[Aimad•Security]<span class="nav-dot"></span><span class="br">]</span></span>
             
         </a>
 
@@ -59,6 +91,15 @@
                     <a href="/" >
                         <i class="fa-solid fa-house fa-xs"></i>
                         <span>Home</span>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a href="/#about" >
+                        <i class="fa-solid fa-user fa-xs"></i>
+                        <span>About</span>
                     </a>
                 </li>
                 
@@ -161,8 +202,8 @@
         <div class="nav-right">
             
             <button id="searchOpenBtn" class="search-trigger-btn" onclick="openSearchModal()" aria-label="Search site (Ctrl+K)">
-                <i class="fa-solid fa-magnifying-glass fa-xs"></i>
-                <span>Search</span>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span class="search-btn-text">Search</span>
                 <kbd class="kbd-badge">Ctrl+K</kbd>
             </button>
             
@@ -174,7 +215,7 @@
             </div>
             
 
-            <button class="dark-mode-btn" id="theme-toggle" aria-label="Toggle dark/light theme" onclick="toggleTheme()" style="background: rgba(13,26,48,0.7); border: 1px solid var(--border); color: var(--silver); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition);">
+            <button class="dark-mode-btn" id="theme-toggle" aria-label="Toggle dark/light theme" onclick="toggleTheme()">
                 <i class="fa-regular fa-moon" id="theme-toggle-icon"></i>
             </button>
 
@@ -184,19 +225,24 @@
                 <i class="fa-solid fa-download dl-icon"></i>
             </a>
 
-            <div class="hamburger" id="ham" aria-label="Toggle navigation menu">
+            <button class="hamburger" id="ham" aria-label="Toggle navigation menu" aria-expanded="false" onclick="toggleMobileNav(event)">
                 <span></span><span></span><span></span>
-            </div>
+            </button>
         </div>
     </div>
 </nav>
 
 <!-- MOBILE OVERLAY & DRAWER -->
-<div class="mobile-overlay" id="mobOverlay" onclick="closeMobileNav()"></div>
-<div class="mobile-nav" id="mobNav">
+<div class="mobile-overlay" id="mobOverlay" onclick="closeMobileNav(event)"></div>
+<div class="mobile-nav" id="mobNav" aria-label="Mobile Navigation">
     <div class="mobile-nav-header">
-        <div class="mobile-nav-brand">Aimad Security</div>
-        <button class="mob-close-btn" id="mobCloseBtn" onclick="closeMobileNav()" aria-label="Close menu">&times;</button>
+        <div class="mobile-nav-brand">
+            
+            
+                <span class="nav-logo"><span class="br">[</span>[Aimad•Security]<span class="nav-dot"></span><span class="br">]</span></span>
+            
+        </div>
+        <button class="mob-close-btn" id="mobCloseBtn" aria-label="Close menu" onclick="closeMobileNav(event)">&times;</button>
     </div>
     
     <div class="mobile-status-badge">
@@ -206,105 +252,119 @@
     
     <ul class="mobile-links">
         
-        <li>
-            <a href="/" onclick="closeMobileNav()">
+        <li class="mob-item-wrap">
+            <a href="/" class="">
                 <i class="fa-solid fa-house"></i>
                 <span>Home</span>
             </a>
-        </li>
             
+        </li>
         
-        <li>
-            <a href="/projects/" onclick="closeMobileNav()">
+        <li class="mob-item-wrap">
+            <a href="/#about" class="">
+                <i class="fa-solid fa-user"></i>
+                <span>About</span>
+            </a>
+            
+        </li>
+        
+        <li class="mob-item-wrap">
+            <a href="/projects/" class="">
                 <i class="fa-solid fa-folder-open"></i>
                 <span>Projects</span>
             </a>
-        </li>
             
+        </li>
         
-        <li>
-            <a href="/labs/" onclick="closeMobileNav()">
+        <li class="mob-item-wrap">
+            <a href="/labs/" class="">
                 <i class="fa-solid fa-flask"></i>
                 <span>Labs</span>
             </a>
-        </li>
             
+        </li>
         
-        <li>
-            <a href="/research/" onclick="closeMobileNav()">
+        <li class="mob-item-wrap">
+            <a href="/research/" class="active">
                 <i class="fa-solid fa-file-contract"></i>
                 <span>Research</span>
             </a>
-        </li>
             
+        </li>
         
-        <li>
-            <a href="/blog/" onclick="closeMobileNav()">
+        <li class="mob-item-wrap">
+            <a href="/blog/" class="">
                 <i class="fa-solid fa-pen-nib"></i>
                 <span>Blog</span>
             </a>
-        </li>
             
+        </li>
         
-        <li>
-            <a href="/resources/" onclick="closeMobileNav()">
+        <li class="mob-item-wrap">
+            <a href="/resources/" class="">
                 <i class="fa-solid fa-shield-halved"></i>
                 <span>Resources</span>
             </a>
-        </li>
             
+            <ul class="mob-sublinks">
                 
-                <li style="padding-left: 1rem;">
-                    <a href="/resources/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                <li>
+                    <a href="/resources/" class="">
                         <i class="fa-solid fa-layer-group"></i>
                         <span>All Resources</span>
                     </a>
                 </li>
                 
-                <li style="padding-left: 1rem;">
-                    <a href="/downloads/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                <li>
+                    <a href="/downloads/" class="">
                         <i class="fa-solid fa-download"></i>
                         <span>Download Hub</span>
                     </a>
                 </li>
                 
-                <li style="padding-left: 1rem;">
-                    <a href="/resources/security-policy/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                <li>
+                    <a href="/resources/security-policy/" class="">
                         <i class="fa-solid fa-lock"></i>
                         <span>Security Policy</span>
                     </a>
                 </li>
                 
-                <li style="padding-left: 1rem;">
-                    <a href="/resources/responsible-disclosure/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                <li>
+                    <a href="/resources/responsible-disclosure/" class="">
                         <i class="fa-solid fa-bug"></i>
                         <span>Disclosure Policy</span>
                     </a>
                 </li>
                 
-                <li style="padding-left: 1rem;">
-                    <a href="/resources/sitemap-page/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                <li>
+                    <a href="/resources/sitemap-page/" class="">
                         <i class="fa-solid fa-sitemap"></i>
                         <span>Human Sitemap</span>
                     </a>
                 </li>
                 
+            </ul>
             
+        </li>
         
-        <li>
-            <a href="/#contact" onclick="closeMobileNav()">
+        <li class="mob-item-wrap">
+            <a href="/#contact" class="">
                 <i class="fa-solid fa-envelope"></i>
                 <span>Contact</span>
             </a>
-        </li>
             
+        </li>
         
     </ul>
     <div class="mobile-actions">
         
-        <button onclick="openSearchModal(); closeMobileNav();" class="btn outline w-full" style="display:flex; align-items:center; justify-content:center; gap:0.5rem; padding:0.65rem 1rem; border:1px solid var(--border); border-radius:20px; background:rgba(13,26,48,0.7); color:var(--cyan); cursor:pointer;"><i class="fa-solid fa-magnifying-glass"></i> Search Platform</button>
+        <button id="mobSearchBtn" class="btn outline w-full mob-action-btn">
+            <i class="fa-solid fa-magnifying-glass"></i> Search Platform
+        </button>
         
-        <a href="/assets/Aimad_Ul_Islam_Resume.pdf" download class="btn primary w-full" style="display:flex; align-items:center; justify-content:center; gap:0.5rem; padding:0.65rem 1rem; border-radius:20px; background:linear-gradient(135deg, var(--cyan), var(--cyan2)); color:var(--void); font-weight:600; text-decoration:none;"><i class="fa-solid fa-file-pdf"></i> Download Resume</a>
+        <a href="/assets/Aimad_Ul_Islam_Resume.pdf" download class="btn primary w-full mob-action-btn">
+            <i class="fa-solid fa-file-pdf"></i> Download Resume
+        </a>
     </div>
 </div>
 
@@ -312,7 +372,7 @@
     <main id="main-content">
         
 <!-- HERO SECTION -->
-<section id="blog-hero" aria-labelledby="research-hero-title" style="padding-bottom: 3rem;">
+<section id="blog-hero" aria-labelledby="research-hero-title">
   <canvas id="blog-hero-canvas" aria-hidden="true"></canvas>
   <div class="blog-hero-inner container">
     <div class="blog-hero-eye"><i class="fa-solid fa-microscope"></i> Threat Intelligence & Whitepaper Vault</div>
@@ -322,13 +382,13 @@
     <p class="blog-hero-sub">In-depth technical white papers, zero-trust implementation blueprints, automated malware triage reports, and SOC threat intelligence digests.</p>
 
     <!-- Research Stats -->
-    <div class="sidebar-stats-grid" style="grid-template-columns: repeat(4, 1fr); max-width: 800px; margin: 1.5rem auto 2rem auto;">
+    <div class="sidebar-stats-grid">
       <div class="s-stat-box card">
         <div class="s-stat-val">4</div>
         <div class="s-stat-lbl">White Papers</div>
       </div>
       <div class="s-stat-box card">
-        <div class="s-stat-val" style="color: var(--cyan);">PDF</div>
+        <div class="s-stat-val text-cyan">PDF</div>
         <div class="s-stat-lbl">Open Standard</div>
       </div>
       <div class="s-stat-box card">
@@ -336,7 +396,7 @@
         <div class="s-stat-lbl">Latest Edition</div>
       </div>
       <div class="s-stat-box card">
-        <div class="s-stat-val" style="color: var(--green);">Verified</div>
+        <div class="s-stat-val text-green">Verified</div>
         <div class="s-stat-lbl">Peer-Reviewed</div>
       </div>
     </div>
@@ -384,7 +444,7 @@
       <span class="posts-count-badge" id="research-count">Showing All Reports</span>
     </div>
 
-    <div id="research-grid" class="articles-grid" style="grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));">
+    <div id="research-grid" class="articles-grid">
       
       <!-- Data items from JSON -->
       
@@ -394,8 +454,8 @@
                data-summary="in-depth research on ransomware mitigation vectors, log aggregation with splunk, and automated siem triage."
                data-author="aimad ul islam">
         <div class="card-glow"></div>
-        <div class="article-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(0,212,255,0.1));">
-          <div class="article-card-img-placeholder" style="background: none;">
+        <div class="article-card-img-wrap" style="height: 180px;">
+          <div class="article-card-img-placeholder">
             <i class="fa-solid fa-file-pdf text-cyan" style="font-size: 3rem;"></i>
           </div>
           <span class="card-diff-badge intermediate">v2.1</span>
@@ -410,7 +470,7 @@
           <h3 class="article-card-title">Enterprise Threat Landscape &amp; Incident Response Playbook 2026</h3>
           <p class="article-card-excerpt">In-depth research on ransomware mitigation vectors, log aggregation with Splunk, and automated SIEM triage.</p>
 
-          <div class="article-card-footer" style="margin-top: 1.2rem; display: flex; gap: 0.5rem;">
+          <div class="article-card-footer" style="margin-top: 1.2rem;">
             
             <a href="https://www.w3.org/W3C/DesignIssues/pdf.pdf" target="_blank" class="btn btn-sm btn-cyan btn-full"><i class="fa-solid fa-file-arrow-down"></i> Download PDF Paper</a>
             
@@ -424,8 +484,8 @@
                data-summary="a comprehensive guide on micro-segmentation, identity-aware proxies, and continuous authentication."
                data-author="aimad ul islam">
         <div class="card-glow"></div>
-        <div class="article-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(0,212,255,0.1));">
-          <div class="article-card-img-placeholder" style="background: none;">
+        <div class="article-card-img-wrap" style="height: 180px;">
+          <div class="article-card-img-placeholder">
             <i class="fa-solid fa-file-pdf text-cyan" style="font-size: 3rem;"></i>
           </div>
           <span class="card-diff-badge intermediate">v1.0</span>
@@ -440,7 +500,7 @@
           <h3 class="article-card-title">Zero Trust Architecture Implementation in Hybrid Networks</h3>
           <p class="article-card-excerpt">A comprehensive guide on micro-segmentation, identity-aware proxies, and continuous authentication.</p>
 
-          <div class="article-card-footer" style="margin-top: 1.2rem; display: flex; gap: 0.5rem;">
+          <div class="article-card-footer" style="margin-top: 1.2rem;">
             
             <a href="https://www.w3.org/W3C/DesignIssues/pdf.pdf" target="_blank" class="btn btn-sm btn-cyan btn-full"><i class="fa-solid fa-file-arrow-down"></i> Download PDF Paper</a>
             
@@ -454,8 +514,8 @@
                data-summary="step-by-step case study detailing dynamic malware analysis pipelines and ioc extraction."
                data-author="aimad ul islam">
         <div class="card-glow"></div>
-        <div class="article-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, rgba(124,58,237,0.15), rgba(0,212,255,0.1));">
-          <div class="article-card-img-placeholder" style="background: none;">
+        <div class="article-card-img-wrap" style="height: 180px;">
+          <div class="article-card-img-placeholder">
             <i class="fa-solid fa-file-pdf text-cyan" style="font-size: 3rem;"></i>
           </div>
           <span class="card-diff-badge intermediate">v1.2</span>
@@ -470,7 +530,7 @@
           <h3 class="article-card-title">Automated Malware Triage using Python &amp; Cuckoo Sandbox</h3>
           <p class="article-card-excerpt">Step-by-step case study detailing dynamic malware analysis pipelines and IOC extraction.</p>
 
-          <div class="article-card-footer" style="margin-top: 1.2rem; display: flex; gap: 0.5rem;">
+          <div class="article-card-footer" style="margin-top: 1.2rem;">
             
             <a href="https://www.w3.org/W3C/DesignIssues/pdf.pdf" target="_blank" class="btn btn-sm btn-cyan btn-full"><i class="fa-solid fa-file-arrow-down"></i> Download PDF Paper</a>
             
@@ -488,24 +548,26 @@
                data-author="aimad ul islam"
                onclick="window.location='/research/zero-trust-architecture-2026/'">
         <div class="card-glow"></div>
-        <div class="article-card-img-wrap" style="height: 180px; background: linear-gradient(135deg, rgba(0,212,255,0.15), rgba(0,255,136,0.1));">
-          <div class="article-card-img-placeholder" style="background: none;">
-            <i class="fa-solid fa-microscope text-cyan" style="font-size: 3rem;"></i>
+        <div class="article-card-img-wrap" style="height: 180px;">
+          
+          <div class="article-card-img-placeholder">
+            <i class="fa-solid fa-book-journal-whills text-cyan" style="font-size: 3rem;"></i>
           </div>
-          <span class="card-diff-badge intermediate">v2.1</span>
+          
+          <span class="card-diff-badge intermediate">White Paper</span>
         </div>
 
         <div class="article-card-body">
           <div class="article-card-tags">
-            <span class="tag tag-cyber"><i class="fa-solid fa-shield-halved"></i> White Paper</span>
-            <span class="tag tag-tut"><i class="fa-solid fa-hard-drive"></i> 3.4 MB</span>
+            <span class="tag tag-cyber"><i class="fa-solid fa-flask"></i> White Paper</span>
+            <span class="tag tag-tut text-green"><i class="fa-solid fa-shield-halved"></i> Peer-Reviewed</span>
           </div>
 
           <h3 class="article-card-title">Zero-Trust Architecture &amp; Microsegmentation Framework 2026</h3>
           <p class="article-card-excerpt">An architectural guide on establishing zero-trust access, identity-aware proxies, and granular eBPF microsegmentation across hybrid multi-cloud environments.</p>
 
           <div class="article-card-footer" style="margin-top: 1.2rem;">
-            <a href="/research/zero-trust-architecture-2026/" class="btn btn-sm btn-cyan btn-full"><i class="fa-solid fa-book-open"></i> Read Full Whitepaper</a>
+            <a href="/research/zero-trust-architecture-2026/" class="btn btn-sm btn-cyan btn-full"><i class="fa-solid fa-book-open"></i> Read Research Paper</a>
           </div>
         </div>
       </article>
@@ -515,10 +577,15 @@
 
     <!-- No Results Fallback -->
     <div class="no-results card" id="no-research-results" style="display:none; text-align: center; padding: 3rem 1.5rem;">
-      <i class="fa-solid fa-folder-open text-cyan" style="font-size: 3rem; margin-bottom: 1rem;"></i>
-      <h3>No Publications Found</h3>
-      <p>Try refining your keyword search or resetting publication categories.</p>
+      <i class="fa-solid fa-book-journal-whills text-cyan" style="font-size: 3rem; margin-bottom: 1rem;"></i>
+      <h3>No Research Reports Match Query</h3>
+      <p>Try searching for CVE identifiers, threat intelligence, malware, or SIEM automation.</p>
       <button class="btn btn-cyan mt-3" onclick="resetResearchSearch()"><i class="fa-solid fa-rotate"></i> Reset All Filters</button>
+    </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination-container" id="research-pagination-controls">
+      <!-- Dynamically rendered -->
     </div>
   </section>
 </main>
@@ -528,44 +595,107 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchInput = document.getElementById("research-search");
   const catSelect = document.getElementById("research-cat-select");
   const catBtns = document.querySelectorAll(".cat-btn");
+  const researchGrid = document.getElementById("research-grid");
   const cards = Array.from(document.querySelectorAll(".research-card"));
   const countBadge = document.getElementById("research-count");
   const noResults = document.getElementById("no-research-results");
+  const paginationControls = document.getElementById("research-pagination-controls");
 
   let currentSearch = "";
   let currentCat = "all";
+  let currentPage = 1;
+  const itemsPerPage = 6;
 
   function filterResearch() {
-    let visible = 0;
-
-    cards.forEach(card => {
+    let filtered = cards.filter(card => {
       const title = card.getAttribute("data-title") || "";
       const summary = card.getAttribute("data-summary") || "";
       const cat = card.getAttribute("data-category") || "";
 
-      const matchSearch = currentSearch === "" || title.includes(currentSearch) || summary.includes(currentSearch) || cat.includes(currentSearch);
+      const matchSearch = currentSearch === "" || 
+                          title.includes(currentSearch) || 
+                          summary.includes(currentSearch) || 
+                          cat.includes(currentSearch);
+
       const matchCat = currentCat === "all" || cat.includes(currentCat.toLowerCase());
 
-      if (matchSearch && matchCat) {
-        card.style.display = "flex";
-        visible++;
-      } else {
-        card.style.display = "none";
-      }
+      return matchSearch && matchCat;
     });
 
-    if (countBadge) countBadge.textContent = `${visible} Research Papers Available`;
-    if (noResults) noResults.style.display = visible === 0 ? "block" : "none";
+    if (countBadge) countBadge.textContent = `${filtered.length} Reports Displayed`;
+
+    cards.forEach(c => c.style.display = "none");
+
+    if (filtered.length === 0) {
+      if (noResults) noResults.style.display = "block";
+      if (paginationControls) paginationControls.innerHTML = "";
+      return;
+    } else {
+      if (noResults) noResults.style.display = "none";
+    }
+
+    const totalPages = Math.ceil(filtered.length / itemsPerPage);
+    if (currentPage > totalPages) currentPage = 1;
+
+    const startIdx = (currentPage - 1) * itemsPerPage;
+    const endIdx = startIdx + itemsPerPage;
+    const pageItems = filtered.slice(startIdx, endIdx);
+
+    pageItems.forEach(item => {
+      item.style.display = "flex";
+      researchGrid.appendChild(item);
+    });
+
+    renderPagination(totalPages);
   }
 
-  if (searchInput) searchInput.addEventListener("input", (e) => { currentSearch = e.target.value.toLowerCase().trim(); filterResearch(); });
-  if (catSelect) catSelect.addEventListener("change", (e) => { currentCat = e.target.value; filterResearch(); });
+  function renderPagination(totalPages) {
+    if (!paginationControls || totalPages <= 1) {
+      if (paginationControls) paginationControls.innerHTML = "";
+      return;
+    }
+
+    let html = `<div class="cyber-pagination">`;
+    html += `<button class="page-btn ${currentPage === 1 ? 'disabled' : ''}" onclick="changeResearchPage(${currentPage - 1})"><i class="fa-solid fa-chevron-left"></i> Prev</button>`;
+
+    for (let i = 1; i <= totalPages; i++) {
+      html += `<button class="page-num ${i === currentPage ? 'active' : ''}" onclick="changeResearchPage(${i})">${i}</button>`;
+    }
+
+    html += `<button class="page-btn ${currentPage === totalPages ? 'disabled' : ''}" onclick="changeResearchPage(${currentPage + 1})">Next <i class="fa-solid fa-chevron-right"></i></button>`;
+    html += `</div>`;
+
+    paginationControls.innerHTML = html;
+  }
+
+  window.changeResearchPage = (page) => {
+    currentPage = page;
+    filterResearch();
+    document.getElementById("research-section").scrollIntoView({ behavior: 'smooth' });
+  };
+
+  if (searchInput) {
+    searchInput.addEventListener("input", (e) => {
+      currentSearch = e.target.value.toLowerCase().trim();
+      currentPage = 1;
+      filterResearch();
+    });
+  }
+
+  if (catSelect) {
+    catSelect.addEventListener("change", (e) => {
+      currentCat = e.target.value;
+      currentPage = 1;
+      filterResearch();
+    });
+  }
 
   catBtns.forEach(btn => {
     btn.addEventListener("click", () => {
       catBtns.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
       currentCat = btn.getAttribute("data-cat");
+      currentPage = 1;
       filterResearch();
     });
   });
@@ -579,8 +709,11 @@ document.addEventListener("DOMContentLoaded", () => {
       if (b.getAttribute("data-cat") === "all") b.classList.add("active");
       else b.classList.remove("active");
     });
+    currentPage = 1;
     filterResearch();
   };
+
+  filterResearch();
 });
 </script>
 
@@ -595,7 +728,9 @@ document.addEventListener("DOMContentLoaded", () => {
             <!-- Brand Column -->
             <div class="footer-col footer-brand-col">
                 <div class="footer-logo-brand">
-                    <span class="logo-bracket">[</span><span class="logo-text">[Aimad•Security]</span><span class="logo-bracket">]</span>
+                    
+                        <span class="logo-bracket">[</span><span class="logo-text">[Aimad•Security]</span><span class="logo-bracket">]</span>
+                    
                 </div>
                 <p class="footer-desc">
                     Cybersecurity student, SOC enthusiast, and network security practitioner from Pakistan. Specializing in DFIR, Linux Systems, and Ethical Hacking.
@@ -726,6 +861,18 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     </div>
 
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script src="/js/main.js"></script>
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", function(user) {
+          if (!user) {
+            window.netlifyIdentity.on("login", function() {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
 </body>
 </html>

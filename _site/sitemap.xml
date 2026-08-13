@@ -253,10 +253,19 @@
   
     
   <url>
-    <loc>https://aimadulislam.dpdns.org/404/</loc>
+    <loc>https://aimadulislam.dpdns.org/posts/educational-keylogger-guide/</loc>
     <lastmod>2026-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+    
+  
+    
+  <url>
+    <loc>https://aimadulislam.dpdns.org/posts/python-backdoor-injection/</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
     
   
@@ -269,7 +278,20 @@
     
   <url>
     <loc>https://aimadulislam.dpdns.org/admin/</loc>
-    <lastmod>2026-08-02</lastmod>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+    
+  
+    
+  
+    
+  
+    
+  <url>
+    <loc>https://aimadulislam.dpdns.org/offline/</loc>
+    <lastmod>2026-08-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -279,8 +301,28 @@
   
     
   <url>
+    <loc>https://aimadulislam.dpdns.org/downloads/volatility3-cheatsheet/</loc>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+    
+  
+    
+  <url>
     <loc>https://aimadulislam.dpdns.org/labs/active-directory-homelab/</loc>
-    <lastmod>2026-08-02</lastmod>
+    <lastmod>2026-08-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+    
+  
+    
+  
+    
+  <url>
+    <loc>https://aimadulislam.dpdns.org/category/cybersecurity/</loc>
+    <lastmod>2026-08-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -289,20 +331,7 @@
     
   <url>
     <loc>https://aimadulislam.dpdns.org/projects/automated-memory-forensics/</loc>
-    <lastmod>2026-08-02</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
-  </url>
-    
-  
-    
-  
-    
-  
-    
-  <url>
-    <loc>https://aimadulislam.dpdns.org/downloads/volatility3-cheatsheet/</loc>
-    <lastmod>2026-08-02</lastmod>
+    <lastmod>2026-08-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -310,13 +339,11 @@
   
     
   <url>
-    <loc>https://aimadulislam.dpdns.org/offline/</loc>
-    <lastmod>2026-08-02</lastmod>
+    <loc>https://aimadulislam.dpdns.org/404.html</loc>
+    <lastmod>2026-08-12</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
-    
-  
     
   
 </urlset>

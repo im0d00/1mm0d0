@@ -1,7 +1,9 @@
 backend:
   name: github
-  repo: aimad-ul-islam/cybersecurity-portfolio
+  repo: im0d00/1mm0d0
   branch: main
+  base_url: https://decap-oauth.im0d00.workers.dev
+  auth_endpoint: /auth
   auth_scope: repo
 
 media_folder: "src/images"

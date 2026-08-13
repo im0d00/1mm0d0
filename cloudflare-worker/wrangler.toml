@@ -1,0 +1,10 @@
+name = "decap-oauth"
+main = "index.js"
+compatibility_date = "2024-01-01"
+
+[vars]
+ALLOWED_GITHUB_USER = "im0d00"
+
+# Note: Set GITHUB_CLIENT_ID and GITHUB_CLIENT_SECRET via Cloudflare Wrangler CLI or Cloudflare Dashboard:
+# npx wrangler secret put GITHUB_CLIENT_ID
+# npx wrangler secret put GITHUB_CLIENT_SECRET

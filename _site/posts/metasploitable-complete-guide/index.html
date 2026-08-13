@@ -108,6 +108,15 @@
             
                 
                 <li>
+                    <a href="/#about" >
+                        <i class="fa-solid fa-user fa-xs"></i>
+                        <span>About</span>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
                     <a href="/projects/" >
                         <i class="fa-solid fa-folder-open fa-xs"></i>
                         <span>Projects</span>
@@ -204,8 +213,8 @@
         <div class="nav-right">
             
             <button id="searchOpenBtn" class="search-trigger-btn" onclick="openSearchModal()" aria-label="Search site (Ctrl+K)">
-                <i class="fa-solid fa-magnifying-glass fa-xs"></i>
-                <span>Search</span>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span class="search-btn-text">Search</span>
                 <kbd class="kbd-badge">Ctrl+K</kbd>
             </button>
             
@@ -217,7 +226,7 @@
             </div>
             
 
-            <button class="dark-mode-btn" id="theme-toggle" aria-label="Toggle dark/light theme" onclick="toggleTheme()" style="background: rgba(13,26,48,0.7); border: 1px solid var(--border); color: var(--silver); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition);">
+            <button class="dark-mode-btn" id="theme-toggle" aria-label="Toggle dark/light theme" onclick="toggleTheme()">
                 <i class="fa-regular fa-moon" id="theme-toggle-icon"></i>
             </button>
 
@@ -227,23 +236,24 @@
                 <i class="fa-solid fa-download dl-icon"></i>
             </a>
 
-            <div class="hamburger" id="ham" aria-label="Toggle navigation menu">
+            <button class="hamburger" id="ham" aria-label="Toggle navigation menu" aria-expanded="false" onclick="toggleMobileNav(event)">
                 <span></span><span></span><span></span>
-            </div>
+            </button>
         </div>
     </div>
 </nav>
 
 <!-- MOBILE OVERLAY & DRAWER -->
-<div class="mobile-overlay" id="mobOverlay" onclick="closeMobileNav()"></div>
-<div class="mobile-nav" id="mobNav">
+<div class="mobile-overlay" id="mobOverlay" onclick="closeMobileNav(event)"></div>
+<div class="mobile-nav" id="mobNav" aria-label="Mobile Navigation">
     <div class="mobile-nav-header">
         <div class="mobile-nav-brand">
             
-                [Aimad•Security]
+            
+                <span class="nav-logo"><span class="br">[</span>[Aimad•Security]<span class="nav-dot"></span><span class="br">]</span></span>
             
         </div>
-        <button class="mob-close-btn" id="mobCloseBtn" onclick="closeMobileNav()" aria-label="Close menu">&times;</button>
+        <button class="mob-close-btn" id="mobCloseBtn" aria-label="Close menu" onclick="closeMobileNav(event)">&times;</button>
     </div>
     
     <div class="mobile-status-badge">
@@ -253,105 +263,119 @@
     
     <ul class="mobile-links">
         
-        <li>
-            <a href="/" onclick="closeMobileNav()">
+        <li class="mob-item-wrap">
+            <a href="/" class="">
                 <i class="fa-solid fa-house"></i>
                 <span>Home</span>
             </a>
-        </li>
             
+        </li>
         
-        <li>
-            <a href="/projects/" onclick="closeMobileNav()">
+        <li class="mob-item-wrap">
+            <a href="/#about" class="">
+                <i class="fa-solid fa-user"></i>
+                <span>About</span>
+            </a>
+            
+        </li>
+        
+        <li class="mob-item-wrap">
+            <a href="/projects/" class="">
                 <i class="fa-solid fa-folder-open"></i>
                 <span>Projects</span>
             </a>
-        </li>
             
+        </li>
         
-        <li>
-            <a href="/labs/" onclick="closeMobileNav()">
+        <li class="mob-item-wrap">
+            <a href="/labs/" class="">
                 <i class="fa-solid fa-flask"></i>
                 <span>Labs</span>
             </a>
-        </li>
             
+        </li>
         
-        <li>
-            <a href="/research/" onclick="closeMobileNav()">
+        <li class="mob-item-wrap">
+            <a href="/research/" class="">
                 <i class="fa-solid fa-file-contract"></i>
                 <span>Research</span>
             </a>
-        </li>
             
+        </li>
         
-        <li>
-            <a href="/blog/" onclick="closeMobileNav()">
+        <li class="mob-item-wrap">
+            <a href="/blog/" class="">
                 <i class="fa-solid fa-pen-nib"></i>
                 <span>Blog</span>
             </a>
-        </li>
             
+        </li>
         
-        <li>
-            <a href="/resources/" onclick="closeMobileNav()">
+        <li class="mob-item-wrap">
+            <a href="/resources/" class="">
                 <i class="fa-solid fa-shield-halved"></i>
                 <span>Resources</span>
             </a>
-        </li>
             
+            <ul class="mob-sublinks">
                 
-                <li style="padding-left: 1rem;">
-                    <a href="/resources/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                <li>
+                    <a href="/resources/" class="">
                         <i class="fa-solid fa-layer-group"></i>
                         <span>All Resources</span>
                     </a>
                 </li>
                 
-                <li style="padding-left: 1rem;">
-                    <a href="/downloads/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                <li>
+                    <a href="/downloads/" class="">
                         <i class="fa-solid fa-download"></i>
                         <span>Download Hub</span>
                     </a>
                 </li>
                 
-                <li style="padding-left: 1rem;">
-                    <a href="/resources/security-policy/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                <li>
+                    <a href="/resources/security-policy/" class="">
                         <i class="fa-solid fa-lock"></i>
                         <span>Security Policy</span>
                     </a>
                 </li>
                 
-                <li style="padding-left: 1rem;">
-                    <a href="/resources/responsible-disclosure/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                <li>
+                    <a href="/resources/responsible-disclosure/" class="">
                         <i class="fa-solid fa-bug"></i>
                         <span>Disclosure Policy</span>
                     </a>
                 </li>
                 
-                <li style="padding-left: 1rem;">
-                    <a href="/resources/sitemap-page/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                <li>
+                    <a href="/resources/sitemap-page/" class="">
                         <i class="fa-solid fa-sitemap"></i>
                         <span>Human Sitemap</span>
                     </a>
                 </li>
                 
+            </ul>
             
+        </li>
         
-        <li>
-            <a href="/#contact" onclick="closeMobileNav()">
+        <li class="mob-item-wrap">
+            <a href="/#contact" class="">
                 <i class="fa-solid fa-envelope"></i>
                 <span>Contact</span>
             </a>
-        </li>
             
+        </li>
         
     </ul>
     <div class="mobile-actions">
         
-        <button onclick="openSearchModal(); closeMobileNav();" class="btn outline w-full" style="display:flex; align-items:center; justify-content:center; gap:0.5rem; padding:0.65rem 1rem; border:1px solid var(--border); border-radius:20px; background:rgba(13,26,48,0.7); color:var(--cyan); cursor:pointer;"><i class="fa-solid fa-magnifying-glass"></i> Search Platform</button>
+        <button id="mobSearchBtn" class="btn outline w-full mob-action-btn">
+            <i class="fa-solid fa-magnifying-glass"></i> Search Platform
+        </button>
         
-        <a href="/assets/Aimad_Ul_Islam_Resume.pdf" download class="btn primary w-full" style="display:flex; align-items:center; justify-content:center; gap:0.5rem; padding:0.65rem 1rem; border-radius:20px; background:linear-gradient(135deg, var(--cyan), var(--cyan2)); color:var(--void); font-weight:600; text-decoration:none;"><i class="fa-solid fa-file-pdf"></i> Download Resume</a>
+        <a href="/assets/Aimad_Ul_Islam_Resume.pdf" download class="btn primary w-full mob-action-btn">
+            <i class="fa-solid fa-file-pdf"></i> Download Resume
+        </a>
     </div>
 </div>
 
@@ -1348,6 +1372,18 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
         </div>
     </div>
 
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script src="/js/main.js"></script>
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", function(user) {
+          if (!user) {
+            window.netlifyIdentity.on("login", function() {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
 </body>
 </html>

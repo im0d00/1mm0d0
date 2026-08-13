@@ -26,9 +26,31 @@ This static site is optimized to sit behind Cloudflare's global edge network to 
 - Static assets (`/assets/*`, `/css/*`, `/images/*`, `/fonts/*`) set to Browser Cache TTL: **1 Year**.
 - CMS Admin endpoint (`/admin/*`) set to Cache Level: **Bypass**.
 
-## 5. Security & WAF Recommendations
-- **Security Level**: Medium / High
-- **Bot Fight Mode**: Enabled
-- **OWASP Core Ruleset**: Enabled (if Cloudflare Managed Rules active)
-- **Browser Integrity Check**: Enabled
-- **Rate Limiting**: Limit `/admin/*` and `/search.json` endpoints to prevent excessive automated requests.
+## 6. Decap CMS GitHub OAuth Cloudflare Worker
+
+The Cloudflare Worker in `/cloudflare-worker/` manages GitHub OAuth authentication for Decap CMS with strict user identity verification.
+
+### Key Security Features
+- **Strict User Authorization**: The Worker queries `https://api.github.com/user` and verifies the authenticated username. Access is granted **ONLY to `im0d00`**. All other users receive HTTP 403 Access Denied.
+- **Zero Secrets Leakage**: `GITHUB_CLIENT_SECRET` is stored securely as an encrypted Cloudflare secret and is never exposed in client code or repository commits.
+
+### Deployment Instructions
+1. Navigate to the worker directory:
+   ```bash
+   cd cloudflare-worker
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Deploy worker to Cloudflare:
+   ```bash
+   npx wrangler deploy
+   ```
+4. Set required secret variables in Cloudflare Worker:
+   ```bash
+   npx wrangler secret put GITHUB_CLIENT_ID
+   npx wrangler secret put GITHUB_CLIENT_SECRET
+   ```
+5. Ensure `ALLOWED_GITHUB_USER` is set to `im0d00` in `wrangler.toml` or environment variables.
+

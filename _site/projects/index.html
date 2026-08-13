@@ -7,12 +7,42 @@
     <meta name="description" content="Comprehensive directory of cybersecurity engineering projects, DFIR tools, SOC automation scripts, and network defense architectures by Aimad Ul Islam.">
     <meta name="theme-color" content="#080C1A">
     
-    <!-- Open Graph -->
+    <!-- Dynamic Favicons & Icons -->
+    
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    
+    
+    
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Open Graph & Meta -->
     <meta property="og:title" content="Security Projects &amp; Engineering Center | Aimad Ul Islam | Aimad Ul Islam">
     <meta property="og:description" content="Comprehensive directory of cybersecurity engineering projects, DFIR tools, SOC automation scripts, and network defense architectures by Aimad Ul Islam.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://aimadulislam.dpdns.org/projects/">
     <meta property="og:image" content="https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Security Projects &amp; Engineering Center | Aimad Ul Islam | Aimad Ul Islam">
+    <meta name="twitter:description" content="Comprehensive directory of cybersecurity engineering projects, DFIR tools, SOC automation scripts, and network defense architectures by Aimad Ul Islam.">
+    <meta name="twitter:image" content="https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://aimadulislam.dpdns.org/projects/">
+
+    <!-- Schema.org JSON-LD Structured Data -->
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Aimad Security",
+      "url": "https://aimadulislam.dpdns.org/"
+    }
+    </script>
+    
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,7 +78,9 @@
     <div class="nav-container" style="width: 100%; max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
         <a href="/" class="nav-logo-wrap" aria-label="Aimad Security">
             
-                <span class="nav-logo"><span class="br">[</span>Aimad Security<span class="nav-dot"></span><span class="br">]</span></span>
+            
+            
+                <span class="nav-logo"><span class="br">[</span>[Aimad•Security]<span class="nav-dot"></span><span class="br">]</span></span>
             
         </a>
 
@@ -59,6 +91,15 @@
                     <a href="/" >
                         <i class="fa-solid fa-house fa-xs"></i>
                         <span>Home</span>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a href="/#about" >
+                        <i class="fa-solid fa-user fa-xs"></i>
+                        <span>About</span>
                     </a>
                 </li>
                 
@@ -161,8 +202,8 @@
         <div class="nav-right">
             
             <button id="searchOpenBtn" class="search-trigger-btn" onclick="openSearchModal()" aria-label="Search site (Ctrl+K)">
-                <i class="fa-solid fa-magnifying-glass fa-xs"></i>
-                <span>Search</span>
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span class="search-btn-text">Search</span>
                 <kbd class="kbd-badge">Ctrl+K</kbd>
             </button>
             
@@ -174,7 +215,7 @@
             </div>
             
 
-            <button class="dark-mode-btn" id="theme-toggle" aria-label="Toggle dark/light theme" onclick="toggleTheme()" style="background: rgba(13,26,48,0.7); border: 1px solid var(--border); color: var(--silver); width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: var(--transition);">
+            <button class="dark-mode-btn" id="theme-toggle" aria-label="Toggle dark/light theme" onclick="toggleTheme()">
                 <i class="fa-regular fa-moon" id="theme-toggle-icon"></i>
             </button>
 
@@ -184,19 +225,24 @@
                 <i class="fa-solid fa-download dl-icon"></i>
             </a>
 
-            <div class="hamburger" id="ham" aria-label="Toggle navigation menu">
+            <button class="hamburger" id="ham" aria-label="Toggle navigation menu" aria-expanded="false" onclick="toggleMobileNav(event)">
                 <span></span><span></span><span></span>
-            </div>
+            </button>
         </div>
     </div>
 </nav>
 
 <!-- MOBILE OVERLAY & DRAWER -->
-<div class="mobile-overlay" id="mobOverlay" onclick="closeMobileNav()"></div>
-<div class="mobile-nav" id="mobNav">
+<div class="mobile-overlay" id="mobOverlay" onclick="closeMobileNav(event)"></div>
+<div class="mobile-nav" id="mobNav" aria-label="Mobile Navigation">
     <div class="mobile-nav-header">
-        <div class="mobile-nav-brand">Aimad Security</div>
-        <button class="mob-close-btn" id="mobCloseBtn" onclick="closeMobileNav()" aria-label="Close menu">&times;</button>
+        <div class="mobile-nav-brand">
+            
+            
+                <span class="nav-logo"><span class="br">[</span>[Aimad•Security]<span class="nav-dot"></span><span class="br">]</span></span>
+            
+        </div>
+        <button class="mob-close-btn" id="mobCloseBtn" aria-label="Close menu" onclick="closeMobileNav(event)">&times;</button>
     </div>
     
     <div class="mobile-status-badge">
@@ -206,105 +252,119 @@
     
     <ul class="mobile-links">
         
-        <li>
-            <a href="/" onclick="closeMobileNav()">
+        <li class="mob-item-wrap">
+            <a href="/" class="">
                 <i class="fa-solid fa-house"></i>
                 <span>Home</span>
             </a>
-        </li>
             
+        </li>
         
-        <li>
-            <a href="/projects/" onclick="closeMobileNav()">
+        <li class="mob-item-wrap">
+            <a href="/#about" class="">
+                <i class="fa-solid fa-user"></i>
+                <span>About</span>
+            </a>
+            
+        </li>
+        
+        <li class="mob-item-wrap">
+            <a href="/projects/" class="active">
                 <i class="fa-solid fa-folder-open"></i>
                 <span>Projects</span>
             </a>
-        </li>
             
+        </li>
         
-        <li>
-            <a href="/labs/" onclick="closeMobileNav()">
+        <li class="mob-item-wrap">
+            <a href="/labs/" class="">
                 <i class="fa-solid fa-flask"></i>
                 <span>Labs</span>
             </a>
-        </li>
             
+        </li>
         
-        <li>
-            <a href="/research/" onclick="closeMobileNav()">
+        <li class="mob-item-wrap">
+            <a href="/research/" class="">
                 <i class="fa-solid fa-file-contract"></i>
                 <span>Research</span>
             </a>
-        </li>
             
+        </li>
         
-        <li>
-            <a href="/blog/" onclick="closeMobileNav()">
+        <li class="mob-item-wrap">
+            <a href="/blog/" class="">
                 <i class="fa-solid fa-pen-nib"></i>
                 <span>Blog</span>
             </a>
-        </li>
             
+        </li>
         
-        <li>
-            <a href="/resources/" onclick="closeMobileNav()">
+        <li class="mob-item-wrap">
+            <a href="/resources/" class="">
                 <i class="fa-solid fa-shield-halved"></i>
                 <span>Resources</span>
             </a>
-        </li>
             
+            <ul class="mob-sublinks">
                 
-                <li style="padding-left: 1rem;">
-                    <a href="/resources/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                <li>
+                    <a href="/resources/" class="">
                         <i class="fa-solid fa-layer-group"></i>
                         <span>All Resources</span>
                     </a>
                 </li>
                 
-                <li style="padding-left: 1rem;">
-                    <a href="/downloads/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                <li>
+                    <a href="/downloads/" class="">
                         <i class="fa-solid fa-download"></i>
                         <span>Download Hub</span>
                     </a>
                 </li>
                 
-                <li style="padding-left: 1rem;">
-                    <a href="/resources/security-policy/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                <li>
+                    <a href="/resources/security-policy/" class="">
                         <i class="fa-solid fa-lock"></i>
                         <span>Security Policy</span>
                     </a>
                 </li>
                 
-                <li style="padding-left: 1rem;">
-                    <a href="/resources/responsible-disclosure/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                <li>
+                    <a href="/resources/responsible-disclosure/" class="">
                         <i class="fa-solid fa-bug"></i>
                         <span>Disclosure Policy</span>
                     </a>
                 </li>
                 
-                <li style="padding-left: 1rem;">
-                    <a href="/resources/sitemap-page/" onclick="closeMobileNav()" style="font-size: 0.88rem; opacity: 0.9;">
+                <li>
+                    <a href="/resources/sitemap-page/" class="">
                         <i class="fa-solid fa-sitemap"></i>
                         <span>Human Sitemap</span>
                     </a>
                 </li>
                 
+            </ul>
             
+        </li>
         
-        <li>
-            <a href="/#contact" onclick="closeMobileNav()">
+        <li class="mob-item-wrap">
+            <a href="/#contact" class="">
                 <i class="fa-solid fa-envelope"></i>
                 <span>Contact</span>
             </a>
-        </li>
             
+        </li>
         
     </ul>
     <div class="mobile-actions">
         
-        <button onclick="openSearchModal(); closeMobileNav();" class="btn outline w-full" style="display:flex; align-items:center; justify-content:center; gap:0.5rem; padding:0.65rem 1rem; border:1px solid var(--border); border-radius:20px; background:rgba(13,26,48,0.7); color:var(--cyan); cursor:pointer;"><i class="fa-solid fa-magnifying-glass"></i> Search Platform</button>
+        <button id="mobSearchBtn" class="btn outline w-full mob-action-btn">
+            <i class="fa-solid fa-magnifying-glass"></i> Search Platform
+        </button>
         
-        <a href="/assets/Aimad_Ul_Islam_Resume.pdf" download class="btn primary w-full" style="display:flex; align-items:center; justify-content:center; gap:0.5rem; padding:0.65rem 1rem; border-radius:20px; background:linear-gradient(135deg, var(--cyan), var(--cyan2)); color:var(--void); font-weight:600; text-decoration:none;"><i class="fa-solid fa-file-pdf"></i> Download Resume</a>
+        <a href="/assets/Aimad_Ul_Islam_Resume.pdf" download class="btn primary w-full mob-action-btn">
+            <i class="fa-solid fa-file-pdf"></i> Download Resume
+        </a>
     </div>
 </div>
 
@@ -312,7 +372,7 @@
     <main id="main-content">
         
 <!-- HERO SECTION -->
-<section id="blog-hero" aria-labelledby="projects-hero-title" style="padding-bottom: 3rem;">
+<section id="blog-hero" aria-labelledby="projects-hero-title">
   <canvas id="blog-hero-canvas" aria-hidden="true"></canvas>
   <div class="blog-hero-inner container">
     <div class="blog-hero-eye"><i class="fa-solid fa-code-branch"></i> Security Engineering & Development Vault</div>
@@ -322,7 +382,7 @@
     <p class="blog-hero-sub">Hands-on security engineering, custom threat parsers, SIEM automation scripts, packet analysis engines, and enterprise virtual network setups.</p>
 
     <!-- Quick Stats Bar -->
-    <div class="sidebar-stats-grid" style="grid-template-columns: repeat(4, 1fr); max-width: 800px; margin: 1.5rem auto 2rem auto;">
+    <div class="sidebar-stats-grid">
       <div class="s-stat-box card">
         <div class="s-stat-val" id="stat-proj-count">7</div>
         <div class="s-stat-lbl">Projects</div>
@@ -336,7 +396,7 @@
         <div class="s-stat-lbl">Tools & Frameworks</div>
       </div>
       <div class="s-stat-box card">
-        <div class="s-stat-val" style="color: var(--green);">Active</div>
+        <div class="s-stat-val text-cyan">Active</div>
         <div class="s-stat-lbl">Status</div>
       </div>
     </div>
@@ -427,7 +487,7 @@
       <span class="posts-count-badge" id="projects-count">Displaying All Projects</span>
     </div>
 
-    <div id="projects-grid" class="articles-grid" style="grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));">
+    <div id="projects-grid" class="articles-grid">
       
       <!-- Data items from JSON -->
       
@@ -439,7 +499,7 @@
                data-difficulty="advanced"
                data-status="completed">
         <div class="card-glow"></div>
-        <div class="article-card-img-wrap" style="height: 190px;">
+        <div class="article-card-img-wrap" style="height: 180px;">
           
           <img class="article-card-img" src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Home Lab SOC Setup with Splunk &amp; Snort" loading="lazy"/>
           
@@ -449,7 +509,7 @@
         <div class="article-card-body">
           <div class="article-card-tags">
             <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> Home Lab</span>
-            <span class="tag tag-tut" style="color: var(--green); border-color: rgba(0,255,136,0.3);"><i class="fa-solid fa-circle-check"></i> Completed</span>
+            <span class="tag tag-tut text-cyan"><i class="fa-solid fa-circle-check"></i> Completed</span>
           </div>
 
           <h3 class="article-card-title">Home Lab SOC Setup with Splunk &amp; Snort</h3>
@@ -490,7 +550,7 @@
                data-difficulty="intermediate"
                data-status="completed">
         <div class="card-glow"></div>
-        <div class="article-card-img-wrap" style="height: 190px;">
+        <div class="article-card-img-wrap" style="height: 180px;">
           
           <img class="article-card-img" src="https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Automated Python PCAP Analyzer &amp; Threat Parser" loading="lazy"/>
           
@@ -500,7 +560,7 @@
         <div class="article-card-body">
           <div class="article-card-tags">
             <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> Automation</span>
-            <span class="tag tag-tut" style="color: var(--green); border-color: rgba(0,255,136,0.3);"><i class="fa-solid fa-circle-check"></i> Completed</span>
+            <span class="tag tag-tut text-cyan"><i class="fa-solid fa-circle-check"></i> Completed</span>
           </div>
 
           <h3 class="article-card-title">Automated Python PCAP Analyzer &amp; Threat Parser</h3>
@@ -541,7 +601,7 @@
                data-difficulty="advanced"
                data-status="completed">
         <div class="card-glow"></div>
-        <div class="article-card-img-wrap" style="height: 190px;">
+        <div class="article-card-img-wrap" style="height: 180px;">
           
           <img class="article-card-img" src="https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Digital Forensics Memory &amp; Disk Investigation Case" loading="lazy"/>
           
@@ -551,7 +611,7 @@
         <div class="article-card-body">
           <div class="article-card-tags">
             <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> Digital Forensics</span>
-            <span class="tag tag-tut" style="color: var(--green); border-color: rgba(0,255,136,0.3);"><i class="fa-solid fa-circle-check"></i> Completed</span>
+            <span class="tag tag-tut text-cyan"><i class="fa-solid fa-circle-check"></i> Completed</span>
           </div>
 
           <h3 class="article-card-title">Digital Forensics Memory &amp; Disk Investigation Case</h3>
@@ -590,7 +650,7 @@
                data-difficulty="intermediate"
                data-status="completed">
         <div class="card-glow"></div>
-        <div class="article-card-img-wrap" style="height: 190px;">
+        <div class="article-card-img-wrap" style="height: 180px;">
           
           <img class="article-card-img" src="https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Enterprise Network Infrastructure Simulation" loading="lazy"/>
           
@@ -600,7 +660,7 @@
         <div class="article-card-body">
           <div class="article-card-tags">
             <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> Networking</span>
-            <span class="tag tag-tut" style="color: var(--green); border-color: rgba(0,255,136,0.3);"><i class="fa-solid fa-circle-check"></i> Completed</span>
+            <span class="tag tag-tut text-cyan"><i class="fa-solid fa-circle-check"></i> Completed</span>
           </div>
 
           <h3 class="article-card-title">Enterprise Network Infrastructure Simulation</h3>
@@ -641,7 +701,7 @@
                data-difficulty="intermediate"
                data-status="completed">
         <div class="card-glow"></div>
-        <div class="article-card-img-wrap" style="height: 190px;">
+        <div class="article-card-img-wrap" style="height: 180px;">
           
           <img class="article-card-img" src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Web Application Penetration Testing Lab" loading="lazy"/>
           
@@ -651,7 +711,7 @@
         <div class="article-card-body">
           <div class="article-card-tags">
             <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> Web Development</span>
-            <span class="tag tag-tut" style="color: var(--green); border-color: rgba(0,255,136,0.3);"><i class="fa-solid fa-circle-check"></i> Completed</span>
+            <span class="tag tag-tut text-cyan"><i class="fa-solid fa-circle-check"></i> Completed</span>
           </div>
 
           <h3 class="article-card-title">Web Application Penetration Testing Lab</h3>
@@ -692,7 +752,7 @@
                data-difficulty="intermediate"
                data-status="completed">
         <div class="card-glow"></div>
-        <div class="article-card-img-wrap" style="height: 190px;">
+        <div class="article-card-img-wrap" style="height: 180px;">
           
           <img class="article-card-img" src="https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&amp;fit=crop&amp;w=800&amp;q=80" alt="Metasploitable 2 Vulnerability Assessment &amp; Hardening" loading="lazy"/>
           
@@ -702,7 +762,7 @@
         <div class="article-card-body">
           <div class="article-card-tags">
             <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> Research</span>
-            <span class="tag tag-tut" style="color: var(--green); border-color: rgba(0,255,136,0.3);"><i class="fa-solid fa-circle-check"></i> Completed</span>
+            <span class="tag tag-tut text-cyan"><i class="fa-solid fa-circle-check"></i> Completed</span>
           </div>
 
           <h3 class="article-card-title">Metasploitable 2 Vulnerability Assessment &amp; Hardening</h3>
@@ -745,7 +805,7 @@
                data-status="completed"
                onclick="window.location='/projects/automated-memory-forensics/'">
         <div class="card-glow"></div>
-        <div class="article-card-img-wrap" style="height: 190px;">
+        <div class="article-card-img-wrap" style="height: 180px;">
           
           <img class="article-card-img" src="/img/memory-forensics-hero.jpg" alt="Automated Volatility 3 Memory Forensic Parser" loading="lazy"/>
           
@@ -755,7 +815,7 @@
         <div class="article-card-body">
           <div class="article-card-tags">
             <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> Digital Forensics</span>
-            <span class="tag tag-tut" style="color: var(--green); border-color: rgba(0,255,136,0.3);"><i class="fa-solid fa-circle-check"></i> Completed</span>
+            <span class="tag tag-tut text-cyan"><i class="fa-solid fa-circle-check"></i> Completed</span>
           </div>
 
           <h3 class="article-card-title">Automated Volatility 3 Memory Forensic Parser</h3>
@@ -793,6 +853,11 @@
       <p>Try clearing difficulty filters, clearing search inputs, or selecting another technical category.</p>
       <button class="btn btn-cyan mt-3" onclick="resetProjSearch()"><i class="fa-solid fa-rotate"></i> Reset All Filters</button>
     </div>
+
+    <!-- Pagination Controls -->
+    <div class="pagination-container" id="proj-pagination-controls">
+      <!-- Dynamically rendered -->
+    </div>
   </section>
 </main>
 
@@ -803,20 +868,22 @@ document.addEventListener("DOMContentLoaded", () => {
   const statusSelect = document.getElementById("status-select");
   const sortSelect = document.getElementById("sort-select");
   const catBtns = document.querySelectorAll(".cat-btn");
+  const projectsGrid = document.getElementById("projects-grid");
   const cards = Array.from(document.querySelectorAll(".project-card"));
   const countBadge = document.getElementById("projects-count");
   const noResults = document.getElementById("no-proj-results");
+  const paginationControls = document.getElementById("proj-pagination-controls");
 
   let currentSearch = "";
   let currentCat = "all";
   let currentDiff = "all";
   let currentStatus = "all";
   let currentSort = "newest";
+  let currentPage = 1;
+  const itemsPerPage = 6;
 
   function filterProjects() {
-    let visibleCount = 0;
-
-    cards.forEach(card => {
+    let filtered = cards.filter(card => {
       const title = card.getAttribute("data-title") || "";
       const desc = card.getAttribute("data-description") || "";
       const cat = card.getAttribute("data-category") || "";
@@ -834,21 +901,75 @@ document.addEventListener("DOMContentLoaded", () => {
       const matchDiff = currentDiff === "all" || diff === currentDiff.toLowerCase();
       const matchStatus = currentStatus === "all" || status === currentStatus.toLowerCase();
 
-      if (matchSearch && matchCat && matchDiff && matchStatus) {
-        card.style.display = "flex";
-        visibleCount++;
-      } else {
-        card.style.display = "none";
-      }
+      return matchSearch && matchCat && matchDiff && matchStatus;
     });
 
-    if (countBadge) countBadge.textContent = `${visibleCount} Projects Displayed`;
-    if (noResults) noResults.style.display = visibleCount === 0 ? "block" : "none";
+    // Sort
+    filtered.sort((a, b) => {
+      if (currentSort === "title") {
+        return (a.getAttribute("data-title") || "").localeCompare(b.getAttribute("data-title") || "");
+      } else if (currentSort === "difficulty") {
+        return (a.getAttribute("data-difficulty") || "").localeCompare(b.getAttribute("data-difficulty") || "");
+      }
+      return 0;
+    });
+
+    if (countBadge) countBadge.textContent = `${filtered.length} Projects Displayed`;
+
+    cards.forEach(c => c.style.display = "none");
+
+    if (filtered.length === 0) {
+      if (noResults) noResults.style.display = "block";
+      if (paginationControls) paginationControls.innerHTML = "";
+      return;
+    } else {
+      if (noResults) noResults.style.display = "none";
+    }
+
+    const totalPages = Math.ceil(filtered.length / itemsPerPage);
+    if (currentPage > totalPages) currentPage = 1;
+
+    const startIdx = (currentPage - 1) * itemsPerPage;
+    const endIdx = startIdx + itemsPerPage;
+    const pageItems = filtered.slice(startIdx, endIdx);
+
+    pageItems.forEach(item => {
+      item.style.display = "flex";
+      projectsGrid.appendChild(item);
+    });
+
+    renderPagination(totalPages);
   }
+
+  function renderPagination(totalPages) {
+    if (!paginationControls || totalPages <= 1) {
+      if (paginationControls) paginationControls.innerHTML = "";
+      return;
+    }
+
+    let html = `<div class="cyber-pagination">`;
+    html += `<button class="page-btn ${currentPage === 1 ? 'disabled' : ''}" onclick="changeProjPage(${currentPage - 1})"><i class="fa-solid fa-chevron-left"></i> Prev</button>`;
+
+    for (let i = 1; i <= totalPages; i++) {
+      html += `<button class="page-num ${i === currentPage ? 'active' : ''}" onclick="changeProjPage(${i})">${i}</button>`;
+    }
+
+    html += `<button class="page-btn ${currentPage === totalPages ? 'disabled' : ''}" onclick="changeProjPage(${currentPage + 1})">Next <i class="fa-solid fa-chevron-right"></i></button>`;
+    html += `</div>`;
+
+    paginationControls.innerHTML = html;
+  }
+
+  window.changeProjPage = (page) => {
+    currentPage = page;
+    filterProjects();
+    document.getElementById("projects-section").scrollIntoView({ behavior: 'smooth' });
+  };
 
   if (searchInput) {
     searchInput.addEventListener("input", (e) => {
       currentSearch = e.target.value.toLowerCase().trim();
+      currentPage = 1;
       filterProjects();
     });
   }
@@ -856,6 +977,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (diffSelect) {
     diffSelect.addEventListener("change", (e) => {
       currentDiff = e.target.value;
+      currentPage = 1;
       filterProjects();
     });
   }
@@ -863,6 +985,15 @@ document.addEventListener("DOMContentLoaded", () => {
   if (statusSelect) {
     statusSelect.addEventListener("change", (e) => {
       currentStatus = e.target.value;
+      currentPage = 1;
+      filterProjects();
+    });
+  }
+
+  if (sortSelect) {
+    sortSelect.addEventListener("change", (e) => {
+      currentSort = e.target.value;
+      currentPage = 1;
       filterProjects();
     });
   }
@@ -872,6 +1003,7 @@ document.addEventListener("DOMContentLoaded", () => {
       catBtns.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
       currentCat = btn.getAttribute("data-cat");
+      currentPage = 1;
       filterProjects();
     });
   });
@@ -880,16 +1012,21 @@ document.addEventListener("DOMContentLoaded", () => {
     if (searchInput) searchInput.value = "";
     if (diffSelect) diffSelect.value = "all";
     if (statusSelect) statusSelect.value = "all";
+    if (sortSelect) sortSelect.value = "newest";
     currentSearch = "";
     currentCat = "all";
     currentDiff = "all";
     currentStatus = "all";
+    currentSort = "newest";
     catBtns.forEach(b => {
       if (b.getAttribute("data-cat") === "all") b.classList.add("active");
       else b.classList.remove("active");
     });
+    currentPage = 1;
     filterProjects();
   };
+
+  filterProjects();
 });
 </script>
 
@@ -904,7 +1041,9 @@ document.addEventListener("DOMContentLoaded", () => {
             <!-- Brand Column -->
             <div class="footer-col footer-brand-col">
                 <div class="footer-logo-brand">
-                    <span class="logo-bracket">[</span><span class="logo-text">[Aimad•Security]</span><span class="logo-bracket">]</span>
+                    
+                        <span class="logo-bracket">[</span><span class="logo-text">[Aimad•Security]</span><span class="logo-bracket">]</span>
+                    
                 </div>
                 <p class="footer-desc">
                     Cybersecurity student, SOC enthusiast, and network security practitioner from Pakistan. Specializing in DFIR, Linux Systems, and Ethical Hacking.
@@ -1035,6 +1174,18 @@ document.addEventListener("DOMContentLoaded", () => {
         </div>
     </div>
 
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <script src="/js/main.js"></script>
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", function(user) {
+          if (!user) {
+            window.netlifyIdentity.on("login", function() {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
 </body>
 </html>

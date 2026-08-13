@@ -7,6 +7,7 @@ function initApp() {
     initSearchModal();
     initScrollTop();
     initScrollReveal();
+    initCodeBlocks();
 }
 
 if (document.readyState === 'loading') {
@@ -319,3 +320,50 @@ function initScrollReveal() {
         reveals.forEach(el => el.classList.add('in'));
     }
 }
+
+// 7. Code Blocks Copy & Filename Enhancement
+function initCodeBlocks() {
+    const codeBlocks = document.querySelectorAll('pre code, .code-block pre');
+    codeBlocks.forEach(codeEl => {
+        const pre = codeEl.closest('pre');
+        if (!pre || pre.querySelector('.code-copy-btn')) return;
+
+        // Ensure parent wrapper style
+        if (!pre.parentNode.classList.contains('code-block-wrapper')) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'code-block-wrapper';
+            wrapper.style.position = 'relative';
+            wrapper.style.margin = '1.5rem 0';
+            pre.parentNode.insertBefore(wrapper, pre);
+            wrapper.appendChild(pre);
+        }
+
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'code-copy-btn';
+        copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+        copyBtn.setAttribute('aria-label', 'Copy code to clipboard');
+        copyBtn.style.cssText = 'position:absolute; top:8px; right:8px; background:rgba(0,212,255,0.1); border:1px solid rgba(0,212,255,0.3); color:var(--cyan); font-family:"JetBrains Mono",monospace; font-size:0.75rem; padding:4px 10px; border-radius:4px; cursor:pointer; z-index:5; transition:all 0.2s ease;';
+
+        copyBtn.addEventListener('click', () => {
+            const textToCopy = codeEl.innerText || codeEl.textContent;
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                copyBtn.style.background = 'rgba(0,255,136,0.2)';
+                copyBtn.style.borderColor = 'var(--green)';
+                copyBtn.style.color = 'var(--green)';
+                setTimeout(() => {
+                    copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
+                    copyBtn.style.background = 'rgba(0,212,255,0.1)';
+                    copyBtn.style.borderColor = 'rgba(0,212,255,0.3)';
+                    copyBtn.style.color = 'var(--cyan)';
+                }, 2000);
+            }).catch(err => {
+                console.error('Copy error:', err);
+            });
+        });
+
+        const parentWrapper = pre.closest('.code-block-wrapper') || pre.parentNode;
+        parentWrapper.appendChild(copyBtn);
+    });
+}
+

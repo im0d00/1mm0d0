@@ -1,6 +1,22 @@
 [
   {
     "type": "Blog Post",
+    "title": "DLL & Code Injection: Build a Stealthy Python Backdoor from Scratch",
+    "description": "Master remote thread creation, DLL injection, and code injection to build a professional-grade Python backdoor with process execution redirection.",
+    "category": "Programming",
+    "tags": ["python","dll-injection","code-injection","backdoor","penetration-testing"],
+    "url": "/posts/python-backdoor-injection/"
+  },
+  {
+    "type": "Blog Post",
+    "title": "Educational Keylogger: How Keyboard Monitoring Works & Defenses",
+    "description": "A deep dive into the mechanics of keyloggers, storage methods, and defensive strategies—strictly for educational purposes.",
+    "category": "Cybersecurity",
+    "tags": ["keylogger","pynput","ethical-hacking","defenses","cybersecurity-education"],
+    "url": "/posts/educational-keylogger-guide/"
+  },
+  {
+    "type": "Blog Post",
     "title": "Metasploitable 2: The Ultimate Beginner's Guide to Exploitation",
     "description": "Learn how to hack Metasploitable 2 from scratch using Metasploit – exploit vsftpd, UnrealIRCd, and more.",
     "category": "Cybersecurity",
@@ -218,7 +234,7 @@
   {
     "type": "Certification",
     "title": "Cisco Learn-A-Thon 2026 Achievement Award",
-    "description": "Cisco Networking Academy - Active",
+    "description": "Cisco Networking Academy - Verified",
     "category": "Credentials",
     "tags": ["Cisco Networking Academy"],
     "url": "/#certifications"
@@ -226,7 +242,7 @@
   {
     "type": "Certification",
     "title": "Linux Essentials Certification",
-    "description": "Cisco Networking Academy / LPI - Active",
+    "description": "Cisco Networking Academy / LPI - Verified",
     "category": "Credentials",
     "tags": ["Cisco Networking Academy / LPI"],
     "url": "/#certifications"
@@ -234,7 +250,7 @@
   {
     "type": "Certification",
     "title": "Ethical Hacker Certification",
-    "description": "Cisco Networking Academy - Active",
+    "description": "Cisco Networking Academy - Verified",
     "category": "Credentials",
     "tags": ["Cisco Networking Academy"],
     "url": "/#certifications"
@@ -242,7 +258,7 @@
   {
     "type": "Certification",
     "title": "Digital Forensics & Incident Response (DFIR)",
-    "description": "BlueCapeSecurity - Active",
+    "description": "BlueCapeSecurity - Verified",
     "category": "Credentials",
     "tags": ["BlueCapeSecurity"],
     "url": "/#certifications"
@@ -258,7 +274,7 @@
   {
     "type": "Certification",
     "title": "Networking Essentials Certification",
-    "description": "Cisco Networking Academy - Active",
+    "description": "Cisco Networking Academy - Verified",
     "category": "Credentials",
     "tags": ["Cisco Networking Academy"],
     "url": "/#certifications"
