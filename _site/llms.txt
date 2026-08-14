@@ -1,0 +1,118 @@
+# Aimad Ul Islam — Cybersecurity & Network Security Portfolio
+
+> Cybersecurity student, SOC enthusiast, and network security learner from Pakistan. BSc Computer Science, Cisco certified.
+
+## About
+Aimad Ul Islam is a Cybersecurity student, SOC analyst enthusiast, and network security learner based in Pakistan. Specializes in Digital Forensics & Incident Response (DFIR), Security Operations Center (SOC) monitoring, Cisco networking, and ethical hacking.
+
+## Professional Focus
+- Security Operations Center (SOC) Analysis & Threat Detection
+- Digital Forensics & Incident Response (DFIR)
+- Network Security Engineering & Cisco Systems
+- Threat Hunting & SIEM Log Analysis
+- Vulnerability Assessment & Ethical Hacking
+
+## Important Pages
+- Home: https://aimadulislam.dpdns.org/
+- Projects Portfolio: https://aimadulislam.dpdns.org/projects/
+- Security Blog & Writeups: https://aimadulislam.dpdns.org/blog/
+- Research Reports: https://aimadulislam.dpdns.org/research/
+- Hands-on Security Labs: https://aimadulislam.dpdns.org/labs/
+- Downloadable Assets & Cheat Sheets: https://aimadulislam.dpdns.org/downloads/
+- Resources & Legal Policies: https://aimadulislam.dpdns.org/resources/
+
+
+## Featured Projects
+
+
+
+- [Automated Volatility 3 Memory Forensic Parser](https://aimadulislam.dpdns.org/projects/automated-memory-forensics/): A Python-based automated memory analysis parser that extracts processes, network sockets, DLL injections, and suspicious handles from Windows RAM dumps using Volatility 3.
+
+
+
+
+
+## Security Research & Whitepapers
+
+
+
+- [Zero-Trust Architecture &amp; Microsegmentation Framework 2026](https://aimadulislam.dpdns.org/research/zero-trust-architecture-2026/): An architectural guide on establishing zero-trust access, identity-aware proxies, and granular eBPF microsegmentation across hybrid multi-cloud environments.
+
+
+
+
+
+## Virtual Security Labs & Walkthroughs
+
+
+
+- [Enterprise Active Directory &amp; SOC Homelab Range](https://aimadulislam.dpdns.org/labs/active-directory-homelab/): Multi-VM Enterprise Active Directory lab featuring Windows Server 2022 Domain Controller, Windows 11 workstation targets, Sysmon, Splunk Universal Forwarders, and pfSense firewall segmentation.
+
+
+
+
+
+## Technical Blog & Writeups
+
+
+
+- [DLL &amp; Code Injection: Build a Stealthy Python Backdoor from Scratch](https://aimadulislam.dpdns.org/posts/python-backdoor-injection/): Master remote thread creation, DLL injection, and code injection to build a professional-grade Python backdoor with process execution redirection. (Published: 2026-08-05)
+
+
+
+
+- [Educational Keylogger: How Keyboard Monitoring Works &amp; Defenses](https://aimadulislam.dpdns.org/posts/educational-keylogger-guide/): A deep dive into the mechanics of keyloggers, storage methods, and defensive strategies—strictly for educational purposes. (Published: 2026-08-02)
+
+
+
+
+- [Metasploitable 2: The Ultimate Beginner&#39;s Guide to Exploitation](https://aimadulislam.dpdns.org/posts/metasploitable-complete-guide/): Learn how to hack Metasploitable 2 from scratch using Metasploit – exploit vsftpd, UnrealIRCd, and more. (Published: 2026-07-25)
+
+
+
+
+- [Getting Started with Kali Linux: Complete Beginner Setup Guide](https://aimadulislam.dpdns.org/posts/kali-linux-setup-guide/): Set up your ethical hacking lab from scratch — VirtualBox, Kali Linux, Metasploitable 2, and DVWA. (Published: 2026-07-15)
+
+
+
+
+- [Nmap Deep Dive: From Port Scanning to Full Network Enumeration](https://aimadulislam.dpdns.org/posts/nmap-complete-guide/): Master Nmap — every flag, scan type, NSE script, output format, and professional methodology explained with real examples. (Published: 2026-07-10)
+
+
+
+
+- [Digital Forensics &amp; Incident Response: A Hands-On Introduction](https://aimadulislam.dpdns.org/posts/dfir-introduction/): Windows forensics, memory analysis, Splunk, and Velociraptor — what I learned from BlueCapeSecurity DFIR certification. (Published: 2026-07-05)
+
+
+
+
+- [Linux Essentials: Every Command You Actually Need](https://aimadulislam.dpdns.org/posts/linux-essentials-guide/): From file permissions to bash scripting — the complete Linux reference guide for cybersecurity professionals. (Published: 2026-06-28)
+
+
+
+
+- [Python for Hackers: Security Automation Scripts from Scratch](https://aimadulislam.dpdns.org/posts/python-for-security/): Port scanners, password sprayers, subdomain enumerators — building real security tools in Python from scratch. (Published: 2026-06-20)
+
+
+
+
+- [Building a Cybersecurity Home Lab on a Budget](https://aimadulislam.dpdns.org/posts/home-lab-setup/): You don&#39;t need expensive hardware or software to build a professional cybersecurity lab. This guide covers everything. (Published: 2026-06-15)
+
+
+
+
+
+## Tools & Downloadable Resources
+
+
+
+- [Volatility 3 CLI Forensics Cheat Sheet &amp; Command Guide](https://aimadulislam.dpdns.org/downloads/volatility3-cheatsheet/): Comprehensive command reference guide for Volatility 3 memory analysis, covering Windows, Linux, and Mac memory plugin execution, YARA scans, and symbol table setups.
+
+
+
+
+## Contact & Professional Profiles
+- Email: info@aimadulislam.dpdns.org
+- GitHub: https://github.com/im0d00
+- LinkedIn: https://linkedin.com/in/aimadulislam
+- X / Twitter: https://x.com/aimadulislam

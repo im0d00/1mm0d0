@@ -6,6 +6,13 @@
     <title>Metasploitable 2: The Ultimate Beginner&#39;s Guide to Exploitation | Aimad Ul Islam</title>
     <meta name="description" content="Learn how to hack Metasploitable 2 from scratch using Metasploit – exploit vsftpd, UnrealIRCd, and more.">
     <meta name="theme-color" content="#080C1A">
+
+    <!-- Search Engine & IndexNow Verifications -->
+    
+    
+    
+    <meta name="indexnow-key" content="4a706e23293e4590b0e50f3b7b257db1">
+    
     
     <!-- Dynamic Favicons & Icons -->
     
@@ -33,6 +40,76 @@
     <link rel="canonical" href="https://aimadulislam.dpdns.org/posts/metasploitable-complete-guide/">
 
     <!-- Schema.org JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Aimad Ul Islam",
+      "url": "https://aimadulislam.dpdns.org",
+      "image": "https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg",
+      "jobTitle": "Cybersecurity Specialist & Network Security Researcher",
+      "description": "Cybersecurity student, SOC enthusiast, and network security learner from Pakistan. BSc Computer Science, Cisco certified.",
+      "knowsAbout": [
+        "Cybersecurity",
+        "Network Security",
+        "Digital Forensics & Incident Response (DFIR)",
+        "Security Operations Center (SOC)",
+        "Ethical Hacking",
+        "Penetration Testing",
+        "Linux System Administration",
+        "Python Security Automation"
+      ],
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "University of Peshawar",
+        "sameAs": "https://uop.edu.pk"
+      },
+      "sameAs": [
+        "https://github.com/im0d00",
+        "https://linkedin.com/in/aimadulislam",
+        "https://x.com/aimadulislam",
+        "https://youtube.com/@aimadulislam"
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Aimad Security",
+      "url": "https://aimadulislam.dpdns.org/"
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://aimadulislam.dpdns.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://aimadulislam.dpdns.org/blog/"
+        }
+        ,
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Metasploitable 2: The Ultimate Beginner's Guide to Exploitation",
+          "item": "https://aimadulislam.dpdns.org/posts/metasploitable-complete-guide/"
+        }
+        
+      ]
+    }
+    </script>
+    
     
     <script type="application/ld+json">
     {
@@ -87,11 +164,22 @@
     <!-- SHARED GLOBAL HEADER -->
     <nav id="navbar" class="site-nav" role="navigation" aria-label="Main Navigation">
     <div class="nav-container" style="width: 100%; max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+        
+        
+        
+
         <a href="/" class="nav-logo-wrap" aria-label="Aimad Security">
             
+                <div class="nav-logo-wrapper site-logo">
+                    <img src="https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg" alt="Aimad Security" class="nav-logo-img " />
+                    
+                </div>
             
+
             
-                <span class="nav-logo"><span class="br">[</span>[Aimad•Security]<span class="nav-dot"></span><span class="br">]</span></span>
+                
+                    <span class="nav-logo-text">Aimad Security</span>
+                
             
         </a>
 
@@ -248,10 +336,18 @@
 <div class="mobile-nav" id="mobNav" aria-label="Mobile Navigation">
     <div class="mobile-nav-header">
         <div class="mobile-nav-brand">
-            
-            
-                <span class="nav-logo"><span class="br">[</span>[Aimad•Security]<span class="nav-dot"></span><span class="br">]</span></span>
-            
+            <a href="/" class="nav-logo-wrap" aria-label="Aimad Security">
+                
+                    <div class="nav-logo-wrapper site-logo">
+                        <img src="https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg" alt="Aimad Security" class="nav-logo-img" />
+                    </div>
+                
+                
+                    
+                        <span class="nav-logo-text">Aimad Security</span>
+                    
+                
+            </a>
         </div>
         <button class="mob-close-btn" id="mobCloseBtn" aria-label="Close menu" onclick="closeMobileNav(event)">&times;</button>
     </div>
@@ -512,6 +608,9 @@
                     <div class="card-glow"></div>
 
                     
+
+                    
+                    <div class="article-markdown-body">
                         <h2 id="introduction" tabindex="-1">Introduction <a class="direct-link" href="#introduction" aria-hidden="true">#</a></h2>
 <p>Metasploitable 2 is the go‑to target for every beginner penetration tester. It’s a deliberately vulnerable Linux virtual machine packed with multiple exploitable services, making it the perfect environment to learn how to use Metasploit, discover vulnerabilities, and practice your hacking skills – all legally.</p>
 <p>In this guide, I’ll walk you through the entire process: from setting up Metasploitable 2 in VirtualBox to exploiting two of its most famous vulnerabilities – the vsftpd backdoor and the UnrealIRCd backdoor – and then performing post‑exploitation steps. By the end, you’ll have a solid understanding of how Metasploit works and how to use it in real engagements.</p>
@@ -663,6 +762,7 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
 <li><strong>Set up a practice network</strong> with multiple VMs to simulate a real enterprise environment.</li>
 </ul>
 
+                    </div>
                     
 
                     
@@ -718,7 +818,7 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
                             Cybersecurity professional specializing in DFIR investigations, SOC operations, SIEM automation, and threat research. Documenting ethical hacking labs, network architecture, and security policies.
                         </p>
                         <div class="author-links">
-                            <a href="https://github.com/aimadulislam" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+                            <a href="https://github.com/im0d00" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
                             <a href="https://linkedin.com/in/aimadulislam" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
                             <a href="/resources/"><i class="fa-solid fa-shield-halved"></i> Resources</a>
                         </div>
@@ -755,6 +855,10 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
                     <div class="related-grid">
                         
                         
+                        
+                        
+                        
+                        
                             
                             <a href="/posts/python-backdoor-injection/" class="card related-card">
                                 <div class="card-glow"></div>
@@ -765,6 +869,7 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
                                 <h4 class="related-card-title">DLL &amp; Code Injection: Build a Stealthy Python Backdoor from Scratch</h4>
                                 <p class="related-card-desc">Master remote thread creation, DLL injection, and code injection to build a professional-grade Python backdoor with process execution redirection.</p>
                             </a>
+                            
                             
                             
                         
@@ -778,6 +883,7 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
                                 <h4 class="related-card-title">Educational Keylogger: How Keyboard Monitoring Works &amp; Defenses</h4>
                                 <p class="related-card-desc">A deep dive into the mechanics of keyloggers, storage methods, and defensive strategies—strictly for educational purposes.</p>
                             </a>
+                            
                             
                             
                         
@@ -795,7 +901,6 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
                             </a>
                             
                             
-                        
                             
                         
                             
@@ -805,6 +910,11 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
                             
                         
                             
+                        
+                            
+                        
+
+                        
                         
                     </div>
                 </div>
@@ -827,7 +937,7 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
                         <div class="comments-placeholder-inner">
                             <i class="fa-solid fa-terminal text-muted" style="font-size: 2.2rem; margin-bottom: 0.8rem;"></i>
                             <p>Interactive peer discussions are powered by GitHub Discussions / Giscus.</p>
-                            <a href="https://github.com/aimadulislam" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline mt-1">
+                            <a href="https://github.com/im0d00" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline mt-1">
                                 <i class="fa-brands fa-github"></i> Open Discussion on GitHub
                             </a>
                         </div>
@@ -1045,17 +1155,28 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
         const articleBody = document.querySelector('.article-body');
         if (articleBody) {
             const preBlocks = articleBody.querySelectorAll('pre');
-            preBlocks.forEach((pre, idx) => {
-                if (pre.parentElement.classList.contains('code-block-wrap')) return;
+            preBlocks.forEach((pre) => {
+                if (pre.closest('.code-block-wrap') || pre.closest('.terminal-block-wrap') || pre.closest('.file-tree-wrap')) return;
 
-                const code = pre.querySelector('code');
+                const code = pre.querySelector('code') || pre;
                 let lang = 'CODE';
-                if (code) {
-                    const match = code.className.match(/language-([a-zA-Z0-9_\-]+)/);
-                    if (match) {
-                        lang = match[1].toUpperCase();
-                    }
+                const classList = (code.className || '') + ' ' + (pre.className || '');
+                const match = classList.match(/language-([a-zA-Z0-9_\-+]+)/);
+                if (match) {
+                    lang = match[1].toUpperCase();
                 }
+
+                const langMap = {
+                    'PY': 'PYTHON', 'PYTHON': 'PYTHON',
+                    'SH': 'BASH', 'BASH': 'BASH', 'SHELL': 'BASH', 'ZSH': 'BASH',
+                    'PS1': 'POWERSHELL', 'POWERSHELL': 'POWERSHELL',
+                    'JS': 'JAVASCRIPT', 'JAVASCRIPT': 'JAVASCRIPT',
+                    'TS': 'TYPESCRIPT', 'TYPESCRIPT': 'TYPESCRIPT',
+                    'HTML': 'HTML', 'MARKUP': 'HTML',
+                    'CSS': 'CSS', 'JSON': 'JSON', 'YAML': 'YAML', 'YML': 'YAML',
+                    'SQL': 'SQL', 'C': 'C', 'CPP': 'C++', 'GO': 'GO', 'RUST': 'RUST'
+                };
+                const displayLang = langMap[lang] || lang;
 
                 const wrapper = document.createElement('div');
                 wrapper.className = 'code-block-wrap';
@@ -1063,8 +1184,8 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
                 const header = document.createElement('div');
                 header.className = 'code-block-header';
                 header.innerHTML = `
-                    <span class="code-block-lang"><i class="fa-solid fa-terminal"></i> ${lang}</span>
-                    <button class="copy-code-btn" aria-label="Copy code block">
+                    <span class="code-block-lang"><i class="fa-solid fa-code text-cyan"></i> ${displayLang}</span>
+                    <button class="copy-code-btn" aria-label="Copy code block" onclick="copyCodeBlockText(this)">
                         <i class="fa-regular fa-copy"></i> Copy
                     </button>
                 `;
@@ -1072,19 +1193,13 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
                 pre.parentNode.insertBefore(wrapper, pre);
                 wrapper.appendChild(header);
                 wrapper.appendChild(pre);
+            });
 
-                const copyBtn = header.querySelector('.copy-code-btn');
-                copyBtn.addEventListener('click', () => {
-                    const codeText = pre.innerText || pre.textContent;
-                    navigator.clipboard.writeText(codeText).then(() => {
-                        copyBtn.innerHTML = '<i class="fa-solid fa-check text-green"></i> Copied!';
-                        copyBtn.classList.add('copied');
-                        setTimeout(() => {
-                            copyBtn.innerHTML = '<i class="fa-regular fa-copy"></i> Copy';
-                            copyBtn.classList.remove('copied');
-                        }, 2000);
-                    });
-                });
+            // Handle pre-existing copy buttons (e.g. from manual HTML)
+            articleBody.querySelectorAll('.copy-btn, .copy-code-btn').forEach(btn => {
+                if (!btn.getAttribute('onclick')) {
+                    btn.addEventListener('click', () => copyCodeBlockText(btn));
+                }
             });
 
             // Click-to-zoom Lightbox for Article Images
@@ -1206,15 +1321,16 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
 
     function copyCodeBlockText(btn) {
         if (!btn) return;
-        const parent = btn.closest('.code-block-wrap') || btn.closest('.terminal-block-wrap');
-        let codeText = '';
-        if (parent) {
-            const pre = parent.querySelector('pre');
-            if (pre) codeText = pre.innerText || pre.textContent;
-        }
+        const parent = btn.closest('.code-block-wrap') || btn.closest('.terminal-block-wrap') || btn.closest('.file-tree-wrap') || btn.parentElement;
+        if (!parent) return;
+
+        let codeEl = parent.querySelector('pre code') || parent.querySelector('code') || parent.querySelector('pre');
+        if (!codeEl) return;
+
+        let codeText = codeEl.textContent || '';
         if (!codeText) return;
 
-        navigator.clipboard.writeText(codeText.trim()).then(() => {
+        function showSuccess() {
             const originalHtml = btn.innerHTML;
             btn.innerHTML = '<i class="fa-solid fa-check text-green"></i> Copied!';
             btn.classList.add('copied');
@@ -1222,9 +1338,33 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
                 btn.innerHTML = originalHtml;
                 btn.classList.remove('copied');
             }, 2000);
-        }).catch(() => {
-            alert('Code copied!');
-        });
+        }
+
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(codeText).then(showSuccess).catch(() => {
+                fallbackCopy(codeText, showSuccess);
+            });
+        } else {
+            fallbackCopy(codeText, showSuccess);
+        }
+    }
+
+    function fallbackCopy(text, callback) {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-9999px';
+        textArea.style.top = '-9999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            if (callback) callback();
+        } catch (err) {
+            console.error('Copy fallback error:', err);
+        }
+        document.body.removeChild(textArea);
     }
 </script>
 
@@ -1240,8 +1380,22 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
             <div class="footer-col footer-brand-col">
                 <div class="footer-logo-brand">
                     
-                        <span class="logo-bracket">[</span><span class="logo-text">[Aimad•Security]</span><span class="logo-bracket">]</span>
                     
+                    
+
+                    <a href="/" class="footer-logo-link" aria-label="Aimad Security">
+                        
+                            <div class="footer-logo-wrapper site-logo">
+                                <img src="https://i.postimg.cc/hPyNdGVF/Whats-App-Image-2026-07-05-at-9-35-59-PM.jpg" alt="Aimad Security" class="footer-logo-img" />
+                            </div>
+                        
+
+                        
+                            
+                                <span class="footer-brand-title">Aimad Security</span>
+                            
+                        
+                    </a>
                 </div>
                 <p class="footer-desc">
                     Cybersecurity student, SOC enthusiast, and network security practitioner from Pakistan. Specializing in DFIR, Linux Systems, and Ethical Hacking.
@@ -1309,7 +1463,7 @@ msf6 auxiliary(scanner/mysql/mysql_login) > run
                 </div>
                 <div class="footer-soc-row">
                     
-                    <a href="https://github.com/aimadulislam" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://github.com/im0d00" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
                     
                     <a href="https://linkedin.com/in/aimadulislam" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
                     
