@@ -1075,5 +1075,4 @@ collections:
             widget: "object"
             fields:
               - { label: "Style", name: "style", widget: "select", options: ["glow", "line", "dots"], default: "glow" }
-      - { label: "Full Article Markdown Body (Fallback)", name: "body", widget: "markdown", required: false }
 
