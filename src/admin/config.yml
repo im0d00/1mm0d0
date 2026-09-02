@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: aimadulislam/1mm0d0
+  repo: im0d00/1mm0d0
   branch: main
   base_url: https://decap-oauth.aikhanpma.workers.dev
   auth_endpoint: /auth
