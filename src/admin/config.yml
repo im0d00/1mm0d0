@@ -393,25 +393,27 @@ collections:
         label: "Contact & Availability"
         file: "src/_data/contact.json"
         fields:
-          - { label: "Primary Email Address", name: "email", widget: "string", pattern: ['^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', 'Must be a valid email address'] }
-          - { label: "Secondary Email Address", name: "secondary_email", widget: "string", required: false, pattern: ['^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', 'Must be a valid email address'] }
-          - { label: "Contact Form Recipient Email", name: "contact_form_email", widget: "string", required: false, pattern: ['^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$', 'Must be a valid email address'] }
-          - { label: "Phone Number", name: "phone", widget: "string" }
-          - { label: "Website URL", name: "website", widget: "string", pattern: ['^https?://.*', 'Must be a valid URL starting with http:// or https://'] }
-          - { label: "Portfolio URL", name: "portfolio", widget: "string", pattern: ['^https?://.*', 'Must be a valid URL starting with http:// or https://'] }
-          - { label: "GitHub Profile URL", name: "github", widget: "string", pattern: ['^https?://.*github\.com/.*', 'Must be a valid GitHub URL'] }
-          - { label: "LinkedIn Profile URL", name: "linkedin", widget: "string", pattern: ['^https?://.*linkedin\.com/.*', 'Must be a valid LinkedIn URL'] }
+          - { label: "Section Title", name: "title", widget: "string", required: false }
+          - { label: "Section Subtitle / Description", name: "description", widget: "text", required: false }
+          - { label: "Primary Email Address", name: "email", widget: "string", required: false }
+          - { label: "Secondary Email Address", name: "secondary_email", widget: "string", required: false }
+          - { label: "Contact Form Recipient Email", name: "contact_form_email", widget: "string", required: false }
+          - { label: "Phone Number", name: "phone", widget: "string", required: false }
+          - { label: "Website URL", name: "website", widget: "string", required: false }
+          - { label: "Portfolio URL", name: "portfolio", widget: "string", required: false }
+          - { label: "GitHub Profile URL", name: "github", widget: "string", required: false }
+          - { label: "LinkedIn Profile URL", name: "linkedin", widget: "string", required: false }
           - { label: "YouTube Channel URL", name: "youtube", widget: "string", required: false }
           - { label: "Instagram Profile URL", name: "instagram", widget: "string", required: false }
           - { label: "X (Twitter) Profile URL", name: "x", widget: "string", required: false }
           - { label: "Facebook Profile URL", name: "facebook", widget: "string", required: false }
           - { label: "Discord Username / Tag", name: "discord", widget: "string", required: false }
           - { label: "Telegram Profile URL", name: "telegram", widget: "string", required: false }
-          - { label: "Office Location / City", name: "location", widget: "string" }
-          - { label: "Google Maps Link", name: "google_maps_link", widget: "string", required: false, pattern: ['^https?://.*', 'Must be a valid URL'] }
-          - { label: "Availability Status", name: "availability", widget: "string" }
-          - { label: "Timezone", name: "timezone", widget: "string" }
-          - { label: "Working Hours", name: "working_hours", widget: "string" }
+          - { label: "Office Location / City", name: "location", widget: "string", required: false }
+          - { label: "Google Maps Link", name: "google_maps_link", widget: "string", required: false }
+          - { label: "Availability Status", name: "availability", widget: "string", required: false }
+          - { label: "Timezone", name: "timezone", widget: "string", required: false }
+          - { label: "Working Hours", name: "working_hours", widget: "string", required: false }
           - { label: "Calendly Scheduling Link", name: "calendly_link", widget: "string", required: false }
           - { label: "Contact Form Endpoint URL", name: "contact_form_endpoint", widget: "string", required: false }
 

@@ -886,20 +886,23 @@ layout: layouts/base.njk
         <div class="reveal"><div class="sec-eye">15 Contact</div><h2 class="sec-title">Get In Touch</h2><div class="sec-rule"></div></div>
         <div class="con-grid">
             <div class="reveal">
-                <div class="con-title">Open for Opportunities</div>
-                <p class="con-desc">Actively seeking SOC analyst roles, penetration testing internships, cybersecurity research collaborations, and security engineering positions.</p>
-                <div class="con-item"><div class="ci-ic"><i class="fa-solid fa-envelope"></i></div><div><div class="ci-lbl">Email</div><div class="ci-val"><a href="mailto:{{ contact.email }}">{{ contact.email }}</a></div></div></div>
-                <div class="con-item"><div class="ci-ic"><i class="fa-solid fa-phone"></i></div><div><div class="ci-lbl">Phone</div><div class="ci-val">{{ contact.phone }}</div></div></div>
-                <div class="con-item"><div class="ci-ic"><i class="fa-solid fa-globe"></i></div><div><div class="ci-lbl">Website / Portfolio</div><div class="ci-val"><a href="{{ contact.website }}" target="_blank">{{ contact.website }}</a></div></div></div>
-                <div class="con-item"><div class="ci-ic"><i class="fa-solid fa-location-dot"></i></div><div><div class="ci-lbl">Location</div><div class="ci-val">{{ contact.location }}</div></div></div>
-                <div class="con-item"><div class="ci-ic"><i class="fa-solid fa-clock"></i></div><div><div class="ci-lbl">Timezone & Hours</div><div class="ci-val">{{ contact.timezone }} ({{ contact.working_hours }})</div></div></div>
+                <div class="con-title">{{ contact.title or "Open for Opportunities" }}</div>
+                <p class="con-desc">{{ contact.description or "Actively seeking SOC analyst roles, penetration testing internships, cybersecurity research collaborations, and security engineering positions." }}</p>
+                <div class="con-item"><div class="ci-ic"><i class="fa-solid fa-envelope"></i></div><div><div class="ci-lbl">Email</div><div class="ci-val"><a href="mailto:{{ contact.email or settings.contact_email or settings.email or 'info@aimadulislam.dpdns.org' }}">{{ contact.email or settings.contact_email or settings.email or "info@aimadulislam.dpdns.org" }}</a></div></div></div>
+                <div class="con-item"><div class="ci-ic"><i class="fa-solid fa-phone"></i></div><div><div class="ci-lbl">Phone</div><div class="ci-val">{{ contact.phone or "+92 300 0000000" }}</div></div></div>
+                <div class="con-item"><div class="ci-ic"><i class="fa-solid fa-globe"></i></div><div><div class="ci-lbl">Website / Portfolio</div><div class="ci-val"><a href="{{ contact.website or settings.portfolio_url or 'https://aimadulislam.dpdns.org' }}" target="_blank">{{ contact.website or settings.portfolio_url or "https://aimadulislam.dpdns.org" }}</a></div></div></div>
+                <div class="con-item"><div class="ci-ic"><i class="fa-solid fa-location-dot"></i></div><div><div class="ci-lbl">Location</div><div class="ci-val">{{ contact.location or "Peshawar, KPK, Pakistan" }}</div></div></div>
+                <div class="con-item"><div class="ci-ic"><i class="fa-solid fa-clock"></i></div><div><div class="ci-lbl">Timezone & Hours</div><div class="ci-val">{{ contact.timezone or "PKT (UTC+5)" }} ({{ contact.working_hours or "09:00 AM - 06:00 PM PKT" }})</div></div></div>
                 
                 <div class="soc-row" style="margin-top:1.5rem;">
-                    {% if contact.linkedin %}<a href="{{ contact.linkedin }}" class="soc-btn" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>{% endif %}
-                    {% if contact.github %}<a href="{{ contact.github }}" class="soc-btn" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>{% endif %}
-                    {% if contact.x %}<a href="{{ contact.x }}" class="soc-btn" target="_blank" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>{% endif %}
-                    {% if contact.youtube %}<a href="{{ contact.youtube }}" class="soc-btn" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>{% endif %}
-                    <a href="mailto:{{ contact.email }}" class="soc-btn" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+                    {% if contact.linkedin or settings.linkedin_url %}<a href="{{ contact.linkedin or settings.linkedin_url }}" class="soc-btn" target="_blank" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>{% endif %}
+                    {% if contact.github or settings.github_url %}<a href="{{ contact.github or settings.github_url }}" class="soc-btn" target="_blank" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>{% endif %}
+                    {% if contact.x or settings.x_url %}<a href="{{ contact.x or settings.x_url }}" class="soc-btn" target="_blank" aria-label="X"><i class="fa-brands fa-x-twitter"></i></a>{% endif %}
+                    {% if contact.youtube or settings.youtube_url %}<a href="{{ contact.youtube or settings.youtube_url }}" class="soc-btn" target="_blank" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>{% endif %}
+                    {% if contact.instagram or settings.instagram_url %}<a href="{{ contact.instagram or settings.instagram_url }}" class="soc-btn" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>{% endif %}
+                    {% if contact.facebook or settings.facebook_url %}<a href="{{ contact.facebook or settings.facebook_url }}" class="soc-btn" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook"></i></a>{% endif %}
+                    {% if contact.telegram or settings.telegram_url %}<a href="{{ contact.telegram or settings.telegram_url }}" class="soc-btn" target="_blank" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>{% endif %}
+                    <a href="mailto:{{ contact.email or settings.contact_email or settings.email or 'info@aimadulislam.dpdns.org' }}" class="soc-btn" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
                 </div>
             </div>
 
@@ -1265,19 +1268,72 @@ document.querySelectorAll('.card').forEach(c => { if (c.querySelector('.sk-fill'
 
 // CONTACT FORM HANDLER
 function handleForm(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn = form.querySelector('button[type="submit"]');
+    const okEl = document.getElementById('formOk');
     const endpoint = "{{ contact.contact_form_endpoint }}";
-    if (!endpoint || endpoint === '#' || endpoint === '') {
-        e.preventDefault();
+    
+    if (btn) {
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+    }
+
+    if (endpoint && endpoint !== '#' && endpoint.trim() !== '') {
+        const formData = new FormData(form);
+        fetch(endpoint, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                if (okEl) {
+                    okEl.style.display = 'block';
+                    okEl.style.color = '#00FF88';
+                    okEl.innerHTML = '<i class="fa-solid fa-circle-check"></i> Thank you! Message sent successfully.';
+                }
+                form.reset();
+            } else {
+                return response.json().then(data => {
+                    throw new Error(data.error || (data.errors ? data.errors.map(err => err.message).join(', ') : 'Form submission failed.'));
+                });
+            }
+        }).catch(err => {
+            if (okEl) {
+                okEl.style.display = 'block';
+                okEl.style.color = '#ff5555';
+                okEl.innerHTML = '<i class="fa-solid fa-triangle-exclamation"></i> ' + (err.message || 'Error submitting form. Please try again or email directly.');
+            }
+        }).finally(() => {
+            if (btn) {
+                btn.disabled = false;
+                btn.innerHTML = '<i class="fa-solid fa-paper-plane fa-xs"></i> Send Message';
+            }
+        });
+    } else {
         const cn = document.getElementById('cn')?.value || '';
         const ce = document.getElementById('ce')?.value || '';
         const co = document.getElementById('co')?.value || '';
         const ct = document.getElementById('ct')?.value || '';
         const cm = document.getElementById('cm')?.value || '';
-        const txt = `Name: ${cn}\nEmail: ${ce}\nOrg: ${co}\nType: ${ct}\n\nMessage:\n${cm}`;
-        navigator.clipboard.writeText(txt).catch(() => {});
-        const okEl = document.getElementById('formOk');
-        if (okEl) okEl.style.display = 'block';
-        if (e.target && typeof e.target.reset === 'function') e.target.reset();
+        const targetEmail = "{{ contact.email or settings.contact_email or settings.email or 'info@aimadulislam.dpdns.org' }}";
+        
+        const subject = encodeURIComponent(`[Website Contact] ${ct || 'Inquiry'} from ${cn}`);
+        const body = encodeURIComponent(`Name: ${cn}\nEmail: ${ce}\nOrganization: ${co}\nType: ${ct}\n\nMessage:\n${cm}`);
+        window.location.href = `mailto:${targetEmail}?subject=${subject}&body=${body}`;
+        
+        if (okEl) {
+            okEl.style.display = 'block';
+            okEl.style.color = '#00FF88';
+            okEl.innerHTML = '<i class="fa-solid fa-circle-check"></i> Opening your email client to send message...';
+        }
+        form.reset();
+        if (btn) {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fa-solid fa-paper-plane fa-xs"></i> Send Message';
+        }
     }
 }
 </script>
