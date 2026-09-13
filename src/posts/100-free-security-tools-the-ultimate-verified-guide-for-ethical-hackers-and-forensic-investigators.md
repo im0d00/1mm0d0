@@ -1,4 +1,5 @@
 ---
+layout: layouts/post.njk
 title: "100 Free Security Tools: The Ultimate Verified Guide for Ethical Hackers
   and Forensic Investigators"
 subtitle: A comprehensively verified and updated collection of 100 essential
