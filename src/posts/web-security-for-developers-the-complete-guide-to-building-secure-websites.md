@@ -9,6 +9,8 @@ author_avatar: /images/file_000000000d8c720780e6dc16033e558d.png
 excerpt: Discover the most critical web vulnerabilities—SQL injection,
   cross-site scripting, CSRF, and session hijacking—and learn how to defend
   against them with practical code examples and modern security best practices.
+thumbnail: /images/chatgpt-image-sep-18-2026-02_36_36-am.png
+image: /images/chatgpt-image-sep-18-2026-02_36_36-am.png
 imageAlt: ""
 emoji: 🛡️
 difficulty: Intermediate
@@ -32,6 +34,7 @@ pinned: true
 readingTime: 25
 views: 120
 likes: 24
+og_image: /images/chatgpt-image-sep-18-2026-02_36_36-am.png
 layout: layouts/post.njk
 ---
 <h1>Web Security for Developers: The Complete Guide to Building Secure Websites</h1>
