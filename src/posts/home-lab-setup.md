@@ -39,10 +39,8 @@ Here’s the minimal hardware and software required. You probably already have e
 
 VirtualBox is the foundation of your lab. It’s open‑source and runs on all major operating systems.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Download & Install VirtualBox</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code># Go to: https://www.virtualbox.org/wiki/Downloads
+```bash
+# Go to: https://www.virtualbox.org/wiki/Downloads
 # Download the appropriate installer for your host OS
 # Run the installer and accept all defaults
 
@@ -50,17 +48,15 @@ VirtualBox is the foundation of your lab. It’s open‑source and runs on all m
 virtualbox --version
 # Example output: 7.0.20r162988
 
-# On Windows, you can check via 'where virtualbox' or open VirtualBox from the Start menu.</code></pre>
-</div>
+# On Windows, you can check via 'where virtualbox' or open VirtualBox from the Start menu.
+```
 
 ## Step 2: Choose Your Attack OS (Kali Linux)
 
 Kali Linux is the industry‑standard penetration testing distribution. Instead of a full ISO install, download the pre‑built VirtualBox appliance from the official Kali website – it’s ready to import.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Import Kali Linux VM</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code># 1. Download the .ova file from: https://www.kali.org/get-kali/#kali-virtual-machines
+```bash
+# 1. Download the .ova file from: https://www.kali.org/get-kali/#kali-virtual-machines
 #    Choose "VirtualBox" (around 4 GB)
 
 # 2. In VirtualBox, go to File → Import Appliance
@@ -73,8 +69,8 @@ Kali Linux is the industry‑standard penetration testing distribution. Instead 
 passwd
 
 # 5. Update the system:
-sudo apt update && sudo apt upgrade -y</code></pre>
-</div>
+sudo apt update && sudo apt upgrade -y
+```
 
 <div class="callout callout-success">
   <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
@@ -88,10 +84,8 @@ sudo apt update && sudo apt upgrade -y</code></pre>
 
 To practise attacks, you need a target that is deliberately vulnerable. Two of the best free options are **Metasploitable 2** and **DVWA**.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Set Up Metasploitable 2</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code># 1. Download Metasploitable 2 from SourceForge:
+```bash
+# 1. Download Metasploitable 2 from SourceForge:
 #    https://sourceforge.net/projects/metasploitable/
 
 # 2. Extract the ZIP file – inside you'll find a .vmdk disk file.
@@ -106,13 +100,11 @@ To practise attacks, you need a target that is deliberately vulnerable. Two of t
 
 # 6. Boot the VM. Default credentials: msfadmin / msfadmin.
 #    Find its IP address with:
-ifconfig</code></pre>
-</div>
+ifconfig
+```
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Install DVWA (Damn Vulnerable Web App)</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code># On Kali, using Docker is the easiest way:
+```bash
+# On Kali, using Docker is the easiest way:
 sudo apt install docker.io -y
 sudo systemctl start docker
 sudo docker pull vulnerables/web-dvwa
@@ -121,17 +113,15 @@ sudo docker run -d -p 80:80 vulnerables/web-dvwa
 # Then open Firefox in Kali and go to:
 # http://localhost/setup.php
 # Click "Create / Reset Database"
-# Login with admin / password</code></pre>
-</div>
+# Login with admin / password
+```
 
 ## Step 4: Configure the Network
 
 To keep your lab isolated from your main network (and the Internet), use **Host‑Only networking** in VirtualBox. This creates a private subnet between your host and the VMs, with no external access.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Set Up Host‑Only Adapter</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code># 1. In VirtualBox, go to File → Host Network Manager.
+```bash
+# 1. In VirtualBox, go to File → Host Network Manager.
 #    Create a new host‑only network (it usually gets IP range 192.168.56.0/24).
 
 # 2. For each VM (Kali, Metasploitable, etc.), go to:
@@ -141,8 +131,8 @@ To keep your lab isolated from your main network (and the Internet), use **Host�
 ip a
 
 # 4. Test connectivity to Metasploitable (replace with its IP):
-ping 192.168.56.102 -c 4</code></pre>
-</div>
+ping 192.168.56.102 -c 4
+```
 
 <div class="callout callout-warn">
   <i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i>
@@ -156,10 +146,8 @@ ping 192.168.56.102 -c 4</code></pre>
 
 A good lab isn’t just for hacking – it’s also for learning defensive techniques. Install these free tools on your Kali VM to practise digital forensics and incident response.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Install DFIR Tools on Kali</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code># Volatility for memory forensics
+```bash
+# Volatility for memory forensics
 sudo apt install volatility -y
 
 # Autopsy / The Sleuth Kit for disk forensics
@@ -172,8 +160,8 @@ sudo apt install autopsy sleuthkit -y
 # Download from splunk.com and install with dpkg.
 
 # Also consider installing Velociraptor (open‑source EDR):
-# Follow the official guide at velociraptor.velocidex.com</code></pre>
-</div>
+# Follow the official guide at velociraptor.velocidex.com
+```
 These tools will allow you to analyse memory dumps, recover deleted files, and parse logs – exactly what a SOC analyst does daily.
 
 ## Step 6: Start Practising

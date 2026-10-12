@@ -6,7 +6,7 @@
       "description": "Analyzed suspicious PowerShell execution logs and PCAP files to trace an initial access vector, C2 communication, and data exfiltration.",
       "tools": ["Wireshark", "PowerShell Logs", "Timeline Explorer"],
       "screenshots": [],
-      "writeup_url": "/blog/dfir-introduction/",
+      "writeup_url": "/posts/dfir-introduction/",
       "tags": ["DFIR", "Incident Response", "PowerShell", "PCAP"]
     },
     {
@@ -15,7 +15,7 @@
       "description": "Completed hands-on packet capture analysis challenges focusing on HTTP headers, DNS exfiltration, and TCP stream reconstruction.",
       "tools": ["Wireshark", "TShark"],
       "screenshots": [],
-      "writeup_url": "/blog/nmap-complete-guide/",
+      "writeup_url": "/posts/nmap-complete-guide/",
       "tags": ["Wireshark", "TryHackMe", "Network Security"]
     },
     {

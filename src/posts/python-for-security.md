@@ -38,10 +38,8 @@ In this guide, I'll walk you through four practical Python projects that I've bu
 
 A port scanner is the first step in any penetration test. It identifies open ports and services on a target, revealing potential attack surfaces. Our scanner will use TCP SYN scans (stealth scans) to check if a port is open, filtering out closed and filtered ports.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">port_scanner.py</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code>#!/usr/bin/env python3
+```python
+#!/usr/bin/env python3
 """
 Simple TCP port scanner with threading for speed.
 """
@@ -84,8 +82,8 @@ for _ in range(50):  # 50 concurrent threads
 for t in threads:
     t.join()
 
-print("Scan completed.")</code></pre>
-</div>
+print("Scan completed.")
+```
 
 **How it works:** The script tries to establish a TCP connection to each port. If the connection succeeds (returns `0`), the port is open. The queue and threading allow us to scan hundreds of ports in seconds.
 
@@ -93,10 +91,8 @@ print("Scan completed.")</code></pre>
 
 Subdomain enumeration helps discover hidden assets, test environments, and other services that might not be publicly listed. We'll use DNS resolution to find subdomains from a wordlist.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">subdomain_enum.py</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code>#!/usr/bin/env python3
+```python
+#!/usr/bin/env python3
 """
 Subdomain enumerator using DNS resolution.
 """
@@ -120,8 +116,8 @@ for sub in subdomains:
         print(f"[+] Found: {subdomain} -> {ip}")
     except socket.gaierror:
         # DNS resolution failed, subdomain does not exist
-        pass</code></pre>
-</div>
+        pass
+```
 
 You can use a common wordlist like `subdomains.txt` from SecLists. This script is a foundation; you can later add threading, wildcard detection, and other enhancements.
 
@@ -129,10 +125,8 @@ You can use a common wordlist like `subdomains.txt` from SecLists. This script i
 
 Password spraying is an attack where you try a small set of common passwords against many accounts to avoid account lockouts. This script attempts to log in to a service (like SSH, FTP, or a web login) using a list of usernames and passwords.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">credential_spray.py</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code>#!/usr/bin/env python3
+```python
+#!/usr/bin/env python3
 """
 Example of a password spray using SSH (paramiko would be needed).
 This is a conceptual snippet for educational purposes.
@@ -156,8 +150,8 @@ for user in username_list:
             continue
         except Exception as e:
             print(f"[-] Error: {e}")
-            break</code></pre>
-</div>
+            break
+```
 
 <div class="callout callout-danger">
   <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
@@ -171,10 +165,8 @@ for user in username_list:
 
 Log analysis is critical for incident response and threat hunting. This script parses Apache access logs and extracts useful information, such as the top IP addresses, most requested URIs, and suspicious patterns.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">log_parser.py</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code>#!/usr/bin/env python3
+```python
+#!/usr/bin/env python3
 """
 Parse Apache access logs and extract statistics.
 """
@@ -208,8 +200,8 @@ for ip, count in Counter(ips).most_common(10):
 
 print("\n=== Most requested URIs ===")
 for url, count in Counter(urls).most_common(10):
-    print(f"{url}: {count}")</code></pre>
-</div>
+    print(f"{url}: {count}")
+```
 
 You can extend this script to detect SQL injection attempts, brute‑force patterns, or unusual user‑agent strings.
 

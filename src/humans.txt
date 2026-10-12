@@ -1,7 +1,7 @@
 /* TEAM */
   Cybersecurity Architect: Aimad Ul Islam
   Contact: info@aimadulislam.dpdns.org
-  GitHub: https://github.com/aimadulislam
+  GitHub: https://github.com/im0d00
   Twitter: @aimadulislam
 
 /* SITE */

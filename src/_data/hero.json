@@ -32,7 +32,7 @@
     {
       "platform": "GitHub",
       "icon": "fa-brands fa-github",
-      "link": "https://github.com/aimadulislam"
+      "link": "https://github.com/im0d00"
     },
     {
       "platform": "LinkedIn",
@@ -87,6 +87,6 @@
   "contact_button_text": "Contact Me",
   "view_projects_button_link": "#projects",
   "blog_button_text": "Technical Blog",
-  "name_accent": "Khan",
+  "name_accent": "",
   "show_scroll_indicator": true
 }

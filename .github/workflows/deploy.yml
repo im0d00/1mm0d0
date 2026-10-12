@@ -41,8 +41,8 @@ jobs:
       - name: Ensure .nojekyll exists
         run: touch _site/.nojekyll
 
-      - name: Validate Output HTML
-        run: test -f _site/index.html && test -f _site/404.html && test -f _site/search.json && test -f _site/.nojekyll
+      - name: Validate Output HTML & Core Assets
+        run: test -f _site/index.html && test -f _site/404.html && test -f _site/search.json && test -f _site/.nojekyll && test -f _site/CNAME && test -f _site/sitemap.xml && test -f _site/robots.txt && test -f _site/feed.xml && test -f _site/llms.txt && test -f _site/brand.md
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

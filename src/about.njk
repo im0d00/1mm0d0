@@ -1,0 +1,129 @@
+---
+layout: layouts/base.njk
+permalink: /about/index.html
+title: "About Aimad Ul Islam | Cybersecurity & Network Security Professional"
+seo_title: "About Aimad Ul Islam | Cybersecurity & Network Security Professional"
+seo_description: "Professional background of Aimad Ul Islam: BSc Computer Science graduate from University of Peshawar, Cisco certified, SOC enthusiast, and DFIR researcher from Pakistan."
+canonical_url: "https://aimadulislam.dpdns.org/about/"
+---
+
+<div class="container" style="padding-top: 4rem; padding-bottom: 5rem;">
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb" aria-label="Breadcrumb" style="margin-bottom: 2rem; display: flex; align-items: center; gap: 0.5rem; font-size: 0.9rem; color: var(--silver);">
+        <a href="/" style="color: var(--cyan); text-decoration: none;"><i class="fa-solid fa-house"></i> Home</a>
+        <span>/</span>
+        <span style="color: var(--white); font-weight: 600;">About</span>
+    </nav>
+
+    <!-- Header Hero Card -->
+    <header class="card" style="padding: 2.5rem; margin-bottom: 2.5rem; border: 1px solid var(--border2); background: var(--panel); border-radius: var(--radius-lg); position: relative; overflow: hidden;">
+        <div class="card-glow"></div>
+        <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;">
+            <div style="flex-shrink: 0; width: 140px; height: 140px; border-radius: 50%; overflow: hidden; border: 3px solid var(--cyan); box-shadow: 0 0 25px rgba(0, 212, 255, 0.3);">
+                <img src="{{ about.profile_image or hero.hero_image or settings.profile_picture or '/images/whatsapp-image-2026-07-05-at-9.35.59-pm.jpeg' }}" alt="Aimad Ul Islam - Cybersecurity Professional" style="width: 100%; height: 100%; object-fit: cover;" />
+            </div>
+            <div style="flex: 1; min-width: 280px;">
+                <div style="font-family: 'Space Grotesk', sans-serif; font-size: 0.85rem; text-transform: uppercase; color: var(--cyan); letter-spacing: 1.5px; margin-bottom: 0.4rem; font-weight: 600;">
+                    <i class="fa-solid fa-user-shield"></i> Professional Dossier
+                </div>
+                <h1 style="font-size: 2.4rem; font-weight: 700; color: var(--white); margin-bottom: 0.6rem; line-height: 1.2;">
+                    Aimad Ul Islam
+                </h1>
+                <p style="color: var(--silver); font-size: 1.05rem; margin-bottom: 1rem; line-height: 1.6; max-width: 800px;">
+                    Cybersecurity Practitioner • SOC Analyst Enthusiast • Network Security Engineer • DFIR Researcher
+                </p>
+                <div style="display: flex; gap: 0.8rem; flex-wrap: wrap;">
+                    <a href="/projects/" class="btn btn-cyan btn-sm"><i class="fa-solid fa-folder-open"></i> View Projects</a>
+                    <a href="/research/" class="btn btn-outline btn-sm"><i class="fa-solid fa-microscope"></i> Read Research</a>
+                    <a href="/blog/" class="btn btn-outline btn-sm"><i class="fa-solid fa-pen-nib"></i> Technical Blog</a>
+                    <a href="/contact/" class="btn btn-ghost btn-sm"><i class="fa-solid fa-envelope"></i> Contact Me</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2rem; margin-bottom: 2.5rem;">
+        <!-- Biography & Academic Foundations -->
+        <article class="card" style="padding: 2rem; border: 1px solid var(--border); background: var(--card);">
+            <h2 style="font-size: 1.35rem; color: var(--white); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.6rem;">
+                <i class="fa-solid fa-book-open" style="color: var(--cyan);"></i> Background & Philosophy
+            </h2>
+            <p style="color: var(--silver); line-height: 1.7; margin-bottom: 1rem;">
+                {{ about.biography or "I'm Aimad Ul Islam, a Computer Science graduate from the University of Peshawar, Pakistan, with a dedicated specialization in cybersecurity, network security, and security operations." }}
+            </p>
+            <p style="color: var(--silver); line-height: 1.7; margin-bottom: 1rem;">
+                {{ about.personal_description or "My journey began with a fascination for how computer systems communicate — and how they can be compromised, analyzed, and hardened against modern adversary tradecraft." }}
+            </p>
+            <p style="color: var(--silver); line-height: 1.7;">
+                <strong>Career Objectives:</strong> {{ about.career_objectives or "To leverage my education, Cisco credentials, and hands-on DFIR training in a dedicated SOC Analyst, Security Researcher, or Network Security Engineer role." }}
+            </p>
+        </article>
+
+        <!-- Technical Competencies & Specializations -->
+        <article class="card" style="padding: 2rem; border: 1px solid var(--border); background: var(--card);">
+            <h2 style="font-size: 1.35rem; color: var(--white); margin-bottom: 1.2rem; display: flex; align-items: center; gap: 0.6rem;">
+                <i class="fa-solid fa-microchip" style="color: var(--green);"></i> Core Competencies
+            </h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 1.5rem;">
+                {% for skill in about.skills %}
+                <span class="tag tag-cyber">{{ skill }}</span>
+                {% endfor %}
+            </div>
+
+            <h3 style="font-size: 1.05rem; color: var(--white); margin-bottom: 0.8rem;">Primary Focus Areas:</h3>
+            <ul style="color: var(--silver); line-height: 1.8; padding-left: 1.2rem; margin-bottom: 1.5rem;">
+                {% for interest in about.interests %}
+                <li>{{ interest }}</li>
+                {% endfor %}
+            </ul>
+
+            <div style="border-top: 1px solid var(--border); padding-top: 1rem;">
+                <div style="font-size: 0.88rem; color: var(--muted); margin-bottom: 0.4rem;">Location & Timezone</div>
+                <div style="color: var(--white); font-weight: 500;"><i class="fa-solid fa-location-dot text-cyan"></i> Peshawar, Pakistan (UTC+5 PKT)</div>
+            </div>
+        </article>
+    </div>
+
+    <!-- Education & Verified Certifications -->
+    <section class="card" style="padding: 2rem; margin-bottom: 2.5rem; border: 1px solid var(--border); background: var(--card);">
+        <h2 style="font-size: 1.35rem; color: var(--white); margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.6rem;">
+            <i class="fa-solid fa-graduation-cap" style="color: var(--violet2);"></i> Education & Verified Credentials
+        </h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem;">
+            <!-- Degree -->
+            <div style="background: rgba(10, 22, 40, 0.6); padding: 1.2rem; border-radius: 8px; border: 1px solid var(--border2);">
+                <div style="color: var(--cyan); font-weight: 600; font-size: 1rem; margin-bottom: 0.3rem;">BSc Computer Science</div>
+                <div style="color: var(--silver); font-size: 0.9rem; margin-bottom: 0.5rem;">University of Peshawar, Pakistan</div>
+                <p style="color: var(--muted); font-size: 0.85rem; margin: 0;">Comprehensive study in algorithms, operating systems, data communications, network protocols, and software security.</p>
+            </div>
+
+            {% for cert in certifications.items %}
+            <div style="background: rgba(10, 22, 40, 0.6); padding: 1.2rem; border-radius: 8px; border: 1px solid var(--border2);">
+                <div style="color: var(--white); font-weight: 600; font-size: 0.95rem; margin-bottom: 0.2rem;">{{ cert.name }}</div>
+                <div style="color: var(--cyan); font-size: 0.85rem; margin-bottom: 0.4rem;">{{ cert.provider }}</div>
+                <p style="color: var(--muted); font-size: 0.82rem; margin-bottom: 0.8rem; line-height: 1.5;">{{ cert.description }}</p>
+                {% if cert.credential_url %}
+                <a href="{{ cert.credential_url }}" target="_blank" rel="noopener noreferrer" style="font-size: 0.8rem; color: var(--green); text-decoration: none; display: inline-flex; align-items: center; gap: 0.3rem;">
+                    <i class="fa-solid fa-arrow-up-right-from-square fa-xs"></i> Verify Credential
+                </a>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+
+    <!-- Social & Contact Channels -->
+    <section class="card" style="padding: 2rem; border: 1px solid var(--border); background: var(--panel); text-align: center;">
+        <h2 style="font-size: 1.35rem; color: var(--white); margin-bottom: 0.8rem;">Connect with Aimad Ul Islam</h2>
+        <p style="color: var(--silver); max-width: 600px; margin: 0 auto 1.5rem; font-size: 0.95rem;">
+            Whether you want to discuss incident response methodologies, explore technical research collaborations, or inquire about open SOC roles, feel free to reach out.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+            <a href="https://github.com/im0d00" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm"><i class="fa-brands fa-github"></i> GitHub (im0d00)</a>
+            <a href="https://linkedin.com/in/aimad-ulislam" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+            <a href="mailto:info@aimadulislam.dpdns.org" class="btn btn-cyan btn-sm"><i class="fa-solid fa-envelope"></i> info@aimadulislam.dpdns.org</a>
+            <a href="/contact/" class="btn btn-ghost btn-sm"><i class="fa-solid fa-paper-plane"></i> Contact Form</a>
+        </div>
+    </section>
+</div>

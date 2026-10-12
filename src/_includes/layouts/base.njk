@@ -6,6 +6,8 @@
     <title>{% if seo_title %}{{ seo_title }}{% elif title %}{% if "Aimad Ul Islam" in title %}{{ title }}{% else %}{{ title }} | Aimad Ul Islam{% endif %}{% else %}{{ settings.seo_title or settings.portfolio_name or "Aimad Ul Islam" }} | Cybersecurity Professional & Security Researcher{% endif %}</title>
     <meta name="description" content="{{ seo_description or description or excerpt or summary or settings.seo_description or settings.website_description or 'Aimad Ul Islam — Cybersecurity Professional, SOC Specialist, Network Security Engineer & Technical Researcher' }}">
     <meta name="theme-color" content="#080C1A">
+    <meta name="robots" content="{% if noindex or ('/404' in page.url) or ('/admin' in page.url) %}noindex, follow{% else %}index, follow{% endif %}">
+    <link rel="alternate" type="application/atom+xml" title="Aimad Ul Islam — Cybersecurity & Network Security Feed" href="https://aimadulislam.dpdns.org/feed.xml">
 
     <!-- Search Engine & IndexNow Verifications -->
     {% if settings.google_search_console_verification %}
@@ -73,7 +75,7 @@
         "sameAs": "https://uop.edu.pk"
       },
       "sameAs": [
-        "{{ settings.github_url or 'https://github.com/aimadulislam' }}",
+        "{{ settings.github_url or 'https://github.com/im0d00' }}",
         "{{ settings.linkedin_url or 'https://linkedin.com/in/aimad-ulislam' }}",
         "{{ settings.x_url or 'https://x.com/aimadulislam' }}",
         "{{ settings.youtube_url or 'https://youtube.com/@aimadulislam' }}"
@@ -103,10 +105,10 @@
         {
           "@type": "ListItem",
           "position": 2,
-          "name": {% if "/posts/" in page.url or "/blog/" in page.url %}"Blog"{% elif "/projects/" in page.url %}"Projects"{% elif "/labs/" in page.url %}"Labs"{% elif "/research/" in page.url %}"Research"{% elif "/downloads/" in page.url %}"Downloads"{% elif "/resources/" in page.url %}"Resources"{% else %}{{ (title or "Page") | dump | safe }}{% endif %},
-          "item": {% if "/posts/" in page.url or "/blog/" in page.url %}"https://aimadulislam.dpdns.org/blog/"{% elif "/projects/" in page.url %}"https://aimadulislam.dpdns.org/projects/"{% elif "/labs/" in page.url %}"https://aimadulislam.dpdns.org/labs/"{% elif "/research/" in page.url %}"https://aimadulislam.dpdns.org/research/"{% elif "/downloads/" in page.url %}"https://aimadulislam.dpdns.org/downloads/"{% elif "/resources/" in page.url %}"https://aimadulislam.dpdns.org/resources/"{% else %}"https://aimadulislam.dpdns.org{{ page.url }}"{% endif %}
+          "name": {% if "/posts/" in page.url or "/blog/" in page.url %}"Blog"{% elif "/projects/" in page.url %}"Projects"{% elif "/labs/" in page.url %}"Labs"{% elif "/research/" in page.url %}"Research"{% elif "/downloads/" in page.url %}"Downloads"{% elif "/resources/" in page.url %}"Resources"{% elif "/about/" in page.url %}"About"{% elif "/contact/" in page.url %}"Contact"{% else %}{{ (title or "Page") | dump | safe }}{% endif %},
+          "item": {% if "/posts/" in page.url or "/blog/" in page.url %}"https://aimadulislam.dpdns.org/blog/"{% elif "/projects/" in page.url %}"https://aimadulislam.dpdns.org/projects/"{% elif "/labs/" in page.url %}"https://aimadulislam.dpdns.org/labs/"{% elif "/research/" in page.url %}"https://aimadulislam.dpdns.org/research/"{% elif "/downloads/" in page.url %}"https://aimadulislam.dpdns.org/downloads/"{% elif "/resources/" in page.url %}"https://aimadulislam.dpdns.org/resources/"{% elif "/about/" in page.url %}"https://aimadulislam.dpdns.org/about/"{% elif "/contact/" in page.url %}"https://aimadulislam.dpdns.org/contact/"{% else %}"https://aimadulislam.dpdns.org{{ page.url }}"{% endif %}
         }
-        {% if page.url != "/blog/" and page.url != "/projects/" and page.url != "/labs/" and page.url != "/research/" and page.url != "/downloads/" and page.url != "/resources/" %},
+        {% if page.url != "/blog/" and page.url != "/projects/" and page.url != "/labs/" and page.url != "/research/" and page.url != "/downloads/" and page.url != "/resources/" and page.url != "/about/" and page.url != "/contact/" %},
         {
           "@type": "ListItem",
           "position": 3,
@@ -136,6 +138,35 @@
         "@type": "WebPage",
         "@id": "https://aimadulislam.dpdns.org{{ page.url }}"
       }
+    }
+    </script>
+    {% elif layout == "layouts/project.njk" %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareSourceCode",
+      "name": {{ (title or "") | dump | safe }},
+      "description": {{ (description or excerpt or "") | dump | safe }},
+      "programmingLanguage": {{ (technologies[0] or "Python") | dump | safe }},
+      "codeRepository": {{ (github_link or "https://github.com/im0d00") | dump | safe }},
+      "author": {
+        "@type": "Person",
+        "name": {{ (author or "Aimad Ul Islam") | dump | safe }}
+      }
+    }
+    </script>
+    {% elif layout == "layouts/research.njk" %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ScholarlyArticle",
+      "headline": {{ (title or "") | dump | safe }},
+      "description": {{ (summary or description or "") | dump | safe }},
+      "author": {
+        "@type": "Person",
+        "name": {{ (author or "Aimad Ul Islam") | dump | safe }}
+      },
+      "datePublished": "{{ date | htmlDateString if date else '2026-03-15' }}"
     }
     </script>
     {% endif %}

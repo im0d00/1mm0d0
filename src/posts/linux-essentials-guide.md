@@ -38,10 +38,8 @@ During my **Cisco Linux Essentials** certification (aligned with the **LPI Linux
 
 The Linux file system is a hierarchical tree starting from the root directory, denoted by a forward slash (`/`). Here are the commands you will use daily to move around.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Navigating the Filesystem</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code># Print current working directory
+```bash
+# Print current working directory
 pwd
 
 # List files in the current directory
@@ -60,8 +58,8 @@ cd -
 cd ~
 
 # View directory structure as a tree (install if needed: apt install tree)
-tree -L 2 /var/log</code></pre>
-</div>
+tree -L 2 /var/log
+```
 Key directories you should memorise: `/etc` (configuration files), `/var/log` (system logs), `/home` (user home directories), and `/bin` (essential system binaries).
 
 ## File Permissions & Ownership
@@ -70,10 +68,8 @@ Linux is a multi-user operating system, and permissions are critical for securit
 
 Permissions are broken into **Read** (r), **Write** (w), and **Execute** (x). They can be represented symbolically (`-rwxr-xr--`) or by octal numbers (`755`).
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Understanding and Modifying Permissions</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code># View current permissions
+```bash
+# View current permissions
 ls -l filename.txt
 # Output: -rw-r--r-- 1 aimad aimad 2048 Jun 28 10:00 filename.txt
 
@@ -88,18 +84,16 @@ chmod go-w script.sh # Removes write for group and others
 sudo chown newuser:newgroup filename.txt
 
 # Change default file creation permissions (umask)
-umask 022  # Sets default permissions to 755 for directories, 644 for files</code></pre>
-</div>
+umask 022  # Sets default permissions to 755 for directories, 644 for files
+```
 **Important for Security:** Never give `777` (full permissions to everyone) to a file on a production server. This is a major security risk allowing anyone to modify your critical files.
 
 ## Text Processing & Filtering
 
 In Linux, everything is a file or a stream of text. Mastering text processing tools allows you to filter massive log files, extract IP addresses, and parse command outputs quickly.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Text Pipes & Filters</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code># View a file page by page
+```bash
+# View a file page by page
 less /var/log/syslog
 
 # View only the first 10 or last 10 lines of a file
@@ -116,8 +110,8 @@ grep -r "error" /var/log/
 cut -d: -f1 /etc/passwd
 
 # Sort output and count duplicates
-cat /var/log/access.log | cut -d' ' -f1 | sort | uniq -c | sort -nr  # Top IP addresses</code></pre>
-</div>
+cat /var/log/access.log | cut -d' ' -f1 | sort | uniq -c | sort -nr  # Top IP addresses
+```
 
 **Pro Tip:** The pipe operator `|` is the secret to Linux power. It takes the output of the command on the left and sends it as input to the command on the right, allowing you to chain complex queries effortlessly.
 
@@ -125,10 +119,8 @@ cat /var/log/access.log | cut -d' ' -f1 | sort | uniq -c | sort -nr  # Top IP ad
 
 Linux distributions are split into two major families: **Debian-based** (Ubuntu, Kali, Debian) which use `apt` and `dpkg`, and **RPM-based** (RedHat, CentOS, Fedora) which use `yum` or `dnf`. This guide focuses on Debian-based systems, which are the most common for cybersecurity.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Software Management with APT</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code># Update the package list
+```bash
+# Update the package list
 sudo apt update
 
 # Upgrade all installed packages
@@ -144,8 +136,8 @@ sudo apt remove nmap
 apt search "web server"
 
 # View detailed information about a package
-apt show nmap</code></pre>
-</div>
+apt show nmap
+```
 <div class="callout callout-success">
   <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
   <div>
@@ -158,10 +150,8 @@ apt show nmap</code></pre>
 
 When a system is compromised, malicious processes run in the background. You need to know how to find them and stop them.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Monitor and Manage Running Processes</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code># List all running processes with detailed info
+```bash
+# List all running processes with detailed info
 ps aux
 
 # View processes in a hierarchical tree
@@ -182,17 +172,15 @@ systemctl status ssh
 
 # Start/Stop/Restart a service
 sudo systemctl start ssh
-sudo systemctl enable ssh  # Enable to start on boot</code></pre>
-</div>
+sudo systemctl enable ssh  # Enable to start on boot
+```
 
 ## Users & Groups
 
 Managing users, groups, and their privileges is essential for system security and compliance.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">User and Group Administration</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code># Add a new user
+```bash
+# Add a new user
 sudo useradd -m -g users -s /bin/bash newuser
 
 # Set or change a user's password
@@ -211,18 +199,16 @@ cat /etc/passwd
 su - aimad
 
 # Execute a single command as root (super user)
-sudo whoami</code></pre>
-</div>
+sudo whoami
+```
 Privilege escalation is a major attack vector. Always ensure standard users have the least amount of privileges required. Use `sudo` sparingly and never give a user root-level access unless absolutely necessary.
 
 ## Bash Scripting for Automation
 
 Automation is a core skill for both system administrators and security professionals. Instead of manually typing 10 commands, you can put them in a script and run them all at once.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Your First Bash Script</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code>#!/bin/bash
+```bash
+#!/bin/bash
 # This is a simple backup script
 
 # Variables
@@ -237,13 +223,11 @@ mkdir -p $BACKUP_DIR
 tar -czf $BACKUP_DIR/backup_$DATE.tar.gz $SOURCE_DIR
 
 # Print success message
-echo "Backup completed successfully for $DATE"</code></pre>
-</div>
+echo "Backup completed successfully for $DATE"
+```
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Loops, Conditions, and Cron</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code># Use an IF statement to check privileges
+```bash
+# Use an IF statement to check privileges
 if [ $USER == "root" ]; then
     echo "You are running as root!"
 else
@@ -257,17 +241,15 @@ done
 
 # Schedule the script to run automatically using Cron (crontab -e)
 # Runs at 2 AM every day
-0 2 * * * /home/aimad/scripts/backup.sh</code></pre>
-</div>
+0 2 * * * /home/aimad/scripts/backup.sh
+```
 
 ## Linux Security Hardening
 
 Securing your Linux server is non-negotiable. Here are the fundamental steps you can take to protect a system from attack.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Basic System Hardening</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code># 1. Enable and configure the firewall (UFW - Uncomplicated Firewall)
+```bash
+# 1. Enable and configure the firewall (UFW - Uncomplicated Firewall)
 sudo ufw enable
 sudo ufw allow 22/tcp  # Allow SSH explicitly
 sudo ufw allow 80/tcp  # Allow HTTP for web servers
@@ -287,8 +269,8 @@ sudo netstat -tulpn
 
 # 5. Configure automatic security updates
 sudo apt install unattended-upgrades
-sudo dpkg-reconfigure --priority=low unattended-upgrades</code></pre>
-</div>
+sudo dpkg-reconfigure --priority=low unattended-upgrades
+```
 <div class="callout callout-danger">
   <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
   <div>

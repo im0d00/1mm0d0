@@ -1,7 +1,7 @@
 ---
 layout: layouts/base.njk
 ---
-<main class="container">
+<div class="container project-layout-wrap">
     <article class="article-hero">
         <!-- Breadcrumbs -->
         <div class="breadcrumb">
@@ -111,7 +111,7 @@ layout: layouts/base.njk
                         <h3>{{ author or "Aimad Ul Islam" }}</h3>
                         <p class="author-bio">Cybersecurity practitioner & security engineer specializing in digital forensics, SOC triage, network security, and automated threat parsers.</p>
                         <div class="author-links">
-                            <a href="{{ contact.github or settings.github_url or 'https://github.com/aimadulislam' }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+                            <a href="{{ contact.github or settings.github_url or 'https://github.com/im0d00' }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
                             <a href="{{ contact.linkedin or settings.linkedin_url or 'https://linkedin.com/in/aimad-ulislam' }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
                         </div>
                     </div>
@@ -153,4 +153,4 @@ layout: layouts/base.njk
             </aside>
         </div>
     </article>
-</main>
+</div>

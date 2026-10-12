@@ -11,7 +11,7 @@
       "issue_date": "2026-03-01",
       "expiration_date": "Never",
       "status": "Verified",
-      "certificate_pdf": "/downloads/cisco-learnathon-2026.pdf",
+      "certificate_pdf": "",
       "skill_tags": ["Networking", "Cybersecurity", "Cisco NetAcad"],
       "description": "Recognized for outstanding technical achievement in Cisco's global Learn-A-Thon competition."
     },
@@ -26,7 +26,7 @@
       "issue_date": "2026-01-15",
       "expiration_date": "Never",
       "status": "Verified",
-      "certificate_pdf": "/downloads/linux-essentials.pdf",
+      "certificate_pdf": "",
       "skill_tags": ["Linux Administration", "Bash Scripting", "System Administration"],
       "description": "Demonstrated core competency in Linux command-line operations, permissions, and system administration."
     },
@@ -41,7 +41,7 @@
       "issue_date": "2026-02-10",
       "expiration_date": "Never",
       "status": "Verified",
-      "certificate_pdf": "/downloads/cisco-ethical-hacker.pdf",
+      "certificate_pdf": "",
       "skill_tags": ["Ethical Hacking", "Penetration Testing", "Vulnerability Assessment"],
       "description": "Comprehensive training in offensive security methodologies, reconnaissance, exploitation, and counter-measures."
     },
@@ -56,7 +56,7 @@
       "issue_date": "2026-04-01",
       "expiration_date": "Never",
       "status": "Verified",
-      "certificate_pdf": "/downloads/bluecape-dfir.pdf",
+      "certificate_pdf": "",
       "skill_tags": ["DFIR", "Memory Forensics", "Log Analysis", "Volatilty"],
       "description": "Hands-on incident response methodology, disk and RAM artifact acquisition, timeline analysis, and threat containment."
     },
@@ -71,7 +71,7 @@
       "issue_date": "2025-11-20",
       "expiration_date": "Never",
       "status": "Completed",
-      "certificate_pdf": "/downloads/mastercard-forage.pdf",
+      "certificate_pdf": "",
       "skill_tags": ["Security Analysis", "Phishing Analysis", "Enterprise Defense"],
       "description": "Completed practical tasks in identifying phishing campaigns, analyzing technical security threats, and recommending security controls."
     },
@@ -86,7 +86,7 @@
       "issue_date": "2025-08-14",
       "expiration_date": "Never",
       "status": "Verified",
-      "certificate_pdf": "/downloads/cisco-networking-essentials.pdf",
+      "certificate_pdf": "",
       "skill_tags": ["TCP/IP", "Subnetting", "Routing & Switching", "Network Security"],
       "description": "Fundamental networking architecture, IP addressing, Ethernet protocols, and router/switch configurations."
     },

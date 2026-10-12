@@ -51,7 +51,7 @@ seo_description: Discover 100 verified, actively-maintained free security tools
   for ethical hacking, digital forensics, OSINT, and incident response. Every
   tool tested and updated for 2026.
 og_image: /images/chatgpt-image-sep-13-2026-11_47_13-pm.png
-canonical_url: https://aimadulislam.dpdns.org/posts/100-free-security-tools
+canonical_url: https://aimadulislam.dpdns.org/posts/100-free-security-tools-the-ultimate-verified-guide-for-ethical-hackers-and-forensic-investigators/
 related_tools:
   - Kali Linux
   - VirtualBox

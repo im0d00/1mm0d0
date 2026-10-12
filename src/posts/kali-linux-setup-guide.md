@@ -44,10 +44,8 @@ Before we start, here's what you need on your computer:
 
 VirtualBox is free software that lets you run multiple operating systems inside your current OS. Download it from the official site — never from random websites.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Download & Install VirtualBox</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code># 1. Go to: https://www.virtualbox.org/wiki/Downloads
+```bash
+# 1. Go to: https://www.virtualbox.org/wiki/Downloads
 # 2. Download for your OS (Windows/macOS/Linux)
 # 3. Run the installer as Administrator
 # 4. Accept all defaults → click Next → Install
@@ -55,17 +53,15 @@ VirtualBox is free software that lets you run multiple operating systems inside 
 
 # Verify installation on Linux:
 virtualbox --version
-# Expected: 7.x.x or similar</code></pre>
-</div>
+# Expected: 7.x.x or similar
+```
 
 ## Step 2: Install Kali Linux
 
 Instead of installing from an ISO (which takes 45 minutes), download the pre-built VirtualBox image from the official Kali website. This is faster and already configured.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Import Kali Linux VM</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code># 1. Go to: https://www.kali.org/get-kali/#kali-virtual-machines
+```bash
+# 1. Go to: https://www.kali.org/get-kali/#kali-virtual-machines
 # 2. Click "VirtualBox" → download .ova file (~4GB)
 # 3. Open VirtualBox → File → Import Appliance
 # 4. Select the .ova file → click Import
@@ -76,8 +72,8 @@ Instead of installing from an ISO (which takes 45 minutes), download the pre-bui
 # Password: kali
 
 # Update everything (run in Kali terminal):
-sudo apt update && sudo apt upgrade -y</code></pre>
-</div>
+sudo apt update && sudo apt upgrade -y
+```
 
 <div class="callout callout-success">
   <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
@@ -91,10 +87,8 @@ sudo apt update && sudo apt upgrade -y</code></pre>
 
 Metasploitable 2 is a deliberately vulnerable Linux server. It's your first legal target — designed specifically for practising attacks. You own it, so you have full permission.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Download & Configure Metasploitable 2</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code># 1. Download from SourceForge:
+```bash
+# 1. Download from SourceForge:
 #    https://sourceforge.net/projects/metasploitable/
 
 # 2. Extract the ZIP file
@@ -114,17 +108,15 @@ Metasploitable 2 is a deliberately vulnerable Linux server. It's your first lega
 
 # Find its IP address (run inside Metasploitable):
 ifconfig
-# Look for inet addr: 192.168.56.xxx</code></pre>
-</div>
+# Look for inet addr: 192.168.56.xxx
+```
 
 ## Step 4: Install DVWA
 
 DVWA (Damn Vulnerable Web Application) gives you a vulnerable website to practise web hacking — SQL injection, XSS, file upload attacks, and more.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Install DVWA with Docker on Kali</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code># In your Kali Linux terminal:
+```bash
+# In your Kali Linux terminal:
 sudo apt install docker.io -y
 sudo systemctl start docker
 sudo systemctl enable docker
@@ -137,17 +129,15 @@ sudo docker run -d -p 80:80 vulnerables/web-dvwa
 # Go to: http://localhost/setup.php
 # Click "Create / Reset Database"
 # Login: admin / password
-# Set Security Level to "Low" for beginners</code></pre>
-</div>
+# Set Security Level to "Low" for beginners
+```
 
 ## Step 5: Configure Network
 
 Host-Only networking is essential. It means your VMs can talk to each other but cannot reach the internet — your attack traffic stays completely contained.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Set up Host-Only network</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code># In VirtualBox:
+```bash
+# In VirtualBox:
 # File → Host Network Manager → Create
 # Note the range: usually 192.168.56.0/24
 
@@ -161,17 +151,15 @@ ip a
 
 # Test connection from Kali to Metasploitable:
 ping 192.168.56.102 -c 4
-# Expected: 4 packets received = lab is working!</code></pre>
-</div>
+# Expected: 4 packets received = lab is working!
+```
 
 ## Step 6: Run Your First Scan
 
 With your lab working, let's run your first real Nmap scan. This is the starting point of every penetration test.
 
-<div class="code-block-wrap">
-  <span class="code-block-label">Your first Nmap scan</span>
-  <button class="copy-btn" aria-label="Copy code"><i class="fa-regular fa-copy" aria-hidden="true"></i> Copy</button>
-  <pre><code># Basic scan of Metasploitable:
+```bash
+# Basic scan of Metasploitable:
 nmap -sV 192.168.56.102
 
 # Expected output:
@@ -184,8 +172,8 @@ nmap -sV 192.168.56.102
 # ... many more vulnerable services
 
 # Full scan (all 65535 ports):
-nmap -sV -sC -O -A -p- 192.168.56.102 --min-rate 5000 -oA my_first_scan</code></pre>
-</div>
+nmap -sV -sC -O -A -p- 192.168.56.102 --min-rate 5000 -oA my_first_scan
+```
 
 > Congratulations. You just ran your first penetration testing recon scan on a legal target. This is how every professional engagement begins.
 

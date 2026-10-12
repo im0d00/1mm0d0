@@ -14,12 +14,15 @@ Aimad Ul Islam is a Cybersecurity student, SOC analyst enthusiast, and network s
 
 ## Important Pages
 - Home: https://aimadulislam.dpdns.org/
+- About Aimad: https://aimadulislam.dpdns.org/about/
 - Projects Portfolio: https://aimadulislam.dpdns.org/projects/
 - Security Blog & Writeups: https://aimadulislam.dpdns.org/blog/
 - Research Reports: https://aimadulislam.dpdns.org/research/
 - Hands-on Security Labs: https://aimadulislam.dpdns.org/labs/
 - Downloadable Assets & Cheat Sheets: https://aimadulislam.dpdns.org/downloads/
 - Resources & Legal Policies: https://aimadulislam.dpdns.org/resources/
+- Contact & Incident Desk: https://aimadulislam.dpdns.org/contact/
+- Brand Specification: https://aimadulislam.dpdns.org/brand.md
 
 
 ## Featured Projects
@@ -53,6 +56,11 @@ Aimad Ul Islam is a Cybersecurity student, SOC analyst enthusiast, and network s
 
 
 ## Technical Blog & Writeups
+
+
+
+- [100 Free Security Tools: The Ultimate Verified Guide for Ethical Hackers and Forensic Investigators](https://aimadulislam.dpdns.org/posts/100-free-security-tools-the-ultimate-verified-guide-for-ethical-hackers-and-forensic-investigators/): The ultimate curated, fact-checked arsenal of 100 free security tools for ethical hackers and forensic investigators. Every tool verified for active maintenance, industry relevance, and practical usability — with dead or discontinued tools removed. (Published: 2026-09-13)
+
 
 
 
@@ -114,5 +122,5 @@ Aimad Ul Islam is a Cybersecurity student, SOC analyst enthusiast, and network s
 ## Contact & Professional Profiles
 - Email: info@aimadulislam.dpdns.org
 - GitHub: https://github.com/im0d00
-- LinkedIn: https://linkedin.com/in/aimadulislam
+- LinkedIn: https://linkedin.com/in/aimad-ulislam
 - X / Twitter: https://x.com/aimadulislam
