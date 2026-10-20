@@ -59,6 +59,21 @@ Aimad Ul Islam is a Cybersecurity student, SOC analyst enthusiast, and network s
 
 
 
+- [Google Dorking: The Complete Guide to Advanced Search Operators, Finding Hidden PDFs, and OSINT Reconnaissance](https://aimadulislam.dpdns.org/posts/google-dorking-the-complete-guide-to-advanced-search-operators-finding-hidden-pdfs-and-osint-reconnaissance/): Google Dorking is one of the most powerful OSINT techniques in cybersecurity. This comprehensive guide covers every advanced search operator, teaches you how to find hidden PDFs and books using directory listings, explores the Google Hacking Database, and provides a defensive playbook for protecting your own site. (Published: 2026-10-03)
+
+
+
+
+- [The Silent Threat in Your Living Room: Analyzing Modem Malware and the Chuck Norris Botnet](https://aimadulislam.dpdns.org/posts/the-silent-threat-in-your-living-room-analyzing-modem-malware-and-the-chuck-norris-botnet/): Your computer has antivirus. Your firewall has an IDS. But what about your ADSL modem? This deep dive explores how attackers infect embedded broadband devices, the lifecycle of the Chuck Norris botnet, and the cutting-edge memory forensics used to extract malware from routers. (Published: 2026-09-21)
+
+
+
+
+- [Web Security for Developers: The Complete Guide to Building Secure Websites](https://aimadulislam.dpdns.org/posts/web-security-for-developers-the-complete-guide-to-building-secure-websites/): Discover the most critical web vulnerabilities—SQL injection, cross-site scripting, CSRF, and session hijacking—and learn how to defend against them with practical code examples and modern security best practices. (Published: 2026-09-17)
+
+
+
+
 - [100 Free Security Tools: The Ultimate Verified Guide for Ethical Hackers and Forensic Investigators](https://aimadulislam.dpdns.org/posts/100-free-security-tools-the-ultimate-verified-guide-for-ethical-hackers-and-forensic-investigators/): The ultimate curated, fact-checked arsenal of 100 free security tools for ethical hackers and forensic investigators. Every tool verified for active maintenance, industry relevance, and practical usability — with dead or discontinued tools removed. (Published: 2026-09-13)
 
 

@@ -132,6 +132,13 @@
     <priority>0.7</priority>
   </url>
   
+  <url>
+    <loc>https://aimadulislam.dpdns.org/category/web-development/</loc>
+    <lastmod>2026-10-12</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
 
   
     
@@ -434,6 +441,42 @@
   <url>
     <loc>https://aimadulislam.dpdns.org/posts/100-free-security-tools-the-ultimate-verified-guide-for-ethical-hackers-and-forensic-investigators/</loc>
     <lastmod>2026-09-13</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+    
+  
+    
+    
+    
+    
+  <url>
+    <loc>https://aimadulislam.dpdns.org/posts/web-security-for-developers-the-complete-guide-to-building-secure-websites/</loc>
+    <lastmod>2026-09-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+    
+  
+    
+    
+    
+    
+  <url>
+    <loc>https://aimadulislam.dpdns.org/posts/the-silent-threat-in-your-living-room-analyzing-modem-malware-and-the-chuck-norris-botnet/</loc>
+    <lastmod>2026-09-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+    
+  
+    
+    
+    
+    
+  <url>
+    <loc>https://aimadulislam.dpdns.org/posts/google-dorking-the-complete-guide-to-advanced-search-operators-finding-hidden-pdfs-and-osint-reconnaissance/</loc>
+    <lastmod>2026-10-03</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>

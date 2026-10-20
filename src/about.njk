@@ -120,7 +120,7 @@ canonical_url: "https://aimadulislam.dpdns.org/about/"
             Whether you want to discuss incident response methodologies, explore technical research collaborations, or inquire about open SOC roles, feel free to reach out.
         </p>
         <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-            <a href="https://github.com/im0d00" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm"><i class="fa-brands fa-github"></i> GitHub (im0d00)</a>
+            <a href="{{ settings.public_github_url or settings.github_url or contact.github or 'https://github.com/im0d00' }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm"><i class="fa-brands fa-github"></i> GitHub ({{ settings.public_github_username or contact.github_username or 'im0d00' }})</a>
             <a href="https://linkedin.com/in/aimad-ulislam" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
             <a href="mailto:info@aimadulislam.dpdns.org" class="btn btn-cyan btn-sm"><i class="fa-solid fa-envelope"></i> info@aimadulislam.dpdns.org</a>
             <a href="/contact/" class="btn btn-ghost btn-sm"><i class="fa-solid fa-paper-plane"></i> Contact Form</a>

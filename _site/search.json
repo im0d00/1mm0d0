@@ -1,6 +1,39 @@
 [
   {
     "type": "Blog Post",
+    "title": "Google Dorking: The Complete Guide to Advanced Search Operators, Finding Hidden PDFs, and OSINT Reconnaissance",
+    "subtitle": "Master advanced Google search operators, uncover hidden PDFs and books, exploit open directories, and learn the ethical framework behind OSINT reconnaissance.",
+    "description": "Google Dorking is one of the most powerful OSINT techniques in cybersecurity. This comprehensive guide covers every advanced search operator, teaches you how to find hidden PDFs and books using directory listings, explores the Google Hacking Database, and provides a defensive playbook for protecting your own site.",
+    "author": "Aimad Ul Islam",
+    "category": "Cybersecurity",
+    "categories": ["Cybersecurity","OSINT","Tutorials","Web Development"],
+    "tags": ["google-dorking","osint","reconnaissance","search-operators","google-hacking-database","information-gathering","cybersecurity","ethical-hacking","pdf-finding","books"],
+    "url": "/posts/google-dorking-the-complete-guide-to-advanced-search-operators-finding-hidden-pdfs-and-osint-reconnaissance/"
+  },
+  {
+    "type": "Blog Post",
+    "title": "The Silent Threat in Your Living Room: Analyzing Modem Malware and the Chuck Norris Botnet",
+    "subtitle": "A deep dive into embedded malware, memory forensics on MIPS routers, and how researchers tracked a 30,000-device botnet using NetFlow.",
+    "description": "Your computer has antivirus. Your firewall has an IDS. But what about your ADSL modem? This deep dive explores how attackers infect embedded broadband devices, the lifecycle of the Chuck Norris botnet, and the cutting-edge memory forensics used to extract malware from routers.",
+    "author": "Aimad Ul Islam",
+    "category": "Cybersecurity",
+    "categories": ["Cybersecurity","Forensics","Networking","Tutorials"],
+    "tags": ["modem-malware","embedded-security","iot-security","botnet","netflow","memory-forensics","chuck-norris-botnet","router-security"],
+    "url": "/posts/the-silent-threat-in-your-living-room-analyzing-modem-malware-and-the-chuck-norris-botnet/"
+  },
+  {
+    "type": "Blog Post",
+    "title": "Web Security for Developers: The Complete Guide to Building Secure Websites",
+    "subtitle": "Real Threats, Practical Defense — A comprehensive guide to preventing injection, XSS, CSRF, and session hijacking in modern web applications.",
+    "description": "Discover the most critical web vulnerabilities—SQL injection, cross-site scripting, CSRF, and session hijacking—and learn how to defend against them with practical code examples and modern security best practices.",
+    "author": "Aimad Ul Islam",
+    "category": "Cybersecurity",
+    "categories": ["Cybersecurity","Web Development","Tutorials"],
+    "tags": ["web-security","sql-injection","xss","csrf","authentication","session-hijacking","encryption","owasp","secure-coding"],
+    "url": "/posts/web-security-for-developers-the-complete-guide-to-building-secure-websites/"
+  },
+  {
+    "type": "Blog Post",
     "title": "100 Free Security Tools: The Ultimate Verified Guide for Ethical Hackers and Forensic Investigators",
     "subtitle": "A comprehensively verified and updated collection of 100 essential security tools — from digital forensics frameworks to OSINT, malware analysis, and penetration testing utilities.",
     "description": "The ultimate curated, fact-checked arsenal of 100 free security tools for ethical hackers and forensic investigators. Every tool verified for active maintenance, industry relevance, and practical usability — with dead or discontinued tools removed.",

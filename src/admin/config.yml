@@ -61,7 +61,10 @@ collections:
           - { label: "Cloudflare Turnstile Public Key", name: "cloudflare_turnstile_key", widget: "string", required: false }
           - { label: "Microsoft Clarity ID", name: "microsoft_clarity_id", widget: "string", required: false }
           - { label: "Cloudflare Analytics Token", name: "cloudflare_analytics", widget: "string", required: false }
-          - { label: "Open Graph Image", name: "og_image", widget: "image", required: false }
+          - { label: "Public GitHub Username", name: "public_github_username", widget: "string", default: "im0d00", required: false, hint: "Public GitHub username displayed to visitors (independent of website deployment account)" }
+          - { label: "Public GitHub Profile URL", name: "public_github_url", widget: "string", default: "https://github.com/im0d00", required: false, hint: "Public GitHub profile URL opened by visitor-facing buttons, header/footer, and social links" }
+          - { label: "Default Public Repository URL", name: "default_repo_url", widget: "string", default: "https://github.com/im0d00", required: false, hint: "Fallback public repository link when a project does not specify its own repository" }
+          - { label: "GitHub Profile Link (Legacy Compatibility)", name: "github_url", widget: "string", default: "https://github.com/im0d00", required: false }
           - { label: "Robots Settings", name: "robots_settings", widget: "text", required: false }
           - name: "social_media_links"
             label: "Social Media Links"
@@ -401,7 +404,8 @@ collections:
           - { label: "Phone Number", name: "phone", widget: "string", required: false }
           - { label: "Website URL", name: "website", widget: "string", required: false }
           - { label: "Portfolio URL", name: "portfolio", widget: "string", required: false }
-          - { label: "GitHub Profile URL", name: "github", widget: "string", required: false }
+          - { label: "GitHub Profile URL (Public)", name: "github", widget: "string", required: false, hint: "Public GitHub profile URL shown in contact section" }
+          - { label: "GitHub Username (Public)", name: "github_username", widget: "string", required: false, hint: "Public GitHub username displayed in contact section" }
           - { label: "LinkedIn Profile URL", name: "linkedin", widget: "string", required: false }
           - { label: "YouTube Channel URL", name: "youtube", widget: "string", required: false }
           - { label: "Instagram Profile URL", name: "instagram", widget: "string", required: false }

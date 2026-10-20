@@ -1,24 +1,11 @@
 {
   "main_menu": [
     { "label": "Home", "url": "/", "icon": "fa-solid fa-house", "target": "_self" },
-    { "label": "About", "url": "/about/", "icon": "fa-solid fa-user", "target": "_self" },
     { "label": "Projects", "url": "/projects/", "icon": "fa-solid fa-folder-open", "target": "_self" },
     { "label": "Labs", "url": "/labs/", "icon": "fa-solid fa-flask", "target": "_self" },
-    { "label": "Research", "url": "/research/", "icon": "fa-solid fa-file-contract", "target": "_self" },
+    { "label": "About", "url": "/about/", "icon": "fa-solid fa-user", "target": "_self" },
     { "label": "Blog", "url": "/blog/", "icon": "fa-solid fa-pen-nib", "target": "_self" },
-    {
-      "label": "Resources",
-      "url": "/resources/",
-      "icon": "fa-solid fa-shield-halved",
-      "target": "_self",
-      "children": [
-        { "label": "All Resources", "url": "/resources/", "icon": "fa-solid fa-layer-group" },
-        { "label": "Download Hub", "url": "/downloads/", "icon": "fa-solid fa-download" },
-        { "label": "Security Policy", "url": "/resources/security-policy/", "icon": "fa-solid fa-lock" },
-        { "label": "Disclosure Policy", "url": "/resources/responsible-disclosure/", "icon": "fa-solid fa-bug" },
-        { "label": "Human Sitemap", "url": "/resources/sitemap-page/", "icon": "fa-solid fa-sitemap" }
-      ]
-    },
+    { "label": "Research", "url": "/research/", "icon": "fa-solid fa-file-contract", "target": "_self" },
     { "label": "Contact", "url": "/contact/", "icon": "fa-solid fa-envelope", "target": "_self" }
   ]
 }

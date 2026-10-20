@@ -75,7 +75,7 @@ description: Technical articles, DFIR research, SOC playbooks, Linux tutorials, 
         <div class="card-glow"></div>
         <div class="featured-img-wrap">
           {% if featuredPost.data.image or featuredPost.data.thumbnail %}
-          <img src="{{ featuredPost.data.image or featuredPost.data.thumbnail }}" alt="{{ featuredPost.data.title }}" loading="lazy"/>
+          <img src="{{ featuredPost.data.image or featuredPost.data.thumbnail }}" alt="{{ featuredPost.data.title }}" loading="lazy" onerror="this.onerror=null; this.src='/images/file_000000000d8c720780e6dc16033e558d.png';"/>
           {% else %}
           <div class="featured-img-placeholder">
             <i class="fa-solid fa-shield-virus"></i>
@@ -132,7 +132,7 @@ description: Technical articles, DFIR research, SOC playbooks, Linux tutorials, 
             <div class="card-glow"></div>
             <div class="article-card-img-wrap">
               {% if post.data.image or post.data.thumbnail %}
-              <img class="article-card-img" src="{{ post.data.image or post.data.thumbnail }}" alt="{{ post.data.title }}" loading="lazy"/>
+              <img class="article-card-img" src="{{ post.data.image or post.data.thumbnail }}" alt="{{ post.data.title }}" loading="lazy" onerror="this.onerror=null; this.src='/images/file_000000000d8c720780e6dc16033e558d.png';"/>
               {% else %}
               <div class="article-card-img-placeholder">
                 <span class="card-emoji">{{ post.data.emoji or "📄" }}</span>

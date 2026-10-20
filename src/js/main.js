@@ -16,21 +16,53 @@ if (document.readyState === 'loading') {
     initApp();
 }
 
-// 1. Header Scroll Effect
+// 1. Header Scroll Effect (Auto-Hide on Scroll Down, Reveal on Scroll Up & Top)
 function initHeaderScroll() {
     const navbar = document.getElementById('navbar');
     if (!navbar) return;
     
-    const handleScroll = () => {
-        if (window.scrollY > 20) {
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+    const deltaThreshold = 8;
+    
+    const updateHeader = () => {
+        const currentScrollY = window.scrollY;
+        
+        // Frosted background style when scrolled past top
+        if (currentScrollY > 20) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
+        
+        // If near the top (<= 60px), header is always visible
+        if (currentScrollY <= 60) {
+            navbar.classList.remove('nav-hidden');
+        } else {
+            const diff = currentScrollY - lastScrollY;
+            if (Math.abs(diff) > deltaThreshold) {
+                if (diff > 0) {
+                    // Scrolling DOWN -> smoothly hide header
+                    navbar.classList.add('nav-hidden');
+                } else {
+                    // Scrolling UP -> smoothly reveal header
+                    navbar.classList.remove('nav-hidden');
+                }
+            }
+        }
+        
+        lastScrollY = currentScrollY;
+        ticking = false;
     };
     
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll();
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            window.requestAnimationFrame(updateHeader);
+            ticking = true;
+        }
+    }, { passive: true });
+    
+    updateHeader();
 }
 
 // 2. Dark / Light Theme Toggle

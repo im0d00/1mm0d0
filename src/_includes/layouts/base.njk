@@ -75,7 +75,7 @@
         "sameAs": "https://uop.edu.pk"
       },
       "sameAs": [
-        "{{ settings.github_url or 'https://github.com/im0d00' }}",
+        "{{ settings.public_github_url or settings.github_url or 'https://github.com/im0d00' }}",
         "{{ settings.linkedin_url or 'https://linkedin.com/in/aimad-ulislam' }}",
         "{{ settings.x_url or 'https://x.com/aimadulislam' }}",
         "{{ settings.youtube_url or 'https://youtube.com/@aimadulislam' }}"
@@ -148,7 +148,7 @@
       "name": {{ (title or "") | dump | safe }},
       "description": {{ (description or excerpt or "") | dump | safe }},
       "programmingLanguage": {{ (technologies[0] or "Python") | dump | safe }},
-      "codeRepository": {{ (github_link or "https://github.com/im0d00") | dump | safe }},
+      "codeRepository": {{ (github_link or settings.default_repo_url or settings.public_github_url or settings.github_url or "https://github.com/im0d00") | dump | safe }},
       "author": {
         "@type": "Person",
         "name": {{ (author or "Aimad Ul Islam") | dump | safe }}
@@ -214,7 +214,7 @@
 
     <!-- SEARCH MODAL OVERLAY -->
     <div id="searchModal" style="display:none; position:fixed; inset:0; z-index:99999; background:rgba(5,8,16,0.88); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); padding:2rem 1rem; align-items:flex-start; justify-content:center; overflow-y:auto;">
-        <div class="card" style="max-width:720px; width:100%; margin-top:6vh; padding:1.8rem; position:relative; border:1px solid var(--border2); background:var(--panel); box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(0,212,255,0.15);">
+        <div class="card cyber-modal-card" style="max-width:720px; width:100%; margin-top:6vh; padding:1.8rem; position:relative; border:1px solid rgba(0,217,255,0.35); background:linear-gradient(180deg, rgba(10,22,40,0.95) 0%, rgba(7,18,37,0.98) 100%); box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 35px rgba(8,123,255,0.3); clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px), 0 12px);">
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.2rem;">
                 <div style="font-family:'Space Grotesk',sans-serif; font-size:1.15rem; font-weight:700; color:var(--cyan); display:flex; align-items:center; gap:0.6rem;">
                     <i class="fa-solid fa-terminal"></i> Security Search Engine

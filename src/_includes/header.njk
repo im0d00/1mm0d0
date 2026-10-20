@@ -1,166 +1,204 @@
-<nav id="navbar" class="site-nav" role="navigation" aria-label="Main Navigation">
-    <div class="nav-container" style="width: 100%; max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
-        {% set headerLogoImg = settings.logo or brand.logo or brand.header_logo or settings.header_logo or brand.main_logo or settings.logo_image or brand.logo_dark %}
-        {% set headerLogoLightImg = brand.logo_light or settings.logo_image_light %}
-        {% set siteName = settings.site_name or brand.site_name or settings.website_name or brand.brand_name or settings.brand_name or brand.logo_text or settings.logo_text or settings.portfolio_name %}
+<header id="navbar" class="cyber-header" role="banner">
+    {% set headerLogoImg = settings.profile_picture or brand.logo or settings.logo or brand.header_logo or "/images/whatsapp-image-2026-07-05-at-9.35.59-pm.jpeg" %}
+    {% set siteName = brand.logo_text or settings.portfolio_name or settings.site_name or "Aimad Security" %}
 
-        <a href="{{ brand.logo_link or '/' }}" class="nav-logo-wrap" aria-label="{{ siteName or 'Home' }}">
-            {% if headerLogoImg %}
-                <div class="nav-logo-wrapper site-logo">
-                    <img src="{{ headerLogoImg }}" alt="{{ siteName or 'Logo' }}" class="nav-logo-img {% if headerLogoLightImg and headerLogoLightImg != headerLogoImg %}dark-logo{% endif %}" />
-                    {% if headerLogoLightImg and headerLogoLightImg != headerLogoImg %}
-                        <img src="{{ headerLogoLightImg }}" alt="{{ siteName or 'Logo' }}" class="nav-logo-img light-logo" />
+    <div class="cyber-nav-container">
+        <!-- OUTER FUTURISTIC CYBER FRAME -->
+        <div class="cyber-nav-frame">
+            <!-- Decorative Laser Rails & Circuit Accents -->
+            <div class="cyber-frame-laser laser-top-left" aria-hidden="true"></div>
+            <div class="cyber-frame-laser laser-top-right" aria-hidden="true"></div>
+            <div class="cyber-frame-laser laser-bottom-center" aria-hidden="true"></div>
+            <div class="cyber-frame-cap cap-left" aria-hidden="true"></div>
+            <div class="cyber-frame-cap cap-right" aria-hidden="true"></div>
+            <div class="cyber-frame-glow-left" aria-hidden="true"></div>
+            <div class="cyber-frame-glow-right" aria-hidden="true"></div>
+
+            <!-- INNER NAVIGATION BAR CONTENT -->
+            <div class="cyber-nav-inner">
+                <!-- Branding on the left: Circular Avatar with HUD ring + Aimad Security -->
+                <a href="{{ brand.logo_link or '/' }}" class="cyber-brand-wrap" aria-label="{{ siteName }} Home">
+                    <div class="cyber-avatar-wrap">
+                        <div class="cyber-avatar-hud-ring" aria-hidden="true"></div>
+                        <img src="{{ headerLogoImg }}" alt="{{ siteName }}" class="cyber-avatar-img" width="42" height="42" loading="eager" />
+                    </div>
+                    <div class="cyber-brand-text">
+                        <span class="cyber-brand-title">{{ siteName }}</span>
+                        <span class="cyber-brand-line" aria-hidden="true"></span>
+                    </div>
+                </a>
+
+                <!-- Exact Navigation Sequence: 1. Home, 2. Projects, 3. Labs, 4. About, 5. Search, 6. Blog, 7. Research, 8. Contact -->
+                <ul class="cyber-nav-links" role="menubar">
+                    <!-- 1. Home -->
+                    <li class="cyber-nav-item" role="none">
+                        <a href="/" class="cyber-nav-link {% if page.url == '/' %}active{% endif %}" role="menuitem">
+                            <i class="fa-solid fa-house" aria-hidden="true"></i>
+                            <span>Home</span>
+                        </a>
+                    </li>
+
+                    <!-- 2. Projects -->
+                    <li class="cyber-nav-item" role="none">
+                        <a href="/projects/" class="cyber-nav-link {% if '/projects' in page.url %}active{% endif %}" role="menuitem">
+                            <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                            <span>Projects</span>
+                        </a>
+                    </li>
+
+                    <!-- 3. Labs -->
+                    <li class="cyber-nav-item" role="none">
+                        <a href="/labs/" class="cyber-nav-link {% if '/labs' in page.url %}active{% endif %}" role="menuitem">
+                            <i class="fa-solid fa-flask" aria-hidden="true"></i>
+                            <span>Labs</span>
+                        </a>
+                    </li>
+
+                    <!-- 4. About -->
+                    <li class="cyber-nav-item" role="none">
+                        <a href="/about/" class="cyber-nav-link {% if '/about' in page.url %}active{% endif %}" role="menuitem">
+                            <i class="fa-solid fa-user" aria-hidden="true"></i>
+                            <span>About</span>
+                        </a>
+                    </li>
+
+                    <!-- 5. Search Control (Positioned between About and Blog) -->
+                    {% if settings.search_enabled != false %}
+                    <li class="cyber-nav-item cyber-nav-search-item" role="none">
+                        <button id="searchOpenBtn" class="cyber-search-btn" onclick="openSearchModal()" aria-label="Search platform (Press Ctrl+K)">
+                            <i class="fa-solid fa-magnifying-glass cyber-search-icon" aria-hidden="true"></i>
+                            <span class="cyber-search-text">Search</span>
+                            <kbd class="cyber-kbd" aria-hidden="true">Ctrl+K</kbd>
+                        </button>
+                    </li>
                     {% endif %}
+
+                    <!-- 6. Blog -->
+                    <li class="cyber-nav-item" role="none">
+                        <a href="/blog/" class="cyber-nav-link {% if ('/blog' in page.url) or ('/posts' in page.url) or ('/category' in page.url) %}active{% endif %}" role="menuitem">
+                            <i class="fa-solid fa-pen-nib" aria-hidden="true"></i>
+                            <span>Blog</span>
+                        </a>
+                    </li>
+
+                    <!-- 7. Research -->
+                    <li class="cyber-nav-item" role="none">
+                        <a href="/research/" class="cyber-nav-link {% if '/research' in page.url %}active{% endif %}" role="menuitem">
+                            <i class="fa-solid fa-file-contract" aria-hidden="true"></i>
+                            <span>Research</span>
+                        </a>
+                    </li>
+
+                    <!-- 8. Contact -->
+                    <li class="cyber-nav-item" role="none">
+                        <a href="/contact/" class="cyber-nav-link {% if '/contact' in page.url %}active{% endif %}" role="menuitem">
+                            <i class="fa-solid fa-envelope" aria-hidden="true"></i>
+                            <span>Contact</span>
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Utility actions on far right: Theme toggle & Mobile hamburger -->
+                <div class="cyber-nav-actions">
+                    <button class="cyber-icon-btn dark-mode-btn" id="theme-toggle" aria-label="Toggle dark/light theme" onclick="toggleTheme()">
+                        <i class="fa-regular fa-moon" id="theme-toggle-icon" aria-hidden="true"></i>
+                    </button>
+
+                    <button class="cyber-hamburger" id="ham" aria-label="Toggle navigation menu" aria-expanded="false" onclick="toggleMobileNav(event)">
+                        <span class="ham-line"></span>
+                        <span class="ham-line"></span>
+                        <span class="ham-line"></span>
+                    </button>
                 </div>
-            {% endif %}
-
-            {% if siteName and (settings.show_logo_text_with_image != false or not headerLogoImg) %}
-                {% if headerLogoImg %}
-                    <span class="nav-logo-text">{{ siteName }}</span>
-                {% else %}
-                    <span class="nav-logo"><span class="br">[</span>{{ siteName }}<span class="nav-dot"></span><span class="br">]</span></span>
-                {% endif %}
-            {% endif %}
-        </a>
-
-        <ul class="nav-links">
-            {% for item in navigation.main_menu %}
-                {% if item.children and item.children.length > 0 %}
-                <li class="nav-item-dropdown">
-                    <a href="{{ item.url }}" class="dropdown-toggle {% if item.url == page.url or (item.url != '/' and item.url != '/#' and item.url in page.url) %}active{% endif %}">
-                        <i class="{{ item.icon or 'fa-solid fa-link' }} fa-xs"></i>
-                        <span>{{ item.label }}</span>
-                        <i class="fa-solid fa-chevron-down nav-arrow"></i>
-                    </a>
-                    <ul class="dropdown-menu">
-                        {% for child in item.children %}
-                        <li>
-                            <a href="{{ child.url }}" {% if child.url == page.url %}class="active"{% endif %}>
-                                <i class="{{ child.icon or 'fa-solid fa-angle-right' }} fa-xs"></i>
-                                <span>{{ child.label }}</span>
-                            </a>
-                        </li>
-                        {% endfor %}
-                    </ul>
-                </li>
-                {% else %}
-                <li>
-                    <a href="{{ item.url }}" {% if page.url == item.url or (item.url != '/' and item.url != '/#' and item.url in page.url) %}class="active"{% endif %}>
-                        <i class="{{ item.icon or 'fa-solid fa-link' }} fa-xs"></i>
-                        <span>{{ item.label }}</span>
-                    </a>
-                </li>
-                {% endif %}
-            {% else %}
-                <li><a href="/" {% if page.url == '/' %}class="active"{% endif %}><i class="fa-solid fa-house fa-xs"></i> Home</a></li>
-                <li><a href="/projects/" {% if 'projects' in page.url %}class="active"{% endif %}><i class="fa-solid fa-folder-open fa-xs"></i> Projects</a></li>
-                <li><a href="/labs/" {% if 'labs' in page.url %}class="active"{% endif %}><i class="fa-solid fa-flask fa-xs"></i> Labs</a></li>
-                <li><a href="/research/" {% if 'research' in page.url %}class="active"{% endif %}><i class="fa-solid fa-file-contract fa-xs"></i> Research</a></li>
-                <li><a href="/blog/" {% if 'blog' in page.url or 'posts' in page.url %}class="active"{% endif %}><i class="fa-solid fa-pen-nib fa-xs"></i> Blog</a></li>
-                <li><a href="/resources/" {% if 'resources' in page.url %}class="active"{% endif %}><i class="fa-solid fa-shield-halved fa-xs"></i> Resources</a></li>
-                <li><a href="/#contact"><i class="fa-solid fa-envelope fa-xs"></i> Contact</a></li>
-            {% endfor %}
-        </ul>
-
-        <div class="nav-right">
-            {% if settings.search_enabled != false %}
-            <button id="searchOpenBtn" class="search-trigger-btn" onclick="openSearchModal()" aria-label="Search site (Ctrl+K)">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <span class="search-btn-text">Search</span>
-                <kbd class="kbd-badge">Ctrl+K</kbd>
-            </button>
-            {% endif %}
-            
-            {% if settings.status_badge_visible != false %}
-            <div class="nav-status" title="{{ settings.status_badge_text or contact.availability or 'ONLINE' }}">
-                <span class="status-dot" style="{% if settings.status_badge_color %}background: {{ settings.status_badge_color }}; box-shadow: 0 0 8px {{ settings.status_badge_color }};{% endif %}"></span>
-                <span class="status-text">{{ settings.status_badge_text or contact.availability or "ONLINE" }}</span>
             </div>
-            {% endif %}
-
-            <button class="dark-mode-btn" id="theme-toggle" aria-label="Toggle dark/light theme" onclick="toggleTheme()">
-                <i class="fa-regular fa-moon" id="theme-toggle-icon"></i>
-            </button>
-
-            <a href="{{ resume.pdf_file or hero.resume_button_link or '/downloads/' }}" download class="nav-resume-btn" aria-label="Download Resume">
-                <i class="fa-solid fa-file-pdf"></i>
-                <span>Resume</span>
-                <i class="fa-solid fa-download dl-icon"></i>
-            </a>
-
-            <button class="hamburger" id="ham" aria-label="Toggle navigation menu" aria-expanded="false" onclick="toggleMobileNav(event)">
-                <span></span><span></span><span></span>
-            </button>
         </div>
     </div>
-</nav>
+</header>
 
 <!-- MOBILE OVERLAY & DRAWER -->
 <div class="mobile-overlay" id="mobOverlay" onclick="closeMobileNav(event)"></div>
-<div class="mobile-nav" id="mobNav" aria-label="Mobile Navigation">
+<aside class="mobile-nav" id="mobNav" aria-label="Mobile Navigation Drawer">
     <div class="mobile-nav-header">
-        <div class="mobile-nav-brand">
-            <a href="{{ brand.logo_link or '/' }}" class="nav-logo-wrap" aria-label="{{ siteName or 'Home' }}">
-                {% if headerLogoImg %}
-                    <div class="nav-logo-wrapper site-logo">
-                        <img src="{{ headerLogoImg }}" alt="{{ siteName or 'Logo' }}" class="nav-logo-img" />
-                    </div>
-                {% endif %}
-                {% if siteName %}
-                    {% if headerLogoImg %}
-                        <span class="nav-logo-text">{{ siteName }}</span>
-                    {% else %}
-                        <span class="nav-logo"><span class="br">[</span>{{ siteName }}<span class="nav-dot"></span><span class="br">]</span></span>
-                    {% endif %}
-                {% endif %}
-            </a>
-        </div>
+        <a href="{{ brand.logo_link or '/' }}" class="cyber-brand-wrap" aria-label="{{ siteName }} Home">
+            <div class="cyber-avatar-wrap">
+                <div class="cyber-avatar-hud-ring" aria-hidden="true"></div>
+                <img src="{{ headerLogoImg }}" alt="{{ siteName }}" class="cyber-avatar-img" width="38" height="38" loading="lazy" />
+            </div>
+            <div class="cyber-brand-text">
+                <span class="cyber-brand-title">{{ siteName }}</span>
+                <span class="cyber-brand-line" aria-hidden="true"></span>
+            </div>
+        </a>
         <button class="mob-close-btn" id="mobCloseBtn" aria-label="Close menu" onclick="closeMobileNav(event)">&times;</button>
     </div>
+
     {% if settings.status_badge_visible != false %}
     <div class="mobile-status-badge">
-        <span class="status-dot" style="{% if settings.status_badge_color %}background: {{ settings.status_badge_color }};{% endif %}"></span>
-        <span>{{ settings.status_badge_text or contact.availability or "Available for Security Consulting" }}</span>
+        <span class="status-dot" style="{% if settings.status_badge_color %}background: {{ settings.status_badge_color }}; box-shadow: 0 0 8px {{ settings.status_badge_color }};{% endif %}"></span>
+        <span>{{ settings.status_badge_text or contact.availability or "Online / SOC Ready" }}</span>
     </div>
     {% endif %}
+
+    <!-- Mobile Navigation links in exact order (No Resources) -->
     <ul class="mobile-links">
-        {% for item in navigation.main_menu %}
-        <li class="mob-item-wrap">
-            <a href="{{ item.url }}" class="{% if page.url == item.url or (item.url != '/' and item.url != '/#' and item.url in page.url) %}active{% endif %}">
-                <i class="{{ item.icon or 'fa-solid fa-chevron-right' }}"></i>
-                <span>{{ item.label }}</span>
+        <li>
+            <a href="/" class="{% if page.url == '/' %}active{% endif %}">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
             </a>
-            {% if item.children and item.children.length > 0 %}
-            <ul class="mob-sublinks">
-                {% for child in item.children %}
-                <li>
-                    <a href="{{ child.url }}" class="{% if child.url == page.url %}active{% endif %}">
-                        <i class="{{ child.icon or 'fa-solid fa-angle-right' }}"></i>
-                        <span>{{ child.label }}</span>
-                    </a>
-                </li>
-                {% endfor %}
-            </ul>
-            {% endif %}
         </li>
-        {% else %}
-        <li><a href="/" class="{% if page.url == '/' %}active{% endif %}"><i class="fa-solid fa-house"></i> Home</a></li>
-        <li><a href="/projects/" class="{% if 'projects' in page.url %}active{% endif %}"><i class="fa-solid fa-folder-open"></i> Projects</a></li>
-        <li><a href="/labs/" class="{% if 'labs' in page.url %}active{% endif %}"><i class="fa-solid fa-flask"></i> Labs</a></li>
-        <li><a href="/research/" class="{% if 'research' in page.url %}active{% endif %}"><i class="fa-solid fa-file-contract"></i> Research</a></li>
-        <li><a href="/blog/" class="{% if 'blog' in page.url %}active{% endif %}"><i class="fa-solid fa-pen-nib"></i> Blog</a></li>
-        <li><a href="/resources/" class="{% if 'resources' in page.url %}active{% endif %}"><i class="fa-solid fa-shield-halved"></i> Resources</a></li>
-        <li><a href="/#contact"><i class="fa-solid fa-envelope"></i> Contact</a></li>
-        {% endfor %}
+        <li>
+            <a href="/projects/" class="{% if '/projects' in page.url %}active{% endif %}">
+                <i class="fa-solid fa-folder-open"></i>
+                <span>Projects</span>
+            </a>
+        </li>
+        <li>
+            <a href="/labs/" class="{% if '/labs' in page.url %}active{% endif %}">
+                <i class="fa-solid fa-flask"></i>
+                <span>Labs</span>
+            </a>
+        </li>
+        <li>
+            <a href="/about/" class="{% if '/about' in page.url %}active{% endif %}">
+                <i class="fa-solid fa-user"></i>
+                <span>About</span>
+            </a>
+        </li>
+        <li>
+            <a href="javascript:void(0)" onclick="closeMobileNav(); openSearchModal();">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span>Search</span>
+            </a>
+        </li>
+        <li>
+            <a href="/blog/" class="{% if ('/blog' in page.url) or ('/posts' in page.url) or ('/category' in page.url) %}active{% endif %}">
+                <i class="fa-solid fa-pen-nib"></i>
+                <span>Blog</span>
+            </a>
+        </li>
+        <li>
+            <a href="/research/" class="{% if '/research' in page.url %}active{% endif %}">
+                <i class="fa-solid fa-file-contract"></i>
+                <span>Research</span>
+            </a>
+        </li>
+        <li>
+            <a href="/contact/" class="{% if '/contact' in page.url %}active{% endif %}">
+                <i class="fa-solid fa-envelope"></i>
+                <span>Contact</span>
+            </a>
+        </li>
     </ul>
+
     <div class="mobile-actions">
         {% if settings.search_enabled != false %}
-        <button id="mobSearchBtn" class="btn outline w-full mob-action-btn">
-            <i class="fa-solid fa-magnifying-glass"></i> Search Platform
+        <button id="mobSearchBtn" class="btn outline w-full mob-action-btn" onclick="closeMobileNav(); openSearchModal();">
+            <i class="fa-solid fa-magnifying-glass"></i> Search Platform (Ctrl+K)
         </button>
         {% endif %}
         <a href="{{ resume.pdf_file or hero.resume_button_link or '/downloads/' }}" download class="btn primary w-full mob-action-btn">
             <i class="fa-solid fa-file-pdf"></i> Download Resume
         </a>
     </div>
-</div>
+</aside>

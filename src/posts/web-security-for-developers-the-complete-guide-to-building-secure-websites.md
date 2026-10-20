@@ -37,7 +37,6 @@ likes: 24
 og_image: /images/chatgpt-image-sep-18-2026-02_36_36-am.png
 layout: layouts/post.njk
 ---
-<h1>Web Security for Developers: The Complete Guide to Building Secure Websites</h1>
 
 <p>The web is a wild place. It's easy to get the impression that the internet was designed very deliberately by experts and that everything works as it does for a good reason. In fact, the evolution of the internet has been rapid and haphazard.</p>
 

@@ -48,7 +48,7 @@ canonical_url: "https://aimadulislam.dpdns.org/contact/"
                 <div class="ci-ic" style="width: 42px; height: 42px; border-radius: 8px; background: rgba(0,255,136,0.1); border: 1px solid rgba(0,255,136,0.25); display: flex; align-items: center; justify-content: center; color: var(--green);"><i class="fa-brands fa-github"></i></div>
                 <div>
                     <div style="font-size: 0.8rem; text-transform: uppercase; color: var(--muted); letter-spacing: 0.5px;">GitHub Code Repository</div>
-                    <div style="font-size: 1rem; font-weight: 600;"><a href="{{ contact.github or 'https://github.com/im0d00' }}" target="_blank" rel="noopener noreferrer" style="color: var(--green); text-decoration: none;">github.com/im0d00</a></div>
+                    <div style="font-size: 1rem; font-weight: 600;"><a href="{{ contact.github or settings.public_github_url or settings.github_url or 'https://github.com/im0d00' }}" target="_blank" rel="noopener noreferrer" style="color: var(--green); text-decoration: none;">github.com/{{ settings.public_github_username or contact.github_username or 'im0d00' }}</a></div>
                 </div>
             </div>
 

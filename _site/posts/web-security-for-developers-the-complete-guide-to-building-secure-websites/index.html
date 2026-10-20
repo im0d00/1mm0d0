@@ -1,0 +1,1958 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Security for Developers: The Complete Guide to Building Secure Websites | Aimad Ul Islam</title>
+    <meta name="description" content="Discover the most critical web vulnerabilities—SQL injection, cross-site scripting, CSRF, and session hijacking—and learn how to defend against them with practical code examples and modern security best practices.">
+    <meta name="theme-color" content="#080C1A">
+    <meta name="robots" content="index, follow">
+    <link rel="alternate" type="application/atom+xml" title="Aimad Ul Islam — Cybersecurity & Network Security Feed" href="https://aimadulislam.dpdns.org/feed.xml">
+
+    <!-- Search Engine & IndexNow Verifications -->
+    
+    
+    
+    <meta name="indexnow-key" content="4a706e23293e4590b0e50f3b7b257db1">
+    
+    
+    <!-- Dynamic Favicons & Icons -->
+    
+    <link rel="icon" href="/images/chatgpt-image-sep-7-2026-09_59_01-pm.png">
+    <link rel="shortcut icon" href="/images/chatgpt-image-sep-7-2026-09_59_01-pm.png">
+    
+    <link rel="icon" type="image/png" sizes="32x32" href="/images/chatgpt-image-sep-7-2026-09_59_01-pm.png">
+    
+    
+    <link rel="icon" type="image/svg+xml" href="/images/chatgpt-image-sep-7-2026-09_59_01-pm.png">
+    
+    <link rel="apple-touch-icon" sizes="180x180" href="/images/chatgpt-image-sep-7-2026-09_59_01-pm.png">
+    <link rel="manifest" href="/manifest.json">
+
+    <!-- Open Graph & Meta -->
+    <meta property="og:title" content="Web Security for Developers: The Complete Guide to Building Secure Websites | Aimad Ul Islam">
+    <meta property="og:description" content="Discover the most critical web vulnerabilities—SQL injection, cross-site scripting, CSRF, and session hijacking—and learn how to defend against them with practical code examples and modern security best practices.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://aimadulislam.dpdns.org/posts/web-security-for-developers-the-complete-guide-to-building-secure-websites/">
+    <meta property="og:image" content="/images/chatgpt-image-sep-18-2026-02_36_36-am.png">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Web Security for Developers: The Complete Guide to Building Secure Websites | Aimad Ul Islam">
+    <meta name="twitter:description" content="Discover the most critical web vulnerabilities—SQL injection, cross-site scripting, CSRF, and session hijacking—and learn how to defend against them with practical code examples and modern security best practices.">
+    <meta name="twitter:image" content="/images/chatgpt-image-sep-18-2026-02_36_36-am.png">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://aimadulislam.dpdns.org/posts/web-security-for-developers-the-complete-guide-to-building-secure-websites/">
+
+    <!-- Schema.org JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Aimad Ul Islam",
+      "url": "https://aimadulislam.dpdns.org",
+      "image": "/images/whatsapp-image-2026-07-05-at-9.35.59-pm.jpeg",
+      "jobTitle": "Cybersecurity Specialist & Network Security Researcher",
+      "description": "Cybersecurity student, SOC enthusiast, and network security learner from Pakistan. BSc Computer Science, Cisco certified.",
+      "knowsAbout": [
+        "Cybersecurity",
+        "Network Security",
+        "Digital Forensics & Incident Response (DFIR)",
+        "Security Operations Center (SOC)",
+        "Ethical Hacking",
+        "Penetration Testing",
+        "Linux System Administration",
+        "Python Security Automation"
+      ],
+      "alumniOf": {
+        "@type": "EducationalOrganization",
+        "name": "University of Peshawar",
+        "sameAs": "https://uop.edu.pk"
+      },
+      "sameAs": [
+        "https://github.com/im0d00",
+        "https://linkedin.com/in/aimad-ulislam",
+        "https://x.com/aimadulislam",
+        "https://youtube.com/@aimadulislam"
+      ]
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Aimad Security",
+      "url": "https://aimadulislam.dpdns.org/"
+    }
+    </script>
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://aimadulislam.dpdns.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Blog",
+          "item": "https://aimadulislam.dpdns.org/blog/"
+        }
+        ,
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Web Security for Developers: The Complete Guide to Building Secure Websites",
+          "item": "https://aimadulislam.dpdns.org/posts/web-security-for-developers-the-complete-guide-to-building-secure-websites/"
+        }
+        
+      ]
+    }
+    </script>
+    
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      "headline": "Web Security for Developers: The Complete Guide to Building Secure Websites",
+      "description": "Discover the most critical web vulnerabilities—SQL injection, cross-site scripting, CSRF, and session hijacking—and learn how to defend against them with practical code examples and modern security best practices.",
+      "image": "/images/chatgpt-image-sep-18-2026-02_36_36-am.png",
+      "author": {
+        "@type": "Person",
+        "name": "Aimad Ul Islam"
+      },
+      "datePublished": "2026-09-17",
+      "dateModified": "2026-09-17",
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://aimadulislam.dpdns.org/posts/web-security-for-developers-the-complete-guide-to-building-secure-websites/"
+      }
+    }
+    </script>
+    
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/blog.css">
+    
+    <script>
+      (function() {
+        var localTheme = localStorage.getItem('aimad-theme');
+        if (localTheme === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'dark');
+          localStorage.setItem('aimad-theme', 'dark');
+        }
+      })();
+    </script>
+</head>
+<body class="site-base-body">
+    <div class="grid-bg"></div>
+    <div class="scan-line"></div>
+    <div id="reading-progress"></div>
+
+    <!-- SHARED GLOBAL HEADER -->
+    <nav id="navbar" class="site-nav" role="navigation" aria-label="Main Navigation">
+    <div class="nav-container" style="width: 100%; max-width: 1240px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between;">
+        
+        
+        
+
+        <a href="/" class="nav-logo-wrap" aria-label="Aimad Security">
+            
+                <div class="nav-logo-wrapper site-logo">
+                    <img src="/images/whatsapp-image-2026-07-05-at-9.35.59-pm.jpeg" alt="Aimad Security" class="nav-logo-img " />
+                    
+                </div>
+            
+
+            
+                
+                    <span class="nav-logo-text">Aimad Security</span>
+                
+            
+        </a>
+
+        <ul class="nav-links">
+            
+                
+                <li>
+                    <a href="/" >
+                        <i class="fa-solid fa-house fa-xs"></i>
+                        <span>Home</span>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a href="/about/" >
+                        <i class="fa-solid fa-user fa-xs"></i>
+                        <span>About</span>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a href="/projects/" >
+                        <i class="fa-solid fa-folder-open fa-xs"></i>
+                        <span>Projects</span>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a href="/labs/" >
+                        <i class="fa-solid fa-flask fa-xs"></i>
+                        <span>Labs</span>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a href="/research/" >
+                        <i class="fa-solid fa-file-contract fa-xs"></i>
+                        <span>Research</span>
+                    </a>
+                </li>
+                
+            
+                
+                <li>
+                    <a href="/blog/" >
+                        <i class="fa-solid fa-pen-nib fa-xs"></i>
+                        <span>Blog</span>
+                    </a>
+                </li>
+                
+            
+                
+                <li class="nav-item-dropdown">
+                    <a href="/resources/" class="dropdown-toggle ">
+                        <i class="fa-solid fa-shield-halved fa-xs"></i>
+                        <span>Resources</span>
+                        <i class="fa-solid fa-chevron-down nav-arrow"></i>
+                    </a>
+                    <ul class="dropdown-menu">
+                        
+                        <li>
+                            <a href="/resources/" >
+                                <i class="fa-solid fa-layer-group fa-xs"></i>
+                                <span>All Resources</span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="/downloads/" >
+                                <i class="fa-solid fa-download fa-xs"></i>
+                                <span>Download Hub</span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="/resources/security-policy/" >
+                                <i class="fa-solid fa-lock fa-xs"></i>
+                                <span>Security Policy</span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="/resources/responsible-disclosure/" >
+                                <i class="fa-solid fa-bug fa-xs"></i>
+                                <span>Disclosure Policy</span>
+                            </a>
+                        </li>
+                        
+                        <li>
+                            <a href="/resources/sitemap-page/" >
+                                <i class="fa-solid fa-sitemap fa-xs"></i>
+                                <span>Human Sitemap</span>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </li>
+                
+            
+                
+                <li>
+                    <a href="/contact/" >
+                        <i class="fa-solid fa-envelope fa-xs"></i>
+                        <span>Contact</span>
+                    </a>
+                </li>
+                
+            
+        </ul>
+
+        <div class="nav-right">
+            
+            <button id="searchOpenBtn" class="search-trigger-btn" onclick="openSearchModal()" aria-label="Search site (Ctrl+K)">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span class="search-btn-text">Search</span>
+                <kbd class="kbd-badge">Ctrl+K</kbd>
+            </button>
+            
+            
+            
+            <div class="nav-status" title="Available">
+                <span class="status-dot" style="background: #00FF88; box-shadow: 0 0 8px #00FF88;"></span>
+                <span class="status-text">Available</span>
+            </div>
+            
+
+            <button class="dark-mode-btn" id="theme-toggle" aria-label="Toggle dark/light theme" onclick="toggleTheme()">
+                <i class="fa-regular fa-moon" id="theme-toggle-icon"></i>
+            </button>
+
+            <a href="/assets/Aimad_Ul_Islam_Resume.pdf" download class="nav-resume-btn" aria-label="Download Resume">
+                <i class="fa-solid fa-file-pdf"></i>
+                <span>Resume</span>
+                <i class="fa-solid fa-download dl-icon"></i>
+            </a>
+
+            <button class="hamburger" id="ham" aria-label="Toggle navigation menu" aria-expanded="false" onclick="toggleMobileNav(event)">
+                <span></span><span></span><span></span>
+            </button>
+        </div>
+    </div>
+</nav>
+
+<!-- MOBILE OVERLAY & DRAWER -->
+<div class="mobile-overlay" id="mobOverlay" onclick="closeMobileNav(event)"></div>
+<div class="mobile-nav" id="mobNav" aria-label="Mobile Navigation">
+    <div class="mobile-nav-header">
+        <div class="mobile-nav-brand">
+            <a href="/" class="nav-logo-wrap" aria-label="Aimad Security">
+                
+                    <div class="nav-logo-wrapper site-logo">
+                        <img src="/images/whatsapp-image-2026-07-05-at-9.35.59-pm.jpeg" alt="Aimad Security" class="nav-logo-img" />
+                    </div>
+                
+                
+                    
+                        <span class="nav-logo-text">Aimad Security</span>
+                    
+                
+            </a>
+        </div>
+        <button class="mob-close-btn" id="mobCloseBtn" aria-label="Close menu" onclick="closeMobileNav(event)">&times;</button>
+    </div>
+    
+    <div class="mobile-status-badge">
+        <span class="status-dot" style="background: #00FF88;"></span>
+        <span>Available</span>
+    </div>
+    
+    <ul class="mobile-links">
+        
+        <li class="mob-item-wrap">
+            <a href="/" class="">
+                <i class="fa-solid fa-house"></i>
+                <span>Home</span>
+            </a>
+            
+        </li>
+        
+        <li class="mob-item-wrap">
+            <a href="/about/" class="">
+                <i class="fa-solid fa-user"></i>
+                <span>About</span>
+            </a>
+            
+        </li>
+        
+        <li class="mob-item-wrap">
+            <a href="/projects/" class="">
+                <i class="fa-solid fa-folder-open"></i>
+                <span>Projects</span>
+            </a>
+            
+        </li>
+        
+        <li class="mob-item-wrap">
+            <a href="/labs/" class="">
+                <i class="fa-solid fa-flask"></i>
+                <span>Labs</span>
+            </a>
+            
+        </li>
+        
+        <li class="mob-item-wrap">
+            <a href="/research/" class="">
+                <i class="fa-solid fa-file-contract"></i>
+                <span>Research</span>
+            </a>
+            
+        </li>
+        
+        <li class="mob-item-wrap">
+            <a href="/blog/" class="">
+                <i class="fa-solid fa-pen-nib"></i>
+                <span>Blog</span>
+            </a>
+            
+        </li>
+        
+        <li class="mob-item-wrap">
+            <a href="/resources/" class="">
+                <i class="fa-solid fa-shield-halved"></i>
+                <span>Resources</span>
+            </a>
+            
+            <ul class="mob-sublinks">
+                
+                <li>
+                    <a href="/resources/" class="">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <span>All Resources</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/downloads/" class="">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Download Hub</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/resources/security-policy/" class="">
+                        <i class="fa-solid fa-lock"></i>
+                        <span>Security Policy</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/resources/responsible-disclosure/" class="">
+                        <i class="fa-solid fa-bug"></i>
+                        <span>Disclosure Policy</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a href="/resources/sitemap-page/" class="">
+                        <i class="fa-solid fa-sitemap"></i>
+                        <span>Human Sitemap</span>
+                    </a>
+                </li>
+                
+            </ul>
+            
+        </li>
+        
+        <li class="mob-item-wrap">
+            <a href="/contact/" class="">
+                <i class="fa-solid fa-envelope"></i>
+                <span>Contact</span>
+            </a>
+            
+        </li>
+        
+    </ul>
+    <div class="mobile-actions">
+        
+        <button id="mobSearchBtn" class="btn outline w-full mob-action-btn">
+            <i class="fa-solid fa-magnifying-glass"></i> Search Platform
+        </button>
+        
+        <a href="/assets/Aimad_Ul_Islam_Resume.pdf" download class="btn primary w-full mob-action-btn">
+            <i class="fa-solid fa-file-pdf"></i> Download Resume
+        </a>
+    </div>
+</div>
+
+
+    <main id="main-content">
+        
+<div class="article-hero-wrapper">
+    <div class="container">
+        <!-- Top Breadcrumbs & Quick Toolbar -->
+        <div class="breadcrumb-toolbar">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <a href="/"><i class="fa-solid fa-house"></i> Home</a>
+                <i class="fa-solid fa-chevron-right breadcrumb-separator"></i>
+                <a href="/blog/">Blog</a>
+                
+                <i class="fa-solid fa-chevron-right breadcrumb-separator"></i>
+                <a href="/blog/?cat=Cybersecurity">Cybersecurity</a>
+                
+                <i class="fa-solid fa-chevron-right breadcrumb-separator"></i>
+                <span class="current-title">Web Security for Developers: The Complete Guide to Building Secure Websites</span>
+            </nav>
+
+            <div class="article-quick-tools">
+                
+                
+                <a href="/blog/" class="btn btn-ghost btn-xs"><i class="fa-solid fa-arrow-left"></i> All Writeups</a>
+                <button class="btn btn-ghost btn-xs copy-url-btn" data-url="https://aimadulislam.dpdns.org/posts/web-security-for-developers-the-complete-guide-to-building-secure-websites/" title="Copy Article Link">
+                    <i class="fa-solid fa-link"></i> <span class="btn-text">Share</span>
+                </button>
+                <button class="btn btn-ghost btn-xs" onclick="window.print()" title="Print / Export PDF">
+                    <i class="fa-solid fa-print"></i> <span class="btn-text">Print</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Featured Cover Image / Header Banner (Single Unified Title Layout) -->
+        
+        
+        <div class="article-cover-container">
+            <div class="article-cover-banner">
+                <img src="/images/chatgpt-image-sep-18-2026-02_36_36-am.png" alt="Web Security for Developers: The Complete Guide to Building Secure Websites" class="article-cover-img" />
+                <div class="article-cover-overlay"></div>
+                <div class="article-cover-badges">
+                    <div class="cover-badge-left">
+                        
+                        <span class="hud-badge hud-badge-cyan"><i class="fa-solid fa-star"></i> Featured Research</span>
+                        
+                    </div>
+                    <div class="cover-badge-right">
+                        
+                        <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> Cybersecurity</span>
+                        
+                        <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> Web Development</span>
+                        
+                        <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> Tutorials</span>
+                        
+                        <span class="difficulty-badge intermediate">
+                            <i class="fa-solid fa-gauge-high"></i> Intermediate
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+
+        <!-- Unified Article Header Meta Card -->
+        <header class="article-header-card card">
+            <div class="card-glow"></div>
+            
+            <div class="article-header-meta-top">
+                <div class="article-cats">
+                    <span class="hud-badge hud-badge-green"><i class="fa-solid fa-terminal"></i> SEC_ID: WEB-SECURITY-FOR-DEVELOPERS-THE-COMPLETE-GUIDE-TO-BUILDING-SECURE-WEBSITES</span>
+                    
+                    <a href="/blog/?cat=Cybersecurity" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Cybersecurity</a>
+                    
+                    <a href="/blog/?cat=Web%20Development" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Web Development</a>
+                    
+                    <a href="/blog/?cat=Tutorials" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> Tutorials</a>
+                    
+                </div>
+                <span class="difficulty-badge intermediate">
+                    <i class="fa-solid fa-layer-group"></i> Intermediate
+                </span>
+            </div>
+
+            <!-- Prominent H1 Article Title (Single Instance) -->
+            <h1 class="article-main-title">Web Security for Developers: The Complete Guide to Building Secure Websites</h1>
+
+            
+            <p class="article-subtitle">Real Threats, Practical Defense — A comprehensive guide to preventing injection, XSS, CSRF, and session hijacking in modern web applications.</p>
+            
+
+            <!-- High-Tech Cyber HUD Metadata Bar -->
+            <div class="article-meta-hud">
+                <div class="meta-hud-item">
+                    <div class="meta-hud-icon"><i class="fa-solid fa-user-shield"></i></div>
+                    <div class="meta-hud-info">
+                        <span class="meta-hud-label">Author</span>
+                        <span class="meta-hud-val">Aimad Ul Islam</span>
+                    </div>
+                </div>
+
+                <div class="meta-hud-item">
+                    <div class="meta-hud-icon"><i class="fa-regular fa-calendar-check"></i></div>
+                    <div class="meta-hud-info">
+                        <span class="meta-hud-label">Published</span>
+                        <span class="meta-hud-val">17 Sep 2026</span>
+                    </div>
+                </div>
+
+                
+                
+                <div class="meta-hud-item">
+                    <div class="meta-hud-icon"><i class="fa-solid fa-rotate"></i></div>
+                    <div class="meta-hud-info">
+                        <span class="meta-hud-label">Last Updated</span>
+                        <span class="meta-hud-val">17 Sep 2026</span>
+                    </div>
+                </div>
+                
+
+                <div class="meta-hud-item">
+                    <div class="meta-hud-icon"><i class="fa-regular fa-clock"></i></div>
+                    <div class="meta-hud-info">
+                        <span class="meta-hud-label">Est. Read Time</span>
+                        <span class="meta-hud-val">25 min read</span>
+                    </div>
+                </div>
+
+                
+                <div class="meta-hud-item">
+                    <div class="meta-hud-icon"><i class="fa-solid fa-eye"></i></div>
+                    <div class="meta-hud-info">
+                        <span class="meta-hud-label">Reads / Views</span>
+                        <span class="meta-hud-val">120</span>
+                    </div>
+                </div>
+                
+            </div>
+
+            
+            <div class="article-tags-wrapper">
+                <span class="tags-label"><i class="fa-solid fa-tags"></i> Tags:</span>
+                <div class="article-tags">
+                    
+                    <a href="/blog/?tag=web-security" class="tag tag-tut">#web-security</a>
+                    
+                    <a href="/blog/?tag=sql-injection" class="tag tag-tut">#sql-injection</a>
+                    
+                    <a href="/blog/?tag=xss" class="tag tag-tut">#xss</a>
+                    
+                    <a href="/blog/?tag=csrf" class="tag tag-tut">#csrf</a>
+                    
+                    <a href="/blog/?tag=authentication" class="tag tag-tut">#authentication</a>
+                    
+                    <a href="/blog/?tag=session-hijacking" class="tag tag-tut">#session-hijacking</a>
+                    
+                    <a href="/blog/?tag=encryption" class="tag tag-tut">#encryption</a>
+                    
+                    <a href="/blog/?tag=owasp" class="tag tag-tut">#owasp</a>
+                    
+                    <a href="/blog/?tag=secure-coding" class="tag tag-tut">#secure-coding</a>
+                    
+                </div>
+            </div>
+            
+        </header>
+
+        <!-- Article Layout: Main Column + Responsive Sidebar -->
+        <div class="article-layout">
+            <!-- Left Main Article Column -->
+            <div class="article-main">
+                <!-- Main Markdown Article Body -->
+                <!-- Main Article Body: Handles structured content blocks OR standard markdown -->
+                <div class="article-body card">
+                    <div class="card-glow"></div>
+
+                    
+
+                    
+                    <div class="article-markdown-body">
+                        <h1>Web Security for Developers: The Complete Guide to Building Secure Websites</h1>
+<p>The web is a wild place. It's easy to get the impression that the internet was designed very deliberately by experts and that everything works as it does for a good reason. In fact, the evolution of the internet has been rapid and haphazard.</p>
+<p>As a result, securing your website can seem like a daunting proposition. Websites are a unique type of software available to millions of users immediately upon release, including an active and motivated community of hackers.</p>
+<p><strong>The big secret of web security is that the number of web vulnerabilities is actually rather small</strong>—coincidentally, about the size to fit in a single book—and these vulnerabilities don't change much from year to year. This guide will teach you every key threat you need to know about and the practical steps to defend your website.</p>
+<blockquote>
+  <p><strong>Ethical Reminder:</strong> The techniques and code samples in this guide are for defensive purposes—to help developers understand how attacks work so they can build secure systems. Never use this knowledge to attack systems you do not own or have explicit written permission to test.</p>
+</blockquote>
+<hr>
+<h2>Chapter 1: How Easy It Is to Hack a Website</h2>
+<p>Before we dive into defenses, let's put ourselves in the shoes of an adversary. Hacking tools are freely available and easy to set up. You don't even have to visit the dark web—everything you need is a quick Google search away.</p>
+<h3>The Hacker's Toolkit: Kali Linux + Metasploit</h3>
+<ol>
+  <li><strong>Kali Linux</strong>: A version of Linux built specifically for hackers, preinstalled with over 600 security and hacking tools. It's completely free.</li>
+  <li><strong>VirtualBox</strong>: A free virtual container to run Kali Linux without overwriting your current OS.</li>
+  <li><strong>Metasploit Framework</strong>: The most popular command-line tool for testing the security of websites.</li>
+</ol>
+<pre><code class="language-bash"># Launch Metasploit
+msfconsole
+
+# Load the wmap web scanner
+msf &gt; load wmap
+
+# Add a target
+msf &gt; wmap_sites -a https://target-website.com
+
+# Run a scan
+msf &gt; wmap_run -e
+</code></pre>
+<p><strong>The main point should be apparent:</strong> it's really easy to start hacking websites! Metasploit and Kali Linux are used by real-world hackers and can be set up in a few minutes. This is the reality we are dealing with as web developers today.</p>
+<hr>
+<h2>Chapter 2: How the Internet Works (Security Perspective)</h2>
+<h3>The Internet Protocol Suite</h3>
+<p>The internet is built on about 20 network protocols collectively referred to as the <strong>Internet Protocol Suite</strong>. The most important ones for web security are:</p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Layer</th>
+      <th style="text-align:left">Protocols</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><strong>Application Layer</strong></td>
+      <td style="text-align:left">DNS, FTP, HTTP, IMAP, POP, SMTP, SSH, XMPP</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><strong>Transport Layer</strong></td>
+      <td style="text-align:left">TCP, UDP</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><strong>Internet Layer</strong></td>
+      <td style="text-align:left">IPv4, IPv6</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><strong>Network Layer</strong></td>
+      <td style="text-align:left">ARP, MAC, NDP, OSPF, PPP</td>
+    </tr>
+  </tbody>
+</table>
+<h3>TCP: Reliable but Not Secure</h3>
+<p>TCP splits messages into data packets. Every time the recipient receives a packet, it sends a receipt. If the recipient fails to acknowledge receipt, the sender resends that packet.</p>
+<p><strong>Security implication:</strong> Unsecured TCP conversations are vulnerable to <strong>man-in-the-middle attacks</strong>, where malicious third parties intercept and read packets as they are transmitted.</p>
+<h3>The Domain Name System (DNS)</h3>
+<p>DNS translates human-readable domains (<code>example.com</code>) to IP addresses (<code>93.184.216.119</code>). DNS caching enables a type of attack called <strong>DNS poisoning</strong>, whereby a local DNS cache is deliberately corrupted so that data is routed to an attacker's server.</p>
+<h3>HTTP Requests, Methods, and Status Codes</h3>
+<p>An HTTP request consists of: Method (Verb), URL, Headers, and Body.</p>
+<p><strong>Critical Security Principle:</strong> Use POST (not GET) for any action that changes server state. GET requests should be <strong>side-effect free</strong>.</p>
+<p><strong>Status Codes:</strong></p>
+<ul>
+  <li><strong>2xx</strong>: Success</li>
+  <li><strong>3xx</strong>: Redirect</li>
+  <li><strong>4xx</strong>: Client error (e.g., 404 Not Found)</li>
+  <li><strong>5xx</strong>: Server error</li>
+</ul>
+<h3>Stateful Connections &amp; Cookies</h3>
+<p>HTTP is stateless. To track users, web servers send a <code>Set-Cookie</code> header. The browser returns the same data in the <code>Cookie</code> header of subsequent requests.</p>
+<p><strong>Session information contained in cookies is a juicy target for hackers.</strong> If an attacker steals another user's cookie, they can pretend to be that user.</p>
+<h3>Encryption: HTTPS</h3>
+<p>HTTPS uses <strong>Transport Layer Security (TLS)</strong> to provide:</p>
+<ol>
+  <li><strong>Privacy</strong>: Data packets can't be deciphered by third parties.</li>
+  <li><strong>Data Integrity</strong>: Any attempt to tamper with packets will be detectable.</li>
+</ol>
+<hr>
+<h2>Chapter 3: How Browsers Work &amp; The Browser Security Model</h2>
+<h3>The Rendering Pipeline</h3>
+<p>When a browser receives an HTTP response, it:</p>
+<ol>
+  <li>Parses HTML into a <strong>Document Object Model (DOM)</strong></li>
+  <li>Applies styling rules from CSS</li>
+  <li>Draws the web page onscreen</li>
+  <li>Executes any JavaScript</li>
+</ol>
+<h3>JavaScript Sandboxing</h3>
+<p>Modern browsers heavily restrict JavaScript with the <strong>browser security model</strong>. JavaScript code must be executed within a sandbox, where it's <strong>not permitted</strong> to:</p>
+<ul>
+  <li>Start new processes or access other existing processes</li>
+  <li>Read arbitrary chunks of system memory</li>
+  <li>Access the local disk</li>
+  <li>Call operating system functions</li>
+</ul>
+<p>However, JavaScript <strong>is permitted</strong> to read and manipulate the DOM, listen to user actions, make HTTP calls, and open new web pages.</p>
+<p><strong>Security Implication:</strong> An attacker who can inject malicious JavaScript into your web page can still do a lot of harm by reading credit card details or credentials as a user enters them.</p>
+<hr>
+<h2>Chapter 4: How Web Servers Work &amp; Where Vulnerabilities Creep In</h2>
+<h3>Static vs. Dynamic Resources</h3>
+<ul>
+  <li><strong>Static Resources</strong>: HTML files, images, and other files returned unaltered.</li>
+  <li><strong>Dynamic Resources</strong>: Code, scripts, or templates executed in response to an HTTP request.</li>
+</ul>
+<h3>Databases: The Heart of Dynamic Websites</h3>
+<p>Most modern websites use databases. The two most common types are:</p>
+<ol>
+  <li><strong>SQL Databases</strong>: Relational, storing data in tables with strict data integrity constraints.</li>
+  <li><strong>NoSQL Databases</strong>: Schemaless, sacrificing strict integrity for scalability.</li>
+</ol>
+<p><strong>Security Implication:</strong> The interface between the web server and a database is a frequent target for hackers. SQL injection attacks are among the most dangerous threats.</p>
+<hr>
+<h2>Chapter 5: The Software Development Life Cycle (SDLC) for Security</h2>
+<p>A chaotic SDLC makes it impossible to track the code you're running and its vulnerabilities. A well-structured SDLC allows you to root out bugs and vulnerabilities early.</p>
+<h3>Phase 1: Design and Analysis</h3>
+<ul>
+  <li>Use <strong>issue-tracking software</strong> to document development goals.</li>
+  <li>Identify requirements and get stakeholder agreement.</li>
+</ul>
+<h3>Phase 2: Writing Code</h3>
+<ul>
+  <li>Keep all code in <strong>source control</strong> (Git).</li>
+  <li>Use <strong>branches</strong> for features and bug fixes.</li>
+  <li>Do <strong>code reviews</strong> (four eyes principle: two people must see every code change).</li>
+</ul>
+<h3>Phase 3: Pre-Release Testing</h3>
+<ul>
+  <li>Write <strong>unit tests</strong> that make assertions about code behavior.</li>
+  <li>Set up a <strong>continuous integration server</strong> that runs tests on every code change.</li>
+  <li>Deploy to a <strong>test environment</strong> that mirrors production. <strong>Scrub sensitive data</strong> from test environments!</li>
+</ul>
+<h3>Phase 4: The Release Process</h3>
+<ul>
+  <li>Release process must be <strong>reliable, reproducible, and revertible</strong>.</li>
+  <li>Use <strong>Platform as a Service (PaaS)</strong> or <strong>DevOps tools</strong> (Puppet, Chef, Ansible).</li>
+  <li>Consider <strong>containerization</strong> (Docker).</li>
+</ul>
+<h3>Phase 5: Post-Release Testing and Observation</h3>
+<ul>
+  <li>Perform <strong>penetration testing</strong> to find vulnerabilities before hackers do.</li>
+  <li>Implement <strong>logging, monitoring, and error reporting</strong>.</li>
+  <li><strong>Dependency management</strong>: Stay on top of security advisories.</li>
+</ul>
+<hr>
+<h2>Chapter 6: Injection Attacks — The #1 Threat</h2>
+<p>Injection attacks occur when an attacker injects external code into an application to take control or read sensitive data.</p>
+<h3>6.1 SQL Injection Attacks</h3>
+<p>SQL injection attacks target websites that construct SQL queries insecurely.</p>
+<p><strong>Anatomy of an Attack:</strong></p>
+<pre><code class="language-java">// INSECURE CODE - DO NOT USE
+String sql = "SELECT * FROM users WHERE email='" + email + "' AND encrypted_password='" + password + "'";
+statement.executeQuery(sql);
+</code></pre>
+<p>An attacker can pass <code>billy@gmail.com'--</code> as the email, which causes the password check to be ignored.</p>
+<p><strong>Mitigation 1: Use Parameterized Statements (Bind Parameters)</strong></p>
+<pre><code class="language-java">// SECURE CODE
+String sql = "SELECT * FROM users WHERE email = ? AND encrypted_password = ?";
+statement.executeQuery(sql, email, password);
+</code></pre>
+<p><strong>Mitigation 2: Use Object-Relational Mapping (ORM)</strong></p>
+<pre><code class="language-ruby"># SECURE (Rails ActiveRecord)
+User.find_by(email: "billy@gmail.com")
+</code></pre>
+<p><strong>Bonus Mitigation: Defense in Depth</strong></p>
+<ul>
+  <li><strong>Principle of Least Privilege</strong>: The web server's database account should have only DML permissions (SELECT, INSERT, UPDATE, DELETE).</li>
+  <li><strong>Blind vs. Nonblind SQL Injection</strong>: Don't leak sensitive information in error messages.</li>
+</ul>
+<h3>6.2 Command Injection Attacks</h3>
+<p>Command injection occurs when a website makes insecure command-line calls to the OS.</p>
+<p><strong>Mitigation: Escape Control Characters</strong></p>
+<pre><code class="language-php">// SECURE PHP CODE
+$domain = escapeshellarg($_GET['domain']);
+$lookup = system("nslookup {$domain}");
+</code></pre>
+<pre><code class="language-python"># SECURE PYTHON CODE
+from subprocess import call
+call(["nslookup", domain])  # Pass an array, not a string
+</code></pre>
+<h3>6.3 Remote Code Execution (RCE)</h3>
+<p>RCE vulnerabilities allow hackers to run exploits inside the web server process itself. <strong>Mitigation:</strong> Disable code execution during deserialization and stay aware of security advisories.</p>
+<h3>6.4 File Upload Vulnerabilities</h3>
+<p><strong>Anatomy of an Attack:</strong> Attacker uploads a web shell (e.g., <code>hack.php</code>) that executes commands.</p>
+<p><strong>Mitigations:</strong></p>
+<ol>
+  <li><strong>Host files on a secure system</strong> (CDN, cloud storage).</li>
+  <li><strong>Ensure uploaded files cannot be executed</strong> (write to disk without executable permissions).</li>
+  <li><strong>Validate the content of uploaded files</strong>.</li>
+  <li><strong>Run antivirus software</strong>.</li>
+</ol>
+<hr>
+<h2>Chapter 7: Cross-Site Scripting (XSS) Attacks</h2>
+<p>XSS attacks occur when an attacker injects malicious JavaScript into a user's browser.</p>
+<h3>7.1 Stored XSS Attacks</h3>
+<p>The JavaScript is written to the database and executed when a victim views a page.</p>
+<p><strong>Mitigation 1: Escape HTML Characters</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Character</th>
+      <th style="text-align:left">Entity Encoding</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><code>"</code></td>
+      <td style="text-align:left"><code>&amp;quot;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>&amp;</code></td>
+      <td style="text-align:left"><code>&amp;amp;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>&lt;</code></td>
+      <td style="text-align:left"><code>&amp;lt;</code></td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><code>&gt;</code></td>
+      <td style="text-align:left"><code>&amp;gt;</code></td>
+    </tr>
+  </tbody>
+</table>
+<p><strong>Mitigation 2: Implement a Content Security Policy</strong></p>
+<pre><code class="language-http">Content-Security-Policy: script-src 'self' https://apis.google.com
+</code></pre>
+<p>This tells the browser to never execute inline JavaScript.</p>
+<h3>7.2 Reflected XSS Attacks</h3>
+<p>The malicious code is sent in the HTTP request and reflected back in the response.</p>
+<p><strong>Mitigation:</strong> Escape all dynamic content from HTTP requests.</p>
+<h3>7.3 DOM-Based XSS Attacks</h3>
+<p>The attack happens entirely on the client side via the URI fragment (<code>#</code>).</p>
+<p><strong>Mitigation:</strong> Escape dynamic content from URI fragments.</p>
+<pre><code class="language-javascript">// SECURE (React)
+&lt;div&gt;{location.hash.substring(1)}&lt;/div&gt;  // React escapes automatically
+</code></pre>
+<hr>
+<h2>Chapter 8: Cross-Site Request Forgery (CSRF) Attacks</h2>
+<p>CSRF attacks trick a user into performing an undesirable action on a site they are already authenticated to.</p>
+<h3>Mitigation 1: Follow REST Principles</h3>
+<ul>
+  <li><strong>GET</strong>: Fetch resources (side-effect free)</li>
+  <li><strong>POST</strong>: Create new objects</li>
+  <li><strong>PUT</strong>: Modify objects</li>
+  <li><strong>DELETE</strong>: Delete objects</li>
+</ul>
+<h3>Mitigation 2: Implement Anti-CSRF Cookies</h3>
+<p>The server validates that the <code>_xsrf</code> value in the returned cookie matches the <code>_xsrf</code> value in the request body.</p>
+<h3>Mitigation 3: Use the SameSite Cookie Attribute</h3>
+<pre><code class="language-http">Set-Cookie: session_id=82938d91e13f3; SameSite=Lax;
+</code></pre>
+<ul>
+  <li><strong>Strict</strong>: Strips cookies from all cross-site requests.</li>
+  <li><strong>Lax</strong>: Allows cookies on GET requests from other sites.</li>
+</ul>
+<hr>
+<h2>Chapter 9: Compromising Authentication</h2>
+<h3>Brute-Force Attacks</h3>
+<p>Attackers use scripts to try thousands of commonly used passwords.</p>
+<h3>Mitigation 1: Use Third-Party Authentication</h3>
+<p>Use OAuth or OpenID standards (Facebook Login, Google OAuth, GitHub OAuth).</p>
+<h3>Mitigation 2: Integrate with Single Sign-On (SSO)</h3>
+<p>Use SAML to integrate with enterprise identity providers (Okta, OneLogin).</p>
+<h3>Mitigation 3: Secure Your Own Authentication System</h3>
+<p><strong>Securely Storing Passwords:</strong></p>
+<pre><code class="language-python">import bcrypt
+password = "super secret password"
+hashed = bcrypt.hashpw(password, bcrypt.gensalt(rounds=14))
+if bcrypt.checkpw(password, hashed):
+    print("It matches!")
+</code></pre>
+<p><strong>Salting Hashes:</strong> Add randomness to prevent rainbow table attacks.</p>
+<p><strong>Requiring Multifactor Authentication (MFA):</strong></p>
+<ul>
+  <li>Something they know (password)</li>
+  <li>Something they have (authenticator app)</li>
+  <li>Something they are (fingerprint)</li>
+</ul>
+<p><strong>Preventing User Enumeration:</strong> Keep error messages generic (<code>Incorrect username or password</code>) and prevent timing attacks.</p>
+<hr>
+<h2>Chapter 10: Session Hijacking</h2>
+<h3>How Attackers Hijack Sessions</h3>
+<p><strong>1. Cookie Theft (via XSS)</strong></p>
+<pre><code class="language-http">Set-Cookie: session_id=278283910977381992837; HttpOnly
+</code></pre>
+<p><strong>2. Cookie Theft (via Man-in-the-Middle)</strong></p>
+<pre><code class="language-http">Set-Cookie: session_id=278283910977381992837; Secure
+</code></pre>
+<p><strong>3. Cookie Theft (via CSRF)</strong></p>
+<pre><code class="language-http">Set-Cookie: session_id=278283910977381992837; SameSite=Lax
+</code></pre>
+<p><strong>4. Session Fixation:</strong> Disable URL rewriting for session tracking.</p>
+<pre><code class="language-xml">&lt;session-config&gt;
+  &lt;tracking-mode&gt;COOKIE&lt;/tracking-mode&gt;
+&lt;/session-config&gt;
+</code></pre>
+<p><strong>5. Weak Session IDs:</strong> Use large, random session IDs generated by a strong random number generator.</p>
+<hr>
+<h2>Chapter 11: Permissions &amp; Access Control</h2>
+<h3>Privilege Escalation</h3>
+<ul>
+  <li><strong>Vertical Escalation</strong>: Attacker gets access to an account with broader permissions.</li>
+  <li><strong>Horizontal Escalation</strong>: Attacker accesses another account with similar privileges.</li>
+</ul>
+<h3>Access Control Models</h3>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align:left">Model</th>
+      <th style="text-align:left">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align:left"><strong>Access Control Lists (ACLs)</strong></td>
+      <td style="text-align:left">Attach permissions to each object.</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><strong>Role-Based Access Control (RBAC)</strong></td>
+      <td style="text-align:left">Grant users roles (e.g., Administrator).</td>
+    </tr>
+    <tr>
+      <td style="text-align:left"><strong>Ownership-Based Access Control</strong></td>
+      <td style="text-align:left">Users have full control over their own content.</td>
+    </tr>
+  </tbody>
+</table>
+<h3>Implementing Access Control</h3>
+<pre><code class="language-python"># Python (Django)
+from django.contrib.auth.decorators import login_required, permission_required
+<p>@login_required<br>
+@permission_required('content.can_publish')<br>
+def publish_post(request):<br>
+pass<br>
+</code></pre></p>
+<h3>Directory Traversal</h3>
+<p>An attacker replaces a filename parameter with a relative path.</p>
+<p><code>https://foodie.com/menus?menu=../../../../etc/passwd</code></p>
+<p><strong>Mitigations:</strong> Trust your web server's URL resolution, use indirect file references, and sanitize file references.</p>
+<hr>
+<h2>Chapter 12: Information Leaks</h2>
+<p>Don't advertise your technology stack!</p>
+<ul>
+  <li><strong>Disable Telltale Server Headers</strong>: Don't send the <code>Server</code> header.</li>
+  <li><strong>Use Clean URLs</strong>: Avoid <code>.php</code>, <code>.asp</code> suffixes.</li>
+  <li><strong>Use Generic Cookie Parameters</strong>: Don't use <code>JSESSIONID</code> or <code>PHPSESSID</code>. Use <code>session</code>.</li>
+  <li><strong>Disable Client-Side Error Reporting</strong>: <code>config.consider_all_requests_local = false</code></li>
+  <li><strong>Minify or Obfuscate JavaScript Files</strong>: Use UglifyJS.</li>
+  <li><strong>Sanitize Your Client-Side Files</strong>: Remove sensitive comments.</li>
+</ul>
+<hr>
+<h2>Chapter 13: Encryption &amp; HTTPS</h2>
+<h3>The TLS Handshake</h3>
+<ol>
+  <li>Browser lists supported cipher suites.</li>
+  <li>Server selects the most secure cipher suite.</li>
+  <li>Server sends its digital certificate.</li>
+  <li>Browser verifies the certificate.</li>
+  <li>Browser generates a session key (encrypted with the server's public key).</li>
+  <li>Server decrypts the session key.</li>
+  <li>Secure communication begins.</li>
+</ol>
+<h3>Enabling HTTPS</h3>
+<ol>
+  <li>Obtain a digital certificate (Let's Encrypt is free).</li>
+  <li>Install it on your web server.</li>
+  <li>Redirect all HTTP traffic to HTTPS.</li>
+  <li>Set HTTP Strict Transport Security (HSTS) policies.</li>
+</ol>
+<pre><code class="language-nginx">server {
+  listen 443 ssl;
+  server_name www.example.com;
+  ssl_certificate www.example.com.crt;
+  ssl_certificate_key www.example.com.key;
+  ssl_protocols TLSv1.2 TLSv1.3;
+  ssl_ciphers HIGH:!aNULL:!MD5;
+}
+</code></pre>
+<hr>
+<h2>Chapter 14: Third-Party Code Security</h2>
+<h3>Securing Dependencies</h3>
+<ul>
+  <li>Use a <strong>dependency manager</strong> (npm, pip, bundler).</li>
+  <li>Pin explicit version numbers.</li>
+  <li>Use <strong>integrity checks</strong> (subresource integrity).</li>
+</ul>
+<pre><code class="language-html">&lt;script src="https://example.com/example-framework.js"
+        integrity="sha384-oqVuAFXRKap7fdgcCY5uykM6+R9GqQ8K/uxy9rx7HNQlC"
+        crossorigin="anonymous"&gt;&lt;/script&gt;
+</code></pre>
+<h3>Securing Configuration</h3>
+<ul>
+  <li>Disable default credentials.</li>
+  <li>Disable open directory listings.</li>
+  <li>Protect your configuration information (environment variables, dedicated config stores).</li>
+  <li>Secure administrative frontends.</li>
+</ul>
+<hr>
+<h2>Chapter 15: XML Attacks</h2>
+<h3>XML Bombs</h3>
+<p>An XML bomb uses inline DTDs to explode the parser's memory usage.</p>
+<h3>XML External Entity (XXE) Attacks</h3>
+<p>External entities can reference local files or network addresses.</p>
+<p><strong>Mitigation:</strong> Disable the processing of inline DTDs in your XML parser.</p>
+<pre><code class="language-java">DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
+</code></pre>
+<hr>
+<h2>Chapter 16: Don't Be an Accessory</h2>
+<ul>
+  <li><strong>Email Fraud</strong>: Implement <strong>Sender Policy Framework (SPF)</strong> and <strong>DomainKeys Identified Mail (DKIM)</strong>.</li>
+  <li><strong>Open Redirects</strong>: Prevent open redirects by validating that redirect URLs are relative.</li>
+  <li><strong>Clickjacking</strong>: Prevent your site from being framed with <code>Content-Security-Policy: frame-ancestors 'none'</code>.</li>
+  <li><strong>Server-Side Request Forgery (SSRF)</strong>: Audit your code to ensure the server cannot be tricked into sending HTTP requests to an attacker's URL.</li>
+  <li><strong>Botnets</strong>: Run up-to-date antivirus software and monitor outgoing network access.</li>
+</ul>
+<hr>
+<h2>Chapter 17: Denial-of-Service (DoS) Attacks</h2>
+<h3>Types of DoS Attacks</h3>
+<ul>
+  <li><strong>ICMP Attacks</strong>: Ping floods, ping of death.</li>
+  <li><strong>TCP Attacks</strong>: SYN floods.</li>
+  <li><strong>Application Layer Attacks</strong>: Slowloris, R-U-Dead-Yet?, zip bombs.</li>
+  <li><strong>Distributed Denial-of-Service (DDoS)</strong>: Launched from a botnet.</li>
+</ul>
+<h3>Mitigations</h3>
+<ol>
+  <li><strong>Firewalls</strong>: Block ICMP attacks, blacklist IP addresses.</li>
+  <li><strong>Intrusion Prevention Systems (IPSs)</strong>: Statistical anomaly detection.</li>
+  <li><strong>DDoS Protection Services</strong>: Route traffic through a provider's data centers.</li>
+  <li><strong>Building for Scale</strong>: Use CDNs, caching, asynchronous processing, and multiple web servers.</li>
+</ol>
+<hr>
+<h2>Chapter 18: The 21 Commandments of Web Security</h2>
+<ol>
+  <li><strong>Automate your release process.</strong></li>
+  <li><strong>Do thorough code reviews.</strong></li>
+  <li><strong>Test your code to the point of boredom.</strong></li>
+  <li><strong>Anticipate malicious input.</strong></li>
+  <li><strong>Neutralize file uploads.</strong></li>
+  <li><strong>Escape content while writing HTML.</strong></li>
+  <li><strong>Be suspicious of HTTP requests from other sites.</strong></li>
+  <li><strong>Hash and salt your passwords.</strong></li>
+  <li><strong>Don't admit who your users are.</strong></li>
+  <li><strong>Protect your cookies.</strong></li>
+  <li><strong>Protect sensitive resources (even if you don't link to them).</strong></li>
+  <li><strong>Avoid using direct file references.</strong></li>
+  <li><strong>Don't leak information.</strong></li>
+  <li><strong>Use encryption (correctly).</strong></li>
+  <li><strong>Secure your dependencies and services.</strong></li>
+  <li><strong>Defuse your XML parser.</strong></li>
+  <li><strong>Send email securely.</strong></li>
+  <li><strong>Check your redirects.</strong></li>
+  <li><strong>Don't allow your site to be framed.</strong></li>
+  <li><strong>Lock down your permissions.</strong></li>
+  <li><strong>Detect and be ready for surges in traffic.</strong></li>
+</ol>
+<hr>
+<h2>Conclusion</h2>
+<p>Web security is not a destination—it's a continuous process. The vulnerabilities discussed in this guide have been around for decades, and they will continue to be exploited as long as developers fail to implement the mitigations.</p>
+<p><strong>Key Takeaways:</strong></p>
+<ol>
+  <li><strong>Assume all input is malicious.</strong> Never trust anything that comes from the client.</li>
+  <li><strong>Defense in depth.</strong> Layer your defenses so a failure at one level doesn't compromise the entire system.</li>
+  <li><strong>Follow the principle of least privilege.</strong></li>
+  <li><strong>Stay informed.</strong> Subscribe to mailing lists and follow security researchers.</li>
+  <li><strong>Test, test, test.</strong> Write unit tests for access control and perform penetration testing.</li>
+</ol>
+<p>By following the 21 commandments and implementing the mitigations in this guide, you can protect your website against 99% of attacks. The remaining 1%—advanced adversaries with zero-day exploits—is a risk that even large organizations struggle to mitigate.</p>
+<p><strong>Keep learning, keep building, and always secure your code.</strong></p>
+<hr>
+<p><strong>Author:</strong> Aimad Ul Islam — Cybersecurity Student, Cisco Ethical Hacker Certified, Blue Cape DFIR Certified.</p>
+
+                    </div>
+                    
+
+                    
+
+                    
+                </div>
+
+                <!-- Social Share Bar -->
+                <div class="social-share card">
+                    <div class="share-header">
+                        <i class="fa-solid fa-share-nodes text-cyan"></i>
+                        <span class="share-label">Share Writeup:</span>
+                    </div>
+                    <div class="share-buttons">
+                        <a href="https://x.com/intent/tweet?text=Web%20Security%20for%20Developers%3A%20The%20Complete%20Guide%20to%20Building%20Secure%20Websites&url=https://aimadulislam.dpdns.org/posts/web-security-for-developers-the-complete-guide-to-building-secure-websites/" target="_blank" rel="noopener noreferrer" class="share-btn twitter" aria-label="Share on X (Twitter)" title="Share on X">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/shareArticle?mini=true&url=https://aimadulislam.dpdns.org/posts/web-security-for-developers-the-complete-guide-to-building-secure-websites/&title=Web%20Security%20for%20Developers%3A%20The%20Complete%20Guide%20to%20Building%20Secure%20Websites" target="_blank" rel="noopener noreferrer" class="share-btn linkedin" aria-label="Share on LinkedIn" title="Share on LinkedIn">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://t.me/share/url?url=https://aimadulislam.dpdns.org/posts/web-security-for-developers-the-complete-guide-to-building-secure-websites/&text=Web%20Security%20for%20Developers%3A%20The%20Complete%20Guide%20to%20Building%20Secure%20Websites" target="_blank" rel="noopener noreferrer" class="share-btn telegram" aria-label="Share on Telegram" title="Share on Telegram">
+                            <i class="fa-brands fa-telegram"></i>
+                        </a>
+                        <a href="https://api.whatsapp.com/send?text=Web%20Security%20for%20Developers%3A%20The%20Complete%20Guide%20to%20Building%20Secure%20Websites%20https://aimadulislam.dpdns.org/posts/web-security-for-developers-the-complete-guide-to-building-secure-websites/" target="_blank" rel="noopener noreferrer" class="share-btn whatsapp" aria-label="Share on WhatsApp" title="Share on WhatsApp">
+                            <i class="fa-brands fa-whatsapp"></i>
+                        </a>
+                        <button class="share-btn copy-url copy-url-btn" data-url="https://aimadulislam.dpdns.org/posts/web-security-for-developers-the-complete-guide-to-building-secure-websites/" aria-label="Copy Direct Article Link" title="Copy Article Link">
+                            <i class="fa-solid fa-link"></i> <span class="share-btn-text">Copy Link</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Cybersecurity Specialist Author Box -->
+                <div class="author-box card">
+                    <div class="card-glow"></div>
+                    <div class="author-avatar-wrap">
+                        <div class="author-avatar-inner">
+                            
+                            <img src="/images/file_000000000d8c720780e6dc16033e558d.png" alt="Aimad Ul Islam" class="author-avatar-img" />
+                            
+                        </div>
+                        <span class="author-verified-dot" title="Verified Security Researcher"></span>
+                    </div>
+                    <div class="author-info">
+                        <div class="author-header">
+                            <div>
+                                <h3 class="author-name">Aimad Ul Islam</h3>
+                                <span class="author-role">Cybersecurity Practitioner & SOC Analyst</span>
+                            </div>
+                            <a href="/#contact" class="btn btn-xs btn-outline"><i class="fa-solid fa-paper-plane"></i> Contact Author</a>
+                        </div>
+                        <p class="author-bio">
+                            Cybersecurity professional specializing in DFIR investigations, SOC operations, SIEM automation, and threat research. Documenting ethical hacking labs, network architecture, and security policies.
+                        </p>
+                        <div class="author-links">
+                            <a href="https://github.com/im0d00" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+                            <a href="https://linkedin.com/in/aimad-ulislam" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+                            <a href="/resources/"><i class="fa-solid fa-shield-halved"></i> Resources</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prev / Next Post Navigation -->
+                
+                
+                <nav class="article-nav" aria-label="Article navigation">
+                    
+                    <a href="/posts/the-silent-threat-in-your-living-room-analyzing-modem-malware-and-the-chuck-norris-botnet/" class="article-nav-link prev card">
+                        <div class="card-glow"></div>
+                        <span class="article-nav-dir"><i class="fa-solid fa-arrow-left"></i> Previous Writeup</span>
+                        <div class="article-nav-title">The Silent Threat in Your Living Room: Analyzing Modem Malware and the Chuck Norris Botnet</div>
+                    </a>
+                    
+
+                    
+                    <a href="/posts/100-free-security-tools-the-ultimate-verified-guide-for-ethical-hackers-and-forensic-investigators/" class="article-nav-link next card">
+                        <div class="card-glow"></div>
+                        <span class="article-nav-dir">Next Writeup <i class="fa-solid fa-arrow-right"></i></span>
+                        <div class="article-nav-title">100 Free Security Tools: The Ultimate Verified Guide for Ethical Hackers and Forensic Investigators</div>
+                    </a>
+                    
+                </nav>
+
+                <!-- Related Research Section -->
+                <div class="related-posts-section">
+                    <div class="related-header">
+                        <h3 class="related-title"><i class="fa-solid fa-layer-group text-cyan"></i> Recommended Writeups</h3>
+                        <a href="/blog/" class="btn btn-ghost btn-xs">View All Research <i class="fa-solid fa-arrow-right"></i></a>
+                    </div>
+                    <div class="related-grid">
+                        
+                        
+                        
+                        
+                        
+                        
+                            
+                            <a href="/posts/google-dorking-the-complete-guide-to-advanced-search-operators-finding-hidden-pdfs-and-osint-reconnaissance/" class="card related-card">
+                                <div class="card-glow"></div>
+                                <div class="related-card-meta">
+                                    <span class="tag tag-cyber"><i class="fa-solid fa-tag"></i> Cybersecurity</span>
+                                    <span class="related-date"><i class="fa-regular fa-calendar"></i> 03 Oct 2026</span>
+                                </div>
+                                <h4 class="related-card-title">Google Dorking: The Complete Guide to Advanced Search Operators, Finding Hidden PDFs, and OSINT Reconnaissance</h4>
+                                <p class="related-card-desc">Master advanced Google search operators, uncover hidden PDFs and books, exploit open directories, and learn the ethical framework behind OSINT reconnaissance.</p>
+                            </a>
+                            
+                            
+                            
+                        
+                            
+                            <a href="/posts/the-silent-threat-in-your-living-room-analyzing-modem-malware-and-the-chuck-norris-botnet/" class="card related-card">
+                                <div class="card-glow"></div>
+                                <div class="related-card-meta">
+                                    <span class="tag tag-cyber"><i class="fa-solid fa-tag"></i> Cybersecurity</span>
+                                    <span class="related-date"><i class="fa-regular fa-calendar"></i> 21 Sep 2026</span>
+                                </div>
+                                <h4 class="related-card-title">The Silent Threat in Your Living Room: Analyzing Modem Malware and the Chuck Norris Botnet</h4>
+                                <p class="related-card-desc">A deep dive into embedded malware, memory forensics on MIPS routers, and how researchers tracked a 30,000-device botnet using NetFlow.</p>
+                            </a>
+                            
+                            
+                            
+                        
+                            
+                        
+                            
+                            <a href="/posts/100-free-security-tools-the-ultimate-verified-guide-for-ethical-hackers-and-forensic-investigators/" class="card related-card">
+                                <div class="card-glow"></div>
+                                <div class="related-card-meta">
+                                    <span class="tag tag-cyber"><i class="fa-solid fa-tag"></i> Cybersecurity</span>
+                                    <span class="related-date"><i class="fa-regular fa-calendar"></i> 13 Sep 2026</span>
+                                </div>
+                                <h4 class="related-card-title">100 Free Security Tools: The Ultimate Verified Guide for Ethical Hackers and Forensic Investigators</h4>
+                                <p class="related-card-desc">A comprehensively verified and updated collection of 100 essential security tools — from digital forensics frameworks to OSINT, malware analysis, and penetration testing utilities.</p>
+                            </a>
+                            
+                            
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+
+                        
+                        
+                    </div>
+                </div>
+
+                <!-- Peer Review & Discussion / Comments Placeholder Section -->
+                <div class="comments-section card">
+                    <div class="card-glow"></div>
+                    <div class="comments-header">
+                        <div class="comments-title-wrap">
+                            <i class="fa-solid fa-comments text-cyan comments-icon"></i>
+                            <div>
+                                <h3 class="comments-title">Peer Review & Threat Discussion</h3>
+                                <p class="comments-sub">Join the technical conversation or share insights regarding this writeup.</p>
+                            </div>
+                        </div>
+                        <span class="hud-badge hud-badge-violet"><i class="fa-solid fa-lock"></i> Giscus / Disqus Ready</span>
+                    </div>
+                    
+                    <div id="comments-container" class="comments-placeholder">
+                        <div class="comments-placeholder-inner">
+                            <i class="fa-solid fa-terminal text-muted" style="font-size: 2.2rem; margin-bottom: 0.8rem;"></i>
+                            <p>Interactive peer discussions are powered by GitHub Discussions / Giscus.</p>
+                            <a href="https://github.com/im0d00" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline mt-1">
+                                <i class="fa-brands fa-github"></i> Open Discussion on GitHub
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Right Sticky Sidebar -->
+            <aside class="sidebar">
+                <!-- Dynamic Table of Contents Widget -->
+                <div class="sidebar-widget card" id="toc-widget">
+                    <div class="card-glow"></div>
+                    <div class="widget-title">
+                        <span><i class="fa-solid fa-list-check text-cyan"></i> Table of Contents</span>
+                        <span class="toc-count-badge" id="toc-count">0 sections</span>
+                    </div>
+                    <nav id="toc-list" class="toc-list"></nav>
+                </div>
+
+                <!-- Quick Author Widget -->
+                <div class="sidebar-widget card">
+                    <div class="card-glow"></div>
+                    <h3 class="widget-title"><i class="fa-solid fa-user-shield text-cyan"></i> Research Author</h3>
+                    <div class="sidebar-author-row">
+                        <div class="author-avatar-inner" style="width:48px; height:48px; font-size:1.1rem;">
+                            
+                            <img src="/images/file_000000000d8c720780e6dc16033e558d.png" alt="Aimad Ul Islam" class="author-avatar-img" />
+                            
+                        </div>
+                        <div>
+                            <div class="sidebar-author-name">Aimad Ul Islam</div>
+                            <div class="sidebar-author-title">SOC Specialist & DFIR Researcher</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Writeups Widget -->
+                <div class="sidebar-widget card">
+                    <div class="card-glow"></div>
+                    <h3 class="widget-title"><i class="fa-solid fa-fire text-amber"></i> Recent Research</h3>
+                    <div class="sidebar-posts">
+                        
+                        
+                            
+                            <a href="/posts/google-dorking-the-complete-guide-to-advanced-search-operators-finding-hidden-pdfs-and-osint-reconnaissance/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    
+                                    <img src="/images/cybersecurity-search-operations.png" alt="Google Dorking: The Complete Guide to Advanced Search Operators, Finding Hidden PDFs, and OSINT Reconnaissance" loading="lazy" />
+                                    
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">Google Dorking: The Complete Guide to Advanced Search Operators, Finding Hidden PDFs, and OSINT Reconnaissance</h4>
+                                    <span class="sidebar-post-meta"><i class="fa-regular fa-calendar"></i> 03 Oct 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                            <a href="/posts/the-silent-threat-in-your-living-room-analyzing-modem-malware-and-the-chuck-norris-botnet/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    
+                                    <img src="/images/chatgpt-image-sep-22-2026-12_42_46-am.png" alt="The Silent Threat in Your Living Room: Analyzing Modem Malware and the Chuck Norris Botnet" loading="lazy" />
+                                    
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">The Silent Threat in Your Living Room: Analyzing Modem Malware and the Chuck Norris Botnet</h4>
+                                    <span class="sidebar-post-meta"><i class="fa-regular fa-calendar"></i> 21 Sep 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                        
+                            
+                            <a href="/posts/100-free-security-tools-the-ultimate-verified-guide-for-ethical-hackers-and-forensic-investigators/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    
+                                    <img src="/images/chatgpt-image-sep-13-2026-11_47_13-pm.png" alt="100 Free Security Tools: The Ultimate Verified Guide for Ethical Hackers and Forensic Investigators" loading="lazy" />
+                                    
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">100 Free Security Tools: The Ultimate Verified Guide for Ethical Hackers and Forensic Investigators</h4>
+                                    <span class="sidebar-post-meta"><i class="fa-regular fa-calendar"></i> 13 Sep 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                            <a href="/posts/python-backdoor-injection/" class="sidebar-post">
+                                <div class="sidebar-post-thumb">
+                                    
+                                    <span class="thumb-emoji">🐉</span>
+                                    
+                                </div>
+                                <div class="sidebar-post-content">
+                                    <h4 class="sidebar-post-title">DLL &amp; Code Injection: Build a Stealthy Python Backdoor from Scratch</h4>
+                                    <span class="sidebar-post-meta"><i class="fa-regular fa-calendar"></i> 05 Aug 2026</span>
+                                </div>
+                            </a>
+                            
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                    </div>
+                </div>
+
+                <!-- Categories List Widget -->
+                <div class="sidebar-widget card">
+                    <div class="card-glow"></div>
+                    <h3 class="widget-title"><i class="fa-solid fa-folder-tree text-cyan"></i> Research Categories</h3>
+                    <div class="sidebar-cat-list">
+                        
+                        
+                        <a href="/blog/?cat=Cybersecurity" class="sidebar-cat-item">
+                            <span><i class="fa-solid fa-folder-open text-cyan" style="font-size:0.75rem;"></i> Cybersecurity</span>
+                            <span class="sidebar-cat-count">12</span>
+                        </a>
+                        
+                        
+                        <a href="/blog/?cat=Forensics" class="sidebar-cat-item">
+                            <span><i class="fa-solid fa-folder-open text-cyan" style="font-size:0.75rem;"></i> Forensics</span>
+                            <span class="sidebar-cat-count">2</span>
+                        </a>
+                        
+                        
+                        <a href="/blog/?cat=Linux" class="sidebar-cat-item">
+                            <span><i class="fa-solid fa-folder-open text-cyan" style="font-size:0.75rem;"></i> Linux</span>
+                            <span class="sidebar-cat-count">3</span>
+                        </a>
+                        
+                        
+                        <a href="/blog/?cat=Networking" class="sidebar-cat-item">
+                            <span><i class="fa-solid fa-folder-open text-cyan" style="font-size:0.75rem;"></i> Networking</span>
+                            <span class="sidebar-cat-count">2</span>
+                        </a>
+                        
+                        
+                        <a href="/blog/?cat=OSINT" class="sidebar-cat-item">
+                            <span><i class="fa-solid fa-folder-open text-cyan" style="font-size:0.75rem;"></i> OSINT</span>
+                            <span class="sidebar-cat-count">2</span>
+                        </a>
+                        
+                        
+                        <a href="/blog/?cat=Personal%20Projects" class="sidebar-cat-item">
+                            <span><i class="fa-solid fa-folder-open text-cyan" style="font-size:0.75rem;"></i> Personal Projects</span>
+                            <span class="sidebar-cat-count">1</span>
+                        </a>
+                        
+                        
+                        <a href="/blog/?cat=Programming" class="sidebar-cat-item">
+                            <span><i class="fa-solid fa-folder-open text-cyan" style="font-size:0.75rem;"></i> Programming</span>
+                            <span class="sidebar-cat-count">3</span>
+                        </a>
+                        
+                        
+                        <a href="/blog/?cat=Tools" class="sidebar-cat-item">
+                            <span><i class="fa-solid fa-folder-open text-cyan" style="font-size:0.75rem;"></i> Tools</span>
+                            <span class="sidebar-cat-count">1</span>
+                        </a>
+                        
+                        
+                        <a href="/blog/?cat=Tutorials" class="sidebar-cat-item">
+                            <span><i class="fa-solid fa-folder-open text-cyan" style="font-size:0.75rem;"></i> Tutorials</span>
+                            <span class="sidebar-cat-count">12</span>
+                        </a>
+                        
+                        
+                        <a href="/blog/?cat=Web%20Development" class="sidebar-cat-item">
+                            <span><i class="fa-solid fa-folder-open text-cyan" style="font-size:0.75rem;"></i> Web Development</span>
+                            <span class="sidebar-cat-count">2</span>
+                        </a>
+                        
+                    </div>
+                </div>
+
+                <!-- Security Advisory / Governance Center Link -->
+                <div class="sidebar-widget card">
+                    <div class="card-glow"></div>
+                    <h3 class="widget-title"><i class="fa-solid fa-shield-halved text-cyan"></i> Security Center</h3>
+                    <p class="widget-desc">Review security disclosures, download vulnerability advisories, or inspect open source tooling.</p>
+                    <a href="/resources/" class="btn btn-sm btn-outline btn-full mt-1">
+                        <i class="fa-solid fa-folder-open"></i> Governance & Policies
+                    </a>
+                </div>
+
+                <!-- Newsletter / Threat Alerts Form -->
+                <div class="sidebar-widget card">
+                    <div class="card-glow"></div>
+                    <h3 class="widget-title"><i class="fa-solid fa-bell text-violet"></i> Security Alerts</h3>
+                    <p class="widget-desc">Subscribe for instant notifications when new security writeups or lab walkthroughs are released.</p>
+                    <form class="newsletter-form mt-1" onsubmit="event.preventDefault(); alert('Subscribed to Security Alerts feed!'); this.reset();">
+                        <input type="email" class="newsletter-input" placeholder="secops@domain.com" required aria-label="Email address for security updates" />
+                        <button type="submit" class="newsletter-btn"><i class="fa-solid fa-paper-plane"></i> Subscribe</button>
+                    </form>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>
+
+<!-- Lightbox Modal Overlay for Images -->
+<div id="imageLightbox" class="lightbox-modal" style="display:none;" onclick="closeLightbox()">
+    <span class="lightbox-close">&times;</span>
+    <img id="lightboxImg" class="lightbox-content" alt="Enlarged figure view" />
+    <div id="lightboxCaption" class="lightbox-caption"></div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // 1. Copy URL functionality for all copy buttons
+        document.querySelectorAll('.copy-url-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                const url = this.getAttribute('data-url') || window.location.href;
+                navigator.clipboard.writeText(url).then(() => {
+                    const originalHtml = this.innerHTML;
+                    this.innerHTML = '<i class="fa-solid fa-check text-green"></i> <span class="btn-text">Copied!</span>';
+                    setTimeout(() => {
+                        this.innerHTML = originalHtml;
+                    }, 2200);
+                }).catch(() => {
+                    alert('Copied URL: ' + url);
+                });
+            });
+        });
+
+        // 2. Wrap Markdown code blocks with copy bar and language label
+        const articleBody = document.querySelector('.article-body');
+        if (articleBody) {
+            const preBlocks = articleBody.querySelectorAll('pre');
+            preBlocks.forEach((pre) => {
+                if (pre.closest('.code-block-wrap') || pre.closest('.terminal-block-wrap') || pre.closest('.file-tree-wrap')) return;
+
+                const code = pre.querySelector('code') || pre;
+                let lang = 'CODE';
+                const classList = (code.className || '') + ' ' + (pre.className || '');
+                const match = classList.match(/language-([a-zA-Z0-9_\-+]+)/);
+                if (match) {
+                    lang = match[1].toUpperCase();
+                }
+
+                const langMap = {
+                    'PY': 'PYTHON', 'PYTHON': 'PYTHON',
+                    'SH': 'BASH', 'BASH': 'BASH', 'SHELL': 'BASH', 'ZSH': 'BASH',
+                    'PS1': 'POWERSHELL', 'POWERSHELL': 'POWERSHELL',
+                    'JS': 'JAVASCRIPT', 'JAVASCRIPT': 'JAVASCRIPT',
+                    'TS': 'TYPESCRIPT', 'TYPESCRIPT': 'TYPESCRIPT',
+                    'HTML': 'HTML', 'MARKUP': 'HTML',
+                    'CSS': 'CSS', 'JSON': 'JSON', 'YAML': 'YAML', 'YML': 'YAML',
+                    'SQL': 'SQL', 'C': 'C', 'CPP': 'C++', 'GO': 'GO', 'RUST': 'RUST'
+                };
+                const displayLang = langMap[lang] || lang;
+
+                const wrapper = document.createElement('div');
+                wrapper.className = 'code-block-wrap';
+
+                const header = document.createElement('div');
+                header.className = 'code-block-header';
+                header.innerHTML = `
+                    <span class="code-block-lang"><i class="fa-solid fa-code text-cyan"></i> ${displayLang}</span>
+                    <button class="copy-code-btn" aria-label="Copy code block" onclick="copyCodeBlockText(this)">
+                        <i class="fa-regular fa-copy"></i> Copy
+                    </button>
+                `;
+
+                pre.parentNode.insertBefore(wrapper, pre);
+                wrapper.appendChild(header);
+                wrapper.appendChild(pre);
+            });
+
+            // Handle pre-existing copy buttons (e.g. from manual HTML)
+            articleBody.querySelectorAll('.copy-btn, .copy-code-btn').forEach(btn => {
+                if (!btn.getAttribute('onclick')) {
+                    btn.addEventListener('click', () => copyCodeBlockText(btn));
+                }
+            });
+
+            // Click-to-zoom Lightbox for Article Images
+            const images = articleBody.querySelectorAll('img');
+            images.forEach(img => {
+                img.style.cursor = 'zoom-in';
+                img.addEventListener('click', () => {
+                    const lightbox = document.getElementById('imageLightbox');
+                    const lightboxImg = document.getElementById('lightboxImg');
+                    const lightboxCaption = document.getElementById('lightboxCaption');
+                    if (lightbox && lightboxImg) {
+                        lightbox.style.display = 'flex';
+                        lightboxImg.src = img.src;
+                        if (lightboxCaption) {
+                            lightboxCaption.textContent = img.alt || img.title || 'Image view';
+                        }
+                    }
+                });
+            });
+        }
+
+        // 3. Dynamic Table of Contents Generator + Live Scroll Spy Highlight
+        const tocWidget = document.getElementById('toc-widget');
+        const tocList = document.getElementById('toc-list');
+        const tocCount = document.getElementById('toc-count');
+
+        if (articleBody && tocList) {
+            const headings = articleBody.querySelectorAll('h2, h3');
+            if (headings.length === 0) {
+                if (tocWidget) tocWidget.style.display = 'none';
+            } else {
+                if (tocCount) tocCount.textContent = headings.length + ' sections';
+                
+                const tocLinks = [];
+
+                headings.forEach((h, idx) => {
+                    if (!h.id) {
+                        h.id = 'sec-' + idx + '-' + h.textContent.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+                    }
+
+                    const li = document.createElement('li');
+                    li.className = 'toc-item ' + (h.tagName.toLowerCase() === 'h3' ? 'h3' : 'h2');
+
+                    const link = document.createElement('a');
+                    link.href = '#' + h.id;
+                    link.innerHTML = `<i class="fa-solid fa-angle-right toc-bullet"></i> ${h.textContent.replace(/^#+\s*/, '')}`;
+                    
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const target = document.getElementById(h.id);
+                        if (target) {
+                            const offset = 95;
+                            const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - offset;
+                            window.scrollTo({ top: targetPosition, behavior: 'smooth' });
+                            history.pushState(null, null, '#' + h.id);
+                        }
+                    });
+
+                    li.appendChild(link);
+                    tocList.appendChild(li);
+                    tocLinks.push({ heading: h, link: link });
+                });
+
+                // Scroll Spy for TOC active link
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '-100px 0px -65% 0px',
+                    threshold: 0
+                };
+
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const id = entry.target.id;
+                            tocLinks.forEach(item => {
+                                if (item.heading.id === id) {
+                                    item.link.classList.add('active');
+                                    item.link.parentElement.classList.add('active');
+                                } else {
+                                    item.link.classList.remove('active');
+                                    item.link.parentElement.classList.remove('active');
+                                }
+                            });
+                        }
+                    });
+                }, observerOptions);
+
+                headings.forEach(h => observer.observe(h));
+            }
+        }
+
+        // 4. Reading Progress Bar
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            const progress = document.getElementById('reading-progress');
+            if (progress) progress.style.width = scrolled + '%';
+        });
+    });
+
+    function closeLightbox() {
+        const lightbox = document.getElementById('imageLightbox');
+        if (lightbox) lightbox.style.display = 'none';
+    }
+
+    function openLightboxImage(src, caption) {
+        const lightbox = document.getElementById('imageLightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxCaption = document.getElementById('lightboxCaption');
+        if (lightbox && lightboxImg) {
+            lightbox.style.display = 'flex';
+            lightboxImg.src = src;
+            if (lightboxCaption) {
+                lightboxCaption.textContent = caption || 'Image view';
+            }
+        }
+    }
+
+    function copyCodeBlockText(btn) {
+        if (!btn) return;
+        const parent = btn.closest('.code-block-wrap') || btn.closest('.terminal-block-wrap') || btn.closest('.file-tree-wrap') || btn.parentElement;
+        if (!parent) return;
+
+        let codeEl = parent.querySelector('pre code') || parent.querySelector('code') || parent.querySelector('pre');
+        if (!codeEl) return;
+
+        let codeText = codeEl.textContent || '';
+        if (!codeText) return;
+
+        function showSuccess() {
+            const originalHtml = btn.innerHTML;
+            btn.innerHTML = '<i class="fa-solid fa-check text-green"></i> Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.innerHTML = originalHtml;
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+
+        if (navigator.clipboard && window.isSecureContext) {
+            navigator.clipboard.writeText(codeText).then(showSuccess).catch(() => {
+                fallbackCopy(codeText, showSuccess);
+            });
+        } else {
+            fallbackCopy(codeText, showSuccess);
+        }
+    }
+
+    function fallbackCopy(text, callback) {
+        const textArea = document.createElement('textarea');
+        textArea.value = text;
+        textArea.style.position = 'fixed';
+        textArea.style.left = '-9999px';
+        textArea.style.top = '-9999px';
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            if (callback) callback();
+        } catch (err) {
+            console.error('Copy fallback error:', err);
+        }
+        document.body.removeChild(textArea);
+    }
+</script>
+
+    </main>
+
+    <!-- SHARED GLOBAL FOOTER -->
+    
+<footer class="site-footer" role="contentinfo">
+    <div class="footer-top-glow"></div>
+    <div class="container">
+        <div class="footer-grid">
+            <!-- Brand Column -->
+            <div class="footer-col footer-brand-col">
+                <div class="footer-logo-brand">
+                    
+                    
+                    
+
+                    <a href="/" class="footer-logo-link" aria-label="Aimad Security">
+                        
+                            <div class="footer-logo-wrapper site-logo">
+                                <img src="/images/whatsapp-image-2026-07-05-at-9.35.59-pm.jpeg" alt="Aimad Security" class="footer-logo-img" />
+                            </div>
+                        
+
+                        
+                            
+                                <span class="footer-brand-title">Aimad Security</span>
+                            
+                        
+                    </a>
+                </div>
+                <p class="footer-desc">
+                    Cybersecurity student, SOC enthusiast, and network security practitioner from Pakistan. Specializing in DFIR, Linux Systems, and Ethical Hacking.
+                </p>
+                
+                <div class="footer-status-pill">
+                    <span class="status-dot"></span>
+                    <span>Available for Consulting &amp; Roles</span>
+                </div>
+                
+            </div>
+
+            <!-- Quick Navigation Column -->
+            <div class="footer-col">
+                <h4 class="footer-heading"><i class="fa-solid fa-compass"></i> Navigation</h4>
+                <ul class="footer-links-list">
+                    
+                    <li><a href="/about/"><i class="fa-solid fa-chevron-right fa-xs"></i> About Me</a></li>
+                    
+                    <li><a href="/projects/"><i class="fa-solid fa-chevron-right fa-xs"></i> Security Projects</a></li>
+                    
+                    <li><a href="/labs/"><i class="fa-solid fa-chevron-right fa-xs"></i> Virtual Cyber Labs</a></li>
+                    
+                    <li><a href="/research/"><i class="fa-solid fa-chevron-right fa-xs"></i> Research Reports</a></li>
+                    
+                    <li><a href="/downloads/"><i class="fa-solid fa-chevron-right fa-xs"></i> Download Assets</a></li>
+                    
+                    <li><a href="/blog/"><i class="fa-solid fa-chevron-right fa-xs"></i> Technical Blog</a></li>
+                    
+                    <li><a href="/resources/"><i class="fa-solid fa-chevron-right fa-xs"></i> Resources Hub</a></li>
+                    
+                    <li><a href="/contact/"><i class="fa-solid fa-chevron-right fa-xs"></i> Get In Touch</a></li>
+                    
+                </ul>
+            </div>
+
+            <!-- Resources & Legal Column -->
+            <div class="footer-col">
+                <h4 class="footer-heading"><i class="fa-solid fa-shield-halved"></i> Resources & Legal</h4>
+                <ul class="footer-links-list">
+                    
+                    <li><a href="/resources/privacy-policy/"><i class="fa-solid fa-chevron-right fa-xs"></i> Privacy Policy</a></li>
+                    
+                    <li><a href="/resources/terms/"><i class="fa-solid fa-chevron-right fa-xs"></i> Terms of Use</a></li>
+                    
+                    <li><a href="/resources/cookie-policy/"><i class="fa-solid fa-chevron-right fa-xs"></i> Cookie Policy</a></li>
+                    
+                    <li><a href="/resources/disclaimer/"><i class="fa-solid fa-chevron-right fa-xs"></i> Security Disclaimer</a></li>
+                    
+                    <li><a href="/resources/sitemap-page/"><i class="fa-solid fa-chevron-right fa-xs"></i> Human Sitemap</a></li>
+                    
+                    <li><a href="/sitemap.xml"><i class="fa-solid fa-chevron-right fa-xs"></i> XML Sitemap</a></li>
+                    
+                    <li><a href="/feed.xml"><i class="fa-solid fa-chevron-right fa-xs"></i> RSS Feed</a></li>
+                    
+                </ul>
+            </div>
+
+            <!-- Contact & Social Column -->
+            <div class="footer-col">
+                <h4 class="footer-heading"><i class="fa-solid fa-headset"></i> Connect</h4>
+                <div class="footer-contact-details">
+                    <div class="f-con-row"><i class="fa-solid fa-envelope"></i> <a href="mailto:info@aimadulislam.dpdns.org">info@aimadulislam.dpdns.org</a></div>
+                    <div class="f-con-row"><i class="fa-solid fa-location-dot"></i> <span>Peshawar, Pakistan</span></div>
+                </div>
+                <div class="footer-soc-row">
+                    
+                    <a href="https://github.com/im0d00" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+                    
+                    <a href="https://linkedin.com/in/aimad-ulislam" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    
+                    <a href="https://x.com/aimadulislam" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)"><i class="fa-brands fa-x-twitter"></i></a>
+                    
+                    <a href="https://youtube.com/@aimadulislam" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                    
+                </div>
+            </div>
+        </div>
+
+        <!-- FOOTER BOTTOM BAR & CREDIT LINE -->
+        <div class="footer-bottom-bar">
+            <div class="footer-bottom-flex">
+                <div class="footer-copyright">
+                    © 2026 Aimad Ul Islam. All Rights Reserved.
+                </div>
+                
+                
+                <div class="footer-meta-tags">
+                    <span class="footer-tag-version"><i class="fa-solid fa-code-branch"></i> v2.5.0</span>
+                    <span class="footer-tag-date"><i class="fa-regular fa-clock"></i> Updated: August 2026</span>
+                </div>
+                
+            </div>
+
+            <!-- WEBSITE CREDIT LINE FOR LIZZDO STUDIO -->
+            <div class="footer-credit-row">
+                <span class="credit-label">Designed &amp; Developed by</span>
+                <a href="https://lizzdo.com" target="_blank" rel="noopener noreferrer" class="lizzdo-credit-link" title="Lizzdo Studio — Official Site">
+                    <span class="credit-glow-dot"></span>
+                    <span class="credit-text-name">Lizzdo Studio</span>
+                    <i class="fa-solid fa-arrow-up-right-from-square credit-ext-icon"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+
+    <button id="scroll-top" aria-label="Scroll to top"><i class="fa-solid fa-arrow-up"></i></button>
+
+    <!-- SEARCH MODAL OVERLAY -->
+    <div id="searchModal" style="display:none; position:fixed; inset:0; z-index:99999; background:rgba(5,8,16,0.88); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); padding:2rem 1rem; align-items:flex-start; justify-content:center; overflow-y:auto;">
+        <div class="card" style="max-width:720px; width:100%; margin-top:6vh; padding:1.8rem; position:relative; border:1px solid var(--border2); background:var(--panel); box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 30px rgba(0,212,255,0.15);">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.2rem;">
+                <div style="font-family:'Space Grotesk',sans-serif; font-size:1.15rem; font-weight:700; color:var(--cyan); display:flex; align-items:center; gap:0.6rem;">
+                    <i class="fa-solid fa-terminal"></i> Security Search Engine
+                </div>
+                <button id="searchCloseBtn" style="background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:50%; width:32px; height:32px; color:var(--silver); font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s;" aria-label="Close search">&times;</button>
+            </div>
+            <div style="position:relative; margin-bottom:1.2rem;">
+                <input type="text" id="searchInput" placeholder="Search projects, labs, posts, tools, certs..." style="width:100%; padding:0.85rem 1rem 0.85rem 2.6rem; background:rgba(10,22,40,0.85); border:1px solid var(--border2); border-radius:8px; color:var(--white); font-family:'JetBrains Mono',monospace; font-size:0.92rem; outline:none;" />
+                <i class="fa-solid fa-magnifying-glass" style="position:absolute; left:1rem; top:50%; transform:translateY(-50%); color:var(--cyan); font-size:0.9rem;"></i>
+            </div>
+            <div id="searchResults" style="max-height:420px; overflow-y:auto; display:flex; flex-direction:column; gap:0.6rem; padding-right:4px;">
+                <div style="textalign:center; color:var(--muted); padding:1.5rem; font-size:0.88rem;">Type a query to search across all platform records...</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <script src="/js/main.js"></script>
+    <script>
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", function(user) {
+          if (!user) {
+            window.netlifyIdentity.on("login", function() {
+              document.location.href = "/admin/";
+            });
+          }
+        });
+      }
+    </script>
+</body>
+</html>

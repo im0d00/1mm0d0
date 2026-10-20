@@ -40,7 +40,7 @@ layout: layouts/base.njk
         {% if postImage %}
         <div class="article-cover-container">
             <div class="article-cover-banner">
-                <img src="{{ postImage }}" alt="{{ imageAlt or title }}" class="article-cover-img" />
+                <img src="{{ postImage }}" alt="{{ imageAlt or title }}" class="article-cover-img" onerror="this.onerror=null; this.closest('.article-cover-container').style.display='none';" />
                 <div class="article-cover-overlay"></div>
                 <div class="article-cover-badges">
                     <div class="cover-badge-left">
@@ -405,7 +405,7 @@ layout: layouts/base.njk
                     <div class="author-avatar-wrap">
                         <div class="author-avatar-inner">
                             {% if author_avatar %}
-                            <img src="{{ author_avatar }}" alt="{{ author or 'Aimad Ul Islam' }}" class="author-avatar-img" />
+                            <img src="{{ author_avatar }}" alt="{{ author or 'Aimad Ul Islam' }}" class="author-avatar-img" onerror="this.onerror=null; this.src='/images/whatsapp-image-2026-07-05-at-9.35.59-pm.jpeg';" />
                             {% else %}
                             <i class="fa-solid fa-user-shield"></i>
                             {% endif %}
@@ -424,7 +424,7 @@ layout: layouts/base.njk
                             Cybersecurity professional specializing in DFIR investigations, SOC operations, SIEM automation, and threat research. Documenting ethical hacking labs, network architecture, and security policies.
                         </p>
                         <div class="author-links">
-                            <a href="{{ contact.github or settings.github_url or 'https://github.com/im0d00' }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
+                            <a href="{{ contact.github or settings.public_github_url or settings.github_url or 'https://github.com/im0d00' }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-github"></i> GitHub</a>
                             <a href="{{ contact.linkedin or settings.linkedin_url or 'https://linkedin.com/in/aimad-ulislam' }}" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
                             <a href="/resources/"><i class="fa-solid fa-shield-halved"></i> Resources</a>
                         </div>
@@ -521,7 +521,7 @@ layout: layouts/base.njk
                         <div class="comments-placeholder-inner">
                             <i class="fa-solid fa-terminal text-muted" style="font-size: 2.2rem; margin-bottom: 0.8rem;"></i>
                             <p>Interactive peer discussions are powered by GitHub Discussions / Giscus.</p>
-                            <a href="{{ contact.github or settings.github_url or 'https://github.com/im0d00' }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline mt-1">
+                            <a href="{{ contact.github or settings.default_repo_url or settings.public_github_url or settings.github_url or 'https://github.com/im0d00' }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline mt-1">
                                 <i class="fa-brands fa-github"></i> Open Discussion on GitHub
                             </a>
                         </div>
