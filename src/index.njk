@@ -1164,20 +1164,11 @@ window.addEventListener('load', () => {
             else scrollIndicator.classList.remove('hidden');
         }
 
-        const secs = document.querySelectorAll('section[id]');
-        const links = document.querySelectorAll('.cyber-nav-link, .nav-links a');
-        let cur = '';
-        secs.forEach(s => {
-            if (window.scrollY >= s.offsetTop - 140) cur = s.id;
-        });
-        links.forEach(a => {
-            const href = a.getAttribute('href');
-            if (window.scrollY < 200 || !cur || cur === 'hero') {
-                a.classList.toggle('active', href === '/' || href === '/#' || href === '#hero');
-            } else {
-                a.classList.toggle('active', href === '#' + cur || href === '/#' + cur);
-            }
-        });
+        // On homepage, ensure Home link remains cleanly active in the cyberpunk navigation bar
+        const homeLink = document.querySelector('.cyber-nav-link[href="/"]');
+        if (homeLink && !homeLink.classList.contains('active')) {
+            homeLink.classList.add('active');
+        }
     });
 
     function openMobileDrawer() {

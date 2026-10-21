@@ -50,7 +50,7 @@
 
 /* ── RESET & BASE ───────────────────────────────────────────── */
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { scroll-behavior:smooth; font-size:16px; }
+html { scroll-behavior:smooth; font-size:16px; scroll-padding-top: 86px; }
 
 body {
   background: var(--void);
@@ -246,10 +246,10 @@ section { padding: 5rem 0; position:relative; z-index:2; }
 
 /* ── BLOG HERO ──────────────────────────────────────────────── */
 #blog-hero {
-  min-height: 55vh;
+  min-height: 52vh;
   display: flex;
   align-items: center;
-  padding-top: 66px;
+  padding-top: 105px;
   position: relative;
   overflow: hidden;
 }
