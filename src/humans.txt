@@ -1,10 +1,14 @@
 /* TEAM */
-  Cybersecurity Architect: Aimad Ul Islam
-  Contact: info@aimadulislam.dpdns.org
+  Cybersecurity Engineer & Researcher: Aimad ul Islam Khan (Aimad Security / Aimad ul Islam)
   GitHub: https://github.com/im0d00
-  Twitter: @aimadulislam
+  Email: info@aimadulislam.dpdns.org
+  LinkedIn: https://linkedin.com/in/aimad-ulislam
+  Twitter / X: https://x.com/aimadulislam
+  Location: Peshawar, Khyber Pakhtunkhwa, Pakistan
 
 /* SITE */
-  Standards: HTML5, CSS3, ES6+, WAI-ARIA
+  Canonical Domain: https://aimadulislam.dpdns.org/
+  Standards: HTML5, CSS3, ES6+, WAI-ARIA, Schema.org JSON-LD
   Framework: Eleventy 3.x, Decap CMS, Tailwind CSS
-  Hosting: GitHub Pages & Cloudflare Pages
+  Hosting: GitHub Pages & Cloudflare DNS / CDN
+

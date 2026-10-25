@@ -66,10 +66,9 @@ layout: layouts/base.njk
         <!-- Unified Article Header Meta Card -->
         <header class="article-header-card card">
             <div class="card-glow"></div>
-            
             <div class="article-header-meta-top">
                 <div class="article-cats">
-                    <span class="hud-badge hud-badge-green"><i class="fa-solid fa-terminal"></i> SEC_ID: {{ page.fileSlug | upper }}</span>
+                    <span class="hud-badge hud-badge-green"><i class="fa-solid fa-terminal"></i> SEC_ID: {{ (sec_id or (page.fileSlug | truncate(16, true, "")) or "RESEARCH") | upper }}</span>
                     {% for cat in categories %}
                     <a href="/blog/?cat={{ cat | urlencode }}" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> {{ cat }}</a>
                     {% endfor %}

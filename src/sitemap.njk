@@ -4,70 +4,49 @@ eleventyExcludeFromCollections: true
 ---
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  {% set siteUrl = (settings.sitemap_settings.url or settings.portfolio_url or "https://aimadulislam.dpdns.org") | replace(r/\/$/, "") %}
+  {% set siteUrl = "https://aimadulislam.dpdns.org" %}
   <url>
     <loc>{{ siteUrl }}/</loc>
-    <lastmod>{{ "now" | htmlDateString }}</lastmod>
-    <changefreq>daily</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
+    <loc>{{ siteUrl }}/about/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>{{ siteUrl }}/projects/</loc>
-    <lastmod>{{ "now" | htmlDateString }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>{{ siteUrl }}/labs/</loc>
-    <lastmod>{{ "now" | htmlDateString }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>{{ siteUrl }}/research/</loc>
-    <lastmod>{{ "now" | htmlDateString }}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>{{ siteUrl }}/downloads/</loc>
-    <lastmod>{{ "now" | htmlDateString }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>{{ siteUrl }}/blog/</loc>
-    <lastmod>{{ "now" | htmlDateString }}</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>{{ siteUrl }}/resources/</loc>
-    <lastmod>{{ "now" | htmlDateString }}</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>{{ siteUrl }}/resources/sitemap-page/</loc>
-    <lastmod>{{ "now" | htmlDateString }}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>{{ siteUrl }}/about/</loc>
-    <lastmod>{{ "now" | htmlDateString }}</lastmod>
-    <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>{{ siteUrl }}/contact/</loc>
-    <lastmod>{{ "now" | htmlDateString }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>{{ siteUrl }}/downloads/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>{{ siteUrl }}/brand/</loc>
-    <lastmod>{{ "now" | htmlDateString }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -75,23 +54,26 @@ eleventyExcludeFromCollections: true
   {% for cat in collections.categories %}
   <url>
     <loc>{{ siteUrl }}/category/{{ cat | slugify }}/</loc>
-    <lastmod>{{ "now" | htmlDateString }}</lastmod>
     <changefreq>weekly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
   {% endfor %}
 
   {% for pageItem in collections.all %}
     {% set isDraft = pageItem.data.draft or pageItem.data.draft == 'true' or pageItem.data.published == false or pageItem.data.published == 'false' or pageItem.data.status == 'Draft' or pageItem.data.status == 'draft' or pageItem.data.status == 'Unpublished' or pageItem.data.status == 'unpublished' %}
     {% set isExcluded = pageItem.data.eleventyExcludeFromCollections or pageItem.data.noindex or ('/admin' in pageItem.url) or ('/404' in pageItem.url) or ('/offline' in pageItem.url) or ('/category/' in pageItem.url) or pageItem.url == '/search.json' or pageItem.url == '/feed.xml' or pageItem.url == '/manifest.json' or pageItem.url == '/robots.txt' or pageItem.url == '/sitemap.xml' or pageItem.url == '/llms.txt' or pageItem.url == '/brand.md' %}
-    {% set isMainPage = pageItem.url == '/' or pageItem.url == '/about/' or pageItem.url == '/contact/' or pageItem.url == '/brand/' or pageItem.url == '/blog/' or pageItem.url == '/projects/' or pageItem.url == '/labs/' or pageItem.url == '/research/' or pageItem.url == '/downloads/' or pageItem.url == '/resources/' or pageItem.url == '/resources/sitemap-page/' %}
+    {% set isMainPage = pageItem.url == '/' or pageItem.url == '/about/' or pageItem.url == '/contact/' or pageItem.url == '/brand/' or pageItem.url == '/blog/' or pageItem.url == '/projects/' or pageItem.url == '/labs/' or pageItem.url == '/research/' or pageItem.url == '/downloads/' %}
     {% if pageItem.url and pageItem.url != false and not isDraft and not isExcluded and not isMainPage %}
   <url>
     <loc>{{ siteUrl }}{{ pageItem.url }}</loc>
-    <lastmod>{{ (pageItem.data.updatedAt or pageItem.data.updated or pageItem.data.last_updated or pageItem.data.lastmod or pageItem.date or "now") | htmlDateString }}</lastmod>
+    {% set itemDate = pageItem.data.updatedAt or pageItem.data.updated or pageItem.data.last_updated or pageItem.data.lastmod or pageItem.date %}
+    {% if itemDate and itemDate != "now" %}
+    <lastmod>{{ itemDate | htmlDateString }}</lastmod>
+    {% endif %}
     <changefreq>{% if '/posts/' in pageItem.url or '/blog/' in pageItem.url %}weekly{% else %}monthly{% endif %}</changefreq>
     <priority>{% if '/posts/' in pageItem.url or '/projects/' in pageItem.url or '/research/' in pageItem.url %}0.8{% else %}0.7{% endif %}</priority>
   </url>
     {% endif %}
   {% endfor %}
 </urlset>
+

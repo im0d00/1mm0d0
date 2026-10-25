@@ -33,18 +33,23 @@
     <link rel="apple-touch-icon" sizes="180x180" href="{{ brand.apple_touch_icon or primary_favicon }}">
     <link rel="manifest" href="/manifest.json">
 
+    {% set raw_img = og_image or featured_image or image or thumbnail or brand.og_image or settings.og_image or '/images/whatsapp-image-2026-07-05-at-9.35.59-pm.jpeg' %}
+    {% set clean_img = raw_img | replace(r/^\/+/, "") %}
+    {% set abs_og_image = raw_img if ('http://' in raw_img or 'https://' in raw_img) else ('https://aimadulislam.dpdns.org/' + clean_img) %}
+
     <!-- Open Graph & Meta -->
-    <meta property="og:title" content="{% if seo_title %}{{ seo_title }}{% elif title %}{% if 'Aimad Ul Islam' in title %}{{ title }}{% else %}{{ title }} | Aimad Ul Islam{% endif %}{% else %}{{ settings.portfolio_name or 'Aimad Ul Islam' }} | Cybersecurity Professional{% endif %}">
+    <meta property="og:site_name" content="{{ settings.portfolio_name or 'Aimad Security' }}">
+    <meta property="og:title" content="{% if seo_title %}{{ seo_title }}{% elif title %}{% if 'Aimad' in title %}{{ title }}{% else %}{{ title }} | Aimad Security{% endif %}{% else %}{{ settings.seo_title or 'Aimad ul Islam | Cybersecurity Portfolio & Security Research' }}{% endif %}">
     <meta property="og:description" content="{{ seo_description or description or excerpt or summary or settings.seo_description or settings.website_description }}">
-    <meta property="og:type" content="{% if layout == 'layouts/post.njk' %}article{% else %}website{% endif %}">
-    <meta property="og:url" content="https://aimadulislam.dpdns.org{{ page.url }}">
-    <meta property="og:image" content="{{ og_image or featured_image or image or thumbnail or brand.og_image or settings.og_image or '/images/whatsapp-image-2026-07-05-at-9.35.59-pm.jpeg' }}">
+    <meta property="og:type" content="{% if layout == 'layouts/post.njk' %}article{% elif page.url == '/about/' %}profile{% else %}website{% endif %}">
+    <meta property="og:url" content="{{ canonical_url or ('https://aimadulislam.dpdns.org' + page.url) }}">
+    <meta property="og:image" content="{{ abs_og_image }}">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{% if seo_title %}{{ seo_title }}{% elif title %}{% if 'Aimad Ul Islam' in title %}{{ title }}{% else %}{{ title }} | Aimad Ul Islam{% endif %}{% else %}{{ settings.portfolio_name or 'Aimad Ul Islam' }} | Cybersecurity Professional{% endif %}">
+    <meta name="twitter:title" content="{% if seo_title %}{{ seo_title }}{% elif title %}{% if 'Aimad' in title %}{{ title }}{% else %}{{ title }} | Aimad Security{% endif %}{% else %}{{ settings.seo_title or 'Aimad ul Islam | Cybersecurity Portfolio & Security Research' }}{% endif %}">
     <meta name="twitter:description" content="{{ seo_description or description or excerpt or summary or settings.seo_description or settings.website_description }}">
-    <meta name="twitter:image" content="{{ og_image or featured_image or image or thumbnail or brand.og_image or settings.og_image or '/images/whatsapp-image-2026-07-05-at-9.35.59-pm.jpeg' }}">
+    <meta name="twitter:image" content="{{ abs_og_image }}">
 
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ canonical_url or ('https://aimadulislam.dpdns.org' + page.url) }}">
@@ -54,11 +59,22 @@
     {
       "@context": "https://schema.org",
       "@type": "Person",
-      "name": {{ (settings.author or "Aimad Ul Islam") | dump | safe }},
-      "url": "https://aimadulislam.dpdns.org",
-      "image": {{ (settings.og_image or "/images/whatsapp-image-2026-07-05-at-9.35.59-pm.jpeg") | dump | safe }},
+      "name": "Aimad ul Islam Khan",
+      "alternateName": [
+        "Aimad ul Islam",
+        "Aimad Security",
+        "Aimad Khan",
+        "im0d00"
+      ],
+      "url": "https://aimadulislam.dpdns.org/",
+      "image": "{{ abs_og_image }}",
       "jobTitle": "Cybersecurity Specialist & Network Security Researcher",
-      "description": {{ (settings.website_description or "Cybersecurity student, SOC enthusiast, and network security engineering portfolio and technical writeups.") | dump | safe }},
+      "worksFor": {
+        "@type": "Organization",
+        "name": "Aimad Security",
+        "url": "https://aimadulislam.dpdns.org/"
+      },
+      "description": {{ (settings.website_description or "Aimad ul Islam Khan (Aimad Security) — Cybersecurity student, SOC analyst, and network security engineering portfolio.") | dump | safe }},
       "knowsAbout": [
         "Cybersecurity",
         "Network Security",
@@ -67,15 +83,64 @@
         "Ethical Hacking",
         "Penetration Testing",
         "Linux System Administration",
-        "Python Security Automation"
+        "Python Security Automation",
+        "Splunk Enterprise & SIEM Triage",
+        "Cisco Networking & Routing"
       ],
       "alumniOf": {
         "@type": "EducationalOrganization",
         "name": "University of Peshawar",
         "sameAs": "https://uop.edu.pk"
       },
+      "hasCredential": [
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Cisco Learn-A-Thon 2026 Achievement",
+          "credentialCategory": "badge",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "Cisco Networking Academy"
+          }
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Networking Essentials",
+          "credentialCategory": "certificate",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "Cisco Networking Academy"
+          }
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Introduction to Cybersecurity",
+          "credentialCategory": "certificate",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "Cisco Networking Academy"
+          }
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Linux Essentials",
+          "credentialCategory": "certificate",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "Linux Professional Institute & Cisco NetAcad"
+          }
+        },
+        {
+          "@type": "EducationalOccupationalCredential",
+          "name": "Ethical Hacker",
+          "credentialCategory": "certificate",
+          "recognizedBy": {
+            "@type": "Organization",
+            "name": "Cisco Networking Academy"
+          }
+        }
+      ],
       "sameAs": [
-        "{{ settings.public_github_url or settings.github_url or 'https://github.com/im0d00' }}",
+        "https://github.com/im0d00",
         "{{ settings.linkedin_url or 'https://linkedin.com/in/aimad-ulislam' }}",
         "{{ settings.x_url or 'https://x.com/aimadulislam' }}",
         "{{ settings.youtube_url or 'https://youtube.com/@aimadulislam' }}"
@@ -86,10 +151,41 @@
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": {{ (settings.portfolio_name or "Aimad Ul Islam") | dump | safe }},
-      "url": "https://aimadulislam.dpdns.org/"
+      "name": "Aimad Security",
+      "alternateName": "Aimad ul Islam Cybersecurity Portfolio & Research",
+      "url": "https://aimadulislam.dpdns.org/",
+      "author": {
+        "@type": "Person",
+        "name": "Aimad ul Islam Khan",
+        "url": "https://aimadulislam.dpdns.org/"
+      }
     }
     </script>
+    {% if page.url == "/about/" %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ProfilePage",
+      "mainEntity": {
+        "@type": "Person",
+        "name": "Aimad ul Islam Khan",
+        "alternateName": ["Aimad ul Islam", "Aimad Security"],
+        "url": "https://aimadulislam.dpdns.org/about/",
+        "jobTitle": "Cybersecurity Specialist & Network Security Researcher"
+      }
+    }
+    </script>
+    {% elif page.url == "/contact/" %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "ContactPage",
+      "name": "Contact Aimad ul Islam Khan | Aimad Security",
+      "url": "https://aimadulislam.dpdns.org/contact/",
+      "description": "Secure communication channels and incident reporting desk for Aimad ul Islam Khan."
+    }
+    </script>
+    {% endif %}
     {% if page.url and page.url != "/" %}
     <script type="application/ld+json">
     {

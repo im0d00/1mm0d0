@@ -5,6 +5,52 @@ eleventyExcludeFromCollections: true
 User-agent: *
 Allow: /
 Disallow: /admin/
+Disallow: /api/
+Disallow: /oauth/
+Disallow: /auth/
 
-Sitemap: {{ (settings.sitemap_settings.url or settings.portfolio_url or "https://aimadulislam.dpdns.org") | replace(r/\/$/, "") }}/sitemap.xml
+# AI Search & Retrieval Assistants
+User-agent: GPTBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /oauth/
+Disallow: /auth/
+
+User-agent: ChatGPT-User
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /oauth/
+Disallow: /auth/
+
+User-agent: Google-Extended
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /oauth/
+Disallow: /auth/
+
+User-agent: PerplexityBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /oauth/
+Disallow: /auth/
+
+User-agent: ClaudeBot
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /oauth/
+Disallow: /auth/
+
+User-agent: Applebot-Extended
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /oauth/
+Disallow: /auth/
+
+Sitemap: https://aimadulislam.dpdns.org/sitemap.xml
 
