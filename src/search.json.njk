@@ -163,8 +163,15 @@ eleventyExcludeFromCollections: true
     "category": {{ item.category | dump | safe }},
     "tags": {{ item.tags | dump | safe }},
     "url": "/#kb"
+  },
+  {%- endfor %}
+  {%- endfor %}
+  {
+    "type": "Portal",
+    "title": "Aimad Security Platform Home",
+    "description": "Cybersecurity operations portal, threat analysis case studies, security research and technical guides.",
+    "category": "Navigation",
+    "tags": ["home", "security", "aimad"],
+    "url": "/"
   }
-  {%- if not loop.last or not loop.parent.loop.last %},{% endif %}
-  {%- endfor %}
-  {%- endfor %}
 ]

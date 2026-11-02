@@ -5,48 +5,62 @@ eleventyExcludeFromCollections: true
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   {% set siteUrl = "https://aimadulislam.dpdns.org" %}
+  {% set latestPostDate = collections.posts[0].date %}
   <url>
     <loc>{{ siteUrl }}/</loc>
+    <lastmod>{{ latestPostDate | htmlDateString }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>{{ siteUrl }}/about/</loc>
+    <lastmod>{{ latestPostDate | htmlDateString }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>{{ siteUrl }}/projects/</loc>
+    {% set projDate = collections.projects[0].date or latestPostDate %}
+    <lastmod>{{ projDate | htmlDateString }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>{{ siteUrl }}/labs/</loc>
+    {% set labDate = collections.labs[0].date or latestPostDate %}
+    <lastmod>{{ labDate | htmlDateString }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>{{ siteUrl }}/research/</loc>
+    {% set resDate = collections.research[0].date or latestPostDate %}
+    <lastmod>{{ resDate | htmlDateString }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>{{ siteUrl }}/blog/</loc>
+    <lastmod>{{ latestPostDate | htmlDateString }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
     <loc>{{ siteUrl }}/contact/</loc>
+    <lastmod>{{ latestPostDate | htmlDateString }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>{{ siteUrl }}/downloads/</loc>
+    {% set dlDate = collections.downloads[0].date or latestPostDate %}
+    <lastmod>{{ dlDate | htmlDateString }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>{{ siteUrl }}/brand/</loc>
+    <lastmod>{{ latestPostDate | htmlDateString }}</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -54,6 +68,7 @@ eleventyExcludeFromCollections: true
   {% for cat in collections.categories %}
   <url>
     <loc>{{ siteUrl }}/category/{{ cat | slugify }}/</loc>
+    <lastmod>{{ latestPostDate | htmlDateString }}</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.6</priority>
   </url>

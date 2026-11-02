@@ -1,6 +1,17 @@
 [
   {
     "type": "Blog Post",
+    "title": "Advanced Malware Evasion: Bypassing EDRs with Direct Syscalls, ETW Patching, and AMSI Bypass — The Complete Guide",
+    "subtitle": "Master kernel-level EDR evasion: patch ETW in memory, execute direct syscalls via SysWhispers2 and Hell's Gate, perform Process Hollowing, and blind AMSI — the red teamer's definitive guide to invisible execution.",
+    "description": "Modern EDRs hook every API call you make and trace every system event. This deep dive teaches you how to go invisible: patching EtwEventWrite in memory to blind ETW, executing direct syscalls from raw assembly to bypass user-land hooks entirely, performing Process Hollowing and Thread Hijacking, and patching AMSI so your PowerShell payloads never get scanned.",
+    "author": "Aimad Ul Islam",
+    "category": "Cybersecurity",
+    "categories": ["Cybersecurity","Malware Analysis","Red Team","Kernel Programming","Windows Internals"],
+    "tags": ["edrs","direct-syscalls","etw-patching","amsi-bypass","process-hollowing","thread-hijacking","syswhispers2","hells-gate","ssns","kernel-level","red-team","malware-evasion","ntdll","windbg","assembly"],
+    "url": "/posts/advanced-malware-evasion-bypassing-edrs-with-direct-syscalls-etw-patching-and-amsi-bypass-—-the-complete-guide/"
+  },
+  {
+    "type": "Blog Post",
     "title": "Google Dorking: The Complete Guide to Advanced Search Operators, Finding Hidden PDFs, and OSINT Reconnaissance",
     "subtitle": "Master advanced Google search operators, uncover hidden PDFs and books, exploit open directories, and learn the ethical framework behind OSINT reconnaissance.",
     "description": "Google Dorking is one of the most powerful OSINT techniques in cybersecurity. This comprehensive guide covers every advanced search operator, teaches you how to find hidden PDFs and books using directory listings, explores the Google Hacking Database, and provides a defensive playbook for protecting your own site.",
@@ -446,4 +457,12 @@
     "tags": ["Nmap","Pentesting","Recon"],
     "url": "/#kb"
   },
+  {
+    "type": "Portal",
+    "title": "Aimad Security Platform Home",
+    "description": "Cybersecurity operations portal, threat analysis case studies, security research and technical guides.",
+    "category": "Navigation",
+    "tags": ["home", "security", "aimad"],
+    "url": "/"
+  }
 ]

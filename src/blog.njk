@@ -145,28 +145,21 @@ canonical_url: "https://aimadulislam.dpdns.org/blog/"
 
             <div class="article-card-body">
               <div class="article-card-tags">
-                {% for cat in post.data.categories %}
-                <span class="tag tag-cyber">{{ cat }}</span>
-                {% endfor %}
+                <span class="tag tag-cyber"><i class="fa-solid fa-folder fa-xs"></i> {{ post.data.categories[0] or 'Cybersecurity' }}</span>
+                {% if post.data.categories[1] %}
+                <span class="tag tag-cyber">{{ post.data.categories[1] }}</span>
+                {% endif %}
               </div>
 
               <h3 class="article-card-title">{{ post.data.title }}</h3>
               <p class="article-card-excerpt">{{ post.data.excerpt or post.data.subtitle }}</p>
-
-              {% if post.data.tags %}
-              <div class="article-tags-mini">
-                {% for tag in post.data.tags %}
-                <span class="mini-tag">#{{ tag }}</span>
-                {% endfor %}
-              </div>
-              {% endif %}
 
               <div class="article-card-footer">
                 <div class="article-meta-mini">
                   <span><i class="fa-regular fa-calendar"></i> {{ post.date | readableDate }}</span>
                   <span><i class="fa-regular fa-clock"></i> {{ post.data.readingTime or 5 }}m</span>
                 </div>
-                <span class="read-more-link">Read Writeup <i class="fa-solid fa-arrow-right fa-xs"></i></span>
+                <span class="read-more-link">Read Article <i class="fa-solid fa-arrow-right fa-xs"></i></span>
               </div>
             </div>
           </article>

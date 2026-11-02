@@ -3038,4 +3038,49 @@ button, .btn, .cat-btn, .page-btn, .filter-btn, .soc-btn, .mob-close-btn, .mobil
   }
 }
 
+/* ── GLOBAL PRINT MEDIA RESETS ────────────────────────────── */
+@media print {
+  *, *::before, *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+  }
+  
+  #navbar,
+  .site-header,
+  header.site-header,
+  .nav-container,
+  .nav-toggle,
+  #mobile-nav,
+  .mobile-nav,
+  .mobile-nav-backdrop,
+  #site-footer,
+  footer,
+  .site-footer,
+  .grid-bg,
+  .scan-line,
+  #reading-progress,
+  #scroll-top,
+  .scroll-top-btn,
+  #searchModal,
+  .modal-overlay,
+  .lightbox-modal,
+  #imageLightbox,
+  #detailModal,
+  .screen-only {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+  }
+}
+
+
 

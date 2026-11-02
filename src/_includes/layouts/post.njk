@@ -4,8 +4,30 @@ layout: layouts/base.njk
 
 <div class="article-hero-wrapper">
     <div class="container">
-        <!-- Top Breadcrumbs & Quick Toolbar -->
-        <div class="breadcrumb-toolbar">
+        <!-- Dedicated Print-Only Document Header (Clean, High-Contrast Black & White) -->
+        <div class="print-header print-only">
+            <div class="print-brand">Aimad Security &bull; Cybersecurity Technical Journal</div>
+            <h1 class="print-title">{{ title }}</h1>
+            {% if subtitle or description or excerpt %}
+            <p class="print-subtitle">{{ subtitle or description or excerpt }}</p>
+            {% endif %}
+            <div class="print-meta-grid">
+                <div><strong>Author:</strong> {{ author or "Aimad ul Islam Khan" }}</div>
+                <div><strong>Published:</strong> {{ date | readableDate }}</div>
+                {% if updated or last_updated %}
+                <div><strong>Updated:</strong> {{ (updated or last_updated) | readableDate }}</div>
+                {% endif %}
+                {% if categories and categories.length > 0 %}
+                <div><strong>Category:</strong> {{ categories | join(', ') }}</div>
+                {% endif %}
+                <div><strong>Read Time:</strong> {{ content | calcReadingTime(readingTime) }} min read</div>
+                <div><strong>Original Article:</strong> https://aimadulislam.dpdns.org{{ page.url }}</div>
+            </div>
+            <hr class="print-divider" />
+        </div>
+
+        <!-- Top Breadcrumbs & Quick Toolbar (Screen Only) -->
+        <div class="breadcrumb-toolbar screen-only">
             <nav class="breadcrumb" aria-label="Breadcrumb">
                 <a href="/"><i class="fa-solid fa-house"></i> Home</a>
                 <i class="fa-solid fa-chevron-right breadcrumb-separator"></i>
@@ -20,129 +42,72 @@ layout: layouts/base.njk
 
             <div class="article-quick-tools">
                 {% if github_link %}
-                <a href="{{ github_link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-xs" title="GitHub Repository"><i class="fa-brands fa-github"></i> Repository</a>
+                <a href="{{ github_link }}" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-xs" title="GitHub Repository" aria-label="View source repository on GitHub"><i class="fa-brands fa-github"></i> Repository</a>
                 {% endif %}
                 {% if download_url %}
-                <a href="{{ download_url }}" download class="btn btn-cyan btn-xs" title="Download Resource / PDF"><i class="fa-solid fa-download"></i> Assets</a>
+                <a href="{{ download_url }}" download class="btn btn-cyan btn-xs" title="Download Resource / PDF" aria-label="Download article resource or PDF file"><i class="fa-solid fa-download"></i> Assets</a>
                 {% endif %}
-                <a href="/blog/" class="btn btn-ghost btn-xs"><i class="fa-solid fa-arrow-left"></i> All Writeups</a>
-                <button class="btn btn-ghost btn-xs copy-url-btn" data-url="https://aimadulislam.dpdns.org{{ page.url }}" title="Copy Article Link">
-                    <i class="fa-solid fa-link"></i> <span class="btn-text">Share</span>
+                <a href="/blog/" class="btn btn-ghost btn-xs" aria-label="Return to blog writeups list"><i class="fa-solid fa-arrow-left"></i> All Writeups</a>
+                <button class="btn btn-ghost btn-xs copy-url-btn" data-url="https://aimadulislam.dpdns.org{{ page.url }}" title="Share article link" aria-label="Share article link">
+                    <i class="fa-solid fa-share-nodes"></i> <span class="btn-text">Share</span>
                 </button>
-                <button class="btn btn-ghost btn-xs" onclick="window.print()" title="Print / Export PDF">
-                    <i class="fa-solid fa-print"></i> <span class="btn-text">Print</span>
+                <button class="btn btn-cyan btn-xs print-action-btn" onclick="window.print()" title="Print / Save as PDF" aria-label="Print article or save as PDF">
+                    <i class="fa-solid fa-print"></i> <span class="btn-text">Print / PDF</span>
                 </button>
             </div>
         </div>
 
-        <!-- Featured Cover Image / Header Banner (Single Unified Title Layout) -->
+        <!-- Featured Cover Image (Clean & Responsive, No Cluttered Badges) -->
         {% set postImage = image or featured_image or thumbnail %}
         {% if postImage %}
         <div class="article-cover-container">
             <div class="article-cover-banner">
                 <img src="{{ postImage }}" alt="{{ imageAlt or title }}" class="article-cover-img" onerror="this.onerror=null; this.closest('.article-cover-container').style.display='none';" />
-                <div class="article-cover-overlay"></div>
-                <div class="article-cover-badges">
-                    <div class="cover-badge-left">
-                        {% if featured or pinned %}
-                        <span class="hud-badge hud-badge-cyan"><i class="fa-solid fa-star"></i> Featured Research</span>
-                        {% else %}
-                        <span class="hud-badge hud-badge-violet"><i class="fa-solid fa-shield-halved"></i> Security Writeup</span>
-                        {% endif %}
-                    </div>
-                    <div class="cover-badge-right">
-                        {% for cat in categories %}
-                        <span class="tag tag-cyber"><i class="fa-solid fa-folder"></i> {{ cat }}</span>
-                        {% endfor %}
-                        <span class="difficulty-badge {{ (difficulty or 'Intermediate') | lower }}">
-                            <i class="fa-solid fa-gauge-high"></i> {{ difficulty or "Intermediate" }}
-                        </span>
-                    </div>
-                </div>
             </div>
         </div>
         {% endif %}
 
-        <!-- Unified Article Header Meta Card -->
-        <header class="article-header-card card">
+        <!-- Clean, Professional Article Header (Screen Only) -->
+        <header class="article-header-card card screen-only">
             <div class="card-glow"></div>
-            <div class="article-header-meta-top">
-                <div class="article-cats">
-                    <span class="hud-badge hud-badge-green"><i class="fa-solid fa-terminal"></i> SEC_ID: {{ (sec_id or (page.fileSlug | truncate(16, true, "")) or "RESEARCH") | upper }}</span>
-                    {% for cat in categories %}
-                    <a href="/blog/?cat={{ cat | urlencode }}" class="tag tag-cyber"><i class="fa-solid fa-folder-open"></i> {{ cat }}</a>
-                    {% endfor %}
-                </div>
-                <span class="difficulty-badge {{ (difficulty or 'Intermediate') | lower }}">
-                    <i class="fa-solid fa-layer-group"></i> {{ difficulty or "Intermediate" }}
+            
+            <div class="article-header-meta-row">
+                {% if categories and categories.length > 0 %}
+                <a href="/blog/?cat={{ categories[0] | urlencode }}" class="article-cat-tag">
+                    <i class="fa-solid fa-folder-open"></i> {{ categories[0] }}
+                </a>
+                {% endif %}
+                <span class="article-diff-tag {{ (difficulty or 'Intermediate') | lower }}">
+                    <i class="fa-solid fa-gauge-high"></i> {{ difficulty or "Intermediate" }}
                 </span>
             </div>
 
-            <!-- Prominent H1 Article Title (Single Instance) -->
+            <!-- Prominent H1 Article Title -->
             <h1 class="article-main-title">{{ title }}</h1>
 
             {% if subtitle or description or excerpt %}
             <p class="article-subtitle">{{ subtitle or description or excerpt }}</p>
             {% endif %}
 
-            <!-- High-Tech Cyber HUD Metadata Bar -->
-            <div class="article-meta-hud">
-                <div class="meta-hud-item">
-                    <div class="meta-hud-icon"><i class="fa-solid fa-user-shield"></i></div>
-                    <div class="meta-hud-info">
-                        <span class="meta-hud-label">Author</span>
-                        <span class="meta-hud-val">{{ author or "Aimad Ul Islam" }}</span>
-                    </div>
+            <!-- Clean Single Byline Metadata Bar -->
+            <div class="article-byline-bar">
+                <div class="byline-avatar">
+                    <img src="{{ author_avatar or '/images/whatsapp-image-2026-07-05-at-9.35.59-pm.jpeg' }}" alt="{{ author or 'Aimad Ul Islam' }}" onerror="this.onerror=null; this.src='/images/whatsapp-image-2026-07-05-at-9.35.59-pm.jpeg';" />
                 </div>
-
-                <div class="meta-hud-item">
-                    <div class="meta-hud-icon"><i class="fa-regular fa-calendar-check"></i></div>
-                    <div class="meta-hud-info">
-                        <span class="meta-hud-label">Published</span>
-                        <span class="meta-hud-val">{{ date | readableDate }}</span>
+                <div class="byline-info">
+                    <div class="byline-author">{{ author or "Aimad Ul Islam" }}</div>
+                    <div class="byline-meta-items">
+                        <span><i class="fa-regular fa-calendar"></i> {{ date | readableDate }}</span>
+                        {% set updatedDate = updated or last_updated %}
+                        {% if updatedDate %}
+                        <span class="byline-sep">&bull;</span>
+                        <span><i class="fa-solid fa-rotate"></i> Updated {{ updatedDate | readableDate }}</span>
+                        {% endif %}
+                        <span class="byline-sep">&bull;</span>
+                        <span><i class="fa-regular fa-clock"></i> {{ content | calcReadingTime(readingTime) }} min read</span>
                     </div>
-                </div>
-
-                {% set updatedDate = updated or last_updated %}
-                {% if updatedDate %}
-                <div class="meta-hud-item">
-                    <div class="meta-hud-icon"><i class="fa-solid fa-rotate"></i></div>
-                    <div class="meta-hud-info">
-                        <span class="meta-hud-label">Last Updated</span>
-                        <span class="meta-hud-val">{{ updatedDate | readableDate }}</span>
-                    </div>
-                </div>
-                {% endif %}
-
-                <div class="meta-hud-item">
-                    <div class="meta-hud-icon"><i class="fa-regular fa-clock"></i></div>
-                    <div class="meta-hud-info">
-                        <span class="meta-hud-label">Est. Read Time</span>
-                        <span class="meta-hud-val">{{ content | calcReadingTime(readingTime) }} min read</span>
-                    </div>
-                </div>
-
-                {% if views %}
-                <div class="meta-hud-item">
-                    <div class="meta-hud-icon"><i class="fa-solid fa-eye"></i></div>
-                    <div class="meta-hud-info">
-                        <span class="meta-hud-label">Reads / Views</span>
-                        <span class="meta-hud-val">{{ views }}</span>
-                    </div>
-                </div>
-                {% endif %}
-            </div>
-
-            {% if tags and tags.length > 0 %}
-            <div class="article-tags-wrapper">
-                <span class="tags-label"><i class="fa-solid fa-tags"></i> Tags:</span>
-                <div class="article-tags">
-                    {% for tag in tags %}
-                    <a href="/blog/?tag={{ tag | urlencode }}" class="tag tag-tut">#{{ tag }}</a>
-                    {% endfor %}
                 </div>
             </div>
-            {% endif %}
         </header>
 
         <!-- Article Layout: Main Column + Responsive Sidebar -->
@@ -502,35 +467,18 @@ layout: layouts/base.njk
                     </div>
                 </div>
 
-                <!-- Peer Review & Discussion / Comments Placeholder Section -->
-                <div class="comments-section card">
-                    <div class="card-glow"></div>
-                    <div class="comments-header">
-                        <div class="comments-title-wrap">
-                            <i class="fa-solid fa-comments text-cyan comments-icon"></i>
-                            <div>
-                                <h3 class="comments-title">Peer Review & Threat Discussion</h3>
-                                <p class="comments-sub">Join the technical conversation or share insights regarding this writeup.</p>
-                            </div>
-                        </div>
-                        <span class="hud-badge hud-badge-violet"><i class="fa-solid fa-lock"></i> Giscus / Disqus Ready</span>
-                    </div>
-                    
-                    <div id="comments-container" class="comments-placeholder">
-                        <div class="comments-placeholder-inner">
-                            <i class="fa-solid fa-terminal text-muted" style="font-size: 2.2rem; margin-bottom: 0.8rem;"></i>
-                            <p>Interactive peer discussions are powered by GitHub Discussions / Giscus.</p>
-                            <a href="{{ contact.github or settings.default_repo_url or settings.public_github_url or settings.github_url or 'https://github.com/im0d00' }}" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-outline mt-1">
-                                <i class="fa-brands fa-github"></i> Open Discussion on GitHub
-                            </a>
-                        </div>
-                    </div>
+                <!-- Dedicated Print Footer Notice (Print Only) -->
+                <div class="print-footer print-only">
+                    <hr class="print-divider" />
+                    <p><strong>Aimad Security</strong> &bull; Cybersecurity Technical Journal &bull; DFIR &bull; Threat Intelligence</p>
+                    <p>Original Publication URL: https://aimadulislam.dpdns.org{{ page.url }}</p>
+                    <p>&copy; {{ date | readableDate }} Aimad ul Islam Khan. All rights reserved.</p>
                 </div>
 
             </div>
 
-            <!-- Right Sticky Sidebar -->
-            <aside class="sidebar">
+            <!-- Right Sticky Sidebar (Screen Only) -->
+            <aside class="sidebar screen-only">
                 <!-- Dynamic Table of Contents Widget -->
                 <div class="sidebar-widget card" id="toc-widget">
                     <div class="card-glow"></div>
@@ -538,26 +486,7 @@ layout: layouts/base.njk
                         <span><i class="fa-solid fa-list-check text-cyan"></i> Table of Contents</span>
                         <span class="toc-count-badge" id="toc-count">0 sections</span>
                     </div>
-                    <nav id="toc-list" class="toc-list"></nav>
-                </div>
-
-                <!-- Quick Author Widget -->
-                <div class="sidebar-widget card">
-                    <div class="card-glow"></div>
-                    <h3 class="widget-title"><i class="fa-solid fa-user-shield text-cyan"></i> Research Author</h3>
-                    <div class="sidebar-author-row">
-                        <div class="author-avatar-inner" style="width:48px; height:48px; font-size:1.1rem;">
-                            {% if author_avatar %}
-                            <img src="{{ author_avatar }}" alt="{{ author or 'Aimad Ul Islam' }}" class="author-avatar-img" />
-                            {% else %}
-                            <i class="fa-solid fa-user-shield"></i>
-                            {% endif %}
-                        </div>
-                        <div>
-                            <div class="sidebar-author-name">{{ author or "Aimad Ul Islam" }}</div>
-                            <div class="sidebar-author-title">SOC Specialist & DFIR Researcher</div>
-                        </div>
-                    </div>
+                    <nav id="toc-list" class="toc-list" aria-label="Table of contents"></nav>
                 </div>
 
                 <!-- Recent Writeups Widget -->
@@ -600,27 +529,6 @@ layout: layouts/base.njk
                         </a>
                         {% endfor %}
                     </div>
-                </div>
-
-                <!-- Security Advisory / Governance Center Link -->
-                <div class="sidebar-widget card">
-                    <div class="card-glow"></div>
-                    <h3 class="widget-title"><i class="fa-solid fa-shield-halved text-cyan"></i> Security Center</h3>
-                    <p class="widget-desc">Review security disclosures, download vulnerability advisories, or inspect open source tooling.</p>
-                    <a href="/resources/" class="btn btn-sm btn-outline btn-full mt-1">
-                        <i class="fa-solid fa-folder-open"></i> Governance & Policies
-                    </a>
-                </div>
-
-                <!-- Newsletter / Threat Alerts Form -->
-                <div class="sidebar-widget card">
-                    <div class="card-glow"></div>
-                    <h3 class="widget-title"><i class="fa-solid fa-bell text-violet"></i> Security Alerts</h3>
-                    <p class="widget-desc">Subscribe for instant notifications when new security writeups or lab walkthroughs are released.</p>
-                    <form class="newsletter-form mt-1" onsubmit="event.preventDefault(); alert('Subscribed to Security Alerts feed!'); this.reset();">
-                        <input type="email" class="newsletter-input" placeholder="secops@domain.com" required aria-label="Email address for security updates" />
-                        <button type="submit" class="newsletter-btn"><i class="fa-solid fa-paper-plane"></i> Subscribe</button>
-                    </form>
                 </div>
             </aside>
         </div>

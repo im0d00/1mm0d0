@@ -222,9 +222,23 @@ function openSearchModal() {
     // Lazy load search records once
     if (!searchRecords) {
         fetch('/search.json')
-            .then(res => res.json())
-            .then(data => {
-                searchRecords = data;
+            .then(res => res.text())
+            .then(text => {
+                let data = [];
+                try {
+                    data = JSON.parse(text);
+                } catch (e) {
+                    const cleaned = text.replace(/,\s*([\]}])/g, '$1');
+                    data = JSON.parse(cleaned);
+                }
+                const seen = new Set();
+                searchRecords = (Array.isArray(data) ? data : []).filter(item => {
+                    if (!item || !item.title) return false;
+                    const key = `${(item.url || '').toLowerCase()}::${item.title.trim().toLowerCase()}`;
+                    if (seen.has(key)) return false;
+                    seen.add(key);
+                    return true;
+                });
                 const searchInput = document.getElementById('searchInput');
                 if (searchInput && searchInput.value.trim().length > 0) {
                     performSearch(searchInput.value);
@@ -273,7 +287,18 @@ function performSearch(query) {
         return;
     }
 
-    resultsContainer.innerHTML = matches.slice(0, 15).map(item => `
+    // Deduplicate matches before slicing
+    const seenMatches = new Set();
+    const uniqueMatches = [];
+    for (const item of matches) {
+        const key = `${(item.url || '').toLowerCase()}::${(item.title || '').trim().toLowerCase()}`;
+        if (!seenMatches.has(key)) {
+            seenMatches.add(key);
+            uniqueMatches.push(item);
+        }
+    }
+
+    resultsContainer.innerHTML = uniqueMatches.slice(0, 15).map(item => `
         <a href="${item.url}" onclick="closeSearchModal()" style="display:flex; flex-direction:column; gap:4px; padding:0.8rem 1rem; background:rgba(13,26,48,0.6); border:1px solid var(--border); border-radius:8px; text-decoration:none; transition:all 0.2s ease;">
             <div style="display:flex; justify-content:space-between; align-items:center;">
                 <span style="font-family:'Space Grotesk',sans-serif; font-size:0.95rem; font-weight:600; color:var(--white);">${escapeHtml(item.title || '')}</span>

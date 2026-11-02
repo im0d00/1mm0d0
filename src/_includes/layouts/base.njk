@@ -151,10 +151,16 @@
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "Aimad Security",
-      "alternateName": "Aimad ul Islam Cybersecurity Portfolio & Research",
+      "@id": "https://aimadulislam.dpdns.org/#website",
+      "name": "Aimad ul Islam",
+      "alternateName": ["Aimad Security", "Aimad ul Islam Khan Portfolio & Research"],
       "url": "https://aimadulislam.dpdns.org/",
       "author": {
+        "@type": "Person",
+        "name": "Aimad ul Islam Khan",
+        "url": "https://aimadulislam.dpdns.org/"
+      },
+      "publisher": {
         "@type": "Person",
         "name": "Aimad ul Islam Khan",
         "url": "https://aimadulislam.dpdns.org/"
@@ -226,7 +232,8 @@
       "image": {{ (og_image or featured_image or image or thumbnail or brand.og_image or settings.og_image or "/images/whatsapp-image-2026-07-05-at-9.35.59-pm.jpeg") | dump | safe }},
       "author": {
         "@type": "Person",
-        "name": {{ (author or settings.author or "Aimad Ul Islam") | dump | safe }}
+        "name": {{ (author or settings.author or "Aimad ul Islam") | dump | safe }},
+        "url": "https://aimadulislam.dpdns.org/about/"
       },
       "datePublished": "{{ date | htmlDateString }}",
       "dateModified": "{{ (updated or last_updated or date) | htmlDateString }}",
@@ -247,8 +254,24 @@
       "codeRepository": {{ (github_link or settings.default_repo_url or settings.public_github_url or settings.github_url or "https://github.com/im0d00") | dump | safe }},
       "author": {
         "@type": "Person",
-        "name": {{ (author or "Aimad Ul Islam") | dump | safe }}
+        "name": {{ (author or "Aimad ul Islam") | dump | safe }},
+        "url": "https://aimadulislam.dpdns.org/about/"
       }
+    }
+    </script>
+    {% elif layout == "layouts/lab.njk" %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "TechArticle",
+      "headline": {{ (title or name or "") | dump | safe }},
+      "description": {{ (description or "") | dump | safe }},
+      "author": {
+        "@type": "Person",
+        "name": "Aimad ul Islam Khan",
+        "url": "https://aimadulislam.dpdns.org/about/"
+      },
+      "url": "https://aimadulislam.dpdns.org{{ page.url }}"
     }
     </script>
     {% elif layout == "layouts/research.njk" %}
@@ -260,9 +283,26 @@
       "description": {{ (summary or description or "") | dump | safe }},
       "author": {
         "@type": "Person",
-        "name": {{ (author or "Aimad Ul Islam") | dump | safe }}
+        "name": {{ (author or "Aimad ul Islam") | dump | safe }},
+        "url": "https://aimadulislam.dpdns.org/about/"
       },
       "datePublished": "{{ date | htmlDateString if date else '2026-03-15' }}"
+    }
+    </script>
+    {% elif layout == "layouts/download.njk" %}
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "DigitalDocument",
+      "name": {{ (title or name or "") | dump | safe }},
+      "description": {{ (description or "") | dump | safe }},
+      "fileFormat": {{ (format or "PDF") | dump | safe }},
+      "author": {
+        "@type": "Person",
+        "name": "Aimad ul Islam Khan",
+        "url": "https://aimadulislam.dpdns.org/about/"
+      },
+      "url": "https://aimadulislam.dpdns.org{{ page.url }}"
     }
     </script>
     {% endif %}
@@ -278,6 +318,7 @@
     <!-- CSS -->
     <link rel="stylesheet" href="/css/main.css">
     <link rel="stylesheet" href="/css/blog.css">
+    <link rel="stylesheet" href="/css/print.css" media="print">
     
     <script>
       (function() {

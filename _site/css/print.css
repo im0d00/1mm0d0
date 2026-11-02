@@ -1,0 +1,599 @@
+/* ============================================================
+   PRINT.CSS — Dedicated High-Fidelity Print & PDF Stylesheet
+   Website: Aimad Security (https://aimadulislam.dpdns.org/)
+   Owner: Aimad ul Islam Khan
+   ============================================================ */
+
+@page {
+  size: A4 portrait;
+  margin: 1.8cm 1.6cm 1.8cm 1.6cm;
+}
+
+@page :first {
+  margin-top: 1.2cm;
+}
+
+/* Visibility utilities */
+.print-only {
+  display: none !important;
+}
+
+@media print {
+  /* 1. Universal Color and Background Reset */
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+    filter: none !important;
+    animation: none !important;
+    transition: none !important;
+  }
+
+  :root {
+    --void: #ffffff !important;
+    --bg-deep: #ffffff !important;
+    --navy: #ffffff !important;
+    --panel: #ffffff !important;
+    --panel-alt: #f8fafc !important;
+    --white: #0f172a !important;
+    --silver: #1e293b !important;
+    --light: #334155 !important;
+    --muted: #475569 !important;
+    --cyan: #0284c7 !important;
+    --cyan2: #0369a1 !important;
+    --blue-elec: #1d4ed8 !important;
+    --violet: #6d28d9 !important;
+    --violet2: #7c3aed !important;
+    --green: #15803d !important;
+    --amber: #b45309 !important;
+    --red: #b91c1c !important;
+    --border: #cbd5e1 !important;
+    --border2: #94a3b8 !important;
+  }
+
+  html,
+  body {
+    background: #ffffff !important;
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    font-size: 10pt !important;
+    line-height: 1.6 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-font-smoothing: subpixel-antialiased;
+  }
+
+  /* 2. Hide Non-Printable Elements & Interface Controls */
+  #navbar,
+  .site-header,
+  header.site-header,
+  .nav-container,
+  .nav-toggle,
+  #mobile-nav,
+  .mobile-nav,
+  .mobile-nav-backdrop,
+  #site-footer,
+  footer,
+  .footer,
+  .grid-bg,
+  .scan-line,
+  #reading-progress,
+  #scroll-top,
+  .scroll-top-btn,
+  #searchModal,
+  .modal-overlay,
+  .lightbox-modal,
+  #imageLightbox,
+  #detailModal,
+  .breadcrumb-toolbar,
+  .article-quick-tools,
+  .btn,
+  button,
+  .social-share,
+  .share-buttons,
+  .sidebar,
+  aside,
+  .comments-section,
+  .comments-placeholder,
+  .article-nav,
+  .copy-code-btn,
+  .copy-btn,
+  .copy-terminal-btn,
+  .copy-url-btn,
+  .card-glow,
+  .glow,
+  .glow2,
+  #blog-hero-canvas,
+  canvas,
+  .newsletter-form,
+  .search-filter-container,
+  #categories-bar,
+  .pagination-container,
+  .screen-only {
+    display: none !important;
+    visibility: hidden !important;
+    height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border: none !important;
+  }
+
+  /* 3. Display Print-Only Headers and Footers */
+  .print-only {
+    display: block !important;
+    visibility: visible !important;
+  }
+
+  /* 4. Full Width Layout Container Resets */
+  .container,
+  .article-hero-wrapper,
+  .article-layout,
+  .article-main,
+  .article-body,
+  .card,
+  #main-content {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    clip-path: none !important;
+    overflow: visible !important;
+  }
+
+  /* 5. Print Header Block */
+  .print-header {
+    margin-bottom: 16pt !important;
+    padding-bottom: 12pt !important;
+    border-bottom: 2pt solid #0f172a !important;
+  }
+
+  .print-brand {
+    font-size: 9pt !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.1em !important;
+    text-transform: uppercase !important;
+    color: #0284c7 !important;
+    margin-bottom: 4pt !important;
+  }
+
+  .print-title {
+    font-size: 20pt !important;
+    font-weight: 800 !important;
+    line-height: 1.25 !important;
+    color: #0f172a !important;
+    margin: 0 0 6pt 0 !important;
+  }
+
+  .print-subtitle {
+    font-size: 11pt !important;
+    color: #334155 !important;
+    line-height: 1.5 !important;
+    margin: 0 0 10pt 0 !important;
+    font-style: italic !important;
+  }
+
+  .print-meta-grid {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8pt 18pt !important;
+    font-size: 8.5pt !important;
+    color: #475569 !important;
+    margin-top: 6pt !important;
+  }
+
+  .print-meta-grid strong {
+    color: #0f172a !important;
+  }
+
+  /* 6. Typography & Headings in Document Flow */
+  h1, h2, h3, h4, h5, h6 {
+    color: #0f172a !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  h1 {
+    font-size: 18pt !important;
+    margin-top: 14pt !important;
+    margin-bottom: 8pt !important;
+  }
+
+  h2 {
+    font-size: 14pt !important;
+    margin-top: 16pt !important;
+    margin-bottom: 6pt !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+    padding-bottom: 3pt !important;
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  h3 {
+    font-size: 12pt !important;
+    margin-top: 12pt !important;
+    margin-bottom: 4pt !important;
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  h4, h5, h6 {
+    font-size: 10.5pt !important;
+    margin-top: 10pt !important;
+    margin-bottom: 4pt !important;
+    break-after: avoid !important;
+    page-break-after: avoid !important;
+  }
+
+  p {
+    color: #1e293b !important;
+    font-size: 10pt !important;
+    line-height: 1.6 !important;
+    margin: 0 0 8pt 0 !important;
+    orphans: 3 !important;
+    widows: 3 !important;
+  }
+
+  ul, ol {
+    color: #1e293b !important;
+    margin: 0 0 10pt 0 !important;
+    padding-left: 18pt !important;
+  }
+
+  li {
+    margin-bottom: 3pt !important;
+    color: #1e293b !important;
+    line-height: 1.55 !important;
+  }
+
+  /* 7. Hyperlinks */
+  a,
+  a:visited {
+    color: #0369a1 !important;
+    text-decoration: underline !important;
+    font-weight: 500 !important;
+  }
+
+  /* 8. Blockquotes and Callouts */
+  blockquote,
+  .custom-quote {
+    background: #f8fafc !important;
+    border-left: 3.5pt solid #0284c7 !important;
+    color: #334155 !important;
+    padding: 8pt 12pt !important;
+    margin: 10pt 0 !important;
+    border-radius: 0 4px 4px 0 !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  blockquote p,
+  .custom-quote p {
+    color: #334155 !important;
+    margin: 0 !important;
+  }
+
+  .callout {
+    border-radius: 4px !important;
+    margin: 12pt 0 !important;
+    padding: 8pt 12pt !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    border: 1px solid #cbd5e1 !important;
+  }
+
+  .callout-warn,
+  .callout-warning {
+    background: #fffbeb !important;
+    border-left: 4pt solid #d97706 !important;
+    color: #78350f !important;
+  }
+
+  .callout-danger {
+    background: #fef2f2 !important;
+    border-left: 4pt solid #dc2626 !important;
+    color: #7f1d1d !important;
+  }
+
+  .callout-info,
+  .callout-tip,
+  .callout-note {
+    background: #f0f9ff !important;
+    border-left: 4pt solid #0284c7 !important;
+    color: #0c4a6e !important;
+  }
+
+  .callout-success {
+    background: #f0fdf4 !important;
+    border-left: 4pt solid #16a34a !important;
+    color: #14532d !important;
+  }
+
+  .callout-title {
+    font-weight: 700 !important;
+    font-size: 10.5pt !important;
+    margin-bottom: 2pt !important;
+    color: inherit !important;
+  }
+
+  .callout-body,
+  .callout-body p {
+    font-size: 9.5pt !important;
+    color: inherit !important;
+    margin: 0 !important;
+  }
+
+  /* 9. Code Blocks & Terminal Blocks */
+  pre,
+  .article-body pre,
+  .article-markdown-body pre,
+  .code-block-wrap pre,
+  .terminal-block-wrap pre,
+  .file-tree-wrap pre {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+    color: #0f172a !important;
+    padding: 8pt 10pt !important;
+    border-radius: 4px !important;
+    font-family: "JetBrains Mono", Consolas, "Courier New", monospace !important;
+    font-size: 8.5pt !important;
+    line-height: 1.45 !important;
+    white-space: pre-wrap !important;
+    word-break: break-all !important;
+    overflow: visible !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    margin: 10pt 0 !important;
+  }
+
+  code,
+  .article-body pre code,
+  .article-markdown-body pre code,
+  .code-block-wrap pre code,
+  .terminal-block-wrap pre code {
+    background: transparent !important;
+    color: #0f172a !important;
+    border: none !important;
+    font-family: "JetBrains Mono", Consolas, "Courier New", monospace !important;
+    font-size: 8.5pt !important;
+    white-space: pre-wrap !important;
+  }
+
+  p code,
+  li code,
+  td code {
+    background: #f1f5f9 !important;
+    border: 1px solid #e2e8f0 !important;
+    color: #0f172a !important;
+    padding: 1pt 3pt !important;
+    border-radius: 3px !important;
+    font-size: 8.5pt !important;
+  }
+
+  .code-block-wrap,
+  .terminal-block-wrap,
+  .file-tree-wrap {
+    background: #f8fafc !important;
+    border: 1px solid #cbd5e1 !important;
+    margin: 12pt 0 !important;
+    border-radius: 4px !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .code-block-header,
+  .terminal-header,
+  .file-tree-header {
+    background: #f1f5f9 !important;
+    border-bottom: 1px solid #cbd5e1 !important;
+    color: #334155 !important;
+    padding: 4pt 8pt !important;
+    font-size: 8.5pt !important;
+    font-weight: 600 !important;
+    display: flex !important;
+    justify-content: space-between !important;
+  }
+
+  .terminal-dots {
+    display: none !important;
+  }
+
+  .term-prompt {
+    color: #15803d !important;
+    font-weight: 700 !important;
+  }
+
+  /* Prism Tokens in Print (High Contrast Dark on Light) */
+  .token.comment,
+  .token.prolog,
+  .token.doctype,
+  .token.cdata {
+    color: #64748b !important;
+    font-style: italic !important;
+  }
+
+  .token.punctuation {
+    color: #334155 !important;
+  }
+
+  .token.property,
+  .token.tag,
+  .token.boolean,
+  .token.number,
+  .token.constant,
+  .token.symbol {
+    color: #b45309 !important;
+    font-weight: 600 !important;
+  }
+
+  .token.selector,
+  .token.attr-name,
+  .token.string,
+  .token.char,
+  .token.builtin {
+    color: #15803d !important;
+  }
+
+  .token.operator,
+  .token.entity,
+  .token.url {
+    color: #0369a1 !important;
+  }
+
+  .token.atrule,
+  .token.attr-value,
+  .token.keyword {
+    color: #6d28d9 !important;
+    font-weight: 700 !important;
+  }
+
+  .token.function,
+  .token.class-name {
+    color: #0284c7 !important;
+    font-weight: 700 !important;
+  }
+
+  .token.regex,
+  .token.important,
+  .token.variable {
+    color: #c2410c !important;
+  }
+
+  /* 10. Tables */
+  table,
+  .custom-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    margin: 12pt 0 !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    font-size: 8.5pt !important;
+  }
+
+  th,
+  td {
+    border: 1px solid #cbd5e1 !important;
+    padding: 5pt 8pt !important;
+    color: #1e293b !important;
+    text-align: left !important;
+  }
+
+  th {
+    background: #f1f5f9 !important;
+    font-weight: 700 !important;
+    color: #0f172a !important;
+  }
+
+  tr:nth-child(even) {
+    background: #f8fafc !important;
+  }
+
+  /* 11. Images & Figures */
+  img {
+    max-width: 100% !important;
+    height: auto !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    border: 1px solid #e2e8f0 !important;
+    border-radius: 4px !important;
+  }
+
+  .article-figure {
+    margin: 10pt 0 !important;
+    text-align: center !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  figcaption {
+    color: #64748b !important;
+    font-size: 8pt !important;
+    margin-top: 4pt !important;
+    font-style: italic !important;
+  }
+
+  .article-cover-container {
+    margin-bottom: 12pt !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .article-cover-img {
+    max-height: 220pt !important;
+    width: 100% !important;
+    object-fit: cover !important;
+    border-radius: 4px !important;
+  }
+
+  /* 12. Author Signature Box */
+  .author-box {
+    display: block !important;
+    border: 1px solid #cbd5e1 !important;
+    background: #f8fafc !important;
+    padding: 10pt 12pt !important;
+    margin-top: 16pt !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    border-radius: 4px !important;
+  }
+
+  .author-info {
+    display: block !important;
+  }
+
+  .author-name {
+    color: #0f172a !important;
+    font-size: 11pt !important;
+    font-weight: 700 !important;
+    margin: 0 !important;
+  }
+
+  .author-role {
+    color: #0284c7 !important;
+    font-size: 9pt !important;
+    font-weight: 600 !important;
+    margin-bottom: 4pt !important;
+    display: block !important;
+  }
+
+  .author-bio {
+    color: #334155 !important;
+    font-size: 8.5pt !important;
+    line-height: 1.5 !important;
+    margin: 4pt 0 !important;
+  }
+
+  .author-links {
+    font-size: 8pt !important;
+    color: #64748b !important;
+    margin-top: 4pt !important;
+  }
+
+  /* 13. Print Footer Notice */
+  .print-footer {
+    display: block !important;
+    margin-top: 20pt !important;
+    padding-top: 10pt !important;
+    border-top: 1pt solid #cbd5e1 !important;
+    font-size: 8pt !important;
+    color: #64748b !important;
+    text-align: center !important;
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+    line-height: 1.4 !important;
+  }
+
+  .print-footer p {
+    font-size: 8pt !important;
+    color: #64748b !important;
+    margin: 2pt 0 !important;
+  }
+}
