@@ -947,139 +947,31 @@ collections:
     folder: "src/posts"
     create: true
     slug: "{{slug}}"
+    summary: "{{title}} ({{date | date('YYYY-MM-DD')}}) - {{status}}"
+    sortable_fields: ["date", "title", "status"]
     fields:
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Subtitle", name: "subtitle", widget: "string", required: false }
-      - { label: "Publish Date", name: "date", widget: "datetime" }
-      - { label: "Last Updated Date", name: "updated", widget: "datetime", required: false }
-      - { label: "Author Name", name: "author", widget: "string", default: "Aimad Ul Islam" }
-      - { label: "Author Avatar / Photo", name: "author_avatar", widget: "image", required: false }
-      - { label: "Summary / Excerpt", name: "excerpt", widget: "text" }
-      - { label: "Thumbnail Image", name: "thumbnail", widget: "image", required: false }
-      - { label: "Cover / Featured Image", name: "image", widget: "image", required: false }
-      - { label: "Image Alt Text", name: "imageAlt", widget: "string", required: false }
-      - { label: "Emoji / Icon", name: "emoji", widget: "string", required: false }
-      - { label: "Difficulty Level", name: "difficulty", widget: "select", options: ["Beginner", "Intermediate", "Advanced", "Expert"], default: "Intermediate" }
-      - { label: "Categories", name: "categories", widget: "list" }
-      - { label: "Tags", name: "tags", widget: "list" }
-      - { label: "Draft/Published Status", name: "status", widget: "select", options: ["Published", "Draft", "Scheduled"], default: "Published" }
-      - { label: "Featured Article Toggle", name: "featured", widget: "boolean", default: false }
-      - { label: "Pinned to Top Toggle", name: "pinned", widget: "boolean", default: false }
-      - { label: "Reading Time (minutes)", name: "readingTime", widget: "number", value_type: "int", required: false }
-      - { label: "Estimated Views Count", name: "views", widget: "number", value_type: "int", default: 120, required: false }
-      - { label: "Estimated Likes Count", name: "likes", widget: "number", value_type: "int", default: 24, required: false }
-      - { label: "GitHub Repository Link", name: "github_link", widget: "string", required: false }
-      - { label: "Download URL / PDF Link", name: "download_url", widget: "file", required: false }
-      - { label: "External Resources & Links", name: "external_resources", widget: "list", required: false, fields: [{ label: "Resource Title", name: "title", widget: "string" }, { label: "URL", name: "url", widget: "string" }] }
-      - { label: "Gallery Images", name: "gallery", widget: "list", required: false, field: { label: "Image", name: "image", widget: "image" } }
-      - { label: "SEO Title", name: "seo_title", widget: "string", required: false }
-      - { label: "SEO Description", name: "seo_description", widget: "text", required: false }
-      - { label: "Open Graph Image", name: "og_image", widget: "image", required: false }
-      - { label: "Canonical URL", name: "canonical_url", widget: "string", required: false }
+      - { label: "Article Title", name: "title", widget: "string", hint: "The main title displayed across the blog and in search results." }
+      - { label: "Short Introduction / Excerpt", name: "excerpt", widget: "text", hint: "1-2 sentence overview shown on blog cards and below the article header." }
+      - { label: "Featured Cover Image", name: "image", widget: "image", required: false, hint: "Cover photo displayed at the top of the article and on the blog listing." }
+      - { label: "Image Alternative Text", name: "imageAlt", widget: "string", required: false, hint: "Descriptive alt text for accessibility and image SEO." }
+      - { label: "Author Name", name: "author", widget: "string", default: "Aimad Ul Islam", hint: "Primary author of this research write-up." }
+      - { label: "Publication Date", name: "date", widget: "datetime", format: "YYYY-MM-DDTHH:mm:ssZ", date_format: "YYYY-MM-DD", time_format: "HH:mm" }
+      - { label: "Last Updated Date", name: "updated", widget: "datetime", required: false, format: "YYYY-MM-DDTHH:mm:ssZ", date_format: "YYYY-MM-DD", time_format: "HH:mm" }
+      - { label: "Category", name: "categories", widget: "list", default: ["Cybersecurity"], hint: "Primary category and topics (e.g. Cybersecurity, DFIR, Malware Analysis, Linux, Networking)." }
+      - { label: "Tags", name: "tags", widget: "list", default: ["cybersecurity", "security-research"], hint: "Topic tags for filtering and related post suggestions." }
+      - { label: "Draft or Publication Status", name: "status", widget: "select", options: ["Published", "Draft"], default: "Published", hint: "Set to 'Draft' to keep this writeup unlisted and exclude from public feeds." }
+      - { label: "Keep as Draft (Unlisted)", name: "draft", widget: "boolean", default: false, required: false, hint: "Secondary safety toggle: when ON, post is completely omitted from the public blog." }
+      - { label: "Technical Difficulty", name: "difficulty", widget: "select", options: ["Beginner", "Intermediate", "Advanced", "Expert"], default: "Intermediate", required: false }
+      - label: "Main Article Content"
+        name: "body"
+        widget: "markdown"
+        hint: "Full Markdown editor. Supports headings (##, ###), bullet/numbered lists, blockquotes, tables, images, and syntax-highlighted code blocks (```python, ```bash, ```powershell, ```json, etc.)"
+      - { label: "GitHub Repository Link", name: "github_link", widget: "string", required: false, hint: "Optional link to the accompanying GitHub repository or tool script." }
+      - { label: "Resource / Assets Download URL", name: "download_url", widget: "file", required: false, hint: "Optional downloadable assets, cheat sheet, or companion PDF file." }
+      - { label: "SEO Title", name: "seo_title", widget: "string", required: false, hint: "Custom browser and Google title. Defaults to Article Title." }
+      - { label: "SEO Description", name: "seo_description", widget: "text", required: false, hint: "Custom meta description for search engines. Defaults to Short Introduction." }
+      - { label: "Social Sharing Image", name: "og_image", widget: "image", required: false, hint: "Custom Open Graph image for social sharing. Defaults to Featured Cover Image." }
+      - { label: "Canonical URL Override", name: "canonical_url", widget: "string", required: false, hint: "Custom canonical URL. Automatically generated if left empty." }
       - { label: "Layout", name: "layout", widget: "hidden", default: "layouts/post.njk" }
-      - { label: "Related Tools / Hardware", name: "related_tools", widget: "list", required: false }
-      - { label: "Related Projects", name: "related_projects", widget: "list", required: false }
-      - { label: "Related Labs", name: "related_labs", widget: "list", required: false }
-      - { label: "Related Posts Slugs / Titles", name: "related_posts", widget: "list", required: false }
-      - { label: "Article Content (Markdown Body)", name: "body", widget: "markdown", required: false }
-      - label: "Structured Content Blocks (Modular Editor)"
-        name: "content_blocks"
-        widget: "list"
-        required: false
-        types:
-          - label: "Basic Paragraph / Text"
-            name: "paragraph"
-            widget: "object"
-            fields:
-              - { label: "Content (Markdown / Text)", name: "content", widget: "markdown" }
-          - label: "Heading"
-            name: "heading"
-            widget: "object"
-            fields:
-              - { label: "Heading Text", name: "text", widget: "string" }
-              - { label: "Level", name: "level", widget: "select", options: ["h2", "h3", "h4"], default: "h2" }
-              - { label: "Subtitle / Description", name: "subtitle", widget: "string", required: false }
-          - label: "Code Block"
-            name: "code_block"
-            widget: "object"
-            fields:
-              - { label: "File Name", name: "filename", widget: "string", default: "script.py", required: false }
-              - { label: "Programming Language", name: "language", widget: "select", options: ["Python", "Bash", "PowerShell", "C/C++", "Go", "Rust", "JavaScript", "TypeScript", "HTML", "CSS", "JSON", "YAML", "SQL", "Markdown", "Text"], default: "Python" }
-              - { label: "Code Content", name: "code", widget: "text" }
-              - { label: "Optional Description", name: "description", widget: "string", required: false }
-          - label: "Terminal Block"
-            name: "terminal_block"
-            widget: "object"
-            fields:
-              - { label: "Terminal Title", name: "title", widget: "string", default: "Terminal Console" }
-              - { label: "Operating System", name: "os", widget: "select", options: ["Linux / Kali", "Windows PowerShell", "macOS Zsh", "Docker Container"], default: "Linux / Kali" }
-              - { label: "Commands", name: "commands", widget: "text" }
-              - { label: "Command Output / Description", name: "description", widget: "text", required: false }
-          - label: "File Tree Block"
-            name: "file_tree"
-            widget: "object"
-            fields:
-              - { label: "Tree Title", name: "title", widget: "string", default: "Project Directory Structure" }
-              - { label: "File Tree Hierarchy (ASCII)", name: "tree_content", widget: "text" }
-          - label: "Alert / Callout Box"
-            name: "alert"
-            widget: "object"
-            fields:
-              - { label: "Alert Type", name: "alert_type", widget: "select", options: ["info", "tip", "warning", "success", "danger", "note"], default: "info" }
-              - { label: "Alert Title", name: "title", widget: "string", default: "Important Notice" }
-              - { label: "Alert Content", name: "content", widget: "text" }
-          - label: "API Endpoint Block"
-            name: "api_endpoint"
-            widget: "object"
-            fields:
-              - { label: "HTTP Method", name: "method", widget: "select", options: ["GET", "POST", "PUT", "DELETE", "PATCH"], default: "GET" }
-              - { label: "Endpoint Path", name: "path", widget: "string", default: "/api/v1/resource" }
-              - { label: "Description", name: "description", widget: "string", required: false }
-              - { label: "Request Headers / Query Params", name: "headers", widget: "text", required: false }
-              - { label: "Request Body (JSON)", name: "request_body", widget: "code", default_language: "json", required: false }
-              - { label: "Response Example (JSON)", name: "response_example", widget: "code", default_language: "json", required: false }
-          - label: "Quote / Citation"
-            name: "quote"
-            widget: "object"
-            fields:
-              - { label: "Quote Text", name: "quote", widget: "text" }
-              - { label: "Author", name: "author", widget: "string", required: false }
-              - { label: "Source / Citation", name: "cite", widget: "string", required: false }
-          - label: "Data Table"
-            name: "table"
-            widget: "object"
-            fields:
-              - { label: "Table Caption", name: "caption", widget: "string", required: false }
-              - { label: "Column Headers", name: "headers", widget: "list" }
-              - { label: "Rows", name: "rows", widget: "list", fields: [{ label: "Row Cells", name: "cells", widget: "list" }] }
-          - label: "Image Block"
-            name: "image_block"
-            widget: "object"
-            fields:
-              - { label: "Image", name: "image", widget: "image" }
-              - { label: "Caption", name: "caption", widget: "string", required: false }
-              - { label: "Alt Text", name: "alt", widget: "string", required: false }
-          - label: "Gallery Block"
-            name: "gallery_block"
-            widget: "object"
-            fields:
-              - { label: "Gallery Title", name: "title", widget: "string", required: false }
-              - { label: "Images", name: "images", widget: "list", field: { label: "Image", name: "image", widget: "image" } }
-          - label: "Video Block"
-            name: "video_block"
-            widget: "object"
-            fields:
-              - { label: "Video Embed URL", name: "embed_url", widget: "string" }
-              - { label: "Caption", name: "caption", widget: "string", required: false }
-          - label: "Checklist"
-            name: "checklist"
-            widget: "object"
-            fields:
-              - { label: "Checklist Title", name: "title", widget: "string", default: "Task Checklist" }
-              - { label: "Items", name: "items", widget: "list", fields: [{ label: "Task Text", name: "text", widget: "string" }, { label: "Completed?", name: "checked", widget: "boolean", default: false }] }
-          - label: "Section Divider"
-            name: "divider"
-            widget: "object"
-            fields:
-              - { label: "Style", name: "style", widget: "select", options: ["glow", "line", "dots"], default: "glow" }
+
 
