@@ -1,0 +1,384 @@
+{
+  "pageAudits": [
+    {
+      "label": "Homepage",
+      "url": "/",
+      "status": 200,
+      "title": "Aimad ul Islam | Cybersecurity Portfolio & Security Research",
+      "hasCanonical": true,
+      "canonicalUrl": "https://aimadulislam.dpdns.org/",
+      "hasMetaDesc": true,
+      "hasH1": true,
+      "h1Text": "Aimad Ul Islam",
+      "brokenImgs": [],
+      "badLinks": [],
+      "errors": [],
+      "warnings": [
+        "Console Error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ]
+    },
+    {
+      "label": "About Page",
+      "url": "/about/",
+      "status": 200,
+      "title": "About Aimad ul Islam | Cybersecurity & Network Security Professional",
+      "hasCanonical": true,
+      "canonicalUrl": "https://aimadulislam.dpdns.org/about/",
+      "hasMetaDesc": true,
+      "hasH1": true,
+      "h1Text": "Aimad ul Islam Khan",
+      "brokenImgs": [],
+      "badLinks": [],
+      "errors": [],
+      "warnings": [
+        "Console Error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ]
+    },
+    {
+      "label": "Projects Listing",
+      "url": "/projects/",
+      "status": 200,
+      "title": "Cybersecurity Projects & Engineering Center | Aimad ul Islam",
+      "hasCanonical": true,
+      "canonicalUrl": "https://aimadulislam.dpdns.org/projects/",
+      "hasMetaDesc": true,
+      "hasH1": true,
+      "h1Text": "Projects Showcase Center",
+      "brokenImgs": [],
+      "badLinks": [],
+      "errors": [],
+      "warnings": [
+        "Console Error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ]
+    },
+    {
+      "label": "Project Detail: Memory Forensics",
+      "url": "/projects/automated-memory-forensics/",
+      "status": 200,
+      "title": "Automated Volatility 3 Memory Forensic Parser | Aimad Ul Islam",
+      "hasCanonical": true,
+      "canonicalUrl": "https://aimadulislam.dpdns.org/projects/automated-memory-forensics/",
+      "hasMetaDesc": true,
+      "hasH1": true,
+      "h1Text": "Automated Volatility 3 Memory Forensic Parser",
+      "brokenImgs": [],
+      "badLinks": [],
+      "errors": [],
+      "warnings": [
+        "Console Error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ]
+    },
+    {
+      "label": "Labs Listing",
+      "url": "/labs/",
+      "status": 200,
+      "title": "Cybersecurity Virtual Labs & Hands-on Range | Aimad ul Islam",
+      "hasCanonical": true,
+      "canonicalUrl": "https://aimadulislam.dpdns.org/labs/",
+      "hasMetaDesc": true,
+      "hasH1": true,
+      "h1Text": "Virtual Cybersecurity Labs",
+      "brokenImgs": [],
+      "badLinks": [],
+      "errors": [],
+      "warnings": [
+        "Console Error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ]
+    },
+    {
+      "label": "Lab Detail: Active Directory",
+      "url": "/labs/active-directory-homelab/",
+      "status": 200,
+      "title": "Enterprise Active Directory & SOC Homelab Range | Aimad Ul Islam",
+      "hasCanonical": true,
+      "canonicalUrl": "https://aimadulislam.dpdns.org/labs/active-directory-homelab/",
+      "hasMetaDesc": true,
+      "hasH1": true,
+      "h1Text": "Enterprise Active Directory & SOC Homelab Range",
+      "brokenImgs": [],
+      "badLinks": [],
+      "errors": [],
+      "warnings": [
+        "Console Error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ]
+    },
+    {
+      "label": "Research Listing",
+      "url": "/research/",
+      "status": 200,
+      "title": "Cybersecurity Research Center & Threat Intelligence | Aimad ul Islam",
+      "hasCanonical": true,
+      "canonicalUrl": "https://aimadulislam.dpdns.org/research/",
+      "hasMetaDesc": true,
+      "hasH1": true,
+      "h1Text": "Security Research Center",
+      "brokenImgs": [],
+      "badLinks": [],
+      "errors": [],
+      "warnings": [
+        "Console Error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ]
+    },
+    {
+      "label": "Research Article: Zero Trust 2026",
+      "url": "/research/zero-trust-architecture-2026/",
+      "status": 200,
+      "title": "Zero-Trust Architecture & Microsegmentation Framework 2026 | Aimad Ul Islam",
+      "hasCanonical": true,
+      "canonicalUrl": "https://aimadulislam.dpdns.org/research/zero-trust-architecture-2026/",
+      "hasMetaDesc": true,
+      "hasH1": true,
+      "h1Text": "Zero-Trust Architecture & Microsegmentation Framew",
+      "brokenImgs": [],
+      "badLinks": [],
+      "errors": [],
+      "warnings": [
+        "Console Error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ]
+    },
+    {
+      "label": "Downloads Listing",
+      "url": "/downloads/",
+      "status": 200,
+      "title": "Cybersecurity Download Hub & Forensic Cheat Sheets | Aimad ul Islam",
+      "hasCanonical": true,
+      "canonicalUrl": "https://aimadulislam.dpdns.org/downloads/",
+      "hasMetaDesc": true,
+      "hasH1": true,
+      "h1Text": "Download Resource Hub",
+      "brokenImgs": [],
+      "badLinks": [],
+      "errors": [],
+      "warnings": [
+        "Console Error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ]
+    },
+    {
+      "label": "Download Detail: Volatility3 Cheatsheet",
+      "url": "/downloads/volatility3-cheatsheet/",
+      "status": 200,
+      "title": "Volatility 3 CLI Forensics Cheat Sheet & Command Guide | Aimad Ul Islam",
+      "hasCanonical": true,
+      "canonicalUrl": "https://aimadulislam.dpdns.org/downloads/volatility3-cheatsheet/",
+      "hasMetaDesc": true,
+      "hasH1": true,
+      "h1Text": "Volatility 3 CLI Forensics Cheat Sheet & Command G",
+      "brokenImgs": [],
+      "badLinks": [],
+      "errors": [],
+      "warnings": [
+        "Console Error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ]
+    },
+    {
+      "label": "Blog Listing",
+      "url": "/blog/",
+      "status": 304,
+      "title": "Cybersecurity Technical Blog & Writeups | Aimad ul Islam",
+      "hasCanonical": true,
+      "canonicalUrl": "https://aimadulislam.dpdns.org/blog/",
+      "hasMetaDesc": true,
+      "hasH1": true,
+      "h1Text": "Cybersecurity Knowledge Vault",
+      "brokenImgs": [],
+      "badLinks": [],
+      "errors": [],
+      "warnings": [
+        "Console Error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ]
+    },
+    {
+      "label": "Blog Post: Kali Linux Setup",
+      "url": "/posts/kali-linux-setup-guide/",
+      "status": 200,
+      "title": "Getting Started with Kali Linux: Complete Beginner Setup Guide | Aimad Ul Islam",
+      "hasCanonical": true,
+      "canonicalUrl": "https://aimadulislam.dpdns.org/posts/kali-linux-setup-guide/",
+      "hasMetaDesc": true,
+      "hasH1": true,
+      "h1Text": "Getting Started with Kali Linux: Complete Beginner",
+      "brokenImgs": [],
+      "badLinks": [],
+      "errors": [],
+      "warnings": [
+        "Console Error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ]
+    },
+    {
+      "label": "Blog Post: Malware Evasion",
+      "url": "/posts/advanced-malware-evasion-bypassing-edrs-with-direct-syscalls-etw-patching-and-amsi-bypass-—-the-complete-guide/",
+      "status": 200,
+      "title": "Advanced Malware Evasion: Bypassing EDRs with Direct Syscalls & ETW Patching (2026 Guide)",
+      "hasCanonical": true,
+      "canonicalUrl": "https://aimadulislam.dpdns.org/posts/advanced-malware-evasion-bypassing-edrs-with-direct-syscalls-etw-patching-and-amsi-bypass-—-the-complete-guide/",
+      "hasMetaDesc": true,
+      "hasH1": true,
+      "h1Text": "Advanced Malware Evasion: Bypassing EDRs with Dire",
+      "brokenImgs": [],
+      "badLinks": [],
+      "errors": [],
+      "warnings": [
+        "Console Error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ]
+    },
+    {
+      "label": "Blog Post: DFIR Intro",
+      "url": "/posts/dfir-introduction/",
+      "status": 200,
+      "title": "Digital Forensics & Incident Response: A Hands-On Introduction | Aimad Ul Islam",
+      "hasCanonical": true,
+      "canonicalUrl": "https://aimadulislam.dpdns.org/posts/dfir-introduction/",
+      "hasMetaDesc": true,
+      "hasH1": true,
+      "h1Text": "Digital Forensics & Incident Response: A Hands-On ",
+      "brokenImgs": [],
+      "badLinks": [],
+      "errors": [],
+      "warnings": [
+        "Console Error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ]
+    },
+    {
+      "label": "Contact Page",
+      "url": "/contact/",
+      "status": 200,
+      "title": "Contact Aimad ul Islam | Cybersecurity & Incident Response Desk",
+      "hasCanonical": true,
+      "canonicalUrl": "https://aimadulislam.dpdns.org/contact/",
+      "hasMetaDesc": true,
+      "hasH1": true,
+      "h1Text": "Contact & Collaboration Desk",
+      "brokenImgs": [],
+      "badLinks": [],
+      "errors": [],
+      "warnings": [
+        "Console Error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ]
+    },
+    {
+      "label": "Resources Hub",
+      "url": "/resources/",
+      "status": 200,
+      "title": "Resources & Compliance Center | Aimad Ul Islam",
+      "hasCanonical": true,
+      "canonicalUrl": "https://aimadulislam.dpdns.org/resources/",
+      "hasMetaDesc": true,
+      "hasH1": true,
+      "h1Text": "Resources & Compliance Center",
+      "brokenImgs": [],
+      "badLinks": [],
+      "errors": [],
+      "warnings": [
+        "Console Error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ]
+    },
+    {
+      "label": "Privacy Policy",
+      "url": "/resources/privacy-policy/",
+      "status": 200,
+      "title": "Privacy Policy | Aimad Ul Islam",
+      "hasCanonical": true,
+      "canonicalUrl": "https://aimadulislam.dpdns.org/resources/privacy-policy/",
+      "hasMetaDesc": true,
+      "hasH1": true,
+      "h1Text": "Privacy Policy",
+      "brokenImgs": [],
+      "badLinks": [],
+      "errors": [],
+      "warnings": [
+        "Console Error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ]
+    },
+    {
+      "label": "Terms of Service",
+      "url": "/resources/terms/",
+      "status": 200,
+      "title": "Terms of Use | Aimad Ul Islam",
+      "hasCanonical": true,
+      "canonicalUrl": "https://aimadulislam.dpdns.org/resources/terms/",
+      "hasMetaDesc": true,
+      "hasH1": true,
+      "h1Text": "Terms of Use",
+      "brokenImgs": [],
+      "badLinks": [],
+      "errors": [],
+      "warnings": [
+        "Console Error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ]
+    },
+    {
+      "label": "Decap CMS Admin",
+      "url": "/admin/index.html",
+      "status": 200,
+      "title": "Content Manager — Decap CMS",
+      "hasCanonical": true,
+      "canonicalUrl": "https://aimadulislam.dpdns.org/admin/",
+      "hasMetaDesc": true,
+      "hasH1": false,
+      "h1Text": "",
+      "brokenImgs": [],
+      "badLinks": [],
+      "errors": [],
+      "warnings": [
+        "Console Error: Failed to load resource: the server responded with a status of 404 (Not Found)"
+      ]
+    }
+  ],
+  "responsiveChecks": {
+    "total": 48,
+    "passed": 48,
+    "allPassed": true
+  },
+  "interactiveTests": {
+    "codeCopy": {
+      "found": true,
+      "initialText": " Copy",
+      "afterClickText": " Copied!",
+      "hasCopiedFeedback": true
+    },
+    "blogMeta": {
+      "relatedCount": 3,
+      "hasDuplicateRelated": false,
+      "categories": [],
+      "hasBackLink": true
+    },
+    "search": {
+      "supported": true,
+      "modalOpened": true,
+      "resultsReturned": 3,
+      "modalClosed": true
+    },
+    "mobileNav": {
+      "supported": true,
+      "drawerOpened": true,
+      "drawerClosed": true
+    }
+  },
+  "printTests": [
+    {
+      "bodyBg": "rgb(255, 255, 255)",
+      "bodyColor": "rgb(15, 23, 42)",
+      "printHeaderDisplay": "block",
+      "printFooterDisplay": "block",
+      "navbarDisplay": "none",
+      "footerDisplay": "none",
+      "preBg": "rgb(248, 250, 252)",
+      "preColor": "rgb(15, 23, 42)"
+    }
+  ],
+  "cmsAudit": {
+    "hasBackend": true,
+    "hasRepo": true,
+    "hasBranch": true,
+    "hasAuthWorker": true,
+    "hasMediaFolder": true,
+    "hasPublicFolder": true,
+    "hasPostsCollection": true,
+    "hasProjectsCollection": true,
+    "hasLabsCollection": true,
+    "hasResearchCollection": true,
+    "hasAboutPage": true,
+    "hasGlobalSettings": true,
+    "hasBrandCollection": true
+  }
+}

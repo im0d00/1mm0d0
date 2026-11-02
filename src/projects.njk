@@ -136,7 +136,7 @@ canonical_url: "https://aimadulislam.dpdns.org/projects/"
         <div class="card-glow"></div>
         <div class="article-card-img-wrap" style="height: 180px;">
           {% if proj.featured_image %}
-          <img class="article-card-img" src="{{ proj.featured_image }}" alt="{{ proj.title }}" loading="lazy"/>
+          <img class="article-card-img" src="{{ proj.featured_image }}" alt="{{ proj.title }}" loading="lazy" onerror="this.onerror=null; this.src='/images/cybersecurity-search-operations.png';"/>
           {% else %}
           <div class="article-card-img-placeholder">
             <i class="fa-solid fa-diagram-project text-cyan" style="font-size: 2.5rem;"></i>
@@ -189,7 +189,7 @@ canonical_url: "https://aimadulislam.dpdns.org/projects/"
         <div class="card-glow"></div>
         <div class="article-card-img-wrap" style="height: 180px;">
           {% if proj.data.featured_image or proj.data.image %}
-          <img class="article-card-img" src="{{ proj.data.featured_image or proj.data.image }}" alt="{{ proj.data.title }}" loading="lazy"/>
+          <img class="article-card-img" src="{{ proj.data.featured_image or proj.data.image }}" alt="{{ proj.data.title }}" loading="lazy" onerror="this.onerror=null; this.src='/images/cybersecurity-search-operations.png';"/>
           {% else %}
           <div class="article-card-img-placeholder">
             <i class="fa-solid fa-code-branch text-cyan" style="font-size: 2.5rem;"></i>

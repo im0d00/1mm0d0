@@ -1,7 +1,7 @@
 {
   "items": [
     {
-      "featured_image": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80",
+      "featured_image": "/images/edr-shield-under-attack.png",
       "technologies": [
         "Splunk",
         "Snort IDS",
@@ -24,7 +24,7 @@
       "category": "Home Lab"
     },
     {
-      "featured_image": "https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80",
+      "featured_image": "/images/cybersecurity-search-operations.png",
       "technologies": [
         "Python",
         "Scapy",
@@ -47,7 +47,7 @@
       "category": "Automation"
     },
     {
-      "featured_image": "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=800&q=80",
+      "featured_image": "/images/edr-shield-bypass-dataflow.png",
       "technologies": [
         "Volatility 3",
         "Autopsy",
@@ -69,7 +69,7 @@
       "category": "Digital Forensics"
     },
     {
-      "featured_image": "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=800&q=80",
+      "featured_image": "/images/chatgpt-image-sep-22-2026-12_42_46-am.png",
       "technologies": [
         "Cisco Packet Tracer",
         "OSPF",
@@ -92,7 +92,7 @@
       "category": "Networking"
     },
     {
-      "featured_image": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80",
+      "featured_image": "/images/chatgpt-image-sep-22-2026-12_44_52-am.png",
       "technologies": [
         "Burp Suite",
         "OWASP Juice Shop",
@@ -115,7 +115,7 @@
       "category": "Web Development"
     },
     {
-      "featured_image": "https://images.unsplash.com/photo-1510511459019-5dda7724fd87?auto=format&fit=crop&w=800&q=80",
+      "featured_image": "/images/chatgpt-image-sep-18-2026-02_36_36-am.png",
       "technologies": [
         "Nmap",
         "Nessus",
