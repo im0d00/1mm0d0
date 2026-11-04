@@ -16,23 +16,42 @@ if (document.readyState === 'loading') {
     initApp();
 }
 
-// 1. Header Scroll Effect (Smooth Cyber Scrolled State)
+// 1. Header Scroll Effect (Smooth Cyber Scrolled State + Auto Hide/Show)
 function initHeaderScroll() {
     const navbar = document.getElementById('navbar');
     if (!navbar) return;
     
     let ticking = false;
+    let lastScrollY = window.scrollY;
     
     const updateHeader = () => {
         const currentScrollY = window.scrollY;
-        
+        const searchModal = document.getElementById('searchModal');
+        const mobNav = document.getElementById('mobNav');
+        const isOverlayOpen = (searchModal && searchModal.style.display === 'flex') || 
+                              (mobNav && mobNav.classList.contains('open'));
+
         // Deep frosted cyber glass & neon glow when scrolled past top
         if (currentScrollY > 20) {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
         }
+
+        // Smooth hide on scroll down, reveal on scroll up
+        if (!isOverlayOpen && currentScrollY > 100) {
+            if (currentScrollY > lastScrollY + 6) {
+                // Scrolling down
+                navbar.classList.add('nav-hidden');
+            } else if (currentScrollY < lastScrollY - 6) {
+                // Scrolling up
+                navbar.classList.remove('nav-hidden');
+            }
+        } else {
+            navbar.classList.remove('nav-hidden');
+        }
         
+        lastScrollY = currentScrollY <= 0 ? 0 : currentScrollY;
         ticking = false;
     };
     
@@ -169,8 +188,10 @@ function initMobileNav() {
     });
 }
 
-// 4. Global Search Engine (Modal & Real-time Filter)
+// 4. Global Search Engine (Modal, Multi-Word, Keyboard Navigation & Real-time Filter)
 let searchRecords = null;
+let currentSearchResults = [];
+let searchSelectedIndex = -1;
 
 function initSearchModal() {
     // Keyboard shortcut Ctrl+K or Cmd+K
@@ -184,9 +205,39 @@ function initSearchModal() {
     });
 
     const searchInput = document.getElementById('searchInput');
+    const searchClearBtn = document.getElementById('searchClearBtn');
+
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
             performSearch(e.target.value);
+        });
+
+        // Keyboard navigation inside search input
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                moveSearchSelection(1);
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                moveSearchSelection(-1);
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                openSelectedSearchResult();
+            } else if (e.key === 'Escape') {
+                e.preventDefault();
+                closeSearchModal();
+            }
+        });
+    }
+
+    if (searchClearBtn) {
+        searchClearBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (searchInput) {
+                searchInput.value = '';
+                searchInput.focus();
+                performSearch('');
+            }
         });
     }
 
@@ -210,16 +261,24 @@ function openSearchModal() {
     if (searchModal) {
         searchModal.style.display = 'flex';
         document.body.style.overflow = 'hidden';
+        
+        // Ensure navbar is visible when search opens
+        const navbar = document.getElementById('navbar');
+        if (navbar) navbar.classList.remove('nav-hidden');
+
         const searchInput = document.getElementById('searchInput');
         if (searchInput) {
-            searchInput.focus();
+            setTimeout(() => {
+                searchInput.focus();
+                searchInput.select();
+            }, 50);
             if (searchInput.value.trim().length > 0) {
                 performSearch(searchInput.value);
             }
         }
     }
 
-    // Lazy load search records once
+    // Lazy load search database
     if (!searchRecords) {
         fetch('/search.json')
             .then(res => res.text())
@@ -234,7 +293,8 @@ function openSearchModal() {
                 const seen = new Set();
                 searchRecords = (Array.isArray(data) ? data : []).filter(item => {
                     if (!item || !item.title) return false;
-                    const key = `${(item.url || '').toLowerCase()}::${item.title.trim().toLowerCase()}`;
+                    const normUrl = (item.url || '').toLowerCase().replace(/\/+$/, '');
+                    const key = `${normUrl}::${item.title.trim().toLowerCase()}`;
                     if (seen.has(key)) return false;
                     seen.add(key);
                     return true;
@@ -246,6 +306,10 @@ function openSearchModal() {
             })
             .catch(err => {
                 console.error('Failed to load search database:', err);
+                const resultsContainer = document.getElementById('searchResults');
+                if (resultsContainer) {
+                    resultsContainer.innerHTML = '<div style="text-align:center; color:#FF5555; padding:1.5rem; font-size:0.88rem;"><i class="fa-solid fa-triangle-exclamation"></i> Error loading search records. Please try again.</div>';
+                }
             });
     }
 }
@@ -255,61 +319,183 @@ function closeSearchModal() {
     if (searchModal) {
         searchModal.style.display = 'none';
         document.body.style.overflow = '';
+        searchSelectedIndex = -1;
+    }
+}
+
+window.openSearchModal = openSearchModal;
+window.closeSearchModal = closeSearchModal;
+
+function moveSearchSelection(delta) {
+    if (!currentSearchResults || currentSearchResults.length === 0) return;
+    const max = currentSearchResults.length;
+    searchSelectedIndex = (searchSelectedIndex + delta + max) % max;
+    updateSelectionHighlight();
+}
+
+function updateSelectionHighlight() {
+    const items = document.querySelectorAll('#searchResults .search-result-item');
+    items.forEach((item, idx) => {
+        if (idx === searchSelectedIndex) {
+            item.classList.add('selected');
+            item.setAttribute('aria-selected', 'true');
+            item.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        } else {
+            item.classList.remove('selected');
+            item.removeAttribute('aria-selected');
+        }
+    });
+}
+
+function openSelectedSearchResult() {
+    if (!currentSearchResults || currentSearchResults.length === 0) return;
+    const targetItem = (searchSelectedIndex >= 0 && searchSelectedIndex < currentSearchResults.length)
+        ? currentSearchResults[searchSelectedIndex]
+        : currentSearchResults[0];
+    if (targetItem && targetItem.url) {
+        closeSearchModal();
+        window.location.href = targetItem.url;
     }
 }
 
 function performSearch(query) {
     const resultsContainer = document.getElementById('searchResults');
+    const searchClearBtn = document.getElementById('searchClearBtn');
+    const searchStats = document.getElementById('searchStats');
     if (!resultsContainer) return;
 
-    const trimmed = query.trim().toLowerCase();
+    searchSelectedIndex = -1;
+    const rawTrimmed = query.trim();
+    const trimmed = rawTrimmed.toLowerCase();
+
+    if (searchClearBtn) {
+        searchClearBtn.style.display = rawTrimmed.length > 0 ? 'inline-flex' : 'none';
+    }
+
     if (!trimmed) {
-        resultsContainer.innerHTML = '<div style="text-align:center; color:var(--muted); padding:1rem; font-size:0.88rem;">Type a query to search across all records...</div>';
+        currentSearchResults = [];
+        if (searchStats) searchStats.innerText = 'Type keywords to search across all published records';
+        resultsContainer.innerHTML = `
+            <div style="text-align:center; color:var(--muted); padding:2rem 1rem; font-size:0.9rem;">
+                <i class="fa-solid fa-terminal" style="font-size:1.8rem; color:rgba(0,217,255,0.4); margin-bottom:0.75rem; display:block;"></i>
+                Type a query to search across all published articles, labs, projects, research papers, and pages...
+            </div>
+        `;
         return;
     }
 
     if (!searchRecords) {
-        resultsContainer.innerHTML = '<div style="text-align:center; color:var(--cyan); padding:1rem; font-size:0.88rem;"><i class="fa-solid fa-spinner fa-spin"></i> Loading search database...</div>';
+        resultsContainer.innerHTML = '<div style="text-align:center; color:#00D9FF; padding:1.5rem; font-size:0.9rem;"><i class="fa-solid fa-spinner fa-spin"></i> Loading search database...</div>';
         return;
     }
 
-    const matches = searchRecords.filter(item => {
-        const titleMatch = (item.title || '').toLowerCase().includes(trimmed);
-        const descMatch = (item.description || '').toLowerCase().includes(trimmed);
-        const catMatch = (item.category || '').toLowerCase().includes(trimmed);
-        const typeMatch = (item.type || '').toLowerCase().includes(trimmed);
-        const tagsMatch = Array.isArray(item.tags) && item.tags.some(t => String(t).toLowerCase().includes(trimmed));
-        return titleMatch || descMatch || catMatch || typeMatch || tagsMatch;
-    });
+    const words = trimmed.split(/\s+/).filter(Boolean);
 
-    if (matches.length === 0) {
-        resultsContainer.innerHTML = `<div style="text-align:center; color:var(--muted); padding:1.5rem; font-size:0.88rem;">No security records found matching "<strong>${escapeHtml(query)}</strong>".</div>`;
-        return;
-    }
+    // Multi-word scoring algorithm
+    const scoredMatches = [];
+    for (const item of searchRecords) {
+        const title = (item.title || '').toLowerCase();
+        const desc = (item.description || item.subtitle || '').toLowerCase();
+        const cat = (item.category || '').toLowerCase();
+        const type = (item.type || '').toLowerCase();
+        const tags = Array.isArray(item.tags) ? item.tags.map(t => String(t).toLowerCase()).join(' ') : '';
+        const combined = `${title} ${desc} ${cat} ${type} ${tags}`;
 
-    // Deduplicate matches before slicing
-    const seenMatches = new Set();
-    const uniqueMatches = [];
-    for (const item of matches) {
-        const key = `${(item.url || '').toLowerCase()}::${(item.title || '').trim().toLowerCase()}`;
-        if (!seenMatches.has(key)) {
-            seenMatches.add(key);
-            uniqueMatches.push(item);
+        // Verify EVERY token exists in combined content
+        const allWordsMatch = words.every(w => combined.includes(w));
+        if (allWordsMatch) {
+            let score = 0;
+            // Exact full phrase title match
+            if (title === trimmed) score += 200;
+            else if (title.startsWith(trimmed)) score += 120;
+            else if (title.includes(trimmed)) score += 80;
+
+            // Word-level bonus
+            words.forEach(w => {
+                if (title.includes(w)) score += 30;
+                if (cat.includes(w)) score += 20;
+                if (tags.includes(w)) score += 15;
+                if (desc.includes(w)) score += 10;
+            });
+
+            // Prioritize primary pages and actual articles
+            if (item.type === 'Page' || item.type === 'Blog' || item.type === 'Project' || item.type === 'Lab' || item.type === 'Research') {
+                score += 15;
+            }
+
+            scoredMatches.push({ item, score });
         }
     }
 
-    resultsContainer.innerHTML = uniqueMatches.slice(0, 15).map(item => `
-        <a href="${item.url}" onclick="closeSearchModal()" style="display:flex; flex-direction:column; gap:4px; padding:0.8rem 1rem; background:rgba(13,26,48,0.6); border:1px solid var(--border); border-radius:8px; text-decoration:none; transition:all 0.2s ease;">
-            <div style="display:flex; justify-content:space-between; align-items:center;">
-                <span style="font-family:'Space Grotesk',sans-serif; font-size:0.95rem; font-weight:600; color:var(--white);">${escapeHtml(item.title || '')}</span>
-                <span style="font-family:'JetBrains Mono',monospace; font-size:0.7rem; color:var(--cyan); background:rgba(0,212,255,0.08); padding:2px 8px; border-radius:4px; border:1px solid rgba(0,212,255,0.2);">${escapeHtml(item.type || 'Record')}</span>
+    // Sort by relevance score descending
+    scoredMatches.sort((a, b) => b.score - a.score);
+
+    // Deduplicate by normalized URL
+    const seenUrls = new Set();
+    const uniqueMatches = [];
+    for (const match of scoredMatches) {
+        const normUrl = (match.item.url || '').toLowerCase().replace(/\/+$/, '');
+        if (!seenUrls.has(normUrl)) {
+            seenUrls.add(normUrl);
+            uniqueMatches.push(match.item);
+        }
+    }
+
+    currentSearchResults = uniqueMatches;
+
+    if (uniqueMatches.length === 0) {
+        if (searchStats) searchStats.innerText = '0 records found';
+        resultsContainer.innerHTML = `
+            <div style="text-align:center; color:var(--muted); padding:2rem 1rem;">
+                <i class="fa-solid fa-triangle-exclamation" style="font-size:1.8rem; color:#00D9FF; margin-bottom:0.75rem; display:block;"></i>
+                <div style="font-weight:600; color:var(--white); font-size:1rem; margin-bottom:0.4rem;">No matching security records found</div>
+                <div style="font-size:0.85rem; color:var(--silver); max-width:440px; margin:0 auto; line-height:1.4;">
+                    No results for "<strong>${escapeHtml(rawTrimmed)}</strong>". Try searching for topics like <em>DFIR</em>, <em>Malware</em>, <em>Nmap</em>, <em>Wireshark</em>, <em>Active Directory</em>, <em>Linux</em>, or <em>Zero Trust</em>.
+                </div>
+            </div>
+        `;
+        return;
+    }
+
+    if (searchStats) {
+        searchStats.innerText = `${uniqueMatches.length} record${uniqueMatches.length === 1 ? '' : 's'} found`;
+    }
+
+    resultsContainer.innerHTML = uniqueMatches.slice(0, 18).map((item, idx) => `
+        <a href="${item.url}" class="search-result-item" data-index="${idx}" onclick="closeSearchModal()" role="option" aria-label="${escapeHtml(item.title || '')}">
+            <div style="display:flex; justify-content:space-between; align-items:center; gap:0.5rem;">
+                <span style="font-family:'Space Grotesk',sans-serif; font-size:0.95rem; font-weight:600; color:var(--white); display:flex; align-items:center; gap:0.45rem;">
+                    ${getTypeIcon(item.type)}
+                    <span>${escapeHtml(item.title || '')}</span>
+                </span>
+                <span style="font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:#00D9FF; background:rgba(0,212,255,0.08); padding:2px 8px; border-radius:4px; border:1px solid rgba(0,212,255,0.2); white-space:nowrap;">${escapeHtml(item.type || 'Record')}</span>
             </div>
             ${item.description ? `<p style="font-size:0.82rem; color:var(--silver); margin:0; line-height:1.4; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden;">${escapeHtml(item.description)}</p>` : ''}
-            <div style="display:flex; gap:6px; font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--muted); margin-top:2px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--muted); margin-top:2px;">
                 <span><i class="fa-solid fa-folder-open fa-xs"></i> ${escapeHtml(item.category || 'General')}</span>
+                <span style="color:rgba(0,217,255,0.65);"><i class="fa-solid fa-arrow-right fa-xs"></i> ${escapeHtml(item.url || '')}</span>
             </div>
         </a>
     `).join('');
+}
+
+function getTypeIcon(type) {
+    switch (type) {
+        case 'Blog':
+            return '<i class="fa-solid fa-pen-nib" style="color:#00D9FF; font-size:0.85rem;" aria-hidden="true"></i>';
+        case 'Project':
+            return '<i class="fa-solid fa-folder-open" style="color:#00D9FF; font-size:0.85rem;" aria-hidden="true"></i>';
+        case 'Lab':
+            return '<i class="fa-solid fa-flask" style="color:#00D9FF; font-size:0.85rem;" aria-hidden="true"></i>';
+        case 'Research':
+            return '<i class="fa-solid fa-file-contract" style="color:#00D9FF; font-size:0.85rem;" aria-hidden="true"></i>';
+        case 'Download':
+            return '<i class="fa-solid fa-download" style="color:#00D9FF; font-size:0.85rem;" aria-hidden="true"></i>';
+        case 'Certification':
+            return '<i class="fa-solid fa-award" style="color:#00D9FF; font-size:0.85rem;" aria-hidden="true"></i>';
+        default:
+            return '<i class="fa-solid fa-file" style="color:#00D9FF; font-size:0.85rem;" aria-hidden="true"></i>';
+    }
 }
 
 function escapeHtml(str) {

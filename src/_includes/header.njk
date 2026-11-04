@@ -28,7 +28,7 @@
                     </div>
                 </a>
 
-                <!-- Exact Navigation Sequence: 1. Home, 2. Projects, 3. Labs, 4. About, 5. Search, 6. Blog, 7. Research, 8. Contact -->
+                <!-- Exact Navigation Sequence: 1. Home, 2. About, 3. Projects, 4. Labs, 5. Blog, 6. Research, 7. Contact, 8. Search -->
                 <ul class="cyber-nav-links" role="menubar">
                     <!-- 1. Home -->
                     <li class="cyber-nav-item" role="none">
@@ -38,23 +38,7 @@
                         </a>
                     </li>
 
-                    <!-- 2. Projects -->
-                    <li class="cyber-nav-item" role="none">
-                        <a href="/projects/" class="cyber-nav-link {% if '/projects' in page.url %}active{% endif %}" role="menuitem">
-                            <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
-                            <span>Projects</span>
-                        </a>
-                    </li>
-
-                    <!-- 3. Labs -->
-                    <li class="cyber-nav-item" role="none">
-                        <a href="/labs/" class="cyber-nav-link {% if '/labs' in page.url %}active{% endif %}" role="menuitem">
-                            <i class="fa-solid fa-flask" aria-hidden="true"></i>
-                            <span>Labs</span>
-                        </a>
-                    </li>
-
-                    <!-- 4. About -->
+                    <!-- 2. About -->
                     <li class="cyber-nav-item" role="none">
                         <a href="/about/" class="cyber-nav-link {% if '/about' in page.url %}active{% endif %}" role="menuitem">
                             <i class="fa-solid fa-user" aria-hidden="true"></i>
@@ -62,18 +46,23 @@
                         </a>
                     </li>
 
-                    <!-- 5. Search Control (Positioned between About and Blog) -->
-                    {% if settings.search_enabled != false %}
-                    <li class="cyber-nav-item cyber-nav-search-item" role="none">
-                        <button id="searchOpenBtn" class="cyber-search-btn" onclick="openSearchModal()" aria-label="Search platform (Press Ctrl+K)">
-                            <i class="fa-solid fa-magnifying-glass cyber-search-icon" aria-hidden="true"></i>
-                            <span class="cyber-search-text">Search</span>
-                            <kbd class="cyber-kbd" aria-hidden="true">Ctrl+K</kbd>
-                        </button>
+                    <!-- 3. Projects -->
+                    <li class="cyber-nav-item" role="none">
+                        <a href="/projects/" class="cyber-nav-link {% if '/projects' in page.url %}active{% endif %}" role="menuitem">
+                            <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                            <span>Projects</span>
+                        </a>
                     </li>
-                    {% endif %}
 
-                    <!-- 6. Blog -->
+                    <!-- 4. Labs -->
+                    <li class="cyber-nav-item" role="none">
+                        <a href="/labs/" class="cyber-nav-link {% if '/labs' in page.url %}active{% endif %}" role="menuitem">
+                            <i class="fa-solid fa-flask" aria-hidden="true"></i>
+                            <span>Labs</span>
+                        </a>
+                    </li>
+
+                    <!-- 5. Blog -->
                     <li class="cyber-nav-item" role="none">
                         <a href="/blog/" class="cyber-nav-link {% if ('/blog' in page.url) or ('/posts' in page.url) or ('/category' in page.url) %}active{% endif %}" role="menuitem">
                             <i class="fa-solid fa-pen-nib" aria-hidden="true"></i>
@@ -81,7 +70,7 @@
                         </a>
                     </li>
 
-                    <!-- 7. Research -->
+                    <!-- 6. Research -->
                     <li class="cyber-nav-item" role="none">
                         <a href="/research/" class="cyber-nav-link {% if '/research' in page.url %}active{% endif %}" role="menuitem">
                             <i class="fa-solid fa-file-contract" aria-hidden="true"></i>
@@ -89,13 +78,24 @@
                         </a>
                     </li>
 
-                    <!-- 8. Contact -->
+                    <!-- 7. Contact -->
                     <li class="cyber-nav-item" role="none">
                         <a href="/contact/" class="cyber-nav-link {% if '/contact' in page.url %}active{% endif %}" role="menuitem">
                             <i class="fa-solid fa-envelope" aria-hidden="true"></i>
                             <span>Contact</span>
                         </a>
                     </li>
+
+                    <!-- 8. Search -->
+                    {% if settings.search_enabled != false %}
+                    <li class="cyber-nav-item cyber-nav-search-item" role="none">
+                        <button id="searchOpenBtn" class="cyber-nav-link cyber-nav-search-btn" onclick="openSearchModal()" role="menuitem" aria-label="Search website (Press Ctrl+K)">
+                            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                            <span>Search</span>
+                            <kbd class="cyber-kbd" aria-hidden="true">Ctrl+K</kbd>
+                        </button>
+                    </li>
+                    {% endif %}
                 </ul>
 
                 <!-- Utility actions on far right: Theme toggle & Mobile hamburger -->
@@ -139,12 +139,18 @@
     </div>
     {% endif %}
 
-    <!-- Mobile Navigation Menu -->
+    <!-- Mobile Navigation Menu: Exact sequence matching desktop (1. Home, 2. About, 3. Projects, 4. Labs, 5. Blog, 6. Research, 7. Contact, 8. Search) -->
     <ul class="mobile-links">
         <li>
             <a href="/" class="{% if page.url == '/' %}active{% endif %}">
                 <i class="fa-solid fa-house"></i>
                 <span>Home</span>
+            </a>
+        </li>
+        <li>
+            <a href="/about/" class="{% if '/about' in page.url %}active{% endif %}">
+                <i class="fa-solid fa-user"></i>
+                <span>About</span>
             </a>
         </li>
         <li>
@@ -157,18 +163,6 @@
             <a href="/labs/" class="{% if '/labs' in page.url %}active{% endif %}">
                 <i class="fa-solid fa-flask"></i>
                 <span>Labs</span>
-            </a>
-        </li>
-        <li>
-            <a href="/about/" class="{% if '/about' in page.url %}active{% endif %}">
-                <i class="fa-solid fa-user"></i>
-                <span>About</span>
-            </a>
-        </li>
-        <li>
-            <a href="javascript:void(0)" onclick="closeMobileNav(); openSearchModal();">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <span>Search</span>
             </a>
         </li>
         <li>
@@ -189,14 +183,17 @@
                 <span>Contact</span>
             </a>
         </li>
+        {% if settings.search_enabled != false %}
+        <li>
+            <a href="javascript:void(0)" onclick="closeMobileNav(); openSearchModal();" id="mobSearchLink" aria-label="Open search interface">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span>Search</span>
+            </a>
+        </li>
+        {% endif %}
     </ul>
 
     <div class="mobile-actions">
-        {% if settings.search_enabled != false %}
-        <button id="mobSearchBtn" class="btn outline w-full mob-action-btn" onclick="closeMobileNav(); openSearchModal();">
-            <i class="fa-solid fa-magnifying-glass"></i> Search Platform (Ctrl+K)
-        </button>
-        {% endif %}
         <a href="{{ resume.pdf_file or hero.resume_button_link or '/downloads/' }}" download class="btn primary w-full mob-action-btn">
             <i class="fa-solid fa-file-pdf"></i> Download Resume
         </a>

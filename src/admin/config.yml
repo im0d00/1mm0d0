@@ -951,6 +951,7 @@ collections:
     sortable_fields: ["date", "title", "status"]
     fields:
       - { label: "Article Title", name: "title", widget: "string", hint: "The main title displayed across the blog and in search results." }
+      - { label: "Article URL Slug", name: "slug", widget: "slug_generator", required: true, hint: "Automatically generated from title. Shows live URL and checks for duplicates." }
       - { label: "Short Introduction / Excerpt", name: "excerpt", widget: "text", hint: "1-2 sentence overview shown on blog cards and below the article header." }
       - { label: "Featured Cover Image", name: "image", widget: "image", required: false, hint: "Cover photo displayed at the top of the article and on the blog listing." }
       - { label: "Image Alternative Text", name: "imageAlt", widget: "string", required: false, hint: "Descriptive alt text for accessibility and image SEO." }

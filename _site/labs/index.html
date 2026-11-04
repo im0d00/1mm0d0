@@ -250,7 +250,7 @@
                     </div>
                 </a>
 
-                <!-- Exact Navigation Sequence: 1. Home, 2. Projects, 3. Labs, 4. About, 5. Search, 6. Blog, 7. Research, 8. Contact -->
+                <!-- Exact Navigation Sequence: 1. Home, 2. About, 3. Projects, 4. Labs, 5. Blog, 6. Research, 7. Contact, 8. Search -->
                 <ul class="cyber-nav-links" role="menubar">
                     <!-- 1. Home -->
                     <li class="cyber-nav-item" role="none">
@@ -260,23 +260,7 @@
                         </a>
                     </li>
 
-                    <!-- 2. Projects -->
-                    <li class="cyber-nav-item" role="none">
-                        <a href="/projects/" class="cyber-nav-link " role="menuitem">
-                            <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
-                            <span>Projects</span>
-                        </a>
-                    </li>
-
-                    <!-- 3. Labs -->
-                    <li class="cyber-nav-item" role="none">
-                        <a href="/labs/" class="cyber-nav-link active" role="menuitem">
-                            <i class="fa-solid fa-flask" aria-hidden="true"></i>
-                            <span>Labs</span>
-                        </a>
-                    </li>
-
-                    <!-- 4. About -->
+                    <!-- 2. About -->
                     <li class="cyber-nav-item" role="none">
                         <a href="/about/" class="cyber-nav-link " role="menuitem">
                             <i class="fa-solid fa-user" aria-hidden="true"></i>
@@ -284,18 +268,23 @@
                         </a>
                     </li>
 
-                    <!-- 5. Search Control (Positioned between About and Blog) -->
-                    
-                    <li class="cyber-nav-item cyber-nav-search-item" role="none">
-                        <button id="searchOpenBtn" class="cyber-search-btn" onclick="openSearchModal()" aria-label="Search platform (Press Ctrl+K)">
-                            <i class="fa-solid fa-magnifying-glass cyber-search-icon" aria-hidden="true"></i>
-                            <span class="cyber-search-text">Search</span>
-                            <kbd class="cyber-kbd" aria-hidden="true">Ctrl+K</kbd>
-                        </button>
+                    <!-- 3. Projects -->
+                    <li class="cyber-nav-item" role="none">
+                        <a href="/projects/" class="cyber-nav-link " role="menuitem">
+                            <i class="fa-solid fa-folder-open" aria-hidden="true"></i>
+                            <span>Projects</span>
+                        </a>
                     </li>
-                    
 
-                    <!-- 6. Blog -->
+                    <!-- 4. Labs -->
+                    <li class="cyber-nav-item" role="none">
+                        <a href="/labs/" class="cyber-nav-link active" role="menuitem">
+                            <i class="fa-solid fa-flask" aria-hidden="true"></i>
+                            <span>Labs</span>
+                        </a>
+                    </li>
+
+                    <!-- 5. Blog -->
                     <li class="cyber-nav-item" role="none">
                         <a href="/blog/" class="cyber-nav-link " role="menuitem">
                             <i class="fa-solid fa-pen-nib" aria-hidden="true"></i>
@@ -303,7 +292,7 @@
                         </a>
                     </li>
 
-                    <!-- 7. Research -->
+                    <!-- 6. Research -->
                     <li class="cyber-nav-item" role="none">
                         <a href="/research/" class="cyber-nav-link " role="menuitem">
                             <i class="fa-solid fa-file-contract" aria-hidden="true"></i>
@@ -311,13 +300,24 @@
                         </a>
                     </li>
 
-                    <!-- 8. Contact -->
+                    <!-- 7. Contact -->
                     <li class="cyber-nav-item" role="none">
                         <a href="/contact/" class="cyber-nav-link " role="menuitem">
                             <i class="fa-solid fa-envelope" aria-hidden="true"></i>
                             <span>Contact</span>
                         </a>
                     </li>
+
+                    <!-- 8. Search -->
+                    
+                    <li class="cyber-nav-item cyber-nav-search-item" role="none">
+                        <button id="searchOpenBtn" class="cyber-nav-link cyber-nav-search-btn" onclick="openSearchModal()" role="menuitem" aria-label="Search website (Press Ctrl+K)">
+                            <i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i>
+                            <span>Search</span>
+                            <kbd class="cyber-kbd" aria-hidden="true">Ctrl+K</kbd>
+                        </button>
+                    </li>
+                    
                 </ul>
 
                 <!-- Utility actions on far right: Theme toggle & Mobile hamburger -->
@@ -361,12 +361,18 @@
     </div>
     
 
-    <!-- Mobile Navigation Menu -->
+    <!-- Mobile Navigation Menu: Exact sequence matching desktop (1. Home, 2. About, 3. Projects, 4. Labs, 5. Blog, 6. Research, 7. Contact, 8. Search) -->
     <ul class="mobile-links">
         <li>
             <a href="/" class="">
                 <i class="fa-solid fa-house"></i>
                 <span>Home</span>
+            </a>
+        </li>
+        <li>
+            <a href="/about/" class="">
+                <i class="fa-solid fa-user"></i>
+                <span>About</span>
             </a>
         </li>
         <li>
@@ -379,18 +385,6 @@
             <a href="/labs/" class="active">
                 <i class="fa-solid fa-flask"></i>
                 <span>Labs</span>
-            </a>
-        </li>
-        <li>
-            <a href="/about/" class="">
-                <i class="fa-solid fa-user"></i>
-                <span>About</span>
-            </a>
-        </li>
-        <li>
-            <a href="javascript:void(0)" onclick="closeMobileNav(); openSearchModal();">
-                <i class="fa-solid fa-magnifying-glass"></i>
-                <span>Search</span>
             </a>
         </li>
         <li>
@@ -411,14 +405,17 @@
                 <span>Contact</span>
             </a>
         </li>
+        
+        <li>
+            <a href="javascript:void(0)" onclick="closeMobileNav(); openSearchModal();" id="mobSearchLink" aria-label="Open search interface">
+                <i class="fa-solid fa-magnifying-glass"></i>
+                <span>Search</span>
+            </a>
+        </li>
+        
     </ul>
 
     <div class="mobile-actions">
-        
-        <button id="mobSearchBtn" class="btn outline w-full mob-action-btn" onclick="closeMobileNav(); openSearchModal();">
-            <i class="fa-solid fa-magnifying-glass"></i> Search Platform (Ctrl+K)
-        </button>
-        
         <a href="/assets/Aimad_Ul_Islam_Resume.pdf" download class="btn primary w-full mob-action-btn">
             <i class="fa-solid fa-file-pdf"></i> Download Resume
         </a>
@@ -1021,20 +1018,47 @@ document.addEventListener("DOMContentLoaded", () => {
     <button id="scroll-top" aria-label="Scroll to top"><i class="fa-solid fa-arrow-up"></i></button>
 
     <!-- SEARCH MODAL OVERLAY -->
-    <div id="searchModal" style="display:none; position:fixed; inset:0; z-index:99999; background:rgba(5,8,16,0.88); backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px); padding:2rem 1rem; align-items:flex-start; justify-content:center; overflow-y:auto;">
-        <div class="card cyber-modal-card" style="max-width:720px; width:100%; margin-top:6vh; padding:1.8rem; position:relative; border:1px solid rgba(0,217,255,0.35); background:linear-gradient(180deg, rgba(10,22,40,0.95) 0%, rgba(7,18,37,0.98) 100%); box-shadow: 0 20px 60px rgba(0,0,0,0.9), 0 0 35px rgba(8,123,255,0.3); clip-path: polygon(12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px), calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px), 0 12px);">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.2rem;">
-                <div style="font-family:'Space Grotesk',sans-serif; font-size:1.15rem; font-weight:700; color:var(--cyan); display:flex; align-items:center; gap:0.6rem;">
-                    <i class="fa-solid fa-terminal"></i> Security Search Engine
+    <div id="searchModal" role="dialog" aria-modal="true" aria-label="Website Search" style="display:none; position:fixed; inset:0; z-index:99999; background:rgba(5,8,16,0.88); backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px); padding:2rem 1rem; align-items:flex-start; justify-content:center; overflow-y:auto;">
+        <div class="card cyber-modal-card" style="max-width:740px; width:100%; margin-top:5vh; padding:1.75rem; position:relative; border:1px solid rgba(0,217,255,0.4); background:linear-gradient(180deg, rgba(10,22,40,0.97) 0%, rgba(6,16,33,0.99) 100%); box-shadow: 0 25px 70px rgba(0,0,0,0.95), 0 0 40px rgba(8,123,255,0.35); border-radius:12px;">
+            <!-- Modal Header -->
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.2rem; padding-bottom:0.75rem; border-bottom:1px solid rgba(0,217,255,0.15);">
+                <div style="font-family:'Space Grotesk',sans-serif; font-size:1.15rem; font-weight:700; color:var(--white); display:flex; align-items:center; gap:0.65rem;">
+                    <div style="width:28px; height:28px; border-radius:6px; background:rgba(0,217,255,0.12); border:1px solid rgba(0,217,255,0.3); display:flex; align-items:center; justify-content:center; color:#00D9FF;">
+                        <i class="fa-solid fa-magnifying-glass" style="font-size:0.85rem;"></i>
+                    </div>
+                    <span>Search Aimad Security</span>
+                    <span style="font-family:'JetBrains Mono',monospace; font-size:0.68rem; color:#00D9FF; background:rgba(0,217,255,0.08); padding:2px 8px; border-radius:4px; border:1px solid rgba(0,217,255,0.25);">LIVE INDEX</span>
                 </div>
-                <button id="searchCloseBtn" style="background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:50%; width:32px; height:32px; color:var(--silver); font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s;" aria-label="Close search">&times;</button>
+                <button id="searchCloseBtn" style="background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.15); border-radius:8px; width:34px; height:34px; color:var(--silver); font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.2s;" aria-label="Close search (Esc)">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
             </div>
-            <div style="position:relative; margin-bottom:1.2rem;">
-                <input type="text" id="searchInput" placeholder="Search projects, labs, posts, tools, certs..." style="width:100%; padding:0.85rem 1rem 0.85rem 2.6rem; background:rgba(10,22,40,0.85); border:1px solid var(--border2); border-radius:8px; color:var(--white); font-family:'JetBrains Mono',monospace; font-size:0.92rem; outline:none;" />
-                <i class="fa-solid fa-magnifying-glass" style="position:absolute; left:1rem; top:50%; transform:translateY(-50%); color:var(--cyan); font-size:0.9rem;"></i>
+
+            <!-- Search Input Box with Magnifier and Clear Button -->
+            <div style="position:relative; margin-bottom:0.75rem;">
+                <i class="fa-solid fa-magnifying-glass" style="position:absolute; left:1.1rem; top:50%; transform:translateY(-50%); color:#00D9FF; font-size:0.95rem; pointer-events:none;"></i>
+                <input type="text" id="searchInput" placeholder="Search by title, keyword, tool, lab, research, or tag..." autocomplete="off" spellcheck="false" style="width:100%; padding:0.9rem 2.8rem 0.9rem 2.9rem; background:rgba(7,18,37,0.92); border:1.5px solid rgba(0,217,255,0.3); border-radius:10px; color:var(--white); font-family:'JetBrains Mono',monospace; font-size:0.95rem; outline:none; transition:all 0.2s; box-shadow:inset 0 2px 6px rgba(0,0,0,0.5);" />
+                <button id="searchClearBtn" style="display:none; position:absolute; right:0.85rem; top:50%; transform:translateY(-50%); background:rgba(255,255,255,0.08); border:none; border-radius:50%; width:24px; height:24px; color:var(--silver); font-size:0.75rem; cursor:pointer; align-items:center; justify-content:center; transition:all 0.2s;" aria-label="Clear search input">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
             </div>
-            <div id="searchResults" style="max-height:420px; overflow-y:auto; display:flex; flex-direction:column; gap:0.6rem; padding-right:4px;">
-                <div style="textalign:center; color:var(--muted); padding:1.5rem; font-size:0.88rem;">Type a query to search across all platform records...</div>
+
+            <!-- Keyboard shortcut guide bar -->
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:0 0.25rem 0.75rem; font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--muted); border-bottom:1px solid rgba(255,255,255,0.06); margin-bottom:0.9rem;">
+                <div id="searchStats">Type keywords to search across all published records</div>
+                <div style="display:flex; gap:0.6rem; align-items:center;">
+                    <span><kbd class="cyber-kbd" style="font-size:0.65rem;">↑</kbd> <kbd class="cyber-kbd" style="font-size:0.65rem;">↓</kbd> navigate</span>
+                    <span><kbd class="cyber-kbd" style="font-size:0.65rem;">↵</kbd> open</span>
+                    <span><kbd class="cyber-kbd" style="font-size:0.65rem;">esc</kbd> close</span>
+                </div>
+            </div>
+
+            <!-- Results container -->
+            <div id="searchResults" role="listbox" style="max-height:430px; overflow-y:auto; display:flex; flex-direction:column; gap:0.6rem; padding-right:4px;">
+                <div style="text-align:center; color:var(--muted); padding:2rem 1rem; font-size:0.9rem;">
+                    <i class="fa-solid fa-terminal" style="font-size:1.8rem; color:rgba(0,217,255,0.4); margin-bottom:0.75rem; display:block;"></i>
+                    Type a query to search across all published articles, labs, projects, research papers, and pages...
+                </div>
             </div>
         </div>
     </div>
